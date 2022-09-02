@@ -1,7 +1,15 @@
-.venv/
-*.z64
+# Splat-generated
 asm/
 assets/
 *.ld
 undefined_funcs_auto.txt
 undefined_syms_auto.txt
+
+# Build artefacts
+build/
+linker_map.txt
+*.elf
+
+# Other
+.venv/
+*.z64
