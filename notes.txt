@@ -1,0 +1,11 @@
+git init oot_splat
+cd oot_splat
+(add readme)
+cp ../oot/baserom.z64 ./
+git subrepo clone https://github.com/ethteck/splat.git tools/splat
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r ./tools/splat/requirements.txt
+python3 tools/splat/create_config.py baserom.z64
+python3 tools/splat/split.py thelegendofzelda.yaml
+(add gitignore)
