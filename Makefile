@@ -20,7 +20,7 @@ default: $(BUILD_DIR)/rom.z64
 
 $(BUILD_DIR)/%.o: %.s
 	@mkdir -p $(dir $@)
-	$(AS) $(ASFLAGS) $< -o $@
+	iconv -f UTF-8 -t EUC-JP $< | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.bin
 	@mkdir -p $(dir $@)
