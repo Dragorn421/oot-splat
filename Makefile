@@ -15,7 +15,7 @@ O_FILES := \
   $(addprefix $(BUILD_DIR)/,$(ASM_FILES:.s=.o)) \
   $(addprefix $(BUILD_DIR)/,$(ASSETS_FILES:.bin=.o))
 
-default: $(BUILD_DIR)/rom.elf
+default: $(BUILD_DIR)/rom.z64
 .PHONY: default
 
 $(BUILD_DIR)/%.o: %.s
@@ -28,3 +28,6 @@ $(BUILD_DIR)/%.o: %.bin
 
 $(BUILD_DIR)/rom.elf: $(LDSCRIPT) $(O_FILES)
 	$(LD) $(LDFLAGS) -o $@
+
+$(BUILD_DIR)/rom.z64: $(BUILD_DIR)/rom.elf
+	$(OBJCOPY) -O binary $< $@

@@ -69,7 +69,7 @@ segments:
       - [0x1060, asm]
       - [0xA010, data]
       - [0xBBC0, rodata]
-      - { type: bss, vram: 0x80012370 }
+      - { name: bss_80012370, type: bss, vram: 0x80012370 }
 
   - name: dmadata
     type: bin
@@ -255,7 +255,7 @@ segments:
       - [0xA94000, asm]
       - [0xB8C5C0, data]
       - [0xBABED0, rodata]
-      - { type: bss, vram: 0x80157D90 }
+      - { name: bss_80157D90, type: bss, vram: 0x80157D90 }
 
   - name: buffers
     type: code
@@ -264,7 +264,7 @@ segments:
     follows_vram: code
     bss_size: 0x9B020
     subsegments:
-      - { type: bss, vram: 0x801759C0 }
+      - { name: bss_801759C0, type: bss, vram: 0x801759C0 }
 
   - name: ovl_title
     type: code
@@ -310,7 +310,7 @@ segments:
       - [0xBE0AE0, data]
       - [0xBE1990, rodata]
       - [0xBE1F50, bin]
-      - { type: bss, vram: 0x80813800 }
+      - { name: bss_80813800, type: bss, vram: 0x80813800 }
 
   - name: ovl_kaleido_scope
     type: code
@@ -323,7 +323,7 @@ segments:
       - [0xBF8F80, data]
       - [0xBFE330, rodata]
       - [0xBFF5A0, bin]
-      - { type: bss, vram: 0x808321A0 }
+      - { name: bss_808321A0, type: bss, vram: 0x808321A0 }
 
   - name: ovl_player_actor
     type: code
@@ -336,7 +336,7 @@ segments:
       - [0xC222B0, data]
       - [0xC240E0, rodata]
       - [0xC243F0, bin]
-      - { type: bss, vram: 0x80858AA0 }
+      - { name: bss_80858AA0, type: bss, vram: 0x80858AA0 }
 
   - name: ovl_map_mark_data
     type: code
@@ -514,7 +514,7 @@ segments:
       - [0xC412F0, data]
       - [0xC41420, rodata]
       - [0xC41460, bin]
-      - { type: bss, vram: 0x808727C0 }
+      - { name: bss_808727C0, type: bss, vram: 0x808727C0 }
 
   - name: ovl_Bg_Dy_Yoseizo
     type: code
@@ -599,7 +599,7 @@ segments:
       - [0xC49480, data]
       - [0xC494F0, rodata]
       - [0xC49680, bin]
-      - { type: bss, vram: 0x8087AC40 }
+      - { name: bss_8087AC40, type: bss, vram: 0x8087AC40 }
 
   - name: ovl_Bg_Gnd_Nisekabe
     type: code
@@ -648,7 +648,7 @@ segments:
       - [0xC4BA20, data]
       - [0xC4BA60, rodata]
       - [0xC4BB10, bin]
-      - { type: bss, vram: 0x8087CFB0 }
+      - { name: bss_8087CFB0, type: bss, vram: 0x8087CFB0 }
 
   - name: ovl_Bg_Haka_Huta
     type: code
@@ -1174,7 +1174,7 @@ segments:
       - [0xC6ADB0, data]
       - [0xC6AE10, rodata]
       - [0xC6AE60, bin]
-      - { type: bss, vram: 0x8089C1A0 }
+      - { name: bss_8089C1A0, type: bss, vram: 0x8089C1A0 }
 
   - name: ovl_Bg_Menkuri_Kaiten
     type: code
@@ -1221,7 +1221,7 @@ segments:
       - [0xC6D850, data]
       - [0xC6D8F0, rodata]
       - [0xC6D9C0, bin]
-      - { type: bss, vram: 0x8089EE40 }
+      - { name: bss_8089EE40, type: bss, vram: 0x8089EE40 }
 
   - name: ovl_Bg_Mizu_Shutter
     type: code
@@ -1317,7 +1317,7 @@ segments:
       - [0xC722C0, data]
       - [0xC72300, rodata]
       - [0xC72410, bin]
-      - { type: bss, vram: 0x808A37C0 }
+      - { name: bss_808A37C0, type: bss, vram: 0x808A37C0 }
 
   - name: ovl_Bg_Mori_Hineri
     type: code
@@ -1378,7 +1378,7 @@ segments:
       - [0xC769C0, data]
       - [0xC76AC0, rodata]
       - [0xC76B20, bin]
-      - { type: bss, vram: 0x808A80A0 }
+      - { name: bss_808A80A0, type: bss, vram: 0x808A80A0 }
 
   - name: ovl_Bg_Po_Syokudai
     type: code
@@ -1925,7 +1925,7 @@ segments:
       - [0xCB38E0, data]
       - [0xCC6750, rodata]
       - [0xCC6F80, bin]
-      - { type: bss, vram: 0x808F93C0 }
+      - { name: bss_808F93C0, type: bss, vram: 0x808F93C0 }
 
   - name: ovl_Boss_Ganon2
     type: code
@@ -1938,7 +1938,7 @@ segments:
       - [0xCD1EC0, data]
       - [0xCD8840, rodata]
       - [0xCD8F20, bin]
-      - { type: bss, vram: 0x8090EB20 }
+      - { name: bss_8090EB20, type: bss, vram: 0x8090EB20 }
 
   - name: ovl_Boss_Ganondrof
     type: code
@@ -1975,7 +1975,7 @@ segments:
       - [0xCEF310, data]
       - [0xCEFFA0, rodata]
       - [0xCF0520, bin]
-      - { type: bss, vram: 0x80927AC0 }
+      - { name: bss_80927AC0, type: bss, vram: 0x80927AC0 }
 
   - name: ovl_Boss_Sst
     type: code
@@ -1988,7 +1988,7 @@ segments:
       - [0xCFB4E0, data]
       - [0xCFC440, rodata]
       - [0xCFC5D0, bin]
-      - { type: bss, vram: 0x80938C90 }
+      - { name: bss_80938C90, type: bss, vram: 0x80938C90 }
 
   - name: ovl_Boss_Tw
     type: code
@@ -2001,7 +2001,7 @@ segments:
       - [0xD0F2C0, data]
       - [0xD0F570, rodata]
       - [0xD0FD40, bin]
-      - { type: bss, vram: 0x8094C840 }
+      - { name: bss_8094C840, type: bss, vram: 0x8094C840 }
 
   - name: ovl_Boss_Va
     type: code
@@ -2014,7 +2014,7 @@ segments:
       - [0xD1DFD0, data]
       - [0xD1E440, rodata]
       - [0xD1E9F0, bin]
-      - { type: bss, vram: 0x8095DF50 }
+      - { name: bss_8095DF50, type: bss, vram: 0x8095DF50 }
 
   - name: ovl_Demo_6K
     type: code
@@ -2159,7 +2159,7 @@ segments:
       - [0xD44FA0, data]
       - [0xD45F00, rodata]
       - [0xD461F0, bin]
-      - { type: bss, vram: 0x8098CF80 }
+      - { name: bss_8098CF80, type: bss, vram: 0x8098CF80 }
 
   - name: ovl_Demo_Kekkai
     type: code
@@ -2279,7 +2279,7 @@ segments:
       - [0xD55BC0, data]
       - [0xD55BF0, rodata]
       - [0xD55E70, bin]
-      - { type: bss, vram: 0x8099CCA0 }
+      - { name: bss_8099CCA0, type: bss, vram: 0x8099CCA0 }
 
   - name: ovl_Efc_Erupc
     type: code
@@ -3019,7 +3019,7 @@ segments:
       - [0xD83E10, data]
       - [0xD83E60, rodata]
       - [0xD83F50, bin]
-      - { type: bss, vram: 0x809CAB00 }
+      - { name: bss_809CAB00, type: bss, vram: 0x809CAB00 }
 
   - name: ovl_En_Brob
     type: code
@@ -3104,7 +3104,7 @@ segments:
       - [0xD8F230, data]
       - [0xD955C0, rodata]
       - [0xD95760, bin]
-      - { type: bss, vram: 0x809DC3D0 }
+      - { name: bss_809DC3D0, type: bss, vram: 0x809DC3D0 }
 
   - name: ovl_En_Cow
     type: code
@@ -3548,7 +3548,7 @@ segments:
       - [0xDD4FF0, data]
       - [0xDD5060, rodata]
       - [0xDD5080, bin]
-      - { type: bss, vram: 0x80A1E590 }
+      - { name: bss_80A1E590, type: bss, vram: 0x80A1E590 }
 
   - name: ovl_En_Fw
     type: code
@@ -3993,7 +3993,7 @@ segments:
       - [0xE2EF20, data]
       - [0xE2F230, rodata]
       - [0xE2F660, bin]
-      - { type: bss, vram: 0x80A78FA0 }
+      - { name: bss_80A78FA0, type: bss, vram: 0x80A78FA0 }
 
   - name: ovl_En_In
     type: code
@@ -4076,7 +4076,7 @@ segments:
       - [0xE41640, data]
       - [0xE45000, rodata]
       - [0xE45080, bin]
-      - { type: bss, vram: 0x80A8E610 }
+      - { name: bss_80A8E610, type: bss, vram: 0x80A8E610 }
 
   - name: ovl_En_Kakasi
     type: code
@@ -4555,7 +4555,7 @@ segments:
       - [0xE8D0D0, data]
       - [0xE8D1D0, rodata]
       - [0xE8D320, bin]
-      - { type: bss, vram: 0x80AD76B0 }
+      - { name: bss_80AD76B0, type: bss, vram: 0x80AD76B0 }
 
   - name: ovl_En_Po_Relay
     type: code
@@ -4735,7 +4735,7 @@ segments:
       - [0xEB0090, data]
       - [0xEB0410, rodata]
       - [0xEB04F0, bin]
-      - { type: bss, vram: 0x80AFA660 }
+      - { name: bss_80AFA660, type: bss, vram: 0x80AFA660 }
 
   - name: ovl_En_Shopnuts
     type: code
@@ -4795,7 +4795,7 @@ segments:
       - [0xEB7560, data]
       - [0xEB76F0, rodata]
       - [0xEB7830, bin]
-      - { type: bss, vram: 0x80B01EA0 }
+      - { name: bss_80B01EA0, type: bss, vram: 0x80B01EA0 }
 
   - name: ovl_En_Skjneedle
     type: code
@@ -4868,7 +4868,7 @@ segments:
       - [0xEC4F30, data]
       - [0xEC50B0, rodata]
       - [0xEC51D0, bin]
-      - { type: bss, vram: 0x80B0F630 }
+      - { name: bss_80B0F630, type: bss, vram: 0x80B0F630 }
 
   - name: ovl_En_Syateki_Itm
     type: code
@@ -5000,7 +5000,7 @@ segments:
       - [0xED5860, data]
       - [0xED58C0, rodata]
       - [0xED5910, bin]
-      - { type: bss, vram: 0x80B20130 }
+      - { name: bss_80B20130, type: bss, vram: 0x80B20130 }
 
   - name: ovl_En_Toryo
     type: code
@@ -5108,7 +5108,7 @@ segments:
       - [0xEE2D10, data]
       - [0xEE2E40, rodata]
       - [0xEE3020, bin]
-      - { type: bss, vram: 0x80B2D440 }
+      - { name: bss_80B2D440, type: bss, vram: 0x80B2D440 }
 
   - name: ovl_En_Vm
     type: code
@@ -5193,7 +5193,7 @@ segments:
       - [0xEEEB70, data]
       - [0xEEEC40, rodata]
       - [0xEEED30, bin]
-      - { type: bss, vram: 0x80B39010 }
+      - { name: bss_80B39010, type: bss, vram: 0x80B39010 }
 
   - name: ovl_En_Wonder_Talk
     type: code
@@ -5230,7 +5230,7 @@ segments:
       - [0xEF1C30, data]
       - [0xEF1CF0, rodata]
       - [0xEF1DC0, bin]
-      - { type: bss, vram: 0x80B3C1D0 }
+      - { name: bss_80B3C1D0, type: bss, vram: 0x80B3C1D0 }
 
   - name: ovl_En_Xc
     type: code
@@ -5243,7 +5243,7 @@ segments:
       - [0xEF7A80, data]
       - [0xEF7C90, rodata]
       - [0xEF8020, bin]
-      - { type: bss, vram: 0x80B42D90 }
+      - { name: bss_80B42D90, type: bss, vram: 0x80B42D90 }
 
   - name: ovl_En_Yabusame_Mark
     type: code
@@ -5280,7 +5280,7 @@ segments:
       - [0xEFFDA0, data]
       - [0xF00020, rodata]
       - [0xF00160, bin]
-      - { type: bss, vram: 0x80B4AB30 }
+      - { name: bss_80B4AB30, type: bss, vram: 0x80B4AB30 }
 
   - name: ovl_En_Zl1
     type: code
@@ -5377,7 +5377,7 @@ segments:
       - [0xF30330, data]
       - [0xF30D00, rodata]
       - [0xF315F0, bin]
-      - { type: bss, vram: 0x80B7E070 }
+      - { name: bss_80B7E070, type: bss, vram: 0x80B7E070 }
 
   - name: ovl_Item_B_Heart
     type: code
@@ -5757,7 +5757,7 @@ segments:
       - [0xF4EA10, data]
       - [0xF4EAB0, rodata]
       - [0xF4EB10, bin]
-      - { type: bss, vram: 0x80B9FF90 }
+      - { name: bss_80B9FF90, type: bss, vram: 0x80B9FF90 }
 
   - name: ovl_Obj_Timeblock
     type: code
