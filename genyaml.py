@@ -124,9 +124,12 @@ for l in ok_map_p.read_text().splitlines():
                                 print(
                                     f"      - [0x{SegmentRomStart + (prev_end - SegmentStart):X}, pad]"
                                 )
-                            print(
-                                f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}]"
-                            )
+                            if subseg_type == "bss":
+                                print(f"      - {{ type: bss, vram: 0x{start:X} }}")
+                            else:
+                                print(
+                                    f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}]"
+                                )
                             prev_end = end
                 print()
 
