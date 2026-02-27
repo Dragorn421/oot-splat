@@ -1,0 +1,9 @@
+.venv
+*.z64
+asm
+assets
+build
+thelegendofzelda.d
+thelegendofzelda.ld
+undefined_funcs_auto.txt
+undefined_syms_auto.txt
