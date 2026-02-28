@@ -172,7 +172,7 @@ for l in ok_map_p.read_text().splitlines():
                             (SegmentTextStart, SegmentTextEnd, "asm"),
                             (SegmentDataStart, SegmentDataEnd, "data"),
                             (SegmentRoDataStart, SegmentRoDataEnd, "rodata"),
-                            (SegmentOvlStart, SegmentOvlEnd, "bin"),
+                            (SegmentOvlStart, SegmentOvlEnd, "rodatabin"),
                             (SegmentBssStart, SegmentBssEnd, "bss"),
                         ):
                             if start != end:

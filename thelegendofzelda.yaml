@@ -961,7 +961,7 @@ segments:
       - [0xBCEF30, asm]
       - [0xBCF8D0, data]
       - [0xBCF8F0, rodata]
-      - [0xBCF9E0, bin]
+      - [0xBCF9E0, rodatabin]
 
   - name: ovl_select
     type: code
@@ -973,7 +973,7 @@ segments:
       - [0xBCFAC0, asm]
       - [0xBD0EF0, data]
       - [0xBD1510, rodata]
-      - [0xBD2550, bin]
+      - [0xBD2550, rodatabin]
 
   - name: ovl_opening
     type: code
@@ -983,7 +983,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xBD2B20, asm]
-      - [0xBD2C40, bin]
+      - [0xBD2C40, rodatabin]
 
   - name: ovl_file_choose
     type: code
@@ -995,7 +995,7 @@ segments:
       - [0xBD2C70, asm]
       - [0xBE0AE0, data]
       - [0xBE1990, rodata]
-      - [0xBE1F50, bin]
+      - [0xBE1F50, rodatabin]
       - { name: bss_80813800, type: bss, vram: 0x80813800 }
 
   - name: ovl_kaleido_scope
@@ -1008,7 +1008,7 @@ segments:
       - [0xBE2730, asm]
       - [0xBF8F80, data]
       - [0xBFE330, rodata]
-      - [0xBFF5A0, bin]
+      - [0xBFF5A0, rodatabin]
       - { name: bss_808321A0, type: bss, vram: 0x808321A0 }
 
   - name: ovl_player_actor
@@ -1021,7 +1021,7 @@ segments:
       - [0xC010B0, asm]
       - [0xC222B0, data]
       - [0xC240E0, rodata]
-      - [0xC243F0, bin]
+      - [0xC243F0, rodatabin]
       - { name: bss_80858AA0, type: bss, vram: 0x80858AA0 }
 
   - name: ovl_map_mark_data
@@ -1032,7 +1032,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC27940, data]
-      - [0xC2E3E0, bin]
+      - [0xC2E3E0, rodatabin]
 
   - name: ovl_En_Test
     type: code
@@ -1044,7 +1044,7 @@ segments:
       - [0xC2E420, asm]
       - [0xC332E0, data]
       - [0xC334D0, rodata]
-      - [0xC33690, bin]
+      - [0xC33690, rodatabin]
 
   - name: ovl_Arms_Hook
     type: code
@@ -1056,7 +1056,7 @@ segments:
       - [0xC33CD0, asm]
       - [0xC348B0, data]
       - [0xC34990, rodata]
-      - [0xC349F0, bin]
+      - [0xC349F0, rodatabin]
 
   - name: ovl_Arrow_Fire
     type: code
@@ -1068,7 +1068,7 @@ segments:
       - [0xC34AE0, asm]
       - [0xC354B0, data]
       - [0xC36900, rodata]
-      - [0xC369A0, bin]
+      - [0xC369A0, rodatabin]
 
   - name: ovl_Arrow_Ice
     type: code
@@ -1080,7 +1080,7 @@ segments:
       - [0xC36AA0, asm]
       - [0xC37490, data]
       - [0xC388E0, rodata]
-      - [0xC38980, bin]
+      - [0xC38980, rodatabin]
 
   - name: ovl_Arrow_Light
     type: code
@@ -1092,7 +1092,7 @@ segments:
       - [0xC38A80, asm]
       - [0xC39480, data]
       - [0xC3A8D0, rodata]
-      - [0xC3A970, bin]
+      - [0xC3A970, rodatabin]
 
   - name: ovl_Bg_Bdan_Objects
     type: code
@@ -1104,7 +1104,7 @@ segments:
       - [0xC3AA70, asm]
       - [0xC3BB20, data]
       - [0xC3BB80, rodata]
-      - [0xC3BC40, bin]
+      - [0xC3BC40, rodatabin]
 
   - name: ovl_Bg_Bdan_Switch
     type: code
@@ -1116,7 +1116,7 @@ segments:
       - [0xC3BDE0, asm]
       - [0xC3CE50, data]
       - [0xC3CEC0, rodata]
-      - [0xC3D060, bin]
+      - [0xC3D060, rodatabin]
 
   - name: ovl_Bg_Bom_Guard
     type: code
@@ -1128,7 +1128,7 @@ segments:
       - [0xC3D320, asm]
       - [0xC3D500, data]
       - [0xC3D520, rodata]
-      - [0xC3D560, bin]
+      - [0xC3D560, rodatabin]
 
   - name: ovl_Bg_Bombwall
     type: code
@@ -1140,7 +1140,7 @@ segments:
       - [0xC3D5A0, asm]
       - [0xC3DCF0, data]
       - [0xC3DE10, rodata]
-      - [0xC3DE90, bin]
+      - [0xC3DE90, rodatabin]
 
   - name: ovl_Bg_Bowl_Wall
     type: code
@@ -1152,7 +1152,7 @@ segments:
       - [0xC3DF30, asm]
       - [0xC3E7F0, data]
       - [0xC3E860, rodata]
-      - [0xC3E8F0, bin]
+      - [0xC3E8F0, rodatabin]
 
   - name: ovl_Bg_Breakwall
     type: code
@@ -1164,7 +1164,7 @@ segments:
       - [0xC3E9B0, asm]
       - [0xC3F510, data]
       - [0xC3F740, rodata]
-      - [0xC3F790, bin]
+      - [0xC3F790, rodatabin]
 
   - name: ovl_Bg_Ddan_Jd
     type: code
@@ -1175,7 +1175,7 @@ segments:
     subsegments:
       - [0xC3F880, asm]
       - [0xC3FE30, data]
-      - [0xC3FE60, bin]
+      - [0xC3FE60, rodatabin]
 
   - name: ovl_Bg_Ddan_Kd
     type: code
@@ -1187,7 +1187,7 @@ segments:
       - [0xC3FEC0, asm]
       - [0xC40670, data]
       - [0xC406F0, rodata]
-      - [0xC40710, bin]
+      - [0xC40710, rodatabin]
 
   - name: ovl_Bg_Dodoago
     type: code
@@ -1199,7 +1199,7 @@ segments:
       - [0xC407D0, asm]
       - [0xC412F0, data]
       - [0xC41420, rodata]
-      - [0xC41460, bin]
+      - [0xC41460, rodatabin]
       - { name: bss_808727C0, type: bss, vram: 0x808727C0 }
 
   - name: ovl_Bg_Dy_Yoseizo
@@ -1212,7 +1212,7 @@ segments:
       - [0xC41590, asm]
       - [0xC441A0, data]
       - [0xC44240, rodata]
-      - [0xC44430, bin]
+      - [0xC44430, rodatabin]
 
   - name: ovl_Bg_Ganon_Otyuka
     type: code
@@ -1224,7 +1224,7 @@ segments:
       - [0xC44680, asm]
       - [0xC457A0, data]
       - [0xC46C20, rodata]
-      - [0xC46D20, bin]
+      - [0xC46D20, rodatabin]
 
   - name: ovl_Bg_Gate_Shutter
     type: code
@@ -1236,7 +1236,7 @@ segments:
       - [0xC46EC0, asm]
       - [0xC472F0, data]
       - [0xC47310, rodata]
-      - [0xC47390, bin]
+      - [0xC47390, rodatabin]
 
   - name: ovl_Bg_Gjyo_Bridge
     type: code
@@ -1248,7 +1248,7 @@ segments:
       - [0xC47420, asm]
       - [0xC47890, data]
       - [0xC478C0, rodata]
-      - [0xC47910, bin]
+      - [0xC47910, rodatabin]
 
   - name: ovl_Bg_Gnd_Darkmeiro
     type: code
@@ -1260,7 +1260,7 @@ segments:
       - [0xC47990, asm]
       - [0xC48120, data]
       - [0xC48140, rodata]
-      - [0xC481A0, bin]
+      - [0xC481A0, rodatabin]
 
   - name: ovl_Bg_Gnd_Firemeiro
     type: code
@@ -1272,7 +1272,7 @@ segments:
       - [0xC48220, asm]
       - [0xC48720, data]
       - [0xC48740, rodata]
-      - [0xC48790, bin]
+      - [0xC48790, rodatabin]
 
   - name: ovl_Bg_Gnd_Iceblock
     type: code
@@ -1284,7 +1284,7 @@ segments:
       - [0xC48800, asm]
       - [0xC49480, data]
       - [0xC494F0, rodata]
-      - [0xC49680, bin]
+      - [0xC49680, rodatabin]
       - { name: bss_8087AC40, type: bss, vram: 0x8087AC40 }
 
   - name: ovl_Bg_Gnd_Nisekabe
@@ -1297,7 +1297,7 @@ segments:
       - [0xC499A0, asm]
       - [0xC49A90, data]
       - [0xC49AC0, rodata]
-      - [0xC49AD0, bin]
+      - [0xC49AD0, rodatabin]
 
   - name: ovl_Bg_Gnd_Soulmeiro
     type: code
@@ -1309,7 +1309,7 @@ segments:
       - [0xC49B10, asm]
       - [0xC4A260, data]
       - [0xC4A2E0, rodata]
-      - [0xC4A340, bin]
+      - [0xC4A340, rodatabin]
 
   - name: ovl_Bg_Haka
     type: code
@@ -1321,7 +1321,7 @@ segments:
       - [0xC4A400, asm]
       - [0xC4AA20, data]
       - [0xC4AA50, rodata]
-      - [0xC4AAA0, bin]
+      - [0xC4AAA0, rodatabin]
 
   - name: ovl_Bg_Haka_Gate
     type: code
@@ -1333,7 +1333,7 @@ segments:
       - [0xC4AB40, asm]
       - [0xC4BA20, data]
       - [0xC4BA60, rodata]
-      - [0xC4BB10, bin]
+      - [0xC4BB10, rodatabin]
       - { name: bss_8087CFB0, type: bss, vram: 0x8087CFB0 }
 
   - name: ovl_Bg_Haka_Huta
@@ -1346,7 +1346,7 @@ segments:
       - [0xC4BD00, asm]
       - [0xC4C660, data]
       - [0xC4C6B0, rodata]
-      - [0xC4C6C0, bin]
+      - [0xC4C6C0, rodatabin]
 
   - name: ovl_Bg_Haka_Megane
     type: code
@@ -1357,7 +1357,7 @@ segments:
     subsegments:
       - [0xC4C780, asm]
       - [0xC4CA70, data]
-      - [0xC4CB00, bin]
+      - [0xC4CB00, rodatabin]
 
   - name: ovl_Bg_Haka_MeganeBG
     type: code
@@ -1369,7 +1369,7 @@ segments:
       - [0xC4CB70, asm]
       - [0xC4D110, data]
       - [0xC4D160, rodata]
-      - [0xC4D170, bin]
+      - [0xC4D170, rodatabin]
 
   - name: ovl_Bg_Haka_Sgami
     type: code
@@ -1381,7 +1381,7 @@ segments:
       - [0xC4D220, asm]
       - [0xC4DB80, data]
       - [0xC4DD20, rodata]
-      - [0xC4DD30, bin]
+      - [0xC4DD30, rodatabin]
 
   - name: ovl_Bg_Haka_Ship
     type: code
@@ -1393,7 +1393,7 @@ segments:
       - [0xC4DE40, asm]
       - [0xC4E7E0, data]
       - [0xC4E810, rodata]
-      - [0xC4E8E0, bin]
+      - [0xC4E8E0, rodatabin]
 
   - name: ovl_Bg_Haka_Trap
     type: code
@@ -1405,7 +1405,7 @@ segments:
       - [0xC4E9E0, asm]
       - [0xC4FC70, data]
       - [0xC4FD80, rodata]
-      - [0xC4FDB0, bin]
+      - [0xC4FDB0, rodatabin]
 
   - name: ovl_Bg_Haka_Tubo
     type: code
@@ -1417,7 +1417,7 @@ segments:
       - [0xC4FF90, asm]
       - [0xC50880, data]
       - [0xC50910, rodata]
-      - [0xC50970, bin]
+      - [0xC50970, rodatabin]
 
   - name: ovl_Bg_Haka_Water
     type: code
@@ -1429,7 +1429,7 @@ segments:
       - [0xC50A40, asm]
       - [0xC511D0, data]
       - [0xC51200, rodata]
-      - [0xC51270, bin]
+      - [0xC51270, rodatabin]
 
   - name: ovl_Bg_Haka_Zou
     type: code
@@ -1441,7 +1441,7 @@ segments:
       - [0xC51300, asm]
       - [0xC52330, data]
       - [0xC523A0, rodata]
-      - [0xC523C0, bin]
+      - [0xC523C0, rodatabin]
 
   - name: ovl_Bg_Heavy_Block
     type: code
@@ -1453,7 +1453,7 @@ segments:
       - [0xC524D0, asm]
       - [0xC53B90, data]
       - [0xC53C20, rodata]
-      - [0xC53D20, bin]
+      - [0xC53D20, rodatabin]
 
   - name: ovl_Bg_Hidan_Curtain
     type: code
@@ -1465,7 +1465,7 @@ segments:
       - [0xC53EE0, asm]
       - [0xC548B0, data]
       - [0xC54930, rodata]
-      - [0xC54A60, bin]
+      - [0xC54A60, rodatabin]
 
   - name: ovl_Bg_Hidan_Dalm
     type: code
@@ -1476,7 +1476,7 @@ segments:
     subsegments:
       - [0xC54B60, asm]
       - [0xC551C0, data]
-      - [0xC55300, bin]
+      - [0xC55300, rodatabin]
 
   - name: ovl_Bg_Hidan_Firewall
     type: code
@@ -1488,7 +1488,7 @@ segments:
       - [0xC553A0, asm]
       - [0xC559F0, data]
       - [0xC55A70, rodata]
-      - [0xC55AD0, bin]
+      - [0xC55AD0, rodatabin]
 
   - name: ovl_Bg_Hidan_Fslift
     type: code
@@ -1500,7 +1500,7 @@ segments:
       - [0xC55B80, asm]
       - [0xC55F80, data]
       - [0xC55FB0, rodata]
-      - [0xC55FC0, bin]
+      - [0xC55FC0, rodatabin]
 
   - name: ovl_Bg_Hidan_Fwbig
     type: code
@@ -1512,7 +1512,7 @@ segments:
       - [0xC56030, asm]
       - [0xC56BF0, data]
       - [0xC56C40, rodata]
-      - [0xC56CA0, bin]
+      - [0xC56CA0, rodatabin]
 
   - name: ovl_Bg_Hidan_Hamstep
     type: code
@@ -1524,7 +1524,7 @@ segments:
       - [0xC56D80, asm]
       - [0xC57AB0, data]
       - [0xC57BE0, rodata]
-      - [0xC57D20, bin]
+      - [0xC57D20, rodatabin]
 
   - name: ovl_Bg_Hidan_Hrock
     type: code
@@ -1536,7 +1536,7 @@ segments:
       - [0xC57E70, asm]
       - [0xC58540, data]
       - [0xC58600, rodata]
-      - [0xC58610, bin]
+      - [0xC58610, rodatabin]
 
   - name: ovl_Bg_Hidan_Kousi
     type: code
@@ -1548,7 +1548,7 @@ segments:
       - [0xC586A0, asm]
       - [0xC58B80, data]
       - [0xC58BD0, rodata]
-      - [0xC58C80, bin]
+      - [0xC58C80, rodatabin]
 
   - name: ovl_Bg_Hidan_Kowarerukabe
     type: code
@@ -1560,7 +1560,7 @@ segments:
       - [0xC58D60, asm]
       - [0xC59B30, data]
       - [0xC59BD0, rodata]
-      - [0xC59CE0, bin]
+      - [0xC59CE0, rodatabin]
 
   - name: ovl_Bg_Hidan_Rock
     type: code
@@ -1572,7 +1572,7 @@ segments:
       - [0xC59DC0, asm]
       - [0xC5ACA0, data]
       - [0xC5AD30, rodata]
-      - [0xC5ADA0, bin]
+      - [0xC5ADA0, rodatabin]
 
   - name: ovl_Bg_Hidan_Rsekizou
     type: code
@@ -1584,7 +1584,7 @@ segments:
       - [0xC5AF40, asm]
       - [0xC5B9A0, data]
       - [0xC5BAE0, rodata]
-      - [0xC5BB60, bin]
+      - [0xC5BB60, rodatabin]
 
   - name: ovl_Bg_Hidan_Sekizou
     type: code
@@ -1596,7 +1596,7 @@ segments:
       - [0xC5BC00, asm]
       - [0xC5CEA0, data]
       - [0xC5CFE0, rodata]
-      - [0xC5D050, bin]
+      - [0xC5D050, rodatabin]
 
   - name: ovl_Bg_Hidan_Sima
     type: code
@@ -1608,7 +1608,7 @@ segments:
       - [0xC5D110, asm]
       - [0xC5DEC0, data]
       - [0xC5DF60, rodata]
-      - [0xC5E000, bin]
+      - [0xC5E000, rodatabin]
 
   - name: ovl_Bg_Hidan_Syoku
     type: code
@@ -1620,7 +1620,7 @@ segments:
       - [0xC5E100, asm]
       - [0xC5E4A0, data]
       - [0xC5E4D0, rodata]
-      - [0xC5E4E0, bin]
+      - [0xC5E4E0, rodatabin]
 
   - name: ovl_Bg_Ice_Objects
     type: code
@@ -1632,7 +1632,7 @@ segments:
       - [0xC5E550, asm]
       - [0xC5F1D0, data]
       - [0xC5F260, rodata]
-      - [0xC5F280, bin]
+      - [0xC5F280, rodatabin]
 
   - name: ovl_Bg_Ice_Shelter
     type: code
@@ -1644,7 +1644,7 @@ segments:
       - [0xC5F480, asm]
       - [0xC60410, data]
       - [0xC60540, rodata]
-      - [0xC60650, bin]
+      - [0xC60650, rodatabin]
 
   - name: ovl_Bg_Ice_Shutter
     type: code
@@ -1655,7 +1655,7 @@ segments:
     subsegments:
       - [0xC60800, asm]
       - [0xC60BD0, data]
-      - [0xC60C00, bin]
+      - [0xC60C00, rodatabin]
 
   - name: ovl_Bg_Ice_Turara
     type: code
@@ -1667,7 +1667,7 @@ segments:
       - [0xC60C60, asm]
       - [0xC61360, data]
       - [0xC613D0, rodata]
-      - [0xC613E0, bin]
+      - [0xC613E0, rodatabin]
 
   - name: ovl_Bg_Ingate
     type: code
@@ -1679,7 +1679,7 @@ segments:
       - [0xC61480, asm]
       - [0xC617D0, data]
       - [0xC617F0, rodata]
-      - [0xC61830, bin]
+      - [0xC61830, rodatabin]
 
   - name: ovl_Bg_Jya_1flift
     type: code
@@ -1691,7 +1691,7 @@ segments:
       - [0xC618A0, asm]
       - [0xC61E20, data]
       - [0xC61E90, rodata]
-      - [0xC61F10, bin]
+      - [0xC61F10, rodatabin]
 
   - name: ovl_Bg_Jya_Amishutter
     type: code
@@ -1703,7 +1703,7 @@ segments:
       - [0xC62000, asm]
       - [0xC62310, data]
       - [0xC62340, rodata]
-      - [0xC623A0, bin]
+      - [0xC623A0, rodatabin]
 
   - name: ovl_Bg_Jya_Bigmirror
     type: code
@@ -1715,7 +1715,7 @@ segments:
       - [0xC62420, asm]
       - [0xC62C10, data]
       - [0xC62CA0, rodata]
-      - [0xC62DE0, bin]
+      - [0xC62DE0, rodatabin]
 
   - name: ovl_Bg_Jya_Block
     type: code
@@ -1727,7 +1727,7 @@ segments:
       - [0xC62EE0, asm]
       - [0xC63120, data]
       - [0xC63150, rodata]
-      - [0xC63190, bin]
+      - [0xC63190, rodatabin]
 
   - name: ovl_Bg_Jya_Bombchuiwa
     type: code
@@ -1739,7 +1739,7 @@ segments:
       - [0xC631E0, asm]
       - [0xC63C60, data]
       - [0xC63CE0, rodata]
-      - [0xC63DF0, bin]
+      - [0xC63DF0, rodatabin]
 
   - name: ovl_Bg_Jya_Bombiwa
     type: code
@@ -1751,7 +1751,7 @@ segments:
       - [0xC63EE0, asm]
       - [0xC64440, data]
       - [0xC644B0, rodata]
-      - [0xC645A0, bin]
+      - [0xC645A0, rodatabin]
 
   - name: ovl_Bg_Jya_Cobra
     type: code
@@ -1763,7 +1763,7 @@ segments:
       - [0xC64630, asm]
       - [0xC65FB0, data]
       - [0xC662B0, rodata]
-      - [0xC66490, bin]
+      - [0xC66490, rodatabin]
 
   - name: ovl_Bg_Jya_Goroiwa
     type: code
@@ -1775,7 +1775,7 @@ segments:
       - [0xC666B0, asm]
       - [0xC66C90, data]
       - [0xC66D00, rodata]
-      - [0xC66D30, bin]
+      - [0xC66D30, rodatabin]
 
   - name: ovl_Bg_Jya_Haheniron
     type: code
@@ -1787,7 +1787,7 @@ segments:
       - [0xC66E00, asm]
       - [0xC67460, data]
       - [0xC67510, rodata]
-      - [0xC67520, bin]
+      - [0xC67520, rodatabin]
 
   - name: ovl_Bg_Jya_Ironobj
     type: code
@@ -1799,7 +1799,7 @@ segments:
       - [0xC675E0, asm]
       - [0xC681C0, data]
       - [0xC682A0, rodata]
-      - [0xC68360, bin]
+      - [0xC68360, rodatabin]
 
   - name: ovl_Bg_Jya_Kanaami
     type: code
@@ -1811,7 +1811,7 @@ segments:
       - [0xC68480, asm]
       - [0xC687C0, data]
       - [0xC687F0, rodata]
-      - [0xC68870, bin]
+      - [0xC68870, rodatabin]
 
   - name: ovl_Bg_Jya_Lift
     type: code
@@ -1823,7 +1823,7 @@ segments:
       - [0xC688E0, asm]
       - [0xC68D60, data]
       - [0xC68DA0, rodata]
-      - [0xC68DD0, bin]
+      - [0xC68DD0, rodatabin]
 
   - name: ovl_Bg_Jya_Megami
     type: code
@@ -1835,7 +1835,7 @@ segments:
       - [0xC68E70, asm]
       - [0xC69D00, data]
       - [0xC69F50, rodata]
-      - [0xC6A010, bin]
+      - [0xC6A010, rodatabin]
 
   - name: ovl_Bg_Jya_Zurerukabe
     type: code
@@ -1847,7 +1847,7 @@ segments:
       - [0xC6A180, asm]
       - [0xC6A700, data]
       - [0xC6A790, rodata]
-      - [0xC6A890, bin]
+      - [0xC6A890, rodatabin]
 
   - name: ovl_Bg_Menkuri_Eye
     type: code
@@ -1859,7 +1859,7 @@ segments:
       - [0xC6A9B0, asm]
       - [0xC6ADB0, data]
       - [0xC6AE10, rodata]
-      - [0xC6AE60, bin]
+      - [0xC6AE60, rodatabin]
       - { name: bss_8089C1A0, type: bss, vram: 0x8089C1A0 }
 
   - name: ovl_Bg_Menkuri_Kaiten
@@ -1871,7 +1871,7 @@ segments:
     subsegments:
       - [0xC6AEE0, asm]
       - [0xC6B000, data]
-      - [0xC6B030, bin]
+      - [0xC6B030, rodatabin]
 
   - name: ovl_Bg_Menkuri_Nisekabe
     type: code
@@ -1882,7 +1882,7 @@ segments:
     subsegments:
       - [0xC6B060, asm]
       - [0xC6B140, data]
-      - [0xC6B170, bin]
+      - [0xC6B170, rodatabin]
 
   - name: ovl_Bg_Mizu_Bwall
     type: code
@@ -1894,7 +1894,7 @@ segments:
       - [0xC6B1B0, asm]
       - [0xC6C3D0, data]
       - [0xC6C5A0, rodata]
-      - [0xC6C7B0, bin]
+      - [0xC6C7B0, rodatabin]
 
   - name: ovl_Bg_Mizu_Movebg
     type: code
@@ -1906,7 +1906,7 @@ segments:
       - [0xC6C960, asm]
       - [0xC6D850, data]
       - [0xC6D8F0, rodata]
-      - [0xC6D9C0, bin]
+      - [0xC6D9C0, rodatabin]
       - { name: bss_8089EE40, type: bss, vram: 0x8089EE40 }
 
   - name: ovl_Bg_Mizu_Shutter
@@ -1919,7 +1919,7 @@ segments:
       - [0xC6DB70, asm]
       - [0xC6E240, data]
       - [0xC6E2A0, rodata]
-      - [0xC6E310, bin]
+      - [0xC6E310, rodatabin]
 
   - name: ovl_Bg_Mizu_Uzu
     type: code
@@ -1930,7 +1930,7 @@ segments:
     subsegments:
       - [0xC6E400, asm]
       - [0xC6E560, data]
-      - [0xC6E590, bin]
+      - [0xC6E590, rodatabin]
 
   - name: ovl_Bg_Mizu_Water
     type: code
@@ -1942,7 +1942,7 @@ segments:
       - [0xC6E5D0, asm]
       - [0xC6F230, data]
       - [0xC6F2A0, rodata]
-      - [0xC6F360, bin]
+      - [0xC6F360, rodatabin]
 
   - name: ovl_Bg_Mjin
     type: code
@@ -1954,7 +1954,7 @@ segments:
       - [0xC6F4A0, asm]
       - [0xC6F800, data]
       - [0xC6F840, rodata]
-      - [0xC6F870, bin]
+      - [0xC6F870, rodatabin]
 
   - name: ovl_Bg_Mori_Bigst
     type: code
@@ -1966,7 +1966,7 @@ segments:
       - [0xC6F8E0, asm]
       - [0xC701E0, data]
       - [0xC70220, rodata]
-      - [0xC703F0, bin]
+      - [0xC703F0, rodatabin]
 
   - name: ovl_Bg_Mori_Elevator
     type: code
@@ -1978,7 +1978,7 @@ segments:
       - [0xC70520, asm]
       - [0xC70F30, data]
       - [0xC70F70, rodata]
-      - [0xC71100, bin]
+      - [0xC71100, rodatabin]
 
   - name: ovl_Bg_Mori_Hashigo
     type: code
@@ -1990,7 +1990,7 @@ segments:
       - [0xC71280, asm]
       - [0xC71AA0, data]
       - [0xC71B30, rodata]
-      - [0xC71C90, bin]
+      - [0xC71C90, rodatabin]
 
   - name: ovl_Bg_Mori_Hashira4
     type: code
@@ -2002,7 +2002,7 @@ segments:
       - [0xC71D80, asm]
       - [0xC722C0, data]
       - [0xC72300, rodata]
-      - [0xC72410, bin]
+      - [0xC72410, rodatabin]
       - { name: bss_808A37C0, type: bss, vram: 0x808A37C0 }
 
   - name: ovl_Bg_Mori_Hineri
@@ -2015,7 +2015,7 @@ segments:
       - [0xC724E0, asm]
       - [0xC730F0, data]
       - [0xC73130, rodata]
-      - [0xC73200, bin]
+      - [0xC73200, rodatabin]
 
   - name: ovl_Bg_Mori_Idomizu
     type: code
@@ -2027,7 +2027,7 @@ segments:
       - [0xC73350, asm]
       - [0xC73920, data]
       - [0xC73950, rodata]
-      - [0xC73A10, bin]
+      - [0xC73A10, rodatabin]
 
   - name: ovl_Bg_Mori_Kaitenkabe
     type: code
@@ -2039,7 +2039,7 @@ segments:
       - [0xC73AD0, asm]
       - [0xC740C0, data]
       - [0xC740F0, rodata]
-      - [0xC741D0, bin]
+      - [0xC741D0, rodatabin]
 
   - name: ovl_Bg_Mori_Rakkatenjo
     type: code
@@ -2051,7 +2051,7 @@ segments:
       - [0xC74280, asm]
       - [0xC74B70, data]
       - [0xC74BB0, rodata]
-      - [0xC74DA0, bin]
+      - [0xC74DA0, rodatabin]
 
   - name: ovl_Bg_Po_Event
     type: code
@@ -2063,7 +2063,7 @@ segments:
       - [0xC74F20, asm]
       - [0xC769C0, data]
       - [0xC76AC0, rodata]
-      - [0xC76B20, bin]
+      - [0xC76B20, rodatabin]
       - { name: bss_808A80A0, type: bss, vram: 0x808A80A0 }
 
   - name: ovl_Bg_Po_Syokudai
@@ -2076,7 +2076,7 @@ segments:
       - [0xC76DB0, asm]
       - [0xC77660, data]
       - [0xC776D0, rodata]
-      - [0xC77750, bin]
+      - [0xC77750, rodatabin]
 
   - name: ovl_Bg_Pushbox
     type: code
@@ -2088,7 +2088,7 @@ segments:
       - [0xC777E0, asm]
       - [0xC77A80, data]
       - [0xC77AB0, rodata]
-      - [0xC77AF0, bin]
+      - [0xC77AF0, rodatabin]
 
   - name: ovl_Bg_Relay_Objects
     type: code
@@ -2100,7 +2100,7 @@ segments:
       - [0xC77B50, asm]
       - [0xC781E0, data]
       - [0xC78210, rodata]
-      - [0xC78220, bin]
+      - [0xC78220, rodatabin]
 
   - name: ovl_Bg_Spot00_Break
     type: code
@@ -2111,7 +2111,7 @@ segments:
     subsegments:
       - [0xC782E0, asm]
       - [0xC78420, data]
-      - [0xC78450, bin]
+      - [0xC78450, rodatabin]
 
   - name: ovl_Bg_Spot00_Hanebasi
     type: code
@@ -2123,7 +2123,7 @@ segments:
       - [0xC78480, asm]
       - [0xC79490, data]
       - [0xC794D0, rodata]
-      - [0xC795A0, bin]
+      - [0xC795A0, rodatabin]
 
   - name: ovl_Bg_Spot01_Fusya
     type: code
@@ -2135,7 +2135,7 @@ segments:
       - [0xC796C0, asm]
       - [0xC79900, data]
       - [0xC79930, rodata]
-      - [0xC79980, bin]
+      - [0xC79980, rodatabin]
 
   - name: ovl_Bg_Spot01_Idohashira
     type: code
@@ -2147,7 +2147,7 @@ segments:
       - [0xC799E0, asm]
       - [0xC7A530, data]
       - [0xC7A570, rodata]
-      - [0xC7A6E0, bin]
+      - [0xC7A6E0, rodatabin]
 
   - name: ovl_Bg_Spot01_Idomizu
     type: code
@@ -2159,7 +2159,7 @@ segments:
       - [0xC7A7E0, asm]
       - [0xC7AA90, data]
       - [0xC7AAC0, rodata]
-      - [0xC7AB20, bin]
+      - [0xC7AB20, rodatabin]
 
   - name: ovl_Bg_Spot01_Idosoko
     type: code
@@ -2171,7 +2171,7 @@ segments:
       - [0xC7AB80, asm]
       - [0xC7AD50, data]
       - [0xC7AD80, rodata]
-      - [0xC7ADE0, bin]
+      - [0xC7ADE0, rodatabin]
 
   - name: ovl_Bg_Spot01_Objects2
     type: code
@@ -2183,7 +2183,7 @@ segments:
       - [0xC7AE40, asm]
       - [0xC7B1E0, data]
       - [0xC7B230, rodata]
-      - [0xC7B2C0, bin]
+      - [0xC7B2C0, rodatabin]
 
   - name: ovl_Bg_Spot02_Objects
     type: code
@@ -2195,7 +2195,7 @@ segments:
       - [0xC7B360, asm]
       - [0xC7C550, data]
       - [0xC7C5C0, rodata]
-      - [0xC7C6A0, bin]
+      - [0xC7C6A0, rodatabin]
 
   - name: ovl_Bg_Spot03_Taki
     type: code
@@ -2207,7 +2207,7 @@ segments:
       - [0xC7C7E0, asm]
       - [0xC7D090, data]
       - [0xC7D0C0, rodata]
-      - [0xC7D110, bin]
+      - [0xC7D110, rodatabin]
 
   - name: ovl_Bg_Spot05_Soko
     type: code
@@ -2218,7 +2218,7 @@ segments:
     subsegments:
       - [0xC7D170, asm]
       - [0xC7D400, data]
-      - [0xC7D430, bin]
+      - [0xC7D430, rodatabin]
 
   - name: ovl_Bg_Spot06_Objects
     type: code
@@ -2230,7 +2230,7 @@ segments:
       - [0xC7D480, asm]
       - [0xC7E610, data]
       - [0xC7E670, rodata]
-      - [0xC7E750, bin]
+      - [0xC7E750, rodatabin]
 
   - name: ovl_Bg_Spot07_Taki
     type: code
@@ -2242,7 +2242,7 @@ segments:
       - [0xC7E930, asm]
       - [0xC7EEE0, data]
       - [0xC7EF10, rodata]
-      - [0xC7EF70, bin]
+      - [0xC7EF70, rodatabin]
 
   - name: ovl_Bg_Spot08_Bakudankabe
     type: code
@@ -2254,7 +2254,7 @@ segments:
       - [0xC7EFD0, asm]
       - [0xC7F510, data]
       - [0xC7F5E0, rodata]
-      - [0xC7F5F0, bin]
+      - [0xC7F5F0, rodatabin]
 
   - name: ovl_Bg_Spot08_Iceblock
     type: code
@@ -2266,7 +2266,7 @@ segments:
       - [0xC7F660, asm]
       - [0xC80390, data]
       - [0xC80410, rodata]
-      - [0xC805B0, bin]
+      - [0xC805B0, rodatabin]
 
   - name: ovl_Bg_Spot09_Obj
     type: code
@@ -2278,7 +2278,7 @@ segments:
       - [0xC807E0, asm]
       - [0xC80C70, data]
       - [0xC80CE0, rodata]
-      - [0xC80DD0, bin]
+      - [0xC80DD0, rodatabin]
 
   - name: ovl_Bg_Spot11_Bakudankabe
     type: code
@@ -2290,7 +2290,7 @@ segments:
       - [0xC80E80, asm]
       - [0xC813E0, data]
       - [0xC81450, rodata]
-      - [0xC81480, bin]
+      - [0xC81480, rodatabin]
 
   - name: ovl_Bg_Spot11_Oasis
     type: code
@@ -2302,7 +2302,7 @@ segments:
       - [0xC814F0, asm]
       - [0xC81AF0, data]
       - [0xC81B70, rodata]
-      - [0xC81BD0, bin]
+      - [0xC81BD0, rodatabin]
 
   - name: ovl_Bg_Spot12_Gate
     type: code
@@ -2314,7 +2314,7 @@ segments:
       - [0xC81C90, asm]
       - [0xC82010, data]
       - [0xC82040, rodata]
-      - [0xC820A0, bin]
+      - [0xC820A0, rodatabin]
 
   - name: ovl_Bg_Spot12_Saku
     type: code
@@ -2326,7 +2326,7 @@ segments:
       - [0xC82120, asm]
       - [0xC82520, data]
       - [0xC82550, rodata]
-      - [0xC825C0, bin]
+      - [0xC825C0, rodatabin]
 
   - name: ovl_Bg_Spot15_Rrbox
     type: code
@@ -2338,7 +2338,7 @@ segments:
       - [0xC82660, asm]
       - [0xC83290, data]
       - [0xC83320, rodata]
-      - [0xC83410, bin]
+      - [0xC83410, rodatabin]
 
   - name: ovl_Bg_Spot15_Saku
     type: code
@@ -2350,7 +2350,7 @@ segments:
       - [0xC83550, asm]
       - [0xC83830, data]
       - [0xC83850, rodata]
-      - [0xC838B0, bin]
+      - [0xC838B0, rodatabin]
 
   - name: ovl_Bg_Spot16_Bombstone
     type: code
@@ -2362,7 +2362,7 @@ segments:
       - [0xC83930, asm]
       - [0xC84AD0, data]
       - [0xC84DA0, rodata]
-      - [0xC84F70, bin]
+      - [0xC84F70, rodatabin]
 
   - name: ovl_Bg_Spot16_Doughnut
     type: code
@@ -2374,7 +2374,7 @@ segments:
       - [0xC85140, asm]
       - [0xC856F0, data]
       - [0xC85730, rodata]
-      - [0xC85820, bin]
+      - [0xC85820, rodatabin]
 
   - name: ovl_Bg_Spot17_Bakudankabe
     type: code
@@ -2386,7 +2386,7 @@ segments:
       - [0xC858C0, asm]
       - [0xC85F80, data]
       - [0xC85FB0, rodata]
-      - [0xC86080, bin]
+      - [0xC86080, rodatabin]
 
   - name: ovl_Bg_Spot17_Funen
     type: code
@@ -2398,7 +2398,7 @@ segments:
       - [0xC86100, asm]
       - [0xC86300, data]
       - [0xC86330, rodata]
-      - [0xC863A0, bin]
+      - [0xC863A0, rodatabin]
 
   - name: ovl_Bg_Spot18_Basket
     type: code
@@ -2410,7 +2410,7 @@ segments:
       - [0xC86410, asm]
       - [0xC87250, data]
       - [0xC872F0, rodata]
-      - [0xC87350, bin]
+      - [0xC87350, rodatabin]
 
   - name: ovl_Bg_Spot18_Futa
     type: code
@@ -2421,7 +2421,7 @@ segments:
     subsegments:
       - [0xC87480, asm]
       - [0xC875B0, data]
-      - [0xC875E0, bin]
+      - [0xC875E0, rodatabin]
 
   - name: ovl_Bg_Spot18_Obj
     type: code
@@ -2433,7 +2433,7 @@ segments:
       - [0xC87610, asm]
       - [0xC87DD0, data]
       - [0xC87E50, rodata]
-      - [0xC87F90, bin]
+      - [0xC87F90, rodatabin]
 
   - name: ovl_Bg_Spot18_Shutter
     type: code
@@ -2444,7 +2444,7 @@ segments:
     subsegments:
       - [0xC880D0, asm]
       - [0xC88550, data]
-      - [0xC88580, bin]
+      - [0xC88580, rodatabin]
 
   - name: ovl_Bg_Sst_Floor
     type: code
@@ -2456,7 +2456,7 @@ segments:
       - [0xC88610, asm]
       - [0xC88B10, data]
       - [0xC88B40, rodata]
-      - [0xC88B90, bin]
+      - [0xC88B90, rodatabin]
 
   - name: ovl_Bg_Toki_Hikari
     type: code
@@ -2468,7 +2468,7 @@ segments:
       - [0xC88C00, asm]
       - [0xC89950, data]
       - [0xC89980, rodata]
-      - [0xC89A70, bin]
+      - [0xC89A70, rodatabin]
 
   - name: ovl_Bg_Toki_Swd
     type: code
@@ -2480,7 +2480,7 @@ segments:
       - [0xC89B40, asm]
       - [0xC89FF0, data]
       - [0xC8B120, rodata]
-      - [0xC8B160, bin]
+      - [0xC8B160, rodatabin]
 
   - name: ovl_Bg_Treemouth
     type: code
@@ -2492,7 +2492,7 @@ segments:
       - [0xC8B200, asm]
       - [0xC8BB20, data]
       - [0xC8C6E0, rodata]
-      - [0xC8C760, bin]
+      - [0xC8C760, rodatabin]
 
   - name: ovl_Bg_Umajump
     type: code
@@ -2503,7 +2503,7 @@ segments:
     subsegments:
       - [0xC8C8E0, asm]
       - [0xC8CA00, data]
-      - [0xC8CA30, bin]
+      - [0xC8CA30, rodatabin]
 
   - name: ovl_Bg_Vb_Sima
     type: code
@@ -2515,7 +2515,7 @@ segments:
       - [0xC8CA60, asm]
       - [0xC8D0F0, data]
       - [0xC8D120, rodata]
-      - [0xC8D170, bin]
+      - [0xC8D170, rodatabin]
 
   - name: ovl_Bg_Ydan_Hasi
     type: code
@@ -2527,7 +2527,7 @@ segments:
       - [0xC8D200, asm]
       - [0xC8D900, data]
       - [0xC8D930, rodata]
-      - [0xC8D980, bin]
+      - [0xC8D980, rodatabin]
 
   - name: ovl_Bg_Ydan_Maruta
     type: code
@@ -2538,7 +2538,7 @@ segments:
     subsegments:
       - [0xC8DA40, asm]
       - [0xC8DFE0, data]
-      - [0xC8E090, bin]
+      - [0xC8E090, rodatabin]
 
   - name: ovl_Bg_Ydan_Sp
     type: code
@@ -2550,7 +2550,7 @@ segments:
       - [0xC8E110, asm]
       - [0xC8F610, data]
       - [0xC8F6F0, rodata]
-      - [0xC8F7A0, bin]
+      - [0xC8F7A0, rodatabin]
 
   - name: ovl_Bg_Zg
     type: code
@@ -2562,7 +2562,7 @@ segments:
       - [0xC8F920, asm]
       - [0xC8FD10, data]
       - [0xC8FD40, rodata]
-      - [0xC8FDF0, bin]
+      - [0xC8FDF0, rodatabin]
 
   - name: ovl_Boss_Dodongo
     type: code
@@ -2574,7 +2574,7 @@ segments:
       - [0xC8FE90, asm]
       - [0xC95CE0, data]
       - [0xC992A0, rodata]
-      - [0xC994E0, bin]
+      - [0xC994E0, rodatabin]
 
   - name: ovl_Boss_Fd
     type: code
@@ -2586,7 +2586,7 @@ segments:
       - [0xC99AC0, asm]
       - [0xCA0340, data]
       - [0xCA0930, rodata]
-      - [0xCA0CE0, bin]
+      - [0xCA0CE0, rodatabin]
 
   - name: ovl_Boss_Fd2
     type: code
@@ -2598,7 +2598,7 @@ segments:
       - [0xCA1370, asm]
       - [0xCA4CB0, data]
       - [0xCA4FD0, rodata]
-      - [0xCA51F0, bin]
+      - [0xCA51F0, rodatabin]
 
   - name: ovl_Boss_Ganon
     type: code
@@ -2610,7 +2610,7 @@ segments:
       - [0xCA5570, asm]
       - [0xCB38E0, data]
       - [0xCC6750, rodata]
-      - [0xCC6F80, bin]
+      - [0xCC6F80, rodatabin]
       - { name: bss_808F93C0, type: bss, vram: 0x808F93C0 }
 
   - name: ovl_Boss_Ganon2
@@ -2623,7 +2623,7 @@ segments:
       - [0xCC80C0, asm]
       - [0xCD1EC0, data]
       - [0xCD8840, rodata]
-      - [0xCD8F20, bin]
+      - [0xCD8F20, rodatabin]
       - { name: bss_8090EB20, type: bss, vram: 0x8090EB20 }
 
   - name: ovl_Boss_Ganondrof
@@ -2636,7 +2636,7 @@ segments:
       - [0xCD9CA0, asm]
       - [0xCDE310, data]
       - [0xCDE7A0, rodata]
-      - [0xCDEB80, bin]
+      - [0xCDEB80, rodatabin]
 
   - name: ovl_Boss_Goma
     type: code
@@ -2648,7 +2648,7 @@ segments:
       - [0xCDF070, asm]
       - [0xCE44A0, data]
       - [0xCE4A90, rodata]
-      - [0xCE4C70, bin]
+      - [0xCE4C70, rodatabin]
 
   - name: ovl_Boss_Mo
     type: code
@@ -2660,7 +2660,7 @@ segments:
       - [0xCE5160, asm]
       - [0xCEF310, data]
       - [0xCEFFA0, rodata]
-      - [0xCF0520, bin]
+      - [0xCF0520, rodatabin]
       - { name: bss_80927AC0, type: bss, vram: 0x80927AC0 }
 
   - name: ovl_Boss_Sst
@@ -2673,7 +2673,7 @@ segments:
       - [0xCF1120, asm]
       - [0xCFB4E0, data]
       - [0xCFC440, rodata]
-      - [0xCFC5D0, bin]
+      - [0xCFC5D0, rodatabin]
       - { name: bss_80938C90, type: bss, vram: 0x80938C90 }
 
   - name: ovl_Boss_Tw
@@ -2686,7 +2686,7 @@ segments:
       - [0xCFD7E0, asm]
       - [0xD0F2C0, data]
       - [0xD0F570, rodata]
-      - [0xD0FD40, bin]
+      - [0xD0FD40, rodatabin]
       - { name: bss_8094C840, type: bss, vram: 0x8094C840 }
 
   - name: ovl_Boss_Va
@@ -2699,7 +2699,7 @@ segments:
       - [0xD11350, asm]
       - [0xD1DFD0, data]
       - [0xD1E440, rodata]
-      - [0xD1E9F0, bin]
+      - [0xD1E9F0, rodatabin]
       - { name: bss_8095DF50, type: bss, vram: 0x8095DF50 }
 
   - name: ovl_Demo_6K
@@ -2712,7 +2712,7 @@ segments:
       - [0xD1FFE0, asm]
       - [0xD22940, data]
       - [0xD22A70, rodata]
-      - [0xD22CF0, bin]
+      - [0xD22CF0, rodatabin]
 
   - name: ovl_Demo_Du
     type: code
@@ -2724,7 +2724,7 @@ segments:
       - [0xD23160, asm]
       - [0xD25830, data]
       - [0xD26660, rodata]
-      - [0xD26780, bin]
+      - [0xD26780, rodatabin]
 
   - name: ovl_Demo_Ec
     type: code
@@ -2736,7 +2736,7 @@ segments:
       - [0xD26B40, asm]
       - [0xD299E0, data]
       - [0xD29CC0, rodata]
-      - [0xD29EA0, bin]
+      - [0xD29EA0, rodatabin]
 
   - name: ovl_Demo_Effect
     type: code
@@ -2748,7 +2748,7 @@ segments:
       - [0xD2A5E0, asm]
       - [0xD2FE80, data]
       - [0xD2FF10, rodata]
-      - [0xD30420, bin]
+      - [0xD30420, rodatabin]
 
   - name: ovl_Demo_Ext
     type: code
@@ -2760,7 +2760,7 @@ segments:
       - [0xD30A20, asm]
       - [0xD31300, data]
       - [0xD31340, rodata]
-      - [0xD31420, bin]
+      - [0xD31420, rodatabin]
 
   - name: ovl_Demo_Geff
     type: code
@@ -2772,7 +2772,7 @@ segments:
       - [0xD314D0, asm]
       - [0xD31C00, data]
       - [0xD31C70, rodata]
-      - [0xD31E50, bin]
+      - [0xD31E50, rodatabin]
 
   - name: ovl_Demo_Gj
     type: code
@@ -2784,7 +2784,7 @@ segments:
       - [0xD31FC0, asm]
       - [0xD35470, data]
       - [0xD35620, rodata]
-      - [0xD35910, bin]
+      - [0xD35910, rodatabin]
 
   - name: ovl_Demo_Go
     type: code
@@ -2796,7 +2796,7 @@ segments:
       - [0xD35F00, asm]
       - [0xD36AD0, data]
       - [0xD36B20, rodata]
-      - [0xD36BD0, bin]
+      - [0xD36BD0, rodatabin]
 
   - name: ovl_Demo_Gt
     type: code
@@ -2808,7 +2808,7 @@ segments:
       - [0xD36D00, asm]
       - [0xD3BC50, data]
       - [0xD3BE10, rodata]
-      - [0xD3C250, bin]
+      - [0xD3C250, rodatabin]
 
   - name: ovl_Demo_Ik
     type: code
@@ -2820,7 +2820,7 @@ segments:
       - [0xD3C990, asm]
       - [0xD3DD60, data]
       - [0xD3DE40, rodata]
-      - [0xD3E090, bin]
+      - [0xD3E090, rodatabin]
 
   - name: ovl_Demo_Im
     type: code
@@ -2832,7 +2832,7 @@ segments:
       - [0xD3E270, asm]
       - [0xD40EC0, data]
       - [0xD41EA0, rodata]
-      - [0xD420B0, bin]
+      - [0xD420B0, rodatabin]
 
   - name: ovl_Demo_Kankyo
     type: code
@@ -2844,7 +2844,7 @@ segments:
       - [0xD42510, asm]
       - [0xD44FA0, data]
       - [0xD45F00, rodata]
-      - [0xD461F0, bin]
+      - [0xD461F0, rodatabin]
       - { name: bss_8098CF80, type: bss, vram: 0x8098CF80 }
 
   - name: ovl_Demo_Kekkai
@@ -2857,7 +2857,7 @@ segments:
       - [0xD46610, asm]
       - [0xD476D0, data]
       - [0xD47810, rodata]
-      - [0xD47910, bin]
+      - [0xD47910, rodatabin]
 
   - name: ovl_Demo_Sa
     type: code
@@ -2869,7 +2869,7 @@ segments:
       - [0xD47AA0, asm]
       - [0xD49720, data]
       - [0xD4A420, rodata]
-      - [0xD4A580, bin]
+      - [0xD4A580, rodatabin]
 
   - name: ovl_Demo_Shd
     type: code
@@ -2881,7 +2881,7 @@ segments:
       - [0xD4A870, asm]
       - [0xD4ACA0, data]
       - [0xD4CC40, rodata]
-      - [0xD4CC70, bin]
+      - [0xD4CC70, rodatabin]
 
   - name: ovl_Demo_Tre_Lgt
     type: code
@@ -2893,7 +2893,7 @@ segments:
       - [0xD4CD00, asm]
       - [0xD4D3B0, data]
       - [0xD4D400, rodata]
-      - [0xD4D4A0, bin]
+      - [0xD4D4A0, rodatabin]
 
   - name: ovl_Door_Ana
     type: code
@@ -2905,7 +2905,7 @@ segments:
       - [0xD4D530, asm]
       - [0xD4DAE0, data]
       - [0xD4DB50, rodata]
-      - [0xD4DB90, bin]
+      - [0xD4DB90, rodatabin]
 
   - name: ovl_Door_Gerudo
     type: code
@@ -2917,7 +2917,7 @@ segments:
       - [0xD4DC20, asm]
       - [0xD4E190, data]
       - [0xD4E1C0, rodata]
-      - [0xD4E210, bin]
+      - [0xD4E210, rodatabin]
 
   - name: ovl_Door_Killer
     type: code
@@ -2929,7 +2929,7 @@ segments:
       - [0xD4E290, asm]
       - [0xD4F5D0, data]
       - [0xD4F6A0, rodata]
-      - [0xD4F740, bin]
+      - [0xD4F740, rodatabin]
 
   - name: ovl_Door_Shutter
     type: code
@@ -2941,7 +2941,7 @@ segments:
       - [0xD4F8E0, asm]
       - [0xD51710, data]
       - [0xD51930, rodata]
-      - [0xD51A00, bin]
+      - [0xD51A00, rodatabin]
 
   - name: ovl_Door_Toki
     type: code
@@ -2952,7 +2952,7 @@ segments:
     subsegments:
       - [0xD51C60, asm]
       - [0xD51D60, data]
-      - [0xD51D90, bin]
+      - [0xD51D90, rodatabin]
 
   - name: ovl_Door_Warp1
     type: code
@@ -2964,7 +2964,7 @@ segments:
       - [0xD51DC0, asm]
       - [0xD55BC0, data]
       - [0xD55BF0, rodata]
-      - [0xD55E70, bin]
+      - [0xD55E70, rodatabin]
       - { name: bss_8099CCA0, type: bss, vram: 0x8099CCA0 }
 
   - name: ovl_Efc_Erupc
@@ -2977,7 +2977,7 @@ segments:
       - [0xD562E0, asm]
       - [0xD56D80, data]
       - [0xD56DC0, rodata]
-      - [0xD56E60, bin]
+      - [0xD56E60, rodatabin]
 
   - name: ovl_Eff_Dust
     type: code
@@ -2989,7 +2989,7 @@ segments:
       - [0xD56F00, asm]
       - [0xD58170, data]
       - [0xD581A0, rodata]
-      - [0xD58260, bin]
+      - [0xD58260, rodatabin]
 
   - name: ovl_Effect_Ss_Blast
     type: code
@@ -3001,7 +3001,7 @@ segments:
       - [0xD583E0, asm]
       - [0xD58740, data]
       - [0xD58750, rodata]
-      - [0xD58790, bin]
+      - [0xD58790, rodatabin]
 
   - name: ovl_Effect_Ss_Bomb
     type: code
@@ -3013,7 +3013,7 @@ segments:
       - [0xD587E0, asm]
       - [0xD58BB0, data]
       - [0xD58BD0, rodata]
-      - [0xD58C10, bin]
+      - [0xD58C10, rodatabin]
 
   - name: ovl_Effect_Ss_Bomb2
     type: code
@@ -3025,7 +3025,7 @@ segments:
       - [0xD58C80, asm]
       - [0xD59500, data]
       - [0xD59550, rodata]
-      - [0xD595D0, bin]
+      - [0xD595D0, rodatabin]
 
   - name: ovl_Effect_Ss_Bubble
     type: code
@@ -3037,7 +3037,7 @@ segments:
       - [0xD59670, asm]
       - [0xD59AC0, data]
       - [0xD59AD0, rodata]
-      - [0xD59B20, bin]
+      - [0xD59B20, rodatabin]
 
   - name: ovl_Effect_Ss_D_Fire
     type: code
@@ -3049,7 +3049,7 @@ segments:
       - [0xD59B80, asm]
       - [0xD5A020, data]
       - [0xD5A040, rodata]
-      - [0xD5A080, bin]
+      - [0xD5A080, rodatabin]
 
   - name: ovl_Effect_Ss_Dead_Db
     type: code
@@ -3061,7 +3061,7 @@ segments:
       - [0xD5A0D0, asm]
       - [0xD5A550, data]
       - [0xD5A580, rodata]
-      - [0xD5A5C0, bin]
+      - [0xD5A5C0, rodatabin]
 
   - name: ovl_Effect_Ss_Dead_Dd
     type: code
@@ -3073,7 +3073,7 @@ segments:
       - [0xD5A610, asm]
       - [0xD5AB70, data]
       - [0xD5AB80, rodata]
-      - [0xD5ABE0, bin]
+      - [0xD5ABE0, rodatabin]
 
   - name: ovl_Effect_Ss_Dead_Ds
     type: code
@@ -3085,7 +3085,7 @@ segments:
       - [0xD5AC40, asm]
       - [0xD5B0A0, data]
       - [0xD5B0B0, rodata]
-      - [0xD5B100, bin]
+      - [0xD5B100, rodatabin]
 
   - name: ovl_Effect_Ss_Dead_Sound
     type: code
@@ -3097,7 +3097,7 @@ segments:
       - [0xD5B160, asm]
       - [0xD5B280, data]
       - [0xD5B290, rodata]
-      - [0xD5B2B0, bin]
+      - [0xD5B2B0, rodatabin]
 
   - name: ovl_Effect_Ss_Dt_Bubble
     type: code
@@ -3109,7 +3109,7 @@ segments:
       - [0xD5B2E0, asm]
       - [0xD5B830, data]
       - [0xD5B850, rodata]
-      - [0xD5B8A0, bin]
+      - [0xD5B8A0, rodatabin]
 
   - name: ovl_Effect_Ss_Dust
     type: code
@@ -3121,7 +3121,7 @@ segments:
       - [0xD5B900, asm]
       - [0xD5C070, data]
       - [0xD5C0A0, rodata]
-      - [0xD5C0F0, bin]
+      - [0xD5C0F0, rodatabin]
 
   - name: ovl_Effect_Ss_En_Fire
     type: code
@@ -3133,7 +3133,7 @@ segments:
       - [0xD5C190, asm]
       - [0xD5C870, data]
       - [0xD5C890, rodata]
-      - [0xD5C8E0, bin]
+      - [0xD5C8E0, rodatabin]
 
   - name: ovl_Effect_Ss_En_Ice
     type: code
@@ -3145,7 +3145,7 @@ segments:
       - [0xD5C960, asm]
       - [0xD5D1B0, data]
       - [0xD5D1D0, rodata]
-      - [0xD5D260, bin]
+      - [0xD5D260, rodatabin]
 
   - name: ovl_Effect_Ss_Extra
     type: code
@@ -3157,7 +3157,7 @@ segments:
       - [0xD5D2F0, asm]
       - [0xD5D690, data]
       - [0xD5D6B0, rodata]
-      - [0xD5D6F0, bin]
+      - [0xD5D6F0, rodatabin]
 
   - name: ovl_Effect_Ss_Fcircle
     type: code
@@ -3169,7 +3169,7 @@ segments:
       - [0xD5D750, asm]
       - [0xD5DBC0, data]
       - [0xD5DBD0, rodata]
-      - [0xD5DC20, bin]
+      - [0xD5DC20, rodatabin]
 
   - name: ovl_Effect_Ss_Fhg_Flash
     type: code
@@ -3181,7 +3181,7 @@ segments:
       - [0xD5DC90, asm]
       - [0xD5E6B0, data]
       - [0xD5EBB0, rodata]
-      - [0xD5EC90, bin]
+      - [0xD5EC90, rodatabin]
 
   - name: ovl_Effect_Ss_Fire_Tail
     type: code
@@ -3193,7 +3193,7 @@ segments:
       - [0xD5ED70, asm]
       - [0xD5F400, data]
       - [0xD5F410, rodata]
-      - [0xD5F480, bin]
+      - [0xD5F480, rodatabin]
 
   - name: ovl_Effect_Ss_G_Fire
     type: code
@@ -3204,7 +3204,7 @@ segments:
     subsegments:
       - [0xD5F500, asm]
       - [0xD5F700, data]
-      - [0xD5F740, bin]
+      - [0xD5F740, rodatabin]
 
   - name: ovl_Effect_Ss_G_Magma
     type: code
@@ -3215,7 +3215,7 @@ segments:
     subsegments:
       - [0xD5F780, asm]
       - [0xD5F950, data]
-      - [0xD5F990, bin]
+      - [0xD5F990, rodatabin]
 
   - name: ovl_Effect_Ss_G_Magma2
     type: code
@@ -3227,7 +3227,7 @@ segments:
       - [0xD5F9D0, asm]
       - [0xD5FE90, data]
       - [0xD5FEE0, rodata]
-      - [0xD5FF30, bin]
+      - [0xD5FF30, rodatabin]
 
   - name: ovl_Effect_Ss_G_Ripple
     type: code
@@ -3239,7 +3239,7 @@ segments:
       - [0xD5FF90, asm]
       - [0xD604B0, data]
       - [0xD604D0, rodata]
-      - [0xD60510, bin]
+      - [0xD60510, rodatabin]
 
   - name: ovl_Effect_Ss_G_Spk
     type: code
@@ -3251,7 +3251,7 @@ segments:
       - [0xD60560, asm]
       - [0xD60AC0, data]
       - [0xD60AE0, rodata]
-      - [0xD60B10, bin]
+      - [0xD60B10, rodatabin]
 
   - name: ovl_Effect_Ss_G_Splash
     type: code
@@ -3263,7 +3263,7 @@ segments:
       - [0xD60B70, asm]
       - [0xD60F70, data]
       - [0xD60FB0, rodata]
-      - [0xD60FC0, bin]
+      - [0xD60FC0, rodatabin]
 
   - name: ovl_Effect_Ss_Hahen
     type: code
@@ -3275,7 +3275,7 @@ segments:
       - [0xD61020, asm]
       - [0xD61640, data]
       - [0xD61650, rodata]
-      - [0xD616E0, bin]
+      - [0xD616E0, rodatabin]
 
   - name: ovl_Effect_Ss_HitMark
     type: code
@@ -3287,7 +3287,7 @@ segments:
       - [0xD61780, asm]
       - [0xD61BE0, data]
       - [0xD61CA0, rodata]
-      - [0xD61CD0, bin]
+      - [0xD61CD0, rodatabin]
 
   - name: ovl_Effect_Ss_Ice_Piece
     type: code
@@ -3299,7 +3299,7 @@ segments:
       - [0xD61D30, asm]
       - [0xD62140, data]
       - [0xD62150, rodata]
-      - [0xD621B0, bin]
+      - [0xD621B0, rodatabin]
 
   - name: ovl_Effect_Ss_Ice_Smoke
     type: code
@@ -3311,7 +3311,7 @@ segments:
       - [0xD62220, asm]
       - [0xD626E0, data]
       - [0xD626F0, rodata]
-      - [0xD62780, bin]
+      - [0xD62780, rodatabin]
 
   - name: ovl_Effect_Ss_K_Fire
     type: code
@@ -3323,7 +3323,7 @@ segments:
       - [0xD627E0, asm]
       - [0xD62BF0, data]
       - [0xD62C00, rodata]
-      - [0xD62C50, bin]
+      - [0xD62C50, rodatabin]
 
   - name: ovl_Effect_Ss_Kakera
     type: code
@@ -3335,7 +3335,7 @@ segments:
       - [0xD62CB0, asm]
       - [0xD63B50, data]
       - [0xD63BF0, rodata]
-      - [0xD63CC0, bin]
+      - [0xD63CC0, rodatabin]
 
   - name: ovl_Effect_Ss_KiraKira
     type: code
@@ -3347,7 +3347,7 @@ segments:
       - [0xD63E40, asm]
       - [0xD64430, data]
       - [0xD64440, rodata]
-      - [0xD64490, bin]
+      - [0xD64490, rodatabin]
 
   - name: ovl_Effect_Ss_Lightning
     type: code
@@ -3359,7 +3359,7 @@ segments:
       - [0xD64520, asm]
       - [0xD64B60, data]
       - [0xD64B90, rodata]
-      - [0xD64BE0, bin]
+      - [0xD64BE0, rodatabin]
 
   - name: ovl_Effect_Ss_Sibuki
     type: code
@@ -3371,7 +3371,7 @@ segments:
       - [0xD64C60, asm]
       - [0xD652B0, data]
       - [0xD652C0, rodata]
-      - [0xD65320, bin]
+      - [0xD65320, rodatabin]
 
   - name: ovl_Effect_Ss_Sibuki2
     type: code
@@ -3383,7 +3383,7 @@ segments:
       - [0xD65390, asm]
       - [0xD65690, data]
       - [0xD656C0, rodata]
-      - [0xD65710, bin]
+      - [0xD65710, rodatabin]
 
   - name: ovl_Effect_Ss_Solder_Srch_Ball
     type: code
@@ -3394,7 +3394,7 @@ segments:
     subsegments:
       - [0xD65760, asm]
       - [0xD658C0, data]
-      - [0xD658D0, bin]
+      - [0xD658D0, rodatabin]
 
   - name: ovl_Effect_Ss_Stick
     type: code
@@ -3406,7 +3406,7 @@ segments:
       - [0xD65900, asm]
       - [0xD65C50, data]
       - [0xD65C70, rodata]
-      - [0xD65CC0, bin]
+      - [0xD65CC0, rodatabin]
 
   - name: ovl_Effect_Ss_Stone1
     type: code
@@ -3418,7 +3418,7 @@ segments:
       - [0xD65D30, asm]
       - [0xD66030, data]
       - [0xD660A0, rodata]
-      - [0xD660F0, bin]
+      - [0xD660F0, rodatabin]
 
   - name: ovl_Elf_Msg
     type: code
@@ -3430,7 +3430,7 @@ segments:
       - [0xD66150, asm]
       - [0xD66880, data]
       - [0xD66B30, rodata]
-      - [0xD66C30, bin]
+      - [0xD66C30, rodatabin]
 
   - name: ovl_Elf_Msg2
     type: code
@@ -3442,7 +3442,7 @@ segments:
       - [0xD66D30, asm]
       - [0xD67240, data]
       - [0xD67370, rodata]
-      - [0xD67450, bin]
+      - [0xD67450, rodatabin]
 
   - name: ovl_En_Am
     type: code
@@ -3454,7 +3454,7 @@ segments:
       - [0xD67550, asm]
       - [0xD69590, data]
       - [0xD69790, rodata]
-      - [0xD697C0, bin]
+      - [0xD697C0, rodatabin]
 
   - name: ovl_En_Ani
     type: code
@@ -3466,7 +3466,7 @@ segments:
       - [0xD699A0, asm]
       - [0xD6A550, data]
       - [0xD6A5C0, rodata]
-      - [0xD6A600, bin]
+      - [0xD6A600, rodatabin]
 
   - name: ovl_En_Anubice
     type: code
@@ -3478,7 +3478,7 @@ segments:
       - [0xD6A750, asm]
       - [0xD6B8E0, data]
       - [0xD6B970, rodata]
-      - [0xD6BA70, bin]
+      - [0xD6BA70, rodatabin]
 
   - name: ovl_En_Anubice_Fire
     type: code
@@ -3490,7 +3490,7 @@ segments:
       - [0xD6BBD0, asm]
       - [0xD6C7F0, data]
       - [0xD6C8C0, rodata]
-      - [0xD6C930, bin]
+      - [0xD6C930, rodatabin]
 
   - name: ovl_En_Anubice_Tag
     type: code
@@ -3502,7 +3502,7 @@ segments:
       - [0xD6CA30, asm]
       - [0xD6CD50, data]
       - [0xD6CD70, rodata]
-      - [0xD6CDB0, bin]
+      - [0xD6CDB0, rodatabin]
 
   - name: ovl_En_Arow_Trap
     type: code
@@ -3513,7 +3513,7 @@ segments:
     subsegments:
       - [0xD6CE00, asm]
       - [0xD6CF00, data]
-      - [0xD6CF20, bin]
+      - [0xD6CF20, rodatabin]
 
   - name: ovl_En_Arrow
     type: code
@@ -3525,7 +3525,7 @@ segments:
       - [0xD6CF50, asm]
       - [0xD6E360, data]
       - [0xD6E4E0, rodata]
-      - [0xD6E5A0, bin]
+      - [0xD6E5A0, rodatabin]
 
   - name: ovl_En_Attack_Niw
     type: code
@@ -3537,7 +3537,7 @@ segments:
       - [0xD6E730, asm]
       - [0xD6F780, data]
       - [0xD6F7C0, rodata]
-      - [0xD6F830, bin]
+      - [0xD6F830, rodatabin]
 
   - name: ovl_En_Ba
     type: code
@@ -3549,7 +3549,7 @@ segments:
       - [0xD6F980, asm]
       - [0xD71690, data]
       - [0xD71760, rodata]
-      - [0xD717C0, bin]
+      - [0xD717C0, rodatabin]
 
   - name: ovl_En_Bb
     type: code
@@ -3561,7 +3561,7 @@ segments:
       - [0xD71910, asm]
       - [0xD750B0, data]
       - [0xD75260, rodata]
-      - [0xD75340, bin]
+      - [0xD75340, rodatabin]
 
   - name: ovl_En_Bdfire
     type: code
@@ -3573,7 +3573,7 @@ segments:
       - [0xD75660, asm]
       - [0xD76120, data]
       - [0xD76160, rodata]
-      - [0xD761D0, bin]
+      - [0xD761D0, rodatabin]
 
   - name: ovl_En_Bigokuta
     type: code
@@ -3585,7 +3585,7 @@ segments:
       - [0xD76290, asm]
       - [0xD789D0, data]
       - [0xD78AE0, rodata]
-      - [0xD78BD0, bin]
+      - [0xD78BD0, rodatabin]
 
   - name: ovl_En_Bili
     type: code
@@ -3597,7 +3597,7 @@ segments:
       - [0xD78ED0, asm]
       - [0xD7AC50, data]
       - [0xD7AD40, rodata]
-      - [0xD7AE30, bin]
+      - [0xD7AE30, rodatabin]
 
   - name: ovl_En_Bird
     type: code
@@ -3608,7 +3608,7 @@ segments:
     subsegments:
       - [0xD7B1E0, asm]
       - [0xD7B600, data]
-      - [0xD7B630, bin]
+      - [0xD7B630, rodatabin]
 
   - name: ovl_En_Blkobj
     type: code
@@ -3620,7 +3620,7 @@ segments:
       - [0xD7B690, asm]
       - [0xD7BB90, data]
       - [0xD7BBE0, rodata]
-      - [0xD7BC50, bin]
+      - [0xD7BC50, rodatabin]
 
   - name: ovl_En_Bom
     type: code
@@ -3632,7 +3632,7 @@ segments:
       - [0xD7BD00, asm]
       - [0xD7CA40, data]
       - [0xD7CB00, rodata]
-      - [0xD7CB60, bin]
+      - [0xD7CB60, rodatabin]
 
   - name: ovl_En_Bom_Bowl_Man
     type: code
@@ -3644,7 +3644,7 @@ segments:
       - [0xD7CC60, asm]
       - [0xD7E020, data]
       - [0xD7E0F0, rodata]
-      - [0xD7E2C0, bin]
+      - [0xD7E2C0, rodatabin]
 
   - name: ovl_En_Bom_Bowl_Pit
     type: code
@@ -3656,7 +3656,7 @@ segments:
       - [0xD7E470, asm]
       - [0xD7ED10, data]
       - [0xD7ED50, rodata]
-      - [0xD7EDC0, bin]
+      - [0xD7EDC0, rodatabin]
 
   - name: ovl_En_Bom_Chu
     type: code
@@ -3668,7 +3668,7 @@ segments:
       - [0xD7EE60, asm]
       - [0xD80340, data]
       - [0xD803D0, rodata]
-      - [0xD80420, bin]
+      - [0xD80420, rodatabin]
 
   - name: ovl_En_Bombf
     type: code
@@ -3680,7 +3680,7 @@ segments:
       - [0xD80590, asm]
       - [0xD81870, data]
       - [0xD81930, rodata]
-      - [0xD819A0, bin]
+      - [0xD819A0, rodatabin]
 
   - name: ovl_En_Boom
     type: code
@@ -3692,7 +3692,7 @@ segments:
       - [0xD81AB0, asm]
       - [0xD82260, data]
       - [0xD822F0, rodata]
-      - [0xD82340, bin]
+      - [0xD82340, rodatabin]
 
   - name: ovl_En_Box
     type: code
@@ -3704,7 +3704,7 @@ segments:
       - [0xD823F0, asm]
       - [0xD83E10, data]
       - [0xD83E60, rodata]
-      - [0xD83F50, bin]
+      - [0xD83F50, rodatabin]
       - { name: bss_809CAB00, type: bss, vram: 0x809CAB00 }
 
   - name: ovl_En_Brob
@@ -3717,7 +3717,7 @@ segments:
       - [0xD84130, asm]
       - [0xD85080, data]
       - [0xD850E0, rodata]
-      - [0xD85100, bin]
+      - [0xD85100, rodatabin]
 
   - name: ovl_En_Bubble
     type: code
@@ -3729,7 +3729,7 @@ segments:
       - [0xD85220, asm]
       - [0xD86430, data]
       - [0xD864D0, rodata]
-      - [0xD86540, bin]
+      - [0xD86540, rodatabin]
 
   - name: ovl_En_Butte
     type: code
@@ -3741,7 +3741,7 @@ segments:
       - [0xD86690, asm]
       - [0xD87910, data]
       - [0xD87A40, rodata]
-      - [0xD87AF0, bin]
+      - [0xD87AF0, rodatabin]
 
   - name: ovl_En_Bw
     type: code
@@ -3753,7 +3753,7 @@ segments:
       - [0xD87D00, asm]
       - [0xD8AA50, data]
       - [0xD8AB80, rodata]
-      - [0xD8AD10, bin]
+      - [0xD8AD10, rodatabin]
 
   - name: ovl_En_Bx
     type: code
@@ -3765,7 +3765,7 @@ segments:
       - [0xD8B100, asm]
       - [0xD8BA90, data]
       - [0xD8BB90, rodata]
-      - [0xD8BBE0, bin]
+      - [0xD8BBE0, rodatabin]
 
   - name: ovl_En_Changer
     type: code
@@ -3777,7 +3777,7 @@ segments:
       - [0xD8BCB0, asm]
       - [0xD8C6A0, data]
       - [0xD8C7A0, rodata]
-      - [0xD8CA80, bin]
+      - [0xD8CA80, rodatabin]
 
   - name: ovl_En_Clear_Tag
     type: code
@@ -3789,7 +3789,7 @@ segments:
       - [0xD8CBD0, asm]
       - [0xD8F230, data]
       - [0xD955C0, rodata]
-      - [0xD95760, bin]
+      - [0xD95760, rodatabin]
       - { name: bss_809DC3D0, type: bss, vram: 0x809DC3D0 }
 
   - name: ovl_En_Cow
@@ -3802,7 +3802,7 @@ segments:
       - [0xD959F0, asm]
       - [0xD96CB0, data]
       - [0xD96D10, rodata]
-      - [0xD96D30, bin]
+      - [0xD96D30, rodatabin]
 
   - name: ovl_En_Crow
     type: code
@@ -3814,7 +3814,7 @@ segments:
       - [0xD96E30, asm]
       - [0xD98230, data]
       - [0xD982E0, rodata]
-      - [0xD98320, bin]
+      - [0xD98320, rodatabin]
 
   - name: ovl_En_Cs
     type: code
@@ -3826,7 +3826,7 @@ segments:
       - [0xD984A0, asm]
       - [0xD99490, data]
       - [0xD99570, rodata]
-      - [0xD995D0, bin]
+      - [0xD995D0, rodatabin]
 
   - name: ovl_En_Daiku
     type: code
@@ -3838,7 +3838,7 @@ segments:
       - [0xD99720, asm]
       - [0xD9AC30, data]
       - [0xD9AD60, rodata]
-      - [0xD9ADC0, bin]
+      - [0xD9ADC0, rodatabin]
 
   - name: ovl_En_Daiku_Kakariko
     type: code
@@ -3850,7 +3850,7 @@ segments:
       - [0xD9AF10, asm]
       - [0xD9C080, data]
       - [0xD9C190, rodata]
-      - [0xD9C230, bin]
+      - [0xD9C230, rodatabin]
 
   - name: ovl_En_Dekubaba
     type: code
@@ -3862,7 +3862,7 @@ segments:
       - [0xD9C3C0, asm]
       - [0xD9FA90, data]
       - [0xD9FC30, rodata]
-      - [0xD9FDD0, bin]
+      - [0xD9FDD0, rodatabin]
 
   - name: ovl_En_Dekunuts
     type: code
@@ -3874,7 +3874,7 @@ segments:
       - [0xDA0150, asm]
       - [0xDA1720, data]
       - [0xDA17B0, rodata]
-      - [0xDA17D0, bin]
+      - [0xDA17D0, rodatabin]
 
   - name: ovl_En_Dh
     type: code
@@ -3886,7 +3886,7 @@ segments:
       - [0xDA1930, asm]
       - [0xDA3190, data]
       - [0xDA3270, rodata]
-      - [0xDA32E0, bin]
+      - [0xDA32E0, rodatabin]
 
   - name: ovl_En_Dha
     type: code
@@ -3898,7 +3898,7 @@ segments:
       - [0xDA3470, asm]
       - [0xDA4220, data]
       - [0xDA4370, rodata]
-      - [0xDA4380, bin]
+      - [0xDA4380, rodatabin]
 
   - name: ovl_En_Diving_Game
     type: code
@@ -3910,7 +3910,7 @@ segments:
       - [0xDA4460, asm]
       - [0xDA5C80, data]
       - [0xDA5CE0, rodata]
-      - [0xDA5DC0, bin]
+      - [0xDA5DC0, rodatabin]
 
   - name: ovl_En_Dns
     type: code
@@ -3922,7 +3922,7 @@ segments:
       - [0xDA5F40, asm]
       - [0xDA6FB0, data]
       - [0xDA7150, rodata]
-      - [0xDA7300, bin]
+      - [0xDA7300, rodatabin]
 
   - name: ovl_En_Dnt_Demo
     type: code
@@ -3934,7 +3934,7 @@ segments:
       - [0xDA74D0, asm]
       - [0xDA8190, data]
       - [0xDA82A0, rodata]
-      - [0xDA85A0, bin]
+      - [0xDA85A0, rodatabin]
 
   - name: ovl_En_Dnt_Jiji
     type: code
@@ -3946,7 +3946,7 @@ segments:
       - [0xDA86D0, asm]
       - [0xDA9B70, data]
       - [0xDA9BD0, rodata]
-      - [0xDA9CF0, bin]
+      - [0xDA9CF0, rodatabin]
 
   - name: ovl_En_Dnt_Nomal
     type: code
@@ -3958,7 +3958,7 @@ segments:
       - [0xDA9EB0, asm]
       - [0xDAC9A0, data]
       - [0xDACAA0, rodata]
-      - [0xDACC80, bin]
+      - [0xDACC80, rodatabin]
 
   - name: ovl_En_Dodojr
     type: code
@@ -3970,7 +3970,7 @@ segments:
       - [0xDACFB0, asm]
       - [0xDAEA80, data]
       - [0xDAEB60, rodata]
-      - [0xDAEB90, bin]
+      - [0xDAEB90, rodatabin]
 
   - name: ovl_En_Dodongo
     type: code
@@ -3982,7 +3982,7 @@ segments:
       - [0xDAEE40, asm]
       - [0xDB13B0, data]
       - [0xDB1750, rodata]
-      - [0xDB1870, bin]
+      - [0xDB1870, rodatabin]
 
   - name: ovl_En_Dog
     type: code
@@ -3994,7 +3994,7 @@ segments:
       - [0xDB1BC0, asm]
       - [0xDB2AE0, data]
       - [0xDB2C20, rodata]
-      - [0xDB2C70, bin]
+      - [0xDB2C70, rodatabin]
 
   - name: ovl_En_Door
     type: code
@@ -4006,7 +4006,7 @@ segments:
       - [0xDB2DC0, asm]
       - [0xDB3A70, data]
       - [0xDB3B00, rodata]
-      - [0xDB3B30, bin]
+      - [0xDB3B30, rodatabin]
 
   - name: ovl_En_Ds
     type: code
@@ -4017,7 +4017,7 @@ segments:
     subsegments:
       - [0xDB3C20, asm]
       - [0xDB4710, data]
-      - [0xDB4740, bin]
+      - [0xDB4740, rodatabin]
 
   - name: ovl_En_Du
     type: code
@@ -4029,7 +4029,7 @@ segments:
       - [0xDB4820, asm]
       - [0xDB5E00, data]
       - [0xDB6030, rodata]
-      - [0xDB6090, bin]
+      - [0xDB6090, rodatabin]
 
   - name: ovl_En_Dy_Extra
     type: code
@@ -4041,7 +4041,7 @@ segments:
       - [0xDB62E0, asm]
       - [0xDB6810, data]
       - [0xDB6860, rodata]
-      - [0xDB68E0, bin]
+      - [0xDB68E0, rodatabin]
 
   - name: ovl_En_Eg
     type: code
@@ -4053,7 +4053,7 @@ segments:
       - [0xDB6980, asm]
       - [0xDB6AD0, data]
       - [0xDB6B00, rodata]
-      - [0xDB6B40, bin]
+      - [0xDB6B40, rodatabin]
 
   - name: ovl_En_Eiyer
     type: code
@@ -4065,7 +4065,7 @@ segments:
       - [0xDB6B90, asm]
       - [0xDB8540, data]
       - [0xDB85C0, rodata]
-      - [0xDB8610, bin]
+      - [0xDB8610, rodatabin]
 
   - name: ovl_En_Elf
     type: code
@@ -4077,7 +4077,7 @@ segments:
       - [0xDB8820, asm]
       - [0xDBCBF0, data]
       - [0xDBCCA0, rodata]
-      - [0xDBCE30, bin]
+      - [0xDBCE30, rodatabin]
 
   - name: ovl_En_Encount1
     type: code
@@ -4089,7 +4089,7 @@ segments:
       - [0xDBD310, asm]
       - [0xDBE040, data]
       - [0xDBE080, rodata]
-      - [0xDBE460, bin]
+      - [0xDBE460, rodatabin]
 
   - name: ovl_En_Encount2
     type: code
@@ -4101,7 +4101,7 @@ segments:
       - [0xDBE580, asm]
       - [0xDBF740, data]
       - [0xDBF760, rodata]
-      - [0xDBF970, bin]
+      - [0xDBF970, rodatabin]
 
   - name: ovl_En_Ex_Item
     type: code
@@ -4113,7 +4113,7 @@ segments:
       - [0xDBFA90, asm]
       - [0xDC09D0, data]
       - [0xDC0A00, rodata]
-      - [0xDC0D70, bin]
+      - [0xDC0D70, rodatabin]
 
   - name: ovl_En_Ex_Ruppy
     type: code
@@ -4125,7 +4125,7 @@ segments:
       - [0xDC1000, asm]
       - [0xDC1F10, data]
       - [0xDC1FC0, rodata]
-      - [0xDC2140, bin]
+      - [0xDC2140, rodatabin]
 
   - name: ovl_En_Fd
     type: code
@@ -4137,7 +4137,7 @@ segments:
       - [0xDC22B0, asm]
       - [0xDC49F0, data]
       - [0xDC4D10, rodata]
-      - [0xDC4DE0, bin]
+      - [0xDC4DE0, rodatabin]
 
   - name: ovl_En_Fd_Fire
     type: code
@@ -4149,7 +4149,7 @@ segments:
       - [0xDC50A0, asm]
       - [0xDC5C00, data]
       - [0xDC5CE0, rodata]
-      - [0xDC5D40, bin]
+      - [0xDC5D40, rodatabin]
 
   - name: ovl_En_Fhg_Fire
     type: code
@@ -4161,7 +4161,7 @@ segments:
       - [0xDC5E50, asm]
       - [0xDC8360, data]
       - [0xDC8430, rodata]
-      - [0xDC8600, bin]
+      - [0xDC8600, rodatabin]
 
   - name: ovl_En_Fire_Rock
     type: code
@@ -4173,7 +4173,7 @@ segments:
       - [0xDC8810, asm]
       - [0xDC9870, data]
       - [0xDC98F0, rodata]
-      - [0xDC9AE0, bin]
+      - [0xDC9AE0, rodatabin]
 
   - name: ovl_En_Firefly
     type: code
@@ -4185,7 +4185,7 @@ segments:
       - [0xDC9C60, asm]
       - [0xDCBB00, data]
       - [0xDCBBD0, rodata]
-      - [0xDCBC40, bin]
+      - [0xDCBC40, rodatabin]
 
   - name: ovl_En_Fish
     type: code
@@ -4197,7 +4197,7 @@ segments:
       - [0xDCBE70, asm]
       - [0xDCDC00, data]
       - [0xDCDC90, rodata]
-      - [0xDCDDF0, bin]
+      - [0xDCDDF0, rodatabin]
 
   - name: ovl_En_Floormas
     type: code
@@ -4209,7 +4209,7 @@ segments:
       - [0xDCE100, asm]
       - [0xDD1040, data]
       - [0xDD10F0, rodata]
-      - [0xDD11C0, bin]
+      - [0xDD11C0, rodatabin]
 
   - name: ovl_En_Fr
     type: code
@@ -4221,7 +4221,7 @@ segments:
       - [0xDD1590, asm]
       - [0xDD3BE0, data]
       - [0xDD3D00, rodata]
-      - [0xDD3F00, bin]
+      - [0xDD3F00, rodatabin]
 
   - name: ovl_En_Fu
     type: code
@@ -4233,7 +4233,7 @@ segments:
       - [0xDD4400, asm]
       - [0xDD4FF0, data]
       - [0xDD5060, rodata]
-      - [0xDD5080, bin]
+      - [0xDD5080, rodatabin]
       - { name: bss_80A1E590, type: bss, vram: 0x80A1E590 }
 
   - name: ovl_En_Fw
@@ -4246,7 +4246,7 @@ segments:
       - [0xDD5180, asm]
       - [0xDD6720, data]
       - [0xDD6820, rodata]
-      - [0xDD6870, bin]
+      - [0xDD6870, rodatabin]
 
   - name: ovl_En_Fz
     type: code
@@ -4258,7 +4258,7 @@ segments:
       - [0xDD69A0, asm]
       - [0xDD8750, data]
       - [0xDD8840, rodata]
-      - [0xDD88D0, bin]
+      - [0xDD88D0, rodatabin]
 
   - name: ovl_En_G_Switch
     type: code
@@ -4270,7 +4270,7 @@ segments:
       - [0xDD8AA0, asm]
       - [0xDDA2C0, data]
       - [0xDDA360, rodata]
-      - [0xDDA710, bin]
+      - [0xDDA710, rodatabin]
 
   - name: ovl_En_Ganon_Mant
     type: code
@@ -4282,7 +4282,7 @@ segments:
       - [0xDDA940, asm]
       - [0xDDB8E0, data]
       - [0xDDEA60, rodata]
-      - [0xDDEAD0, bin]
+      - [0xDDEAD0, rodatabin]
 
   - name: ovl_En_Ganon_Organ
     type: code
@@ -4294,7 +4294,7 @@ segments:
       - [0xDDEBE0, asm]
       - [0xDDEFA0, data]
       - [0xDE5B50, rodata]
-      - [0xDE5BE0, bin]
+      - [0xDE5BE0, rodatabin]
 
   - name: ovl_En_Gb
     type: code
@@ -4306,7 +4306,7 @@ segments:
       - [0xDE5D60, asm]
       - [0xDE7220, data]
       - [0xDE7380, rodata]
-      - [0xDE73F0, bin]
+      - [0xDE73F0, rodatabin]
 
   - name: ovl_En_Ge1
     type: code
@@ -4318,7 +4318,7 @@ segments:
       - [0xDE7550, asm]
       - [0xDE9330, data]
       - [0xDE93A0, rodata]
-      - [0xDE94B0, bin]
+      - [0xDE94B0, rodatabin]
 
   - name: ovl_En_Ge2
     type: code
@@ -4330,7 +4330,7 @@ segments:
       - [0xDE97B0, asm]
       - [0xDEAED0, data]
       - [0xDEAFB0, rodata]
-      - [0xDEB020, bin]
+      - [0xDEB020, rodatabin]
 
   - name: ovl_En_Ge3
     type: code
@@ -4342,7 +4342,7 @@ segments:
       - [0xDEB200, asm]
       - [0xDEBD50, data]
       - [0xDEBDC0, rodata]
-      - [0xDEBE00, bin]
+      - [0xDEBE00, rodatabin]
 
   - name: ovl_En_GeldB
     type: code
@@ -4354,7 +4354,7 @@ segments:
       - [0xDEBEF0, asm]
       - [0xDF0BA0, data]
       - [0xDF0DC0, rodata]
-      - [0xDF0EC0, bin]
+      - [0xDF0EC0, rodatabin]
 
   - name: ovl_En_GirlA
     type: code
@@ -4366,7 +4366,7 @@ segments:
       - [0xDF1330, asm]
       - [0xDF3150, data]
       - [0xDF38B0, rodata]
-      - [0xDF3D30, bin]
+      - [0xDF3D30, rodatabin]
 
   - name: ovl_En_Gm
     type: code
@@ -4378,7 +4378,7 @@ segments:
       - [0xDF42C0, asm]
       - [0xDF4F10, data]
       - [0xDF4F70, rodata]
-      - [0xDF5020, bin]
+      - [0xDF5020, rodatabin]
 
   - name: ovl_En_Go
     type: code
@@ -4390,7 +4390,7 @@ segments:
       - [0xDF5150, asm]
       - [0xDF86C0, data]
       - [0xDF87E0, rodata]
-      - [0xDF8EC0, bin]
+      - [0xDF8EC0, rodatabin]
 
   - name: ovl_En_Go2
     type: code
@@ -4402,7 +4402,7 @@ segments:
       - [0xDF9910, asm]
       - [0xDFECB0, data]
       - [0xDFF170, rodata]
-      - [0xDFF3C0, bin]
+      - [0xDFF3C0, rodatabin]
 
   - name: ovl_En_Goma
     type: code
@@ -4414,7 +4414,7 @@ segments:
       - [0xDFFAA0, asm]
       - [0xE02360, data]
       - [0xE02460, rodata]
-      - [0xE02570, bin]
+      - [0xE02570, rodatabin]
 
   - name: ovl_En_Goroiwa
     type: code
@@ -4426,7 +4426,7 @@ segments:
       - [0xE02880, asm]
       - [0xE04A40, data]
       - [0xE04B10, rodata]
-      - [0xE04C90, bin]
+      - [0xE04C90, rodatabin]
 
   - name: ovl_En_Gs
     type: code
@@ -4438,7 +4438,7 @@ segments:
       - [0xE04F00, asm]
       - [0xE06960, data]
       - [0xE06A30, rodata]
-      - [0xE06B40, bin]
+      - [0xE06B40, rodatabin]
 
   - name: ovl_En_Guest
     type: code
@@ -4450,7 +4450,7 @@ segments:
       - [0xE06E00, asm]
       - [0xE07730, data]
       - [0xE07790, rodata]
-      - [0xE07840, bin]
+      - [0xE07840, rodatabin]
 
   - name: ovl_En_Hata
     type: code
@@ -4462,7 +4462,7 @@ segments:
       - [0xE07930, asm]
       - [0xE07DD0, data]
       - [0xE07E40, rodata]
-      - [0xE07E50, bin]
+      - [0xE07E50, rodatabin]
 
   - name: ovl_En_Heishi1
     type: code
@@ -4474,7 +4474,7 @@ segments:
       - [0xE07EB0, asm]
       - [0xE09380, data]
       - [0xE09510, rodata]
-      - [0xE09830, bin]
+      - [0xE09830, rodatabin]
 
   - name: ovl_En_Heishi2
     type: code
@@ -4486,7 +4486,7 @@ segments:
       - [0xE09A80, asm]
       - [0xE0BAD0, data]
       - [0xE0BB20, rodata]
-      - [0xE0BEF0, bin]
+      - [0xE0BEF0, rodatabin]
 
   - name: ovl_En_Heishi3
     type: code
@@ -4498,7 +4498,7 @@ segments:
       - [0xE0C220, asm]
       - [0xE0CB20, data]
       - [0xE0CB70, rodata]
-      - [0xE0CC00, bin]
+      - [0xE0CC00, rodatabin]
 
   - name: ovl_En_Heishi4
     type: code
@@ -4510,7 +4510,7 @@ segments:
       - [0xE0CCB0, asm]
       - [0xE0DAB0, data]
       - [0xE0DB10, rodata]
-      - [0xE0DC80, bin]
+      - [0xE0DC80, rodatabin]
 
   - name: ovl_En_Hintnuts
     type: code
@@ -4522,7 +4522,7 @@ segments:
       - [0xE0DDE0, asm]
       - [0xE0F5C0, data]
       - [0xE0F630, rodata]
-      - [0xE0F650, bin]
+      - [0xE0F650, rodatabin]
 
   - name: ovl_En_Holl
     type: code
@@ -4534,7 +4534,7 @@ segments:
       - [0xE0F7F0, asm]
       - [0xE10600, data]
       - [0xE106D0, rodata]
-      - [0xE10710, bin]
+      - [0xE10710, rodatabin]
 
   - name: ovl_En_Honotrap
     type: code
@@ -4546,7 +4546,7 @@ segments:
       - [0xE10810, asm]
       - [0xE11B40, data]
       - [0xE11C50, rodata]
-      - [0xE11D30, bin]
+      - [0xE11D30, rodatabin]
 
   - name: ovl_En_Horse
     type: code
@@ -4558,7 +4558,7 @@ segments:
       - [0xE11ED0, asm]
       - [0xE1C9F0, data]
       - [0xE1D3E0, rodata]
-      - [0xE1D5C0, bin]
+      - [0xE1D5C0, rodatabin]
 
   - name: ovl_En_Horse_Game_Check
     type: code
@@ -4570,7 +4570,7 @@ segments:
       - [0xE1E130, asm]
       - [0xE1F000, data]
       - [0xE1F110, rodata]
-      - [0xE1F160, bin]
+      - [0xE1F160, rodatabin]
 
   - name: ovl_En_Horse_Ganon
     type: code
@@ -4582,7 +4582,7 @@ segments:
       - [0xE1F240, asm]
       - [0xE1FD70, data]
       - [0xE1FEB0, rodata]
-      - [0xE1FEC0, bin]
+      - [0xE1FEC0, rodatabin]
 
   - name: ovl_En_Horse_Link_Child
     type: code
@@ -4594,7 +4594,7 @@ segments:
       - [0xE1FFB0, asm]
       - [0xE21AA0, data]
       - [0xE21B90, rodata]
-      - [0xE21BE0, bin]
+      - [0xE21BE0, rodatabin]
 
   - name: ovl_En_Horse_Normal
     type: code
@@ -4606,7 +4606,7 @@ segments:
       - [0xE21E30, asm]
       - [0xE23F30, data]
       - [0xE24140, rodata]
-      - [0xE241E0, bin]
+      - [0xE241E0, rodatabin]
 
   - name: ovl_En_Horse_Zelda
     type: code
@@ -4618,7 +4618,7 @@ segments:
       - [0xE244B0, asm]
       - [0xE24D90, data]
       - [0xE24EA0, rodata]
-      - [0xE24EB0, bin]
+      - [0xE24EB0, rodatabin]
 
   - name: ovl_En_Hs
     type: code
@@ -4630,7 +4630,7 @@ segments:
       - [0xE24F80, asm]
       - [0xE25990, data]
       - [0xE259F0, rodata]
-      - [0xE25A60, bin]
+      - [0xE25A60, rodatabin]
 
   - name: ovl_En_Hs2
     type: code
@@ -4642,7 +4642,7 @@ segments:
       - [0xE25B80, asm]
       - [0xE26060, data]
       - [0xE260C0, rodata]
-      - [0xE26100, bin]
+      - [0xE26100, rodatabin]
 
   - name: ovl_En_Hy
     type: code
@@ -4654,7 +4654,7 @@ segments:
       - [0xE26190, asm]
       - [0xE28A80, data]
       - [0xE293F0, rodata]
-      - [0xE296D0, bin]
+      - [0xE296D0, rodatabin]
 
   - name: ovl_En_Ice_Hono
     type: code
@@ -4666,7 +4666,7 @@ segments:
       - [0xE29BD0, asm]
       - [0xE2ABD0, data]
       - [0xE2AC80, rodata]
-      - [0xE2AD60, bin]
+      - [0xE2AD60, rodatabin]
 
   - name: ovl_En_Ik
     type: code
@@ -4678,7 +4678,7 @@ segments:
       - [0xE2AEF0, asm]
       - [0xE2EF20, data]
       - [0xE2F230, rodata]
-      - [0xE2F660, bin]
+      - [0xE2F660, rodatabin]
       - { name: bss_80A78FA0, type: bss, vram: 0x80A78FA0 }
 
   - name: ovl_En_In
@@ -4691,7 +4691,7 @@ segments:
       - [0xE2FB80, asm]
       - [0xE323F0, data]
       - [0xE325A0, rodata]
-      - [0xE326D0, bin]
+      - [0xE326D0, rodatabin]
 
   - name: ovl_En_Insect
     type: code
@@ -4703,7 +4703,7 @@ segments:
       - [0xE329F0, asm]
       - [0xE34A80, data]
       - [0xE34B10, rodata]
-      - [0xE34C80, bin]
+      - [0xE34C80, rodatabin]
 
   - name: ovl_En_Ishi
     type: code
@@ -4715,7 +4715,7 @@ segments:
       - [0xE35030, asm]
       - [0xE365C0, data]
       - [0xE3DFC0, rodata]
-      - [0xE3E050, bin]
+      - [0xE3E050, rodatabin]
 
   - name: ovl_En_It
     type: code
@@ -4726,7 +4726,7 @@ segments:
     subsegments:
       - [0xE3E250, asm]
       - [0xE3E330, data]
-      - [0xE3E390, bin]
+      - [0xE3E390, rodatabin]
 
   - name: ovl_En_Jj
     type: code
@@ -4738,7 +4738,7 @@ segments:
       - [0xE3E3D0, asm]
       - [0xE3ED10, data]
       - [0xE3F8E0, rodata]
-      - [0xE3F910, bin]
+      - [0xE3F910, rodatabin]
 
   - name: ovl_En_Js
     type: code
@@ -4749,7 +4749,7 @@ segments:
     subsegments:
       - [0xE3F9E0, asm]
       - [0xE40260, data]
-      - [0xE402C0, bin]
+      - [0xE402C0, rodatabin]
 
   - name: ovl_En_Jsjutan
     type: code
@@ -4761,7 +4761,7 @@ segments:
       - [0xE40370, asm]
       - [0xE41640, data]
       - [0xE45000, rodata]
-      - [0xE45080, bin]
+      - [0xE45080, rodatabin]
       - { name: bss_80A8E610, type: bss, vram: 0x80A8E610 }
 
   - name: ovl_En_Kakasi
@@ -4774,7 +4774,7 @@ segments:
       - [0xE451E0, asm]
       - [0xE45E50, data]
       - [0xE45EA0, rodata]
-      - [0xE45F80, bin]
+      - [0xE45F80, rodatabin]
 
   - name: ovl_En_Kakasi2
     type: code
@@ -4786,7 +4786,7 @@ segments:
       - [0xE46080, asm]
       - [0xE46A10, data]
       - [0xE46A60, rodata]
-      - [0xE46C90, bin]
+      - [0xE46C90, rodatabin]
 
   - name: ovl_En_Kakasi3
     type: code
@@ -4798,7 +4798,7 @@ segments:
       - [0xE46D90, asm]
       - [0xE47D80, data]
       - [0xE47DD0, rodata]
-      - [0xE47ED0, bin]
+      - [0xE47ED0, rodatabin]
 
   - name: ovl_En_Kanban
     type: code
@@ -4810,7 +4810,7 @@ segments:
       - [0xE48010, asm]
       - [0xE4A4E0, data]
       - [0xE4B050, rodata]
-      - [0xE4B1B0, bin]
+      - [0xE4B1B0, rodatabin]
 
   - name: ovl_En_Karebaba
     type: code
@@ -4822,7 +4822,7 @@ segments:
       - [0xE4B3C0, asm]
       - [0xE4CA40, data]
       - [0xE4CB00, rodata]
-      - [0xE4CBF0, bin]
+      - [0xE4CBF0, rodatabin]
 
   - name: ovl_En_Ko
     type: code
@@ -4834,7 +4834,7 @@ segments:
       - [0xE4CE20, asm]
       - [0xE50150, data]
       - [0xE507F0, rodata]
-      - [0xE50A50, bin]
+      - [0xE50A50, rodatabin]
 
   - name: ovl_En_Kusa
     type: code
@@ -4846,7 +4846,7 @@ segments:
       - [0xE51010, asm]
       - [0xE52240, data]
       - [0xE52310, rodata]
-      - [0xE523B0, bin]
+      - [0xE523B0, rodatabin]
 
   - name: ovl_En_Kz
     type: code
@@ -4858,7 +4858,7 @@ segments:
       - [0xE525C0, asm]
       - [0xE53910, data]
       - [0xE539E0, rodata]
-      - [0xE53A40, bin]
+      - [0xE53A40, rodatabin]
 
   - name: ovl_En_Light
     type: code
@@ -4870,7 +4870,7 @@ segments:
       - [0xE53BB0, asm]
       - [0xE54890, data]
       - [0xE54930, rodata]
-      - [0xE54990, bin]
+      - [0xE54990, rodatabin]
 
   - name: ovl_En_Lightbox
     type: code
@@ -4882,7 +4882,7 @@ segments:
       - [0xE54A40, asm]
       - [0xE54E50, data]
       - [0xE54E70, rodata]
-      - [0xE54E80, bin]
+      - [0xE54E80, rodatabin]
 
   - name: ovl_En_M_Fire1
     type: code
@@ -4893,7 +4893,7 @@ segments:
     subsegments:
       - [0xE54EB0, asm]
       - [0xE54FD0, data]
-      - [0xE55020, bin]
+      - [0xE55020, rodatabin]
 
   - name: ovl_En_M_Thunder
     type: code
@@ -4905,7 +4905,7 @@ segments:
       - [0xE55050, asm]
       - [0xE56470, data]
       - [0xE56500, rodata]
-      - [0xE565A0, bin]
+      - [0xE565A0, rodatabin]
 
   - name: ovl_En_Ma1
     type: code
@@ -4917,7 +4917,7 @@ segments:
       - [0xE56700, asm]
       - [0xE57690, data]
       - [0xE57750, rodata]
-      - [0xE57830, bin]
+      - [0xE57830, rodatabin]
 
   - name: ovl_En_Ma2
     type: code
@@ -4929,7 +4929,7 @@ segments:
       - [0xE57A10, asm]
       - [0xE58870, data]
       - [0xE58940, rodata]
-      - [0xE589C0, bin]
+      - [0xE589C0, rodatabin]
 
   - name: ovl_En_Ma3
     type: code
@@ -4941,7 +4941,7 @@ segments:
       - [0xE58B10, asm]
       - [0xE59860, data]
       - [0xE59930, rodata]
-      - [0xE59A00, bin]
+      - [0xE59A00, rodatabin]
 
   - name: ovl_En_Mag
     type: code
@@ -4953,7 +4953,7 @@ segments:
       - [0xE59B70, asm]
       - [0xE5BF10, data]
       - [0xE5BF80, rodata]
-      - [0xE5BFB0, bin]
+      - [0xE5BFB0, rodatabin]
 
   - name: ovl_En_Mb
     type: code
@@ -4965,7 +4965,7 @@ segments:
       - [0xE5C0C0, asm]
       - [0xE5FC50, data]
       - [0xE5FEE0, rodata]
-      - [0xE5FF70, bin]
+      - [0xE5FF70, rodatabin]
 
   - name: ovl_En_Md
     type: code
@@ -4977,7 +4977,7 @@ segments:
       - [0xE602C0, asm]
       - [0xE62360, data]
       - [0xE62520, rodata]
-      - [0xE62610, bin]
+      - [0xE62610, rodatabin]
 
   - name: ovl_En_Mk
     type: code
@@ -4989,7 +4989,7 @@ segments:
       - [0xE62970, asm]
       - [0xE63670, data]
       - [0xE636D0, rodata]
-      - [0xE636E0, bin]
+      - [0xE636E0, rodatabin]
 
   - name: ovl_En_Mm
     type: code
@@ -5001,7 +5001,7 @@ segments:
       - [0xE637E0, asm]
       - [0xE64B30, data]
       - [0xE64C70, rodata]
-      - [0xE64D10, bin]
+      - [0xE64D10, rodatabin]
 
   - name: ovl_En_Mm2
     type: code
@@ -5013,7 +5013,7 @@ segments:
       - [0xE64EC0, asm]
       - [0xE65B10, data]
       - [0xE65BF0, rodata]
-      - [0xE65C80, bin]
+      - [0xE65C80, rodatabin]
 
   - name: ovl_En_Ms
     type: code
@@ -5025,7 +5025,7 @@ segments:
       - [0xE65D90, asm]
       - [0xE66370, data]
       - [0xE663F0, rodata]
-      - [0xE66400, bin]
+      - [0xE66400, rodatabin]
 
   - name: ovl_En_Mu
     type: code
@@ -5037,7 +5037,7 @@ segments:
       - [0xE66490, asm]
       - [0xE66C40, data]
       - [0xE66CE0, rodata]
-      - [0xE66D30, bin]
+      - [0xE66D30, rodatabin]
 
   - name: ovl_En_Nb
     type: code
@@ -5049,7 +5049,7 @@ segments:
       - [0xE66E00, asm]
       - [0xE6A350, data]
       - [0xE6B000, rodata]
-      - [0xE6B2D0, bin]
+      - [0xE6B2D0, rodatabin]
 
   - name: ovl_En_Niw
     type: code
@@ -5061,7 +5061,7 @@ segments:
       - [0xE6B7F0, asm]
       - [0xE6E650, data]
       - [0xE6E790, rodata]
-      - [0xE6EB90, bin]
+      - [0xE6EB90, rodatabin]
 
   - name: ovl_En_Niw_Girl
     type: code
@@ -5073,7 +5073,7 @@ segments:
       - [0xE6EFF0, asm]
       - [0xE6F9F0, data]
       - [0xE6FA60, rodata]
-      - [0xE6FBB0, bin]
+      - [0xE6FBB0, rodatabin]
 
   - name: ovl_En_Niw_Lady
     type: code
@@ -5085,7 +5085,7 @@ segments:
       - [0xE6FCB0, asm]
       - [0xE713F0, data]
       - [0xE71490, rodata]
-      - [0xE71830, bin]
+      - [0xE71830, rodatabin]
 
   - name: ovl_En_Nutsball
     type: code
@@ -5097,7 +5097,7 @@ segments:
       - [0xE71AC0, asm]
       - [0xE72010, data]
       - [0xE72080, rodata]
-      - [0xE720C0, bin]
+      - [0xE720C0, rodatabin]
 
   - name: ovl_En_Nwc
     type: code
@@ -5109,7 +5109,7 @@ segments:
       - [0xE72150, asm]
       - [0xE72AD0, data]
       - [0xE72B30, rodata]
-      - [0xE72B80, bin]
+      - [0xE72B80, rodatabin]
 
   - name: ovl_En_Ny
     type: code
@@ -5121,7 +5121,7 @@ segments:
       - [0xE72C20, asm]
       - [0xE74380, data]
       - [0xE74450, rodata]
-      - [0xE74560, bin]
+      - [0xE74560, rodatabin]
 
   - name: ovl_En_OE2
     type: code
@@ -5132,7 +5132,7 @@ segments:
     subsegments:
       - [0xE74710, asm]
       - [0xE74770, data]
-      - [0xE74790, bin]
+      - [0xE74790, rodatabin]
 
   - name: ovl_En_Okarina_Effect
     type: code
@@ -5144,7 +5144,7 @@ segments:
       - [0xE747D0, asm]
       - [0xE74C40, data]
       - [0xE74C60, rodata]
-      - [0xE74D10, bin]
+      - [0xE74D10, rodatabin]
 
   - name: ovl_En_Okarina_Tag
     type: code
@@ -5156,7 +5156,7 @@ segments:
       - [0xE74D90, asm]
       - [0xE75A40, data]
       - [0xE76370, rodata]
-      - [0xE765A0, bin]
+      - [0xE765A0, rodatabin]
 
   - name: ovl_En_Okuta
     type: code
@@ -5168,7 +5168,7 @@ segments:
       - [0xE766D0, asm]
       - [0xE78870, data]
       - [0xE78940, rodata]
-      - [0xE78A00, bin]
+      - [0xE78A00, rodatabin]
 
   - name: ovl_En_Ossan
     type: code
@@ -5180,7 +5180,7 @@ segments:
       - [0xE78D10, asm]
       - [0xE7E910, data]
       - [0xE7EF60, rodata]
-      - [0xE7F690, bin]
+      - [0xE7F690, rodatabin]
 
   - name: ovl_En_Owl
     type: code
@@ -5192,7 +5192,7 @@ segments:
       - [0xE7FF90, asm]
       - [0xE83640, data]
       - [0xE836C0, rodata]
-      - [0xE838E0, bin]
+      - [0xE838E0, rodatabin]
 
   - name: ovl_En_Part
     type: code
@@ -5204,7 +5204,7 @@ segments:
       - [0xE83E40, asm]
       - [0xE85200, data]
       - [0xE85280, rodata]
-      - [0xE85360, bin]
+      - [0xE85360, rodatabin]
 
   - name: ovl_En_Peehat
     type: code
@@ -5216,7 +5216,7 @@ segments:
       - [0xE85510, asm]
       - [0xE88790, data]
       - [0xE88900, rodata]
-      - [0xE88A00, bin]
+      - [0xE88A00, rodatabin]
 
   - name: ovl_En_Po_Desert
     type: code
@@ -5228,7 +5228,7 @@ segments:
       - [0xE88D20, asm]
       - [0xE899F0, data]
       - [0xE89A60, rodata]
-      - [0xE89AB0, bin]
+      - [0xE89AB0, rodatabin]
 
   - name: ovl_En_Po_Field
     type: code
@@ -5240,7 +5240,7 @@ segments:
       - [0xE89B70, asm]
       - [0xE8D0D0, data]
       - [0xE8D1D0, rodata]
-      - [0xE8D320, bin]
+      - [0xE8D320, rodatabin]
       - { name: bss_80AD76B0, type: bss, vram: 0x80AD76B0 }
 
   - name: ovl_En_Po_Relay
@@ -5253,7 +5253,7 @@ segments:
       - [0xE8D720, asm]
       - [0xE8EC10, data]
       - [0xE8ED40, rodata]
-      - [0xE8EDF0, bin]
+      - [0xE8EDF0, rodatabin]
 
   - name: ovl_En_Po_Sisters
     type: code
@@ -5265,7 +5265,7 @@ segments:
       - [0xE8EF70, asm]
       - [0xE936D0, data]
       - [0xE937F0, rodata]
-      - [0xE938B0, bin]
+      - [0xE938B0, rodatabin]
 
   - name: ovl_En_Poh
     type: code
@@ -5277,7 +5277,7 @@ segments:
       - [0xE93D30, asm]
       - [0xE97A30, data]
       - [0xE97B60, rodata]
-      - [0xE97C60, bin]
+      - [0xE97C60, rodatabin]
 
   - name: ovl_En_Pu_box
     type: code
@@ -5288,7 +5288,7 @@ segments:
     subsegments:
       - [0xE980A0, asm]
       - [0xE98390, data]
-      - [0xE983B0, bin]
+      - [0xE983B0, rodatabin]
 
   - name: ovl_En_Rd
     type: code
@@ -5300,7 +5300,7 @@ segments:
       - [0xE983E0, asm]
       - [0xE9A880, data]
       - [0xE9A950, rodata]
-      - [0xE9AA10, bin]
+      - [0xE9AA10, rodatabin]
 
   - name: ovl_En_Reeba
     type: code
@@ -5312,7 +5312,7 @@ segments:
       - [0xE9ACB0, asm]
       - [0xE9C540, data]
       - [0xE9C5D0, rodata]
-      - [0xE9C6D0, bin]
+      - [0xE9C6D0, rodatabin]
 
   - name: ovl_En_River_Sound
     type: code
@@ -5324,7 +5324,7 @@ segments:
       - [0xE9C910, asm]
       - [0xE9D1B0, data]
       - [0xE9D210, rodata]
-      - [0xE9D220, bin]
+      - [0xE9D220, rodatabin]
 
   - name: ovl_En_Rl
     type: code
@@ -5336,7 +5336,7 @@ segments:
       - [0xE9D290, asm]
       - [0xE9E180, data]
       - [0xE9E1E0, rodata]
-      - [0xE9E2C0, bin]
+      - [0xE9E2C0, rodatabin]
 
   - name: ovl_En_Rr
     type: code
@@ -5348,7 +5348,7 @@ segments:
       - [0xE9E420, asm]
       - [0xEA0600, data]
       - [0xEA0700, rodata]
-      - [0xEA0920, bin]
+      - [0xEA0920, rodatabin]
 
   - name: ovl_En_Ru1
     type: code
@@ -5360,7 +5360,7 @@ segments:
       - [0xEA0BF0, asm]
       - [0xEA67E0, data]
       - [0xEA7A10, rodata]
-      - [0xEA7C70, bin]
+      - [0xEA7C70, rodatabin]
 
   - name: ovl_En_Ru2
     type: code
@@ -5372,7 +5372,7 @@ segments:
       - [0xEA8530, asm]
       - [0xEAA0C0, data]
       - [0xEAB120, rodata]
-      - [0xEAB270, bin]
+      - [0xEAB270, rodatabin]
 
   - name: ovl_En_Sa
     type: code
@@ -5384,7 +5384,7 @@ segments:
       - [0xEAB540, asm]
       - [0xEAD220, data]
       - [0xEAD470, rodata]
-      - [0xEAD500, bin]
+      - [0xEAD500, rodatabin]
 
   - name: ovl_En_Sb
     type: code
@@ -5396,7 +5396,7 @@ segments:
       - [0xEAD7D0, asm]
       - [0xEAE990, data]
       - [0xEAEA40, rodata]
-      - [0xEAEAE0, bin]
+      - [0xEAEAE0, rodatabin]
 
   - name: ovl_En_Scene_Change
     type: code
@@ -5408,7 +5408,7 @@ segments:
       - [0xEAEC50, asm]
       - [0xEAED60, data]
       - [0xEAED80, rodata]
-      - [0xEAEDB0, bin]
+      - [0xEAEDB0, rodatabin]
 
   - name: ovl_En_Sda
     type: code
@@ -5420,7 +5420,7 @@ segments:
       - [0xEAEE00, asm]
       - [0xEB0090, data]
       - [0xEB0410, rodata]
-      - [0xEB04F0, bin]
+      - [0xEB04F0, rodatabin]
       - { name: bss_80AFA660, type: bss, vram: 0x80AFA660 }
 
   - name: ovl_En_Shopnuts
@@ -5433,7 +5433,7 @@ segments:
       - [0xEB0640, asm]
       - [0xEB13E0, data]
       - [0xEB1440, rodata]
-      - [0xEB1490, bin]
+      - [0xEB1490, rodatabin]
 
   - name: ovl_En_Si
     type: code
@@ -5444,7 +5444,7 @@ segments:
     subsegments:
       - [0xEB15B0, asm]
       - [0xEB19D0, data]
-      - [0xEB1A30, bin]
+      - [0xEB1A30, rodatabin]
 
   - name: ovl_En_Siofuki
     type: code
@@ -5456,7 +5456,7 @@ segments:
       - [0xEB1AA0, asm]
       - [0xEB2710, data]
       - [0xEB2740, rodata]
-      - [0xEB27A0, bin]
+      - [0xEB27A0, rodatabin]
 
   - name: ovl_En_Skb
     type: code
@@ -5468,7 +5468,7 @@ segments:
       - [0xEB28C0, asm]
       - [0xEB3F40, data]
       - [0xEB4000, rodata]
-      - [0xEB4050, bin]
+      - [0xEB4050, rodatabin]
 
   - name: ovl_En_Skj
     type: code
@@ -5480,7 +5480,7 @@ segments:
       - [0xEB41D0, asm]
       - [0xEB7560, data]
       - [0xEB76F0, rodata]
-      - [0xEB7830, bin]
+      - [0xEB7830, rodatabin]
       - { name: bss_80B01EA0, type: bss, vram: 0x80B01EA0 }
 
   - name: ovl_En_Skjneedle
@@ -5493,7 +5493,7 @@ segments:
       - [0xEB7DC0, asm]
       - [0xEB8070, data]
       - [0xEB80D0, rodata]
-      - [0xEB8120, bin]
+      - [0xEB8120, rodatabin]
 
   - name: ovl_En_Ssh
     type: code
@@ -5505,7 +5505,7 @@ segments:
       - [0xEB8180, asm]
       - [0xEBA2D0, data]
       - [0xEBA4E0, rodata]
-      - [0xEBA520, bin]
+      - [0xEBA520, rodatabin]
 
   - name: ovl_En_St
     type: code
@@ -5517,7 +5517,7 @@ segments:
       - [0xEBA7A0, asm]
       - [0xEBCE50, data]
       - [0xEBD110, rodata]
-      - [0xEBD150, bin]
+      - [0xEBD150, rodatabin]
 
   - name: ovl_En_Sth
     type: code
@@ -5529,7 +5529,7 @@ segments:
       - [0xEBD450, asm]
       - [0xEBE320, data]
       - [0xEC13D0, rodata]
-      - [0xEC14A0, bin]
+      - [0xEC14A0, rodatabin]
 
   - name: ovl_En_Stream
     type: code
@@ -5541,7 +5541,7 @@ segments:
       - [0xEC16B0, asm]
       - [0xEC1BB0, data]
       - [0xEC1BE0, rodata]
-      - [0xEC1C30, bin]
+      - [0xEC1C30, rodatabin]
 
   - name: ovl_En_Sw
     type: code
@@ -5553,7 +5553,7 @@ segments:
       - [0xEC1CC0, asm]
       - [0xEC4F30, data]
       - [0xEC50B0, rodata]
-      - [0xEC51D0, bin]
+      - [0xEC51D0, rodatabin]
       - { name: bss_80B0F630, type: bss, vram: 0x80B0F630 }
 
   - name: ovl_En_Syateki_Itm
@@ -5566,7 +5566,7 @@ segments:
       - [0xEC5540, asm]
       - [0xEC60B0, data]
       - [0xEC6270, rodata]
-      - [0xEC6520, bin]
+      - [0xEC6520, rodatabin]
 
   - name: ovl_En_Syateki_Man
     type: code
@@ -5578,7 +5578,7 @@ segments:
       - [0xEC6700, asm]
       - [0xEC7450, data]
       - [0xEC7530, rodata]
-      - [0xEC7630, bin]
+      - [0xEC7630, rodatabin]
 
   - name: ovl_En_Syateki_Niw
     type: code
@@ -5590,7 +5590,7 @@ segments:
       - [0xEC7780, asm]
       - [0xEC94D0, data]
       - [0xEC9570, rodata]
-      - [0xEC96D0, bin]
+      - [0xEC96D0, rodatabin]
 
   - name: ovl_En_Ta
     type: code
@@ -5602,7 +5602,7 @@ segments:
       - [0xEC9930, asm]
       - [0xECCCC0, data]
       - [0xECCD30, rodata]
-      - [0xECCE00, bin]
+      - [0xECCE00, rodatabin]
 
   - name: ovl_En_Takara_Man
     type: code
@@ -5614,7 +5614,7 @@ segments:
       - [0xECD3F0, asm]
       - [0xECDC40, data]
       - [0xECDC70, rodata]
-      - [0xECDD00, bin]
+      - [0xECDD00, rodatabin]
 
   - name: ovl_En_Tana
     type: code
@@ -5626,7 +5626,7 @@ segments:
       - [0xECDDC0, asm]
       - [0xECE070, data]
       - [0xECE0C0, rodata]
-      - [0xECE150, bin]
+      - [0xECE150, rodatabin]
 
   - name: ovl_En_Tg
     type: code
@@ -5638,7 +5638,7 @@ segments:
       - [0xECE1F0, asm]
       - [0xECE7A0, data]
       - [0xECE810, rodata]
-      - [0xECE860, bin]
+      - [0xECE860, rodatabin]
 
   - name: ovl_En_Tite
     type: code
@@ -5650,7 +5650,7 @@ segments:
       - [0xECE910, asm]
       - [0xED1440, data]
       - [0xED1580, rodata]
-      - [0xED15E0, bin]
+      - [0xED15E0, rodatabin]
 
   - name: ovl_En_Tk
     type: code
@@ -5662,7 +5662,7 @@ segments:
       - [0xED1790, asm]
       - [0xED3340, data]
       - [0xED3440, rodata]
-      - [0xED3520, bin]
+      - [0xED3520, rodatabin]
 
   - name: ovl_En_Torch
     type: code
@@ -5673,7 +5673,7 @@ segments:
     subsegments:
       - [0xED3720, asm]
       - [0xED37B0, data]
-      - [0xED37E0, bin]
+      - [0xED37E0, rodatabin]
 
   - name: ovl_En_Torch2
     type: code
@@ -5685,7 +5685,7 @@ segments:
       - [0xED3810, asm]
       - [0xED5860, data]
       - [0xED58C0, rodata]
-      - [0xED5910, bin]
+      - [0xED5910, rodatabin]
       - { name: bss_80B20130, type: bss, vram: 0x80B20130 }
 
   - name: ovl_En_Toryo
@@ -5698,7 +5698,7 @@ segments:
       - [0xED5FC0, asm]
       - [0xED6A30, data]
       - [0xED6AD0, rodata]
-      - [0xED6B30, bin]
+      - [0xED6B30, rodatabin]
 
   - name: ovl_En_Tp
     type: code
@@ -5710,7 +5710,7 @@ segments:
       - [0xED6C30, asm]
       - [0xED88C0, data]
       - [0xED8990, rodata]
-      - [0xED89F0, bin]
+      - [0xED89F0, rodatabin]
 
   - name: ovl_En_Tr
     type: code
@@ -5722,7 +5722,7 @@ segments:
       - [0xED8B40, asm]
       - [0xEDA190, data]
       - [0xEDA250, rodata]
-      - [0xEDA2B0, bin]
+      - [0xEDA2B0, rodatabin]
 
   - name: ovl_En_Trap
     type: code
@@ -5734,7 +5734,7 @@ segments:
       - [0xEDA4B0, asm]
       - [0xEDB660, data]
       - [0xEDB6B0, rodata]
-      - [0xEDB6D0, bin]
+      - [0xEDB6D0, rodatabin]
 
   - name: ovl_En_Tubo_Trap
     type: code
@@ -5746,7 +5746,7 @@ segments:
       - [0xEDB740, asm]
       - [0xEDC330, data]
       - [0xEDC380, rodata]
-      - [0xEDC430, bin]
+      - [0xEDC430, rodatabin]
 
   - name: ovl_En_Vali
     type: code
@@ -5758,7 +5758,7 @@ segments:
       - [0xEDC500, asm]
       - [0xEDE6D0, data]
       - [0xEDE810, rodata]
-      - [0xEDE950, bin]
+      - [0xEDE950, rodatabin]
 
   - name: ovl_En_Vase
     type: code
@@ -5769,7 +5769,7 @@ segments:
     subsegments:
       - [0xEDED00, asm]
       - [0xEDEDA0, data]
-      - [0xEDEDC0, bin]
+      - [0xEDEDC0, rodatabin]
 
   - name: ovl_En_Vb_Ball
     type: code
@@ -5781,7 +5781,7 @@ segments:
       - [0xEDEDF0, asm]
       - [0xEDFE30, data]
       - [0xEDFEE0, rodata]
-      - [0xEDFF60, bin]
+      - [0xEDFF60, rodatabin]
 
   - name: ovl_En_Viewer
     type: code
@@ -5793,7 +5793,7 @@ segments:
       - [0xEE0050, asm]
       - [0xEE2D10, data]
       - [0xEE2E40, rodata]
-      - [0xEE3020, bin]
+      - [0xEE3020, rodatabin]
       - { name: bss_80B2D440, type: bss, vram: 0x80B2D440 }
 
   - name: ovl_En_Vm
@@ -5806,7 +5806,7 @@ segments:
       - [0xEE3290, asm]
       - [0xEE4830, data]
       - [0xEE49E0, rodata]
-      - [0xEE4A70, bin]
+      - [0xEE4A70, rodatabin]
 
   - name: ovl_En_Wall_Tubo
     type: code
@@ -5818,7 +5818,7 @@ segments:
       - [0xEE4C20, asm]
       - [0xEE5150, data]
       - [0xEE51A0, rodata]
-      - [0xEE52B0, bin]
+      - [0xEE52B0, rodatabin]
 
   - name: ovl_En_Wallmas
     type: code
@@ -5830,7 +5830,7 @@ segments:
       - [0xEE5350, asm]
       - [0xEE6B20, data]
       - [0xEE6BB0, rodata]
-      - [0xEE6C40, bin]
+      - [0xEE6C40, rodatabin]
 
   - name: ovl_En_Weather_Tag
     type: code
@@ -5842,7 +5842,7 @@ segments:
       - [0xEE6E50, asm]
       - [0xEE7C50, data]
       - [0xEE7C70, rodata]
-      - [0xEE7EB0, bin]
+      - [0xEE7EB0, rodatabin]
 
   - name: ovl_En_Weiyer
     type: code
@@ -5854,7 +5854,7 @@ segments:
       - [0xEE80C0, asm]
       - [0xEE98A0, data]
       - [0xEE9920, rodata]
-      - [0xEE9960, bin]
+      - [0xEE9960, rodatabin]
 
   - name: ovl_En_Wf
     type: code
@@ -5866,7 +5866,7 @@ segments:
       - [0xEE9AE0, asm]
       - [0xEED7C0, data]
       - [0xEED950, rodata]
-      - [0xEEDA90, bin]
+      - [0xEEDA90, rodatabin]
 
   - name: ovl_En_Wonder_Item
     type: code
@@ -5878,7 +5878,7 @@ segments:
       - [0xEEDE90, asm]
       - [0xEEEB70, data]
       - [0xEEEC40, rodata]
-      - [0xEEED30, bin]
+      - [0xEEED30, rodatabin]
       - { name: bss_80B39010, type: bss, vram: 0x80B39010 }
 
   - name: ovl_En_Wonder_Talk
@@ -5891,7 +5891,7 @@ segments:
       - [0xEEEE40, asm]
       - [0xEEF6A0, data]
       - [0xEEF6C0, rodata]
-      - [0xEEFAE0, bin]
+      - [0xEEFAE0, rodatabin]
 
   - name: ovl_En_Wonder_Talk2
     type: code
@@ -5903,7 +5903,7 @@ segments:
       - [0xEEFC20, asm]
       - [0xEF0610, data]
       - [0xEF0640, rodata]
-      - [0xEF0B30, bin]
+      - [0xEF0B30, rodatabin]
 
   - name: ovl_En_Wood02
     type: code
@@ -5915,7 +5915,7 @@ segments:
       - [0xEF0CC0, asm]
       - [0xEF1C30, data]
       - [0xEF1CF0, rodata]
-      - [0xEF1DC0, bin]
+      - [0xEF1DC0, rodatabin]
       - { name: bss_80B3C1D0, type: bss, vram: 0x80B3C1D0 }
 
   - name: ovl_En_Xc
@@ -5928,7 +5928,7 @@ segments:
       - [0xEF1F20, asm]
       - [0xEF7A80, data]
       - [0xEF7C90, rodata]
-      - [0xEF8020, bin]
+      - [0xEF8020, rodatabin]
       - { name: bss_80B42D90, type: bss, vram: 0x80B42D90 }
 
   - name: ovl_En_Yabusame_Mark
@@ -5941,7 +5941,7 @@ segments:
       - [0xEF8AD0, asm]
       - [0xEF9200, data]
       - [0xEF9390, rodata]
-      - [0xEF95D0, bin]
+      - [0xEF95D0, rodatabin]
 
   - name: ovl_En_Yukabyun
     type: code
@@ -5953,7 +5953,7 @@ segments:
       - [0xEF96D0, asm]
       - [0xEF9C20, data]
       - [0xEF9C80, rodata]
-      - [0xEF9CC0, bin]
+      - [0xEF9CC0, rodatabin]
 
   - name: ovl_En_Zf
     type: code
@@ -5965,7 +5965,7 @@ segments:
       - [0xEF9D60, asm]
       - [0xEFFDA0, data]
       - [0xF00020, rodata]
-      - [0xF00160, bin]
+      - [0xF00160, rodatabin]
       - { name: bss_80B4AB30, type: bss, vram: 0x80B4AB30 }
 
   - name: ovl_En_Zl1
@@ -5978,7 +5978,7 @@ segments:
       - [0xF00840, asm]
       - [0xF022D0, data]
       - [0xF04420, rodata]
-      - [0xF04490, bin]
+      - [0xF04490, rodatabin]
 
   - name: ovl_En_Zl2
     type: code
@@ -5990,7 +5990,7 @@ segments:
       - [0xF04690, asm]
       - [0xF08510, data]
       - [0xF08600, rodata]
-      - [0xF08970, bin]
+      - [0xF08970, rodatabin]
 
   - name: ovl_En_Zl3
     type: code
@@ -6002,7 +6002,7 @@ segments:
       - [0xF090B0, asm]
       - [0xF10110, data]
       - [0xF102A0, rodata]
-      - [0xF108A0, bin]
+      - [0xF108A0, rodatabin]
 
   - name: ovl_En_Zl4
     type: code
@@ -6014,7 +6014,7 @@ segments:
       - [0xF114B0, asm]
       - [0xF14460, data]
       - [0xF15880, rodata]
-      - [0xF15A20, bin]
+      - [0xF15A20, rodatabin]
 
   - name: ovl_En_Zo
     type: code
@@ -6026,7 +6026,7 @@ segments:
       - [0xF15F20, asm]
       - [0xF18150, data]
       - [0xF182C0, rodata]
-      - [0xF18420, bin]
+      - [0xF18420, rodatabin]
 
   - name: ovl_En_fHG
     type: code
@@ -6038,7 +6038,7 @@ segments:
       - [0xF186C0, asm]
       - [0xF1AE70, data]
       - [0xF1AF10, rodata]
-      - [0xF1B160, bin]
+      - [0xF1B160, rodatabin]
 
   - name: ovl_End_Title
     type: code
@@ -6050,7 +6050,7 @@ segments:
       - [0xF1B420, asm]
       - [0xF1BB80, data]
       - [0xF1F550, rodata]
-      - [0xF1F5F0, bin]
+      - [0xF1F5F0, rodatabin]
 
   - name: ovl_Fishing
     type: code
@@ -6062,7 +6062,7 @@ segments:
       - [0xF1F6A0, asm]
       - [0xF30330, data]
       - [0xF30D00, rodata]
-      - [0xF315F0, bin]
+      - [0xF315F0, rodatabin]
       - { name: bss_80B7E070, type: bss, vram: 0x80B7E070 }
 
   - name: ovl_Item_B_Heart
@@ -6075,7 +6075,7 @@ segments:
       - [0xF33D70, asm]
       - [0xF34130, data]
       - [0xF34160, rodata]
-      - [0xF341B0, bin]
+      - [0xF341B0, rodatabin]
 
   - name: ovl_Item_Etcetera
     type: code
@@ -6087,7 +6087,7 @@ segments:
       - [0xF34210, asm]
       - [0xF34920, data]
       - [0xF349C0, rodata]
-      - [0xF34A90, bin]
+      - [0xF34A90, rodatabin]
 
   - name: ovl_Item_Inbox
     type: code
@@ -6098,7 +6098,7 @@ segments:
     subsegments:
       - [0xF34C00, asm]
       - [0xF34D00, data]
-      - [0xF34D20, bin]
+      - [0xF34D20, rodatabin]
 
   - name: ovl_Item_Ocarina
     type: code
@@ -6110,7 +6110,7 @@ segments:
       - [0xF34D50, asm]
       - [0xF35410, data]
       - [0xF35430, rodata]
-      - [0xF35470, bin]
+      - [0xF35470, rodatabin]
 
   - name: ovl_Item_Shield
     type: code
@@ -6122,7 +6122,7 @@ segments:
       - [0xF35540, asm]
       - [0xF35DC0, data]
       - [0xF35EA0, rodata]
-      - [0xF35F10, bin]
+      - [0xF35F10, rodatabin]
 
   - name: ovl_Magic_Dark
     type: code
@@ -6134,7 +6134,7 @@ segments:
       - [0xF35FF0, asm]
       - [0xF36CE0, data]
       - [0xF37740, rodata]
-      - [0xF37830, bin]
+      - [0xF37830, rodatabin]
 
   - name: ovl_Magic_Fire
     type: code
@@ -6146,7 +6146,7 @@ segments:
       - [0xF37990, asm]
       - [0xF38500, data]
       - [0xF39BE0, rodata]
-      - [0xF39C40, bin]
+      - [0xF39C40, rodatabin]
 
   - name: ovl_Magic_Wind
     type: code
@@ -6158,7 +6158,7 @@ segments:
       - [0xF39D20, asm]
       - [0xF3A480, data]
       - [0xF3B9D0, rodata]
-      - [0xF3BAF0, bin]
+      - [0xF3BAF0, rodatabin]
 
   - name: ovl_Mir_Ray
     type: code
@@ -6170,7 +6170,7 @@ segments:
       - [0xF3BC70, asm]
       - [0xF3D270, data]
       - [0xF3D470, rodata]
-      - [0xF3D560, bin]
+      - [0xF3D560, rodatabin]
 
   - name: ovl_Obj_Bean
     type: code
@@ -6182,7 +6182,7 @@ segments:
       - [0xF3D6A0, asm]
       - [0xF3FA50, data]
       - [0xF3FAE0, rodata]
-      - [0xF3FCA0, bin]
+      - [0xF3FCA0, rodatabin]
 
   - name: ovl_Obj_Blockstop
     type: code
@@ -6193,7 +6193,7 @@ segments:
     subsegments:
       - [0xF40080, asm]
       - [0xF401C0, data]
-      - [0xF401E0, bin]
+      - [0xF401E0, rodatabin]
 
   - name: ovl_Obj_Bombiwa
     type: code
@@ -6204,7 +6204,7 @@ segments:
     subsegments:
       - [0xF40210, asm]
       - [0xF406A0, data]
-      - [0xF40720, bin]
+      - [0xF40720, rodatabin]
 
   - name: ovl_Obj_Comb
     type: code
@@ -6216,7 +6216,7 @@ segments:
       - [0xF40780, asm]
       - [0xF40EE0, data]
       - [0xF40F50, rodata]
-      - [0xF40FA0, bin]
+      - [0xF40FA0, rodatabin]
 
   - name: ovl_Obj_Dekujr
     type: code
@@ -6228,7 +6228,7 @@ segments:
       - [0xF41040, asm]
       - [0xF41600, data]
       - [0xF41660, rodata]
-      - [0xF416B0, bin]
+      - [0xF416B0, rodatabin]
 
   - name: ovl_Obj_Elevator
     type: code
@@ -6240,7 +6240,7 @@ segments:
       - [0xF41720, asm]
       - [0xF41A50, data]
       - [0xF41A90, rodata]
-      - [0xF41B20, bin]
+      - [0xF41B20, rodatabin]
 
   - name: ovl_Obj_Hamishi
     type: code
@@ -6252,7 +6252,7 @@ segments:
       - [0xF41BB0, asm]
       - [0xF42350, data]
       - [0xF423D0, rodata]
-      - [0xF42410, bin]
+      - [0xF42410, rodatabin]
 
   - name: ovl_Obj_Hana
     type: code
@@ -6263,7 +6263,7 @@ segments:
     subsegments:
       - [0xF42480, asm]
       - [0xF42670, data]
-      - [0xF42710, bin]
+      - [0xF42710, rodatabin]
 
   - name: ovl_Obj_Hsblock
     type: code
@@ -6275,7 +6275,7 @@ segments:
       - [0xF42780, asm]
       - [0xF42CC0, data]
       - [0xF42D20, rodata]
-      - [0xF42DC0, bin]
+      - [0xF42DC0, rodatabin]
 
   - name: ovl_Obj_Ice_Poly
     type: code
@@ -6287,7 +6287,7 @@ segments:
       - [0xF42E80, asm]
       - [0xF43730, data]
       - [0xF437D0, rodata]
-      - [0xF43810, bin]
+      - [0xF43810, rodatabin]
 
   - name: ovl_Obj_Kibako
     type: code
@@ -6299,7 +6299,7 @@ segments:
       - [0xF438C0, asm]
       - [0xF44450, data]
       - [0xF444C0, rodata]
-      - [0xF44510, bin]
+      - [0xF44510, rodatabin]
 
   - name: ovl_Obj_Kibako2
     type: code
@@ -6311,7 +6311,7 @@ segments:
       - [0xF445F0, asm]
       - [0xF44BD0, data]
       - [0xF44C30, rodata]
-      - [0xF44C70, bin]
+      - [0xF44C70, rodatabin]
 
   - name: ovl_Obj_Lift
     type: code
@@ -6323,7 +6323,7 @@ segments:
       - [0xF44CF0, asm]
       - [0xF455C0, data]
       - [0xF45640, rodata]
-      - [0xF456D0, bin]
+      - [0xF456D0, rodatabin]
 
   - name: ovl_Obj_Lightswitch
     type: code
@@ -6335,7 +6335,7 @@ segments:
       - [0xF457C0, asm]
       - [0xF46B20, data]
       - [0xF46BB0, rodata]
-      - [0xF46D20, bin]
+      - [0xF46D20, rodatabin]
 
   - name: ovl_Obj_Makekinsuta
     type: code
@@ -6347,7 +6347,7 @@ segments:
       - [0xF46E90, asm]
       - [0xF47030, data]
       - [0xF47050, rodata]
-      - [0xF470C0, bin]
+      - [0xF470C0, rodatabin]
 
   - name: ovl_Obj_Makeoshihiki
     type: code
@@ -6359,7 +6359,7 @@ segments:
       - [0xF47130, asm]
       - [0xF474F0, data]
       - [0xF47590, rodata]
-      - [0xF47630, bin]
+      - [0xF47630, rodatabin]
 
   - name: ovl_Obj_Mure
     type: code
@@ -6371,7 +6371,7 @@ segments:
       - [0xF476C0, asm]
       - [0xF48650, data]
       - [0xF486D0, rodata]
-      - [0xF48980, bin]
+      - [0xF48980, rodatabin]
 
   - name: ovl_Obj_Mure2
     type: code
@@ -6383,7 +6383,7 @@ segments:
       - [0xF48B60, asm]
       - [0xF49400, data]
       - [0xF494A0, rodata]
-      - [0xF494F0, bin]
+      - [0xF494F0, rodatabin]
 
   - name: ovl_Obj_Mure3
     type: code
@@ -6395,7 +6395,7 @@ segments:
       - [0xF495F0, asm]
       - [0xF49CC0, data]
       - [0xF49D00, rodata]
-      - [0xF49D10, bin]
+      - [0xF49D10, rodatabin]
 
   - name: ovl_Obj_Oshihiki
     type: code
@@ -6407,7 +6407,7 @@ segments:
       - [0xF49DA0, asm]
       - [0xF4B5C0, data]
       - [0xF4B710, rodata]
-      - [0xF4B970, bin]
+      - [0xF4B970, rodatabin]
 
   - name: ovl_Obj_Roomtimer
     type: code
@@ -6418,7 +6418,7 @@ segments:
     subsegments:
       - [0xF4BBF0, asm]
       - [0xF4BDD0, data]
-      - [0xF4BDF0, bin]
+      - [0xF4BDF0, rodatabin]
 
   - name: ovl_Obj_Switch
     type: code
@@ -6430,7 +6430,7 @@ segments:
       - [0xF4BE30, asm]
       - [0xF4D820, data]
       - [0xF4DA20, rodata]
-      - [0xF4DBC0, bin]
+      - [0xF4DBC0, rodatabin]
 
   - name: ovl_Obj_Syokudai
     type: code
@@ -6442,7 +6442,7 @@ segments:
       - [0xF4DED0, asm]
       - [0xF4EA10, data]
       - [0xF4EAB0, rodata]
-      - [0xF4EB10, bin]
+      - [0xF4EB10, rodatabin]
       - { name: bss_80B9FF90, type: bss, vram: 0x80B9FF90 }
 
   - name: ovl_Obj_Timeblock
@@ -6455,7 +6455,7 @@ segments:
       - [0xF4EBB0, asm]
       - [0xF4F6E0, data]
       - [0xF4F760, rodata]
-      - [0xF4F860, bin]
+      - [0xF4F860, rodatabin]
 
   - name: ovl_Obj_Tsubo
     type: code
@@ -6467,7 +6467,7 @@ segments:
       - [0xF4F970, asm]
       - [0xF50760, data]
       - [0xF507F0, rodata]
-      - [0xF50880, bin]
+      - [0xF50880, rodatabin]
 
   - name: ovl_Obj_Warp2block
     type: code
@@ -6479,7 +6479,7 @@ segments:
       - [0xF50A00, asm]
       - [0xF51430, data]
       - [0xF514B0, rodata]
-      - [0xF515B0, bin]
+      - [0xF515B0, rodatabin]
 
   - name: ovl_Object_Kankyo
     type: code
@@ -6491,7 +6491,7 @@ segments:
       - [0xF516B0, asm]
       - [0xF544F0, data]
       - [0xF54650, rodata]
-      - [0xF548F0, bin]
+      - [0xF548F0, rodatabin]
 
   - name: ovl_Oceff_Spot
     type: code
@@ -6503,7 +6503,7 @@ segments:
       - [0xF54C80, asm]
       - [0xF55450, data]
       - [0xF55B50, rodata]
-      - [0xF55C00, bin]
+      - [0xF55C00, rodatabin]
 
   - name: ovl_Oceff_Storm
     type: code
@@ -6515,7 +6515,7 @@ segments:
       - [0xF55CF0, asm]
       - [0xF56480, data]
       - [0xF57830, rodata]
-      - [0xF578B0, bin]
+      - [0xF578B0, rodatabin]
 
   - name: ovl_Oceff_Wipe
     type: code
@@ -6527,7 +6527,7 @@ segments:
       - [0xF579A0, asm]
       - [0xF57ED0, data]
       - [0xF586D0, rodata]
-      - [0xF58730, bin]
+      - [0xF58730, rodatabin]
 
   - name: ovl_Oceff_Wipe2
     type: code
@@ -6539,7 +6539,7 @@ segments:
       - [0xF587C0, asm]
       - [0xF58C20, data]
       - [0xF59EB0, rodata]
-      - [0xF59F20, bin]
+      - [0xF59F20, rodatabin]
 
   - name: ovl_Oceff_Wipe3
     type: code
@@ -6551,7 +6551,7 @@ segments:
       - [0xF5A000, asm]
       - [0xF5A460, data]
       - [0xF5B6D0, rodata]
-      - [0xF5B740, bin]
+      - [0xF5B740, rodatabin]
 
   - name: ovl_Oceff_Wipe4
     type: code
@@ -6563,7 +6563,7 @@ segments:
       - [0xF5B820, asm]
       - [0xF5BC60, data]
       - [0xF5C770, rodata]
-      - [0xF5C7E0, bin]
+      - [0xF5C7E0, rodatabin]
 
   - name: ovl_Shot_Sun
     type: code
@@ -6575,7 +6575,7 @@ segments:
       - [0xF5C8D0, asm]
       - [0xF5CEE0, data]
       - [0xF5CF30, rodata]
-      - [0xF5CF90, bin]
+      - [0xF5CF90, rodatabin]
 
   - [0xF5D010, pad, pad_F5D010]
 
