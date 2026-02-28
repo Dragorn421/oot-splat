@@ -102,6 +102,7 @@ segments:
   - name: icon_item_static
     type: bin
     start: 0x74C000
+    ld_align_segment_start: 0x1000
     vram: 0x08000000
 
   - [0x7D5CA0, pad, pad_7D5CA0]
@@ -109,6 +110,7 @@ segments:
   - name: icon_item_24_static
     type: bin
     start: 0x7D6000
+    ld_align_segment_start: 0x1000
     vram: 0x09000000
 
   - [0x7E1400, pad, pad_7E1400]
@@ -116,6 +118,7 @@ segments:
   - name: icon_item_field_static
     type: bin
     start: 0x7E2000
+    ld_align_segment_start: 0x1000
     vram: 0x0C000000
 
   - [0x7ED930, pad, pad_7ED930]
@@ -123,6 +126,7 @@ segments:
   - name: icon_item_dungeon_static
     type: bin
     start: 0x7EE000
+    ld_align_segment_start: 0x1000
     vram: 0x0C000000
 
   - [0x7EFD80, pad, pad_7EFD80]
@@ -130,6 +134,7 @@ segments:
   - name: icon_item_gameover_static
     type: bin
     start: 0x7F0000
+    ld_align_segment_start: 0x1000
     vram: 0x0C000000
 
   - [0x7F3C80, pad, pad_7F3C80]
@@ -137,6 +142,7 @@ segments:
   - name: icon_item_nes_static
     type: bin
     start: 0x7F4000
+    ld_align_segment_start: 0x1000
     vram: 0x0D000000
 
   - [0x801C80, pad, pad_801C80]
@@ -144,6 +150,7 @@ segments:
   - name: icon_item_ger_static
     type: bin
     start: 0x802000
+    ld_align_segment_start: 0x1000
     vram: 0x0D000000
 
   - [0x810B80, pad, pad_810B80]
@@ -151,6 +158,7 @@ segments:
   - name: icon_item_fra_static
     type: bin
     start: 0x811000
+    ld_align_segment_start: 0x1000
     vram: 0x0D000000
 
   - [0x820480, pad, pad_820480]
@@ -158,6 +166,7 @@ segments:
   - name: item_name_static
     type: bin
     start: 0x821000
+    ld_align_segment_start: 0x1000
     vram: 0x0A000000
 
   - [0x87D400, pad, pad_87D400]
@@ -165,6 +174,7 @@ segments:
   - name: map_name_static
     type: bin
     start: 0x87E000
+    ld_align_segment_start: 0x1000
     vram: 0x0B000000
 
   - [0x8B0400, pad, pad_8B0400]
@@ -172,6 +182,7 @@ segments:
   - name: do_action_static
     type: bin
     start: 0x8B1000
+    ld_align_segment_start: 0x1000
     vram: 0x07000000
 
   - [0x8B9280, pad, pad_8B9280]
@@ -179,6 +190,7 @@ segments:
   - name: message_static
     type: bin
     start: 0x8BA000
+    ld_align_segment_start: 0x1000
     vram: 0x07000000
 
   - [0x8BE180, pad, pad_8BE180]
@@ -186,6 +198,7 @@ segments:
   - name: message_texture_static
     type: bin
     start: 0x8BF000
+    ld_align_segment_start: 0x1000
     vram: 0x09000000
 
   - [0x8C0200, pad, pad_8C0200]
@@ -193,6 +206,7 @@ segments:
   - name: nes_font_static
     type: bin
     start: 0x8C1000
+    ld_align_segment_start: 0x1000
     vram: 0x0A000000
 
   - [0x8C5600, pad, pad_8C5600]
@@ -200,6 +214,7 @@ segments:
   - name: nes_message_data_static
     type: bin
     start: 0x8C6000
+    ld_align_segment_start: 0x1000
     vram: 0x07000000
 
   - [0x8FE120, pad, pad_8FE120]
@@ -207,6 +222,7 @@ segments:
   - name: ger_message_data_static
     type: bin
     start: 0x8FF000
+    ld_align_segment_start: 0x1000
     vram: 0x07000000
 
   - [0x93A9D0, pad, pad_93A9D0]
@@ -214,6 +230,7 @@ segments:
   - name: fra_message_data_static
     type: bin
     start: 0x93B000
+    ld_align_segment_start: 0x1000
     vram: 0x07000000
 
   - [0x9721C0, pad, pad_9721C0]
@@ -221,6 +238,7 @@ segments:
   - name: staff_message_data_static
     type: bin
     start: 0x973000
+    ld_align_segment_start: 0x1000
     vram: 0x07000000
 
   - [0x973F50, pad, pad_973F50]
@@ -228,6 +246,7 @@ segments:
   - name: map_grand_static
     type: bin
     start: 0x974000
+    ld_align_segment_start: 0x1000
     vram: 0x0B000000
 
   - [0x982350, pad, pad_982350]
@@ -235,6 +254,7 @@ segments:
   - name: map_48x85_static
     type: bin
     start: 0x983000
+    ld_align_segment_start: 0x1000
     vram: 0x0B000000
 
   - [0x9A4DE0, pad, pad_9A4DE0]
@@ -242,6 +262,7 @@ segments:
   - name: map_i_static
     type: bin
     start: 0x9A5000
+    ld_align_segment_start: 0x1000
     vram: 0x0B000000
 
   - [0xA93110, pad, pad_A93110]
@@ -249,6 +270,7 @@ segments:
   - name: code
     type: code
     start: 0xA94000
+    ld_align_segment_start: 0x1000
     vram: 0x8001CE60
     bss_size: 0x1DC30
     subsegments:
@@ -5896,6 +5918,7 @@ segments:
   - name: gameplay_keep
     type: bin
     start: 0xF5E000
+    ld_align_segment_start: 0x1000
     vram: 0x04000000
 
   - [0xFB47B0, pad, pad_FB47B0]
@@ -5903,6 +5926,7 @@ segments:
   - name: gameplay_field_keep
     type: bin
     start: 0xFB5000
+    ld_align_segment_start: 0x1000
     vram: 0x05000000
 
   - [0xFC2330, pad, pad_FC2330]
@@ -5910,6 +5934,7 @@ segments:
   - name: gameplay_dangeon_keep
     type: bin
     start: 0xFC3000
+    ld_align_segment_start: 0x1000
     vram: 0x05000000
 
   - [0xFDAAF0, pad, pad_FDAAF0]
@@ -5917,6 +5942,7 @@ segments:
   - name: gameplay_object_exchange_static
     type: bin
     start: 0xFDB000
+    ld_align_segment_start: 0x1000
     vram: 0x05017AF0
     follows_vram: gameplay_dangeon_keep
 
@@ -5925,6 +5951,7 @@ segments:
   - name: object_link_boy
     type: bin
     start: 0xFDC000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1013800, pad, pad_1013800]
@@ -5932,6 +5959,7 @@ segments:
   - name: object_link_child
     type: bin
     start: 0x1014000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1040F80, pad, pad_1040F80]
@@ -5939,11 +5967,13 @@ segments:
   - name: object_box
     type: bin
     start: 0x1041000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_human
     type: bin
     start: 0x1047000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x105A180, pad, pad_105A180]
@@ -5951,6 +5981,7 @@ segments:
   - name: object_okuta
     type: bin
     start: 0x105B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x105EC80, pad, pad_105EC80]
@@ -5958,6 +5989,7 @@ segments:
   - name: object_poh
     type: bin
     start: 0x105F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10640E0, pad, pad_10640E0]
@@ -5965,6 +5997,7 @@ segments:
   - name: object_wallmaster
     type: bin
     start: 0x1065000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x106F070, pad, pad_106F070]
@@ -5972,6 +6005,7 @@ segments:
   - name: object_dy_obj
     type: bin
     start: 0x1070000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x108D530, pad, pad_108D530]
@@ -5979,6 +6013,7 @@ segments:
   - name: object_firefly
     type: bin
     start: 0x108E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x108F8C0, pad, pad_108F8C0]
@@ -5986,6 +6021,7 @@ segments:
   - name: object_dodongo
     type: bin
     start: 0x1090000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1099940, pad, pad_1099940]
@@ -5993,6 +6029,7 @@ segments:
   - name: object_fire
     type: bin
     start: 0x109A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x109E0A0, pad, pad_109E0A0]
@@ -6000,6 +6037,7 @@ segments:
   - name: object_niw
     type: bin
     start: 0x109F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10A1540, pad, pad_10A1540]
@@ -6007,6 +6045,7 @@ segments:
   - name: object_tite
     type: bin
     start: 0x10A2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10A5A30, pad, pad_10A5A30]
@@ -6014,6 +6053,7 @@ segments:
   - name: object_reeba
     type: bin
     start: 0x10A6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10A7EF0, pad, pad_10A7EF0]
@@ -6021,6 +6061,7 @@ segments:
   - name: object_peehat
     type: bin
     start: 0x10A8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10A9C90, pad, pad_10A9C90]
@@ -6028,6 +6069,7 @@ segments:
   - name: object_kingdodongo
     type: bin
     start: 0x10AA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10DACE0, pad, pad_10DACE0]
@@ -6035,6 +6077,7 @@ segments:
   - name: object_horse
     type: bin
     start: 0x10DB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10E8F10, pad, pad_10E8F10]
@@ -6042,6 +6085,7 @@ segments:
   - name: object_zf
     type: bin
     start: 0x10E9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x10FF3A0, pad, pad_10FF3A0]
@@ -6049,6 +6093,7 @@ segments:
   - name: object_goma
     type: bin
     start: 0x1100000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x111F600, pad, pad_111F600]
@@ -6056,6 +6101,7 @@ segments:
   - name: object_zl1
     type: bin
     start: 0x1120000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11343C0, pad, pad_11343C0]
@@ -6063,6 +6109,7 @@ segments:
   - name: object_gol
     type: bin
     start: 0x1135000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1139220, pad, pad_1139220]
@@ -6070,6 +6117,7 @@ segments:
   - name: object_bubble
     type: bin
     start: 0x113A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x113B0C0, pad, pad_113B0C0]
@@ -6077,6 +6125,7 @@ segments:
   - name: object_dodojr
     type: bin
     start: 0x113C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x113E0F0, pad, pad_113E0F0]
@@ -6084,6 +6133,7 @@ segments:
   - name: object_torch2
     type: bin
     start: 0x113F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1143770, pad, pad_1143770]
@@ -6091,6 +6141,7 @@ segments:
   - name: object_bl
     type: bin
     start: 0x1144000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1149850, pad, pad_1149850]
@@ -6098,6 +6149,7 @@ segments:
   - name: object_tp
     type: bin
     start: 0x114A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x114BCF0, pad, pad_114BCF0]
@@ -6105,6 +6157,7 @@ segments:
   - name: object_oA1
     type: bin
     start: 0x114C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1150710, pad, pad_1150710]
@@ -6112,6 +6165,7 @@ segments:
   - name: object_st
     type: bin
     start: 0x1151000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1156BB0, pad, pad_1156BB0]
@@ -6119,6 +6173,7 @@ segments:
   - name: object_bw
     type: bin
     start: 0x1157000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1159260, pad, pad_1159260]
@@ -6126,6 +6181,7 @@ segments:
   - name: object_ei
     type: bin
     start: 0x115A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x115D420, pad, pad_115D420]
@@ -6133,6 +6189,7 @@ segments:
   - name: object_horse_normal
     type: bin
     start: 0x115E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1167FC0, pad, pad_1167FC0]
@@ -6140,6 +6197,7 @@ segments:
   - name: object_oB1
     type: bin
     start: 0x1168000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x116E6B0, pad, pad_116E6B0]
@@ -6147,6 +6205,7 @@ segments:
   - name: object_o_anime
     type: bin
     start: 0x116F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1171150, pad, pad_1171150]
@@ -6154,6 +6213,7 @@ segments:
   - name: object_spot04_objects
     type: bin
     start: 0x1172000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11736C0, pad, pad_11736C0]
@@ -6161,6 +6221,7 @@ segments:
   - name: object_ddan_objects
     type: bin
     start: 0x1174000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x117C760, pad, pad_117C760]
@@ -6168,6 +6229,7 @@ segments:
   - name: object_hidan_objects
     type: bin
     start: 0x117D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1194D20, pad, pad_1194D20]
@@ -6175,6 +6237,7 @@ segments:
   - name: object_horse_ganon
     type: bin
     start: 0x1195000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11A1090, pad, pad_11A1090]
@@ -6182,6 +6245,7 @@ segments:
   - name: object_oA2
     type: bin
     start: 0x11A2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11A76D0, pad, pad_11A76D0]
@@ -6189,6 +6253,7 @@ segments:
   - name: object_spot00_objects
     type: bin
     start: 0x11A8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11A9C10, pad, pad_11A9C10]
@@ -6196,6 +6261,7 @@ segments:
   - name: object_mb
     type: bin
     start: 0x11AA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11BE1A0, pad, pad_11BE1A0]
@@ -6203,6 +6269,7 @@ segments:
   - name: object_bombf
     type: bin
     start: 0x11BF000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11C0A00, pad, pad_11C0A00]
@@ -6210,6 +6277,7 @@ segments:
   - name: object_sk2
     type: bin
     start: 0x11C1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11CF800, pad, pad_11CF800]
@@ -6217,6 +6285,7 @@ segments:
   - name: object_oE1
     type: bin
     start: 0x11D0000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11D6810, pad, pad_11D6810]
@@ -6224,6 +6293,7 @@ segments:
   - name: object_oE_anime
     type: bin
     start: 0x11D7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11DC060, pad, pad_11DC060]
@@ -6231,6 +6301,7 @@ segments:
   - name: object_oE2
     type: bin
     start: 0x11DD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11E2A70, pad, pad_11E2A70]
@@ -6238,6 +6309,7 @@ segments:
   - name: object_ydan_objects
     type: bin
     start: 0x11E3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x11EC080, pad, pad_11EC080]
@@ -6245,11 +6317,13 @@ segments:
   - name: object_gnd
     type: bin
     start: 0x11ED000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_am
     type: bin
     start: 0x1200000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1205B50, pad, pad_1205B50]
@@ -6257,6 +6331,7 @@ segments:
   - name: object_dekubaba
     type: bin
     start: 0x1206000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12099C0, pad, pad_12099C0]
@@ -6264,6 +6339,7 @@ segments:
   - name: object_oA3
     type: bin
     start: 0x120A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x120C130, pad, pad_120C130]
@@ -6271,6 +6347,7 @@ segments:
   - name: object_oA4
     type: bin
     start: 0x120D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x120E730, pad, pad_120E730]
@@ -6278,6 +6355,7 @@ segments:
   - name: object_oA5
     type: bin
     start: 0x120F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12106B0, pad, pad_12106B0]
@@ -6285,6 +6363,7 @@ segments:
   - name: object_oA6
     type: bin
     start: 0x1211000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1212A00, pad, pad_1212A00]
@@ -6292,6 +6371,7 @@ segments:
   - name: object_oA7
     type: bin
     start: 0x1213000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1214550, pad, pad_1214550]
@@ -6299,6 +6379,7 @@ segments:
   - name: object_jj
     type: bin
     start: 0x1215000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1220AC0, pad, pad_1220AC0]
@@ -6306,6 +6387,7 @@ segments:
   - name: object_oA8
     type: bin
     start: 0x1221000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12227B0, pad, pad_12227B0]
@@ -6313,6 +6395,7 @@ segments:
   - name: object_oA9
     type: bin
     start: 0x1223000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1223520, pad, pad_1223520]
@@ -6320,6 +6403,7 @@ segments:
   - name: object_oB2
     type: bin
     start: 0x1224000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12280E0, pad, pad_12280E0]
@@ -6327,6 +6411,7 @@ segments:
   - name: object_oB3
     type: bin
     start: 0x1229000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x122D490, pad, pad_122D490]
@@ -6334,6 +6419,7 @@ segments:
   - name: object_oB4
     type: bin
     start: 0x122E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x122F870, pad, pad_122F870]
@@ -6341,6 +6427,7 @@ segments:
   - name: object_horse_zelda
     type: bin
     start: 0x1230000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1237160, pad, pad_1237160]
@@ -6348,6 +6435,7 @@ segments:
   - name: object_opening_demo1
     type: bin
     start: 0x1238000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x123D060, pad, pad_123D060]
@@ -6355,6 +6443,7 @@ segments:
   - name: object_warp1
     type: bin
     start: 0x123E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1240CB0, pad, pad_1240CB0]
@@ -6362,6 +6451,7 @@ segments:
   - name: object_b_heart
     type: bin
     start: 0x1241000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1241640, pad, pad_1241640]
@@ -6369,6 +6459,7 @@ segments:
   - name: object_dekunuts
     type: bin
     start: 0x1242000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1245660, pad, pad_1245660]
@@ -6376,6 +6467,7 @@ segments:
   - name: object_oE3
     type: bin
     start: 0x1246000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x124D120, pad, pad_124D120]
@@ -6383,6 +6475,7 @@ segments:
   - name: object_oE4
     type: bin
     start: 0x124E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1252FD0, pad, pad_1252FD0]
@@ -6390,6 +6483,7 @@ segments:
   - name: object_menkuri_objects
     type: bin
     start: 0x1253000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x125BB10, pad, pad_125BB10]
@@ -6397,6 +6491,7 @@ segments:
   - name: object_oE5
     type: bin
     start: 0x125C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12615C0, pad, pad_12615C0]
@@ -6404,6 +6499,7 @@ segments:
   - name: object_oE6
     type: bin
     start: 0x1262000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1264E50, pad, pad_1264E50]
@@ -6411,6 +6507,7 @@ segments:
   - name: object_oE7
     type: bin
     start: 0x1265000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1267A60, pad, pad_1267A60]
@@ -6418,6 +6515,7 @@ segments:
   - name: object_oE8
     type: bin
     start: 0x1268000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x126B3D0, pad, pad_126B3D0]
@@ -6425,6 +6523,7 @@ segments:
   - name: object_oE9
     type: bin
     start: 0x126C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x126EF10, pad, pad_126EF10]
@@ -6432,6 +6531,7 @@ segments:
   - name: object_oE10
     type: bin
     start: 0x126F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12719D0, pad, pad_12719D0]
@@ -6439,6 +6539,7 @@ segments:
   - name: object_oE11
     type: bin
     start: 0x1272000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12751F0, pad, pad_12751F0]
@@ -6446,6 +6547,7 @@ segments:
   - name: object_oE12
     type: bin
     start: 0x1276000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12797C0, pad, pad_12797C0]
@@ -6453,6 +6555,7 @@ segments:
   - name: object_vali
     type: bin
     start: 0x127A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x127E850, pad, pad_127E850]
@@ -6460,6 +6563,7 @@ segments:
   - name: object_oA10
     type: bin
     start: 0x127F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1281EB0, pad, pad_1281EB0]
@@ -6467,6 +6571,7 @@ segments:
   - name: object_oA11
     type: bin
     start: 0x1282000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12835C0, pad, pad_12835C0]
@@ -6474,6 +6579,7 @@ segments:
   - name: object_mizu_objects
     type: bin
     start: 0x1284000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x128F320, pad, pad_128F320]
@@ -6481,6 +6587,7 @@ segments:
   - name: object_fhg
     type: bin
     start: 0x1290000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12A21E0, pad, pad_12A21E0]
@@ -6488,6 +6595,7 @@ segments:
   - name: object_ossan
     type: bin
     start: 0x12A3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12ACB50, pad, pad_12ACB50]
@@ -6495,6 +6603,7 @@ segments:
   - name: object_mori_hineri1
     type: bin
     start: 0x12AD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12B24F0, pad, pad_12B24F0]
@@ -6502,6 +6611,7 @@ segments:
   - name: object_Bb
     type: bin
     start: 0x12B3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12B4A40, pad, pad_12B4A40]
@@ -6509,6 +6619,7 @@ segments:
   - name: object_toki_objects
     type: bin
     start: 0x12B5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12BD450, pad, pad_12BD450]
@@ -6516,6 +6627,7 @@ segments:
   - name: object_yukabyun
     type: bin
     start: 0x12BE000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12BF4F0, pad, pad_12BF4F0]
@@ -6523,6 +6635,7 @@ segments:
   - name: object_zl2
     type: bin
     start: 0x12C0000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12D0D80, pad, pad_12D0D80]
@@ -6530,6 +6643,7 @@ segments:
   - name: object_mjin
     type: bin
     start: 0x12D1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12D2290, pad, pad_12D2290]
@@ -6537,36 +6651,43 @@ segments:
   - name: object_mjin_flash
     type: bin
     start: 0x12D3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_mjin_dark
     type: bin
     start: 0x12D4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_mjin_flame
     type: bin
     start: 0x12D5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_mjin_ice
     type: bin
     start: 0x12D6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_mjin_soul
     type: bin
     start: 0x12D7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_mjin_wind
     type: bin
     start: 0x12D8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - name: object_mjin_oka
     type: bin
     start: 0x12D9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12DAB60, pad, pad_12DAB60]
@@ -6574,6 +6695,7 @@ segments:
   - name: object_haka_objects
     type: bin
     start: 0x12DB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12F86B0, pad, pad_12F86B0]
@@ -6581,6 +6703,7 @@ segments:
   - name: object_spot06_objects
     type: bin
     start: 0x12F9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x12FBDA0, pad, pad_12FBDA0]
@@ -6588,6 +6711,7 @@ segments:
   - name: object_ice_objects
     type: bin
     start: 0x12FC000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1304D50, pad, pad_1304D50]
@@ -6595,6 +6719,7 @@ segments:
   - name: object_relay_objects
     type: bin
     start: 0x1305000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1308630, pad, pad_1308630]
@@ -6602,6 +6727,7 @@ segments:
   - name: object_mori_hineri1a
     type: bin
     start: 0x1309000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x130C4C0, pad, pad_130C4C0]
@@ -6609,6 +6735,7 @@ segments:
   - name: object_mori_hineri2
     type: bin
     start: 0x130D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1311400, pad, pad_1311400]
@@ -6616,6 +6743,7 @@ segments:
   - name: object_mori_hineri2a
     type: bin
     start: 0x1312000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13180B0, pad, pad_13180B0]
@@ -6623,6 +6751,7 @@ segments:
   - name: object_mori_objects
     type: bin
     start: 0x1319000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1321A10, pad, pad_1321A10]
@@ -6630,6 +6759,7 @@ segments:
   - name: object_mori_tex
     type: bin
     start: 0x1322000
+    ld_align_segment_start: 0x1000
     vram: 0x08000000
 
   - [0x132BE00, pad, pad_132BE00]
@@ -6637,6 +6767,7 @@ segments:
   - name: object_spot08_obj
     type: bin
     start: 0x132C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1331600, pad, pad_1331600]
@@ -6644,6 +6775,7 @@ segments:
   - name: object_warp2
     type: bin
     start: 0x1332000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1332010, pad, pad_1332010]
@@ -6651,6 +6783,7 @@ segments:
   - name: object_hata
     type: bin
     start: 0x1333000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1335FE0, pad, pad_1335FE0]
@@ -6658,6 +6791,7 @@ segments:
   - name: object_bird
     type: bin
     start: 0x1336000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13381A0, pad, pad_13381A0]
@@ -6665,6 +6799,7 @@ segments:
   - name: object_wood02
     type: bin
     start: 0x1339000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13417D0, pad, pad_13417D0]
@@ -6672,6 +6807,7 @@ segments:
   - name: object_lightbox
     type: bin
     start: 0x1342000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1343F40, pad, pad_1343F40]
@@ -6679,6 +6815,7 @@ segments:
   - name: object_pu_box
     type: bin
     start: 0x1344000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1345600, pad, pad_1345600]
@@ -6686,6 +6823,7 @@ segments:
   - name: object_trap
     type: bin
     start: 0x1346000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13483E0, pad, pad_13483E0]
@@ -6693,6 +6831,7 @@ segments:
   - name: object_vase
     type: bin
     start: 0x1349000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x134A590, pad, pad_134A590]
@@ -6700,6 +6839,7 @@ segments:
   - name: object_im
     type: bin
     start: 0x134B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x135D230, pad, pad_135D230]
@@ -6707,6 +6847,7 @@ segments:
   - name: object_ta
     type: bin
     start: 0x135E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x136C3F0, pad, pad_136C3F0]
@@ -6714,6 +6855,7 @@ segments:
   - name: object_tk
     type: bin
     start: 0x136D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1378E50, pad, pad_1378E50]
@@ -6721,6 +6863,7 @@ segments:
   - name: object_xc
     type: bin
     start: 0x1379000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1395100, pad, pad_1395100]
@@ -6728,6 +6871,7 @@ segments:
   - name: object_vm
     type: bin
     start: 0x1396000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1399F70, pad, pad_1399F70]
@@ -6735,6 +6879,7 @@ segments:
   - name: object_bv
     type: bin
     start: 0x139A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13B91B0, pad, pad_13B91B0]
@@ -6742,6 +6887,7 @@ segments:
   - name: object_hakach_objects
     type: bin
     start: 0x13BA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13C0AF0, pad, pad_13C0AF0]
@@ -6749,6 +6895,7 @@ segments:
   - name: object_efc_crystal_light
     type: bin
     start: 0x13C1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13C1AA0, pad, pad_13C1AA0]
@@ -6756,6 +6903,7 @@ segments:
   - name: object_efc_fire_ball
     type: bin
     start: 0x13C2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13C2D00, pad, pad_13C2D00]
@@ -6763,6 +6911,7 @@ segments:
   - name: object_efc_flash
     type: bin
     start: 0x13C3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13C3010, pad, pad_13C3010]
@@ -6770,6 +6919,7 @@ segments:
   - name: object_efc_lgt_shower
     type: bin
     start: 0x13C4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13C52D0, pad, pad_13C52D0]
@@ -6777,6 +6927,7 @@ segments:
   - name: object_efc_star_field
     type: bin
     start: 0x13C6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13C77D0, pad, pad_13C77D0]
@@ -6784,6 +6935,7 @@ segments:
   - name: object_god_lgt
     type: bin
     start: 0x13C8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13CC350, pad, pad_13CC350]
@@ -6791,6 +6943,7 @@ segments:
   - name: object_light_ring
     type: bin
     start: 0x13CD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13CE280, pad, pad_13CE280]
@@ -6798,6 +6951,7 @@ segments:
   - name: object_triforce_spot
     type: bin
     start: 0x13CF000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13D1910, pad, pad_13D1910]
@@ -6805,6 +6959,7 @@ segments:
   - name: object_medal
     type: bin
     start: 0x13D2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13D7140, pad, pad_13D7140]
@@ -6812,6 +6967,7 @@ segments:
   - name: object_bdan_objects
     type: bin
     start: 0x13D8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13E4D10, pad, pad_13E4D10]
@@ -6819,6 +6975,7 @@ segments:
   - name: object_sd
     type: bin
     start: 0x13E5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x13F16E0, pad, pad_13F16E0]
@@ -6826,6 +6983,7 @@ segments:
   - name: object_rd
     type: bin
     start: 0x13F2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1400FF0, pad, pad_1400FF0]
@@ -6833,6 +6991,7 @@ segments:
   - name: object_po_sisters
     type: bin
     start: 0x1401000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x140F3C0, pad, pad_140F3C0]
@@ -6840,6 +6999,7 @@ segments:
   - name: object_heavy_object
     type: bin
     start: 0x1410000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1411AE0, pad, pad_1411AE0]
@@ -6847,6 +7007,7 @@ segments:
   - name: object_gndd
     type: bin
     start: 0x1412000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1423A00, pad, pad_1423A00]
@@ -6854,6 +7015,7 @@ segments:
   - name: object_fd
     type: bin
     start: 0x1424000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1435670, pad, pad_1435670]
@@ -6861,6 +7023,7 @@ segments:
   - name: object_du
     type: bin
     start: 0x1436000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1448030, pad, pad_1448030]
@@ -6868,6 +7031,7 @@ segments:
   - name: object_fw
     type: bin
     start: 0x1449000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1450DE0, pad, pad_1450DE0]
@@ -6875,6 +7039,7 @@ segments:
   - name: object_horse_link_child
     type: bin
     start: 0x1451000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1459B20, pad, pad_1459B20]
@@ -6882,6 +7047,7 @@ segments:
   - name: object_spot02_objects
     type: bin
     start: 0x145A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1470620, pad, pad_1470620]
@@ -6889,6 +7055,7 @@ segments:
   - name: object_haka
     type: bin
     start: 0x1471000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1472460, pad, pad_1472460]
@@ -6896,6 +7063,7 @@ segments:
   - name: object_ru1
     type: bin
     start: 0x1473000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1486A80, pad, pad_1486A80]
@@ -6903,6 +7071,7 @@ segments:
   - name: object_syokudai
     type: bin
     start: 0x1487000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x148AC90, pad, pad_148AC90]
@@ -6910,6 +7079,7 @@ segments:
   - name: object_fd2
     type: bin
     start: 0x148B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x149CA90, pad, pad_149CA90]
@@ -6917,6 +7087,7 @@ segments:
   - name: object_dh
     type: bin
     start: 0x149D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14A60C0, pad, pad_14A60C0]
@@ -6924,6 +7095,7 @@ segments:
   - name: object_rl
     type: bin
     start: 0x14A7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14AEB50, pad, pad_14AEB50]
@@ -6931,6 +7103,7 @@ segments:
   - name: object_efc_tw
     type: bin
     start: 0x14AF000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14B02F0, pad, pad_14B02F0]
@@ -6938,6 +7111,7 @@ segments:
   - name: object_demo_tre_lgt
     type: bin
     start: 0x14B1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14B1010, pad, pad_14B1010]
@@ -6945,6 +7119,7 @@ segments:
   - name: object_gi_key
     type: bin
     start: 0x14B2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14B2A20, pad, pad_14B2A20]
@@ -6952,6 +7127,7 @@ segments:
   - name: object_mir_ray
     type: bin
     start: 0x14B3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14B4D00, pad, pad_14B4D00]
@@ -6959,6 +7135,7 @@ segments:
   - name: object_brob
     type: bin
     start: 0x14B5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14B6AA0, pad, pad_14B6AA0]
@@ -6966,6 +7143,7 @@ segments:
   - name: object_gi_jewel
     type: bin
     start: 0x14B7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14BA680, pad, pad_14BA680]
@@ -6973,6 +7151,7 @@ segments:
   - name: object_spot09_obj
     type: bin
     start: 0x14BB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14D3890, pad, pad_14D3890]
@@ -6980,6 +7159,7 @@ segments:
   - name: object_spot18_obj
     type: bin
     start: 0x14D4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14E0A10, pad, pad_14E0A10]
@@ -6987,6 +7167,7 @@ segments:
   - name: object_bdoor
     type: bin
     start: 0x14E1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14E85C0, pad, pad_14E85C0]
@@ -6994,6 +7175,7 @@ segments:
   - name: object_spot17_obj
     type: bin
     start: 0x14E9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14EA830, pad, pad_14EA830]
@@ -7001,6 +7183,7 @@ segments:
   - name: object_shop_dungen
     type: bin
     start: 0x14EB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x14EEA20, pad, pad_14EEA20]
@@ -7008,6 +7191,7 @@ segments:
   - name: object_nb
     type: bin
     start: 0x14EF000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15071E0, pad, pad_15071E0]
@@ -7015,6 +7199,7 @@ segments:
   - name: object_mo
     type: bin
     start: 0x1508000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1511070, pad, pad_1511070]
@@ -7022,6 +7207,7 @@ segments:
   - name: object_sb
     type: bin
     start: 0x1512000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1514CA0, pad, pad_1514CA0]
@@ -7029,6 +7215,7 @@ segments:
   - name: object_gi_melody
     type: bin
     start: 0x1515000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1515D20, pad, pad_1515D20]
@@ -7036,6 +7223,7 @@ segments:
   - name: object_gi_heart
     type: bin
     start: 0x1516000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15161F0, pad, pad_15161F0]
@@ -7043,6 +7231,7 @@ segments:
   - name: object_gi_compass
     type: bin
     start: 0x1517000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1517D10, pad, pad_1517D10]
@@ -7050,6 +7239,7 @@ segments:
   - name: object_gi_bosskey
     type: bin
     start: 0x1518000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1519010, pad, pad_1519010]
@@ -7057,6 +7247,7 @@ segments:
   - name: object_gi_medal
     type: bin
     start: 0x151A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x151F370, pad, pad_151F370]
@@ -7064,6 +7255,7 @@ segments:
   - name: object_gi_nuts
     type: bin
     start: 0x1520000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15211C0, pad, pad_15211C0]
@@ -7071,6 +7263,7 @@ segments:
   - name: object_sa
     type: bin
     start: 0x1522000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1537230, pad, pad_1537230]
@@ -7078,6 +7271,7 @@ segments:
   - name: object_gi_hearts
     type: bin
     start: 0x1538000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15397B0, pad, pad_15397B0]
@@ -7085,6 +7279,7 @@ segments:
   - name: object_gi_arrowcase
     type: bin
     start: 0x153A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x153ACB0, pad, pad_153ACB0]
@@ -7092,6 +7287,7 @@ segments:
   - name: object_gi_bombpouch
     type: bin
     start: 0x153B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x153BE60, pad, pad_153BE60]
@@ -7099,6 +7295,7 @@ segments:
   - name: object_in
     type: bin
     start: 0x153C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1554C50, pad, pad_1554C50]
@@ -7106,6 +7303,7 @@ segments:
   - name: object_tr
     type: bin
     start: 0x1555000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1567E30, pad, pad_1567E30]
@@ -7113,6 +7311,7 @@ segments:
   - name: object_spot16_obj
     type: bin
     start: 0x1568000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1569500, pad, pad_1569500]
@@ -7120,6 +7319,7 @@ segments:
   - name: object_oE1s
     type: bin
     start: 0x156A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1570560, pad, pad_1570560]
@@ -7127,6 +7327,7 @@ segments:
   - name: object_oE4s
     type: bin
     start: 0x1571000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1575E00, pad, pad_1575E00]
@@ -7134,6 +7335,7 @@ segments:
   - name: object_os_anime
     type: bin
     start: 0x1576000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1580640, pad, pad_1580640]
@@ -7141,6 +7343,7 @@ segments:
   - name: object_gi_bottle
     type: bin
     start: 0x1581000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15818F0, pad, pad_15818F0]
@@ -7148,6 +7351,7 @@ segments:
   - name: object_gi_stick
     type: bin
     start: 0x1582000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15826C0, pad, pad_15826C0]
@@ -7155,6 +7359,7 @@ segments:
   - name: object_gi_map
     type: bin
     start: 0x1583000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1584160, pad, pad_1584160]
@@ -7162,6 +7367,7 @@ segments:
   - name: object_oF1d_map
     type: bin
     start: 0x1585000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15955A0, pad, pad_15955A0]
@@ -7169,6 +7375,7 @@ segments:
   - name: object_ru2
     type: bin
     start: 0x1596000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15A58D0, pad, pad_15A58D0]
@@ -7176,6 +7383,7 @@ segments:
   - name: object_gi_shield_1
     type: bin
     start: 0x15A6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15A6D50, pad, pad_15A6D50]
@@ -7183,6 +7391,7 @@ segments:
   - name: object_dekujr
     type: bin
     start: 0x15A7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15AA510, pad, pad_15AA510]
@@ -7190,6 +7399,7 @@ segments:
   - name: object_gi_magicpot
     type: bin
     start: 0x15AB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15AC1D0, pad, pad_15AC1D0]
@@ -7197,6 +7407,7 @@ segments:
   - name: object_gi_bomb_1
     type: bin
     start: 0x15AD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15ADCB0, pad, pad_15ADCB0]
@@ -7204,6 +7415,7 @@ segments:
   - name: object_oF1s
     type: bin
     start: 0x15AE000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15B68A0, pad, pad_15B68A0]
@@ -7211,6 +7423,7 @@ segments:
   - name: object_ma2
     type: bin
     start: 0x15B7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15C0EF0, pad, pad_15C0EF0]
@@ -7218,6 +7431,7 @@ segments:
   - name: object_gi_purse
     type: bin
     start: 0x15C1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15C2B70, pad, pad_15C2B70]
@@ -7225,6 +7439,7 @@ segments:
   - name: object_hni
     type: bin
     start: 0x15C3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x15CDF70, pad, pad_15CDF70]
@@ -7232,6 +7447,7 @@ segments:
   - name: object_tw
     type: bin
     start: 0x15CE000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1608FB0, pad, pad_1608FB0]
@@ -7239,6 +7455,7 @@ segments:
   - name: object_rr
     type: bin
     start: 0x1609000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1609E00, pad, pad_1609E00]
@@ -7246,6 +7463,7 @@ segments:
   - name: object_bxa
     type: bin
     start: 0x160A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x160CBF0, pad, pad_160CBF0]
@@ -7253,6 +7471,7 @@ segments:
   - name: object_anubice
     type: bin
     start: 0x160D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16109A0, pad, pad_16109A0]
@@ -7260,6 +7479,7 @@ segments:
   - name: object_gi_gerudo
     type: bin
     start: 0x1611000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1612340, pad, pad_1612340]
@@ -7267,6 +7487,7 @@ segments:
   - name: object_gi_arrow
     type: bin
     start: 0x1613000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1614B10, pad, pad_1614B10]
@@ -7274,6 +7495,7 @@ segments:
   - name: object_gi_bomb_2
     type: bin
     start: 0x1615000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16156A0, pad, pad_16156A0]
@@ -7281,6 +7503,7 @@ segments:
   - name: object_gi_egg
     type: bin
     start: 0x1616000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1617320, pad, pad_1617320]
@@ -7288,6 +7511,7 @@ segments:
   - name: object_gi_scale
     type: bin
     start: 0x1618000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1618DF0, pad, pad_1618DF0]
@@ -7295,6 +7519,7 @@ segments:
   - name: object_gi_shield_2
     type: bin
     start: 0x1619000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x161A070, pad, pad_161A070]
@@ -7302,6 +7527,7 @@ segments:
   - name: object_gi_hookshot
     type: bin
     start: 0x161B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x161C560, pad, pad_161C560]
@@ -7309,6 +7535,7 @@ segments:
   - name: object_gi_ocarina
     type: bin
     start: 0x161D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x161DBB0, pad, pad_161DBB0]
@@ -7316,6 +7543,7 @@ segments:
   - name: object_gi_milk
     type: bin
     start: 0x161E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x161F470, pad, pad_161F470]
@@ -7323,6 +7551,7 @@ segments:
   - name: object_ma1
     type: bin
     start: 0x1620000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1628D80, pad, pad_1628D80]
@@ -7330,6 +7559,7 @@ segments:
   - name: object_ganon
     type: bin
     start: 0x1629000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x163A500, pad, pad_163A500]
@@ -7337,6 +7567,7 @@ segments:
   - name: object_sst
     type: bin
     start: 0x163B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1655BB0, pad, pad_1655BB0]
@@ -7344,6 +7575,7 @@ segments:
   - name: object_ny
     type: bin
     start: 0x1656000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1658170, pad, pad_1658170]
@@ -7351,6 +7583,7 @@ segments:
   - name: object_fr
     type: bin
     start: 0x1659000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16644B0, pad, pad_16644B0]
@@ -7358,6 +7591,7 @@ segments:
   - name: object_gi_pachinko
     type: bin
     start: 0x1665000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1665C60, pad, pad_1665C60]
@@ -7365,6 +7599,7 @@ segments:
   - name: object_gi_boomerang
     type: bin
     start: 0x1666000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1666DA0, pad, pad_1666DA0]
@@ -7372,6 +7607,7 @@ segments:
   - name: object_gi_bow
     type: bin
     start: 0x1667000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1667D30, pad, pad_1667D30]
@@ -7379,6 +7615,7 @@ segments:
   - name: object_gi_glasses
     type: bin
     start: 0x1668000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1669180, pad, pad_1669180]
@@ -7386,6 +7623,7 @@ segments:
   - name: object_gi_liquid
     type: bin
     start: 0x166A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x166B8D0, pad, pad_166B8D0]
@@ -7393,6 +7631,7 @@ segments:
   - name: object_ani
     type: bin
     start: 0x166C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1673700, pad, pad_1673700]
@@ -7400,6 +7639,7 @@ segments:
   - name: object_demo_6k
     type: bin
     start: 0x1674000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1677BA0, pad, pad_1677BA0]
@@ -7407,6 +7647,7 @@ segments:
   - name: object_gi_shield_3
     type: bin
     start: 0x1678000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16792C0, pad, pad_16792C0]
@@ -7414,6 +7655,7 @@ segments:
   - name: object_gi_letter
     type: bin
     start: 0x167A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x167AE00, pad, pad_167AE00]
@@ -7421,6 +7663,7 @@ segments:
   - name: object_spot15_obj
     type: bin
     start: 0x167B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x167CD00, pad, pad_167CD00]
@@ -7428,6 +7671,7 @@ segments:
   - name: object_jya_obj
     type: bin
     start: 0x167D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1699140, pad, pad_1699140]
@@ -7435,6 +7679,7 @@ segments:
   - name: object_gi_clothes
     type: bin
     start: 0x169A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x169B860, pad, pad_169B860]
@@ -7442,6 +7687,7 @@ segments:
   - name: object_gi_bean
     type: bin
     start: 0x169C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x169C8C0, pad, pad_169C8C0]
@@ -7449,6 +7695,7 @@ segments:
   - name: object_gi_fish
     type: bin
     start: 0x169D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x169D950, pad, pad_169D950]
@@ -7456,6 +7703,7 @@ segments:
   - name: object_gi_saw
     type: bin
     start: 0x169E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x169EB80, pad, pad_169EB80]
@@ -7463,6 +7711,7 @@ segments:
   - name: object_gi_hammer
     type: bin
     start: 0x169F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x169FCC0, pad, pad_169FCC0]
@@ -7470,6 +7719,7 @@ segments:
   - name: object_gi_grass
     type: bin
     start: 0x16A0000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16A0C10, pad, pad_16A0C10]
@@ -7477,6 +7727,7 @@ segments:
   - name: object_gi_longsword
     type: bin
     start: 0x16A1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16A18C0, pad, pad_16A18C0]
@@ -7484,6 +7735,7 @@ segments:
   - name: object_spot01_objects
     type: bin
     start: 0x16A2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16A4490, pad, pad_16A4490]
@@ -7491,6 +7743,7 @@ segments:
   - name: object_md
     type: bin
     start: 0x16A5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16AF150, pad, pad_16AF150]
@@ -7498,6 +7751,7 @@ segments:
   - name: object_km1
     type: bin
     start: 0x16B0000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16B59C0, pad, pad_16B59C0]
@@ -7505,6 +7759,7 @@ segments:
   - name: object_kw1
     type: bin
     start: 0x16B6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16BC8E0, pad, pad_16BC8E0]
@@ -7512,6 +7767,7 @@ segments:
   - name: object_zo
     type: bin
     start: 0x16BD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16C9040, pad, pad_16C9040]
@@ -7519,6 +7775,7 @@ segments:
   - name: object_kz
     type: bin
     start: 0x16CA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16D26E0, pad, pad_16D26E0]
@@ -7526,6 +7783,7 @@ segments:
   - name: object_umajump
     type: bin
     start: 0x16D3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16D4470, pad, pad_16D4470]
@@ -7533,6 +7791,7 @@ segments:
   - name: object_masterkokiri
     type: bin
     start: 0x16D5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16D54C0, pad, pad_16D54C0]
@@ -7540,6 +7799,7 @@ segments:
   - name: object_masterkokirihead
     type: bin
     start: 0x16D6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16D8CA0, pad, pad_16D8CA0]
@@ -7547,6 +7807,7 @@ segments:
   - name: object_mastergolon
     type: bin
     start: 0x16D9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16D9110, pad, pad_16D9110]
@@ -7554,6 +7815,7 @@ segments:
   - name: object_masterzoora
     type: bin
     start: 0x16DA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16DA7A0, pad, pad_16DA7A0]
@@ -7561,6 +7823,7 @@ segments:
   - name: object_aob
     type: bin
     start: 0x16DB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x16E06B0, pad, pad_16E06B0]
@@ -7568,6 +7831,7 @@ segments:
   - name: object_ik
     type: bin
     start: 0x16E1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17015D0, pad, pad_17015D0]
@@ -7575,6 +7839,7 @@ segments:
   - name: object_ahg
     type: bin
     start: 0x1702000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17079B0, pad, pad_17079B0]
@@ -7582,6 +7847,7 @@ segments:
   - name: object_cne
     type: bin
     start: 0x1708000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x170A9D0, pad, pad_170A9D0]
@@ -7589,6 +7855,7 @@ segments:
   - name: object_gi_niwatori
     type: bin
     start: 0x170B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x170C9F0, pad, pad_170C9F0]
@@ -7596,6 +7863,7 @@ segments:
   - name: object_skj
     type: bin
     start: 0x170D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1715E30, pad, pad_1715E30]
@@ -7603,6 +7871,7 @@ segments:
   - name: object_gi_bottle_letter
     type: bin
     start: 0x1716000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1716C80, pad, pad_1716C80]
@@ -7610,6 +7879,7 @@ segments:
   - name: object_bji
     type: bin
     start: 0x1717000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x171B190, pad, pad_171B190]
@@ -7617,6 +7887,7 @@ segments:
   - name: object_bba
     type: bin
     start: 0x171C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1720290, pad, pad_1720290]
@@ -7624,6 +7895,7 @@ segments:
   - name: object_gi_ocarina_0
     type: bin
     start: 0x1721000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1721C10, pad, pad_1721C10]
@@ -7631,6 +7903,7 @@ segments:
   - name: object_ds
     type: bin
     start: 0x1722000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1726780, pad, pad_1726780]
@@ -7638,6 +7911,7 @@ segments:
   - name: object_ane
     type: bin
     start: 0x1727000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x172DFB0, pad, pad_172DFB0]
@@ -7645,6 +7919,7 @@ segments:
   - name: object_boj
     type: bin
     start: 0x172E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1733CC0, pad, pad_1733CC0]
@@ -7652,6 +7927,7 @@ segments:
   - name: object_spot03_object
     type: bin
     start: 0x1734000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1735660, pad, pad_1735660]
@@ -7659,6 +7935,7 @@ segments:
   - name: object_spot07_object
     type: bin
     start: 0x1736000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x173CD30, pad, pad_173CD30]
@@ -7666,6 +7943,7 @@ segments:
   - name: object_fz
     type: bin
     start: 0x173D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17404D0, pad, pad_17404D0]
@@ -7673,6 +7951,7 @@ segments:
   - name: object_bob
     type: bin
     start: 0x1741000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1745F20, pad, pad_1745F20]
@@ -7680,6 +7959,7 @@ segments:
   - name: object_ge1
     type: bin
     start: 0x1746000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17504B0, pad, pad_17504B0]
@@ -7687,6 +7967,7 @@ segments:
   - name: object_yabusame_point
     type: bin
     start: 0x1751000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1751E50, pad, pad_1751E50]
@@ -7694,6 +7975,7 @@ segments:
   - name: object_gi_boots_2
     type: bin
     start: 0x1752000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1753BC0, pad, pad_1753BC0]
@@ -7701,6 +7983,7 @@ segments:
   - name: object_gi_seed
     type: bin
     start: 0x1754000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1754AC0, pad, pad_1754AC0]
@@ -7708,6 +7991,7 @@ segments:
   - name: object_gnd_magic
     type: bin
     start: 0x1755000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1756280, pad, pad_1756280]
@@ -7715,6 +7999,7 @@ segments:
   - name: object_d_elevator
     type: bin
     start: 0x1757000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1758390, pad, pad_1758390]
@@ -7722,6 +8007,7 @@ segments:
   - name: object_d_hsblock
     type: bin
     start: 0x1759000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x175A760, pad, pad_175A760]
@@ -7729,6 +8015,7 @@ segments:
   - name: object_d_lift
     type: bin
     start: 0x175B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x175C800, pad, pad_175C800]
@@ -7736,6 +8023,7 @@ segments:
   - name: object_mamenoki
     type: bin
     start: 0x175D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x175F6E0, pad, pad_175F6E0]
@@ -7743,6 +8031,7 @@ segments:
   - name: object_goroiwa
     type: bin
     start: 0x1760000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17618A0, pad, pad_17618A0]
@@ -7750,6 +8039,7 @@ segments:
   - name: object_toryo
     type: bin
     start: 0x1762000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1769160, pad, pad_1769160]
@@ -7757,6 +8047,7 @@ segments:
   - name: object_daiku
     type: bin
     start: 0x176A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1772870, pad, pad_1772870]
@@ -7764,6 +8055,7 @@ segments:
   - name: object_nwc
     type: bin
     start: 0x1773000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1773DA0, pad, pad_1773DA0]
@@ -7771,6 +8063,7 @@ segments:
   - name: object_blkobj
     type: bin
     start: 0x1774000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1787890, pad, pad_1787890]
@@ -7778,6 +8071,7 @@ segments:
   - name: object_gm
     type: bin
     start: 0x1788000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17882D0, pad, pad_17882D0]
@@ -7785,6 +8079,7 @@ segments:
   - name: object_ms
     type: bin
     start: 0x1789000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x178CDD0, pad, pad_178CDD0]
@@ -7792,6 +8087,7 @@ segments:
   - name: object_hs
     type: bin
     start: 0x178D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1793270, pad, pad_1793270]
@@ -7799,6 +8095,7 @@ segments:
   - name: object_ingate
     type: bin
     start: 0x1794000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17951F0, pad, pad_17951F0]
@@ -7806,6 +8103,7 @@ segments:
   - name: object_lightswitch
     type: bin
     start: 0x1796000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1798420, pad, pad_1798420]
@@ -7813,6 +8111,7 @@ segments:
   - name: object_kusa
     type: bin
     start: 0x1799000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1799380, pad, pad_1799380]
@@ -7820,6 +8119,7 @@ segments:
   - name: object_tsubo
     type: bin
     start: 0x179A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x179B9F0, pad, pad_179B9F0]
@@ -7827,6 +8127,7 @@ segments:
   - name: object_gi_gloves
     type: bin
     start: 0x179C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x179D960, pad, pad_179D960]
@@ -7834,6 +8135,7 @@ segments:
   - name: object_gi_coin
     type: bin
     start: 0x179E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x179E850, pad, pad_179E850]
@@ -7841,6 +8143,7 @@ segments:
   - name: object_kanban
     type: bin
     start: 0x179F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17A07B0, pad, pad_17A07B0]
@@ -7848,6 +8151,7 @@ segments:
   - name: object_gjyo_objects
     type: bin
     start: 0x17A1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17A25F0, pad, pad_17A25F0]
@@ -7855,6 +8159,7 @@ segments:
   - name: object_owl
     type: bin
     start: 0x17A3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17B30C0, pad, pad_17B30C0]
@@ -7862,6 +8167,7 @@ segments:
   - name: object_mk
     type: bin
     start: 0x17B4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17B9E00, pad, pad_17B9E00]
@@ -7869,6 +8175,7 @@ segments:
   - name: object_fu
     type: bin
     start: 0x17BA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C0CA0, pad, pad_17C0CA0]
@@ -7876,6 +8183,7 @@ segments:
   - name: object_gi_ki_tan_mask
     type: bin
     start: 0x17C1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C1DF0, pad, pad_17C1DF0]
@@ -7883,6 +8191,7 @@ segments:
   - name: object_gi_redead_mask
     type: bin
     start: 0x17C2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C2A90, pad, pad_17C2A90]
@@ -7890,6 +8199,7 @@ segments:
   - name: object_gi_skj_mask
     type: bin
     start: 0x17C3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C3CE0, pad, pad_17C3CE0]
@@ -7897,6 +8207,7 @@ segments:
   - name: object_gi_rabit_mask
     type: bin
     start: 0x17C4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C4F00, pad, pad_17C4F00]
@@ -7904,6 +8215,7 @@ segments:
   - name: object_gi_truth_mask
     type: bin
     start: 0x17C5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C6860, pad, pad_17C6860]
@@ -7911,6 +8223,7 @@ segments:
   - name: object_ganon_objects
     type: bin
     start: 0x17C7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C8170, pad, pad_17C8170]
@@ -7918,6 +8231,7 @@ segments:
   - name: object_siofuki
     type: bin
     start: 0x17C9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17C9DB0, pad, pad_17C9DB0]
@@ -7925,6 +8239,7 @@ segments:
   - name: object_stream
     type: bin
     start: 0x17CA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17CAA80, pad, pad_17CAA80]
@@ -7932,6 +8247,7 @@ segments:
   - name: object_mm
     type: bin
     start: 0x17CB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17D3070, pad, pad_17D3070]
@@ -7939,6 +8255,7 @@ segments:
   - name: object_fa
     type: bin
     start: 0x17D4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17D7B90, pad, pad_17D7B90]
@@ -7946,6 +8263,7 @@ segments:
   - name: object_os
     type: bin
     start: 0x17D8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17DC670, pad, pad_17DC670]
@@ -7953,6 +8271,7 @@ segments:
   - name: object_gi_eye_lotion
     type: bin
     start: 0x17DD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17DD970, pad, pad_17DD970]
@@ -7960,6 +8279,7 @@ segments:
   - name: object_gi_powder
     type: bin
     start: 0x17DE000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17DEB80, pad, pad_17DEB80]
@@ -7967,6 +8287,7 @@ segments:
   - name: object_gi_mushroom
     type: bin
     start: 0x17DF000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17DFCD0, pad, pad_17DFCD0]
@@ -7974,6 +8295,7 @@ segments:
   - name: object_gi_ticketstone
     type: bin
     start: 0x17E0000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17E12A0, pad, pad_17E12A0]
@@ -7981,6 +8303,7 @@ segments:
   - name: object_gi_brokensword
     type: bin
     start: 0x17E2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17E2990, pad, pad_17E2990]
@@ -7988,6 +8311,7 @@ segments:
   - name: object_js
     type: bin
     start: 0x17E3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17E8F30, pad, pad_17E8F30]
@@ -7995,6 +8319,7 @@ segments:
   - name: object_cs
     type: bin
     start: 0x17E9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17F1550, pad, pad_17F1550]
@@ -8002,6 +8327,7 @@ segments:
   - name: object_gi_prescription
     type: bin
     start: 0x17F2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17F2C20, pad, pad_17F2C20]
@@ -8009,6 +8335,7 @@ segments:
   - name: object_gi_bracelet
     type: bin
     start: 0x17F3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17F3BF0, pad, pad_17F3BF0]
@@ -8016,6 +8343,7 @@ segments:
   - name: object_gi_soldout
     type: bin
     start: 0x17F4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17F44D0, pad, pad_17F44D0]
@@ -8023,6 +8351,7 @@ segments:
   - name: object_gi_frog
     type: bin
     start: 0x17F5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x17F6110, pad, pad_17F6110]
@@ -8030,6 +8359,7 @@ segments:
   - name: object_mag
     type: bin
     start: 0x17F7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x181C940, pad, pad_181C940]
@@ -8037,6 +8367,7 @@ segments:
   - name: object_door_gerudo
     type: bin
     start: 0x181D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x181D9A0, pad, pad_181D9A0]
@@ -8044,6 +8375,7 @@ segments:
   - name: object_gt
     type: bin
     start: 0x181E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18315F0, pad, pad_18315F0]
@@ -8051,6 +8383,7 @@ segments:
   - name: object_efc_erupc
     type: bin
     start: 0x1832000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18348F0, pad, pad_18348F0]
@@ -8058,6 +8391,7 @@ segments:
   - name: object_zl2_anime1
     type: bin
     start: 0x1835000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1840610, pad, pad_1840610]
@@ -8065,6 +8399,7 @@ segments:
   - name: object_zl2_anime2
     type: bin
     start: 0x1841000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x184BAE0, pad, pad_184BAE0]
@@ -8072,6 +8407,7 @@ segments:
   - name: object_gi_golonmask
     type: bin
     start: 0x184C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x184D7B0, pad, pad_184D7B0]
@@ -8079,6 +8415,7 @@ segments:
   - name: object_gi_zoramask
     type: bin
     start: 0x184E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x184F630, pad, pad_184F630]
@@ -8086,6 +8423,7 @@ segments:
   - name: object_gi_gerudomask
     type: bin
     start: 0x1850000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1851400, pad, pad_1851400]
@@ -8093,6 +8431,7 @@ segments:
   - name: object_ganon2
     type: bin
     start: 0x1852000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1887BF0, pad, pad_1887BF0]
@@ -8100,6 +8439,7 @@ segments:
   - name: object_ka
     type: bin
     start: 0x1888000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x188E7C0, pad, pad_188E7C0]
@@ -8107,6 +8447,7 @@ segments:
   - name: object_ts
     type: bin
     start: 0x188F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1893FF0, pad, pad_1893FF0]
@@ -8114,6 +8455,7 @@ segments:
   - name: object_zg
     type: bin
     start: 0x1894000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1895200, pad, pad_1895200]
@@ -8121,6 +8463,7 @@ segments:
   - name: object_gi_hoverboots
     type: bin
     start: 0x1896000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1897E70, pad, pad_1897E70]
@@ -8128,6 +8471,7 @@ segments:
   - name: object_gi_m_arrow
     type: bin
     start: 0x1898000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1898E80, pad, pad_1898E80]
@@ -8135,6 +8479,7 @@ segments:
   - name: object_ds2
     type: bin
     start: 0x1899000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x189D270, pad, pad_189D270]
@@ -8142,6 +8487,7 @@ segments:
   - name: object_ec
     type: bin
     start: 0x189E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18AA930, pad, pad_18AA930]
@@ -8149,6 +8495,7 @@ segments:
   - name: object_fish
     type: bin
     start: 0x18AB000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18C05F0, pad, pad_18C05F0]
@@ -8156,6 +8503,7 @@ segments:
   - name: object_gi_sutaru
     type: bin
     start: 0x18C1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18C1650, pad, pad_18C1650]
@@ -8163,6 +8511,7 @@ segments:
   - name: object_gi_goddess
     type: bin
     start: 0x18C2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18C2C50, pad, pad_18C2C50]
@@ -8170,6 +8519,7 @@ segments:
   - name: object_ssh
     type: bin
     start: 0x18C3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18C8C00, pad, pad_18C8C00]
@@ -8177,6 +8527,7 @@ segments:
   - name: object_bigokuta
     type: bin
     start: 0x18C9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18CFBD0, pad, pad_18CFBD0]
@@ -8184,6 +8535,7 @@ segments:
   - name: object_bg
     type: bin
     start: 0x18D0000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18D72C0, pad, pad_18D72C0]
@@ -8191,6 +8543,7 @@ segments:
   - name: object_spot05_objects
     type: bin
     start: 0x18D8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18D92F0, pad, pad_18D92F0]
@@ -8198,6 +8551,7 @@ segments:
   - name: object_spot12_obj
     type: bin
     start: 0x18DA000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18DC3C0, pad, pad_18DC3C0]
@@ -8205,6 +8559,7 @@ segments:
   - name: object_bombiwa
     type: bin
     start: 0x18DD000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18DDB00, pad, pad_18DDB00]
@@ -8212,6 +8567,7 @@ segments:
   - name: object_hintnuts
     type: bin
     start: 0x18DE000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18E1140, pad, pad_18E1140]
@@ -8219,6 +8575,7 @@ segments:
   - name: object_rs
     type: bin
     start: 0x18E2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18E6880, pad, pad_18E6880]
@@ -8226,6 +8583,7 @@ segments:
   - name: object_spot00_break
     type: bin
     start: 0x18E7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18E8E20, pad, pad_18E8E20]
@@ -8233,6 +8591,7 @@ segments:
   - name: object_gla
     type: bin
     start: 0x18E9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18F2EF0, pad, pad_18F2EF0]
@@ -8240,6 +8599,7 @@ segments:
   - name: object_shopnuts
     type: bin
     start: 0x18F3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x18F7590, pad, pad_18F7590]
@@ -8247,6 +8607,7 @@ segments:
   - name: object_geldb
     type: bin
     start: 0x18F8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19036F0, pad, pad_19036F0]
@@ -8254,6 +8615,7 @@ segments:
   - name: object_gr
     type: bin
     start: 0x1904000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x190DC90, pad, pad_190DC90]
@@ -8261,6 +8623,7 @@ segments:
   - name: object_dog
     type: bin
     start: 0x190E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19152A0, pad, pad_19152A0]
@@ -8268,6 +8631,7 @@ segments:
   - name: object_jya_iron
     type: bin
     start: 0x1916000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1918660, pad, pad_1918660]
@@ -8275,6 +8639,7 @@ segments:
   - name: object_jya_door
     type: bin
     start: 0x1919000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x191B280, pad, pad_191B280]
@@ -8282,6 +8647,7 @@ segments:
   - name: object_spot01_objects2
     type: bin
     start: 0x191C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x191C010, pad, pad_191C010]
@@ -8289,6 +8655,7 @@ segments:
   - name: object_spot11_obj
     type: bin
     start: 0x191D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x191EA90, pad, pad_191EA90]
@@ -8296,6 +8663,7 @@ segments:
   - name: object_kibako2
     type: bin
     start: 0x191F000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19200C0, pad, pad_19200C0]
@@ -8303,6 +8671,7 @@ segments:
   - name: object_dns
     type: bin
     start: 0x1921000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19247D0, pad, pad_19247D0]
@@ -8310,6 +8679,7 @@ segments:
   - name: object_dnk
     type: bin
     start: 0x1925000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1927E30, pad, pad_1927E30]
@@ -8317,6 +8687,7 @@ segments:
   - name: object_gi_fire
     type: bin
     start: 0x1928000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1928FE0, pad, pad_1928FE0]
@@ -8324,6 +8695,7 @@ segments:
   - name: object_gi_insect
     type: bin
     start: 0x1929000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1929BF0, pad, pad_1929BF0]
@@ -8331,6 +8703,7 @@ segments:
   - name: object_gi_butterfly
     type: bin
     start: 0x192A000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x192ABD0, pad, pad_192ABD0]
@@ -8338,6 +8711,7 @@ segments:
   - name: object_gi_ghost
     type: bin
     start: 0x192B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x192BDB0, pad, pad_192BDB0]
@@ -8345,6 +8719,7 @@ segments:
   - name: object_gi_soul
     type: bin
     start: 0x192C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x192CFB0, pad, pad_192CFB0]
@@ -8352,6 +8727,7 @@ segments:
   - name: object_bowl
     type: bin
     start: 0x192D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19304F0, pad, pad_19304F0]
@@ -8359,6 +8735,7 @@ segments:
   - name: object_po_field
     type: bin
     start: 0x1931000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1937A40, pad, pad_1937A40]
@@ -8366,6 +8743,7 @@ segments:
   - name: object_demo_kekkai
     type: bin
     start: 0x1938000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1946D10, pad, pad_1946D10]
@@ -8373,6 +8751,7 @@ segments:
   - name: object_efc_doughnut
     type: bin
     start: 0x1947000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1948050, pad, pad_1948050]
@@ -8380,6 +8759,7 @@ segments:
   - name: object_gi_dekupouch
     type: bin
     start: 0x1949000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x194A050, pad, pad_194A050]
@@ -8387,6 +8767,7 @@ segments:
   - name: object_ganon_anime1
     type: bin
     start: 0x194B000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1956C40, pad, pad_1956C40]
@@ -8394,6 +8775,7 @@ segments:
   - name: object_ganon_anime2
     type: bin
     start: 0x1957000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1967530, pad, pad_1967530]
@@ -8401,6 +8783,7 @@ segments:
   - name: object_ganon_anime3
     type: bin
     start: 0x1968000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x197C7F0, pad, pad_197C7F0]
@@ -8408,6 +8791,7 @@ segments:
   - name: object_gi_rupy
     type: bin
     start: 0x197D000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x197D800, pad, pad_197D800]
@@ -8415,6 +8799,7 @@ segments:
   - name: object_spot01_matoya
     type: bin
     start: 0x197E000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1981C90, pad, pad_1981C90]
@@ -8422,6 +8807,7 @@ segments:
   - name: object_spot01_matoyab
     type: bin
     start: 0x1982000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19841E0, pad, pad_19841E0]
@@ -8429,6 +8815,7 @@ segments:
   - name: object_po_composer
     type: bin
     start: 0x1985000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x198BFA0, pad, pad_198BFA0]
@@ -8436,6 +8823,7 @@ segments:
   - name: object_mu
     type: bin
     start: 0x198C000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x1996E50, pad, pad_1996E50]
@@ -8443,6 +8831,7 @@ segments:
   - name: object_wf
     type: bin
     start: 0x1997000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19A1500, pad, pad_19A1500]
@@ -8450,6 +8839,7 @@ segments:
   - name: object_skb
     type: bin
     start: 0x19A2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19A6810, pad, pad_19A6810]
@@ -8457,6 +8847,7 @@ segments:
   - name: object_gj
     type: bin
     start: 0x19A7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19B1720, pad, pad_19B1720]
@@ -8464,6 +8855,7 @@ segments:
   - name: object_geff
     type: bin
     start: 0x19B2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19B2FB0, pad, pad_19B2FB0]
@@ -8471,6 +8863,7 @@ segments:
   - name: object_haka_door
     type: bin
     start: 0x19B3000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19B6970, pad, pad_19B6970]
@@ -8478,6 +8871,7 @@ segments:
   - name: object_gs
     type: bin
     start: 0x19B7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19B7A80, pad, pad_19B7A80]
@@ -8485,6 +8879,7 @@ segments:
   - name: object_ps
     type: bin
     start: 0x19B8000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19C4900, pad, pad_19C4900]
@@ -8492,6 +8887,7 @@ segments:
   - name: object_bwall
     type: bin
     start: 0x19C5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19C6150, pad, pad_19C6150]
@@ -8499,6 +8895,7 @@ segments:
   - name: object_crow
     type: bin
     start: 0x19C7000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19C80D0, pad, pad_19C80D0]
@@ -8506,6 +8903,7 @@ segments:
   - name: object_cow
     type: bin
     start: 0x19C9000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19CDEB0, pad, pad_19CDEB0]
@@ -8513,6 +8911,7 @@ segments:
   - name: object_cob
     type: bin
     start: 0x19CE000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19D0210, pad, pad_19D0210]
@@ -8520,6 +8919,7 @@ segments:
   - name: object_gi_sword_1
     type: bin
     start: 0x19D1000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19D1D20, pad, pad_19D1D20]
@@ -8527,6 +8927,7 @@ segments:
   - name: object_door_killer
     type: bin
     start: 0x19D2000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19D3BE0, pad, pad_19D3BE0]
@@ -8534,6 +8935,7 @@ segments:
   - name: object_ouke_haka
     type: bin
     start: 0x19D4000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19D4970, pad, pad_19D4970]
@@ -8541,6 +8943,7 @@ segments:
   - name: object_timeblock
     type: bin
     start: 0x19D5000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19D5B60, pad, pad_19D5B60]
@@ -8548,6 +8951,7 @@ segments:
   - name: object_zl4
     type: bin
     start: 0x19D6000
+    ld_align_segment_start: 0x1000
     vram: 0x06000000
 
   - [0x19F2E20, pad, pad_19F2E20]
@@ -8555,6 +8959,7 @@ segments:
   - name: g_pn_01
     type: bin
     start: 0x19F3000
+    ld_align_segment_start: 0x1000
     vram: 0x0601CE20
     follows_vram: object_zl4
 
@@ -8563,6 +8968,7 @@ segments:
   - name: g_pn_02
     type: bin
     start: 0x19F6000
+    ld_align_segment_start: 0x1000
     vram: 0x0601F6A0
     follows_vram: g_pn_01
 
@@ -8571,6 +8977,7 @@ segments:
   - name: g_pn_03
     type: bin
     start: 0x19F9000
+    ld_align_segment_start: 0x1000
     vram: 0x06021F20
     follows_vram: g_pn_02
 
@@ -8579,6 +8986,7 @@ segments:
   - name: g_pn_04
     type: bin
     start: 0x19FC000
+    ld_align_segment_start: 0x1000
     vram: 0x060247A0
     follows_vram: g_pn_03
 
@@ -8587,6 +8995,7 @@ segments:
   - name: g_pn_05
     type: bin
     start: 0x19FF000
+    ld_align_segment_start: 0x1000
     vram: 0x06027020
     follows_vram: g_pn_04
 
@@ -8595,6 +9004,7 @@ segments:
   - name: g_pn_06
     type: bin
     start: 0x1A02000
+    ld_align_segment_start: 0x1000
     vram: 0x060298A0
     follows_vram: g_pn_05
 
@@ -8603,6 +9013,7 @@ segments:
   - name: g_pn_07
     type: bin
     start: 0x1A05000
+    ld_align_segment_start: 0x1000
     vram: 0x0602C120
     follows_vram: g_pn_06
 
@@ -8611,6 +9022,7 @@ segments:
   - name: g_pn_08
     type: bin
     start: 0x1A08000
+    ld_align_segment_start: 0x1000
     vram: 0x0602E9A0
     follows_vram: g_pn_07
 
@@ -8619,6 +9031,7 @@ segments:
   - name: g_pn_09
     type: bin
     start: 0x1A0B000
+    ld_align_segment_start: 0x1000
     vram: 0x06031220
     follows_vram: g_pn_08
 
@@ -8627,6 +9040,7 @@ segments:
   - name: g_pn_10
     type: bin
     start: 0x1A0E000
+    ld_align_segment_start: 0x1000
     vram: 0x06033AA0
     follows_vram: g_pn_09
 
@@ -8635,6 +9049,7 @@ segments:
   - name: g_pn_11
     type: bin
     start: 0x1A11000
+    ld_align_segment_start: 0x1000
     vram: 0x06036320
     follows_vram: g_pn_10
 
@@ -8643,6 +9058,7 @@ segments:
   - name: g_pn_12
     type: bin
     start: 0x1A14000
+    ld_align_segment_start: 0x1000
     vram: 0x06038BA0
     follows_vram: g_pn_11
 
@@ -8651,6 +9067,7 @@ segments:
   - name: g_pn_13
     type: bin
     start: 0x1A17000
+    ld_align_segment_start: 0x1000
     vram: 0x0603B420
     follows_vram: g_pn_12
 
@@ -8659,6 +9076,7 @@ segments:
   - name: g_pn_14
     type: bin
     start: 0x1A1A000
+    ld_align_segment_start: 0x1000
     vram: 0x0603DCA0
     follows_vram: g_pn_13
 
@@ -8667,6 +9085,7 @@ segments:
   - name: g_pn_15
     type: bin
     start: 0x1A1D000
+    ld_align_segment_start: 0x1000
     vram: 0x06040520
     follows_vram: g_pn_14
 
@@ -8675,6 +9094,7 @@ segments:
   - name: g_pn_16
     type: bin
     start: 0x1A20000
+    ld_align_segment_start: 0x1000
     vram: 0x06042DA0
     follows_vram: g_pn_15
 
@@ -8683,6 +9103,7 @@ segments:
   - name: g_pn_17
     type: bin
     start: 0x1A23000
+    ld_align_segment_start: 0x1000
     vram: 0x06045620
     follows_vram: g_pn_16
 
@@ -8691,6 +9112,7 @@ segments:
   - name: g_pn_18
     type: bin
     start: 0x1A26000
+    ld_align_segment_start: 0x1000
     vram: 0x06047EA0
     follows_vram: g_pn_17
 
@@ -8699,6 +9121,7 @@ segments:
   - name: g_pn_19
     type: bin
     start: 0x1A29000
+    ld_align_segment_start: 0x1000
     vram: 0x0604A720
     follows_vram: g_pn_18
 
@@ -8707,6 +9130,7 @@ segments:
   - name: g_pn_20
     type: bin
     start: 0x1A2C000
+    ld_align_segment_start: 0x1000
     vram: 0x0604CFA0
     follows_vram: g_pn_19
 
@@ -8715,6 +9139,7 @@ segments:
   - name: g_pn_21
     type: bin
     start: 0x1A2F000
+    ld_align_segment_start: 0x1000
     vram: 0x0604F820
     follows_vram: g_pn_20
 
@@ -8723,6 +9148,7 @@ segments:
   - name: g_pn_22
     type: bin
     start: 0x1A32000
+    ld_align_segment_start: 0x1000
     vram: 0x060520A0
     follows_vram: g_pn_21
 
@@ -8731,6 +9157,7 @@ segments:
   - name: g_pn_23
     type: bin
     start: 0x1A35000
+    ld_align_segment_start: 0x1000
     vram: 0x06054920
     follows_vram: g_pn_22
 
@@ -8739,6 +9166,7 @@ segments:
   - name: g_pn_24
     type: bin
     start: 0x1A38000
+    ld_align_segment_start: 0x1000
     vram: 0x060571A0
     follows_vram: g_pn_23
 
@@ -8747,6 +9175,7 @@ segments:
   - name: g_pn_25
     type: bin
     start: 0x1A3B000
+    ld_align_segment_start: 0x1000
     vram: 0x06059A20
     follows_vram: g_pn_24
 
@@ -8755,6 +9184,7 @@ segments:
   - name: g_pn_26
     type: bin
     start: 0x1A3E000
+    ld_align_segment_start: 0x1000
     vram: 0x0605C2A0
     follows_vram: g_pn_25
 
@@ -8763,6 +9193,7 @@ segments:
   - name: g_pn_27
     type: bin
     start: 0x1A41000
+    ld_align_segment_start: 0x1000
     vram: 0x0605EB20
     follows_vram: g_pn_26
 
@@ -8771,6 +9202,7 @@ segments:
   - name: g_pn_28
     type: bin
     start: 0x1A44000
+    ld_align_segment_start: 0x1000
     vram: 0x060613A0
     follows_vram: g_pn_27
 
@@ -8779,6 +9211,7 @@ segments:
   - name: g_pn_29
     type: bin
     start: 0x1A47000
+    ld_align_segment_start: 0x1000
     vram: 0x06063C20
     follows_vram: g_pn_28
 
@@ -8787,6 +9220,7 @@ segments:
   - name: g_pn_30
     type: bin
     start: 0x1A4A000
+    ld_align_segment_start: 0x1000
     vram: 0x060664A0
     follows_vram: g_pn_29
 
@@ -8795,6 +9229,7 @@ segments:
   - name: g_pn_31
     type: bin
     start: 0x1A4D000
+    ld_align_segment_start: 0x1000
     vram: 0x06068D20
     follows_vram: g_pn_30
 
@@ -8803,6 +9238,7 @@ segments:
   - name: g_pn_32
     type: bin
     start: 0x1A50000
+    ld_align_segment_start: 0x1000
     vram: 0x0606B5A0
     follows_vram: g_pn_31
 
@@ -8811,6 +9247,7 @@ segments:
   - name: g_pn_33
     type: bin
     start: 0x1A53000
+    ld_align_segment_start: 0x1000
     vram: 0x0606DE20
     follows_vram: g_pn_32
 
@@ -8819,6 +9256,7 @@ segments:
   - name: g_pn_34
     type: bin
     start: 0x1A56000
+    ld_align_segment_start: 0x1000
     vram: 0x060706A0
     follows_vram: g_pn_33
 
@@ -8827,6 +9265,7 @@ segments:
   - name: g_pn_35
     type: bin
     start: 0x1A59000
+    ld_align_segment_start: 0x1000
     vram: 0x06072F20
     follows_vram: g_pn_34
 
@@ -8835,6 +9274,7 @@ segments:
   - name: g_pn_36
     type: bin
     start: 0x1A5C000
+    ld_align_segment_start: 0x1000
     vram: 0x060757A0
     follows_vram: g_pn_35
 
@@ -8843,6 +9283,7 @@ segments:
   - name: g_pn_37
     type: bin
     start: 0x1A5F000
+    ld_align_segment_start: 0x1000
     vram: 0x06078020
     follows_vram: g_pn_36
 
@@ -8851,6 +9292,7 @@ segments:
   - name: g_pn_38
     type: bin
     start: 0x1A62000
+    ld_align_segment_start: 0x1000
     vram: 0x0607A8A0
     follows_vram: g_pn_37
 
@@ -8859,6 +9301,7 @@ segments:
   - name: g_pn_39
     type: bin
     start: 0x1A65000
+    ld_align_segment_start: 0x1000
     vram: 0x0607D120
     follows_vram: g_pn_38
 
@@ -8867,6 +9310,7 @@ segments:
   - name: g_pn_40
     type: bin
     start: 0x1A68000
+    ld_align_segment_start: 0x1000
     vram: 0x0607F9A0
     follows_vram: g_pn_39
 
@@ -8875,6 +9319,7 @@ segments:
   - name: g_pn_41
     type: bin
     start: 0x1A6B000
+    ld_align_segment_start: 0x1000
     vram: 0x06082220
     follows_vram: g_pn_40
 
@@ -8883,6 +9328,7 @@ segments:
   - name: g_pn_42
     type: bin
     start: 0x1A6E000
+    ld_align_segment_start: 0x1000
     vram: 0x06084AA0
     follows_vram: g_pn_41
 
@@ -8891,6 +9337,7 @@ segments:
   - name: g_pn_43
     type: bin
     start: 0x1A71000
+    ld_align_segment_start: 0x1000
     vram: 0x06087320
     follows_vram: g_pn_42
 
@@ -8899,6 +9346,7 @@ segments:
   - name: g_pn_44
     type: bin
     start: 0x1A74000
+    ld_align_segment_start: 0x1000
     vram: 0x06089BA0
     follows_vram: g_pn_43
 
@@ -8907,6 +9355,7 @@ segments:
   - name: g_pn_45
     type: bin
     start: 0x1A77000
+    ld_align_segment_start: 0x1000
     vram: 0x0608C420
     follows_vram: g_pn_44
 
@@ -8915,6 +9364,7 @@ segments:
   - name: g_pn_46
     type: bin
     start: 0x1A7A000
+    ld_align_segment_start: 0x1000
     vram: 0x0608ECA0
     follows_vram: g_pn_45
 
@@ -8923,6 +9373,7 @@ segments:
   - name: g_pn_47
     type: bin
     start: 0x1A7D000
+    ld_align_segment_start: 0x1000
     vram: 0x06091520
     follows_vram: g_pn_46
 
@@ -8931,6 +9382,7 @@ segments:
   - name: g_pn_48
     type: bin
     start: 0x1A80000
+    ld_align_segment_start: 0x1000
     vram: 0x06093DA0
     follows_vram: g_pn_47
 
@@ -8939,6 +9391,7 @@ segments:
   - name: g_pn_49
     type: bin
     start: 0x1A83000
+    ld_align_segment_start: 0x1000
     vram: 0x06096620
     follows_vram: g_pn_48
 
@@ -8947,6 +9400,7 @@ segments:
   - name: g_pn_50
     type: bin
     start: 0x1A86000
+    ld_align_segment_start: 0x1000
     vram: 0x06098EA0
     follows_vram: g_pn_49
 
@@ -8955,6 +9409,7 @@ segments:
   - name: g_pn_51
     type: bin
     start: 0x1A89000
+    ld_align_segment_start: 0x1000
     vram: 0x0609B720
     follows_vram: g_pn_50
 
@@ -8963,6 +9418,7 @@ segments:
   - name: g_pn_52
     type: bin
     start: 0x1A8C000
+    ld_align_segment_start: 0x1000
     vram: 0x0609DFA0
     follows_vram: g_pn_51
 
@@ -8971,6 +9427,7 @@ segments:
   - name: g_pn_53
     type: bin
     start: 0x1A8F000
+    ld_align_segment_start: 0x1000
     vram: 0x060A0820
     follows_vram: g_pn_52
 
@@ -8979,6 +9436,7 @@ segments:
   - name: g_pn_54
     type: bin
     start: 0x1A92000
+    ld_align_segment_start: 0x1000
     vram: 0x060A30A0
     follows_vram: g_pn_53
 
@@ -8987,6 +9445,7 @@ segments:
   - name: g_pn_55
     type: bin
     start: 0x1A95000
+    ld_align_segment_start: 0x1000
     vram: 0x060A5920
     follows_vram: g_pn_54
 
@@ -8995,6 +9454,7 @@ segments:
   - name: g_pn_56
     type: bin
     start: 0x1A98000
+    ld_align_segment_start: 0x1000
     vram: 0x060A81A0
     follows_vram: g_pn_55
 
@@ -9003,6 +9463,7 @@ segments:
   - name: g_pn_57
     type: bin
     start: 0x1A9B000
+    ld_align_segment_start: 0x1000
     vram: 0x060AAA20
     follows_vram: g_pn_56
 
@@ -9011,6 +9472,7 @@ segments:
   - name: z_select_static
     type: bin
     start: 0x1A9E000
+    ld_align_segment_start: 0x1000
     vram: 0x01000000
 
   - [0x1AA0200, pad, pad_1AA0200]
@@ -9018,6 +9480,7 @@ segments:
   - name: nintendo_rogo_static
     type: bin
     start: 0x1AA1000
+    ld_align_segment_start: 0x1000
     vram: 0x01000000
 
   - [0x1AA3DC0, pad, pad_1AA3DC0]
@@ -9025,6 +9488,7 @@ segments:
   - name: title_static
     type: bin
     start: 0x1AA4000
+    ld_align_segment_start: 0x1000
     vram: 0x01000000
 
   - [0x1AEB440, pad, pad_1AEB440]
@@ -9032,6 +9496,7 @@ segments:
   - name: parameter_static
     type: bin
     start: 0x1AEC000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x1AEFB00, pad, pad_1AEFB00]
@@ -9039,12 +9504,14 @@ segments:
   - name: vr_fine0_static
     type: bin
     start: 0x1AF0000
+    ld_align_segment_start: 0x1000
     vram: 0x02003B00
     follows_vram: parameter_static
 
   - name: vr_fine0_pal_static
     type: bin
     start: 0x1AFC000
+    ld_align_segment_start: 0x1000
     vram: 0x0200FB00
     follows_vram: vr_fine0_static
 
@@ -9053,12 +9520,14 @@ segments:
   - name: vr_fine1_static
     type: bin
     start: 0x1AFD000
+    ld_align_segment_start: 0x1000
     vram: 0x0200FC00
     follows_vram: vr_fine0_pal_static
 
   - name: vr_fine1_pal_static
     type: bin
     start: 0x1B09000
+    ld_align_segment_start: 0x1000
     vram: 0x0201BC00
     follows_vram: vr_fine1_static
 
@@ -9067,12 +9536,14 @@ segments:
   - name: vr_fine2_static
     type: bin
     start: 0x1B0A000
+    ld_align_segment_start: 0x1000
     vram: 0x0201BD00
     follows_vram: vr_fine1_pal_static
 
   - name: vr_fine2_pal_static
     type: bin
     start: 0x1B16000
+    ld_align_segment_start: 0x1000
     vram: 0x02027D00
     follows_vram: vr_fine2_static
 
@@ -9081,12 +9552,14 @@ segments:
   - name: vr_fine3_static
     type: bin
     start: 0x1B17000
+    ld_align_segment_start: 0x1000
     vram: 0x02027E00
     follows_vram: vr_fine2_pal_static
 
   - name: vr_fine3_pal_static
     type: bin
     start: 0x1B23000
+    ld_align_segment_start: 0x1000
     vram: 0x02033E00
     follows_vram: vr_fine3_static
 
@@ -9095,12 +9568,14 @@ segments:
   - name: vr_cloud0_static
     type: bin
     start: 0x1B24000
+    ld_align_segment_start: 0x1000
     vram: 0x02033F00
     follows_vram: vr_fine3_pal_static
 
   - name: vr_cloud0_pal_static
     type: bin
     start: 0x1B30000
+    ld_align_segment_start: 0x1000
     vram: 0x0203FF00
     follows_vram: vr_cloud0_static
 
@@ -9109,12 +9584,14 @@ segments:
   - name: vr_cloud1_static
     type: bin
     start: 0x1B31000
+    ld_align_segment_start: 0x1000
     vram: 0x02040000
     follows_vram: vr_cloud0_pal_static
 
   - name: vr_cloud1_pal_static
     type: bin
     start: 0x1B3D000
+    ld_align_segment_start: 0x1000
     vram: 0x0204C000
     follows_vram: vr_cloud1_static
 
@@ -9123,12 +9600,14 @@ segments:
   - name: vr_cloud2_static
     type: bin
     start: 0x1B3E000
+    ld_align_segment_start: 0x1000
     vram: 0x0204C100
     follows_vram: vr_cloud1_pal_static
 
   - name: vr_cloud2_pal_static
     type: bin
     start: 0x1B4A000
+    ld_align_segment_start: 0x1000
     vram: 0x02058100
     follows_vram: vr_cloud2_static
 
@@ -9137,12 +9616,14 @@ segments:
   - name: vr_cloud3_static
     type: bin
     start: 0x1B4B000
+    ld_align_segment_start: 0x1000
     vram: 0x02058200
     follows_vram: vr_cloud2_pal_static
 
   - name: vr_cloud3_pal_static
     type: bin
     start: 0x1B57000
+    ld_align_segment_start: 0x1000
     vram: 0x02064200
     follows_vram: vr_cloud3_static
 
@@ -9151,12 +9632,14 @@ segments:
   - name: vr_holy0_static
     type: bin
     start: 0x1B58000
+    ld_align_segment_start: 0x1000
     vram: 0x02064300
     follows_vram: vr_cloud3_pal_static
 
   - name: vr_holy0_pal_static
     type: bin
     start: 0x1B68000
+    ld_align_segment_start: 0x1000
     vram: 0x02074300
     follows_vram: vr_holy0_static
 
@@ -9165,12 +9648,14 @@ segments:
   - name: vr_holy1_static
     type: bin
     start: 0x1B69000
+    ld_align_segment_start: 0x1000
     vram: 0x02074400
     follows_vram: vr_holy0_pal_static
 
   - name: vr_holy1_pal_static
     type: bin
     start: 0x1B79000
+    ld_align_segment_start: 0x1000
     vram: 0x02084400
     follows_vram: vr_holy1_static
 
@@ -9179,12 +9664,14 @@ segments:
   - name: vr_MDVR_static
     type: bin
     start: 0x1B7A000
+    ld_align_segment_start: 0x1000
     vram: 0x02084500
     follows_vram: vr_holy1_pal_static
 
   - name: vr_MDVR_pal_static
     type: bin
     start: 0x1BBA000
+    ld_align_segment_start: 0x1000
     vram: 0x020C4500
     follows_vram: vr_MDVR_static
 
@@ -9193,12 +9680,14 @@ segments:
   - name: vr_MNVR_static
     type: bin
     start: 0x1BBB000
+    ld_align_segment_start: 0x1000
     vram: 0x020C4D00
     follows_vram: vr_MDVR_pal_static
 
   - name: vr_MNVR_pal_static
     type: bin
     start: 0x1BFB000
+    ld_align_segment_start: 0x1000
     vram: 0x02104D00
     follows_vram: vr_MNVR_static
 
@@ -9207,12 +9696,14 @@ segments:
   - name: vr_RUVR_static
     type: bin
     start: 0x1BFC000
+    ld_align_segment_start: 0x1000
     vram: 0x02105500
     follows_vram: vr_MNVR_pal_static
 
   - name: vr_RUVR_pal_static
     type: bin
     start: 0x1C3C000
+    ld_align_segment_start: 0x1000
     vram: 0x02145500
     follows_vram: vr_RUVR_static
 
@@ -9221,12 +9712,14 @@ segments:
   - name: vr_LHVR_static
     type: bin
     start: 0x1C3D000
+    ld_align_segment_start: 0x1000
     vram: 0x02145D00
     follows_vram: vr_RUVR_pal_static
 
   - name: vr_LHVR_pal_static
     type: bin
     start: 0x1C7D000
+    ld_align_segment_start: 0x1000
     vram: 0x02185D00
     follows_vram: vr_LHVR_static
 
@@ -9235,12 +9728,14 @@ segments:
   - name: vr_KHVR_static
     type: bin
     start: 0x1C7E000
+    ld_align_segment_start: 0x1000
     vram: 0x02186500
     follows_vram: vr_LHVR_pal_static
 
   - name: vr_KHVR_pal_static
     type: bin
     start: 0x1CBE000
+    ld_align_segment_start: 0x1000
     vram: 0x021C6500
     follows_vram: vr_KHVR_static
 
@@ -9249,12 +9744,14 @@ segments:
   - name: vr_K3VR_static
     type: bin
     start: 0x1CBF000
+    ld_align_segment_start: 0x1000
     vram: 0x021C6D00
     follows_vram: vr_KHVR_pal_static
 
   - name: vr_K3VR_pal_static
     type: bin
     start: 0x1CEF000
+    ld_align_segment_start: 0x1000
     vram: 0x021F6D00
     follows_vram: vr_K3VR_static
 
@@ -9263,12 +9760,14 @@ segments:
   - name: vr_K4VR_static
     type: bin
     start: 0x1CF0000
+    ld_align_segment_start: 0x1000
     vram: 0x021F7300
     follows_vram: vr_K3VR_pal_static
 
   - name: vr_K4VR_pal_static
     type: bin
     start: 0x1D20000
+    ld_align_segment_start: 0x1000
     vram: 0x02227300
     follows_vram: vr_K4VR_static
 
@@ -9277,12 +9776,14 @@ segments:
   - name: vr_K5VR_static
     type: bin
     start: 0x1D21000
+    ld_align_segment_start: 0x1000
     vram: 0x02227900
     follows_vram: vr_K4VR_pal_static
 
   - name: vr_K5VR_pal_static
     type: bin
     start: 0x1D51000
+    ld_align_segment_start: 0x1000
     vram: 0x02257900
     follows_vram: vr_K5VR_static
 
@@ -9291,12 +9792,14 @@ segments:
   - name: vr_SP1a_static
     type: bin
     start: 0x1D52000
+    ld_align_segment_start: 0x1000
     vram: 0x02257F00
     follows_vram: vr_K5VR_pal_static
 
   - name: vr_SP1a_pal_static
     type: bin
     start: 0x1D72000
+    ld_align_segment_start: 0x1000
     vram: 0x02277F00
     follows_vram: vr_SP1a_static
 
@@ -9305,12 +9808,14 @@ segments:
   - name: vr_MLVR_static
     type: bin
     start: 0x1D73000
+    ld_align_segment_start: 0x1000
     vram: 0x02278300
     follows_vram: vr_SP1a_pal_static
 
   - name: vr_MLVR_pal_static
     type: bin
     start: 0x1DB3000
+    ld_align_segment_start: 0x1000
     vram: 0x022B8300
     follows_vram: vr_MLVR_static
 
@@ -9319,12 +9824,14 @@ segments:
   - name: vr_KKRVR_static
     type: bin
     start: 0x1DB4000
+    ld_align_segment_start: 0x1000
     vram: 0x022B8B00
     follows_vram: vr_MLVR_pal_static
 
   - name: vr_KKRVR_pal_static
     type: bin
     start: 0x1DF4000
+    ld_align_segment_start: 0x1000
     vram: 0x022F8B00
     follows_vram: vr_KKRVR_static
 
@@ -9333,12 +9840,14 @@ segments:
   - name: vr_KR3VR_static
     type: bin
     start: 0x1DF5000
+    ld_align_segment_start: 0x1000
     vram: 0x022F9300
     follows_vram: vr_KKRVR_pal_static
 
   - name: vr_KR3VR_pal_static
     type: bin
     start: 0x1E25000
+    ld_align_segment_start: 0x1000
     vram: 0x02329300
     follows_vram: vr_KR3VR_static
 
@@ -9347,12 +9856,14 @@ segments:
   - name: vr_IPVR_static
     type: bin
     start: 0x1E26000
+    ld_align_segment_start: 0x1000
     vram: 0x02329900
     follows_vram: vr_KR3VR_pal_static
 
   - name: vr_IPVR_pal_static
     type: bin
     start: 0x1E66000
+    ld_align_segment_start: 0x1000
     vram: 0x02369900
     follows_vram: vr_IPVR_static
 
@@ -9361,12 +9872,14 @@ segments:
   - name: vr_KSVR_static
     type: bin
     start: 0x1E67000
+    ld_align_segment_start: 0x1000
     vram: 0x0236A100
     follows_vram: vr_IPVR_pal_static
 
   - name: vr_KSVR_pal_static
     type: bin
     start: 0x1E87000
+    ld_align_segment_start: 0x1000
     vram: 0x0238A100
     follows_vram: vr_KSVR_static
 
@@ -9375,12 +9888,14 @@ segments:
   - name: vr_GLVR_static
     type: bin
     start: 0x1E88000
+    ld_align_segment_start: 0x1000
     vram: 0x0238A500
     follows_vram: vr_KSVR_pal_static
 
   - name: vr_GLVR_pal_static
     type: bin
     start: 0x1EA8000
+    ld_align_segment_start: 0x1000
     vram: 0x023AA500
     follows_vram: vr_GLVR_static
 
@@ -9389,12 +9904,14 @@ segments:
   - name: vr_ZRVR_static
     type: bin
     start: 0x1EA9000
+    ld_align_segment_start: 0x1000
     vram: 0x023AA900
     follows_vram: vr_GLVR_pal_static
 
   - name: vr_ZRVR_pal_static
     type: bin
     start: 0x1EC9000
+    ld_align_segment_start: 0x1000
     vram: 0x023CA900
     follows_vram: vr_ZRVR_static
 
@@ -9403,12 +9920,14 @@ segments:
   - name: vr_DGVR_static
     type: bin
     start: 0x1ECA000
+    ld_align_segment_start: 0x1000
     vram: 0x023CAD00
     follows_vram: vr_ZRVR_pal_static
 
   - name: vr_DGVR_pal_static
     type: bin
     start: 0x1EEA000
+    ld_align_segment_start: 0x1000
     vram: 0x023EAD00
     follows_vram: vr_DGVR_static
 
@@ -9417,12 +9936,14 @@ segments:
   - name: vr_ALVR_static
     type: bin
     start: 0x1EEB000
+    ld_align_segment_start: 0x1000
     vram: 0x023EB100
     follows_vram: vr_DGVR_pal_static
 
   - name: vr_ALVR_pal_static
     type: bin
     start: 0x1F0B000
+    ld_align_segment_start: 0x1000
     vram: 0x0240B100
     follows_vram: vr_ALVR_static
 
@@ -9431,12 +9952,14 @@ segments:
   - name: vr_NSVR_static
     type: bin
     start: 0x1F0C000
+    ld_align_segment_start: 0x1000
     vram: 0x0240B500
     follows_vram: vr_ALVR_pal_static
 
   - name: vr_NSVR_pal_static
     type: bin
     start: 0x1F2C000
+    ld_align_segment_start: 0x1000
     vram: 0x0242B500
     follows_vram: vr_NSVR_static
 
@@ -9445,12 +9968,14 @@ segments:
   - name: vr_LBVR_static
     type: bin
     start: 0x1F2D000
+    ld_align_segment_start: 0x1000
     vram: 0x0242B900
     follows_vram: vr_NSVR_pal_static
 
   - name: vr_LBVR_pal_static
     type: bin
     start: 0x1F6D000
+    ld_align_segment_start: 0x1000
     vram: 0x0246B900
     follows_vram: vr_LBVR_static
 
@@ -9459,12 +9984,14 @@ segments:
   - name: vr_TTVR_static
     type: bin
     start: 0x1F6E000
+    ld_align_segment_start: 0x1000
     vram: 0x0246C100
     follows_vram: vr_LBVR_pal_static
 
   - name: vr_TTVR_pal_static
     type: bin
     start: 0x1F9E000
+    ld_align_segment_start: 0x1000
     vram: 0x0249C100
     follows_vram: vr_TTVR_static
 
@@ -9473,12 +10000,14 @@ segments:
   - name: vr_FCVR_static
     type: bin
     start: 0x1F9F000
+    ld_align_segment_start: 0x1000
     vram: 0x0249C700
     follows_vram: vr_TTVR_pal_static
 
   - name: vr_FCVR_pal_static
     type: bin
     start: 0x1FBF000
+    ld_align_segment_start: 0x1000
     vram: 0x024BC700
     follows_vram: vr_FCVR_static
 
@@ -9487,6 +10016,7 @@ segments:
   - name: elf_message_field
     type: bin
     start: 0x1FC0000
+    ld_align_segment_start: 0x1000
     vram: 0x00000000
 
   - [0x1FC0070, pad, pad_1FC0070]
@@ -9494,6 +10024,7 @@ segments:
   - name: elf_message_ydan
     type: bin
     start: 0x1FC1000
+    ld_align_segment_start: 0x1000
     vram: 0x00000000
 
   - [0x1FC1010, pad, pad_1FC1010]
@@ -9501,6 +10032,7 @@ segments:
   - name: ydan_scene
     type: bin
     start: 0x1FC2000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x1FCFA20, pad, pad_1FCFA20]
@@ -9508,6 +10040,7 @@ segments:
   - name: ydan_room_0
     type: bin
     start: 0x1FD0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x1FE5350, pad, pad_1FE5350]
@@ -9515,6 +10048,7 @@ segments:
   - name: ydan_room_1
     type: bin
     start: 0x1FE6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x1FEA200, pad, pad_1FEA200]
@@ -9522,6 +10056,7 @@ segments:
   - name: ydan_room_2
     type: bin
     start: 0x1FEB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x1FF0F30, pad, pad_1FF0F30]
@@ -9529,6 +10064,7 @@ segments:
   - name: ydan_room_3
     type: bin
     start: 0x1FF1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20051B0, pad, pad_20051B0]
@@ -9536,6 +10072,7 @@ segments:
   - name: ydan_room_4
     type: bin
     start: 0x2006000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x200AC30, pad, pad_200AC30]
@@ -9543,6 +10080,7 @@ segments:
   - name: ydan_room_5
     type: bin
     start: 0x200B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2013390, pad, pad_2013390]
@@ -9550,6 +10088,7 @@ segments:
   - name: ydan_room_6
     type: bin
     start: 0x2014000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2018F00, pad, pad_2018F00]
@@ -9557,6 +10096,7 @@ segments:
   - name: ydan_room_7
     type: bin
     start: 0x2019000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2021AA0, pad, pad_2021AA0]
@@ -9564,6 +10104,7 @@ segments:
   - name: ydan_room_8
     type: bin
     start: 0x2022000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2022D90, pad, pad_2022D90]
@@ -9571,6 +10112,7 @@ segments:
   - name: ydan_room_9
     type: bin
     start: 0x2023000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x202C8A0, pad, pad_202C8A0]
@@ -9578,6 +10120,7 @@ segments:
   - name: ydan_room_10
     type: bin
     start: 0x202D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2031E00, pad, pad_2031E00]
@@ -9585,6 +10128,7 @@ segments:
   - name: ydan_room_11
     type: bin
     start: 0x2032000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2039170, pad, pad_2039170]
@@ -9592,6 +10136,7 @@ segments:
   - name: ddan_scene
     type: bin
     start: 0x203A000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x204F140, pad, pad_204F140]
@@ -9599,6 +10144,7 @@ segments:
   - name: ddan_room_0
     type: bin
     start: 0x2050000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x206B8A0, pad, pad_206B8A0]
@@ -9606,6 +10152,7 @@ segments:
   - name: ddan_room_1
     type: bin
     start: 0x206C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2075B70, pad, pad_2075B70]
@@ -9613,6 +10160,7 @@ segments:
   - name: ddan_room_2
     type: bin
     start: 0x2076000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x207DEC0, pad, pad_207DEC0]
@@ -9620,6 +10168,7 @@ segments:
   - name: ddan_room_3
     type: bin
     start: 0x207E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x208BE70, pad, pad_208BE70]
@@ -9627,6 +10176,7 @@ segments:
   - name: ddan_room_4
     type: bin
     start: 0x208C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2095960, pad, pad_2095960]
@@ -9634,6 +10184,7 @@ segments:
   - name: ddan_room_5
     type: bin
     start: 0x2096000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x209BEC0, pad, pad_209BEC0]
@@ -9641,6 +10192,7 @@ segments:
   - name: ddan_room_6
     type: bin
     start: 0x209C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x209E4B0, pad, pad_209E4B0]
@@ -9648,6 +10200,7 @@ segments:
   - name: ddan_room_7
     type: bin
     start: 0x209F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20A6700, pad, pad_20A6700]
@@ -9655,6 +10208,7 @@ segments:
   - name: ddan_room_8
     type: bin
     start: 0x20A7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20B05A0, pad, pad_20B05A0]
@@ -9662,6 +10216,7 @@ segments:
   - name: ddan_room_9
     type: bin
     start: 0x20B1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20BC530, pad, pad_20BC530]
@@ -9669,6 +10224,7 @@ segments:
   - name: ddan_room_10
     type: bin
     start: 0x20BD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20C4F10, pad, pad_20C4F10]
@@ -9676,6 +10232,7 @@ segments:
   - name: ddan_room_11
     type: bin
     start: 0x20C5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20C7030, pad, pad_20C7030]
@@ -9683,6 +10240,7 @@ segments:
   - name: ddan_room_12
     type: bin
     start: 0x20C8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20D0780, pad, pad_20D0780]
@@ -9690,6 +10248,7 @@ segments:
   - name: ddan_room_13
     type: bin
     start: 0x20D1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20D34D0, pad, pad_20D34D0]
@@ -9697,6 +10256,7 @@ segments:
   - name: ddan_room_14
     type: bin
     start: 0x20D4000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20D64D0, pad, pad_20D64D0]
@@ -9704,6 +10264,7 @@ segments:
   - name: ddan_room_15
     type: bin
     start: 0x20D7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20D9930, pad, pad_20D9930]
@@ -9711,6 +10272,7 @@ segments:
   - name: ddan_room_16
     type: bin
     start: 0x20DA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20DF560, pad, pad_20DF560]
@@ -9718,6 +10280,7 @@ segments:
   - name: bdan_scene
     type: bin
     start: 0x20E0000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x20F57E0, pad, pad_20F57E0]
@@ -9725,6 +10288,7 @@ segments:
   - name: bdan_room_0
     type: bin
     start: 0x20F6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x20FA140, pad, pad_20FA140]
@@ -9732,6 +10296,7 @@ segments:
   - name: bdan_room_1
     type: bin
     start: 0x20FB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2100FC0, pad, pad_2100FC0]
@@ -9739,6 +10304,7 @@ segments:
   - name: bdan_room_2
     type: bin
     start: 0x2101000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x210A240, pad, pad_210A240]
@@ -9746,6 +10312,7 @@ segments:
   - name: bdan_room_3
     type: bin
     start: 0x210B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2112260, pad, pad_2112260]
@@ -9753,6 +10320,7 @@ segments:
   - name: bdan_room_4
     type: bin
     start: 0x2113000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2117100, pad, pad_2117100]
@@ -9760,6 +10328,7 @@ segments:
   - name: bdan_room_5
     type: bin
     start: 0x2118000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x211E090, pad, pad_211E090]
@@ -9767,6 +10336,7 @@ segments:
   - name: bdan_room_6
     type: bin
     start: 0x211F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2123240, pad, pad_2123240]
@@ -9774,6 +10344,7 @@ segments:
   - name: bdan_room_7
     type: bin
     start: 0x2124000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21274D0, pad, pad_21274D0]
@@ -9781,6 +10352,7 @@ segments:
   - name: bdan_room_8
     type: bin
     start: 0x2128000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x212B840, pad, pad_212B840]
@@ -9788,6 +10360,7 @@ segments:
   - name: bdan_room_9
     type: bin
     start: 0x212C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x212FC30, pad, pad_212FC30]
@@ -9795,6 +10368,7 @@ segments:
   - name: bdan_room_10
     type: bin
     start: 0x2130000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2133820, pad, pad_2133820]
@@ -9802,6 +10376,7 @@ segments:
   - name: bdan_room_11
     type: bin
     start: 0x2134000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21379F0, pad, pad_21379F0]
@@ -9809,6 +10384,7 @@ segments:
   - name: bdan_room_12
     type: bin
     start: 0x2138000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x213BCE0, pad, pad_213BCE0]
@@ -9816,6 +10392,7 @@ segments:
   - name: bdan_room_13
     type: bin
     start: 0x213C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x213EB80, pad, pad_213EB80]
@@ -9823,6 +10400,7 @@ segments:
   - name: bdan_room_14
     type: bin
     start: 0x213F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21451D0, pad, pad_21451D0]
@@ -9830,6 +10408,7 @@ segments:
   - name: bdan_room_15
     type: bin
     start: 0x2146000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21486E0, pad, pad_21486E0]
@@ -9837,6 +10416,7 @@ segments:
   - name: Bmori1_scene
     type: bin
     start: 0x2149000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x215EF90, pad, pad_215EF90]
@@ -9844,6 +10424,7 @@ segments:
   - name: Bmori1_room_0
     type: bin
     start: 0x215F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x216CB90, pad, pad_216CB90]
@@ -9851,6 +10432,7 @@ segments:
   - name: Bmori1_room_1
     type: bin
     start: 0x216D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2172B70, pad, pad_2172B70]
@@ -9858,6 +10440,7 @@ segments:
   - name: Bmori1_room_2
     type: bin
     start: 0x2173000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2182980, pad, pad_2182980]
@@ -9865,6 +10448,7 @@ segments:
   - name: Bmori1_room_3
     type: bin
     start: 0x2183000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21869E0, pad, pad_21869E0]
@@ -9872,6 +10456,7 @@ segments:
   - name: Bmori1_room_4
     type: bin
     start: 0x2187000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x218A2C0, pad, pad_218A2C0]
@@ -9879,6 +10464,7 @@ segments:
   - name: Bmori1_room_5
     type: bin
     start: 0x218B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x218E5D0, pad, pad_218E5D0]
@@ -9886,6 +10472,7 @@ segments:
   - name: Bmori1_room_6
     type: bin
     start: 0x218F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2198430, pad, pad_2198430]
@@ -9893,6 +10480,7 @@ segments:
   - name: Bmori1_room_7
     type: bin
     start: 0x2199000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21ABFE0, pad, pad_21ABFE0]
@@ -9900,6 +10488,7 @@ segments:
   - name: Bmori1_room_8
     type: bin
     start: 0x21AC000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21C3AB0, pad, pad_21C3AB0]
@@ -9907,6 +10496,7 @@ segments:
   - name: Bmori1_room_9
     type: bin
     start: 0x21C4000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21CE160, pad, pad_21CE160]
@@ -9914,6 +10504,7 @@ segments:
   - name: Bmori1_room_10
     type: bin
     start: 0x21CF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21D43E0, pad, pad_21D43E0]
@@ -9921,6 +10512,7 @@ segments:
   - name: Bmori1_room_11
     type: bin
     start: 0x21D5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21DFBE0, pad, pad_21DFBE0]
@@ -9928,6 +10520,7 @@ segments:
   - name: Bmori1_room_12
     type: bin
     start: 0x21E0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21E83E0, pad, pad_21E83E0]
@@ -9935,6 +10528,7 @@ segments:
   - name: Bmori1_room_13
     type: bin
     start: 0x21E9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21F1AB0, pad, pad_21F1AB0]
@@ -9942,6 +10536,7 @@ segments:
   - name: Bmori1_room_14
     type: bin
     start: 0x21F2000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21F7B70, pad, pad_21F7B70]
@@ -9949,6 +10544,7 @@ segments:
   - name: Bmori1_room_15
     type: bin
     start: 0x21F8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21FA6E0, pad, pad_21FA6E0]
@@ -9956,6 +10552,7 @@ segments:
   - name: Bmori1_room_16
     type: bin
     start: 0x21FB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x21FFFA0, pad, pad_21FFFA0]
@@ -9963,6 +10560,7 @@ segments:
   - name: Bmori1_room_17
     type: bin
     start: 0x2200000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22090F0, pad, pad_22090F0]
@@ -9970,6 +10568,7 @@ segments:
   - name: Bmori1_room_18
     type: bin
     start: 0x220A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x220B330, pad, pad_220B330]
@@ -9977,6 +10576,7 @@ segments:
   - name: Bmori1_room_19
     type: bin
     start: 0x220C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x220C500, pad, pad_220C500]
@@ -9984,6 +10584,7 @@ segments:
   - name: Bmori1_room_20
     type: bin
     start: 0x220D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x220E300, pad, pad_220E300]
@@ -9991,6 +10592,7 @@ segments:
   - name: Bmori1_room_21
     type: bin
     start: 0x220F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2210770, pad, pad_2210770]
@@ -9998,6 +10600,7 @@ segments:
   - name: Bmori1_room_22
     type: bin
     start: 0x2211000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2212DE0, pad, pad_2212DE0]
@@ -10005,6 +10608,7 @@ segments:
   - name: HIDAN_scene
     type: bin
     start: 0x2213000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x222D7D0, pad, pad_222D7D0]
@@ -10012,6 +10616,7 @@ segments:
   - name: HIDAN_room_0
     type: bin
     start: 0x222E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22352F0, pad, pad_22352F0]
@@ -10019,6 +10624,7 @@ segments:
   - name: HIDAN_room_1
     type: bin
     start: 0x2236000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2242930, pad, pad_2242930]
@@ -10026,6 +10632,7 @@ segments:
   - name: HIDAN_room_2
     type: bin
     start: 0x2243000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2253030, pad, pad_2253030]
@@ -10033,6 +10640,7 @@ segments:
   - name: HIDAN_room_3
     type: bin
     start: 0x2254000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22564D0, pad, pad_22564D0]
@@ -10040,6 +10648,7 @@ segments:
   - name: HIDAN_room_4
     type: bin
     start: 0x2257000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x225E8F0, pad, pad_225E8F0]
@@ -10047,6 +10656,7 @@ segments:
   - name: HIDAN_room_5
     type: bin
     start: 0x225F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22692E0, pad, pad_22692E0]
@@ -10054,6 +10664,7 @@ segments:
   - name: HIDAN_room_6
     type: bin
     start: 0x226A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2270F90, pad, pad_2270F90]
@@ -10061,6 +10672,7 @@ segments:
   - name: HIDAN_room_7
     type: bin
     start: 0x2271000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2274A50, pad, pad_2274A50]
@@ -10068,6 +10680,7 @@ segments:
   - name: HIDAN_room_8
     type: bin
     start: 0x2275000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x227EAE0, pad, pad_227EAE0]
@@ -10075,6 +10688,7 @@ segments:
   - name: HIDAN_room_9
     type: bin
     start: 0x227F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2287770, pad, pad_2287770]
@@ -10082,6 +10696,7 @@ segments:
   - name: HIDAN_room_10
     type: bin
     start: 0x2288000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22A0420, pad, pad_22A0420]
@@ -10089,6 +10704,7 @@ segments:
   - name: HIDAN_room_11
     type: bin
     start: 0x22A1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22A47E0, pad, pad_22A47E0]
@@ -10096,6 +10712,7 @@ segments:
   - name: HIDAN_room_12
     type: bin
     start: 0x22A5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22A7B70, pad, pad_22A7B70]
@@ -10103,6 +10720,7 @@ segments:
   - name: HIDAN_room_13
     type: bin
     start: 0x22A8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22B4B90, pad, pad_22B4B90]
@@ -10110,6 +10728,7 @@ segments:
   - name: HIDAN_room_14
     type: bin
     start: 0x22B5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22B7200, pad, pad_22B7200]
@@ -10117,6 +10736,7 @@ segments:
   - name: HIDAN_room_15
     type: bin
     start: 0x22B8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22B9190, pad, pad_22B9190]
@@ -10124,6 +10744,7 @@ segments:
   - name: HIDAN_room_16
     type: bin
     start: 0x22BA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22C59E0, pad, pad_22C59E0]
@@ -10131,6 +10752,7 @@ segments:
   - name: HIDAN_room_17
     type: bin
     start: 0x22C6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22CF170, pad, pad_22CF170]
@@ -10138,6 +10760,7 @@ segments:
   - name: HIDAN_room_18
     type: bin
     start: 0x22D0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22D3C00, pad, pad_22D3C00]
@@ -10145,6 +10768,7 @@ segments:
   - name: HIDAN_room_19
     type: bin
     start: 0x22D4000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22D8230, pad, pad_22D8230]
@@ -10152,6 +10776,7 @@ segments:
   - name: HIDAN_room_20
     type: bin
     start: 0x22D9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22DFD10, pad, pad_22DFD10]
@@ -10159,6 +10784,7 @@ segments:
   - name: HIDAN_room_21
     type: bin
     start: 0x22E0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22E8480, pad, pad_22E8480]
@@ -10166,6 +10792,7 @@ segments:
   - name: HIDAN_room_22
     type: bin
     start: 0x22E9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22EFAF0, pad, pad_22EFAF0]
@@ -10173,6 +10800,7 @@ segments:
   - name: HIDAN_room_23
     type: bin
     start: 0x22F0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22F6D20, pad, pad_22F6D20]
@@ -10180,6 +10808,7 @@ segments:
   - name: HIDAN_room_24
     type: bin
     start: 0x22F7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x22FC540, pad, pad_22FC540]
@@ -10187,6 +10816,7 @@ segments:
   - name: HIDAN_room_25
     type: bin
     start: 0x22FD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2303AE0, pad, pad_2303AE0]
@@ -10194,6 +10824,7 @@ segments:
   - name: HIDAN_room_26
     type: bin
     start: 0x2304000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x230A8A0, pad, pad_230A8A0]
@@ -10201,6 +10832,7 @@ segments:
   - name: MIZUsin_scene
     type: bin
     start: 0x230B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2320C30, pad, pad_2320C30]
@@ -10208,6 +10840,7 @@ segments:
   - name: MIZUsin_room_0
     type: bin
     start: 0x2321000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2336C30, pad, pad_2336C30]
@@ -10215,6 +10848,7 @@ segments:
   - name: MIZUsin_room_1
     type: bin
     start: 0x2337000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23411D0, pad, pad_23411D0]
@@ -10222,6 +10856,7 @@ segments:
   - name: MIZUsin_room_2
     type: bin
     start: 0x2342000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2347C90, pad, pad_2347C90]
@@ -10229,6 +10864,7 @@ segments:
   - name: MIZUsin_room_3
     type: bin
     start: 0x2348000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x234E7C0, pad, pad_234E7C0]
@@ -10236,6 +10872,7 @@ segments:
   - name: MIZUsin_room_4
     type: bin
     start: 0x234F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2355020, pad, pad_2355020]
@@ -10243,6 +10880,7 @@ segments:
   - name: MIZUsin_room_5
     type: bin
     start: 0x2356000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2360640, pad, pad_2360640]
@@ -10250,6 +10888,7 @@ segments:
   - name: MIZUsin_room_6
     type: bin
     start: 0x2361000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x236C300, pad, pad_236C300]
@@ -10257,6 +10896,7 @@ segments:
   - name: MIZUsin_room_7
     type: bin
     start: 0x236D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2372560, pad, pad_2372560]
@@ -10264,6 +10904,7 @@ segments:
   - name: MIZUsin_room_8
     type: bin
     start: 0x2373000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2380D80, pad, pad_2380D80]
@@ -10271,6 +10912,7 @@ segments:
   - name: MIZUsin_room_9
     type: bin
     start: 0x2381000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23890B0, pad, pad_23890B0]
@@ -10278,6 +10920,7 @@ segments:
   - name: MIZUsin_room_10
     type: bin
     start: 0x238A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2390070, pad, pad_2390070]
@@ -10285,6 +10928,7 @@ segments:
   - name: MIZUsin_room_11
     type: bin
     start: 0x2391000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2395A20, pad, pad_2395A20]
@@ -10292,6 +10936,7 @@ segments:
   - name: MIZUsin_room_12
     type: bin
     start: 0x2396000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x239CE30, pad, pad_239CE30]
@@ -10299,6 +10944,7 @@ segments:
   - name: MIZUsin_room_13
     type: bin
     start: 0x239D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x239DA00, pad, pad_239DA00]
@@ -10306,6 +10952,7 @@ segments:
   - name: MIZUsin_room_14
     type: bin
     start: 0x239E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23A4E80, pad, pad_23A4E80]
@@ -10313,6 +10960,7 @@ segments:
   - name: MIZUsin_room_15
     type: bin
     start: 0x23A5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23AC470, pad, pad_23AC470]
@@ -10320,6 +10968,7 @@ segments:
   - name: MIZUsin_room_16
     type: bin
     start: 0x23AD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23B0B30, pad, pad_23B0B30]
@@ -10327,6 +10976,7 @@ segments:
   - name: MIZUsin_room_17
     type: bin
     start: 0x23B1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23B9AB0, pad, pad_23B9AB0]
@@ -10334,6 +10984,7 @@ segments:
   - name: MIZUsin_room_18
     type: bin
     start: 0x23BA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23BE100, pad, pad_23BE100]
@@ -10341,6 +10992,7 @@ segments:
   - name: MIZUsin_room_19
     type: bin
     start: 0x23BF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23C2930, pad, pad_23C2930]
@@ -10348,6 +11000,7 @@ segments:
   - name: MIZUsin_room_20
     type: bin
     start: 0x23C3000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23C9840, pad, pad_23C9840]
@@ -10355,6 +11008,7 @@ segments:
   - name: MIZUsin_room_21
     type: bin
     start: 0x23CA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23D14A0, pad, pad_23D14A0]
@@ -10362,6 +11016,7 @@ segments:
   - name: MIZUsin_room_22
     type: bin
     start: 0x23D2000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x23DB0F0, pad, pad_23DB0F0]
@@ -10369,6 +11024,7 @@ segments:
   - name: jyasinzou_scene
     type: bin
     start: 0x23DC000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x23F5B20, pad, pad_23F5B20]
@@ -10376,6 +11032,7 @@ segments:
   - name: jyasinzou_room_0
     type: bin
     start: 0x23F6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2406FF0, pad, pad_2406FF0]
@@ -10383,6 +11040,7 @@ segments:
   - name: jyasinzou_room_1
     type: bin
     start: 0x2407000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2410350, pad, pad_2410350]
@@ -10390,6 +11048,7 @@ segments:
   - name: jyasinzou_room_2
     type: bin
     start: 0x2411000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2416BB0, pad, pad_2416BB0]
@@ -10397,6 +11056,7 @@ segments:
   - name: jyasinzou_room_3
     type: bin
     start: 0x2417000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x241ABD0, pad, pad_241ABD0]
@@ -10404,6 +11064,7 @@ segments:
   - name: jyasinzou_room_4
     type: bin
     start: 0x241B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2422280, pad, pad_2422280]
@@ -10411,6 +11072,7 @@ segments:
   - name: jyasinzou_room_5
     type: bin
     start: 0x2423000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x243B010, pad, pad_243B010]
@@ -10418,6 +11080,7 @@ segments:
   - name: jyasinzou_room_6
     type: bin
     start: 0x243C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24407F0, pad, pad_24407F0]
@@ -10425,6 +11088,7 @@ segments:
   - name: jyasinzou_room_7
     type: bin
     start: 0x2441000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2446510, pad, pad_2446510]
@@ -10432,6 +11096,7 @@ segments:
   - name: jyasinzou_room_8
     type: bin
     start: 0x2447000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x244F0B0, pad, pad_244F0B0]
@@ -10439,6 +11104,7 @@ segments:
   - name: jyasinzou_room_9
     type: bin
     start: 0x2450000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2455DD0, pad, pad_2455DD0]
@@ -10446,6 +11112,7 @@ segments:
   - name: jyasinzou_room_10
     type: bin
     start: 0x2456000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x245E1A0, pad, pad_245E1A0]
@@ -10453,6 +11120,7 @@ segments:
   - name: jyasinzou_room_11
     type: bin
     start: 0x245F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2460010, pad, pad_2460010]
@@ -10460,6 +11128,7 @@ segments:
   - name: jyasinzou_room_12
     type: bin
     start: 0x2461000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24630E0, pad, pad_24630E0]
@@ -10467,6 +11136,7 @@ segments:
   - name: jyasinzou_room_13
     type: bin
     start: 0x2464000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24698B0, pad, pad_24698B0]
@@ -10474,6 +11144,7 @@ segments:
   - name: jyasinzou_room_14
     type: bin
     start: 0x246A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x246ECA0, pad, pad_246ECA0]
@@ -10481,6 +11152,7 @@ segments:
   - name: jyasinzou_room_15
     type: bin
     start: 0x246F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24774A0, pad, pad_24774A0]
@@ -10488,6 +11160,7 @@ segments:
   - name: jyasinzou_room_16
     type: bin
     start: 0x2478000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x247E1C0, pad, pad_247E1C0]
@@ -10495,6 +11168,7 @@ segments:
   - name: jyasinzou_room_17
     type: bin
     start: 0x247F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2488650, pad, pad_2488650]
@@ -10502,6 +11176,7 @@ segments:
   - name: jyasinzou_room_18
     type: bin
     start: 0x2489000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x248ECE0, pad, pad_248ECE0]
@@ -10509,6 +11184,7 @@ segments:
   - name: jyasinzou_room_19
     type: bin
     start: 0x248F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2494DD0, pad, pad_2494DD0]
@@ -10516,6 +11192,7 @@ segments:
   - name: jyasinzou_room_20
     type: bin
     start: 0x2495000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x249D1C0, pad, pad_249D1C0]
@@ -10523,6 +11200,7 @@ segments:
   - name: jyasinzou_room_21
     type: bin
     start: 0x249E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24A2660, pad, pad_24A2660]
@@ -10530,6 +11208,7 @@ segments:
   - name: jyasinzou_room_22
     type: bin
     start: 0x24A3000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24A6070, pad, pad_24A6070]
@@ -10537,6 +11216,7 @@ segments:
   - name: jyasinzou_room_23
     type: bin
     start: 0x24A7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24B0210, pad, pad_24B0210]
@@ -10544,6 +11224,7 @@ segments:
   - name: jyasinzou_room_24
     type: bin
     start: 0x24B1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24B74D0, pad, pad_24B74D0]
@@ -10551,6 +11232,7 @@ segments:
   - name: jyasinzou_room_25
     type: bin
     start: 0x24B8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24CDBA0, pad, pad_24CDBA0]
@@ -10558,6 +11240,7 @@ segments:
   - name: jyasinzou_room_26
     type: bin
     start: 0x24CE000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24DAB00, pad, pad_24DAB00]
@@ -10565,6 +11248,7 @@ segments:
   - name: jyasinzou_room_27
     type: bin
     start: 0x24DB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24E0710, pad, pad_24E0710]
@@ -10572,6 +11256,7 @@ segments:
   - name: jyasinzou_room_28
     type: bin
     start: 0x24E1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x24E9A30, pad, pad_24E9A30]
@@ -10579,6 +11264,7 @@ segments:
   - name: HAKAdan_scene
     type: bin
     start: 0x24EA000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x25023C0, pad, pad_25023C0]
@@ -10586,6 +11272,7 @@ segments:
   - name: HAKAdan_room_0
     type: bin
     start: 0x2503000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x250E150, pad, pad_250E150]
@@ -10593,6 +11280,7 @@ segments:
   - name: HAKAdan_room_1
     type: bin
     start: 0x250F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2510AF0, pad, pad_2510AF0]
@@ -10600,6 +11288,7 @@ segments:
   - name: HAKAdan_room_2
     type: bin
     start: 0x2511000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x251B9E0, pad, pad_251B9E0]
@@ -10607,6 +11296,7 @@ segments:
   - name: HAKAdan_room_3
     type: bin
     start: 0x251C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x251E980, pad, pad_251E980]
@@ -10614,6 +11304,7 @@ segments:
   - name: HAKAdan_room_4
     type: bin
     start: 0x251F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2520C60, pad, pad_2520C60]
@@ -10621,6 +11312,7 @@ segments:
   - name: HAKAdan_room_5
     type: bin
     start: 0x2521000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2526AC0, pad, pad_2526AC0]
@@ -10628,6 +11320,7 @@ segments:
   - name: HAKAdan_room_6
     type: bin
     start: 0x2527000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x252E5F0, pad, pad_252E5F0]
@@ -10635,6 +11328,7 @@ segments:
   - name: HAKAdan_room_7
     type: bin
     start: 0x252F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2530AE0, pad, pad_2530AE0]
@@ -10642,6 +11336,7 @@ segments:
   - name: HAKAdan_room_8
     type: bin
     start: 0x2531000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25360A0, pad, pad_25360A0]
@@ -10649,6 +11344,7 @@ segments:
   - name: HAKAdan_room_9
     type: bin
     start: 0x2537000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2543C90, pad, pad_2543C90]
@@ -10656,6 +11352,7 @@ segments:
   - name: HAKAdan_room_10
     type: bin
     start: 0x2544000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x254B7F0, pad, pad_254B7F0]
@@ -10663,6 +11360,7 @@ segments:
   - name: HAKAdan_room_11
     type: bin
     start: 0x254C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x254FE60, pad, pad_254FE60]
@@ -10670,6 +11368,7 @@ segments:
   - name: HAKAdan_room_12
     type: bin
     start: 0x2550000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2555750, pad, pad_2555750]
@@ -10677,6 +11376,7 @@ segments:
   - name: HAKAdan_room_13
     type: bin
     start: 0x2556000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2557020, pad, pad_2557020]
@@ -10684,6 +11384,7 @@ segments:
   - name: HAKAdan_room_14
     type: bin
     start: 0x2558000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x255D900, pad, pad_255D900]
@@ -10691,6 +11392,7 @@ segments:
   - name: HAKAdan_room_15
     type: bin
     start: 0x255E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25652C0, pad, pad_25652C0]
@@ -10698,6 +11400,7 @@ segments:
   - name: HAKAdan_room_16
     type: bin
     start: 0x2566000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2568930, pad, pad_2568930]
@@ -10705,6 +11408,7 @@ segments:
   - name: HAKAdan_room_17
     type: bin
     start: 0x2569000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x256BDE0, pad, pad_256BDE0]
@@ -10712,6 +11416,7 @@ segments:
   - name: HAKAdan_room_18
     type: bin
     start: 0x256C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2579310, pad, pad_2579310]
@@ -10719,6 +11424,7 @@ segments:
   - name: HAKAdan_room_19
     type: bin
     start: 0x257A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x257CD80, pad, pad_257CD80]
@@ -10726,6 +11432,7 @@ segments:
   - name: HAKAdan_room_20
     type: bin
     start: 0x257D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x257EE40, pad, pad_257EE40]
@@ -10733,6 +11440,7 @@ segments:
   - name: HAKAdan_room_21
     type: bin
     start: 0x257F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x258A5B0, pad, pad_258A5B0]
@@ -10740,6 +11448,7 @@ segments:
   - name: HAKAdan_room_22
     type: bin
     start: 0x258B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x258D9B0, pad, pad_258D9B0]
@@ -10747,6 +11456,7 @@ segments:
   - name: HAKAdanCH_scene
     type: bin
     start: 0x258E000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x259A590, pad, pad_259A590]
@@ -10754,6 +11464,7 @@ segments:
   - name: HAKAdanCH_room_0
     type: bin
     start: 0x259B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25B0720, pad, pad_25B0720]
@@ -10761,6 +11472,7 @@ segments:
   - name: HAKAdanCH_room_1
     type: bin
     start: 0x25B1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25BC130, pad, pad_25BC130]
@@ -10768,6 +11480,7 @@ segments:
   - name: HAKAdanCH_room_2
     type: bin
     start: 0x25BD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25C0160, pad, pad_25C0160]
@@ -10775,6 +11488,7 @@ segments:
   - name: HAKAdanCH_room_3
     type: bin
     start: 0x25C1000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25C2CC0, pad, pad_25C2CC0]
@@ -10782,6 +11496,7 @@ segments:
   - name: HAKAdanCH_room_4
     type: bin
     start: 0x25C3000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25C54A0, pad, pad_25C54A0]
@@ -10789,6 +11504,7 @@ segments:
   - name: HAKAdanCH_room_5
     type: bin
     start: 0x25C6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25C8990, pad, pad_25C8990]
@@ -10796,6 +11512,7 @@ segments:
   - name: HAKAdanCH_room_6
     type: bin
     start: 0x25C9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25CBEA0, pad, pad_25CBEA0]
@@ -10803,6 +11520,7 @@ segments:
   - name: ice_doukutu_scene
     type: bin
     start: 0x25CC000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x25DD6C0, pad, pad_25DD6C0]
@@ -10810,6 +11528,7 @@ segments:
   - name: ice_doukutu_room_0
     type: bin
     start: 0x25DE000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25E6680, pad, pad_25E6680]
@@ -10817,6 +11536,7 @@ segments:
   - name: ice_doukutu_room_1
     type: bin
     start: 0x25E7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25F3530, pad, pad_25F3530]
@@ -10824,6 +11544,7 @@ segments:
   - name: ice_doukutu_room_2
     type: bin
     start: 0x25F4000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x25F9B00, pad, pad_25F9B00]
@@ -10831,6 +11552,7 @@ segments:
   - name: ice_doukutu_room_3
     type: bin
     start: 0x25FA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2602090, pad, pad_2602090]
@@ -10838,6 +11560,7 @@ segments:
   - name: ice_doukutu_room_4
     type: bin
     start: 0x2603000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x260A650, pad, pad_260A650]
@@ -10845,6 +11568,7 @@ segments:
   - name: ice_doukutu_room_5
     type: bin
     start: 0x260B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2613880, pad, pad_2613880]
@@ -10852,6 +11576,7 @@ segments:
   - name: ice_doukutu_room_6
     type: bin
     start: 0x2614000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26181B0, pad, pad_26181B0]
@@ -10859,6 +11584,7 @@ segments:
   - name: ice_doukutu_room_7
     type: bin
     start: 0x2619000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x261E8F0, pad, pad_261E8F0]
@@ -10866,6 +11592,7 @@ segments:
   - name: ice_doukutu_room_8
     type: bin
     start: 0x261F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2620920, pad, pad_2620920]
@@ -10873,6 +11600,7 @@ segments:
   - name: ice_doukutu_room_9
     type: bin
     start: 0x2621000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2629690, pad, pad_2629690]
@@ -10880,6 +11608,7 @@ segments:
   - name: ice_doukutu_room_10
     type: bin
     start: 0x262A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x262E3E0, pad, pad_262E3E0]
@@ -10887,6 +11616,7 @@ segments:
   - name: ice_doukutu_room_11
     type: bin
     start: 0x262F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2634850, pad, pad_2634850]
@@ -10894,6 +11624,7 @@ segments:
   - name: men_scene
     type: bin
     start: 0x2635000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x26464C0, pad, pad_26464C0]
@@ -10901,6 +11632,7 @@ segments:
   - name: men_room_0
     type: bin
     start: 0x2647000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2656F90, pad, pad_2656F90]
@@ -10908,6 +11640,7 @@ segments:
   - name: men_room_1
     type: bin
     start: 0x2657000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2660270, pad, pad_2660270]
@@ -10915,6 +11648,7 @@ segments:
   - name: men_room_2
     type: bin
     start: 0x2661000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2666050, pad, pad_2666050]
@@ -10922,6 +11656,7 @@ segments:
   - name: men_room_3
     type: bin
     start: 0x2667000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x266EC50, pad, pad_266EC50]
@@ -10929,6 +11664,7 @@ segments:
   - name: men_room_4
     type: bin
     start: 0x266F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26791E0, pad, pad_26791E0]
@@ -10936,6 +11672,7 @@ segments:
   - name: men_room_5
     type: bin
     start: 0x267A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x267F020, pad, pad_267F020]
@@ -10943,6 +11680,7 @@ segments:
   - name: men_room_6
     type: bin
     start: 0x2680000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2687F80, pad, pad_2687F80]
@@ -10950,6 +11688,7 @@ segments:
   - name: men_room_7
     type: bin
     start: 0x2688000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26902C0, pad, pad_26902C0]
@@ -10957,6 +11696,7 @@ segments:
   - name: men_room_8
     type: bin
     start: 0x2691000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2699230, pad, pad_2699230]
@@ -10964,6 +11704,7 @@ segments:
   - name: men_room_9
     type: bin
     start: 0x269A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x269D870, pad, pad_269D870]
@@ -10971,6 +11712,7 @@ segments:
   - name: men_room_10
     type: bin
     start: 0x269E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26A3C50, pad, pad_26A3C50]
@@ -10978,6 +11720,7 @@ segments:
   - name: ganontika_scene
     type: bin
     start: 0x26A4000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x26C57D0, pad, pad_26C57D0]
@@ -10985,6 +11728,7 @@ segments:
   - name: ganontika_room_0
     type: bin
     start: 0x26C6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26CF210, pad, pad_26CF210]
@@ -10992,6 +11736,7 @@ segments:
   - name: ganontika_room_1
     type: bin
     start: 0x26D0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26EC9D0, pad, pad_26EC9D0]
@@ -10999,6 +11744,7 @@ segments:
   - name: ganontika_room_2
     type: bin
     start: 0x26ED000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26F47E0, pad, pad_26F47E0]
@@ -11006,6 +11752,7 @@ segments:
   - name: ganontika_room_3
     type: bin
     start: 0x26F5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x26FEA40, pad, pad_26FEA40]
@@ -11013,6 +11760,7 @@ segments:
   - name: ganontika_room_4
     type: bin
     start: 0x26FF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2706C90, pad, pad_2706C90]
@@ -11020,6 +11768,7 @@ segments:
   - name: ganontika_room_5
     type: bin
     start: 0x2707000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x270E520, pad, pad_270E520]
@@ -11027,6 +11776,7 @@ segments:
   - name: ganontika_room_6
     type: bin
     start: 0x270F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x271EC60, pad, pad_271EC60]
@@ -11034,6 +11784,7 @@ segments:
   - name: ganontika_room_7
     type: bin
     start: 0x271F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2726C90, pad, pad_2726C90]
@@ -11041,6 +11792,7 @@ segments:
   - name: ganontika_room_8
     type: bin
     start: 0x2727000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2730020, pad, pad_2730020]
@@ -11048,6 +11800,7 @@ segments:
   - name: ganontika_room_9
     type: bin
     start: 0x2731000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x273C820, pad, pad_273C820]
@@ -11055,6 +11808,7 @@ segments:
   - name: ganontika_room_10
     type: bin
     start: 0x273D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2743BC0, pad, pad_2743BC0]
@@ -11062,6 +11816,7 @@ segments:
   - name: ganontika_room_11
     type: bin
     start: 0x2744000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x274A950, pad, pad_274A950]
@@ -11069,6 +11824,7 @@ segments:
   - name: ganontika_room_12
     type: bin
     start: 0x274B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2756270, pad, pad_2756270]
@@ -11076,6 +11832,7 @@ segments:
   - name: ganontika_room_13
     type: bin
     start: 0x2757000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x275ED40, pad, pad_275ED40]
@@ -11083,6 +11840,7 @@ segments:
   - name: ganontika_room_14
     type: bin
     start: 0x275F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x27691D0, pad, pad_27691D0]
@@ -11090,6 +11848,7 @@ segments:
   - name: ganontika_room_15
     type: bin
     start: 0x276A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2771D40, pad, pad_2771D40]
@@ -11097,6 +11856,7 @@ segments:
   - name: ganontika_room_16
     type: bin
     start: 0x2772000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2774E30, pad, pad_2774E30]
@@ -11104,6 +11864,7 @@ segments:
   - name: ganontika_room_17
     type: bin
     start: 0x2775000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x277D620, pad, pad_277D620]
@@ -11111,6 +11872,7 @@ segments:
   - name: ganontika_room_18
     type: bin
     start: 0x277E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x278A6E0, pad, pad_278A6E0]
@@ -11118,6 +11880,7 @@ segments:
   - name: ganontika_room_19
     type: bin
     start: 0x278B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2792D40, pad, pad_2792D40]
@@ -11125,6 +11888,7 @@ segments:
   - name: syotes_scene
     type: bin
     start: 0x2793000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2794C00, pad, pad_2794C00]
@@ -11132,6 +11896,7 @@ segments:
   - name: syotes_room_0
     type: bin
     start: 0x2795000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x27A1F80, pad, pad_27A1F80]
@@ -11139,6 +11904,7 @@ segments:
   - name: syotes2_scene
     type: bin
     start: 0x27A2000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x27A44B0, pad, pad_27A44B0]
@@ -11146,6 +11912,7 @@ segments:
   - name: syotes2_room_0
     type: bin
     start: 0x27A5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x27AEF00, pad, pad_27AEF00]
@@ -11153,6 +11920,7 @@ segments:
   - name: depth_test_scene
     type: bin
     start: 0x27AF000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x27AF300, pad, pad_27AF300]
@@ -11160,6 +11928,7 @@ segments:
   - name: depth_test_room_0
     type: bin
     start: 0x27B0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x27D5EF0, pad, pad_27D5EF0]
@@ -11167,6 +11936,7 @@ segments:
   - name: spot00_scene
     type: bin
     start: 0x27D6000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2800220, pad, pad_2800220]
@@ -11174,6 +11944,7 @@ segments:
   - name: spot00_room_0
     type: bin
     start: 0x2801000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2816230, pad, pad_2816230]
@@ -11181,6 +11952,7 @@ segments:
   - name: spot01_scene
     type: bin
     start: 0x2817000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2833150, pad, pad_2833150]
@@ -11188,6 +11960,7 @@ segments:
   - name: spot01_room_0
     type: bin
     start: 0x2834000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x283DEE0, pad, pad_283DEE0]
@@ -11195,6 +11968,7 @@ segments:
   - name: spot02_scene
     type: bin
     start: 0x283E000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2849C80, pad, pad_2849C80]
@@ -11202,6 +11976,7 @@ segments:
   - name: spot02_room_0
     type: bin
     start: 0x284A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x284C6E0, pad, pad_284C6E0]
@@ -11209,6 +11984,7 @@ segments:
   - name: spot02_room_1
     type: bin
     start: 0x284D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x286AF90, pad, pad_286AF90]
@@ -11216,6 +11992,7 @@ segments:
   - name: spot03_scene
     type: bin
     start: 0x286B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2876560, pad, pad_2876560]
@@ -11223,6 +12000,7 @@ segments:
   - name: spot03_room_0
     type: bin
     start: 0x2877000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2884980, pad, pad_2884980]
@@ -11230,6 +12008,7 @@ segments:
   - name: spot03_room_1
     type: bin
     start: 0x2885000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x288C500, pad, pad_288C500]
@@ -11237,6 +12016,7 @@ segments:
   - name: spot04_scene
     type: bin
     start: 0x288D000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x289E240, pad, pad_289E240]
@@ -11244,6 +12024,7 @@ segments:
   - name: spot04_room_0
     type: bin
     start: 0x289F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x28BA490, pad, pad_28BA490]
@@ -11251,6 +12032,7 @@ segments:
   - name: spot04_room_1
     type: bin
     start: 0x28BB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x28C3580, pad, pad_28C3580]
@@ -11258,6 +12040,7 @@ segments:
   - name: spot04_room_2
     type: bin
     start: 0x28C4000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x28C9070, pad, pad_28C9070]
@@ -11265,6 +12048,7 @@ segments:
   - name: spot05_scene
     type: bin
     start: 0x28CA000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x28DED60, pad, pad_28DED60]
@@ -11272,6 +12056,7 @@ segments:
   - name: spot05_room_0
     type: bin
     start: 0x28DF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x28E8F00, pad, pad_28E8F00]
@@ -11279,6 +12064,7 @@ segments:
   - name: spot06_scene
     type: bin
     start: 0x28E9000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2904430, pad, pad_2904430]
@@ -11286,6 +12072,7 @@ segments:
   - name: spot06_room_0
     type: bin
     start: 0x2905000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x290F620, pad, pad_290F620]
@@ -11293,6 +12080,7 @@ segments:
   - name: spot07_scene
     type: bin
     start: 0x2910000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2919820, pad, pad_2919820]
@@ -11300,6 +12088,7 @@ segments:
   - name: spot07_room_0
     type: bin
     start: 0x291A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29202F0, pad, pad_29202F0]
@@ -11307,6 +12096,7 @@ segments:
   - name: spot07_room_1
     type: bin
     start: 0x2921000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x292D9A0, pad, pad_292D9A0]
@@ -11314,6 +12104,7 @@ segments:
   - name: spot08_scene
     type: bin
     start: 0x292E000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x293F6A0, pad, pad_293F6A0]
@@ -11321,6 +12112,7 @@ segments:
   - name: spot08_room_0
     type: bin
     start: 0x2940000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2948160, pad, pad_2948160]
@@ -11328,6 +12120,7 @@ segments:
   - name: spot09_scene
     type: bin
     start: 0x2949000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x295A160, pad, pad_295A160]
@@ -11335,6 +12128,7 @@ segments:
   - name: spot09_room_0
     type: bin
     start: 0x295B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29637C0, pad, pad_29637C0]
@@ -11342,6 +12136,7 @@ segments:
   - name: spot10_scene
     type: bin
     start: 0x2964000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2974430, pad, pad_2974430]
@@ -11349,6 +12144,7 @@ segments:
   - name: spot10_room_0
     type: bin
     start: 0x2975000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29775F0, pad, pad_29775F0]
@@ -11356,6 +12152,7 @@ segments:
   - name: spot10_room_1
     type: bin
     start: 0x2978000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2980430, pad, pad_2980430]
@@ -11363,6 +12160,7 @@ segments:
   - name: spot10_room_2
     type: bin
     start: 0x2981000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2985BF0, pad, pad_2985BF0]
@@ -11370,6 +12168,7 @@ segments:
   - name: spot10_room_3
     type: bin
     start: 0x2986000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x298BAB0, pad, pad_298BAB0]
@@ -11377,6 +12176,7 @@ segments:
   - name: spot10_room_4
     type: bin
     start: 0x298C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x298E4D0, pad, pad_298E4D0]
@@ -11384,6 +12184,7 @@ segments:
   - name: spot10_room_5
     type: bin
     start: 0x298F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2995FF0, pad, pad_2995FF0]
@@ -11391,6 +12192,7 @@ segments:
   - name: spot10_room_6
     type: bin
     start: 0x2996000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2999AF0, pad, pad_2999AF0]
@@ -11398,6 +12200,7 @@ segments:
   - name: spot10_room_7
     type: bin
     start: 0x299A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x299C5C0, pad, pad_299C5C0]
@@ -11405,6 +12208,7 @@ segments:
   - name: spot10_room_8
     type: bin
     start: 0x299D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x299F670, pad, pad_299F670]
@@ -11412,6 +12216,7 @@ segments:
   - name: spot10_room_9
     type: bin
     start: 0x29A0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29A3BE0, pad, pad_29A3BE0]
@@ -11419,6 +12224,7 @@ segments:
   - name: spot11_scene
     type: bin
     start: 0x29A4000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x29BD4E0, pad, pad_29BD4E0]
@@ -11426,6 +12232,7 @@ segments:
   - name: spot11_room_0
     type: bin
     start: 0x29BE000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29CA7C0, pad, pad_29CA7C0]
@@ -11433,6 +12240,7 @@ segments:
   - name: spot12_scene
     type: bin
     start: 0x29CB000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x29DAE80, pad, pad_29DAE80]
@@ -11440,6 +12248,7 @@ segments:
   - name: spot12_room_0
     type: bin
     start: 0x29DB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29EC5C0, pad, pad_29EC5C0]
@@ -11447,6 +12256,7 @@ segments:
   - name: spot12_room_1
     type: bin
     start: 0x29ED000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x29F90A0, pad, pad_29F90A0]
@@ -11454,6 +12264,7 @@ segments:
   - name: spot13_scene
     type: bin
     start: 0x29FA000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x29FFE30, pad, pad_29FFE30]
@@ -11461,6 +12272,7 @@ segments:
   - name: spot13_room_0
     type: bin
     start: 0x2A00000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2A00910, pad, pad_2A00910]
@@ -11468,6 +12280,7 @@ segments:
   - name: spot13_room_1
     type: bin
     start: 0x2A01000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2A13A40, pad, pad_2A13A40]
@@ -11475,6 +12288,7 @@ segments:
   - name: spot15_scene
     type: bin
     start: 0x2A14000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2A2C500, pad, pad_2A2C500]
@@ -11482,6 +12296,7 @@ segments:
   - name: spot15_room_0
     type: bin
     start: 0x2A2D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2A3A1C0, pad, pad_2A3A1C0]
@@ -11489,6 +12304,7 @@ segments:
   - name: spot16_scene
     type: bin
     start: 0x2A3B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2A59A90, pad, pad_2A59A90]
@@ -11496,6 +12312,7 @@ segments:
   - name: spot16_room_0
     type: bin
     start: 0x2A5A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2A64D10, pad, pad_2A64D10]
@@ -11503,6 +12320,7 @@ segments:
   - name: spot17_scene
     type: bin
     start: 0x2A65000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2A74EE0, pad, pad_2A74EE0]
@@ -11510,6 +12328,7 @@ segments:
   - name: spot17_room_0
     type: bin
     start: 0x2A75000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2A7B880, pad, pad_2A7B880]
@@ -11517,6 +12336,7 @@ segments:
   - name: spot17_room_1
     type: bin
     start: 0x2A7C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2A8E360, pad, pad_2A8E360]
@@ -11524,6 +12344,7 @@ segments:
   - name: spot18_scene
     type: bin
     start: 0x2A8F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2A99450, pad, pad_2A99450]
@@ -11531,6 +12352,7 @@ segments:
   - name: spot18_room_0
     type: bin
     start: 0x2A9A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AAC7D0, pad, pad_2AAC7D0]
@@ -11538,6 +12360,7 @@ segments:
   - name: spot18_room_1
     type: bin
     start: 0x2AAD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AB3200, pad, pad_2AB3200]
@@ -11545,6 +12368,7 @@ segments:
   - name: spot18_room_2
     type: bin
     start: 0x2AB4000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AC59B0, pad, pad_2AC59B0]
@@ -11552,6 +12376,7 @@ segments:
   - name: spot18_room_3
     type: bin
     start: 0x2AC6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AE3CF0, pad, pad_2AE3CF0]
@@ -11559,6 +12384,7 @@ segments:
   - name: market_day_scene
     type: bin
     start: 0x2AE4000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2AE6670, pad, pad_2AE6670]
@@ -11566,6 +12392,7 @@ segments:
   - name: market_day_room_0
     type: bin
     start: 0x2AE7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AEC870, pad, pad_2AEC870]
@@ -11573,6 +12400,7 @@ segments:
   - name: market_night_scene
     type: bin
     start: 0x2AED000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2AEF630, pad, pad_2AEF630]
@@ -11580,6 +12408,7 @@ segments:
   - name: market_night_room_0
     type: bin
     start: 0x2AF0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AF57A0, pad, pad_2AF57A0]
@@ -11587,6 +12416,7 @@ segments:
   - name: testroom_scene
     type: bin
     start: 0x2AF6000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2AFA200, pad, pad_2AFA200]
@@ -11594,6 +12424,7 @@ segments:
   - name: testroom_room_0
     type: bin
     start: 0x2AFB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2AFF600, pad, pad_2AFF600]
@@ -11601,6 +12432,7 @@ segments:
   - name: testroom_room_1
     type: bin
     start: 0x2B00000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B023F0, pad, pad_2B023F0]
@@ -11608,6 +12440,7 @@ segments:
   - name: testroom_room_2
     type: bin
     start: 0x2B03000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B06280, pad, pad_2B06280]
@@ -11615,6 +12448,7 @@ segments:
   - name: testroom_room_3
     type: bin
     start: 0x2B07000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B0AA20, pad, pad_2B0AA20]
@@ -11622,6 +12456,7 @@ segments:
   - name: testroom_room_4
     type: bin
     start: 0x2B0B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B0B300, pad, pad_2B0B300]
@@ -11629,6 +12464,7 @@ segments:
   - name: kenjyanoma_scene
     type: bin
     start: 0x2B0C000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2B0F8F0, pad, pad_2B0F8F0]
@@ -11636,6 +12472,7 @@ segments:
   - name: kenjyanoma_room_0
     type: bin
     start: 0x2B10000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B23110, pad, pad_2B23110]
@@ -11643,6 +12480,7 @@ segments:
   - name: tokinoma_scene
     type: bin
     start: 0x2B24000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2B367A0, pad, pad_2B367A0]
@@ -11650,6 +12488,7 @@ segments:
   - name: tokinoma_room_0
     type: bin
     start: 0x2B37000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B4E1E0, pad, pad_2B4E1E0]
@@ -11657,6 +12496,7 @@ segments:
   - name: tokinoma_room_1
     type: bin
     start: 0x2B4F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B560D0, pad, pad_2B560D0]
@@ -11664,6 +12504,7 @@ segments:
   - name: sutaru_scene
     type: bin
     start: 0x2B57000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2B57BB0, pad, pad_2B57BB0]
@@ -11671,6 +12512,7 @@ segments:
   - name: sutaru_room_0
     type: bin
     start: 0x2B58000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B5F2F0, pad, pad_2B5F2F0]
@@ -11678,6 +12520,7 @@ segments:
   - name: link_home_scene
     type: bin
     start: 0x2B60000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2B61B60, pad, pad_2B61B60]
@@ -11685,6 +12528,7 @@ segments:
   - name: link_home_room_0
     type: bin
     start: 0x2B62000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2B89C80, pad, pad_2B89C80]
@@ -11692,6 +12536,7 @@ segments:
   - name: kokiri_shop_scene
     type: bin
     start: 0x2B8A000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2B8A980, pad, pad_2B8A980]
@@ -11699,6 +12544,7 @@ segments:
   - name: kokiri_shop_room_0
     type: bin
     start: 0x2B8B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2BBBC90, pad, pad_2BBBC90]
@@ -11706,6 +12552,7 @@ segments:
   - name: kokiri_home_scene
     type: bin
     start: 0x2BBC000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2BBCCC0, pad, pad_2BBCCC0]
@@ -11713,6 +12560,7 @@ segments:
   - name: kokiri_home_room_0
     type: bin
     start: 0x2BBD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2BE8C30, pad, pad_2BE8C30]
@@ -11720,6 +12568,7 @@ segments:
   - name: kakusiana_scene
     type: bin
     start: 0x2BE9000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2BF6820, pad, pad_2BF6820]
@@ -11727,6 +12576,7 @@ segments:
   - name: kakusiana_room_0
     type: bin
     start: 0x2BF7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2BFE2A0, pad, pad_2BFE2A0]
@@ -11734,6 +12584,7 @@ segments:
   - name: kakusiana_room_1
     type: bin
     start: 0x2BFF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C04190, pad, pad_2C04190]
@@ -11741,6 +12592,7 @@ segments:
   - name: kakusiana_room_2
     type: bin
     start: 0x2C05000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C078C0, pad, pad_2C078C0]
@@ -11748,6 +12600,7 @@ segments:
   - name: kakusiana_room_3
     type: bin
     start: 0x2C08000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C0D130, pad, pad_2C0D130]
@@ -11755,6 +12608,7 @@ segments:
   - name: kakusiana_room_4
     type: bin
     start: 0x2C0E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C15960, pad, pad_2C15960]
@@ -11762,6 +12616,7 @@ segments:
   - name: kakusiana_room_5
     type: bin
     start: 0x2C16000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C1A6E0, pad, pad_2C1A6E0]
@@ -11769,6 +12624,7 @@ segments:
   - name: kakusiana_room_6
     type: bin
     start: 0x2C1B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C20A70, pad, pad_2C20A70]
@@ -11776,6 +12632,7 @@ segments:
   - name: kakusiana_room_7
     type: bin
     start: 0x2C21000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C24FD0, pad, pad_2C24FD0]
@@ -11783,6 +12640,7 @@ segments:
   - name: kakusiana_room_8
     type: bin
     start: 0x2C25000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C28630, pad, pad_2C28630]
@@ -11790,6 +12648,7 @@ segments:
   - name: kakusiana_room_9
     type: bin
     start: 0x2C29000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C2EAD0, pad, pad_2C2EAD0]
@@ -11797,6 +12656,7 @@ segments:
   - name: kakusiana_room_10
     type: bin
     start: 0x2C2F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C34A30, pad, pad_2C34A30]
@@ -11804,6 +12664,7 @@ segments:
   - name: kakusiana_room_11
     type: bin
     start: 0x2C35000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C3D6B0, pad, pad_2C3D6B0]
@@ -11811,6 +12672,7 @@ segments:
   - name: kakusiana_room_12
     type: bin
     start: 0x2C3E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C45E50, pad, pad_2C45E50]
@@ -11818,6 +12680,7 @@ segments:
   - name: kakusiana_room_13
     type: bin
     start: 0x2C46000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C4CED0, pad, pad_2C4CED0]
@@ -11825,6 +12688,7 @@ segments:
   - name: entra_scene
     type: bin
     start: 0x2C4D000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2C4D3E0, pad, pad_2C4D3E0]
@@ -11832,6 +12696,7 @@ segments:
   - name: entra_room_0
     type: bin
     start: 0x2C4E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C73B70, pad, pad_2C73B70]
@@ -11839,6 +12704,7 @@ segments:
   - name: moribossroom_scene
     type: bin
     start: 0x2C74000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2C75900, pad, pad_2C75900]
@@ -11846,6 +12712,7 @@ segments:
   - name: moribossroom_room_0
     type: bin
     start: 0x2C76000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C7BEC0, pad, pad_2C7BEC0]
@@ -11853,6 +12720,7 @@ segments:
   - name: moribossroom_room_1
     type: bin
     start: 0x2C7C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C89AB0, pad, pad_2C89AB0]
@@ -11860,6 +12728,7 @@ segments:
   - name: syatekijyou_scene
     type: bin
     start: 0x2C8A000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2C962C0, pad, pad_2C962C0]
@@ -11867,6 +12736,7 @@ segments:
   - name: syatekijyou_room_0
     type: bin
     start: 0x2C97000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2C9E6F0, pad, pad_2C9E6F0]
@@ -11874,6 +12744,7 @@ segments:
   - name: shop1_scene
     type: bin
     start: 0x2C9F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2C9F2F0, pad, pad_2C9F2F0]
@@ -11881,6 +12752,7 @@ segments:
   - name: shop1_room_0
     type: bin
     start: 0x2CA0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2CC97B0, pad, pad_2CC97B0]
@@ -11888,6 +12760,7 @@ segments:
   - name: hairal_niwa_scene
     type: bin
     start: 0x2CCA000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2CDB390, pad, pad_2CDB390]
@@ -11895,6 +12768,7 @@ segments:
   - name: hairal_niwa_room_0
     type: bin
     start: 0x2CDC000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2CE68E0, pad, pad_2CE68E0]
@@ -11902,6 +12776,7 @@ segments:
   - name: ganon_tou_scene
     type: bin
     start: 0x2CE7000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2CEBB70, pad, pad_2CEBB70]
@@ -11909,6 +12784,7 @@ segments:
   - name: ganon_tou_room_0
     type: bin
     start: 0x2CEC000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2CFFAF0, pad, pad_2CFFAF0]
@@ -11916,6 +12792,7 @@ segments:
   - name: sasatest_scene
     type: bin
     start: 0x2D00000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2D02B20, pad, pad_2D02B20]
@@ -11923,6 +12800,7 @@ segments:
   - name: sasatest_room_0
     type: bin
     start: 0x2D03000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2D06650, pad, pad_2D06650]
@@ -11930,6 +12808,7 @@ segments:
   - name: market_alley_scene
     type: bin
     start: 0x2D07000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2D08250, pad, pad_2D08250]
@@ -11937,6 +12816,7 @@ segments:
   - name: market_alley_room_0
     type: bin
     start: 0x2D09000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2D7E700, pad, pad_2D7E700]
@@ -11944,6 +12824,7 @@ segments:
   - name: spot20_scene
     type: bin
     start: 0x2D7F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2D90E20, pad, pad_2D90E20]
@@ -11951,6 +12832,7 @@ segments:
   - name: spot20_room_0
     type: bin
     start: 0x2D91000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2D976D0, pad, pad_2D976D0]
@@ -11958,6 +12840,7 @@ segments:
   - name: market_ruins_scene
     type: bin
     start: 0x2D98000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2D99630, pad, pad_2D99630]
@@ -11965,6 +12848,7 @@ segments:
   - name: market_ruins_room_0
     type: bin
     start: 0x2D9A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2D9C820, pad, pad_2D9C820]
@@ -11972,6 +12856,7 @@ segments:
   - name: entra_n_scene
     type: bin
     start: 0x2D9D000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2D9D430, pad, pad_2D9D430]
@@ -11979,6 +12864,7 @@ segments:
   - name: entra_n_room_0
     type: bin
     start: 0x2D9E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2DC3B70, pad, pad_2DC3B70]
@@ -11986,6 +12872,7 @@ segments:
   - name: enrui_scene
     type: bin
     start: 0x2DC4000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2DC43E0, pad, pad_2DC43E0]
@@ -11993,6 +12880,7 @@ segments:
   - name: enrui_room_0
     type: bin
     start: 0x2DC5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2DEAB60, pad, pad_2DEAB60]
@@ -12000,6 +12888,7 @@ segments:
   - name: market_alley_n_scene
     type: bin
     start: 0x2DEB000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2DEC2F0, pad, pad_2DEC2F0]
@@ -12007,6 +12896,7 @@ segments:
   - name: market_alley_n_room_0
     type: bin
     start: 0x2DED000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2E626F0, pad, pad_2E626F0]
@@ -12014,6 +12904,7 @@ segments:
   - name: hiral_demo_scene
     type: bin
     start: 0x2E63000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2E66D50, pad, pad_2E66D50]
@@ -12021,6 +12912,7 @@ segments:
   - name: hiral_demo_room_0
     type: bin
     start: 0x2E67000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2E67640, pad, pad_2E67640]
@@ -12028,6 +12920,7 @@ segments:
   - name: kokiri_home3_scene
     type: bin
     start: 0x2E68000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2E697A0, pad, pad_2E697A0]
@@ -12035,6 +12928,7 @@ segments:
   - name: kokiri_home3_room_0
     type: bin
     start: 0x2E6A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2EA0610, pad, pad_2EA0610]
@@ -12042,6 +12936,7 @@ segments:
   - name: malon_stable_scene
     type: bin
     start: 0x2EA1000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2EA1670, pad, pad_2EA1670]
@@ -12049,6 +12944,7 @@ segments:
   - name: malon_stable_room_0
     type: bin
     start: 0x2EA2000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2ED0250, pad, pad_2ED0250]
@@ -12056,6 +12952,7 @@ segments:
   - name: kakariko_scene
     type: bin
     start: 0x2ED1000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2ED1EA0, pad, pad_2ED1EA0]
@@ -12063,6 +12960,7 @@ segments:
   - name: kakariko_room_0
     type: bin
     start: 0x2ED2000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2EFCFC0, pad, pad_2EFCFC0]
@@ -12070,6 +12968,7 @@ segments:
   - name: bdan_boss_scene
     type: bin
     start: 0x2EFD000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2EFDE40, pad, pad_2EFDE40]
@@ -12077,6 +12976,7 @@ segments:
   - name: bdan_boss_room_0
     type: bin
     start: 0x2EFE000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F01020, pad, pad_2F01020]
@@ -12084,6 +12984,7 @@ segments:
   - name: bdan_boss_room_1
     type: bin
     start: 0x2F02000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F070C0, pad, pad_2F070C0]
@@ -12091,6 +12992,7 @@ segments:
   - name: FIRE_bs_scene
     type: bin
     start: 0x2F08000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2F0CC00, pad, pad_2F0CC00]
@@ -12098,6 +13000,7 @@ segments:
   - name: FIRE_bs_room_0
     type: bin
     start: 0x2F0D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F11270, pad, pad_2F11270]
@@ -12105,6 +13008,7 @@ segments:
   - name: FIRE_bs_room_1
     type: bin
     start: 0x2F12000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F18FE0, pad, pad_2F18FE0]
@@ -12112,6 +13016,7 @@ segments:
   - name: hut_scene
     type: bin
     start: 0x2F19000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2F19510, pad, pad_2F19510]
@@ -12119,6 +13024,7 @@ segments:
   - name: hut_room_0
     type: bin
     start: 0x2F1A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F435A0, pad, pad_2F435A0]
@@ -12126,11 +13032,13 @@ segments:
   - name: daiyousei_izumi_scene
     type: bin
     start: 0x2F44000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - name: daiyousei_izumi_room_0
     type: bin
     start: 0x2F52000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F55910, pad, pad_2F55910]
@@ -12138,6 +13046,7 @@ segments:
   - name: hakaana_scene
     type: bin
     start: 0x2F56000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2F56A90, pad, pad_2F56A90]
@@ -12145,6 +13054,7 @@ segments:
   - name: hakaana_room_0
     type: bin
     start: 0x2F57000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F5E8D0, pad, pad_2F5E8D0]
@@ -12152,6 +13062,7 @@ segments:
   - name: yousei_izumi_tate_scene
     type: bin
     start: 0x2F5F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2F67810, pad, pad_2F67810]
@@ -12159,6 +13070,7 @@ segments:
   - name: yousei_izumi_tate_room_0
     type: bin
     start: 0x2F68000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F6C2D0, pad, pad_2F6C2D0]
@@ -12166,6 +13078,7 @@ segments:
   - name: yousei_izumi_yoko_scene
     type: bin
     start: 0x2F6D000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2F79DA0, pad, pad_2F79DA0]
@@ -12173,6 +13086,7 @@ segments:
   - name: yousei_izumi_yoko_room_0
     type: bin
     start: 0x2F7A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2F7E010, pad, pad_2F7E010]
@@ -12180,6 +13094,7 @@ segments:
   - name: golon_scene
     type: bin
     start: 0x2F7F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2F7F3A0, pad, pad_2F7F3A0]
@@ -12187,6 +13102,7 @@ segments:
   - name: golon_room_0
     type: bin
     start: 0x2F80000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2FA61D0, pad, pad_2FA61D0]
@@ -12194,6 +13110,7 @@ segments:
   - name: zoora_scene
     type: bin
     start: 0x2FA7000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2FA7390, pad, pad_2FA7390]
@@ -12201,6 +13118,7 @@ segments:
   - name: zoora_room_0
     type: bin
     start: 0x2FA8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2FCE1E0, pad, pad_2FCE1E0]
@@ -12208,6 +13126,7 @@ segments:
   - name: drag_scene
     type: bin
     start: 0x2FCF000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2FCF3F0, pad, pad_2FCF3F0]
@@ -12215,6 +13134,7 @@ segments:
   - name: drag_room_0
     type: bin
     start: 0x2FD0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x2FFBE60, pad, pad_2FFBE60]
@@ -12222,6 +13142,7 @@ segments:
   - name: alley_shop_scene
     type: bin
     start: 0x2FFC000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x2FFC5B0, pad, pad_2FFC5B0]
@@ -12229,6 +13150,7 @@ segments:
   - name: alley_shop_room_0
     type: bin
     start: 0x2FFD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3023C30, pad, pad_3023C30]
@@ -12236,6 +13158,7 @@ segments:
   - name: night_shop_scene
     type: bin
     start: 0x3024000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3024670, pad, pad_3024670]
@@ -12243,6 +13166,7 @@ segments:
   - name: night_shop_room_0
     type: bin
     start: 0x3025000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x304D960, pad, pad_304D960]
@@ -12250,6 +13174,7 @@ segments:
   - name: impa_scene
     type: bin
     start: 0x304E000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x304ED10, pad, pad_304ED10]
@@ -12257,6 +13182,7 @@ segments:
   - name: impa_room_0
     type: bin
     start: 0x304F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3075FA0, pad, pad_3075FA0]
@@ -12264,6 +13190,7 @@ segments:
   - name: labo_scene
     type: bin
     start: 0x3076000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3076EF0, pad, pad_3076EF0]
@@ -12271,6 +13198,7 @@ segments:
   - name: labo_room_0
     type: bin
     start: 0x3077000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x30A36F0, pad, pad_30A36F0]
@@ -12278,6 +13206,7 @@ segments:
   - name: tent_scene
     type: bin
     start: 0x30A4000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x30A4680, pad, pad_30A4680]
@@ -12285,6 +13214,7 @@ segments:
   - name: tent_room_0
     type: bin
     start: 0x30A5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x30D86A0, pad, pad_30D86A0]
@@ -12292,6 +13222,7 @@ segments:
   - name: nakaniwa_scene
     type: bin
     start: 0x30D9000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x30DCA20, pad, pad_30DCA20]
@@ -12299,6 +13230,7 @@ segments:
   - name: nakaniwa_room_0
     type: bin
     start: 0x30DD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x30F4EC0, pad, pad_30F4EC0]
@@ -12306,6 +13238,7 @@ segments:
   - name: ddan_boss_scene
     type: bin
     start: 0x30F5000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x30F7860, pad, pad_30F7860]
@@ -12313,6 +13246,7 @@ segments:
   - name: ddan_boss_room_0
     type: bin
     start: 0x30F8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x30FCE30, pad, pad_30FCE30]
@@ -12320,6 +13254,7 @@ segments:
   - name: ddan_boss_room_1
     type: bin
     start: 0x30FD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3100DE0, pad, pad_3100DE0]
@@ -12327,6 +13262,7 @@ segments:
   - name: ydan_boss_scene
     type: bin
     start: 0x3101000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3102740, pad, pad_3102740]
@@ -12334,6 +13270,7 @@ segments:
   - name: ydan_boss_room_0
     type: bin
     start: 0x3103000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3109FF0, pad, pad_3109FF0]
@@ -12341,6 +13278,7 @@ segments:
   - name: ydan_boss_room_1
     type: bin
     start: 0x310A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31107F0, pad, pad_31107F0]
@@ -12348,6 +13286,7 @@ segments:
   - name: HAKAdan_bs_scene
     type: bin
     start: 0x3111000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3113780, pad, pad_3113780]
@@ -12355,6 +13294,7 @@ segments:
   - name: HAKAdan_bs_room_0
     type: bin
     start: 0x3114000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31169E0, pad, pad_31169E0]
@@ -12362,6 +13302,7 @@ segments:
   - name: HAKAdan_bs_room_1
     type: bin
     start: 0x3117000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x311CF50, pad, pad_311CF50]
@@ -12369,6 +13310,7 @@ segments:
   - name: MIZUsin_bs_scene
     type: bin
     start: 0x311D000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x311EA60, pad, pad_311EA60]
@@ -12376,6 +13318,7 @@ segments:
   - name: MIZUsin_bs_room_0
     type: bin
     start: 0x311F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3123470, pad, pad_3123470]
@@ -12383,6 +13326,7 @@ segments:
   - name: MIZUsin_bs_room_1
     type: bin
     start: 0x3124000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x312F2F0, pad, pad_312F2F0]
@@ -12390,6 +13334,7 @@ segments:
   - name: ganon_scene
     type: bin
     start: 0x3130000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x31407B0, pad, pad_31407B0]
@@ -12397,6 +13342,7 @@ segments:
   - name: ganon_room_0
     type: bin
     start: 0x3141000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3148ED0, pad, pad_3148ED0]
@@ -12404,6 +13350,7 @@ segments:
   - name: ganon_room_1
     type: bin
     start: 0x3149000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3150770, pad, pad_3150770]
@@ -12411,6 +13358,7 @@ segments:
   - name: ganon_room_2
     type: bin
     start: 0x3151000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3158850, pad, pad_3158850]
@@ -12418,6 +13366,7 @@ segments:
   - name: ganon_room_3
     type: bin
     start: 0x3159000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3160730, pad, pad_3160730]
@@ -12425,6 +13374,7 @@ segments:
   - name: ganon_room_4
     type: bin
     start: 0x3161000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x316A0D0, pad, pad_316A0D0]
@@ -12432,6 +13382,7 @@ segments:
   - name: ganon_room_5
     type: bin
     start: 0x316B000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3173B10, pad, pad_3173B10]
@@ -12439,6 +13390,7 @@ segments:
   - name: ganon_room_6
     type: bin
     start: 0x3174000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x317DBA0, pad, pad_317DBA0]
@@ -12446,6 +13398,7 @@ segments:
   - name: ganon_room_7
     type: bin
     start: 0x317E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31887A0, pad, pad_31887A0]
@@ -12453,6 +13406,7 @@ segments:
   - name: ganon_room_8
     type: bin
     start: 0x3189000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x318FBE0, pad, pad_318FBE0]
@@ -12460,6 +13414,7 @@ segments:
   - name: ganon_room_9
     type: bin
     start: 0x3190000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3195920, pad, pad_3195920]
@@ -12467,6 +13422,7 @@ segments:
   - name: ganon_boss_scene
     type: bin
     start: 0x3196000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x319DC20, pad, pad_319DC20]
@@ -12474,6 +13430,7 @@ segments:
   - name: ganon_boss_room_0
     type: bin
     start: 0x319E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31A3E80, pad, pad_31A3E80]
@@ -12481,6 +13438,7 @@ segments:
   - name: jyasinboss_scene
     type: bin
     start: 0x31A4000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x31ACCF0, pad, pad_31ACCF0]
@@ -12488,6 +13446,7 @@ segments:
   - name: jyasinboss_room_0
     type: bin
     start: 0x31AD000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31ADFD0, pad, pad_31ADFD0]
@@ -12495,6 +13454,7 @@ segments:
   - name: jyasinboss_room_1
     type: bin
     start: 0x31AE000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31B5E40, pad, pad_31B5E40]
@@ -12502,6 +13462,7 @@ segments:
   - name: jyasinboss_room_2
     type: bin
     start: 0x31B6000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31B9DC0, pad, pad_31B9DC0]
@@ -12509,6 +13470,7 @@ segments:
   - name: jyasinboss_room_3
     type: bin
     start: 0x31BA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x31C5700, pad, pad_31C5700]
@@ -12516,6 +13478,7 @@ segments:
   - name: kokiri_home4_scene
     type: bin
     start: 0x31C6000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x31C7AB0, pad, pad_31C7AB0]
@@ -12523,6 +13486,7 @@ segments:
   - name: kokiri_home4_room_0
     type: bin
     start: 0x31C8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3200950, pad, pad_3200950]
@@ -12530,6 +13494,7 @@ segments:
   - name: kokiri_home5_scene
     type: bin
     start: 0x3201000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3202410, pad, pad_3202410]
@@ -12537,6 +13502,7 @@ segments:
   - name: kokiri_home5_room_0
     type: bin
     start: 0x3203000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3233F60, pad, pad_3233F60]
@@ -12544,6 +13510,7 @@ segments:
   - name: ganon_final_scene
     type: bin
     start: 0x3234000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3246180, pad, pad_3246180]
@@ -12551,6 +13518,7 @@ segments:
   - name: ganon_final_room_0
     type: bin
     start: 0x3247000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3253EB0, pad, pad_3253EB0]
@@ -12558,6 +13526,7 @@ segments:
   - name: kakariko3_scene
     type: bin
     start: 0x3254000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3254840, pad, pad_3254840]
@@ -12565,6 +13534,7 @@ segments:
   - name: kakariko3_room_0
     type: bin
     start: 0x3255000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x327F580, pad, pad_327F580]
@@ -12572,6 +13542,7 @@ segments:
   - name: hairal_niwa2_scene
     type: bin
     start: 0x3280000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3282D10, pad, pad_3282D10]
@@ -12579,6 +13550,7 @@ segments:
   - name: hairal_niwa2_room_0
     type: bin
     start: 0x3283000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x329AC00, pad, pad_329AC00]
@@ -12586,6 +13558,7 @@ segments:
   - name: hakasitarelay_scene
     type: bin
     start: 0x329B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x32A9270, pad, pad_32A9270]
@@ -12593,6 +13566,7 @@ segments:
   - name: hakasitarelay_room_0
     type: bin
     start: 0x32AA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32B12C0, pad, pad_32B12C0]
@@ -12600,6 +13574,7 @@ segments:
   - name: hakasitarelay_room_1
     type: bin
     start: 0x32B2000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32B8720, pad, pad_32B8720]
@@ -12607,6 +13582,7 @@ segments:
   - name: hakasitarelay_room_2
     type: bin
     start: 0x32B9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32C14B0, pad, pad_32C14B0]
@@ -12614,6 +13590,7 @@ segments:
   - name: hakasitarelay_room_3
     type: bin
     start: 0x32C2000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32CACE0, pad, pad_32CACE0]
@@ -12621,6 +13598,7 @@ segments:
   - name: hakasitarelay_room_4
     type: bin
     start: 0x32CB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32CF480, pad, pad_32CF480]
@@ -12628,6 +13606,7 @@ segments:
   - name: hakasitarelay_room_5
     type: bin
     start: 0x32D0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32D4450, pad, pad_32D4450]
@@ -12635,6 +13614,7 @@ segments:
   - name: hakasitarelay_room_6
     type: bin
     start: 0x32D5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x32DCAB0, pad, pad_32DCAB0]
@@ -12642,6 +13622,7 @@ segments:
   - name: shrine_scene
     type: bin
     start: 0x32DD000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x32DE4E0, pad, pad_32DE4E0]
@@ -12649,6 +13630,7 @@ segments:
   - name: shrine_room_0
     type: bin
     start: 0x32DF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3331AF0, pad, pad_3331AF0]
@@ -12656,6 +13638,7 @@ segments:
   - name: turibori_scene
     type: bin
     start: 0x3332000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x33446E0, pad, pad_33446E0]
@@ -12663,6 +13646,7 @@ segments:
   - name: turibori_room_0
     type: bin
     start: 0x3345000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x334B760, pad, pad_334B760]
@@ -12670,6 +13654,7 @@ segments:
   - name: shrine_n_scene
     type: bin
     start: 0x334C000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x334D500, pad, pad_334D500]
@@ -12677,6 +13662,7 @@ segments:
   - name: shrine_n_room_0
     type: bin
     start: 0x334E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x33A0B10, pad, pad_33A0B10]
@@ -12684,6 +13670,7 @@ segments:
   - name: shrine_r_scene
     type: bin
     start: 0x33A1000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x33A2490, pad, pad_33A2490]
@@ -12691,6 +13678,7 @@ segments:
   - name: shrine_r_room_0
     type: bin
     start: 0x33A3000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x33F5AF0, pad, pad_33F5AF0]
@@ -12698,6 +13686,7 @@ segments:
   - name: hakaana2_scene
     type: bin
     start: 0x33F6000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3403090, pad, pad_3403090]
@@ -12705,6 +13694,7 @@ segments:
   - name: hakaana2_room_0
     type: bin
     start: 0x3404000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x340A810, pad, pad_340A810]
@@ -12712,6 +13702,7 @@ segments:
   - name: gerudoway_scene
     type: bin
     start: 0x340B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3418920, pad, pad_3418920]
@@ -12719,6 +13710,7 @@ segments:
   - name: gerudoway_room_0
     type: bin
     start: 0x3419000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x341DD40, pad, pad_341DD40]
@@ -12726,6 +13718,7 @@ segments:
   - name: gerudoway_room_1
     type: bin
     start: 0x341E000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34252B0, pad, pad_34252B0]
@@ -12733,6 +13726,7 @@ segments:
   - name: gerudoway_room_2
     type: bin
     start: 0x3426000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3429E50, pad, pad_3429E50]
@@ -12740,6 +13734,7 @@ segments:
   - name: gerudoway_room_3
     type: bin
     start: 0x342A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3435310, pad, pad_3435310]
@@ -12747,6 +13742,7 @@ segments:
   - name: gerudoway_room_4
     type: bin
     start: 0x3436000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3439920, pad, pad_3439920]
@@ -12754,6 +13750,7 @@ segments:
   - name: gerudoway_room_5
     type: bin
     start: 0x343A000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x343EE40, pad, pad_343EE40]
@@ -12761,6 +13758,7 @@ segments:
   - name: hairal_niwa_n_scene
     type: bin
     start: 0x343F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x34480F0, pad, pad_34480F0]
@@ -12768,6 +13766,7 @@ segments:
   - name: hairal_niwa_n_room_0
     type: bin
     start: 0x3449000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x344C620, pad, pad_344C620]
@@ -12775,6 +13774,7 @@ segments:
   - name: bowling_scene
     type: bin
     start: 0x344D000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x345BB20, pad, pad_345BB20]
@@ -12782,6 +13782,7 @@ segments:
   - name: bowling_room_0
     type: bin
     start: 0x345C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34621E0, pad, pad_34621E0]
@@ -12789,6 +13790,7 @@ segments:
   - name: hakaana_ouke_scene
     type: bin
     start: 0x3463000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3467AE0, pad, pad_3467AE0]
@@ -12796,6 +13798,7 @@ segments:
   - name: hakaana_ouke_room_0
     type: bin
     start: 0x3468000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3472800, pad, pad_3472800]
@@ -12803,6 +13806,7 @@ segments:
   - name: hakaana_ouke_room_1
     type: bin
     start: 0x3473000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3477800, pad, pad_3477800]
@@ -12810,6 +13814,7 @@ segments:
   - name: hakaana_ouke_room_2
     type: bin
     start: 0x3478000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x347E110, pad, pad_347E110]
@@ -12817,6 +13822,7 @@ segments:
   - name: hylia_labo_scene
     type: bin
     start: 0x347F000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3490090, pad, pad_3490090]
@@ -12824,6 +13830,7 @@ segments:
   - name: hylia_labo_room_0
     type: bin
     start: 0x3491000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34985D0, pad, pad_34985D0]
@@ -12831,6 +13838,7 @@ segments:
   - name: souko_scene
     type: bin
     start: 0x3499000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x349FC10, pad, pad_349FC10]
@@ -12838,6 +13846,7 @@ segments:
   - name: souko_room_0
     type: bin
     start: 0x34A0000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34A9540, pad, pad_34A9540]
@@ -12845,6 +13854,7 @@ segments:
   - name: souko_room_1
     type: bin
     start: 0x34AA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34B4430, pad, pad_34B4430]
@@ -12852,6 +13862,7 @@ segments:
   - name: souko_room_2
     type: bin
     start: 0x34B5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34BD180, pad, pad_34BD180]
@@ -12859,6 +13870,7 @@ segments:
   - name: miharigoya_scene
     type: bin
     start: 0x34BE000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x34CA550, pad, pad_34CA550]
@@ -12866,6 +13878,7 @@ segments:
   - name: miharigoya_room_0
     type: bin
     start: 0x34CB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34CEDB0, pad, pad_34CEDB0]
@@ -12873,6 +13886,7 @@ segments:
   - name: mahouya_scene
     type: bin
     start: 0x34CF000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x34D9A20, pad, pad_34D9A20]
@@ -12880,6 +13894,7 @@ segments:
   - name: mahouya_room_0
     type: bin
     start: 0x34DA000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34E0A90, pad, pad_34E0A90]
@@ -12887,6 +13902,7 @@ segments:
   - name: takaraya_scene
     type: bin
     start: 0x34E1000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x34E81B0, pad, pad_34E81B0]
@@ -12894,6 +13910,7 @@ segments:
   - name: takaraya_room_0
     type: bin
     start: 0x34E9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34F2DC0, pad, pad_34F2DC0]
@@ -12901,11 +13918,13 @@ segments:
   - name: takaraya_room_1
     type: bin
     start: 0x34F3000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - name: takaraya_room_2
     type: bin
     start: 0x34F5000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34F7030, pad, pad_34F7030]
@@ -12913,6 +13932,7 @@ segments:
   - name: takaraya_room_3
     type: bin
     start: 0x34F8000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34FA820, pad, pad_34FA820]
@@ -12920,6 +13940,7 @@ segments:
   - name: takaraya_room_4
     type: bin
     start: 0x34FB000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x34FE020, pad, pad_34FE020]
@@ -12927,11 +13948,13 @@ segments:
   - name: takaraya_room_5
     type: bin
     start: 0x34FF000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - name: takaraya_room_6
     type: bin
     start: 0x3502000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3504B00, pad, pad_3504B00]
@@ -12939,6 +13962,7 @@ segments:
   - name: ganon_sonogo_scene
     type: bin
     start: 0x3505000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x350CF10, pad, pad_350CF10]
@@ -12946,6 +13970,7 @@ segments:
   - name: ganon_sonogo_room_0
     type: bin
     start: 0x350D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3514E80, pad, pad_3514E80]
@@ -12953,6 +13978,7 @@ segments:
   - name: ganon_sonogo_room_1
     type: bin
     start: 0x3515000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x351CBB0, pad, pad_351CBB0]
@@ -12960,6 +13986,7 @@ segments:
   - name: ganon_sonogo_room_2
     type: bin
     start: 0x351D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3525CA0, pad, pad_3525CA0]
@@ -12967,6 +13994,7 @@ segments:
   - name: ganon_sonogo_room_3
     type: bin
     start: 0x3526000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x352B640, pad, pad_352B640]
@@ -12974,6 +14002,7 @@ segments:
   - name: ganon_sonogo_room_4
     type: bin
     start: 0x352C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3534CF0, pad, pad_3534CF0]
@@ -12981,6 +14010,7 @@ segments:
   - name: ganon_demo_scene
     type: bin
     start: 0x3535000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x353E070, pad, pad_353E070]
@@ -12988,6 +14018,7 @@ segments:
   - name: ganon_demo_room_0
     type: bin
     start: 0x353F000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x3543150, pad, pad_3543150]
@@ -12995,6 +14026,7 @@ segments:
   - name: besitu_scene
     type: bin
     start: 0x3544000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x35444B0, pad, pad_35444B0]
@@ -13002,6 +14034,7 @@ segments:
   - name: besitu_room_0
     type: bin
     start: 0x3545000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x354A4E0, pad, pad_354A4E0]
@@ -13009,6 +14042,7 @@ segments:
   - name: face_shop_scene
     type: bin
     start: 0x354B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x354B370, pad, pad_354B370]
@@ -13016,6 +14050,7 @@ segments:
   - name: face_shop_room_0
     type: bin
     start: 0x354C000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x357A640, pad, pad_357A640]
@@ -13023,6 +14058,7 @@ segments:
   - name: kinsuta_scene
     type: bin
     start: 0x357B000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x357C610, pad, pad_357C610]
@@ -13030,6 +14066,7 @@ segments:
   - name: kinsuta_room_0
     type: bin
     start: 0x357D000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x358B0A0, pad, pad_358B0A0]
@@ -13037,6 +14074,7 @@ segments:
   - name: ganontikasonogo_scene
     type: bin
     start: 0x358C000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x3590B00, pad, pad_3590B00]
@@ -13044,6 +14082,7 @@ segments:
   - name: ganontikasonogo_room_0
     type: bin
     start: 0x3591000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x35A8B80, pad, pad_35A8B80]
@@ -13051,6 +14090,7 @@ segments:
   - name: ganontikasonogo_room_1
     type: bin
     start: 0x35A9000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x35B2F20, pad, pad_35B2F20]
@@ -13058,6 +14098,7 @@ segments:
   - name: test01_scene
     type: bin
     start: 0x35B3000
+    ld_align_segment_start: 0x1000
     vram: 0x02000000
 
   - [0x35B6E20, pad, pad_35B6E20]
@@ -13065,6 +14106,7 @@ segments:
   - name: test01_room_0
     type: bin
     start: 0x35B7000
+    ld_align_segment_start: 0x1000
     vram: 0x03000000
 
   - [0x35C08F0, pad, pad_35C08F0]
@@ -13072,6 +14114,7 @@ segments:
   - name: bump_texture_static
     type: bin
     start: 0x35C1000
+    ld_align_segment_start: 0x1000
     vram: 0x030098F0
     follows_vram: test01_room_0
 
@@ -13080,6 +14123,7 @@ segments:
   - name: anime_model_1_static
     type: bin
     start: 0x35C2000
+    ld_align_segment_start: 0x1000
     vram: 0x03009CF0
     follows_vram: bump_texture_static
 
@@ -13088,6 +14132,7 @@ segments:
   - name: anime_model_2_static
     type: bin
     start: 0x35C3000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D00
     follows_vram: anime_model_1_static
 
@@ -13096,6 +14141,7 @@ segments:
   - name: anime_model_3_static
     type: bin
     start: 0x35C4000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D10
     follows_vram: anime_model_2_static
 
@@ -13104,6 +14150,7 @@ segments:
   - name: anime_model_4_static
     type: bin
     start: 0x35C5000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D20
     follows_vram: anime_model_3_static
 
@@ -13112,6 +14159,7 @@ segments:
   - name: anime_model_5_static
     type: bin
     start: 0x35C6000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D30
     follows_vram: anime_model_4_static
 
@@ -13120,6 +14168,7 @@ segments:
   - name: anime_model_6_static
     type: bin
     start: 0x35C7000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D40
     follows_vram: anime_model_5_static
 
@@ -13128,6 +14177,7 @@ segments:
   - name: anime_texture_1_static
     type: bin
     start: 0x35C8000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D50
     follows_vram: anime_model_6_static
 
@@ -13136,6 +14186,7 @@ segments:
   - name: anime_texture_2_static
     type: bin
     start: 0x35C9000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D60
     follows_vram: anime_texture_1_static
 
@@ -13144,6 +14195,7 @@ segments:
   - name: anime_texture_3_static
     type: bin
     start: 0x35CA000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D70
     follows_vram: anime_texture_2_static
 
@@ -13152,6 +14204,7 @@ segments:
   - name: anime_texture_4_static
     type: bin
     start: 0x35CB000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D80
     follows_vram: anime_texture_3_static
 
@@ -13160,6 +14213,7 @@ segments:
   - name: anime_texture_5_static
     type: bin
     start: 0x35CC000
+    ld_align_segment_start: 0x1000
     vram: 0x03009D90
     follows_vram: anime_texture_4_static
 
@@ -13168,6 +14222,7 @@ segments:
   - name: anime_texture_6_static
     type: bin
     start: 0x35CD000
+    ld_align_segment_start: 0x1000
     vram: 0x03009DA0
     follows_vram: anime_texture_5_static
 
@@ -13176,6 +14231,7 @@ segments:
   - name: softsprite_matrix_static
     type: bin
     start: 0x35CE000
+    ld_align_segment_start: 0x1000
     vram: 0x03009DB0
     follows_vram: anime_texture_6_static
 

@@ -1,8 +1,17 @@
 from pathlib import Path
 
+import pyspec
+
+
 ok_map_p = Path(
     "/home/dragorn421/Documents/oot/build/gc-eu-mq-dbg/oot-gc-eu-mq-dbg.map"
 )
+
+ok_spec_p = Path("/home/dragorn421/Documents/oot/build/gc-eu-mq-dbg/spec")
+
+
+ok_spec = pyspec.parse_spec_p(ok_spec_p)
+
 
 SegmentRomStart = None
 SegmentStart = None
@@ -20,6 +29,7 @@ SegmentBssEnd = None
 SegmentEnd = None
 
 prev_segment_name = None
+prev_segment_romalign = 0
 prev_SegmentRomEnd = None
 prev_SegmentEnd = None
 
@@ -97,10 +107,17 @@ for l in ok_map_p.read_text().splitlines():
                     segment_type = "code"
                 else:
                     segment_type = "bin"
+                segment_romalign = ok_spec.find_segment_by_name(segment_name).romalign
 
                 print(f"  - name: {segment_name}")
                 print(f"    type: {segment_type}")
                 print(f"    start: 0x{SegmentRomStart:X}")
+                if segment_romalign != 0 or prev_segment_romalign != 0:
+                    print(
+                        "    ld_align_segment_start: "
+                        f"0x{max(segment_romalign, prev_segment_romalign):X}"
+                    )
+                prev_segment_romalign = segment_romalign
                 print(f"    vram: 0x{SegmentStart:08X}")
                 if SegmentStart == prev_SegmentEnd:
                     if segment_name == "boot":
