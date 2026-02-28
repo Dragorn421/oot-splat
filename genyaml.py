@@ -1,3 +1,4 @@
+import io
 from pathlib import Path
 
 import mapfile_parser
@@ -40,6 +41,13 @@ prev_SegmentRomEnd = None
 prev_SegmentEnd = None
 
 segment_names = set()
+
+genyaml_out = io.StringIO()
+
+
+def yamlprint(*args, **kwargs):
+    print(*args, **kwargs, file=genyaml_out)
+
 
 for l in ok_map_p.read_text().splitlines():
     toks = l.split()
@@ -102,10 +110,10 @@ for l in ok_map_p.read_text().splitlines():
                 assert prev_SegmentRomEnd is not None and prev_SegmentEnd is not None
 
                 if SegmentRomStart != prev_SegmentRomEnd:
-                    print(
+                    yamlprint(
                         f"  - [0x{prev_SegmentRomEnd:X}, pad, pad_{prev_SegmentRomEnd:X}]"
                     )
-                    print()
+                    yamlprint()
 
                 if segment_name in {
                     "boot",
@@ -117,25 +125,25 @@ for l in ok_map_p.read_text().splitlines():
                     segment_type = "bin"
                 segment_romalign = ok_spec.find_segment_by_name(segment_name).romalign
 
-                print(f"  - name: {segment_name}")
-                print(f"    type: {segment_type}")
-                print(f"    start: 0x{SegmentRomStart:X}")
+                yamlprint(f"  - name: {segment_name}")
+                yamlprint(f"    type: {segment_type}")
+                yamlprint(f"    start: 0x{SegmentRomStart:X}")
                 if segment_romalign != 0 or prev_segment_romalign != 0:
-                    print(
+                    yamlprint(
                         "    ld_align_segment_start: "
                         f"0x{max(segment_romalign, prev_segment_romalign):X}"
                     )
                 prev_segment_romalign = segment_romalign
-                print(f"    vram: 0x{SegmentStart:08X}")
+                yamlprint(f"    vram: 0x{SegmentStart:08X}")
                 if SegmentStart == prev_SegmentEnd:
                     if segment_name == "boot":
-                        print(f"    follows_vram: entry")
+                        yamlprint(f"    follows_vram: entry")
                     else:
-                        print(f"    follows_vram: {prev_segment_name}")
+                        yamlprint(f"    follows_vram: {prev_segment_name}")
                 if segment_type == "code":
                     bss_size = SegmentBssEnd - SegmentBssStart
-                    print(f"    bss_size: 0x{bss_size:X}")
-                    print(f"    subsegments:")
+                    yamlprint(f"    bss_size: 0x{bss_size:X}")
+                    yamlprint(f"    subsegments:")
                     prev_end = None
 
                     if segment_name in {"boot", "code"}:
@@ -152,11 +160,11 @@ for l in ok_map_p.read_text().splitlines():
                             subseg_name = f"{sec.filepath.stem}_{sec.vrom:X}_{sec.sectionType.removeprefix(".")}"
                             assert subseg_name not in segment_names
                             segment_names.add(subseg_name)
-                            print(
+                            yamlprint(
                                 f"      - [0x{sec.vrom:X}, {subseg_type}, {subseg_name}]"
                             )
                         for sec in map_segment_bss:
-                            print(
+                            yamlprint(
                                 f"      - {{ name: {sec.filepath.stem}_bss, type: bss, vram: 0x{sec.vram:X} }}"
                             )
                     else:
@@ -169,22 +177,22 @@ for l in ok_map_p.read_text().splitlines():
                         ):
                             if start != end:
                                 if prev_end is not None and prev_end != start:
-                                    print(
+                                    yamlprint(
                                         f"      - [0x{SegmentRomStart + (prev_end - SegmentStart):X}, pad]"
                                     )
                                 if subseg_type == "bss":
                                     subseg_name = f"bss_{start:X}"
                                     assert subseg_name not in segment_names
                                     segment_names.add(subseg_name)
-                                    print(
+                                    yamlprint(
                                         f"      - {{ name: {subseg_name}, type: bss, vram: 0x{start:X} }}"
                                     )
                                 else:
-                                    print(
+                                    yamlprint(
                                         f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}]"
                                     )
                                 prev_end = end
-                print()
+                yamlprint()
 
             prev_segment_name = segment_name
             prev_SegmentRomEnd = SegmentRomEnd
@@ -204,3 +212,14 @@ for l in ok_map_p.read_text().splitlines():
             SegmentBssStart = None
             SegmentBssEnd = None
             SegmentEnd = None
+
+splatyaml = Path("thelegendofzelda.yaml").read_text()
+splatyaml_prefix = splatyaml.split("# MAGIC_START_AUTO_GENYAML")[0]
+splatyaml_suffix = splatyaml.split("# MAGIC_END_AUTO_GENYAML\n")[1]
+Path("thelegendofzelda.yaml").write_text(
+    splatyaml_prefix
+    + "# MAGIC_START_AUTO_GENYAML\n\n"
+    + genyaml_out.getvalue()
+    + "# MAGIC_END_AUTO_GENYAML\n"
+    + splatyaml_suffix
+)

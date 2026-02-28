@@ -59,6 +59,8 @@ segments:
     subsegments:
       - [0x1000, hasm]
 
+# MAGIC_START_AUTO_GENYAML
+
   - name: boot
     type: code
     start: 0x1060
@@ -14896,5 +14898,7 @@ segments:
     ld_align_segment_start: 0x1000
     vram: 0x03009DB0
     follows_vram: anime_texture_6_static
+
+# MAGIC_END_AUTO_GENYAML
 
   - [0x35CF000]
