@@ -3,7 +3,7 @@ sha1: 2a87a67479d14871c84829a84f511d5e30beca3f
 options:
   basename: thelegendofzelda
   target_path: baserom.z64
-  elf_path: build/thelegendofzelda.elf
+  elf_path: build/rom.elf
   base_path: .
   platform: n64
   compiler: IDO

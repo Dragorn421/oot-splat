@@ -9,12 +9,6 @@ OBJCOPY := mips-linux-gnu-objcopy
 LD := mips-linux-gnu-ld
 LDFLAGS := -T $(LDSCRIPT) -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map $(BUILD_DIR)/rom.map
 
-ASM_FILES := $(shell find asm -name '*.s')
-ASSETS_FILES := $(shell find assets -name '*.bin')
-O_FILES := \
-  $(addprefix $(BUILD_DIR)/,$(ASM_FILES:.s=.o)) \
-  $(addprefix $(BUILD_DIR)/,$(ASSETS_FILES:.bin=.o))
-
 default: $(BUILD_DIR)/rom.z64
 .PHONY: default
 
@@ -26,9 +20,13 @@ $(BUILD_DIR)/%.o: %.bin
 	@mkdir -p $(dir $@)
 	$(OBJCOPY) -I binary -O elf32-tradbigmips $< $@
 
-$(BUILD_DIR)/rom.elf: $(LDSCRIPT) $(O_FILES)
+include thelegendofzelda.d
+
+$(BUILD_DIR)/rom.elf: $(LDSCRIPT) undefined_funcs_auto.txt undefined_syms_auto.txt
+	@mkdir -p $(dir $@)
 	$(LD) $(LDFLAGS) -o $@
 
 $(BUILD_DIR)/rom.z64: $(BUILD_DIR)/rom.elf
+	@mkdir -p $(dir $@)
 	$(OBJCOPY) -O binary $< $@
 	md5sum -c checksum.md5
