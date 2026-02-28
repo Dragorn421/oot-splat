@@ -147,6 +147,8 @@ for l in ok_map_p.read_text().splitlines():
                             subseg_type = sec.sectionType.removeprefix(".")
                             if subseg_type == "text":
                                 subseg_type = "asm"
+                            if sec.filepath.stem == "rsp.text":
+                                subseg_type = "textbin"
                             subseg_name = f"{sec.filepath.stem}_{sec.vrom:X}_{sec.sectionType.removeprefix(".")}"
                             assert subseg_name not in segment_names
                             segment_names.add(subseg_name)

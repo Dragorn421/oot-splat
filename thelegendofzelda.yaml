@@ -639,7 +639,7 @@ segments:
       - [0xB7DA50, asm, memmove_B7DA50_text]
       - [0xB7DB50, asm, z_message_z_game_over_B7DB50_text]
       - [0xB87B30, asm, z_construct_B87B30_text]
-      - [0xB89260, asm, rsp.text_B89260_text]
+      - [0xB89260, textbin, rsp.text_B89260_text]
       - [0xB8C5C0, data, z_en_a_keep_B8C5C0_data]
       - [0xB8C660, data, z_en_item00_B8C660_data]
       - [0xB8C900, data, z_eff_blure_B8C900_data]
