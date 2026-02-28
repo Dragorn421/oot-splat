@@ -1,4 +1,5 @@
 .venv
+.vscode
 __pycache__
 *.z64
 asm
