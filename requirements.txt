@@ -1,1 +1,5 @@
 splat64==0.37.3
+
+# decomp-permuter
+pycparser==3.0
+toml==0.10.2

@@ -1,6 +1,7 @@
 .venv
 .vscode
 __pycache__
+nonmatchings
 *.z64
 asm
 assets
