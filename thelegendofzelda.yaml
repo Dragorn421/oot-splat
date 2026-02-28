@@ -23,6 +23,8 @@ options:
   use_legacy_include_asm: False
   mips_abi_float_regs: o32
 
+  generated_c_preamble: ''
+
   # section_order: [".text", ".data", ".rodata", ".bss"]
   # auto_link_sections: [".data", ".rodata", ".bss"]
 
@@ -1402,9 +1404,9 @@ segments:
     follows_vram: ovl_Bg_Haka_Ship
     bss_size: 0x0
     subsegments:
-      - [0xC4E9E0, asm]
-      - [0xC4FC70, data]
-      - [0xC4FD80, rodata]
+      - [0xC4E9E0, c, overlays/actors/ovl_Bg_Haka_Trap]
+      - [0xC4FC70, data, overlays/actors/ovl_Bg_Haka_Trap]
+      - [0xC4FD80, .rodata, overlays/actors/ovl_Bg_Haka_Trap]
       - [0xC4FDB0, rodatabin]
 
   - name: ovl_Bg_Haka_Tubo
