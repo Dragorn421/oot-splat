@@ -31,3 +31,4 @@ $(BUILD_DIR)/rom.elf: $(LDSCRIPT) $(O_FILES)
 
 $(BUILD_DIR)/rom.z64: $(BUILD_DIR)/rom.elf
 	$(OBJCOPY) -O binary $< $@
+	md5sum -c checksum.md5
