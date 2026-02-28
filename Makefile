@@ -6,6 +6,8 @@ ASFLAGS := -march=vr4300 -32 -no-pad-sections -Iinclude
 
 OBJCOPY := mips-linux-gnu-objcopy
 
+IDO := /home/dragorn421/Documents/oot/tools/ido_recomp/linux/7.1/cc
+
 LD := mips-linux-gnu-ld
 LDFLAGS := -T $(LDSCRIPT) -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map $(BUILD_DIR)/rom.map
 
@@ -19,6 +21,10 @@ $(BUILD_DIR)/%.o: %.s
 $(BUILD_DIR)/%.o: %.bin
 	@mkdir -p $(dir $@)
 	$(OBJCOPY) -I binary -O elf32-tradbigmips $< $@
+
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	python3 ./tools/asm-processor/build.py $(IDO) -- $(AS) $(ASFLAGS) -- -c -G 0 -non_shared -fullwarn -verbose -Xcpluscomm -Wab,-r4300_mul -mips2 -O2 -o $@ $<
 
 include thelegendofzelda.d
 
