@@ -40,14 +40,14 @@ prev_segment_romalign = 0
 prev_SegmentRomEnd = None
 prev_SegmentEnd = None
 
-segment_names = set()
-
 genyaml_out = io.StringIO()
 
 
 def yamlprint(*args, **kwargs):
     print(*args, **kwargs, file=genyaml_out)
 
+
+used_subseg_names = set()
 
 for l in ok_map_p.read_text().splitlines():
     toks = l.split()
@@ -157,9 +157,69 @@ for l in ok_map_p.read_text().splitlines():
                                 subseg_type = "asm"
                             if sec.filepath.stem == "rsp.text":
                                 subseg_type = "textbin"
-                            subseg_name = f"{sec.filepath.stem}_{sec.vrom:X}_{sec.sectionType.removeprefix(".")}"
-                            assert subseg_name not in segment_names
-                            segment_names.add(subseg_name)
+                            subseg_name = str(
+                                sec.filepath.with_suffix("").relative_to(
+                                    "build/gc-eu-mq-dbg"
+                                )
+                            )
+
+                            # work around mapfile_parser bug?
+                            if sec.vrom == 0x2C70:
+                                assert subseg_name == "src/boot/assert", subseg_name
+                                # 0x10 bytes of padding due to unknown-reason 0x20 alignment of isdebug.c
+                                subseg_name = "assert_text_pad_to_isdebug"
+                            if sec.vrom == 0x54F0:
+                                assert (
+                                    subseg_name == "src/libultra/io/pimgr"
+                                ), subseg_name
+                                subseg_name = "kdebugserver"
+                            if sec.vrom == 0x9890:
+                                assert (
+                                    subseg_name == "src/libultra/io/sirawwrite"
+                                ), subseg_name
+                                # another 0x10 of padding
+                                subseg_name = "sirawwrite_text_pad_to_vimgr"
+                            if sec.vrom == 0xB3AE10:
+                                assert (
+                                    subseg_name == "src/code/audio_stop_all_sfx"
+                                ), subseg_name
+                                # another 0x10 of padding
+                                subseg_name = "audio_stop_all_sfx_text_pad_to_audio_thread_manager"
+                            if sec.vrom == 0xB4B0B0:
+                                assert (
+                                    subseg_name == "src/code/debug_malloc"
+                                ), subseg_name
+                                # another 0x10 of padding
+                                subseg_name = "debug_malloc_text_pad_to_fault_gc"
+                            if sec.vrom == 0xB51E50:
+                                assert (
+                                    subseg_name == "src/code/ucode_disas"
+                                ), subseg_name
+                                # pad_text
+                                subseg_name = "ucode_disas_text_pad_to_synthesis"
+                            if sec.vrom == 0xB7B2F0:
+                                assert (
+                                    subseg_name == "src/libultra/os/getactivequeue"
+                                ), subseg_name
+                                # another 0x10 of padding
+                                subseg_name = "getactivequeue_text_pad_to_normalize"
+                            if sec.vrom == 0xB7CDB0:
+                                assert (
+                                    subseg_name == "src/libultra/io/aigetlen"
+                                ), subseg_name
+                                # another 0x10 of padding
+                                subseg_name = "aigetlen_text_pad_to_translate"
+                            if sec.vrom == 0xB7D670:
+                                assert (
+                                    subseg_name
+                                    == "src/libultra/os/getcurrfaultedthread"
+                                ), subseg_name
+                                # another 0x10 of padding
+                                subseg_name = "getcurrfaultedthread_text_pad_to_mtxf2l"
+                            if (subseg_type, subseg_name) in used_subseg_names:
+                                assert False, subseg_name
+                            used_subseg_names.add((subseg_type, subseg_name))
+
                             yamlprint(
                                 f"      - [0x{sec.vrom:X}, {subseg_type}, {subseg_name}]"
                             )
@@ -182,8 +242,6 @@ for l in ok_map_p.read_text().splitlines():
                                     )
                                 if subseg_type == "bss":
                                     subseg_name = f"bss_{start:X}"
-                                    assert subseg_name not in segment_names
-                                    segment_names.add(subseg_name)
                                     yamlprint(
                                         f"      - {{ name: {subseg_name}, type: bss, vram: 0x{start:X} }}"
                                     )
