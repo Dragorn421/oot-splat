@@ -1,11 +1,17 @@
 from pathlib import Path
 
+import mapfile_parser
+
 import pyspec
 
 
 ok_map_p = Path(
     "/home/dragorn421/Documents/oot/build/gc-eu-mq-dbg/oot-gc-eu-mq-dbg.map"
 )
+
+ok_map = mapfile_parser.MapFile()
+ok_map.readMapFile(ok_map_p)
+ok_map_segment_by_name = {s.name: s for s in ok_map}
 
 ok_spec_p = Path("/home/dragorn421/Documents/oot/build/gc-eu-mq-dbg/spec")
 
@@ -32,6 +38,8 @@ prev_segment_name = None
 prev_segment_romalign = 0
 prev_SegmentRomEnd = None
 prev_SegmentEnd = None
+
+segment_names = set()
 
 for l in ok_map_p.read_text().splitlines():
     toks = l.split()
@@ -129,27 +137,51 @@ for l in ok_map_p.read_text().splitlines():
                     print(f"    bss_size: 0x{bss_size:X}")
                     print(f"    subsegments:")
                     prev_end = None
-                    for start, end, subseg_type in (
-                        (SegmentTextStart, SegmentTextEnd, "asm"),
-                        (SegmentDataStart, SegmentDataEnd, "data"),
-                        (SegmentRoDataStart, SegmentRoDataEnd, "rodata"),
-                        (SegmentOvlStart, SegmentOvlEnd, "bin"),
-                        (SegmentBssStart, SegmentBssEnd, "bss"),
-                    ):
-                        if start != end:
-                            if prev_end is not None and prev_end != start:
-                                print(
-                                    f"      - [0x{SegmentRomStart + (prev_end - SegmentStart):X}, pad]"
-                                )
-                            if subseg_type == "bss":
-                                print(
-                                    f"      - {{ name: bss_{start:X}, type: bss, vram: 0x{start:X} }}"
-                                )
-                            else:
-                                print(
-                                    f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}]"
-                                )
-                            prev_end = end
+
+                    if segment_name in {"boot", "code"}:
+                        map_segment = ok_map_segment_by_name[".." + segment_name]
+                        map_segment_bss = ok_map_segment_by_name[
+                            ".." + segment_name + ".bss"
+                        ]
+                        for sec in map_segment:
+                            subseg_type = sec.sectionType.removeprefix(".")
+                            if subseg_type == "text":
+                                subseg_type = "asm"
+                            subseg_name = f"{sec.filepath.stem}_{sec.vrom:X}_{sec.sectionType.removeprefix(".")}"
+                            assert subseg_name not in segment_names
+                            segment_names.add(subseg_name)
+                            print(
+                                f"      - [0x{sec.vrom:X}, {subseg_type}, {subseg_name}]"
+                            )
+                        for sec in map_segment_bss:
+                            print(
+                                f"      - {{ name: {sec.filepath.stem}_bss, type: bss, vram: 0x{sec.vram:X} }}"
+                            )
+                    else:
+                        for start, end, subseg_type in (
+                            (SegmentTextStart, SegmentTextEnd, "asm"),
+                            (SegmentDataStart, SegmentDataEnd, "data"),
+                            (SegmentRoDataStart, SegmentRoDataEnd, "rodata"),
+                            (SegmentOvlStart, SegmentOvlEnd, "bin"),
+                            (SegmentBssStart, SegmentBssEnd, "bss"),
+                        ):
+                            if start != end:
+                                if prev_end is not None and prev_end != start:
+                                    print(
+                                        f"      - [0x{SegmentRomStart + (prev_end - SegmentStart):X}, pad]"
+                                    )
+                                if subseg_type == "bss":
+                                    subseg_name = f"bss_{start:X}"
+                                    assert subseg_name not in segment_names
+                                    segment_names.add(subseg_name)
+                                    print(
+                                        f"      - {{ name: {subseg_name}, type: bss, vram: 0x{start:X} }}"
+                                    )
+                                else:
+                                    print(
+                                        f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}]"
+                                    )
+                                prev_end = end
                 print()
 
             prev_segment_name = segment_name
