@@ -1,5 +1,44 @@
 #include "global.h"
 
+GameInfo *gGameInfo;
+
+typedef struct struct_8015FA98_sub {
+    s8 unk0;
+    s8 unk1;
+    s8 unk2;
+    s8 unk3[0x15];
+} struct_8015FA98_sub;
+typedef struct struct_8015FA98 {
+    struct_8015FA98_sub unk0[0x16];
+} struct_8015FA98;
+
+struct_8015FA98 D_8015FA98;
+
+s16 D_8011E0B0 = 0;
+Color_RGBA8 D_8011E0B4[] = {
+    { 0xFF, 0xFF, 0x20, 0xC0 }, { 0xFF, 0x96, 0x80, 0xC0 }, { 0x80, 0x60, 0x00, 0x40 }, { 0xC0, 0x80, 0x10, 0x80 },
+    { 0xFF, 0xC0, 0x20, 0x80 }, { 0xE6, 0xE6, 0xDC, 0x40 }, { 0x80, 0x96, 0xFF, 0x80 }, { 0x80, 0xFF, 0x20, 0x80 },
+};
+
+typedef struct struct_8011E0D4 {
+    u16 unk0;
+    u16 unk2;
+} struct_8011E0D4;
+struct_8011E0D4 D_8011E0D4[] = {
+    { 0x0020, 0x0008 }, { 0x0020, 0x0002 }, { 0x0020, 0x0004 }, { 0x0020, 0x8000 }, { 0x0010, 0x0004 },
+    { 0x0020, 0x0001 }, { 0x0020, 0x0010 }, { 0x0020, 0x0200 }, { 0x0020, 0x0100 }, { 0x0020, 0x0800 },
+    { 0x0020, 0x4000 }, { 0x0020, 0x2000 }, { 0x0020, 0x0400 }, { 0x0010, 0x8000 }, { 0x0010, 0x4000 },
+    { 0x0010, 0x2000 }, { 0x0010, 0x0020 }, { 0x0010, 0x0008 }, { 0x0010, 0x0001 }, { 0x0010, 0x0200 },
+    { 0x0010, 0x0002 }, { 0x0010, 0x1000 }, { 0x0020, 0x1000 }, { 0x0010, 0x0100 }, { 0x0010, 0x0800 },
+    { 0x1000, 0x0010 }, { 0x1000, 0x8000 }, { 0x1000, 0x4000 }, { 0x1000, 0x0001 },
+};
+
+u8 D_8011E148[] = {
+    0x20, 0x53, 0x4F, 0x50, 0x51, 0x4D, 0x59, 0x44, 0x55, 0x49, 0x5A, 0x43, 0x4E, 0x4B,
+    0x58, 0x63, 0x73, 0x69, 0x57, 0x41, 0x56, 0x48, 0x47, 0x6D, 0x6E, 0x42, 0x64, 0x6B,
+    0x62, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
+
 void func_800636C0(void) {
     s32 i;
 
@@ -16,20 +55,6 @@ void func_800636C0(void) {
 
 void func_8006375C(s32 arg0, s32 arg1, s32 arg2) {
 }
-
-extern s16 D_8011E0B0;
-
-typedef struct struct_8015FA98_sub {
-    s8 unk0;
-    s8 unk1;
-    s8 unk2;
-    s8 unk3[0x15];
-} struct_8015FA98_sub;
-typedef struct struct_8015FA98 {
-    struct_8015FA98_sub unk0[0x16];
-} struct_8015FA98;
-
-extern struct_8015FA98 D_8015FA98;
 
 #ifdef NON_MATCHING
 void func_8006376C(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
@@ -71,8 +96,6 @@ void func_8006376C(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code/z_debug/func_8006376C.s")
 #endif
 
-extern Color_RGBA8 D_8011E0B4[];
-
 void func_80063828(GfxPrint* arg0) {
     Color_RGBA8* temp_v0;
     s32 i;
@@ -84,12 +107,6 @@ void func_80063828(GfxPrint* arg0) {
         GfxPrint_Printf(arg0, "%s", D_8015FA98.unk0[i].unk3);
     }
 }
-
-typedef struct struct_8011E0D4 {
-    u16 unk0;
-    u16 unk2;
-} struct_8011E0D4;
-extern struct_8011E0D4 D_8011E0D4[];
 
 typedef struct struct_8006390C_arg0 {
     u16 unk00;
@@ -170,8 +187,6 @@ void func_8006390C(struct_8006390C_arg0* arg0) {
         }
     }
 }
-
-extern u8 D_8011E148[];
 
 void func_80063C04(GfxPrint* arg0) {
     s32 temp_s4;

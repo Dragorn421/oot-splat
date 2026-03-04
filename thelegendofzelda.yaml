@@ -659,7 +659,7 @@ segments:
       - [0xB91080, data, code/z_camera]
       - [0xB94CC0, data, code/z_collision_btltbls]
       - [0xB94FA0, data, code/z_collision_check]
-      - [0xB95250, data, code/z_debug]
+      - [0xB95250, .data, code/z_debug]
       - [0xB95310, data, code/z_debug_display]
       - [0xB95360, data, code/z_demo]
       - [0xB954C0, data, code/z_draw]
@@ -891,7 +891,7 @@ segments:
       - { name: z_camera_bss, type: bss, vram: 0x8015BD50 }
       - { name: z_collision_check_bss, type: bss, vram: 0x8015CF00 }
       - { name: z_common_data_bss, type: bss, vram: 0x8015E660 }
-      - { name: z_debug_bss, type: bss, vram: 0x8015FA90 }
+      - { name: code/z_debug, type: .bss, vram: 0x8015FA90 }
       - { name: z_debug_display_bss, type: bss, vram: 0x8015FCB0 }
       - { name: z_demo_bss, type: bss, vram: 0x8015FCC0 }
       - { name: z_kankyo_bss, type: bss, vram: 0x8015FCF0 }
