@@ -35,4 +35,6 @@ $(BUILD_DIR)/rom.elf: $(LDSCRIPT) undefined_funcs_auto.txt undefined_syms_auto.t
 $(BUILD_DIR)/rom.z64: $(BUILD_DIR)/rom.elf
 	@mkdir -p $(dir $@)
 	$(OBJCOPY) -O binary $< $@
+ifneq ($(COMPARE),0)
 	md5sum -c checksum.md5
+endif
