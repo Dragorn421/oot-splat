@@ -1,8 +1,8 @@
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_8087FCA0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/BgHakaTrap_Init.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_8087FF3C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/BgHakaTrap_Destroy.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_8087FFC0.s")
 
@@ -26,8 +26,8 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_80880C0C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_80880C80.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/BgHakaTrap_Update.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_80880D68.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/func_80880E04.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/overlays/actors/ovl_Bg_Haka_Trap/BgHakaTrap_Draw.s")
