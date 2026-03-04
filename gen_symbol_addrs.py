@@ -9,7 +9,11 @@ symbol_addrs_p = Path("symbol_addrs.txt")
 
 gen_l = list[str]()
 
-SKIP_SYMS = {"vi", "D_80157D90_", "gZBuffer"}
+SKIP_SYMS = {"vi", "D_80157D90_", "gZBuffer", "D_8015FA9B", "D_8015FC18"}
+
+OPTS = {
+    "D_8015FA98": {"size": "0x210"},
+}
 
 for name, addr, size in sorted(
     pynm.nm_syms_sized(str(elf_p)),
@@ -27,6 +31,7 @@ for name, addr, size in sorted(
     options = dict[str, str]()
     if size is not None:
         options["size"] = f"0x{size:X}"
+    options.update(OPTS.get(name, {}))
     if options:
         l += " // " + " ".join(f"{k}:{v}" for k, v in options.items())
     gen_l.append(l)

@@ -12,6 +12,7 @@ def preprocess(in_file: Path):
         "-E",
         "-P",
         "-Iinclude",
+        "-Iinclude/include_oot_cc0redo",
         "-undef",
         "-D__sgi",
         "-D_LANGUAGE_C",

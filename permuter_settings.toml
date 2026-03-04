@@ -1,5 +1,8 @@
 build_system = "make"
 compiler_type = "ido"
 
+[preserve_macros]
+"g[DS]P.*" = "void"
+
 [decompme.compilers]
 "/home/dragorn421/Documents/oot/tools/ido_recomp/linux/7.1/cc" = "ido7.1"

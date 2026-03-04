@@ -3,6 +3,9 @@
 #ifndef _ULTRA64_GBI_H_
 #define _ULTRA64_GBI_H_
 
+/* Private macro to wrap other macros in do {...} while (0) */
+#define _DW(macro) do {macro} while (0)	
+
 /* To enable Fast3DEX grucode support, define F3DEX_GBI. */
 
 /* Types */
@@ -4483,8 +4486,5 @@ _DW({									\
 #define	gsDPNoOpTag(tag)	gsDPParam(G_NOOP, tag)
 
 #endif
-
-/* Private macro to wrap other macros in do {...} while (0) */
-#define _DW(macro) do {macro} while (0)	
 
 #endif

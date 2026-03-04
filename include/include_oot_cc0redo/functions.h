@@ -1472,7 +1472,7 @@ void* Graph_Alloc(GraphicsContext* gfxCtx, size_t size);
 void func_800C6AC4(Gfx** a0, GraphicsContext* gfxCtx, char* file, s32 line);
 void func_800C6B54(Gfx** a0, GraphicsContext* gfxCtx, char* file, s32 line);
 Gfx* func_800C6C20(Gfx* a0);
-// ? func_800C6C28(?);
+Gfx* func_800C6C28(Gfx *, Gfx *);
 // ? func_800C6C3C(?);
 ListAlloc* ListAlloc_Init(ListAlloc* this);
 void* ListAlloc_Alloc(ListAlloc* this, u32 size);
