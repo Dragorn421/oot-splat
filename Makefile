@@ -6,7 +6,11 @@ ASFLAGS := -march=vr4300 -32 -no-pad-sections -Iinclude
 
 OBJCOPY := mips-linux-gnu-objcopy
 
-IDO := /home/dragorn421/Documents/oot/tools/ido_recomp/linux/7.1/cc
+ifeq ($(IDO7RECOMP),)
+  $(error No path to ido 7.1 recomp set. Export IDO7RECOMP as an environment variable or pass it to make.)
+endif
+
+IDO := $(IDO7RECOMP)
 
 LD := mips-linux-gnu-ld
 LDFLAGS := -T $(LDSCRIPT) -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map $(BUILD_DIR)/rom.map

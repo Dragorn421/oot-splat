@@ -1,5 +1,15 @@
 splat64==0.37.3
 
+# asm-differ
+colorama
+watchdog
+levenshtein
+cxxfilt
+
 # decomp-permuter
 pycparser==3.0
 toml==0.10.2
+
+# sym_info.py
+mapfile-parser>=2.12.1,<3.0.0
+pyelftools==0.30

@@ -5,4 +5,4 @@ compiler_type = "ido"
 "g[DS]P.*" = "void"
 
 [decompme.compilers]
-"/home/dragorn421/Documents/oot/tools/ido_recomp/linux/7.1/cc" = "ido7.1"
+"*/tools/ido_recomp/linux/7.1/cc" = "ido7.1"
