@@ -45,6 +45,12 @@ options:
   # libultra_symbols: True
   # hardware_regs: True
   # gfx_ucode: # one of [f3d, f3db, f3dex, f3dexb, f3dex2]
+
+  ld_sections_allowlist:
+    - .pdr
+    - .mdebug
+    - .mdebug.abi32
+
 segments:
   - name: header
     type: header
