@@ -3,20 +3,20 @@
 
 #include <z64.h>
 
-#define DECLARE_SEGMENT(name) \
+#define DECLARE_SEGMENT(name)          \
     extern u8 _##name##SegmentStart[]; \
     extern u8 _##name##SegmentEnd[];
 
-#define DECLARE_ROM_SEGMENT(name) \
+#define DECLARE_ROM_SEGMENT(name)         \
     extern u8 _##name##SegmentRomStart[]; \
     extern u8 _##name##SegmentRomEnd[];
 
-#define DECLARE_BSS_SEGMENT(name) \
+#define DECLARE_BSS_SEGMENT(name)         \
     extern u8 _##name##SegmentBssStart[]; \
     extern u8 _##name##SegmentBssEnd[];
 
 #define DECLARE_OVERLAY_SEGMENT(name) \
-    DECLARE_SEGMENT(ovl_##name) \
+    DECLARE_SEGMENT(ovl_##name)       \
     DECLARE_ROM_SEGMENT(ovl_##name)
 
 DECLARE_SEGMENT(boot)
@@ -31,6 +31,14 @@ DECLARE_ROM_SEGMENT(Audiotable)
 DECLARE_ROM_SEGMENT(link_animetion)
 DECLARE_ROM_SEGMENT(icon_item_static)
 DECLARE_ROM_SEGMENT(icon_item_24_static)
+DECLARE_ROM_SEGMENT(icon_item_field_static)
+DECLARE_ROM_SEGMENT(icon_item_dungeon_static)
+DECLARE_ROM_SEGMENT(icon_item_gameover_static)
+DECLARE_ROM_SEGMENT(icon_item_nes_static)
+DECLARE_ROM_SEGMENT(icon_item_ger_static)
+DECLARE_ROM_SEGMENT(icon_item_fra_static)
+DECLARE_ROM_SEGMENT(item_name_static)
+DECLARE_ROM_SEGMENT(map_name_static)
 DECLARE_ROM_SEGMENT(do_action_static)
 DECLARE_ROM_SEGMENT(message_static)
 DECLARE_ROM_SEGMENT(message_texture_static)
@@ -38,8 +46,12 @@ DECLARE_ROM_SEGMENT(nes_font_static)
 DECLARE_ROM_SEGMENT(nes_message_data_static)
 DECLARE_ROM_SEGMENT(ger_message_data_static)
 DECLARE_ROM_SEGMENT(fra_message_data_static)
+DECLARE_ROM_SEGMENT(staff_message_data_static)
 DECLARE_ROM_SEGMENT(map_grand_static)
+DECLARE_ROM_SEGMENT(map_i_static)
+DECLARE_ROM_SEGMENT(map_48x85_static)
 
+DECLARE_SEGMENT(code)
 DECLARE_ROM_SEGMENT(code)
 DECLARE_BSS_SEGMENT(code)
 
@@ -921,6 +933,8 @@ DECLARE_ROM_SEGMENT(g_pn_55)
 DECLARE_ROM_SEGMENT(g_pn_56)
 DECLARE_ROM_SEGMENT(g_pn_57)
 
+DECLARE_ROM_SEGMENT(z_select_static)
+DECLARE_ROM_SEGMENT(nintendo_rogo_static)
 DECLARE_ROM_SEGMENT(title_static)
 DECLARE_ROM_SEGMENT(parameter_static)
 DECLARE_ROM_SEGMENT(vr_cloud2_static)
@@ -1089,6 +1103,5 @@ DECLARE_ROM_SEGMENT(testroom_room_1)
 DECLARE_ROM_SEGMENT(testroom_room_2)
 DECLARE_ROM_SEGMENT(testroom_room_3)
 DECLARE_ROM_SEGMENT(testroom_room_4)
-
 
 #endif
