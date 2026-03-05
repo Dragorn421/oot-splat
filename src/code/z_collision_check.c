@@ -1,363 +1,363 @@
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B280.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B280.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B2AC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B2AC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B65C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B65C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B6A0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6A0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B6B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B6EC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6EC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B72C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B72C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B76C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B76C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B784.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B784.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B79C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B79C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B7C0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7C0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B7E4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7E4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B7F4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7F4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B818.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B818.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B824.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B824.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B850.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B850.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B860.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B860.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B884.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B884.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B904.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B904.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B93C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B93C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B9B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B9B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005B9E8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B9E8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BA1C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA1C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BA30.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA30.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BA74.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA74.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BA84.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA84.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BAD8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BAD8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BB10.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BB10.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BB48.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BB48.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BB8C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BB8C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BBB0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BBB0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BBD4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BBD4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BBF8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BBF8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BC28.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BC28.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BCC8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BCC8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BD50.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BD50.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BE50.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BE50.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005BF50.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BF50.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C050.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C050.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C124.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C124.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C1AC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C1AC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C234.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C234.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C2BC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C2BC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C318.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C318.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C328.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C328.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/ActorCollider_AllocCylinder.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_AllocCylinder.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/ActorCollider_FreeCylinder.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_FreeCylinder.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C3F4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C3F4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C450.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C450.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/ActorCollider_InitCylinder.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_InitCylinder.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C508.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C508.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C540.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C540.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C578.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C578.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C5B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C5B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C5F8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C5F8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C608.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C608.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C6C0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C6C0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C6F8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C6F8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C730.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C730.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C774.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C774.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C798.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C798.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C7BC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C7BC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C7E0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C7E0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C810.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C810.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C8C8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C8C8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005C964.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C964.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CA88.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CA88.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CBAC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CBAC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CC98.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CC98.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CD34.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CD34.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CDD0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CDD0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CE6C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CE6C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CEB4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEB4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CEC4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEC4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CEDC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEDC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005CF90.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CF90.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D018.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D018.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D060.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D060.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D0A8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D0A8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D104.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D104.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D160.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D160.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D1A8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D1A8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D1E0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D1E0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D218.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D218.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D2C4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D2C4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D324.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D324.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D334.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D334.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D378.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D378.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D3A4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D3A4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D3BC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D3BC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D400.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D400.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D40C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D40C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D4B4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D4B4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D4C8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D4C8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D4DC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D4DC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D62C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D62C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/Actor_CollisionCheck_SetAT.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/Actor_CollisionCheck_SetAT.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005D8AC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D8AC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/Actor_CollisionCheck_SetAC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/Actor_CollisionCheck_SetAC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DB04.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DB04.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/Actor_CollisionCheck_SetOT.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/Actor_CollisionCheck_SetOT.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DD5C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DD5C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DE9C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DE9C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DF2C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF2C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DF50.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF50.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DF74.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF74.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DF9C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF9C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005DFAC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DFAC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E10C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E10C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E26C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E26C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E2A4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2A4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E2C8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2C8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E2EC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2EC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E4F8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E4F8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E604.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E604.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E800.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E800.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E81C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E81C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005E9C0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E9C0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005EC6C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EC6C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005EEE0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EEE0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005F17C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F17C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005F39C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F39C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005F5B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F5B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005F7D0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F7D0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005FA30.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FA30.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005FC04.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FC04.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005FDCC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FDCC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8005FF90.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FF90.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80060204.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060204.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800604B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800604B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80060704.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060704.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80060994.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060994.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80060C2C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80060EBC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060EBC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80060F94.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060F94.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061028.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061028.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006110C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006110C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800611A0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800611A0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061274.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061274.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006139C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006139C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006146C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006146C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800614A4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800614A4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800617D4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800617D4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006199C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006199C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061AF8.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061AF8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061B24.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061B24.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061BF4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061BF4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061C18.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061C18.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061C98.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061C98.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061E48.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061E48.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061E8C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061E8C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061EB0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061EB0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061ED4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061ED4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061EFC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061EFC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061F2C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061F2C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80061F64.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061F64.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006216C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006216C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062210.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062210.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062230.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062230.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800622C4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800622C4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800622E4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800622E4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800623A4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800623A4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800624BC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800624BC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062530.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062530.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006268C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006268C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800626B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800626B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/ActorCollider_Cylinder_Update.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_Cylinder_Update.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062718.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062718.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062734.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062734.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800627A0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800627A0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_8006285C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006285C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800628A4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800628A4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062A28.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062A28.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062B80.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062B80.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062CD4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062CD4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062D60.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062D60.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062DAC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062DAC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062DF4.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062DF4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062E14.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062E14.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_80062ECC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062ECC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_collision_check/func_800635D0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800635D0.s")

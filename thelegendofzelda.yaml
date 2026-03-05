@@ -51,6 +51,8 @@ options:
     - .mdebug
     - .mdebug.abi32
 
+  nonmatchings_path: non_matchings
+
 segments:
   - name: header
     type: header

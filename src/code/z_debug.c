@@ -94,7 +94,7 @@ void func_8006376C_cc0(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_debug/func_8006376C_cc0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_debug/func_8006376C_cc0.s")
 #endif
 
 void func_80063828_cc0(GfxPrint* arg0) {
