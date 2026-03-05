@@ -598,14 +598,19 @@ for l in ok_map_p.read_text().splitlines():
                                     yamlprint(
                                         f"      - [0x{SegmentRomStart + (prev_end - SegmentStart):X}, pad]"
                                     )
+                                subseg_name = f"{subseg_type}_{start:X}"
+                                if (
+                                    segment_name.startswith("ovl_")
+                                    and subseg_type != "rodatabin"
+                                ):
+                                    subseg_name = f"overlays/{segment_name}"
                                 if subseg_type == "bss":
-                                    subseg_name = f"bss_{start:X}"
                                     yamlprint(
                                         f"      - {{ name: {subseg_name}, type: bss, vram: 0x{start:X} }}"
                                     )
                                 else:
                                     yamlprint(
-                                        f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}]"
+                                        f"      - [0x{SegmentRomStart + (start - SegmentStart):X}, {subseg_type}, {subseg_name}]"
                                     )
                                 prev_end = end
                 yamlprint()
