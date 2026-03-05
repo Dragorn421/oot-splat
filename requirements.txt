@@ -1,4 +1,4 @@
-splat64==0.37.3
+splat64[mips]==0.37.3
 
 # asm-differ
 colorama
