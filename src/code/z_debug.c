@@ -1,6 +1,6 @@
 #include "global.h"
 
-GameInfo *gGameInfo;
+GameInfo* gGameInfo;
 
 typedef struct struct_8015FA98_sub {
     s8 unk0;
@@ -39,7 +39,7 @@ u8 D_8011E148[] = {
     0x62, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
-void func_800636C0(void) {
+void func_800636C0_cc0(void) {
     s32 i;
 
     gGameInfo = SystemArena_MallocDebug(sizeof(GameInfo), "../z_debug.c", 260);
@@ -53,11 +53,12 @@ void func_800636C0(void) {
     }
 }
 
-void func_8006375C(s32 arg0, s32 arg1, s32 arg2) {
+void func_8006375C_cc0(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 #ifdef NON_MATCHING
-void func_8006376C(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
+// Note: matched by Roman in 64b5536ab
+void func_8006376C_cc0(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
     s16 var_v1;
     s8* var_t0;
     struct_8015FA98_sub* temp_v0;
@@ -93,10 +94,10 @@ void func_8006376C(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/nonmatchings/code/z_debug/func_8006376C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code/z_debug/func_8006376C_cc0.s")
 #endif
 
-void func_80063828(GfxPrint* arg0) {
+void func_80063828_cc0(GfxPrint* arg0) {
     Color_RGBA8* temp_v0;
     s32 i;
 
@@ -108,13 +109,7 @@ void func_80063828(GfxPrint* arg0) {
     }
 }
 
-typedef struct struct_8006390C_arg0 {
-    u16 unk00;
-    char unk02[0xA];
-    u16 unk0C;
-} struct_8006390C_arg0;
-
-void func_8006390C(struct_8006390C_arg0* arg0) {
+void func_8006390C_cc0(struct_8006390C_arg0* arg0) {
     s32 var_a3;
     s32 var_v1;
     s32 var_v1_2;
@@ -188,7 +183,7 @@ void func_8006390C(struct_8006390C_arg0* arg0) {
     }
 }
 
-void func_80063C04(GfxPrint* arg0) {
+void func_80063C04_cc0(GfxPrint* arg0) {
     s32 temp_s4;
     s32 temp_s5;
     s32 var_s0;
@@ -215,7 +210,7 @@ void func_80063C04(GfxPrint* arg0) {
     }
 }
 
-void func_80063D7C(GraphicsContext* arg0) {
+void func_80063D7C_cc0(GraphicsContext* arg0) {
     Gfx* temp_v0;
     Gfx* sp78;
     s32 pad1[7];
@@ -223,24 +218,24 @@ void func_80063D7C(GraphicsContext* arg0) {
     s32 pad2[2];
     Gfx* sp30[4];
 
-    func_800C6AC4(sp30, arg0, "../z_debug.c", 0x274);
+    Graph_OpenDisps(sp30, arg0, "../z_debug.c", 0x274);
     GfxPrint_Ctor(&sp48);
     sp78 = arg0->polyOpa.p;
-    temp_v0 = func_800C6C20(sp78);
+    temp_v0 = Graph_GfxPlusOne(sp78);
     gSPDisplayList(arg0->overlay.p++, temp_v0);
     GfxPrint_Open(&sp48, temp_v0);
     if ((gGameInfo->data[0xC0] == 1) || (gGameInfo->data[0xC0] == 8)) {
-        func_80063828(&sp48);
+        func_80063828_cc0(&sp48);
     }
     if (gGameInfo->unk0 != 0) {
-        func_80063C04(&sp48);
+        func_80063C04_cc0(&sp48);
     }
     D_8011E0B0 = 0;
     temp_v0 = GfxPrint_Close(&sp48);
     gSPEndDisplayList(temp_v0++);
-    func_800C6C28(sp78, temp_v0);
+    Graph_BranchDlist(sp78, temp_v0);
     arg0->polyOpa.p = temp_v0;
     if (1) {}
-    func_800C6B54(sp30, arg0, "../z_debug.c", 0x298);
+    Graph_CloseDisps(sp30, arg0, "../z_debug.c", 0x298);
     GfxPrint_Dtor(&sp48);
 }
