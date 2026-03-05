@@ -1,4 +1,5 @@
-
+#include <ultra64.h>
+#include <global.h>
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B280.s")
 
@@ -6,49 +7,114 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B65C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6A0.s")
+s32 func_8005B6A0(GlobalContext* globalCtx, Collider* collision) {
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6B0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6EC.s")
+s32 func_8005B6EC(GlobalContext* globalCtx, Collider* collision, Actor* actor, ColliderBodyInfo* src) {
+    collision->actor = actor;
+    collision->unk_14 = src->unk_00;
+    collision->colliderFlags = src->colliderFlags;
+    collision->collideFlags = src->collideFlags;
+    collision->maskA = src->maskA;
+    collision->maskB = 0x10;
+    collision->type = src->maskB;
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B72C.s")
+s32 func_8005B72C(GlobalContext* globalCtx, Collider* collision, Actor* actor, ColliderBodyInfo* src) {
+    collision->actor = actor;
+    collision->unk_14 = src->unk_00;
+    collision->colliderFlags = src->colliderFlags;
+    collision->collideFlags = src->collideFlags;
+    collision->maskA = src->maskA;
+    collision->maskB = src->maskB;
+    collision->type = src->type;
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B76C.s")
+void func_8005B76C(GlobalContext* globalCtx, Collider* collision) {
+    collision->at = NULL;
+    collision->colliderFlags &= ~0x6;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B784.s")
+void func_8005B784(GlobalContext* globalCtx, Collider* collision) {
+    collision->ac = NULL;
+    collision->collideFlags &= ~0x82;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B79C.s")
+void func_8005B79C(GlobalContext* globalCtx, Collider* collision) {
+    collision->ot = NULL;
+    collision->maskA &= ~0x2;
+    collision->maskB &= ~0x1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7C0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7E4.s")
+s32 func_8005B7E4(GlobalContext* globalCtx, ColliderTouch* touch) {
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7F4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B818.s")
+void func_8005B818(GlobalContext* globalCtx, ColliderBody* body) {
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B824.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B850.s")
+s32 func_8005B850(GlobalContext* globalCtx, ColliderBump* bump) {
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B860.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B884.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B904.s")
+s32 func_8005B904(GlobalContext* globalCtx, ColliderBody* body) {
+    func_8005B7E4(globalCtx, &body->toucher);
+    func_8005B850(globalCtx, &body->bumper);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B93C.s")
+s32 func_8005B93C(GlobalContext* globalCtx, ColliderBody* body, ColliderBodyInfoInner* bodyInfoInner) {
+    body->flags = bodyInfoInner->bodyFlags;
+    func_8005B7F4(globalCtx, &body->toucher, &bodyInfoInner->toucherMask);
+    func_8005B860(globalCtx, &body->bumper, &bodyInfoInner->bumperMask);
+    body->toucherFlags = bodyInfoInner->toucherFlags;
+    body->bumperFlags = bodyInfoInner->bumperFlags;
+    body->flags2 = bodyInfoInner->bodyFlags2;
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B9B0.s")
+void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body) {
+    body->unk_18 = 0;
+    body->unk_20 = 0;
+    body->toucherFlags &= ~0x2;
+    body->toucherFlags &= ~0x40;
+    func_8005B818(globalCtx, body);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B9E8.s")
+void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body) {
+    body->bumper.unk_0A = 0;
+    body->bumperFlags &= ~0x2;
+    body->bumperFlags &= ~0x80;
+    body->colBuf = NULL;
+    body->colliding = NULL;
+    body->bumper.unk_08 = body->bumper.unk_0A;
+    body->bumper.unk_06 = body->bumper.unk_0A;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA1C.s")
+void func_8005BA1C(GlobalContext* globalCtx, ColliderBody* body) {
+    body->flags2 &= ~0x2;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA30.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA74.s")
+s32 func_8005BA74(UNK_TYPE arg0, UNK_TYPE arg1) {
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA84.s")
 
@@ -86,29 +152,74 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C2BC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C318.s")
+s32 func_8005C318(GlobalContext* globalCtx, ColliderDimensions* dim) {
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C328.s")
+s32 func_8005C328(GlobalContext* globalCtx, ColliderDimensions* dest, ColliderDimensions* src) {
+    *dest = *src;
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_AllocCylinder.s")
+s32 ActorCollider_AllocCylinder(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B65C(globalCtx, &collision->base);
+    func_8005B884(globalCtx, &collision->body);
+    func_8005C2BC(globalCtx, &collision->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_FreeCylinder.s")
+s32 ActorCollider_FreeCylinder(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B6A0(globalCtx, &collision->base);
+    func_8005B904(globalCtx, &collision->body);
+    func_8005C318(globalCtx, &collision->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C3F4.s")
+s32 func_8005C3F4(GlobalContext* globalCtx, ColliderCylinderMain* collision, ColliderCylinderInit* src) {
+    func_8005B6B0(globalCtx, &collision->base, &src->body);
+    func_8005B93C(globalCtx, &collision->body, &src->inner);
+    func_8005C328(globalCtx, &collision->dim, &src->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C450.s")
+s32 func_8005C450(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor, ColliderCylinderInit* src) {
+    func_8005B6EC(globalCtx, &collision->base, actor, &src->body);
+    func_8005B93C(globalCtx, &collision->body, &src->inner);
+    func_8005C328(globalCtx, &collision->dim, &src->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_InitCylinder.s")
+s32 ActorCollider_InitCylinder(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor,
+                               ColliderCylinderInit* src) {
+    func_8005B72C(globalCtx, &collision->base, actor, &src->body);
+    func_8005B93C(globalCtx, &collision->body, &src->inner);
+    func_8005C328(globalCtx, &collision->dim, &src->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C508.s")
+s32 func_8005C508(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B76C(globalCtx, &collision->base);
+    func_8005B9B0(globalCtx, &collision->body);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C540.s")
+s32 func_8005C540(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B784(globalCtx, &collision->base);
+    func_8005B9E8(globalCtx, &collision->body);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C578.s")
+s32 func_8005C578(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B79C(globalCtx, &collision->base);
+    func_8005BA1C(globalCtx, &collision->body);
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C5B0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C5F8.s")
+s32 func_8005C5F8(UNK_TYPE arg0, UNK_TYPE arg1) {
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C608.s")
 
@@ -144,7 +255,9 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CE6C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEB4.s")
+s32 func_8005CEB4(GlobalContext* globalCtx, ColliderDimensions* dim) {
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEC4.s")
 
@@ -152,19 +265,52 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CF90.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D018.s")
+s32 func_8005D018(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B65C(globalCtx, &collision->base);
+    func_8005B884(globalCtx, &collision->body);
+    func_8005CE6C(globalCtx, &collision->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D060.s")
+s32 func_8005D060(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B6A0(globalCtx, &collision->base);
+    func_8005B904(globalCtx, &collision->body);
+    func_8005CEB4(globalCtx, &collision->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D0A8.s")
+s32 func_8005D0A8(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor, ColliderCylinderInit* src) {
+    func_8005B6EC(globalCtx, &collision->base, actor, &src->body);
+    func_8005B93C(globalCtx, &collision->body, &src->inner);
+    func_8005CF90(globalCtx, &collision->dim, &src->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D104.s")
+s32 func_8005D104(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor, ColliderCylinderInit* src) {
+    func_8005B72C(globalCtx, &collision->base, actor, &src->body);
+    func_8005B93C(globalCtx, &collision->body, &src->inner);
+    func_8005CF90(globalCtx, &collision->dim, &src->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D160.s")
+s32 func_8005D160(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B76C(globalCtx, &collision->base);
+    func_8005B9B0(globalCtx, &collision->body);
+    func_8005CEC4(globalCtx, &collision->dim);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D1A8.s")
+s32 func_8005D1A8(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B784(globalCtx, &collision->base);
+    func_8005B9E8(globalCtx, &collision->body);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D1E0.s")
+s32 func_8005D1E0(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+    func_8005B79C(globalCtx, &collision->base);
+    func_8005BA1C(globalCtx, &collision->body);
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D218.s")
 
@@ -180,7 +326,8 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D3BC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D400.s")
+void func_8005D400(GlobalContext* globalCtx, SubGlobalContext11E60* sub_11E60) {
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D40C.s")
 
