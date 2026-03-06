@@ -891,7 +891,16 @@ typedef struct {
 } RoomContext; // size = 0x74
 
 typedef struct {
-    /* 0x00 */ char unk_00[0x028C];
+    /* 0x000 */ s16 unk0;
+    /* 0x002 */ u16 unk2;
+    /* 0x004 */ void* unk4[1];
+    /* 0x008 */ char unk_8[0xC4];
+    /* 0x0CC */ s32 unkCC;
+    /* 0x0D0 */ void* unkD0[1];
+    /* 0x0D4 */ char unk_D4[0xEC];
+    /* 0x1C0 */ s32 unk1C0;
+    /* 0x1C4 */ void* unk_1C4[1];
+    /* 0x1C8 */ char unk_1C8[0xCC];
 } SubGlobalContext11E60; // size = 0x28C
 
 typedef struct {
