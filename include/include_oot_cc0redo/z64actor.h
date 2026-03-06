@@ -242,7 +242,7 @@ typedef struct {
     /* 0x15 */ u8 bumperFlags; /* Bumper Flags */
     /* 0x16 */ u8 bodyFlags2;
     /* 0x17 */ u8 unk_1F; /* 00 */
-} ColliderBodyInfoInner; // size = 0x1A
+} ColliderBodyInfoInner; // size = 0x18
 
 typedef struct {
     /* 0x00 */ u8 unk_00;
