@@ -18,7 +18,7 @@ typedef struct struct_8011DE00 {
 
 extern struct_8011DE00 D_8011DE00;
 
-s32 func_8005B65C(s32 arg0, struct_8011DE00* arg1) {
+s32 func_8005B65C(GlobalContext* arg0, struct_8011DE00* arg1) {
     *arg1 = D_8011DE00;
     return 1;
 }
@@ -176,7 +176,7 @@ typedef struct struct_8011DE2C {
 
 extern struct_8011DE2C D_8011DE2C;
 
-s32 func_8005B884(s32 arg0, struct_8011DE2C* arg1) {
+s32 func_8005B884(GlobalContext* arg0, struct_8011DE2C* arg1) {
     *arg1 = D_8011DE2C;
     func_8005B7C0(arg0, &arg1->unk0);
     func_8005B824(arg0, &arg1->unk8);
@@ -1037,7 +1037,7 @@ typedef struct struct_8011DEAC {
 
 extern struct_8011DEAC D_8011DEAC;
 
-s32 func_8005CE6C(s32 arg0, struct_8011DEAC* arg1) {
+s32 func_8005CE6C(GlobalContext* arg0, struct_8011DEAC* arg1) {
     *arg1 = D_8011DEAC;
     return 1;
 }
@@ -1400,12 +1400,17 @@ void func_80062718(struct_80062718_1* arg0, struct_80062718_2* arg1) {
     arg0->unk4A = arg1->unk4;
 }
 
-void func_80062734(s32 arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
-    Math_Vec3f_Copy(arg0 + 0x58, arg3);
-    Math_Vec3f_Copy(arg0 + 0x64, arg4);
-    Math_Vec3f_Copy(arg0 + 0x40, arg1);
-    Math_Vec3f_Copy(arg0 + 0x4C, arg2);
-    func_8005CEDC(arg0 + 0x40);
+typedef struct struct_80062734 {
+    char unk_0[0x40];
+    struct_8005CEDC unk40;
+} struct_80062734;
+
+void func_80062734(struct_80062734* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
+    Math_Vec3f_Copy(&arg0->unk40.unk18, arg3);
+    Math_Vec3f_Copy(&arg0->unk40.unk24, arg4);
+    Math_Vec3f_Copy(&arg0->unk40.unk0, arg1);
+    Math_Vec3f_Copy(&arg0->unk40.unkC, arg2);
+    func_8005CEDC(&arg0->unk40);
 }
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800627A0.s")

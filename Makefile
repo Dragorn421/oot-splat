@@ -28,7 +28,7 @@ $(BUILD_DIR)/%.o: %.bin
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	python3 ./tools/asm-processor/build.py --input-enc UTF-8 --output-enc EUC-JP $(IDO) -- $(AS) $(ASFLAGS) -- -I include/include_oot_cc0redo -c -G 0 -non_shared -fullwarn -verbose -Xcpluscomm -Wab,-r4300_mul -mips2 -O2 -o $@ $<
+	python3 ./tools/asm-processor/build.py --input-enc UTF-8 --output-enc EUC-JP $(IDO) -- $(AS) $(ASFLAGS) -- -I include/include_oot_cc0redo -c -G 0 -non_shared -fullwarn -verbose -Xcpluscomm -Wab,-r4300_mul -mips2 -O2 -woff 649,838 -o $@ $<
 
 include thelegendofzelda.d
 
