@@ -1210,9 +1210,32 @@ void func_8005E800(struct_8005E800* arg0, struct_8005E800* arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_Cylinder_Update.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062718.s")
+typedef struct struct_80062718_1 {
+    /* 0x00 */ char unk0[0x46];
+    /* 0x46 */ s16 unk46;
+    /* 0x48 */ s16 unk48;
+    /* 0x4A */ s16 unk4A;
+} struct_80062718_1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062734.s")
+typedef struct struct_80062718_2 {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+} struct_80062718_2;
+
+void func_80062718(struct_80062718_1* arg0, struct_80062718_2* arg1) {
+    arg0->unk46 = arg1->unk0;
+    arg0->unk48 = arg1->unk2;
+    arg0->unk4A = arg1->unk4;
+}
+
+void func_80062734(s32 arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
+    Math_Vec3f_Copy(arg0 + 0x58, arg3);
+    Math_Vec3f_Copy(arg0 + 0x64, arg4);
+    Math_Vec3f_Copy(arg0 + 0x40, arg1);
+    Math_Vec3f_Copy(arg0 + 0x4C, arg2);
+    func_8005CEDC(arg0 + 0x40);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800627A0.s")
 
@@ -1226,14 +1249,37 @@ void func_8005E800(struct_8005E800* arg0, struct_8005E800* arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062CD4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062D60.s")
+void func_80062D60(GlobalContext* arg0, Vec3f* arg1) {
+    func_80062CD4(arg0, arg1);
+    Audio_PlaySoundGeneral(0x1808U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062DAC.s")
+void func_80062DAC(s32 arg0, s32 arg1, Vec3f* arg2) {
+    func_80062CD4(arg0, arg1);
+    Audio_PlaySoundGeneral(0x1808U, arg2, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062DF4.s")
+void func_80062DF4(GlobalContext* globalCtx, Vec3f* arg1) {
+    func_80062D60(globalCtx, arg1);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062E14.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062ECC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800635D0.s")
+s16 func_800635D0(s32 arg0) {
+    s16 var_v1;
+
+    var_v1 = 0;
+    if (arg0 & 0x400100) {
+        var_v1 = 1;
+    } else if (arg0 & 0x03000242) {
+        var_v1 = 2;
+    } else if (arg0 & 0x48800400) {
+        var_v1 = 4;
+    } else if (arg0 & 0x04000000) {
+        var_v1 = 8;
+    }
+    gGameInfo->data[0x4E7] = var_v1;
+    return var_v1;
+}
