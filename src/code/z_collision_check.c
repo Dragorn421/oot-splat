@@ -29,12 +29,12 @@ s32 func_8005B6A0(GlobalContext* globalCtx, Collider* collision) {
 
 typedef struct struct_8005B6B0_arg1 {
     s32 unk0;
-    char unk4[0xC];
+    char unk_4[0xC];
     u8 unk10;
     u8 unk11;
     u8 unk12;
     u8 unk13;
-    char unk14[1];
+    char unk_14[1];
     u8 unk15;
 } struct_8005B6B0_arg1;
 
@@ -171,7 +171,7 @@ s32 func_8005B860(s32 arg0, struct_8005B860_arg1* arg1, struct_8005B860_arg2* ar
 typedef struct struct_8011DE2C {
     struct_8011DE18 unk0;
     struct_8011DE20 unk8;
-    char unk14[0x14];
+    char unk_14[0x14];
 } struct_8011DE2C;
 
 extern struct_8011DE2C D_8011DE2C;
@@ -250,7 +250,7 @@ typedef struct struct_8005BA84_arg1_sub {
 
 typedef struct struct_8005BA84_arg1 {
     struct_8005BA84_arg1_sub unk0;
-    char unk8[8];
+    char unk_8[8];
     f32 unk10;
     u8 unk14;
 } struct_8005BA84_arg1;
@@ -280,7 +280,7 @@ s32 func_8005BAD8(s32 arg0, struct_8005BAD8* arg1) {
 }
 
 typedef struct struct_8005BB10_sub {
-    char unk0[1];
+    char unk_0[1];
 } struct_8005BB10_sub;
 
 typedef struct struct_8005BB10 {
@@ -754,9 +754,9 @@ typedef struct struct_8005C6F8 {
     char unk_28[1];
 } struct_8005C6F8;
 
-s32 func_8005C6F8(GlobalContext *arg0, struct_8005C6F8 *arg1) {
+s32 func_8005C6F8(GlobalContext* arg0, struct_8005C6F8* arg1) {
     func_8005B904(arg0, &arg1->unk0);
-    func_8005C5F8((s32) arg0, arg1->unk_28);
+    func_8005C5F8((s32)arg0, arg1->unk_28);
     return 1;
 }
 
@@ -886,23 +886,62 @@ void func_8005D400(GlobalContext* globalCtx, SubGlobalContext11E60* sub_11E60) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DE9C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF2C.s")
+typedef struct struct_8005DF2C {
+    char unk_0[0x15];
+    u8 unk15;
+} struct_8005DF2C;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF50.s")
+s32 func_8005DF2C(struct_8005DF2C *arg0) {
+    if (!(arg0->unk15 & 1)) {
+        return 1;
+    }
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF74.s")
+typedef struct struct_8005DF50 {
+    char unk_0[0x16];
+    u8 unk16;
+} struct_8005DF50;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DF9C.s")
+s32 func_8005DF50(struct_8005DF50* arg0) {
+    if (!(arg0->unk16 & 1)) {
+        return 1;
+    }
+    return 0;
+}
+
+typedef struct struct_8005DF74 {
+    char unk_0[8];
+    s32 unk8;
+} struct_8005DF74;
+
+s32 func_8005DF74(s32* arg0, struct_8005DF74* arg1) {
+    if (!(*arg0 & arg1->unk8)) {
+        return 1;
+    }
+
+    return 0;
+}
+
+void func_8005DF9C(s32 arg0, s32 arg1, s32 arg2) {
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DFAC.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E10C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E26C.s")
+void func_8005E26C(s32 arg0, s32 arg1, s32 arg2) {
+    func_800299AC(arg0, arg2);
+    func_80062B80(arg0, arg2);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2A4.s")
+void func_8005E2A4(s32 arg1, s32 arg2, s32 arg3) {
+    func_80062A28(arg1, arg3);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2C8.s")
+void func_8005E2C8(s32 arg1, s32 arg2, s32 arg3) {
+    func_80062A28(arg1, arg3);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2EC.s")
 
@@ -910,7 +949,16 @@ void func_8005D400(GlobalContext* globalCtx, SubGlobalContext11E60* sub_11E60) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E604.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E800.s")
+typedef struct struct_8005E800 {
+    char unk_0[0x10];
+    u8 unk10;
+    u8 unk11;
+} struct_8005E800;
+
+void func_8005E800(struct_8005E800* arg0, struct_8005E800* arg1) {
+    arg0->unk10 |= 4;
+    arg1->unk11 |= 0x80;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E81C.s")
 
