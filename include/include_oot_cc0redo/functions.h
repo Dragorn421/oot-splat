@@ -197,7 +197,7 @@ GlobalContext* func_80026B00(void);
 // ? func_80026B0C(?);
 // ? func_80026C1C(?);
 // ? func_80026C2C(?);
-// ? Effect_Add(?);
+void Effect_Add(GlobalContext*, s32*, s32, u8, u8, void*);
 // ? func_80026E74(?);
 // ? func_80026F70(?);
 // ? func_8002709C(?);
