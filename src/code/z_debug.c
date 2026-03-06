@@ -56,46 +56,29 @@ void func_800636C0_cc0(void) {
 void func_8006375C_cc0(s32 arg0, s32 arg1, s32 arg2) {
 }
 
-#ifdef NON_MATCHING
-// Note: matched by Roman in 64b5536ab
-void func_8006376C_cc0(s32 arg0, s32 arg1, s32 arg2, u8* arg3) {
+void func_8006376C_cc0(u8 arg0, u8 arg1, u8 arg2, u8* arg3) {
     s16 var_v1;
-    s8* var_t0;
+    u8* var_t0;
     struct_8015FA98_sub* temp_v0;
-    u8* var_s0;
-    u8 temp_a3;
-    u8 temp_a3_2;
 
     temp_v0 = &D_8015FA98.unk0[D_8011E0B0];
     if (D_8011E0B0 < 0x16) {
-        temp_v0->unk0 = arg0 & 0xFF;
-        temp_v0->unk1 = arg1 & 0xFF;
-        temp_v0->unk2 = arg2 & 0xFF;
-        temp_a3 = *arg3;
+        temp_v0->unk0 = arg0;
+        temp_v0->unk1 = arg1;
+        temp_v0->unk2 = arg2;
+
         var_v1 = 0;
-        var_t0 = &temp_v0->unk3[1];
-        var_s0 = arg3 + 1;
-        temp_v0->unk3[0] = (s8)temp_a3;
-        if (temp_a3 != 0) {
-        loop_2:
-            var_v1 += 1;
-            if (((var_v1 < 0x15) ^ 1) == 0) {
-                temp_a3_2 = *var_s0;
-                *var_t0 = temp_a3_2;
-                var_t0 += 1;
-                var_s0 += 1;
-                if (temp_a3_2 != 0) {
-                    goto loop_2;
-                }
+        var_t0 = (u8*)temp_v0->unk3;
+
+        while (*var_t0++ = *arg3++) {
+            if (var_v1++ > 20) {
+                break;
             }
         }
         *var_t0 = 0;
-        D_8011E0B0 += 1;
+        D_8011E0B0++;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_debug/func_8006376C_cc0.s")
-#endif
 
 void func_80063828_cc0(GfxPrint* arg0) {
     Color_RGBA8* temp_v0;
