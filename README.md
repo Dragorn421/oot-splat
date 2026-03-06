@@ -82,3 +82,4 @@ This repo has
 - `./tools/mkctx.py` (given the path to a .c file, creates a ctx.c file for m2c)
 - `./sym_info.py` (find symbols info by ram or rom address. Without arguments, prints a list of all symbols)
 - `./tools/pw.py` (given a function name, automatically finds the file it's in and calls `./tools/decomp-permuter/import.py`)
+- `./tools/m2cw.py` (given a function name, automatically finds the file it's in and calls `./tools/mkctx.py` then m2c)
