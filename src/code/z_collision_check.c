@@ -1,17 +1,60 @@
 #include <ultra64.h>
 #include <global.h>
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B280.s")
+void func_8005B280(GraphicsContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3) {
+    func_8005B2AC(arg0, arg1, arg2, arg3, 0xFFU, 0U, 0U);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B2AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B65C.s")
+typedef struct struct_8011DE00 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} struct_8011DE00;
+
+extern struct_8011DE00 D_8011DE00;
+
+s32 func_8005B65C(s32 arg0, struct_8011DE00* arg1) {
+    *arg1 = D_8011DE00;
+    return 1;
+}
 
 s32 func_8005B6A0(GlobalContext* globalCtx, Collider* collision) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6B0.s")
+typedef struct struct_8005B6B0_arg1 {
+    s32 unk0;
+    char unk4[0xC];
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    char unk14[1];
+    u8 unk15;
+} struct_8005B6B0_arg1;
+
+typedef struct struct_8005B6B0_arg2 {
+    s32 unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+} struct_8005B6B0_arg2;
+
+s32 func_8005B6B0(s32 arg0, struct_8005B6B0_arg1* arg1, struct_8005B6B0_arg2* arg2) {
+    arg1->unk0 = arg2->unk0;
+    arg1->unk10 = arg2->unk4;
+    arg1->unk11 = arg2->unk5;
+    arg1->unk12 = arg2->unk6;
+    arg1->unk13 = 0x10;
+    arg1->unk15 = arg2->unk7;
+    return 1;
+}
 
 s32 func_8005B6EC(GlobalContext* globalCtx, Collider* collision, Actor* actor, ColliderBodyInfo* src) {
     collision->actor = actor;
@@ -51,26 +94,94 @@ void func_8005B79C(GlobalContext* globalCtx, Collider* collision) {
     collision->maskB &= ~0x1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7C0.s")
+typedef struct struct_8011DE18 {
+    s32 unk0;
+    s32 unk4;
+} struct_8011DE18;
+
+extern struct_8011DE18 D_8011DE18;
+
+s32 func_8005B7C0(s32 arg0, struct_8011DE18* arg1) {
+    *arg1 = D_8011DE18;
+    return 1;
+}
 
 s32 func_8005B7E4(GlobalContext* globalCtx, ColliderTouch* touch) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B7F4.s")
+typedef struct struct_8005B7F4_arg1 {
+    s32 unk0;
+    u8 unk4;
+    u8 unk5;
+} struct_8005B7F4_arg1;
+
+typedef struct struct_8005B7F4_arg2 {
+    s32 unk0;
+    u8 unk4;
+    u8 unk5;
+} struct_8005B7F4_arg2;
+
+s32 func_8005B7F4(s32 arg0, struct_8005B7F4_arg1* arg1, struct_8005B7F4_arg2* arg2) {
+    arg1->unk0 = (s32)arg2->unk0;
+    arg1->unk4 = (u8)arg2->unk4;
+    arg1->unk5 = (u8)arg2->unk5;
+    return 1;
+}
 
 void func_8005B818(GlobalContext* globalCtx, ColliderBody* body) {
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B824.s")
+typedef struct struct_8011DE20 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+} struct_8011DE20;
+
+extern struct_8011DE20 D_8011DE20;
+
+s32 func_8005B824(s32 arg0, struct_8011DE20* arg1) {
+    *arg1 = D_8011DE20;
+    return 1;
+}
 
 s32 func_8005B850(GlobalContext* globalCtx, ColliderBump* bump) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B860.s")
+typedef struct struct_8005B860_arg1 {
+    s32 unk0;
+    u8 unk4;
+    u8 unk5;
+} struct_8005B860_arg1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B884.s")
+typedef struct struct_8005B860_arg2 {
+    s32 unk0;
+    u8 unk4;
+    u8 unk5;
+} struct_8005B860_arg2;
+
+s32 func_8005B860(s32 arg0, struct_8005B860_arg1* arg1, struct_8005B860_arg2* arg2) {
+    arg1->unk0 = (s32)arg2->unk0;
+    arg1->unk4 = (u8)arg2->unk4;
+    arg1->unk5 = (u8)arg2->unk5;
+    return 1;
+}
+
+typedef struct struct_8011DE2C {
+    struct_8011DE18 unk0;
+    struct_8011DE20 unk8;
+    char unk14[0x14];
+} struct_8011DE2C;
+
+extern struct_8011DE2C D_8011DE2C;
+
+s32 func_8005B884(s32 arg0, struct_8011DE2C* arg1) {
+    *arg1 = D_8011DE2C;
+    func_8005B7C0(arg0, &arg1->unk0);
+    func_8005B824(arg0, &arg1->unk8);
+    return 1;
+}
 
 s32 func_8005B904(GlobalContext* globalCtx, ColliderBody* body) {
     func_8005B7E4(globalCtx, &body->toucher);
@@ -110,47 +221,412 @@ void func_8005BA1C(GlobalContext* globalCtx, ColliderBody* body) {
     body->flags2 &= ~0x2;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA30.s")
+typedef struct struct_8011DE54 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} struct_8011DE54;
+
+extern struct_8011DE54 D_8011DE54;
+
+s32 func_8005BA30(s32 arg0, struct_8011DE54* arg1) {
+    *arg1 = D_8011DE54;
+    return 1;
+}
 
 s32 func_8005BA74(UNK_TYPE arg0, UNK_TYPE arg1) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BA84.s")
+typedef struct struct_8005BA84_arg1_sub {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+} struct_8005BA84_arg1_sub;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BAD8.s")
+typedef struct struct_8005BA84_arg1 {
+    struct_8005BA84_arg1_sub unk0;
+    char unk8[8];
+    f32 unk10;
+    u8 unk14;
+} struct_8005BA84_arg1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BB10.s")
+typedef struct struct_8005BA84_arg2 {
+    u8 unk0;
+    struct_8005BA84_arg1_sub unk2;
+    s16 unkA;
+} struct_8005BA84_arg2;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BB48.s")
+s32 func_8005BA84(s32 arg0, struct_8005BA84_arg1* arg1, struct_8005BA84_arg2* arg2) {
+    arg1->unk14 = (u8)arg2->unk0;
+    arg1->unk0 = arg2->unk2;
+    arg1->unk10 = (f32)((f32)arg2->unkA * 0.01f);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BB8C.s")
+typedef struct struct_8005BAD8 {
+    struct_8011DE2C unk0;
+    struct_8011DE54 unk28;
+} struct_8005BAD8;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BBB0.s")
+s32 func_8005BAD8(s32 arg0, struct_8005BAD8* arg1) {
+    func_8005B884(arg0, &arg1->unk0);
+    func_8005BA30(arg0, &arg1->unk28);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BBD4.s")
+typedef struct struct_8005BB10_sub {
+    char unk0[1];
+} struct_8005BB10_sub;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BBF8.s")
+typedef struct struct_8005BB10 {
+    ColliderBody unk0;
+    struct_8005BB10_sub unk28;
+} struct_8005BB10;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BC28.s")
+s32 func_8005BB10(GlobalContext* arg0, struct_8005BB10* arg1) {
+    func_8005B904(arg0, &arg1->unk0);
+    func_8005BA74((s32)arg0, &arg1->unk28);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BCC8.s")
+typedef struct struct_8005BB48_arg1 {
+    ColliderBody unk0;
+    struct_8005BA84_arg1 unk28;
+} struct_8005BB48_arg1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BD50.s")
+typedef struct struct_8005BB48_arg2 {
+    ColliderBodyInfoInner unk0;
+    struct_8005BA84_arg2 unk18;
+} struct_8005BB48_arg2;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BE50.s")
+s32 func_8005BB48(GlobalContext* arg0, struct_8005BB48_arg1* arg1, struct_8005BB48_arg2* arg2) {
+    func_8005B93C(arg0, &arg1->unk0, &arg2->unk0);
+    func_8005BA84((s32)arg0, &arg1->unk28, &arg2->unk18);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005BF50.s")
+s32 func_8005BB8C(GlobalContext* arg0, ColliderBody* arg1) {
+    func_8005B9B0(arg0, arg1);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C050.s")
+s32 func_8005BBB0(GlobalContext* arg0, ColliderBody* arg1) {
+    func_8005B9E8(arg0, arg1);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C124.s")
+s32 func_8005BBD4(GlobalContext* arg0, ColliderBody* arg1) {
+    func_8005BA1C(arg0, arg1);
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C1AC.s")
+typedef struct struct_8005BBF8 {
+    struct_8011DE00 unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005BBF8;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C234.s")
+s32 func_8005BBF8(s32 arg0, struct_8005BBF8* arg1) {
+    func_8005B65C(arg0, &arg1->unk0);
+    arg1->unk18 = 0;
+    arg1->unk1C = 0;
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C2BC.s")
+typedef struct struct_8005BC28 {
+    Collider unk0;
+    s32 unk18;
+    void* unk1C;
+} struct_8005BC28;
+
+s32 func_8005BC28(GlobalContext* arg0, struct_8005BC28* arg1) {
+    u32 temp_a0;
+    u32 var_s0;
+
+    func_8005B6A0(arg0, &arg1->unk0);
+    temp_a0 = arg1->unk1C;
+    var_s0 = temp_a0;
+    if (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6))) {
+        do {
+            func_8005BB10(arg0, (struct_8005BB10*)var_s0);
+            var_s0 += 0x40;
+        } while (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6)));
+    }
+    arg1->unk18 = 0;
+    if ((void*)arg1->unk1C != NULL) {
+        ZeldaArena_FreeDebug((void*)arg1->unk1C, "../z_collision_check.c", 0x571);
+    }
+    arg1->unk1C = 0U;
+    return 1;
+}
+
+typedef struct struct_8005BCC8 {
+    Collider unk0;
+    u32 unk18;
+    u32 unk1C;
+} struct_8005BCC8;
+
+s32 func_8005BCC8(GlobalContext* arg0, struct_8005BCC8* arg1) {
+    u32 var_s0;
+
+    func_8005B6A0(arg0, &arg1->unk0);
+    var_s0 = arg1->unk1C;
+    if (var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6))) {
+        do {
+            func_8005BB10(arg0, (struct_8005BB10*)var_s0);
+            var_s0 += 0x40;
+        } while (var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+    }
+    arg1->unk18 = 0;
+    arg1->unk1C = 0U;
+    return 1;
+}
+
+typedef struct struct_8005BD50_arg1 {
+    struct_8005B6B0_arg1 unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005BD50_arg1;
+
+typedef struct struct_8005BD50_arg2 {
+    struct_8005B6B0_arg2 unk0;
+    s32 unk8;
+    s32 unkC;
+} struct_8005BD50_arg2;
+
+s32 func_8005BD50(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct_8005BD50_arg2* arg2) {
+    s32 temp_v0;
+    s32 var_s0;
+    s32 var_s1;
+
+    func_8005B6B0((s32)arg0, &arg1->unk0, &arg2->unk0);
+    arg1->unk18 = arg2->unk8;
+    temp_v0 = ZeldaArena_MallocDebug(arg2->unk8 << 6, "../z_collision_check.c", 0x5A3);
+    arg1->unk1C = temp_v0;
+    if (temp_v0 == 0) {
+        arg1->unk18 = 0;
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("ClObjJntSph_set():zelda_malloc()出来ません。\n");
+        osSyncPrintf("\x1b[m");
+        return 0;
+    }
+    var_s0 = arg1->unk1C;
+    var_s1 = arg2->unkC;
+    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
+        do {
+            func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
+            func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
+            var_s0 += 0x40;
+            var_s1 += 0x24;
+        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+    }
+    return 1;
+}
+
+typedef struct struct_8005BE50_arg1 {
+    Collider unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005BE50_arg1;
+
+typedef struct struct_8005BE50_arg3 {
+    ColliderBodyInfo unk0;
+    s32 unk8;
+    s32 unkC;
+} struct_8005BE50_arg3;
+
+s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, struct_8005BE50_arg3* arg3) {
+    s32 temp_v0;
+    s32 var_s0;
+    s32 var_s1;
+
+    func_8005B6EC(arg0, &arg1->unk0, arg2, &arg3->unk0);
+    arg1->unk18 = arg3->unk8;
+    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 << 6, "../z_collision_check.c", 0x5D2);
+    arg1->unk1C = temp_v0;
+    if (temp_v0 == 0) {
+        arg1->unk18 = 0;
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("ClObjJntSph_set3():zelda_malloc_出来ません。\n");
+        osSyncPrintf("\x1b[m");
+        return 0;
+    }
+    var_s0 = arg1->unk1C;
+    var_s1 = arg3->unkC;
+    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
+        do {
+            func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
+            func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
+            var_s0 += 0x40;
+            var_s1 += 0x24;
+        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+    }
+    return 1;
+}
+
+typedef struct struct_8005BF50_arg1 {
+    Collider unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005BF50_arg1;
+
+typedef struct struct_8005BF50_arg3 {
+    ColliderBodyInfo unk0;
+    s32 unk8;
+    s32 unkC;
+} struct_8005BF50_arg3;
+
+s32 func_8005BF50(GlobalContext* arg0, struct_8005BF50_arg1* arg1, Actor* arg2, struct_8005BF50_arg3* arg3) {
+    s32 temp_v0;
+    s32 var_s0;
+    s32 var_s1;
+
+    func_8005B72C(arg0, &arg1->unk0, arg2, &arg3->unk0);
+    arg1->unk18 = arg3->unk8;
+    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 << 6, "../z_collision_check.c", 0x60F);
+    arg1->unk1C = temp_v0;
+    if (temp_v0 == 0) {
+        arg1->unk18 = 0;
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("ClObjJntSph_set5():zelda_malloc出来ません\n");
+        osSyncPrintf("\x1b[m");
+        return 0;
+    }
+    var_s0 = arg1->unk1C;
+    var_s1 = arg3->unkC;
+    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
+        do {
+            func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
+            func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
+            var_s0 += 0x40;
+            var_s1 += 0x24;
+        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+    }
+    return 1;
+}
+
+typedef struct struct_8005C050_arg1 {
+    Collider unk0;
+    s32 unk18;
+    struct_8005BB48_arg1* unk1C;
+} struct_8005C050_arg1;
+
+typedef struct struct_8005C050_arg3 {
+    ColliderBodyInfo unk0;
+    s32 unk8;
+    struct_8005BB48_arg2* unkC;
+} struct_8005C050_arg3;
+
+s32 func_8005C050(GlobalContext* globalCtx, struct_8005C050_arg1* collision, Actor* actor, struct_8005C050_arg3* arg3,
+                  s32 arg4) {
+    struct_8005BB48_arg1* var_s0;
+    struct_8005BB48_arg2* var_s1;
+
+    func_8005B72C(globalCtx, &collision->unk0, actor, &arg3->unk0);
+    collision->unk18 = arg3->unk8;
+    collision->unk1C = arg4;
+    if (arg4 == 0) {
+        func_80001FF0("pclobj_jntsph->elem_tbl != NULL", "../z_collision_check.c", 0x643);
+    }
+    var_s0 = collision->unk1C;
+    var_s1 = arg3->unkC;
+    while (var_s0 < (collision->unk1C + (collision->unk18))) {
+        func_8005BAD8((s32)globalCtx, (struct_8005BAD8*)var_s0);
+        func_8005BB48(globalCtx, var_s0, var_s1);
+        var_s0++;
+        var_s1++;
+    }
+    return 1;
+}
+
+typedef struct struct_8005C124_arg1 {
+    Collider unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005C124_arg1;
+
+s32 func_8005C124(GlobalContext* arg0, struct_8005C124_arg1* arg1) {
+    struct_8005C124_arg1* new_var;
+    s32 var_s0;
+
+    new_var = arg1;
+    func_8005B76C(arg0, &new_var->unk0);
+    var_s0 = new_var->unk1C;
+    while (((u32)var_s0) < ((u32)(new_var->unk1C + (new_var->unk18 << 6)))) {
+        func_8005BB8C(arg0, (ColliderBody*)var_s0);
+        var_s0 += 0x40;
+    }
+
+    return 1;
+}
+
+typedef struct struct_8005C1AC {
+    Collider unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005C1AC;
+
+s32 func_8005C1AC(GlobalContext* arg0, struct_8005C1AC* arg1) {
+    struct_8005C1AC* new_var;
+    s32 var_s0;
+
+    new_var = arg1;
+    func_8005B784(arg0, &arg1->unk0);
+    var_s0 = new_var->unk1C;
+    if ((u32)var_s0 < (u32)(var_s0 + (new_var->unk18 << 6))) {
+        do {
+            func_8005BBB0(arg0, (ColliderBody*)var_s0);
+            var_s0 += 0x40;
+        } while ((u32)var_s0 < (u32)(new_var->unk1C + (new_var->unk18 << 6)));
+    }
+    return 1;
+}
+
+typedef struct struct_8005C234 {
+    Collider unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005C234;
+
+s32 func_8005C234(GlobalContext* arg0, struct_8005C234* arg1) {
+    struct_8005C234* new_var;
+    s32 var_s0;
+
+    new_var = arg1;
+    func_8005B79C(arg0, &arg1->unk0);
+    var_s0 = new_var->unk1C;
+    if ((u32)var_s0 < (u32)(var_s0 + (new_var->unk18 << 6))) {
+        do {
+            func_8005BBD4(arg0, (ColliderBody*)var_s0);
+            var_s0 += 0x40;
+        } while ((u32)var_s0 < (u32)(new_var->unk1C + (new_var->unk18 << 6)));
+    }
+    return 1;
+}
+
+typedef struct struct_8011DE6C {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+} struct_8011DE6C;
+
+extern struct_8011DE6C D_8011DE6C;
+
+s32 func_8005C2BC(s32 arg0, struct_8011DE6C* arg1) {
+    struct_8011DE6C sp4;
+
+    sp4 = D_8011DE6C;
+    *arg1 = sp4;
+    return 1;
+}
 
 s32 func_8005C318(GlobalContext* globalCtx, ColliderDimensions* dim) {
     return 1;
@@ -215,17 +691,74 @@ s32 func_8005C578(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C5B0.s")
+typedef struct struct_8011DE78 {
+    s32 unk0[0x34 / 4];
+} struct_8011DE78;
+
+extern struct_8011DE78 D_8011DE78;
+
+s32 func_8005C5B0(s32 arg0, struct_8011DE78* arg1) {
+    *arg1 = D_8011DE78;
+    return 1;
+}
 
 s32 func_8005C5F8(UNK_TYPE arg0, UNK_TYPE arg1) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C608.s")
+typedef struct struct_8005C608_arg1 {
+    /* 0x00 */ Vec3f unk0[3];
+    /* 0x24 */ f32 unk24;
+    /* 0x28 */ f32 unk28;
+    /* 0x2C */ f32 unk2C;
+    /* 0x30 */ f32 unk30;
+} struct_8005C608_arg1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C6C0.s")
+s32 func_8005C608(s32 arg0, struct_8005C608_arg1* arg1, Vec3f* arg2) {
+    Vec3f* var_v1;
+    Vec3f* var_v0;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C6F8.s")
+    var_v0 = arg1->unk0;
+    var_v1 = arg2;
+    while (var_v0 < arg1->unk0 + 3) {
+        *var_v0 = *var_v1;
+        var_v0++;
+        var_v1++;
+    }
+
+    func_800CC8B4(arg2, arg2 + 1, arg2 + 2, &sp44, &sp40, &sp3C, &sp38);
+    arg1->unk24 = sp44;
+    arg1->unk28 = sp40;
+    arg1->unk2C = sp3C;
+    arg1->unk30 = sp38;
+    return 1;
+}
+
+typedef struct struct_8005C6C0 {
+    struct_8011DE2C unk0;
+    struct_8011DE78 unk28;
+} struct_8005C6C0;
+
+s32 func_8005C6C0(s32 arg0, struct_8005C6C0* arg1) {
+    func_8005B884(arg0, &arg1->unk0);
+    func_8005C5B0(arg0, &arg1->unk28);
+    return 1;
+}
+
+typedef struct struct_8005C6F8 {
+    ColliderBody unk0;
+    char unk_28[1];
+} struct_8005C6F8;
+
+s32 func_8005C6F8(GlobalContext *arg0, struct_8005C6F8 *arg1) {
+    func_8005B904(arg0, &arg1->unk0);
+    func_8005C5F8((s32) arg0, arg1->unk_28);
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005C730.s")
 

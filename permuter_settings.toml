@@ -2,7 +2,9 @@ build_system = "make"
 compiler_type = "ido"
 
 [preserve_macros]
+"_DW" = "void"
 "g[DS]P.*" = "void"
+"G_[AC]CMUX_.*" = "void"
 
 [decompme.compilers]
 "*/tools/ido_recomp/linux/7.1/cc" = "ido7.1"
