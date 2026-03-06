@@ -1897,19 +1897,176 @@ void func_8005E800(struct_8005E800* arg0, struct_8005E800* arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800622C4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800622E4.s")
+typedef struct sub_struct_800622E4 {
+    /* 0x00 */ char unk0[0x11];
+    /* 0x11 */ u8 unk11;
+    /* 0x12 */ u8 unk12[3];
+    /* 0x15 */ u8 unk15;
+} sub_struct_800622E4;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800623A4.s")
+typedef void (*func_ptr_800622E4)(GlobalContext*, SubGlobalContext11E60*, sub_struct_800622E4*);
+extern func_ptr_800622E4 D_8011E008[];
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800624BC.s")
+void func_800622E4(GlobalContext* globalCtx, SubGlobalContext11E60* subContext) {
+    sub_struct_800622E4* entry;
+    s32 i;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062530.s")
+    for (i = 0; i < subContext->unkCC; i++) {
+        entry = subContext->unkD0[i];
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006268C.s")
+        if (entry == NULL) {
+        } else if (entry->unk11 & 0x40) {
+        } else {
+            D_8011E008[entry->unk15](globalCtx, subContext, entry);
+        }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800626B0.s")
+typedef struct sub_struct_800623A4 {
+    /* 0x00 */ char unk0[0x17];
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ char unk18[0x18];
+    /* 0x30 */ Sphere16 sphere;
+    /* 0x38 */ char unk38[0x8];
+} sub_struct_800623A4; // size = 0x40
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_Cylinder_Update.s")
+typedef struct struct_800623A4_1 {
+    /* 0x00 */ char unk0[0x18];
+    /* 0x18 */ s32 unk18;
+    /* 0x1C */ sub_struct_800623A4* unk1C;
+} struct_800623A4_1;
+
+typedef struct struct_800623A4_2 {
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s32 unk8;
+} struct_800623A4_2;
+
+typedef struct struct_800623A4_3 {
+    /* 0x00 */ f32 unk0;
+    /* 0x04 */ f32 unk4;
+    /* 0x08 */ f32 unk8;
+} struct_800623A4_3;
+
+extern Linef D_8015E610;
+extern struct_800623A4_2 D_8015E61C;
+
+s32 func_800623A4(s32 arg0, s32 arg1, struct_800623A4_1* arg2, Vec3f* arg3, struct_800623A4_2* arg4) {
+    struct_800623A4_1* new_var;
+    s32 i;
+    sub_struct_800623A4* entry;
+
+    new_var = arg2;
+    for (i = 0; i < new_var->unk18; i++) {
+        entry = arg2->unk1C + i;
+
+        if (!(entry->unk17 & 1)) {
+            continue;
+        }
+
+        D_8015E610.a = *arg3;
+        D_8015E61C = *arg4;
+
+        if (func_800CE600(&entry->sphere, &D_8015E610) == 1) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+typedef struct struct_800624BC {
+    /* 0x00 */ char unk0[0x2F];
+    /* 0x2F */ u8 unk2F;
+    /* 0x30 */ char unk30[0x10];
+    /* 0x40 */ Cylinder16 cylinder;
+} struct_800624BC;
+
+s32 func_800624BC(s32 arg0, s32 arg1, struct_800624BC* arg2, Vec3f* arg3, Vec3f* arg4) {
+    extern Vec3f D_8015E628;
+    extern Vec3f D_8015E638;
+    if (!(arg2->unk2F & 1)) {
+        return 0;
+    }
+
+    if (func_800CEE0C(&arg2->cylinder, arg3, arg4, &D_8015E628, &D_8015E638) != 0) {
+        return 1;
+    }
+
+    return 0;
+}
+
+typedef struct sub_struct_80062530 {
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ char unk4[0x11];
+    /* 0x15 */ u8 unk15;
+} sub_struct_80062530;
+
+typedef struct struct_80062530 {
+    /* 0x000 */ char unk0[0x1C0];
+    /* 0x1C0 */ s32 unk1C0;
+    /* 0x1C4 */ sub_struct_80062530* unk1C4[1];
+} struct_80062530;
+
+typedef s32 (*func_ptr_80062530)(void*, void*, sub_struct_80062530*, s32, s32);
+extern func_ptr_80062530 D_8011E018[];
+
+s32 func_80062530(void* arg0, struct_80062530* arg1, s32 arg2, s32 arg3, s32* unkList, s32 unkListCount) {
+    func_ptr_80062530 func;
+    s32 condition;
+    s32 result = 0;
+    s32 j;
+    sub_struct_80062530** entryPtr = arg1->unk1C4;
+    sub_struct_80062530* entry;
+
+    for (; entryPtr < arg1->unk1C4 + arg1->unk1C0; entryPtr++) {
+        if (func_80061BF4(*entryPtr) == 1) {
+            continue;
+        }
+
+        condition = 0;
+        for (j = 0; j < unkListCount; j++) {
+            if ((*entryPtr)->unk0 == unkList[j]) {
+                condition = true;
+                break;
+            }
+        }
+
+        if (condition == true) {
+            continue;
+        }
+
+        entry = *entryPtr;
+        func = D_8011E018[entry->unk15];
+
+        if (func == NULL) {
+            osSyncPrintf("CollisionCheck_generalLineOcCheck():未対応 %dタイプ\n", entry->unk15);
+            continue;
+        }
+
+        result = func(arg0, arg1, entry, arg2, arg3);
+
+        if (result != 0) {
+            break;
+        }
+    }
+
+    return result;
+}
+
+void func_8006268C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_80062530(arg0, arg1, arg2, arg3, 0, 0);
+}
+
+void func_800626B0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    func_80062530(arg0, arg1, arg2, arg3, arg4, arg5);
+}
+
+void ActorCollider_Cylinder_Update(Actor* actor, ColliderCylinderMain* collision) {
+    collision->dim.position.x = actor->posRot.pos.x;
+    collision->dim.position.y = actor->posRot.pos.y;
+    collision->dim.position.z = actor->posRot.pos.z;
+}
 
 typedef struct struct_80062718_1 {
     /* 0x00 */ char unk0[0x46];
