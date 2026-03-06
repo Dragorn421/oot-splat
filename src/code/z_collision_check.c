@@ -926,25 +926,162 @@ s32 func_8005CA88(GlobalContext* arg0, struct_8005CA88_arg1* arg1, Actor* arg2, 
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CBAC.s")
+typedef struct struct_8005CBAC_arg1 {
+    Collider unk0;
+    s32 unk18;
+    struct_8005C6C0* unk1C;
+} struct_8005CBAC_arg1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CC98.s")
+typedef struct struct_8005CBAC_arg3 {
+    ColliderBodyInfo unk0;
+    s32 unk8;
+    struct_8005C730_arg2* unkC;
+} struct_8005CBAC_arg3;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CD34.s")
+s32 func_8005CBAC(GlobalContext* arg0, struct_8005CBAC_arg1* arg1, Actor* arg2, struct_8005CBAC_arg3* arg3, u32 arg4) {
+    struct_8005C6C0* var_s0;
+    struct_8005C730_arg2* var_s1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CDD0.s")
+    func_8005B72C(arg0, &arg1->unk0, arg2, &arg3->unk0);
+    arg1->unk18 = arg3->unk8;
+    arg1->unk1C = (struct_8005C6C0*)arg4;
+    if (arg1->unk1C == 0) {
+        func_80001FF0("pclobj_tris->elem_tbl != NULL", "../z_collision_check.c", 0x8D2);
+    }
+    var_s0 = arg1->unk1C;
+    var_s1 = arg3->unkC;
+    while (var_s0 < &arg1->unk1C[arg1->unk18]) {
+        func_8005C6C0((s32)arg0, var_s0);
+        func_8005C730(arg0, (struct_8005C730_arg1*)var_s0, var_s1);
+        var_s0++;
+        var_s1++;
+    }
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CE6C.s")
+typedef struct struct_8005CC98_ptr {
+    char unk_0[0x5C];
+} struct_8005CC98_ptr;
+
+typedef struct struct_8005CC98 {
+    Collider unk0;
+    s32 unk18;
+    struct_8005CC98_ptr* unk1C;
+} struct_8005CC98;
+
+s32 func_8005CC98(GlobalContext* arg0, struct_8005CC98* arg1) {
+    struct_8005CC98_ptr* var_s0;
+    struct_8005CC98* new_var;
+
+    new_var = arg1;
+    func_8005B76C(arg0, &new_var->unk0);
+    var_s0 = new_var->unk1C;
+    while (((u32)var_s0) < ((u32)(new_var->unk1C + new_var->unk18))) {
+        func_8005C774(arg0, var_s0);
+        var_s0++;
+    }
+    return 1;
+}
+
+typedef struct struct_8005CD34_ptr {
+    char unk_0[0x5C];
+} struct_8005CD34_ptr;
+
+typedef struct struct_8005CD34 {
+    Collider unk0;
+    s32 unk18;
+    struct_8005CD34_ptr* unk1C;
+} struct_8005CD34;
+
+s32 func_8005CD34(GlobalContext* arg0, struct_8005CD34* arg1) {
+    struct_8005CD34_ptr* var_s0;
+    struct_8005CD34* new_var;
+
+    new_var = arg1;
+    func_8005B784(arg0, &new_var->unk0);
+    var_s0 = new_var->unk1C;
+    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+        func_8005C798(arg0, (ColliderBody*)var_s0);
+        var_s0++;
+    }
+    return 1;
+}
+
+typedef struct struct_8005CDD0_ptr {
+    char unk_0[0x5C];
+} struct_8005CDD0_ptr;
+
+typedef struct struct_8005CDD0 {
+    Collider unk0;
+    s32 unk18;
+    struct_8005CDD0_ptr* unk1C;
+} struct_8005CDD0;
+
+s32 func_8005CDD0(GlobalContext* arg0, struct_8005CDD0* arg1) {
+    struct_8005CDD0* new_var;
+    struct_8005CDD0_ptr* var_s0;
+
+    new_var = arg1;
+    func_8005B79C(arg0, new_var);
+    var_s0 = new_var->unk1C;
+    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+        func_8005C7BC(arg0, (ColliderBody*)var_s0);
+        var_s0++;
+    }
+    return 1;
+}
+
+typedef struct struct_8011DEAC {
+    s32 unk_0[0x40 / 4];
+} struct_8011DEAC;
+
+extern struct_8011DEAC D_8011DEAC;
+
+s32 func_8005CE6C(s32 arg0, struct_8011DEAC* arg1) {
+    *arg1 = D_8011DEAC;
+    return 1;
+}
 
 s32 func_8005CEB4(GlobalContext* globalCtx, ColliderDimensions* dim) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEC4.s")
+typedef struct struct_8005CEC4 {
+    char unk_0[0x3C];
+    f32 unk3C;
+} struct_8005CEC4;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CEDC.s")
+s32 func_8005CEC4(s32 arg0, struct_8005CEC4* arg1) {
+    arg1->unk3C = 1e38f;
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005CF90.s")
+typedef struct struct_8005CEDC {
+    /* 0x00 */ Vec3f unk0;
+    /* 0x0C */ Vec3f unkC;
+    /* 0x18 */ Vec3f unk18;
+    /* 0x24 */ Vec3f unk24;
+    /* 0x30 */ Vec3s unk30;
+    /* 0x36 */ Vec3s unk36;
+} struct_8005CEDC;
+
+void func_8005CEDC(struct_8005CEDC* arg0) {
+    arg0->unk30.x = (s16)(s32)((arg0->unk18.x + arg0->unk24.x) * 0.5f);
+    arg0->unk30.y = (s16)(s32)((arg0->unk18.y + arg0->unk24.y) * 0.5f);
+    arg0->unk30.z = (s16)(s32)((arg0->unk18.z + arg0->unk24.z) * 0.5f);
+    arg0->unk36.x = (s16)(s32)((arg0->unk0.x + arg0->unkC.x) * 0.5f);
+    arg0->unk36.y = (s16)(s32)((arg0->unk0.y + arg0->unkC.y) * 0.5f);
+    arg0->unk36.z = (s16)(s32)((arg0->unk0.z + arg0->unkC.z) * 0.5f);
+}
+
+s32 func_8005CF90(s32 arg0, struct_8005CEDC* arg1, Vec3f* arg2) {
+    arg1->unk0 = arg2[0];
+    arg1->unkC = arg2[1];
+    arg1->unk18 = arg2[2];
+    arg1->unk24 = arg2[3];
+    func_8005CEDC(arg1);
+    return 1;
+}
 
 s32 func_8005D018(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
     func_8005B65C(globalCtx, &collision->base);
@@ -993,7 +1130,41 @@ s32 func_8005D1E0(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D218.s")
+typedef struct struct_8005D218 {
+    /* 0x00 */ char unk_0[0x2D];
+    /* 0x2D */ u8 unk2D;
+    /* 0x2E */ char unk_2E[2];
+    /* 0x30 */ Collider* unk30;
+    /* 0x34 */ char unk_34[4];
+    /* 0x38 */ ColliderBody* unk38;
+    /* 0x3C */ char unk_3C[0x34];
+    /* 0x70 */ Vec3s unk70;
+    /* 0x76 */ char unk_76[6];
+    /* 0x7C */ f32 unk7C;
+} struct_8005D218;
+
+s32 func_8005D218(GlobalContext* arg0, struct_8005D218* arg1, Vec3f* arg2) {
+    f32 temp_fv0;
+    Vec3f sp20;
+
+    if (!(arg1->unk2D & 4)) {
+        return 1;
+    }
+    Math_Vec3s_ToVec3f(&sp20, &arg1->unk70);
+    temp_fv0 = func_800CB650(&sp20, arg2);
+    if (temp_fv0 < arg1->unk7C) {
+        arg1->unk7C = temp_fv0;
+        if (arg1->unk30 != NULL) {
+            func_8005B784(arg0, arg1->unk30);
+        }
+        if (arg1->unk38 != NULL) {
+            func_8005B9E8(arg0, arg1->unk38);
+        }
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005D2C4.s")
 
