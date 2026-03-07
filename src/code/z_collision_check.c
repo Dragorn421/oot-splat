@@ -1926,7 +1926,7 @@ typedef struct struct_8005E4F8_arg1 {
 } struct_8005E4F8_arg1;
 
 void func_80062D60(GlobalContext* arg0, Vec3f* arg1);
-void func_80062DAC(s32 arg0, s32 arg1, Vec3f* arg2);
+void func_80062DAC(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2);
 
 void func_8005E2EC(GlobalContext* arg0, struct_8005E2EC_arg1* arg1, struct_8005E2EC_arg2* arg2, Vec3f* arg3) {
     if (((arg1->unk15 & 0x18) == 0) && (arg2->unk14 != 9)) {
@@ -1982,6 +1982,7 @@ typedef void (*callback_8011DF28)(GlobalContext*, struct_8005E2EC_arg2*, Vec3f*)
 extern callback_8011DF28 D_8011DF28[];
 extern u8 D_8011DF40[][2];
 
+void func_80062CD4(GlobalContext* arg0, Vec3f* arg1);
 void func_80062E14(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2);
 
 void func_8005E604(GlobalContext* arg0, struct_8005E4F8_arg0** arg1, struct_8005E2EC_arg1* arg2,
@@ -2410,15 +2411,110 @@ void func_8006139C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061F2C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061F64.s")
+typedef struct sub_struct_80061F64_3 {
+    /* 0x00 */ char unk0[0x98];
+    /* 0x98 */ u8* unk98;
+    /* 0x9C */ char unk9C[0x14];
+    /* 0xB1 */ u8 unkB0;
+    /* 0xB1 */ u8 unkB1;
+} sub_struct_80061F64_3;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006216C.s")
+typedef struct sub_struct_80061F64_2 {
+    /* 0x00 */ u32 unk0;
+    /* 0x04 */ u8 unk4;
+    /* 0x05 */ u8 unk5;
+} sub_struct_80061F64_2;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062210.s")
+typedef struct sub_struct_80061F64_1 {
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ void* unk4;
+    /* 0x08 */ char unk8[5];
+    /* 0x0D */ u8 unkD;
+    /* 0x0E */ char unkE[8];
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ char unk17[0xD];
+    /* 0x24 */ sub_struct_80061F64_2* ac_hit_elem;
+} sub_struct_80061F64_1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062230.s")
+typedef struct struct_80061F64 {
+    /* 0x00 */ sub_struct_80061F64_3* unk0;
+    /* 0x04 */ char unk4[0xD];
+    /* 0x11 */ u8 unk11;
+    /* 0x12 */ char unk12[6];
+    /* 0x18 */ sub_struct_80061F64_1 unk18;
+} struct_80061F64;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800622C4.s")
+void func_80061F64(s32 arg0, void* arg1, struct_80061F64* arg2, sub_struct_80061F64_1* obj_elem) {
+    f32 unkf;
+    s32 i;
+    u32 unk0;
+
+    if (arg2->unk0 != NULL && (arg2->unk11 & 2)) {
+        if ((obj_elem->unk16 & 2) && !(obj_elem->unk16 & 0x10)) {
+
+            if (obj_elem->ac_hit_elem == NULL) {
+                func_80001FF0("pclobj_elem->ac_hit_elem != NULL", "../z_collision_check.c", 0x195D);
+            }
+
+            if (arg2->unk0->unk98 == NULL) {
+                unkf = (f32)obj_elem->ac_hit_elem->unk5 - (f32)obj_elem->unkD;
+                if (unkf < 0.0f) {
+                    unkf = 0.0f;
+                }
+            } else {
+                unk0 = obj_elem->ac_hit_elem->unk0;
+
+                for (i = 0; i < 32; i++) {
+                    if (unk0 == 1) {
+                        break;
+                    }
+
+                    unk0 >>= 1;
+                }
+
+                unkf = arg2->unk0->unk98[i] & 0xF;
+                arg2->unk0->unkB1 = (arg2->unk0->unk98[i] >> 4) & 0xF;
+            }
+
+            if (!(arg2->unk11 & 4)) {
+                arg2->unk0->unkB0 += unkf;
+            }
+            if (1) {}
+            if (1) {}
+        }
+    }
+}
+
+void func_8006216C(s32 arg0, void* arg1, struct_80061F64* arg2) {
+    struct_80061F64* new_var2 = arg2;
+    struct_80061F64* new_var = arg2;
+    s32 i;
+
+    if (new_var->unk18.unk0 <= 0 || new_var->unk18.unk4 == NULL) {
+        return;
+    }
+
+    for (i = 0; i < new_var2->unk18.unk0; i++) {
+        func_80061F64(arg0, arg1, new_var, (void*)(((u8*)new_var->unk18.unk4) + (i * 0x40)));
+    }
+}
+
+void func_80062210(s32 arg0, void* arg1, struct_80061F64* arg2) {
+    func_80061F64(arg0, arg1, arg2, &arg2->unk18);
+}
+
+void func_80062230(s32 arg0, void* arg1, struct_80061F64* arg2) {
+    s32 i;
+    struct_80061F64* new_var = arg2;
+
+    for (i = 0; i < new_var->unk18.unk0; i++) {
+        func_80061F64(arg0, arg1, new_var, (void*)((u8*)new_var->unk18.unk4 + (i * 0x5C)));
+    }
+}
+
+void func_800622C4(s32 arg0, s32 arg1, struct_80061F64* arg2) {
+    func_80061F64(arg0, arg1, arg2, &arg2->unk18);
+}
 
 typedef struct sub_struct_800622E4 {
     /* 0x00 */ char unk0[0x11];
@@ -2718,7 +2814,7 @@ void func_80062D60(GlobalContext* arg0, Vec3f* arg1) {
     Audio_PlaySoundGeneral(0x1808U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
 }
 
-void func_80062DAC(s32 arg0, s32 arg1, Vec3f* arg2) {
+void func_80062DAC(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2) {
     func_80062CD4(arg0, arg1);
     Audio_PlaySoundGeneral(0x1808U, arg2, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
 }
