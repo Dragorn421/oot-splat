@@ -1683,7 +1683,7 @@ void func_8005DF9C(s32 arg0, s32 arg1, s32 arg2) {
 
 typedef struct struct_8015D8A0 {
     /* 0x000 */ Vec3s unk0;
-    /* 0x006 */ char unk_2[0x486];
+    /* 0x006 */ char unk_6[0x486];
     /* 0x48C */ f32 unk48C;
     /* 0x490 */ f32 unk490;
     /* 0x494 */ s32 unk494;
@@ -1724,10 +1724,11 @@ typedef struct struct_8015D8A0 {
     s32 unk4C0;
 } struct_8015D8A0;
 
-extern struct_8015D8A0 D_8015D8A0;
-
 #ifdef NON_MATCHING
+// https://decomp.me/scratch/aKq4j
 void func_8005DFAC(GlobalContext* arg0, s32 arg1, Vec3f* arg2) {
+    static struct_8015D8A0 D_8015D8A0;
+
     s32 sp24;
 
     D_8015D8A0.unk0.x = (s16)(s32)arg2->x;
@@ -1777,7 +1778,57 @@ void func_8005DFAC(GlobalContext* arg0, s32 arg1, Vec3f* arg2) {
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DFAC.s")
 #endif
 
+#ifdef NON_MATCHING
+void func_8005E10C(GlobalContext* arg0, s32 arg1, Vec3f* arg2) {
+    static struct_8015D8A0 D_8015DD68;
+    s32 sp24;
+
+    D_8015DD68.unk0.x = (s16)(s32)arg2->x;
+    D_8015DD68.unk0.y = (s16)(s32)arg2->y;
+    D_8015DD68.unk0.z = (s16)(s32)arg2->z;
+    D_8015DD68.unk494 = 5;
+    D_8015DD68.unk498 = 5;
+    D_8015DD68.unk49C = 0xA;
+    D_8015DD68.unk49D = -0x38;
+    D_8015DD68.unk49E = 0xA;
+    D_8015DD68.unk49F = -1;
+    D_8015DD68.unk4A0 = 0;
+    D_8015DD68.unk4A1 = 0x80;
+    D_8015DD68.unk4A2 = 0;
+    D_8015DD68.unk4A3 = -1;
+    D_8015DD68.unk4A4 = 0;
+    D_8015DD68.unk4A5 = 0x80;
+    D_8015DD68.unk4A6 = 0;
+    D_8015DD68.unk4A7 = -1;
+    D_8015DD68.unk4A8 = 0;
+    D_8015DD68.unk4A9 = 0x80;
+    D_8015DD68.unk4AA = 0;
+    D_8015DD68.unk4AB = -1;
+    D_8015DD68.unk4AC = 0;
+    D_8015DD68.unk4AD = 0x20;
+    D_8015DD68.unk4AE = 0;
+    D_8015DD68.unk4AF = 0;
+    D_8015DD68.unk4B0 = 0;
+    D_8015DD68.unk4B1 = 0x20;
+    D_8015DD68.unk4B2 = 0;
+    D_8015DD68.unk4B3 = 0;
+    D_8015DD68.unk4B4 = 0;
+    D_8015DD68.unk4B5 = 0x40;
+    D_8015DD68.unk4B6 = 0;
+    D_8015DD68.unk4B7 = 0;
+    D_8015DD68.unk4B8 = 0;
+    D_8015DD68.unk4B9 = 0x40;
+    D_8015DD68.unk4BA = 0;
+    D_8015DD68.unk4BB = 0;
+    D_8015DD68.unk4BC = 0;
+    D_8015DD68.unk4C0 = 0x10;
+    D_8015DD68.unk48C = 8.0f;
+    D_8015DD68.unk490 = -1.0f;
+    Effect_Add(arg0, &sp24, 0, 0U, 1U, &D_8015DD68);
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E10C.s")
+#endif
 
 void func_8005E26C(s32 arg0, s32 arg1, s32 arg2) {
     func_800299AC(arg0, arg2);
@@ -1792,11 +1843,124 @@ void func_8005E2C8(s32 arg1, s32 arg2, s32 arg3) {
     func_80062A28(arg1, arg3);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E2EC.s")
+typedef struct struct_8005E2EC_arg1 {
+    /* 0x000 */ char unk_0[0x15];
+    /* 0x015 */ u8 unk15;
+} struct_8005E2EC_arg1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E4F8.s")
+typedef struct struct_8005E2EC_arg2 {
+    /* 0x000 */ s32 unk0;
+    /* 0x004 */ char unk_4[0x10];
+    /* 0x014 */ u8 unk14;
+} struct_8005E2EC_arg2;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E604.s")
+void func_80062D60(GlobalContext* arg0, Vec3f* arg1);
+void func_80062DAC(s32 arg0, s32 arg1, Vec3f* arg2);
+
+void func_8005E2EC(GlobalContext* arg0, struct_8005E2EC_arg1* arg1, struct_8005E2EC_arg2* arg2, Vec3f* arg3) {
+    if (((arg1->unk15 & 0x18) == 0) && (arg2->unk14 != 9)) {
+        func_80029CA4(arg0, 0, arg3);
+        if (arg2->unk0 == 0) {
+            Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else {
+            Audio_PlaySoundGeneral(0x1806U, arg2->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        }
+    } else if ((arg1->unk15 & 0x18) == 0) {
+        func_80029CA4(arg0, 3, arg3);
+        if (arg2->unk0 == 0) {
+            func_80062D60(arg0, arg3);
+        } else {
+            func_80062DAC((s32)arg0, (s32)arg3, arg2->unk0 + 0xE4);
+        }
+    } else if ((arg1->unk15 & 0x18) == 8) {
+        func_80029CA4(arg0, 0, arg3);
+        if (arg2->unk0 == 0) {
+            Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else {
+            Audio_PlaySoundGeneral(0x1806U, arg2->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        }
+    } else if ((arg1->unk15 & 0x18) == 0x10) {
+        func_80029CA4(arg0, 1, arg3);
+        if (arg2->unk0 == 0) {
+            Audio_PlaySoundGeneral(0x1837U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else {
+            Audio_PlaySoundGeneral(0x1837U, arg2->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        }
+    }
+}
+
+typedef struct struct_8005E4F8_arg0 {
+    /* 0x000 */ char unk_0[2];
+    /* 0x002 */ u8 unk2;
+    /* 0x003 */ char unk_3[0xE1];
+    /* 0x0E4 */ Vec3f unkE4;
+} struct_8005E4F8_arg0;
+
+typedef struct struct_8005E4F8_arg1 {
+    /* 0x000 */ char unk_0[0x14];
+    /* 0x014 */ u8 unk14;
+    char unk_15[1];
+    u8 unk16;
+} struct_8005E4F8_arg1;
+
+s32 func_8005E4F8(struct_8005E4F8_arg0** arg0, struct_8005E4F8_arg1* arg1) {
+    struct_8005E4F8_arg0* temp_v1;
+
+    temp_v1 = *arg0;
+    if ((temp_v1 != NULL) && (temp_v1->unk2 == 2)) {
+        if (arg1->unk14 == 0) {
+            Audio_PlaySoundGeneral(0x1811U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else if (arg1->unk14 == 1) {
+            Audio_PlaySoundGeneral(0x1824U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else if (arg1->unk14 == 2) {
+            Audio_PlaySoundGeneral(0U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else if (arg1->unk14 == 3) {
+            Audio_PlaySoundGeneral(0U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        }
+    }
+    return 1;
+}
+
+typedef void (*callback_8011DF28)(GlobalContext*, struct_8005E2EC_arg2*, Vec3f*);
+extern callback_8011DF28 D_8011DF28[];
+extern u8 D_8011DF40[][2];
+
+void func_80062E14(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2);
+
+void func_8005E604(GlobalContext* arg0, struct_8005E4F8_arg0** arg1, struct_8005E2EC_arg1* arg2,
+                   struct_8005E2EC_arg2* arg3, struct_8005E4F8_arg1* arg4, Vec3f* arg5) {
+    if (!(arg4->unk16 & 0x40) && ((((arg2->unk15 & 0x20) != 0)) || !(arg2->unk15 & 0x40))) {
+        if (arg3->unk0 != 0) {
+            D_8011DF28[D_8011DF40[arg3->unk14][0]](arg0, arg3, arg5);
+        }
+        do {
+        } while (0);
+        if (arg3->unk0 != 0) {
+            if (D_8011DF40[arg3->unk14][1] == 3) {
+                func_8005E2EC(arg0, arg2, arg3, arg5);
+            } else if (D_8011DF40[arg3->unk14][1] == 4) {
+                if (*arg1 == NULL) {
+                    func_80062CD4(arg0, arg5);
+                    Audio_PlaySoundGeneral(0x1837U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+                } else {
+                    func_80062E14(arg0, arg5, &(*arg1)->unkE4);
+                }
+            } else if (D_8011DF40[arg3->unk14][1] != 5) {
+                func_80029CA4(arg0, D_8011DF40[arg3->unk14][1], arg5);
+                if (!(arg4->unk16 & 0x20)) {
+                    func_8005E4F8(arg1, arg4);
+                }
+            }
+        } else {
+            func_80029CA4(arg0, 0U, arg5);
+            if (arg3->unk0 == 0) {
+                Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            } else {
+                Audio_PlaySoundGeneral(0x1806U, arg3->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            }
+        }
+    }
+}
 
 typedef struct struct_8005E800 {
     char unk_0[0x10];
@@ -2100,11 +2264,89 @@ void func_80062734(struct_80062734* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
     func_8005CEDC(&arg0->unk40);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800627A0.s")
+typedef struct struct_800627A0_ptr {
+    /* 0x00 */ char unk_0[0x28];
+    /* 0x28 */ Vec3f unk28;
+    /* 0x34 */ Vec3f unk34;
+    /* 0x40 */ Vec3f unk40;
+    /* 0x4C */ f32 unk4C;
+    /* 0x50 */ f32 unk50;
+    /* 0x54 */ f32 unk54;
+    /* 0x58 */ f32 unk58;
+} struct_800627A0_ptr;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006285C.s")
+typedef struct struct_800627A0 {
+    char unk_0[0x1C];
+    struct_800627A0_ptr* unk1C;
+} struct_800627A0;
 
+void func_800627A0(struct_800627A0* arg0, s32 arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
+    struct_800627A0_ptr* temp_s0;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+
+    temp_s0 = &arg0->unk1C[arg1];
+    Math_Vec3f_Copy(&temp_s0->unk28, arg2);
+    Math_Vec3f_Copy(&temp_s0->unk34, arg3);
+    Math_Vec3f_Copy(&temp_s0->unk40, arg4);
+    func_800CC8B4(arg2, arg3, arg4, &sp40, &sp3C, &sp38, &sp34);
+    temp_s0->unk4C = sp40;
+    temp_s0->unk50 = sp3C;
+    temp_s0->unk54 = sp38;
+    temp_s0->unk58 = sp34;
+}
+
+void func_8006285C(s32 arg0, struct_800627A0* arg1, s32 arg2, Vec3f* arg3) {
+    struct_800627A0_ptr* new_var;
+
+    new_var = &arg1->unk1C[arg2];
+    func_8005C608(arg0, (struct_8005C608_arg1*)&new_var->unk28, arg3);
+}
+
+typedef struct struct_800628A4_ptr {
+    char unk_0[0x28];
+    Vec3s unk28;
+    s16 unk2E;
+    Vec3s unk30;
+    s16 unk36;
+    f32 unk38;
+    u8 unk3C;
+    char unk_3D[3];
+} struct_800628A4_ptr;
+
+typedef struct struct_800628A4 {
+    char unk_0[0x18];
+    s32 unk18;
+    struct_800628A4_ptr* unk1C;
+} struct_800628A4;
+
+void func_800628A4(s32 arg0, struct_800628A4* arg1);
+#ifdef NON_MATCHING
+// need import bss
+void func_800628A4(s32 arg0, struct_800628A4* arg1) {
+    static Vec3f D_8015CF00;
+    static Vec3f D_8015E648;
+
+    s32 i;
+
+    for (i = 0; i < arg1->unk18; i++) {
+        if (arg0 == arg1->unk1C[i].unk3C) {
+            D_8015E648.x = arg1->unk1C[i].unk28.x;
+            D_8015E648.y = arg1->unk1C[i].unk28.y;
+            D_8015E648.z = arg1->unk1C[i].unk28.z;
+            Matrix_MultVec3f(&D_8015E648, &D_8015CF00);
+            arg1->unk1C[i].unk30.x = D_8015CF00.x;
+            arg1->unk1C[i].unk30.y = D_8015CF00.y;
+            arg1->unk1C[i].unk30.z = D_8015CF00.z;
+            arg1->unk1C[i].unk36 = (arg1->unk1C[i].unk2E * arg1->unk1C[i].unk38);
+        }
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800628A4.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062A28.s")
 
