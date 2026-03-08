@@ -9,7 +9,7 @@ void func_8005B280(GraphicsContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3)
 
 extern Collider D_8011DE00;
 
-s32 func_8005B65C(GlobalContext* arg0, Collider* arg1) {
+s32 func_8005B65C_InitColliderDefault(GlobalContext* arg0, Collider* arg1) {
     *arg1 = D_8011DE00;
     return 1;
 }
@@ -91,9 +91,9 @@ typedef struct struct_8011DE18 {
     s32 unk4;
 } struct_8011DE18; /* size = 0x8 */
 
-extern struct_8011DE18 D_8011DE18;
+extern ColliderTouch D_8011DE18;
 
-s32 func_8005B7C0(s32 arg0, struct_8011DE18* arg1) {
+s32 func_8005B7C0(s32 arg0, ColliderTouch* arg1) {
     *arg1 = D_8011DE18;
     return 1;
 }
@@ -142,12 +142,12 @@ typedef struct struct_8011DE2C {
     char unk_14[0x14];
 } struct_8011DE2C; /* size = 0x28 */
 
-extern struct_8011DE2C D_8011DE2C;
+extern ColliderBody D_8011DE2C;
 
-s32 func_8005B884(GlobalContext* arg0, struct_8011DE2C* arg1) {
+s32 func_8005B884(GlobalContext* arg0, ColliderBody* arg1) {
     *arg1 = D_8011DE2C;
-    func_8005B7C0(arg0, &arg1->unk0);
-    func_8005B824(arg0, &arg1->unk8);
+    func_8005B7C0(arg0, &arg1->toucher);
+    func_8005B824(arg0, &arg1->bumper);
     return 1;
 }
 
@@ -248,7 +248,7 @@ s32 func_8005BBD4_SetOT_sub_0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
 }
 
 s32 func_8005BBF8_Type0(GlobalContext* arg0, Collider_Type0* arg1) {
-    func_8005B65C(arg0, &arg1->unk0);
+    func_8005B65C_InitColliderDefault(arg0, &arg1->unk0);
     arg1->unk18 = 0;
     arg1->unk1C = 0;
     return 1;
@@ -528,7 +528,7 @@ s32 func_8005C328(GlobalContext* globalCtx, struct_8005C328* dest, struct_8005C3
 }
 
 s32 ActorCollider_AllocThing_Type1(GlobalContext* globalCtx, Collider_Type1* collision) {
-    func_8005B65C(globalCtx, &collision->unk0);
+    func_8005B65C_InitColliderDefault(globalCtx, &collision->unk0);
     func_8005B884(globalCtx, &collision->unk18);
     func_8005C2BC(globalCtx, &collision->unk40);
     return 1;
@@ -649,7 +649,7 @@ s32 func_8005C608(GlobalContext* arg0, struct_8005C608_arg1* arg1, Vec3f* arg2) 
 }
 
 typedef struct struct_8005C6C0 {
-    struct_8011DE2C unk0;
+    ColliderBody unk0;
     struct_8011DE78 unk28;
 } struct_8005C6C0; /* size = 0x5C */
 
@@ -710,7 +710,7 @@ typedef struct struct_8005C7E0 {
 
 // uses not decompiled
 s32 func_8005C7E0(GlobalContext* arg0, struct_8005C7E0* arg1) {
-    func_8005B65C(arg0, &arg1->unk0);
+    func_8005B65C_InitColliderDefault(arg0, &arg1->unk0);
     arg1->unk18 = 0;
     arg1->unk1C = 0;
     return 1;
@@ -793,8 +793,8 @@ s32 func_8005C964(GlobalContext* arg0, struct_8005C964_arg1* arg1, Actor* arg2, 
     var_s0 = arg1->unk1C;
     var_s1 = arg3->unkC;
     while (var_s0 < (arg1->unk1C + arg1->unk18)) {
-        func_8005C6C0((s32)arg0, var_s0);
-        func_8005C730(arg0, (struct_8005C730_arg1*)var_s0, var_s1);
+        func_8005C6C0(arg0, var_s0);
+        func_8005C730(arg0, var_s0, var_s1);
         var_s0++;
         var_s1++;
     }
@@ -867,8 +867,8 @@ s32 func_8005CBAC(GlobalContext* arg0, struct_8005CBAC_arg1* arg1, Actor* arg2, 
     var_s0 = arg1->unk1C;
     var_s1 = arg3->unkC;
     while (var_s0 < &arg1->unk1C[arg1->unk18]) {
-        func_8005C6C0((s32)arg0, var_s0);
-        func_8005C730(arg0, (struct_8005C730_arg1*)var_s0, var_s1);
+        func_8005C6C0(arg0, var_s0);
+        func_8005C730(arg0, var_s0, var_s1);
         var_s0++;
         var_s1++;
     }
@@ -952,7 +952,7 @@ s32 func_8005CF90_Type3(s32 arg0, struct_Collider_Type3_subc* arg1, Vec3f* arg2)
 }
 
 s32 func_8005D018_Type3(GlobalContext* globalCtx, Collider_Type3* collision) {
-    func_8005B65C(globalCtx, &collision->unk0);
+    func_8005B65C_InitColliderDefault(globalCtx, &collision->unk0);
     func_8005B884(globalCtx, &collision->unk18);
     func_8005CE6C(globalCtx, &collision->unk40);
     return 1;

@@ -663,7 +663,7 @@ s32 func_8005AA90(Camera*, s32, Vec3f*);
 s32 CollisionBtlTbl_Get(s32 index);
 // ? func_8005B280(?);
 void func_8005B2AC(GraphicsContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, u8 arg4, u8 arg5, u8 arg6);
-// ? func_8005B65C(?);
+// ? func_8005B65C_InitColliderDefault(?);
 // ? func_8005B6B0(?);
 s32 func_8005B72C_InitColliderFromSrc(GlobalContext* globalCtx, Collider* collision, Actor* actor, ColliderSrc* src);
 void func_8005B76C(GlobalContext* globalCtx, Collider* collision);
