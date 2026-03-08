@@ -170,6 +170,7 @@ s32 func_8005B93C(GlobalContext* globalCtx, ColliderBody* body, ColliderBodySrc*
     return 1;
 }
 
+// multi-type
 void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body) {
     body->unk_18 = 0;
     body->unk_20 = 0;
@@ -178,6 +179,7 @@ void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body) {
     func_8005B818(globalCtx, body);
 }
 
+// multi-type
 void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body) {
     body->bumperFlags &= ~0x2;
     body->bumperFlags &= ~0x80;
@@ -208,7 +210,7 @@ s32 func_8005BA84_Type0(GlobalContext* arg0, struct_8011DE54* arg1, ColliderSrc_
     return 1;
 }
 
-s32 func_8005BAD8(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
+s32 func_8005BAD8_Type0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
     func_8005B884(arg0, &arg1->unk0);
     func_8005BA30(arg0, &arg1->unk28);
     return 1;
@@ -248,67 +250,47 @@ s32 func_8005BBF8_Type0(GlobalContext* arg0, Collider_Type0* arg1) {
     return 1;
 }
 
-typedef struct struct_8005BC28 {
-    Collider unk0;
-    s32 unk18;
-    void* unk1C;
-} struct_8005BC28;
-
 // only used by EnNwc
-s32 func_8005BC28(GlobalContext* arg0, struct_8005BC28* arg1) {
-    u32 temp_a0;
-    u32 var_s0;
+s32 func_8005BC28(GlobalContext* arg0, Collider_Type0* arg1) {
+    Collider_Type0_ptr1C* var_s0;
 
     func_8005B6A0(arg0, &arg1->unk0);
-    temp_a0 = arg1->unk1C;
-    var_s0 = temp_a0;
-    if (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6))) {
-        do {
-            func_8005BB10_Type0(arg0, var_s0);
-            var_s0 += 0x40;
-        } while (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6)));
+    var_s0 = arg1->unk1C;
+    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+        func_8005BB10_Type0(arg0, var_s0);
+        var_s0++;
     }
     arg1->unk18 = 0;
-    if ((void*)arg1->unk1C != NULL) {
+    if (arg1->unk1C != NULL) {
         ZeldaArena_FreeDebug((void*)arg1->unk1C, "../z_collision_check.c", 0x571);
     }
-    arg1->unk1C = 0U;
+    arg1->unk1C = NULL;
     return 1;
 }
-
-typedef struct struct_8005BCC8 {
-    Collider unk0;
-    u32 unk18;
-    u32 unk1C;
-} struct_8005BCC8;
 
 s32 func_8005BCC8_Type0(GlobalContext* arg0, Collider_Type0* arg1) {
     Collider_Type0_ptr1C* var_s0;
 
     func_8005B6A0(arg0, &arg1->unk0);
     var_s0 = arg1->unk1C;
-    if (var_s0 < (arg1->unk1C + (arg1->unk18))) {
-        do {
-            func_8005BB10_Type0(arg0, var_s0);
-            var_s0++;
-        } while (var_s0 < (arg1->unk1C + (arg1->unk18)));
+    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+        func_8005BB10_Type0(arg0, var_s0);
+        var_s0++;
     }
     arg1->unk18 = 0;
-    arg1->unk1C = 0U;
+    arg1->unk1C = NULL;
     return 1;
 }
 
 // unused
 s32 func_8005BD50_jntsph(GlobalContext* arg0, Collider_Type0* arg1, ColliderSrc_Type0* arg2) {
-    s32 temp_v0;
     Collider_Type0_ptr1C* var_s0;
     ColliderSrc_Type0_ptrC* var_s1;
 
     func_8005B6B0(arg0, &arg1->unk0, &arg2->unk0);
     arg1->unk18 = arg2->unk8;
-    temp_v0 = ZeldaArena_MallocDebug(arg2->unk8 << 6, "../z_collision_check.c", 0x5A3);
-    arg1->unk1C = temp_v0;
-    if (temp_v0 == 0) {
+    arg1->unk1C = ZeldaArena_MallocDebug(arg2->unk8 << 6, "../z_collision_check.c", 0x5A3);
+    if (arg1->unk1C == 0) {
         arg1->unk18 = 0;
         osSyncPrintf("\x1b[31m");
         osSyncPrintf("ClObjJntSph_set():zelda_malloc()出来ません。\n");
@@ -317,13 +299,11 @@ s32 func_8005BD50_jntsph(GlobalContext* arg0, Collider_Type0* arg1, ColliderSrc_
     }
     var_s0 = arg1->unk1C;
     var_s1 = arg2->unkC;
-    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
-        do {
-            func_8005BAD8((s32)arg0, var_s0);
-            func_8005BB48_Type0(arg0, var_s0, var_s1);
-            var_s0 += 1;
-            var_s1 += 1;
-        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
+    while (var_s0 < (arg1->unk1C + (arg1->unk18))) {
+        func_8005BAD8_Type0(arg0, var_s0);
+        func_8005BB48_Type0(arg0, var_s0, var_s1);
+        var_s0++;
+        var_s1++;
     }
     return 1;
 }
@@ -347,13 +327,11 @@ s32 func_8005BE50_jntsph(GlobalContext* arg0, Collider_Type0* arg1, Actor* arg2,
     }
     var_s0 = arg1->unk1C;
     var_s1 = arg3->unkC;
-    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
-        do {
-            func_8005BAD8((s32)arg0, var_s0);
-            func_8005BB48_Type0(arg0, var_s0, var_s1);
-            var_s0++;
-            var_s1++;
-        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
+    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+        func_8005BAD8_Type0(arg0, var_s0);
+        func_8005BB48_Type0(arg0, var_s0, var_s1);
+        var_s0++;
+        var_s1++;
     }
     return 1;
 }
@@ -366,9 +344,8 @@ s32 func_8005BF50_jntsph(GlobalContext* arg0, Collider_Type0* arg1, Actor* arg2,
 
     func_8005B72C_InitColliderFromSrc(arg0, &arg1->unk0, arg2, &arg3->unk0);
     arg1->unk18 = arg3->unk8;
-    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 * 0x40, "../z_collision_check.c", 0x60F);
-    arg1->unk1C = temp_v0;
-    if (temp_v0 == 0) {
+    arg1->unk1C = ZeldaArena_MallocDebug(arg3->unk8 * 0x40, "../z_collision_check.c", 0x60F);
+    if (arg1->unk1C == NULL) {
         arg1->unk18 = 0;
         osSyncPrintf("\x1b[31m");
         osSyncPrintf("ClObjJntSph_set5():zelda_malloc出来ません\n");
@@ -377,13 +354,11 @@ s32 func_8005BF50_jntsph(GlobalContext* arg0, Collider_Type0* arg1, Actor* arg2,
     }
     var_s0 = arg1->unk1C;
     var_s1 = arg3->unkC;
-    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
-        do {
-            func_8005BAD8((s32)arg0, var_s0);
-            func_8005BB48_Type0(arg0, var_s0, var_s1);
-            var_s0++;
-            var_s1++;
-        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
+    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+        func_8005BAD8_Type0(arg0, var_s0);
+        func_8005BB48_Type0(arg0, var_s0, var_s1);
+        var_s0++;
+        var_s1++;
     }
     return 1;
 }
@@ -401,8 +376,8 @@ s32 func_8005C050_jntsph_Type0(GlobalContext* globalCtx, Collider_Type0* collisi
     }
     var_s0 = collision->unk1C;
     var_s1 = arg3->unkC;
-    while (var_s0 < (collision->unk1C + (collision->unk18))) {
-        func_8005BAD8(globalCtx, var_s0);
+    while (var_s0 < (collision->unk1C + collision->unk18)) {
+        func_8005BAD8_Type0(globalCtx, var_s0);
         func_8005BB48_Type0(globalCtx, var_s0, var_s1);
         var_s0++;
         var_s1++;
@@ -417,7 +392,7 @@ s32 func_8005C124_SetAT_0(GlobalContext* arg0, Collider* arg1) {
     new_var = arg1;
     func_8005B76C(arg0, &new_var->unk0);
     var_s0 = new_var->unk1C;
-    while (((u32)var_s0) < ((u32)(new_var->unk1C + (new_var->unk18)))) {
+    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
         func_8005BB8C_SetAT_sub_0(arg0, var_s0);
         var_s0++;
     }
@@ -432,11 +407,9 @@ s32 func_8005C1AC_SetAC_0(GlobalContext* arg0, Collider* arg1) {
     new_var = arg1;
     func_8005B784(arg0, &new_var->unk0);
     var_s0 = new_var->unk1C;
-    if ((u32)var_s0 < (u32)(var_s0 + (new_var->unk18))) {
-        do {
-            func_8005BBB0_SetAC_sub_0(arg0, var_s0);
-            var_s0++;
-        } while ((u32)var_s0 < (u32)(new_var->unk1C + (new_var->unk18)));
+    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+        func_8005BBB0_SetAC_sub_0(arg0, var_s0);
+        var_s0++;
     }
     return 1;
 }
@@ -448,28 +421,17 @@ s32 func_8005C234_SetOT_0(GlobalContext* arg0, Collider* arg1) {
     new_var = arg1;
     func_8005B79C(arg0, &new_var->unk0);
     var_s0 = new_var->unk1C;
-    if ((u32)var_s0 < (u32)(var_s0 + (new_var->unk18))) {
-        do {
-            func_8005BBD4_SetOT_sub_0(arg0, var_s0);
-            var_s0++;
-        } while ((u32)var_s0 < (u32)(new_var->unk1C + (new_var->unk18)));
+    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+        func_8005BBD4_SetOT_sub_0(arg0, var_s0);
+        var_s0++;
     }
     return 1;
 }
 
-typedef struct struct_8011DE6C {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-} struct_8011DE6C; /* size = 0xC */
+extern struct_8005C328 D_8011DE6C;
 
-extern struct_8011DE6C D_8011DE6C;
-
-s32 func_8005C2BC(s32 arg0, struct_8011DE6C* arg1) {
-    struct_8011DE6C sp4;
+s32 func_8005C2BC(s32 arg0, struct_8005C328* arg1) {
+    struct_8005C328 sp4;
 
     sp4 = D_8011DE6C;
     *arg1 = sp4;
@@ -480,7 +442,7 @@ s32 func_8005C318(GlobalContext* globalCtx, UNK_PTR dim) {
     return 1;
 }
 
-s32 func_8005C328(GlobalContext* globalCtx, struct_8005C328* dest, struct_8005C328* src) {
+s32 func_8005C328_Type1(GlobalContext* globalCtx, struct_8005C328* dest, struct_8005C328* src) {
     *dest = *src;
     return 1;
 }
@@ -515,7 +477,7 @@ typedef struct struct_8005C3F4_arg2 {
 s32 func_8005C3F4(GlobalContext* globalCtx, struct_8005C3F4_arg1* collision, struct_8005C3F4_arg2* src) {
     func_8005B6B0(globalCtx, &collision->unk0, &src->unk0);
     func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
-    func_8005C328(globalCtx, &collision->unk40, &src->unk20);
+    func_8005C328_Type1(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
 
@@ -523,7 +485,7 @@ s32 func_8005C450_Type1(GlobalContext* globalCtx, Collider_Type1* collision, Act
                         struct_8005C450_Type1_ColliderSrc* src) {
     func_8005B6EC(globalCtx, &collision->unk0, actor, &src->unk0);
     func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
-    func_8005C328(globalCtx, &collision->unk40, &src->unk20);
+    func_8005C328_Type1(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
 
@@ -531,7 +493,7 @@ s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, Collider_Type1* coll
                                   Type1_ColliderSrc_alt* src) {
     func_8005B72C_InitColliderFromSrc(globalCtx, &collision->unk0, actor, &src->unk0);
     func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
-    func_8005C328(globalCtx, &collision->unk40, &src->unk20);
+    func_8005C328_Type1(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
 
@@ -982,7 +944,7 @@ typedef struct struct_8005D218 {
     /* 0x2E */ char unk_2E[2];
     /* 0x30 */ Collider* unk30;
     /* 0x34 */ char unk_34[4];
-    /* 0x38 */ UNK_PTR unk38;
+    /* 0x38 */ ColliderBody* unk38;
     /* 0x3C */ char unk_3C[0x34];
     /* 0x70 */ Vec3s unk70;
     /* 0x76 */ char unk_76[6];
@@ -1471,6 +1433,7 @@ typedef struct struct_8005DE9C {
     void* unk_290[UNK_SIZE];
 } struct_8005DE9C;
 
+// unused
 s32 func_8005DE9C(GlobalContext* arg0, struct_8005DE9C* arg1, struct_8005D3A4* arg2) {
     s32 temp_v1;
 
@@ -1671,11 +1634,11 @@ void func_8005E26C(s32 arg0, s32 arg1, s32 arg2) {
 
 void func_80062A28(GlobalContext* arg0, Vec3f* arg1);
 
-void func_8005E2A4(s32 arg1, s32 arg2, s32 arg3) {
+void func_8005E2A4(GlobalContext* arg1, s32 arg2, Vec3f* arg3) {
     func_80062A28(arg1, arg3);
 }
 
-void func_8005E2C8(s32 arg1, s32 arg2, s32 arg3) {
+void func_8005E2C8(GlobalContext* arg1, s32 arg2, Vec3f* arg3) {
     func_80062A28(arg1, arg3);
 }
 

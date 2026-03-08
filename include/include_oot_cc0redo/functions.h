@@ -681,7 +681,7 @@ void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body);
 // ? func_8005BA30(?);
 s32 func_8005BA74(GlobalContext*, UNK_TYPE);
 // ? func_8005BA84_Type0(?);
-// ? func_8005BAD8(?);
+// ? func_8005BAD8_Type0(?);
 // ? func_8005BB10_Type0(?);
 // ? func_8005BB48_Type0(?);
 // ? func_8005BB8C_SetAT_sub_0(?);
