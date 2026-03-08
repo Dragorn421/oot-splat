@@ -111,7 +111,7 @@ typedef struct struct_8005BA84_arg2 {
     s16 unkA;
 } struct_8005BA84_arg2; /* size >= 0xC */
 
-// type0
+// type0 - jntsph
 
 typedef struct struct_8011DE54 {
     s32 unk0;
@@ -132,30 +132,15 @@ typedef struct Collider_Type0 {
     Collider_Type0_ptr1C* unk1C;
 } Collider_Type0;
 
-typedef struct struct_8005BB48_arg2_sub {
-    /* 0x00 */ u8 bodyFlags;
-    /* 0x01 */ u8 unk_09[0x3]; /* 000000 */
-    /* 0x04 */ s32 toucherMask; /* Attack Toucher Exclusion Mask */
-    /* 0x08 */ u8 bumperEffect; /* Damage Effect (Knockback, Fire, etc.) */
-    /* 0x09 */ u8 toucherDamage; /* Damage Amount or Stun Timer */
-    /* 0x0A */ u8 unk_12[0x2]; /* 0000 */
-    /* 0x0C */ s32 bumperMask; /* Bumper Exclusion Mask */
-    /* 0x10 */ u8 unk_18[0x4]; /* 00000000 */
-    /* 0x14 */ u8 toucherFlags; /* Attack Toucher Flags */
-    /* 0x15 */ u8 bumperFlags; /* Bumper Flags */
-    /* 0x16 */ u8 bodyFlags2;
-    /* 0x17 */ u8 unk_1F; /* 00 */
-} struct_8005BB48_arg2_sub;
-
-typedef struct struct_8005BB48_arg2 {
-    struct_8005BB48_arg2_sub unk0;
+typedef struct ColliderSrc_Type0_ptrC {
+    ColliderBodySrc unk0;
     struct_8005BA84_arg2 unk18;
-} struct_8005BB48_arg2; /* size = 0x24 */
+} ColliderSrc_Type0_ptrC; /* size = 0x24 */
 
 typedef struct ColliderSrc_Type0 {
     ColliderSrc unk0;
     s32 unk8;
-    struct_8005BB48_arg2* unkC;
+    ColliderSrc_Type0_ptrC* unkC;
 } ColliderSrc_Type0;
 
 // type1

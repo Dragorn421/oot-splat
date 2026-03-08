@@ -698,7 +698,7 @@ s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005C5B0(?);
 s32 func_8005C5F8(GlobalContext*, UNK_TYPE);
 // ? func_8005C608(?);
-// ? func_8005C6C0(?);
+// ? func_8005C6C0_tris(?);
 // ? func_8005C6F8(?);
 // ? func_8005C730(?);
 // ? func_8005C774(?);
