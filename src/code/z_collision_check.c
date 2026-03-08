@@ -2293,8 +2293,11 @@ void func_800626B0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Vec3f* arg2
     func_80062530(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
-void ActorCollider_Type1_Update(Actor* actor, Collider_Type1* collision);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_Type1_Update.s")
+void ActorCollider_Type1_Update(Actor* actor, Collider_Type1* collision) {
+    collision->unk40.pos.x = (s16)(s32)actor->posRot.pos.x;
+    collision->unk40.pos.y = (s16)(s32)actor->posRot.pos.y;
+    collision->unk40.pos.z = (s16)(s32)actor->posRot.pos.z;
+}
 
 typedef struct struct_80062718_1 {
     /* 0x00 */ char unk0[0x46];
