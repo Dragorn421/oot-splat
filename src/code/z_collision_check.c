@@ -1851,19 +1851,19 @@ void func_8005E2EC(GlobalContext* arg0, struct_8005E2EC_arg1* arg1, struct_8005E
     }
 }
 
-s32 func_8005E4F8(struct_8005E4F8_arg0** arg0, struct_8005E4F8_arg1* arg1) {
-    struct_8005E4F8_arg0* temp_v1;
+s32 func_8005E4F8(Collider* arg0, ColliderBody* arg1) {
+    Actor* temp_v1;
 
-    temp_v1 = *arg0;
-    if ((temp_v1 != NULL) && (temp_v1->unk2 == 2)) {
-        if (arg1->unk14 == 0) {
-            Audio_PlaySoundGeneral(0x1811U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
-        } else if (arg1->unk14 == 1) {
-            Audio_PlaySoundGeneral(0x1824U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
-        } else if (arg1->unk14 == 2) {
-            Audio_PlaySoundGeneral(0U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
-        } else if (arg1->unk14 == 3) {
-            Audio_PlaySoundGeneral(0U, &temp_v1->unkE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+    temp_v1 = arg0->actor;
+    if ((temp_v1 != NULL) && (temp_v1->type == 2)) {
+        if (arg1->flags == 0) {
+            Audio_PlaySoundGeneral(0x1811U, &temp_v1->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else if (arg1->flags == 1) {
+            Audio_PlaySoundGeneral(0x1824U, &temp_v1->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else if (arg1->flags == 2) {
+            Audio_PlaySoundGeneral(0U, &temp_v1->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        } else if (arg1->flags == 3) {
+            Audio_PlaySoundGeneral(0U, &temp_v1->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         }
     }
     return 1;
@@ -1876,36 +1876,36 @@ extern u8 D_8011DF40[][2];
 void func_80062CD4(GlobalContext* arg0, Vec3f* arg1);
 void func_80062E14(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2);
 
-void func_8005E604(GlobalContext* arg0, struct_8005E4F8_arg0** arg1, struct_8005E2EC_arg1* arg2,
-                   struct_8005E2EC_arg2* arg3, struct_8005E4F8_arg1* arg4, Vec3f* arg5) {
-    if (!(arg4->unk16 & 0x40) && ((((arg2->unk15 & 0x20) != 0)) || !(arg2->unk15 & 0x40))) {
-        if (arg3->unk0 != 0) {
-            D_8011DF28[D_8011DF40[arg3->unk14][0]](arg0, arg3, arg5);
+void func_8005E604(GlobalContext* arg0, Collider* arg1, ColliderBody* arg2, Collider* arg3, ColliderBody* arg4,
+                   Vec3f* arg5) {
+    if (!(arg4->bumperFlags & 0x40) && ((((arg2->toucherFlags & 0x20) != 0)) || !(arg2->toucherFlags & 0x40))) {
+        if (arg3->actor != NULL) {
+            D_8011DF28[D_8011DF40[arg3->unk_14][0]](arg0, arg3, arg5);
         }
         do {
         } while (0);
-        if (arg3->unk0 != 0) {
-            if (D_8011DF40[arg3->unk14][1] == 3) {
+        if (arg3->actor != NULL) {
+            if (D_8011DF40[arg3->unk_14][1] == 3) {
                 func_8005E2EC(arg0, arg2, arg3, arg5);
-            } else if (D_8011DF40[arg3->unk14][1] == 4) {
-                if (*arg1 == NULL) {
+            } else if (D_8011DF40[arg3->unk_14][1] == 4) {
+                if (arg1->actor == NULL) {
                     func_80062CD4(arg0, arg5);
                     Audio_PlaySoundGeneral(0x1837U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
                 } else {
-                    func_80062E14(arg0, arg5, &(*arg1)->unkE4);
+                    func_80062E14(arg0, arg5, &arg1->actor->unk_E4);
                 }
-            } else if (D_8011DF40[arg3->unk14][1] != 5) {
-                func_80029CA4(arg0, D_8011DF40[arg3->unk14][1], arg5);
-                if (!(arg4->unk16 & 0x20)) {
+            } else if (D_8011DF40[arg3->unk_14][1] != 5) {
+                func_80029CA4(arg0, D_8011DF40[arg3->unk_14][1], arg5);
+                if (!(arg4->bumperFlags & 0x20)) {
                     func_8005E4F8(arg1, arg4);
                 }
             }
         } else {
             func_80029CA4(arg0, 0U, arg5);
-            if (arg3->unk0 == 0) {
+            if (arg3->actor == NULL) {
                 Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
             } else {
-                Audio_PlaySoundGeneral(0x1806U, arg3->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+                Audio_PlaySoundGeneral(0x1806U, &arg3->actor->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
             }
         }
     }
@@ -1945,7 +1945,7 @@ s32 func_8005E81C(GlobalContext* arg0, Collider* arg1, ColliderBody* arg2, s32 a
     if (!(arg2->toucherFlags & 0x20) && ((arg4->unk_14 != 9)) && (arg4->unk_14 != 0xB) && (arg4->unk_14 != 0xC)) {
         arg5->bumperFlags |= 0x80;
     } else {
-        func_8005E604(arg0, (struct_8005E4F8_arg0**)&arg1->actor, (struct_8005E2EC_arg1*)arg2, (struct_8005E2EC_arg2*)arg4,
+        func_8005E604(arg0, (struct_8005E4F8_arg0**)arg1, (struct_8005E2EC_arg1*)arg2, (struct_8005E2EC_arg2*)arg4,
                       (struct_8005E4F8_arg1*)arg5, arg7);
         arg2->toucherFlags |= 0x40;
     }
