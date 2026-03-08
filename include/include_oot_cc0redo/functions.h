@@ -707,7 +707,7 @@ s32 func_8005C5F8(GlobalContext*, UNK_TYPE);
 // ? func_8005CE6C(?);
 // ? func_8005CEC4(?);
 // ? func_8005CEDC(?);
-// ? func_8005CF90(?);
+// ? func_8005CF90_Type3(?);
 s32 func_8005D018_Type3(GlobalContext* globalCtx, Collider_Type3* collision);
 s32 func_8005D060_Type3(GlobalContext* globalCtx, Collider_Type3* collision);
 s32 func_8005D104_Type3(GlobalContext* globalCtx, Collider_Type3* collision, Actor* actor, ColliderSrc_Type3* src);

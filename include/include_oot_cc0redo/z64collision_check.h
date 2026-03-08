@@ -244,8 +244,14 @@ typedef struct struct_Collider_Type3_subb {
 } struct_Collider_Type3_subb; /* size = 0x28 */
 
 typedef struct struct_Collider_Type3_subc {
-    char unk_0[0x100]; /* unk size */
-} struct_Collider_Type3_subc;
+    /* 0x00 */ Vec3f unk0;
+    /* 0x0C */ Vec3f unkC;
+    /* 0x18 */ Vec3f unk18;
+    /* 0x24 */ Vec3f unk24;
+    /* 0x30 */ Vec3s unk30;
+    /* 0x36 */ Vec3s unk36;
+    /* 0x3C */ f32 unk3C;
+} struct_Collider_Type3_subc; /* size = 0x40 */
 
 typedef struct Collider_Type3 {
     Collider unk0;

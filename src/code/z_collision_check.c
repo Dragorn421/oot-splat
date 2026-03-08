@@ -7,18 +7,9 @@ void func_8005B280(GraphicsContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3)
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B2AC.s")
 
-typedef struct struct_8011DE00 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-} struct_8011DE00; /* size = 0x18 */
+extern Collider D_8011DE00;
 
-extern struct_8011DE00 D_8011DE00;
-
-s32 func_8005B65C(GlobalContext* arg0, struct_8011DE00* arg1) {
+s32 func_8005B65C(GlobalContext* arg0, Collider* arg1) {
     *arg1 = D_8011DE00;
     return 1;
 }
@@ -712,11 +703,12 @@ s32 func_8005C7BC_Type2(GlobalContext* arg0, Collider_Type2_ptr1C* arg1) {
 }
 
 typedef struct struct_8005C7E0 {
-    struct_8011DE00 unk0;
+    Collider unk0;
     s32 unk18;
     s32 unk1C;
 } struct_8005C7E0;
 
+// uses not decompiled
 s32 func_8005C7E0(GlobalContext* arg0, struct_8005C7E0* arg1) {
     func_8005B65C(arg0, &arg1->unk0);
     arg1->unk18 = 0;
@@ -925,41 +917,23 @@ s32 func_8005CDD0_SetOT_2(GlobalContext* arg0, Collider* arg1) {
     return 1;
 }
 
-typedef struct struct_8011DEAC {
-    s32 unk_0[0x40 / 4];
-} struct_8011DEAC;
+extern struct_Collider_Type3_subc D_8011DEAC;
 
-extern struct_8011DEAC D_8011DEAC;
-
-s32 func_8005CE6C(GlobalContext* arg0, struct_8011DEAC* arg1) {
+s32 func_8005CE6C(GlobalContext* arg0, struct_Collider_Type3_subc* arg1) {
     *arg1 = D_8011DEAC;
     return 1;
 }
 
-s32 func_8005CEB4_Type3(GlobalContext* globalCtx, UNK_PTR dim) {
+s32 func_8005CEB4_Type3(GlobalContext* globalCtx, struct_Collider_Type3_subc* dim) {
     return 1;
 }
 
-typedef struct struct_8005CEC4 {
-    char unk_0[0x3C];
-    f32 unk3C;
-} struct_8005CEC4;
-
-s32 func_8005CEC4(s32 arg0, struct_8005CEC4* arg1) {
+s32 func_8005CEC4(s32 arg0, struct_Collider_Type3_subc* arg1) {
     arg1->unk3C = 1e38f;
     return 1;
 }
 
-typedef struct struct_8005CEDC {
-    /* 0x00 */ Vec3f unk0;
-    /* 0x0C */ Vec3f unkC;
-    /* 0x18 */ Vec3f unk18;
-    /* 0x24 */ Vec3f unk24;
-    /* 0x30 */ Vec3s unk30;
-    /* 0x36 */ Vec3s unk36;
-} struct_8005CEDC;
-
-void func_8005CEDC(struct_8005CEDC* arg0) {
+void func_8005CEDC(struct_Collider_Type3_subc* arg0) {
     arg0->unk30.x = (s16)(s32)((arg0->unk18.x + arg0->unk24.x) * 0.5f);
     arg0->unk30.y = (s16)(s32)((arg0->unk18.y + arg0->unk24.y) * 0.5f);
     arg0->unk30.z = (s16)(s32)((arg0->unk18.z + arg0->unk24.z) * 0.5f);
@@ -968,7 +942,7 @@ void func_8005CEDC(struct_8005CEDC* arg0) {
     arg0->unk36.z = (s16)(s32)((arg0->unk0.z + arg0->unkC.z) * 0.5f);
 }
 
-s32 func_8005CF90(s32 arg0, struct_8005CEDC* arg1, Vec3f* arg2) {
+s32 func_8005CF90_Type3(s32 arg0, struct_Collider_Type3_subc* arg1, Vec3f* arg2) {
     arg1->unk0 = arg2[0];
     arg1->unkC = arg2[1];
     arg1->unk18 = arg2[2];
@@ -994,7 +968,7 @@ s32 func_8005D060_Type3(GlobalContext* globalCtx, Collider_Type3* collision) {
 typedef struct struct_8005D0A8_arg1 {
     /* 0x00 */ Collider unk0;
     /* 0x18 */ ColliderBody unk18;
-    /* 0x40 */ struct_8005CEDC unk40;
+    /* 0x40 */ struct_Collider_Type3_subc unk40;
 } struct_8005D0A8_arg1;
 
 typedef struct struct_8005D0A8_arg3 {
@@ -1007,14 +981,14 @@ typedef struct struct_8005D0A8_arg3 {
 s32 func_8005D0A8(GlobalContext* globalCtx, struct_8005D0A8_arg1* collision, Actor* actor, struct_8005D0A8_arg3* src) {
     func_8005B6EC(globalCtx, &collision->unk0, actor, &src->unk0);
     func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
-    func_8005CF90(globalCtx, &collision->unk40, &src->unk20);
+    func_8005CF90_Type3(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
 
 s32 func_8005D104_Type3(GlobalContext* globalCtx, Collider_Type3* collision, Actor* actor, ColliderSrc_Type3* src) {
     func_8005B72C_InitColliderFromSrc(globalCtx, &collision->unk0, actor, &src->unk0);
     func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
-    func_8005CF90(globalCtx, &collision->unk40, src->unk20);
+    func_8005CF90_Type3(globalCtx, &collision->unk40, src->unk20);
     return 1;
 }
 
@@ -2639,7 +2613,7 @@ void func_80062718(struct_80062718_1* arg0, struct_80062718_2* arg1) {
 
 typedef struct struct_80062734 {
     char unk_0[0x40];
-    struct_8005CEDC unk40;
+    struct_Collider_Type3_subc unk40;
 } struct_80062734;
 
 // uses not decompiled
