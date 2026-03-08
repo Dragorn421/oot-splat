@@ -57,8 +57,16 @@ s32 func_8005B6B0(GlobalContext* arg0, struct_8005B6B0_arg1* arg1, struct_8005B6
 }
 
 // is this type 1 only?
-s32 func_8005B6EC(GlobalContext* globalCtx, Collider* collision, Actor* actor, struct_8005C450_Type1_suba* src);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B6EC.s")
+s32 func_8005B6EC(GlobalContext* globalCtx, Collider* collision, Actor* actor, struct_8005C450_Type1_suba* src) {
+    collision->actor = actor;
+    collision->unk_14 = src->unk0;
+    collision->colliderFlags = src->unk1;
+    collision->collideFlags = src->unk2;
+    collision->maskA = src->unk3;
+    collision->maskB = 0x10;
+    collision->type = src->unk4;
+    return 1;
+}
 
 s32 func_8005B72C_InitColliderFromSrc(GlobalContext* globalCtx, Collider* collision, Actor* actor, ColliderSrc* src) {
     collision->actor = actor;
@@ -99,7 +107,7 @@ s32 func_8005B7C0(s32 arg0, struct_8011DE18* arg1) {
     return 1;
 }
 
-s32 func_8005B7E4(GlobalContext* globalCtx, UNK_PTR touch) {
+s32 func_8005B7E4(GlobalContext* globalCtx, ColliderTouch* touch) {
     return 1;
 }
 
@@ -152,13 +160,12 @@ s32 func_8005B884(GlobalContext* arg0, struct_8011DE2C* arg1) {
     return 1;
 }
 
-typedef struct struct_8005B904 {
-    char unk_0[0x100]; /* unk size */
-} struct_8005B904;
-
 // multi-type
-s32 func_8005B904(GlobalContext* globalCtx, struct_8005B904* body);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B904.s")
+s32 func_8005B904(GlobalContext* globalCtx, ColliderBody* body) {
+    func_8005B7E4(globalCtx, &body->toucher);
+    func_8005B850(globalCtx, &body->bumper);
+    return 1;
+}
 
 // multi-type
 s32 func_8005B93C(GlobalContext* globalCtx, ColliderBody* body, ColliderBodySrc* bodyInfoInner) {
@@ -222,16 +229,7 @@ s32 func_8005BAD8(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
     return 1;
 }
 
-typedef struct struct_8005BB10_sub {
-    char unk_0[1];
-} struct_8005BB10_sub;
-
-typedef struct struct_8005BB10 {
-    ColliderBody unk0;
-    struct_8005BB10_sub unk28;
-} struct_8005BB10;
-
-s32 func_8005BB10(GlobalContext* arg0, struct_8005BB10* arg1) {
+s32 func_8005BB10(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
     func_8005B904(arg0, &arg1->unk0);
     func_8005BA74((s32)arg0, &arg1->unk28);
     return 1;
@@ -281,7 +279,7 @@ s32 func_8005BC28(GlobalContext* arg0, struct_8005BC28* arg1) {
     var_s0 = temp_a0;
     if (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6))) {
         do {
-            func_8005BB10(arg0, (struct_8005BB10*)var_s0);
+            func_8005BB10(arg0, var_s0);
             var_s0 += 0x40;
         } while (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6)));
     }
@@ -299,16 +297,16 @@ typedef struct struct_8005BCC8 {
     u32 unk1C;
 } struct_8005BCC8;
 
-s32 func_8005BCC8_Type0(GlobalContext* arg0, struct_8005BCC8* arg1) {
-    u32 var_s0;
+s32 func_8005BCC8_Type0(GlobalContext* arg0, Collider_Type0* arg1) {
+    Collider_Type0_ptr1C* var_s0;
 
     func_8005B6A0(arg0, &arg1->unk0);
     var_s0 = arg1->unk1C;
-    if (var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6))) {
+    if (var_s0 < (arg1->unk1C + (arg1->unk18))) {
         do {
-            func_8005BB10(arg0, (struct_8005BB10*)var_s0);
-            var_s0 += 0x40;
-        } while (var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+            func_8005BB10(arg0, var_s0);
+            var_s0++;
+        } while (var_s0 < (arg1->unk1C + (arg1->unk18)));
     }
     arg1->unk18 = 0;
     arg1->unk1C = 0U;
@@ -581,8 +579,12 @@ s32 func_8005C450_Type1(GlobalContext* globalCtx, Collider_Type1* collision, Act
 }
 
 s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, Collider_Type1* collision, Actor* actor,
-                                  Type1_ColliderSrc_alt* src);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/ActorCollider_InitThing_Type1.s")
+                                  Type1_ColliderSrc_alt* src) {
+    func_8005B72C_InitColliderFromSrc(globalCtx, &collision->unk0, actor, &src->unk0);
+    func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
+    func_8005C328(globalCtx, &collision->unk40, &src->unk20);
+    return 1;
+}
 
 s32 func_8005C508_SetAT_1(GlobalContext* globalCtx, Collider* collision_) {
     Collider_Type1* collision = collision_;
