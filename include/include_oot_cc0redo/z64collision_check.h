@@ -88,9 +88,7 @@ typedef struct {
 // ?
 
 typedef struct struct_8005BA84_arg1_sub {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
+    Vec3s unk0;
     s16 unk6;
 } struct_8005BA84_arg1_sub; /* size = 0x8 */
 
@@ -106,7 +104,7 @@ typedef struct struct_8011DE54 {
     struct_8005BA84_arg1_sub unk0;
     Sphere16 unk8;
     f32 unk10;
-    s8 unk14;
+    u8 unk14;
 } struct_8011DE54; /* size = 0x18 */
 
 typedef struct Collider_Type0_ptr1C {
@@ -186,10 +184,6 @@ typedef struct ColliderSrc_Type3 {
     Vec3f unk20[4];
 } ColliderSrc_Type3;
 
-typedef struct struct_Collider_Type3_subb {
-    char unk_0[0x28];
-} struct_Collider_Type3_subb; /* size = 0x28 */
-
 typedef struct struct_Collider_Type3_subc {
     /* 0x00 */ Vec3f unk0;
     /* 0x0C */ Vec3f unkC;
@@ -202,7 +196,7 @@ typedef struct struct_Collider_Type3_subc {
 
 typedef struct Collider_Type3 {
     Collider unk0;
-    struct_Collider_Type3_subb unk18;
+    ColliderBody unk18;
     struct_Collider_Type3_subc unk40;
 } Collider_Type3;
 
