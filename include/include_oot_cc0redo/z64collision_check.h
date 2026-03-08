@@ -45,9 +45,9 @@ typedef struct ColliderBody {
     /* 0x15 */ u8 toucherFlags;
     /* 0x16 */ u8 bumperFlags;
     /* 0x17 */ u8 flags2;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ struct Collider* unk_18;
     /* 0x1C */ struct Collider* colBuf;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ struct ColliderBody* unk_20;
     /* 0x24 */ struct ColliderBody* colliding;
 } ColliderBody; // size = 0x28
 
