@@ -253,7 +253,7 @@ typedef struct struct_8005BA84_arg1 {
     char unk_8[8];
     f32 unk10;
     u8 unk14;
-} struct_8005BA84_arg1; /* size >= 0x18 */
+} struct_8005BA84_arg1; /* size = 0x18 */
 
 typedef struct struct_8005BA84_arg2 {
     u8 unk0;
@@ -268,12 +268,12 @@ s32 func_8005BA84(s32 arg0, struct_8005BA84_arg1* arg1, struct_8005BA84_arg2* ar
     return 1;
 }
 
-typedef struct struct_8005BAD8 {
-    struct_8011DE2C unk0;
-    struct_8011DE54 unk28;
-} struct_8005BAD8; /* size = 0x40 */
+typedef struct struct_8005BB48_arg1 {
+    ColliderBody unk0;
+    struct_8005BA84_arg1 unk28;
+} struct_8005BB48_arg1; /* size = 0x40 */
 
-s32 func_8005BAD8(s32 arg0, struct_8005BAD8* arg1) {
+s32 func_8005BAD8(s32 arg0, struct_8005BB48_arg1* arg1) {
     func_8005B884(arg0, &arg1->unk0);
     func_8005BA30(arg0, &arg1->unk28);
     return 1;
@@ -293,11 +293,6 @@ s32 func_8005BB10(GlobalContext* arg0, struct_8005BB10* arg1) {
     func_8005BA74((s32)arg0, &arg1->unk28);
     return 1;
 }
-
-typedef struct struct_8005BB48_arg1 {
-    ColliderBody unk0;
-    struct_8005BA84_arg1 unk28;
-} struct_8005BB48_arg1;
 
 typedef struct struct_8005BB48_arg2 {
     ColliderBodyInfoInner unk0;
@@ -420,7 +415,7 @@ s32 func_8005BD50(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct_8005BD
     var_s1 = arg2->unkC;
     if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
         do {
-            func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
+            func_8005BAD8((s32)arg0, (struct_8005BB48_arg1*)var_s0);
             func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
             var_s0 += 0x40;
             var_s1 += 0x24;
@@ -432,7 +427,7 @@ s32 func_8005BD50(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct_8005BD
 typedef struct struct_8005BE50_arg1 {
     Collider unk0;
     s32 unk18;
-    struct_8005BAD8* unk1C;
+    struct_8005BB48_arg1* unk1C;
 } struct_8005BE50_arg1;
 
 typedef struct struct_8005BE50_arg3_ptrC {
@@ -447,7 +442,7 @@ typedef struct struct_8005BE50_arg3 {
 
 s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, struct_8005BE50_arg3* arg3) {
     s32 temp_v0;
-    struct_8005BAD8* var_s0;
+    struct_8005BB48_arg1* var_s0;
     struct_8005BE50_arg3_ptrC* var_s1;
 
     func_8005B6EC(arg0, &arg1->unk0, arg2, &arg3->unk0);
@@ -465,7 +460,7 @@ s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, 
     var_s1 = arg3->unkC;
     if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
         do {
-            func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
+            func_8005BAD8((s32)arg0, (struct_8005BB48_arg1*)var_s0);
             func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
             var_s0++;
             var_s1++;
@@ -477,23 +472,27 @@ s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, 
 typedef struct struct_8005BF50_arg1 {
     Collider unk0;
     s32 unk18;
-    s32 unk1C;
+    struct_8005BB48_arg1* unk1C;
 } struct_8005BF50_arg1;
+
+typedef struct struct_8005BF50_arg3_ptrC {
+    char unk_0[0x24];
+} struct_8005BF50_arg3_ptrC;
 
 typedef struct struct_8005BF50_arg3 {
     ColliderBodyInfo unk0;
     s32 unk8;
-    s32 unkC;
+    struct_8005BF50_arg3_ptrC* unkC;
 } struct_8005BF50_arg3;
 
 s32 func_8005BF50(GlobalContext* arg0, struct_8005BF50_arg1* arg1, Actor* arg2, struct_8005BF50_arg3* arg3) {
     s32 temp_v0;
-    s32 var_s0;
-    s32 var_s1;
+    struct_8005BB48_arg1* var_s0;
+    struct_8005BF50_arg3_ptrC* var_s1;
 
     func_8005B72C(arg0, &arg1->unk0, arg2, &arg3->unk0);
     arg1->unk18 = arg3->unk8;
-    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 << 6, "../z_collision_check.c", 0x60F);
+    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 * 0x40, "../z_collision_check.c", 0x60F);
     arg1->unk1C = temp_v0;
     if (temp_v0 == 0) {
         arg1->unk18 = 0;
@@ -504,13 +503,13 @@ s32 func_8005BF50(GlobalContext* arg0, struct_8005BF50_arg1* arg1, Actor* arg2, 
     }
     var_s0 = arg1->unk1C;
     var_s1 = arg3->unkC;
-    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
+    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
         do {
-            func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
+            func_8005BAD8((s32)arg0, var_s0);
             func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
-            var_s0 += 0x40;
-            var_s1 += 0x24;
-        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+            var_s0++;
+            var_s1++;
+        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
     }
     return 1;
 }
@@ -541,7 +540,7 @@ s32 func_8005C050(GlobalContext* globalCtx, struct_8005C050_arg1* collision, Act
     var_s0 = collision->unk1C;
     var_s1 = arg3->unkC;
     while (var_s0 < (collision->unk1C + (collision->unk18))) {
-        func_8005BAD8((s32)globalCtx, (struct_8005BAD8*)var_s0);
+        func_8005BAD8((s32)globalCtx, (struct_8005BB48_arg1*)var_s0);
         func_8005BB48(globalCtx, var_s0, var_s1);
         var_s0++;
         var_s1++;
