@@ -53,11 +53,6 @@ typedef struct ColliderBody {
     /* 0x24 */ struct ColliderBody* colliding;
 } ColliderBody; // size = 0x28
 
-// typedef struct ColliderBodyEntry {
-//     /* 0x00 */ ColliderBody c;
-//     /* 0x28 */ char unk_28[0x18];
-// } ColliderBodyEntry; // size = 0x40
-
 typedef struct ColliderTouchSrc {
      s32 toucherMask; /* Attack Toucher Exclusion Mask */
      u8 bumperEffect; /* Damage Effect (Knockback, Fire, etc.) */
@@ -91,25 +86,6 @@ typedef struct {
     /* 0x05 */ u8 type; /* Collider Type */
     /* 0x06 */ u8 unk_06[0x2]; /* 0000 */
 } ColliderSrc; // size = 0x08
-
-// typedef struct {
-//     /* 0x00 */ s16 radius; /* Cylinder Radius */
-//     /* 0x02 */ s16 height; /* Cylinder Height */
-//     /* 0x04 */ s16 yShift; /* Shift Cylinder on Y Axis */
-//     /* 0x06 */ Vec3s position; /* {X, Y, Z} position of Cylinder */
-// } ColliderDimensions; // size = 0xC
-
-// typedef struct {
-//     /* 0x00 */ Collider base;
-//     /* 0x18 */ ColliderBody body;
-//     /* 0x40 */ ColliderDimensions dim;
-// } ColliderCylinderMain; // size = 0x4C
-
-// typedef struct {
-//     /* 0x00 */func_8005D160_SetAT_3 ColliderBodyInfo body;
-//     /* 0x08 */ ColliderBodyInfoInner inner;
-//     /* 0x22 */ ColliderDimensions dim;
-// } ColliderCylinderInit; // size = 0x2E
 
 typedef struct struct_8005C328 {
     s16 unk0[6];

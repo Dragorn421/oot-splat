@@ -890,25 +890,14 @@ typedef struct {
     /* 0x70 */ OSMesg loadMsg;
 } RoomContext; // size = 0x74
 
-typedef struct struct_8006139C {
-    /* 0x000 */ Actor *unk0;
-    /* 0x004 */ char unk_4[0xC];
-    /* 0x010 */ u8 unk10;
-    /* 0x011 */ u8 unk11;
-    u8 unk12;
-    char unk_13[2];
-    /* 0x015 */ u8 unk15;
-    /* 0x016 */ char unk_16[0x2];
-} struct_8006139C; /* size = 0x18 */
-
 typedef struct {
     /* 0x000 */ s16 unk0;
     /* 0x002 */ u16 unk2;
-    /* 0x004 */ struct_8006139C* unk4[50];
+    /* 0x004 */ Collider* unk4[50];
     /* 0x0CC */ s32 unkCC;
-    /* 0x0D0 */ struct_8006139C* unkD0[60];
+    /* 0x0D0 */ Collider* unkD0[60];
     /* 0x1C0 */ s32 unk1C0;
-    /* 0x1C4 */ struct_8006139C* unk_1C4[50];
+    /* 0x1C4 */ Collider* unk_1C4[50];
     s32 unk28C;
     void* unk290[3];
 } SubGlobalContext11E60; // size = 0x29C
