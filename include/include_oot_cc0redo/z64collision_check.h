@@ -35,9 +35,7 @@ typedef struct {
     /* 0x00 */ s32 flags; /* Collision Exclusion Mask */
     /* 0x04 */ u8 effect; /* Damage Effect (Knockback, Fire, etc.) */
     /* 0x05 */ u8 unk_05;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
+    /* 0x06 */ Vec3s unk_06;
 } ColliderBump; // size = 0x0C
 
 typedef struct ColliderBody {
@@ -48,7 +46,7 @@ typedef struct ColliderBody {
     /* 0x16 */ u8 bumperFlags;
     /* 0x17 */ u8 flags2;
     /* 0x18 */ s32 unk_18;
-    /* 0x1C */ struct ColliderBodyEntry* colBuf;
+    /* 0x1C */ struct Collider* colBuf;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ struct ColliderBody* colliding;
 } ColliderBody; // size = 0x28
@@ -118,8 +116,7 @@ typedef struct struct_8005BA84_arg2 {
 typedef struct struct_8011DE54 {
     s32 unk0;
     s32 unk4;
-    s32 unk8;
-    s32 unkC;
+    Sphere16 unk8;
     s32 unk10;
     s32 unk14;
 } struct_8011DE54; /* size = 0x18 */

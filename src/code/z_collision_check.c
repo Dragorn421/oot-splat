@@ -178,13 +178,11 @@ void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body) {
 }
 
 void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body) {
-    body->bumper.unk_0A = 0;
     body->bumperFlags &= ~0x2;
     body->bumperFlags &= ~0x80;
     body->colBuf = NULL;
     body->colliding = NULL;
-    body->bumper.unk_08 = body->bumper.unk_0A;
-    body->bumper.unk_06 = body->bumper.unk_0A;
+    body->bumper.unk_06.x = body->bumper.unk_06.y = body->bumper.unk_06.z = 0;
 }
 
 void func_8005BA1C(GlobalContext* globalCtx, ColliderBody* body) {
@@ -1554,15 +1552,15 @@ typedef struct struct_8005DF50 {
     /* 0x16 */ u8 unk16;
 } struct_8005DF50;
 
-s32 func_8005DF50(struct_8005DF50* arg0) {
-    if (!(arg0->unk16 & 1)) {
+s32 func_8005DF50(ColliderBody* arg0) {
+    if (!(arg0->bumperFlags & 1)) {
         return 1;
     }
     return 0;
 }
 
-s32 func_8005DF74(s32* arg0, struct_8005DF74* arg1) {
-    if (!(*arg0 & arg1->unk8)) {
+s32 func_8005DF74(ColliderBody* arg0, ColliderBody* arg1) {
+    if (!(arg0->toucher.flags & arg1->bumper.flags)) {
         return 1;
     }
 
@@ -1913,42 +1911,43 @@ void func_8005E604(GlobalContext* arg0, struct_8005E4F8_arg0** arg1, struct_8005
     }
 }
 
-void func_8005E800(struct_8005E800* arg0, struct_8005E800* arg1) {
-    arg0->unk10 |= 4;
-    arg1->unk11 |= 0x80;
+void func_8005E800(Collider* arg0, Collider* arg1) {
+    arg0->colliderFlags |= 4;
+    arg1->collideFlags |= 0x80;
 }
 
-s32 func_8005E81C(GlobalContext* arg0, struct_8005E800* arg1, struct_8005E2EC_arg1* arg2, s32 arg3,
-                  struct_8005E800* arg4, struct_8005E4F8_arg1* arg5, s32 arg6, Vec3f* arg7) {
-    if ((arg4->unk11 & 4) && (arg1->unk0 != NULL) && (arg4->unk0 != NULL)) {
+s32 func_8005E81C(GlobalContext* arg0, Collider* arg1, ColliderBody* arg2, s32 arg3, Collider* arg4, ColliderBody* arg5,
+                  s32 arg6, Vec3f* arg7) {
+    if ((arg4->collideFlags & 4) && (arg1->actor != NULL) && (arg4->actor != NULL)) {
         func_8005E800(arg1, arg4);
     }
-    if (!(arg5->unk16 & 8)) {
-        arg1->unk10 |= 2;
-        arg1->unk4 = arg4->unk0;
-        arg2->unk18 = arg4;
-        arg2->unk20 = arg5;
-        arg2->unk15 |= 2;
-        if (arg1->unk0 != NULL) {
-            arg1->unk0->unkB2 = arg5->unkC;
+    if (!(arg5->bumperFlags & 8)) {
+        arg1->colliderFlags |= 2;
+        arg1->at = arg4->actor;
+        arg2->unk_18 = (s32)arg4;
+        arg2->unk_20 = (s32)arg5;
+        arg2->toucherFlags |= 2;
+        if (arg1->actor != NULL) {
+            arg1->actor->sub_98.impactEffect = arg5->bumper.effect;
         }
     }
-    arg4->unk11 |= 2;
-    arg4->unk8 = arg1->unk0;
-    arg5->unk1C = arg1;
-    arg5->unk24 = arg2;
-    arg5->unk16 |= 2;
-    if (arg4->unk0 != NULL) {
-        arg4->unk0->unkB3 = arg2->unk4;
+    arg4->collideFlags |= 2;
+    arg4->ac = arg1->actor;
+    arg5->colBuf = (struct Collider*)arg1;
+    arg5->colliding = arg2;
+    arg5->bumperFlags |= 2;
+    if (arg4->actor != NULL) {
+        arg4->actor->sub_98.unk_1B = arg2->toucher.unk_04;
     }
-    arg5->unkE = (s16)(s32)arg7->x;
-    arg5->unk10 = (s16)(s32)arg7->y;
-    arg5->unk12 = (s16)(s32)arg7->z;
-    if (!(arg2->unk15 & 0x20) && ((arg4->unk14 != 9)) && (arg4->unk14 != 0xB) && (arg4->unk14 != 0xC)) {
-        arg5->unk16 |= 0x80;
+    arg5->bumper.unk_06.x = (s16)(s32)arg7->x;
+    arg5->bumper.unk_06.y = (s16)(s32)arg7->y;
+    arg5->bumper.unk_06.z = (s16)(s32)arg7->z;
+    if (!(arg2->toucherFlags & 0x20) && ((arg4->unk_14 != 9)) && (arg4->unk_14 != 0xB) && (arg4->unk_14 != 0xC)) {
+        arg5->bumperFlags |= 0x80;
     } else {
-        func_8005E604(arg0, &arg1->unk0, arg2, (struct_8005E2EC_arg2*)arg4, arg5, arg7);
-        arg2->unk15 |= 0x40;
+        func_8005E604(arg0, (struct_8005E4F8_arg0**)&arg1->actor, (struct_8005E2EC_arg1*)arg2, (struct_8005E2EC_arg2*)arg4,
+                      (struct_8005E4F8_arg1*)arg5, arg7);
+        arg2->toucherFlags |= 0x40;
     }
     return 1;
 }
@@ -1961,33 +1960,35 @@ void func_8005E9C0_0vs0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collid
     Vec3f sp6C;
     Vec3f sp60;
     f32 temp_fv0_2;
-    struct_8005E800_ptr2* var_s1;
-    struct_8005E800_ptr2* var_s0;
+    Collider_Type0_ptr1C* var_s1;
+    Collider_Type0_ptr1C* var_s0;
+    Collider_Type0* arg2_0 = (Collider_Type0*)arg2;
+    Collider_Type0* arg3_0 = (Collider_Type0*)arg3;
 
-    if ((((arg2->unk18 > 0) && (arg2->unk1C != NULL)) && (arg3->unk18 > 0)) && (arg3->unk1C != NULL)) {
-        for (var_s1 = arg2->unk1C; ((u32)var_s1) < ((u32)(arg2->unk1C + arg2->unk18)); var_s1++) {
+    if ((((arg2_0->unk18 > 0) && (arg2_0->unk1C != NULL)) && (arg3_0->unk18 > 0)) && (arg3_0->unk1C != NULL)) {
+        for (var_s1 = arg2_0->unk1C; ((u32)var_s1) < ((u32)(arg2_0->unk1C + arg2_0->unk18)); var_s1++) {
             if (func_8005DF2C(&var_s1->unk0) != 1) {
-                for (var_s0 = arg3->unk1C; ((u32)var_s0) < ((u32)(arg3->unk1C + arg3->unk18)); var_s0++) {
-                    if (((func_8005DF50((struct_8005DF50*)var_s0) != 1) &&
-                         (func_8005DF74(&var_s1->unk0.unk0, (struct_8005DF74*)var_s0) != 1)) &&
-                        (Math3D_SpheresTouchingSurfaceCenter(&var_s1->unk30, &var_s0->unk30, &sp8C, &sp88) == 1)) {
-                        sp6C.x = (f32)var_s1->unk30.center.x;
-                        sp6C.y = (f32)var_s1->unk30.center.y;
-                        sp6C.z = (f32)var_s1->unk30.center.z;
-                        sp60.x = (f32)var_s0->unk30.center.x;
-                        sp60.y = (f32)var_s0->unk30.center.y;
-                        sp60.z = (f32)var_s0->unk30.center.z;
+                for (var_s0 = arg3_0->unk1C; ((u32)var_s0) < ((u32)(arg3_0->unk1C + arg3_0->unk18)); var_s0++) {
+                    if (((func_8005DF50(&var_s0->unk0) != 1) && (func_8005DF74(&var_s1->unk0, &var_s0->unk0) != 1)) &&
+                        (Math3D_SpheresTouchingSurfaceCenter(&var_s1->unk28.unk8, &var_s0->unk28.unk8, &sp8C, &sp88) ==
+                         1)) {
+                        sp6C.x = (f32)var_s1->unk28.unk8.center.x;
+                        sp6C.y = (f32)var_s1->unk28.unk8.center.y;
+                        sp6C.z = (f32)var_s1->unk28.unk8.center.z;
+                        sp60.x = (f32)var_s0->unk28.unk8.center.x;
+                        sp60.y = (f32)var_s0->unk28.unk8.center.y;
+                        sp60.z = (f32)var_s0->unk28.unk8.center.z;
                         if (!(fabsf(sp88) < 0.008f)) {
-                            temp_fv0_2 = ((f32)var_s0->unk30.radius) / sp88;
+                            temp_fv0_2 = ((f32)var_s0->unk28.unk8.radius) / sp88;
                             sp78.x = ((sp6C.x - sp60.x) * temp_fv0_2) + sp60.x;
                             sp78.y = ((sp6C.y - sp60.y) * temp_fv0_2) + sp60.y;
                             sp78.z = ((sp6C.z - sp60.z) * temp_fv0_2) + sp60.z;
                         } else {
                             Math_Vec3f_Copy(&sp78, &sp6C);
                         }
-                        func_8005E81C(arg0, arg2, (struct_8005E2EC_arg1*)var_s1, (s32)&sp6C, arg3,
-                                      (struct_8005E4F8_arg1*)var_s0, (s32)(&sp60), &sp78);
-                        if (!(arg3->unk13 & 0x40)) {
+                        func_8005E81C(arg0, &arg2_0->unk0, &var_s1->unk0, (s32)&sp6C, &arg3_0->unk0, &var_s0->unk0,
+                                      (s32)(&sp60), &sp78);
+                        if (!(arg3_0->unk0.maskB & 0x40)) {
                             return;
                         }
                     }
