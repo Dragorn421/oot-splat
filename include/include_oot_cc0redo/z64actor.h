@@ -62,9 +62,12 @@ typedef struct {
 } ActorOverlay; // size = 0x20
 
 typedef struct {
-    struct {
-        char damage : 4;
-        char effect : 4;
+    union {
+        struct {
+            char damage : 4;
+            char effect : 4;
+        };
+        u8 raw;
     } attack[32];
 } ActorDamageChart;
 

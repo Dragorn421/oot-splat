@@ -2188,58 +2188,25 @@ void func_8006139C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061F2C.s")
 
-typedef struct sub_struct_80061F64_3 {
-    /* 0x00 */ char unk0[0x98];
-    /* 0x98 */ u8* unk98;
-    /* 0x9C */ char unk9C[0x14];
-    /* 0xB1 */ u8 unkB0;
-    /* 0xB1 */ u8 unkB1;
-} sub_struct_80061F64_3;
-
-typedef struct sub_struct_80061F64_2 {
-    /* 0x00 */ u32 unk0;
-    /* 0x04 */ u8 unk4;
-    /* 0x05 */ u8 unk5;
-} sub_struct_80061F64_2;
-
-typedef struct sub_struct_80061F64_1 {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ void* unk4;
-    /* 0x08 */ char unk8[5];
-    /* 0x0D */ u8 unkD;
-    /* 0x0E */ char unkE[8];
-    /* 0x16 */ u8 unk16;
-    /* 0x17 */ char unk17[0xD];
-    /* 0x24 */ sub_struct_80061F64_2* ac_hit_elem;
-} sub_struct_80061F64_1;
-
-typedef struct struct_80061F64 {
-    /* 0x00 */ sub_struct_80061F64_3* unk0;
-    /* 0x04 */ char unk4[0xD];
-    /* 0x11 */ u8 unk11;
-    /* 0x12 */ char unk12[6];
-    /* 0x18 */ sub_struct_80061F64_1 unk18;
-} struct_80061F64;
-
-void func_80061F64(s32 arg0, void* arg1, struct_80061F64* arg2, sub_struct_80061F64_1* obj_elem) {
+void func_80061F64(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, ColliderBody* obj_elem) {
     f32 unkf;
     s32 i;
     u32 unk0;
 
-    if (arg2->unk0 != NULL && (arg2->unk11 & 2)) {
-        if ((obj_elem->unk16 & 2) && !(obj_elem->unk16 & 0x10)) {
+    if (arg2->actor != NULL && (arg2->collideFlags & 2)) {
+        if ((obj_elem->bumperFlags & 2) && !(obj_elem->bumperFlags & 0x10)) {
 
-            if (obj_elem->ac_hit_elem == NULL) {
+            if (obj_elem->colliding == NULL) {
                 func_80001FF0("pclobj_elem->ac_hit_elem != NULL", "../z_collision_check.c", 0x195D);
             }
 
-            if (arg2->unk0->unk98 == NULL) {
-                unkf = (f32)obj_elem->ac_hit_elem->unk5 - (f32)obj_elem->unkD;
+            if (arg2->actor->sub_98.damageChart == NULL) {
+                unkf = (f32)obj_elem->colliding->toucher.damage - (f32)obj_elem->bumper.unk_05;
                 if (unkf < 0.0f) {
                     unkf = 0.0f;
                 }
             } else {
-                unk0 = obj_elem->ac_hit_elem->unk0;
+                unk0 = obj_elem->colliding->toucher.flags;
 
                 for (i = 0; i < 32; i++) {
                     if (unk0 == 1) {
@@ -2249,12 +2216,12 @@ void func_80061F64(s32 arg0, void* arg1, struct_80061F64* arg2, sub_struct_80061
                     unk0 >>= 1;
                 }
 
-                unkf = arg2->unk0->unk98[i] & 0xF;
-                arg2->unk0->unkB1 = (arg2->unk0->unk98[i] >> 4) & 0xF;
+                unkf = arg2->actor->sub_98.damageChart->attack[i].raw & 0xF;
+                arg2->actor->sub_98.damageEffect = (arg2->actor->sub_98.damageChart->attack[i].raw >> 4) & 0xF;
             }
 
-            if (!(arg2->unk11 & 4)) {
-                arg2->unk0->unkB0 += unkf;
+            if (!(arg2->collideFlags & 4)) {
+                arg2->actor->sub_98.damage += unkf;
             }
             if (1) {}
             if (1) {}
@@ -2272,7 +2239,7 @@ void func_8006216C_Type0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Colli
     }
 
     for (i = 0; i < new_var2->unk18; i++) {
-        func_80061F64(arg0, arg1, new_var, (void*)(new_var->unk1C + i));
+        func_80061F64(arg0, arg1, new_var, &new_var->unk1C[i].unk0);
     }
 }
 
@@ -2284,10 +2251,10 @@ void func_80062210_Type1(GlobalContext* arg0, SubGlobalContext11E60* arg1, Colli
 
 void func_80062230_Type2(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
     s32 i;
-    struct_80061F64* new_var = arg2;
+    Collider_Type2* new_var = arg2;
 
-    for (i = 0; i < new_var->unk18.unk0; i++) {
-        func_80061F64(arg0, arg1, new_var, (void*)((u8*)new_var->unk18.unk4 + (i * 0x5C)));
+    for (i = 0; i < new_var->unk18; i++) {
+        func_80061F64(arg0, arg1, &new_var->unk0, &new_var->unk1C[i]);
     }
 }
 
@@ -2297,14 +2264,7 @@ void func_800622C4_Type3(GlobalContext* arg0, SubGlobalContext11E60* arg1, Colli
     func_80061F64(arg0, arg1, arg2, &new_var->unk18);
 }
 
-typedef struct sub_struct_800622E4 {
-    /* 0x00 */ char unk0[0x11];
-    /* 0x11 */ u8 unk11;
-    /* 0x12 */ u8 unk12[3];
-    /* 0x15 */ u8 unk15;
-} sub_struct_800622E4;
-
-typedef void (*func_ptr_800622E4)(GlobalContext*, SubGlobalContext11E60*, sub_struct_800622E4*);
+typedef void (*func_ptr_800622E4)(GlobalContext*, SubGlobalContext11E60*, Collider*);
 extern func_ptr_800622E4 D_8011E008[];
 
 void func_8006216C_Type0(GlobalContext*, SubGlobalContext11E60*, Collider*);
@@ -2336,52 +2296,25 @@ void func_800622E4(GlobalContext* globalCtx, SubGlobalContext11E60* subContext) 
     }
 }
 
-typedef struct sub_struct_800623A4 {
-    /* 0x00 */ char unk0[0x17];
-    /* 0x17 */ u8 unk17;
-    /* 0x18 */ char unk18[0x18];
-    /* 0x30 */ Sphere16 sphere;
-    /* 0x38 */ char unk38[0x8];
-} sub_struct_800623A4; // size = 0x40
-
-typedef struct struct_800623A4_1 {
-    /* 0x00 */ char unk0[0x18];
-    /* 0x18 */ s32 unk18;
-    /* 0x1C */ sub_struct_800623A4* unk1C;
-} struct_800623A4_1;
-
-typedef struct struct_800623A4_2 {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ s32 unk4;
-    /* 0x08 */ s32 unk8;
-} struct_800623A4_2;
-
-typedef struct struct_800623A4_3 {
-    /* 0x00 */ f32 unk0;
-    /* 0x04 */ f32 unk4;
-    /* 0x08 */ f32 unk8;
-} struct_800623A4_3;
-
 extern Linef D_8015E610;
-extern struct_800623A4_2 D_8015E61C;
 
-s32 func_800623A4(s32 arg0, s32 arg1, struct_800623A4_1* arg2, Vec3f* arg3, struct_800623A4_2* arg4) {
-    struct_800623A4_1* new_var;
+s32 func_800623A4_Type0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Vec3f* arg3, Vec3f* arg4) {
+    Collider_Type0* new_var;
     s32 i;
-    sub_struct_800623A4* entry;
+    Collider_Type0_ptr1C* entry;
 
     new_var = arg2;
     for (i = 0; i < new_var->unk18; i++) {
-        entry = arg2->unk1C + i;
+        entry = new_var->unk1C + i;
 
-        if (!(entry->unk17 & 1)) {
+        if (!(entry->unk0.flags2 & 1)) {
             continue;
         }
 
         D_8015E610.a = *arg3;
-        D_8015E61C = *arg4;
+        D_8015E610.b = *arg4;
 
-        if (func_800CE600(&entry->sphere, &D_8015E610) == 1) {
+        if (func_800CE600(&entry->unk28.unk8, &D_8015E610) == 1) {
             return 1;
         }
     }
@@ -2396,7 +2329,7 @@ typedef struct struct_800624BC {
     /* 0x40 */ Cylinder16 cylinder;
 } struct_800624BC;
 
-s32 func_800624BC(s32 arg0, s32 arg1, struct_800624BC* arg2, Vec3f* arg3, Vec3f* arg4) {
+s32 func_800624BC_Type1(s32 arg0, s32 arg1, struct_800624BC* arg2, Vec3f* arg3, Vec3f* arg4) {
     extern Vec3f D_8015E628;
     extern Vec3f D_8015E638;
     if (!(arg2->unk2F & 1)) {
@@ -2410,37 +2343,35 @@ s32 func_800624BC(s32 arg0, s32 arg1, struct_800624BC* arg2, Vec3f* arg3, Vec3f*
     return 0;
 }
 
-typedef struct sub_struct_80062530 {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ char unk4[0x11];
-    /* 0x15 */ u8 unk15;
-} sub_struct_80062530;
-
-typedef struct struct_80062530 {
-    /* 0x000 */ char unk0[0x1C0];
-    /* 0x1C0 */ s32 unk1C0;
-    /* 0x1C4 */ sub_struct_80062530* unk1C4[1];
-} struct_80062530;
-
-typedef s32 (*func_ptr_80062530)(void*, void*, sub_struct_80062530*, s32, s32);
+typedef s32 (*func_ptr_80062530)(GlobalContext*, SubGlobalContext11E60*, Collider*, Vec3f*, Vec3f*);
 extern func_ptr_80062530 D_8011E018[];
 
-s32 func_80062530(void* arg0, struct_80062530* arg1, s32 arg2, s32 arg3, s32* unkList, s32 unkListCount) {
+#if 0
+func_ptr_80062530 D_8011E018[] = {
+    func_800623A4_Type0,
+    func_800624BC_Type1,
+    NULL,
+    NULL,
+};
+#endif
+
+s32 func_80062530(GlobalContext* arg0, SubGlobalContext11E60* arg1, Vec3f* arg2, Vec3f* arg3, Actor** unkList,
+                  s32 unkListCount) {
     func_ptr_80062530 func;
     s32 condition;
     s32 result = 0;
     s32 j;
-    sub_struct_80062530** entryPtr = arg1->unk1C4;
-    sub_struct_80062530* entry;
+    Collider** entryPtr = arg1->unk1C4_OT;
+    Collider* entry;
 
-    for (; entryPtr < arg1->unk1C4 + arg1->unk1C0; entryPtr++) {
+    for (; entryPtr < arg1->unk1C4_OT + arg1->unk1C0_nOT; entryPtr++) {
         if (func_80061BF4(*entryPtr) == 1) {
             continue;
         }
 
         condition = 0;
         for (j = 0; j < unkListCount; j++) {
-            if ((*entryPtr)->unk0 == unkList[j]) {
+            if ((*entryPtr)->actor == unkList[j]) {
                 condition = true;
                 break;
             }
@@ -2451,10 +2382,10 @@ s32 func_80062530(void* arg0, struct_80062530* arg1, s32 arg2, s32 arg3, s32* un
         }
 
         entry = *entryPtr;
-        func = D_8011E018[entry->unk15];
+        func = D_8011E018[entry->type];
 
         if (func == NULL) {
-            osSyncPrintf("CollisionCheck_generalLineOcCheck():未対応 %dタイプ\n", entry->unk15);
+            osSyncPrintf("CollisionCheck_generalLineOcCheck():未対応 %dタイプ\n", entry->type);
             continue;
         }
 
@@ -2468,6 +2399,7 @@ s32 func_80062530(void* arg0, struct_80062530* arg1, s32 arg2, s32 arg3, s32* un
     return result;
 }
 
+// unused
 void func_8006268C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_80062530(arg0, arg1, arg2, arg3, 0, 0);
 }
