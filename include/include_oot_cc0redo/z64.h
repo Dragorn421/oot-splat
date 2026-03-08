@@ -898,8 +898,8 @@ typedef struct struct_8006139C {
     u8 unk12;
     char unk_13[2];
     /* 0x015 */ u8 unk15;
-    /* 0x016 */ char unk_16[0x100]; /* unk size */
-} struct_8006139C;
+    /* 0x016 */ char unk_16[0x2];
+} struct_8006139C; /* size = 0x18 */
 
 typedef struct {
     /* 0x000 */ s16 unk0;

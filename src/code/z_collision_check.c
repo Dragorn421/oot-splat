@@ -253,13 +253,13 @@ typedef struct struct_8005BA84_arg1 {
     char unk_8[8];
     f32 unk10;
     u8 unk14;
-} struct_8005BA84_arg1;
+} struct_8005BA84_arg1; /* size >= 0x18 */
 
 typedef struct struct_8005BA84_arg2 {
     u8 unk0;
     struct_8005BA84_arg1_sub unk2;
     s16 unkA;
-} struct_8005BA84_arg2;
+} struct_8005BA84_arg2; /* size >= 0xC */
 
 s32 func_8005BA84(s32 arg0, struct_8005BA84_arg1* arg1, struct_8005BA84_arg2* arg2) {
     arg1->unk14 = (u8)arg2->unk0;
@@ -331,7 +331,7 @@ typedef struct struct_8005BBF8 {
     s32 unk1C;
 } struct_8005BBF8;
 
-s32 func_8005BBF8(s32 arg0, struct_8005BBF8* arg1) {
+s32 func_8005BBF8(GlobalContext* arg0, struct_8005BBF8* arg1) {
     func_8005B65C(arg0, &arg1->unk0);
     arg1->unk18 = 0;
     arg1->unk1C = 0;
@@ -399,6 +399,7 @@ typedef struct struct_8005BD50_arg2 {
     s32 unkC;
 } struct_8005BD50_arg2;
 
+// unused
 s32 func_8005BD50(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct_8005BD50_arg2* arg2) {
     s32 temp_v0;
     s32 var_s0;
@@ -431,23 +432,27 @@ s32 func_8005BD50(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct_8005BD
 typedef struct struct_8005BE50_arg1 {
     Collider unk0;
     s32 unk18;
-    s32 unk1C;
+    struct_8005BAD8* unk1C;
 } struct_8005BE50_arg1;
+
+typedef struct struct_8005BE50_arg3_ptrC {
+    char unk_0[0x24];
+} struct_8005BE50_arg3_ptrC; /* size = 0x24 */
 
 typedef struct struct_8005BE50_arg3 {
     ColliderBodyInfo unk0;
     s32 unk8;
-    s32 unkC;
+    struct_8005BE50_arg3_ptrC* unkC;
 } struct_8005BE50_arg3;
 
 s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, struct_8005BE50_arg3* arg3) {
     s32 temp_v0;
-    s32 var_s0;
-    s32 var_s1;
+    struct_8005BAD8* var_s0;
+    struct_8005BE50_arg3_ptrC* var_s1;
 
     func_8005B6EC(arg0, &arg1->unk0, arg2, &arg3->unk0);
     arg1->unk18 = arg3->unk8;
-    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 << 6, "../z_collision_check.c", 0x5D2);
+    temp_v0 = ZeldaArena_MallocDebug(arg3->unk8 * 0x40, "../z_collision_check.c", 0x5D2);
     arg1->unk1C = temp_v0;
     if (temp_v0 == 0) {
         arg1->unk18 = 0;
@@ -458,13 +463,13 @@ s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, 
     }
     var_s0 = arg1->unk1C;
     var_s1 = arg3->unkC;
-    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
+    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
         do {
             func_8005BAD8((s32)arg0, (struct_8005BAD8*)var_s0);
             func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
-            var_s0 += 0x40;
-            var_s1 += 0x24;
-        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+            var_s0++;
+            var_s1++;
+        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
     }
     return 1;
 }
@@ -693,16 +698,16 @@ s32 func_8005C578(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
 
 typedef struct struct_8011DE78 {
     s32 unk0[0x34 / 4];
-} struct_8011DE78;
+} struct_8011DE78; /* size = 0x34 */
 
 extern struct_8011DE78 D_8011DE78;
 
-s32 func_8005C5B0(s32 arg0, struct_8011DE78* arg1) {
+s32 func_8005C5B0(GlobalContext* arg0, struct_8011DE78* arg1) {
     *arg1 = D_8011DE78;
     return 1;
 }
 
-s32 func_8005C5F8(UNK_TYPE arg0, UNK_TYPE arg1) {
+s32 func_8005C5F8(GlobalContext* arg0, UNK_TYPE arg1) {
     return 1;
 }
 
@@ -741,9 +746,9 @@ s32 func_8005C608(s32 arg0, struct_8005C608_arg1* arg1, Vec3f* arg2) {
 typedef struct struct_8005C6C0 {
     struct_8011DE2C unk0;
     struct_8011DE78 unk28;
-} struct_8005C6C0;
+} struct_8005C6C0; /* size = 0x5C */
 
-s32 func_8005C6C0(s32 arg0, struct_8005C6C0* arg1) {
+s32 func_8005C6C0(GlobalContext* arg0, struct_8005C6C0* arg1) {
     func_8005B884(arg0, &arg1->unk0);
     func_8005C5B0(arg0, &arg1->unk28);
     return 1;
@@ -752,7 +757,7 @@ s32 func_8005C6C0(s32 arg0, struct_8005C6C0* arg1) {
 typedef struct struct_8005C6F8 {
     ColliderBody unk0;
     char unk_28[0x5C - 0x28];
-} struct_8005C6F8;
+} struct_8005C6F8; /* size = 0x5C */
 
 s32 func_8005C6F8(GlobalContext* arg0, struct_8005C6F8* arg1) {
     func_8005B904(arg0, &arg1->unk0);
@@ -798,7 +803,7 @@ typedef struct struct_8005C7E0 {
     s32 unk1C;
 } struct_8005C7E0;
 
-s32 func_8005C7E0(s32 arg0, struct_8005C7E0* arg1) {
+s32 func_8005C7E0(GlobalContext* arg0, struct_8005C7E0* arg1) {
     func_8005B65C(arg0, &arg1->unk0);
     arg1->unk18 = 0;
     arg1->unk1C = 0;
@@ -862,6 +867,7 @@ typedef struct struct_8005C964_arg3 {
     struct_8005C730_arg2* unkC;
 } struct_8005C964_arg3;
 
+// unused
 s32 func_8005C964(GlobalContext* arg0, struct_8005C964_arg1* arg1, Actor* arg2, struct_8005C964_arg3* arg3) {
     struct_8005C6C0* var_s0;
     struct_8005C730_arg2* var_s1;
@@ -1210,7 +1216,7 @@ typedef struct struct_8005D3A4 {
     u16 unk18;
 } struct_8005D3A4;
 
-s32 func_8005D3A4(s32 arg0, struct_8005D3A4* arg1) {
+s32 func_8005D3A4(GlobalContext* arg0, struct_8005D3A4* arg1) {
     arg1->unk18 = (u16)(arg1->unk18 & 0xFFFE);
     return 1;
 }
@@ -1291,11 +1297,7 @@ typedef struct struct_8005D4DC_ptr1C_b {
 } struct_8005D4DC_ptr1C_b;
 
 typedef struct struct_8005D4DC {
-    char unk_0[0x12];
-    u8 unk12;
-    char unk_13[2];
-    u8 unk15;
-    char unk_16[2];
+    struct_8006139C unk0;
     s32 unk18;
     union {
         struct_8005D4DC_ptr1C_a* a;
