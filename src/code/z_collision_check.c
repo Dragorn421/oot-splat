@@ -1827,33 +1827,31 @@ void func_8005F17C_0ATvs2AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Co
     }
 }
 
-#ifdef NON_MATCHING
 void func_8005F39C_2ATvs0AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
+    Collider_Type2* arg2_2 = arg2;
+    Collider_Type2_ptr1C* var_s0;
+    Collider_Type0* arg3_0 = arg3;
+    Collider_Type0_ptr1C* var_s3;
     Vec3f sp7C;
     Vec3f sp70;
     Vec3f sp64;
-    Collider_Type0_ptr1C* var_s3;
-    Collider_Type2_ptr1C* var_s0;
-    Collider_Type2* arg2_2 = arg2;
-    Collider_Type0* arg3_0 = arg3;
 
     if (arg3_0->unk18 > 0) {
         if ((arg3_0->unk1C != NULL) && (arg2_2->unk18 > 0) && (arg2_2->unk1C != 0)) {
-            for (var_s3 = arg3_0->unk1C; (u32)var_s3 < (u32)(arg3_0->unk1C + arg3_0->unk18); var_s3++) {
+            for (var_s3 = arg3_0->unk1C; var_s3 < (arg3_0->unk1C + arg3_0->unk18); var_s3++) {
                 if ((func_8005DF50(var_s3) != 1)) {
-                    for (var_s0 = arg2_2->unk1C; ((((u32)var_s0 < (u32)(arg2_2->unk1C + (arg2_2->unk18))))); var_s0++) {
+                    for (var_s0 = arg2_2->unk1C; var_s0 < (arg2_2->unk1C + arg2_2->unk18); var_s0++) {
                         if (((func_8005DF2C(&var_s0->unk0) != 1))) {
                             if ((((func_8005DF74(&var_s0->unk0, &var_s3->unk0) != 1)) &&
                                  (func_800CE934(&var_s3->unk28.unk8, &var_s0->unk28, &sp7C) == 1))) {
                                 Math_Vec3s_ToVec3f(&sp64, &var_s3->unk28.unk8.center);
-                                sp70.x = (var_s0->unk28.vtx[2].x + (var_s0->unk28.vtx[0].x + var_s0->unk28.vtx[1].x)) *
+                                sp70.x = (var_s0->unk28.vtx[0].x + var_s0->unk28.vtx[1].x + var_s0->unk28.vtx[2].x) *
                                          0.33333334f;
-                                sp70.y = (var_s0->unk28.vtx[2].y + (var_s0->unk28.vtx[0].y + var_s0->unk28.vtx[1].y)) *
+                                sp70.y = (var_s0->unk28.vtx[0].y + var_s0->unk28.vtx[1].y + var_s0->unk28.vtx[2].y) *
                                          0.33333334f;
-                                sp70.z = (var_s0->unk28.vtx[2].z + (var_s0->unk28.vtx[0].z + var_s0->unk28.vtx[1].z)) *
+                                sp70.z = (var_s0->unk28.vtx[0].z + var_s0->unk28.vtx[1].z + var_s0->unk28.vtx[2].z) *
                                          0.33333334f;
-                                func_8005E81C(arg0, &arg2_2->unk0, var_s0, (s32)&sp70, &arg3_0->unk0, var_s3,
-                                              (s32)&sp64, &sp7C);
+                                func_8005E81C(arg0, &arg2_2->unk0, var_s0, &sp70, &arg3_0->unk0, var_s3, &sp64, &sp7C);
                                 if (((((arg3_0->unk0.maskB & 0x40) == 0)))) {
                                     return;
                                 }
@@ -1865,15 +1863,11 @@ void func_8005F39C_2ATvs0AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Co
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F39C_2ATvs0AC.s")
-#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F5B0_0ATvs3AC.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F7D0_3ATvs0AC.s")
 
-#if 1
 void func_8005FA30_1ATvs1AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2_, Collider* arg3_) {
     Collider_Type1* arg2 = (Collider_Type1*)arg2_;
     Collider_Type1* arg3 = (Collider_Type1*)arg3_;
@@ -1907,9 +1901,6 @@ void func_8005FA30_1ATvs1AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Co
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FA30_1ATvs1AC.s")
-#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FC04_1ATvs2AC.s")
 
@@ -1927,7 +1918,7 @@ void func_8005FA30_1ATvs1AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Co
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C_3ATvs3AC.s")
 
-void func_80060EBC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
+void func_80060EBC_Type0_processAC_(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
     Collider_Type0* arg2_0 = (Collider_Type0*)arg2;
     Collider_Type0_ptr1C* var_v0;
     Vec3f sp24;
@@ -1946,27 +1937,27 @@ void func_80060EBC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* a
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060F94.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060F94_Type1_processAC_.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061028.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061028_Type2_processAC_.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006110C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006110C_Type3_processAC_.s")
 
 typedef void (*callback_800611A0)(GlobalContext*, SubGlobalContext11E60*, Collider*);
 
-extern callback_800611A0 D_8011DF5C[];
+extern callback_800611A0 D_8011DF5C_processAC_[];
 
-void func_80060EBC(GlobalContext*, SubGlobalContext11E60*, Collider*);
-void func_80060F94(GlobalContext*, SubGlobalContext11E60*, Collider*);
-void func_80061028(GlobalContext*, SubGlobalContext11E60*, Collider*);
-void func_8006110C(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_80060EBC_Type0_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_80060F94_Type1_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_80061028_Type2_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_8006110C_Type3_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
 
 #if 0
-callback_800611A0 D_8011DF5C[] = {
-    func_80060EBC,
-    func_80060F94,
-    func_80061028,
-    func_8006110C,
+callback_800611A0 D_8011DF5C_processAC_[] = {
+    func_80060EBC_Type0_processAC_,
+    func_80060F94_Type1_processAC_,
+    func_80061028_Type2_processAC_,
+    func_8006110C_Type3_processAC_,
 };
 #endif
 
@@ -1979,7 +1970,7 @@ void func_800611A0_processAC_(GlobalContext* globalCtx, SubGlobalContext11E60* c
         temp_a2 = *var_s0;
         if ((temp_a2 != NULL) && (temp_a2->collideFlags & 1) &&
             (((temp_a2->actor == NULL)) || (temp_a2->actor->update != NULL))) {
-            D_8011DF5C[temp_a2->type](globalCtx, colChkCtx, temp_a2);
+            D_8011DF5C_processAC_[temp_a2->type](globalCtx, colChkCtx, temp_a2);
         }
         var_s0++;
     }

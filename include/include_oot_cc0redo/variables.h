@@ -244,7 +244,7 @@ extern s32 D_8011D3AC;
 //extern ? D_8011DE78;
 //extern ? D_8011DEAC;
 //extern ? D_8011DEEC;
-//extern ? D_8011DF5C;
+//extern ? D_8011DF5C_processAC_;
 //extern ? D_8011DF6C_ATvsAC;
 //extern ? D_8011DFAC;
 //extern ? D_8011DFEC;
