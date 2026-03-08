@@ -85,10 +85,6 @@ typedef struct {
     /* 0x06 */ u8 unk_06[0x2]; /* 0000 */
 } ColliderSrc; // size = 0x08
 
-typedef struct struct_8005C328 {
-    s16 unk0[6];
-} struct_8005C328;
-
 // ?
 
 typedef struct struct_8005BA84_arg1_sub {
@@ -140,7 +136,7 @@ typedef struct ColliderSrc_Type0 {
 typedef struct Collider_Type1 {
     Collider unk0;
     ColliderBody unk18;
-    struct_8005C328 unk40;
+    Cylinder16 unk40;
 } Collider_Type1;
 
 typedef struct struct_8005C450_Type1_suba {
@@ -159,20 +155,21 @@ typedef struct struct_8005C450_Type1_subb {
 typedef struct struct_8005C450_Type1_ColliderSrc {
     struct_8005C450_Type1_suba unk0;
     struct_8005C450_Type1_subb unk8;
-    struct_8005C328 unk20;
+    Cylinder16 unk20;
 } struct_8005C450_Type1_ColliderSrc;
 
 typedef struct Type1_ColliderSrc_alt {
     /* 0x000 */ ColliderSrc unk0;
     /* 0x008 */ ColliderBodySrc unk8;
-    /* 0x020 */ struct_8005C328 unk20;
+    /* 0x020 */ Cylinder16 unk20;
     /* 0x02C */ char pad2C[0x100]; /* unk size */
 } Type1_ColliderSrc_alt;
 
 // type2
 
 typedef struct Collider_Type2_ptr1C {
-    char unk_0[0x5C];
+    ColliderBody unk0;
+    TriNorm unk28;
 } Collider_Type2_ptr1C;
 
 typedef struct Collider_Type2 {
