@@ -1736,117 +1736,37 @@ void func_8005E2C8(s32 arg1, s32 arg2, s32 arg3) {
     func_80062A28(arg1, arg3);
 }
 
-typedef struct struct_8005E4F8_arg0 {
-    /* 0x00 */ char unk_0[2];
-    /* 0x02 */ u8 unk2;
-    /* 0x03 */ char unk_3[0xAF];
-    /* 0xB2 */ u8 unkB2;
-    /* 0xB3 */ u8 unkB3;
-    /* 0xB4 */ char unk_B4[0x30];
-    /* 0xE4 */ Vec3f unkE4;
-} struct_8005E4F8_arg0;
-
-typedef struct struct_8005E2EC_arg2 {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ char unk_4[4];
-    /* 0x08 */ struct_8005E4F8_arg0* unk8;
-    /* 0x0C */ char unk_C[5];
-    /* 0x11 */ u8 unk11;
-    /* 0x12 */ char unk_12[2];
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ char unk_15[3];
-} struct_8005E2EC_arg2;
-
-typedef struct struct_8005E800_ptr2 {
-    /* 0x000 */ struct_8005DF2C unk0;
-    /* 0x018 */ char unk_18[0x18];
-    /* 0x030 */ Sphere16 unk30;
-    char unk_38[8];
-} struct_8005E800_ptr2; /* size = 0x40 */
-
-typedef struct struct_8005E800 {
-    /* 0x00 */ struct_8005E4F8_arg0* unk0;
-    /* 0x04 */ struct_8005E4F8_arg0* unk4;
-    /* 0x08 */ struct_8005E4F8_arg0* unk8;
-    /* 0x0C */ char unk_C[4];
-    u8 unk10;
-    u8 unk11;
-    /* 0x12 */ char unk_12[1];
-    /* 0x13 */ u8 unk13;
-    /* 0x14 */ u8 unk14;
-    /* 0x15 */ char unk_15[3];
-    /* 0x18 */ s32 unk18;
-    /* 0x1C */ struct_8005E800_ptr2* unk1C;
-    /* 0x020 */ char unk_20[0x20];
-    /* 0x040 */ s16 unk40;
-    /* 0x042 */ s16 unk42;
-    /* 0x044 */ char unk_44[2];
-    /* 0x046 */ s16 unk46;
-    /* 0x048 */ s16 unk48;
-    /* 0x04A */ s16 unk4A;
-    /* 0x04C */ char unk_4C[0x100]; /* size unknown */
-} struct_8005E800;
-
-struct struct_8005E4F8_arg1;
-
-typedef struct struct_8005E2EC_arg1 {
-    /* 0x00 */ char unk_0[4];
-    /* 0x04 */ u8 unk4;
-    /* 0x05 */ char unk_5[0x10];
-    /* 0x015 */ u8 unk15;
-    /* 0x016 */ char unk_16[2];
-    /* 0x018 */ struct_8005E2EC_arg2* unk18;
-    /* 0x01C */ char unk_1C[4];
-    /* 0x020 */ struct struct_8005E4F8_arg1* unk20;
-} struct_8005E2EC_arg1;
-
-typedef struct struct_8005E4F8_arg1 {
-    /* 0x00 */ char unk_0[0xC];
-    /* 0x0C */ u8 unkC;
-    /* 0x0D */ char unk_D[1];
-    /* 0x0E */ s16 unkE;
-    /* 0x10 */ s16 unk10;
-    /* 0x12 */ s16 unk12;
-    /* 0x14 */ u8 unk14;
-    char unk_15[1];
-    u8 unk16;
-    /* 0x017 */ char unk_17[5];
-    /* 0x01C */ struct_8005E800* unk1C;
-    /* 0x020 */ char unk_20[4];
-    /* 0x024 */ struct_8005E2EC_arg1* unk24;
-} struct_8005E4F8_arg1;
-
 void func_80062D60(GlobalContext* arg0, Vec3f* arg1);
 void func_80062DAC(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2);
 
-void func_8005E2EC(GlobalContext* arg0, struct_8005E2EC_arg1* arg1, struct_8005E2EC_arg2* arg2, Vec3f* arg3) {
-    if (((arg1->unk15 & 0x18) == 0) && (arg2->unk14 != 9)) {
+void func_8005E2EC(GlobalContext* arg0, ColliderBody* arg1, Collider* arg2, Vec3f* arg3) {
+    if (((arg1->toucherFlags & 0x18) == 0) && (arg2->unk_14 != 9)) {
         func_80029CA4(arg0, 0, arg3);
-        if (arg2->unk0 == 0) {
+        if (arg2->actor == NULL) {
             Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         } else {
-            Audio_PlaySoundGeneral(0x1806U, arg2->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            Audio_PlaySoundGeneral(0x1806U, &arg2->actor->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         }
-    } else if ((arg1->unk15 & 0x18) == 0) {
+    } else if ((arg1->toucherFlags & 0x18) == 0) {
         func_80029CA4(arg0, 3, arg3);
-        if (arg2->unk0 == 0) {
+        if (arg2->actor == NULL) {
             func_80062D60(arg0, arg3);
         } else {
-            func_80062DAC((s32)arg0, (s32)arg3, arg2->unk0 + 0xE4);
+            func_80062DAC(arg0, arg3, &arg2->actor->unk_E4);
         }
-    } else if ((arg1->unk15 & 0x18) == 8) {
+    } else if ((arg1->toucherFlags & 0x18) == 8) {
         func_80029CA4(arg0, 0, arg3);
-        if (arg2->unk0 == 0) {
+        if (arg2->actor == NULL) {
             Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         } else {
-            Audio_PlaySoundGeneral(0x1806U, arg2->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            Audio_PlaySoundGeneral(0x1806U, &arg2->actor->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         }
-    } else if ((arg1->unk15 & 0x18) == 0x10) {
+    } else if ((arg1->toucherFlags & 0x18) == 0x10) {
         func_80029CA4(arg0, 1, arg3);
-        if (arg2->unk0 == 0) {
+        if (arg2->actor == NULL) {
             Audio_PlaySoundGeneral(0x1837U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         } else {
-            Audio_PlaySoundGeneral(0x1837U, arg2->unk0 + 0xE4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            Audio_PlaySoundGeneral(0x1837U, &arg2->actor->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
         }
     }
 }
@@ -1869,7 +1789,7 @@ s32 func_8005E4F8(Collider* arg0, ColliderBody* arg1) {
     return 1;
 }
 
-typedef void (*callback_8011DF28)(GlobalContext*, struct_8005E2EC_arg2*, Vec3f*);
+typedef void (*callback_8011DF28)(GlobalContext*, Collider*, Vec3f*);
 extern callback_8011DF28 D_8011DF28[];
 extern u8 D_8011DF40[][2];
 
@@ -1945,8 +1865,7 @@ s32 func_8005E81C(GlobalContext* arg0, Collider* arg1, ColliderBody* arg2, s32 a
     if (!(arg2->toucherFlags & 0x20) && ((arg4->unk_14 != 9)) && (arg4->unk_14 != 0xB) && (arg4->unk_14 != 0xC)) {
         arg5->bumperFlags |= 0x80;
     } else {
-        func_8005E604(arg0, (struct_8005E4F8_arg0**)arg1, (struct_8005E2EC_arg1*)arg2, (struct_8005E2EC_arg2*)arg4,
-                      (struct_8005E4F8_arg1*)arg5, arg7);
+        func_8005E604(arg0, arg1, arg2, arg4, arg5, arg7);
         arg2->toucherFlags |= 0x40;
     }
     return 1;
