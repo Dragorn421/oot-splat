@@ -14,7 +14,8 @@ s32 func_8005B65C_InitColliderDefault(GlobalContext* arg0, Collider* arg1) {
     return 1;
 }
 
-s32 func_8005B6A0(GlobalContext* globalCtx, UNK_PTR collision) {
+// multi-type
+s32 func_8005B6A0(GlobalContext* globalCtx, Collider* collision) {
     return 1;
 }
 
@@ -200,7 +201,7 @@ s32 func_8005BA74(GlobalContext* arg0, UNK_TYPE arg1) {
     return 1;
 }
 
-s32 func_8005BA84(GlobalContext* arg0, struct_8005BA84_arg1* arg1, struct_8005BA84_arg2* arg2) {
+s32 func_8005BA84_Type0(GlobalContext* arg0, struct_8011DE54* arg1, ColliderSrc_Type0_ptrC_sub18* arg2) {
     arg1->unk14 = (u8)arg2->unk0;
     arg1->unk0 = arg2->unk2;
     arg1->unk10 = (f32)((f32)arg2->unkA * 0.01f);
@@ -213,30 +214,30 @@ s32 func_8005BAD8(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
     return 1;
 }
 
-s32 func_8005BB10(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
+s32 func_8005BB10_Type0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
     func_8005B904(arg0, &arg1->unk0);
-    func_8005BA74((s32)arg0, &arg1->unk28);
+    func_8005BA74(arg0, &arg1->unk28);
     return 1;
 }
 
 s32 func_8005BB48_Type0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1, ColliderSrc_Type0_ptrC* arg2) {
     func_8005B93C(arg0, &arg1->unk0, &arg2->unk0);
-    func_8005BA84(arg0, &arg1->unk28, &arg2->unk18);
+    func_8005BA84_Type0(arg0, &arg1->unk28, &arg2->unk18);
     return 1;
 }
 
 s32 func_8005BB8C_SetAT_sub_0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
-    func_8005B9B0(arg0, arg1);
+    func_8005B9B0(arg0, &arg1->unk0);
     return 1;
 }
 
 s32 func_8005BBB0_SetAC_sub_0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
-    func_8005B9E8(arg0, arg1);
+    func_8005B9E8(arg0, &arg1->unk0);
     return 1;
 }
 
 s32 func_8005BBD4_SetOT_sub_0(GlobalContext* arg0, Collider_Type0_ptr1C* arg1) {
-    func_8005BA1C(arg0, arg1);
+    func_8005BA1C(arg0, &arg1->unk0);
     return 1;
 }
 
@@ -263,7 +264,7 @@ s32 func_8005BC28(GlobalContext* arg0, struct_8005BC28* arg1) {
     var_s0 = temp_a0;
     if (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6))) {
         do {
-            func_8005BB10(arg0, var_s0);
+            func_8005BB10_Type0(arg0, var_s0);
             var_s0 += 0x40;
         } while (var_s0 < (u32)((char*)arg1->unk1C + (arg1->unk18 << 6)));
     }
@@ -288,7 +289,7 @@ s32 func_8005BCC8_Type0(GlobalContext* arg0, Collider_Type0* arg1) {
     var_s0 = arg1->unk1C;
     if (var_s0 < (arg1->unk1C + (arg1->unk18))) {
         do {
-            func_8005BB10(arg0, var_s0);
+            func_8005BB10_Type0(arg0, var_s0);
             var_s0++;
         } while (var_s0 < (arg1->unk1C + (arg1->unk18)));
     }
@@ -297,25 +298,13 @@ s32 func_8005BCC8_Type0(GlobalContext* arg0, Collider_Type0* arg1) {
     return 1;
 }
 
-typedef struct struct_8005BD50_arg1 {
-    struct_8005B6B0_arg1 unk0;
-    s32 unk18;
-    s32 unk1C;
-} struct_8005BD50_arg1;
-
-typedef struct struct_8005BD50_arg2 {
-    struct_8005B6B0_arg2 unk0;
-    s32 unk8;
-    s32 unkC;
-} struct_8005BD50_arg2;
-
 // unused
-s32 func_8005BD50_jntsph(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct_8005BD50_arg2* arg2) {
+s32 func_8005BD50_jntsph(GlobalContext* arg0, Collider_Type0* arg1, ColliderSrc_Type0* arg2) {
     s32 temp_v0;
-    s32 var_s0;
-    s32 var_s1;
+    Collider_Type0_ptr1C* var_s0;
+    ColliderSrc_Type0_ptrC* var_s1;
 
-    func_8005B6B0((s32)arg0, &arg1->unk0, &arg2->unk0);
+    func_8005B6B0(arg0, &arg1->unk0, &arg2->unk0);
     arg1->unk18 = arg2->unk8;
     temp_v0 = ZeldaArena_MallocDebug(arg2->unk8 << 6, "../z_collision_check.c", 0x5A3);
     arg1->unk1C = temp_v0;
@@ -328,13 +317,13 @@ s32 func_8005BD50_jntsph(GlobalContext* arg0, struct_8005BD50_arg1* arg1, struct
     }
     var_s0 = arg1->unk1C;
     var_s1 = arg2->unkC;
-    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18 << 6))) {
+    if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
         do {
             func_8005BAD8((s32)arg0, var_s0);
             func_8005BB48_Type0(arg0, var_s0, var_s1);
-            var_s0 += 0x40;
-            var_s1 += 0x24;
-        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18 << 6)));
+            var_s0 += 1;
+            var_s1 += 1;
+        } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
     }
     return 1;
 }
