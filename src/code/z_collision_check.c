@@ -1135,8 +1135,8 @@ void func_8005D40C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
             *var_v0 = 0;
             var_v0++;
         }
-        var_v0 = arg1->unk_1C4;
-        while ((u32)var_v0 < (u32)(arg1->unk_1C4 + ARRAY_COUNT(arg1->unk_1C4))) {
+        var_v0 = arg1->unk1C4;
+        while ((u32)var_v0 < (u32)(arg1->unk1C4 + ARRAY_COUNT(arg1->unk1C4))) {
             *var_v0 = 0;
             var_v0++;
         }
@@ -1253,8 +1253,8 @@ void func_8005D62C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
         if (gGameInfo->data[0x737] != 0) {
             var_s1 = 0;
             while (var_s1 < arg1->unk1C0) {
-                if (arg1->unk_1C4[var_s1]->maskA & 1) {
-                    func_8005D4DC(arg0, arg1->unk_1C4[var_s1]);
+                if (arg1->unk1C4[var_s1]->maskA & 1) {
+                    func_8005D4DC(arg0, arg1->unk1C4[var_s1]);
                 }
                 var_s1 += 1;
             }
@@ -1315,36 +1315,19 @@ s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     return temp_v1;
 }
 
-typedef struct struct_8005D8AC_arg1 {
-    /* 0x000 */ s16 unk0;
-    /* 0x002 */ u16 unk2;
-    void* unk4[UNK_SIZE];
-    char unk_8[0xC4]; /* maybe part of unk4[0x32]? */
-    /* 0x00CC */ s32 unkCC;
-    void* unkD0[UNK_SIZE];
-    /* 0x00D4 */ char unk_D4[0xEC];
-    /* 0x01C0 */ s32 unk1C0;
-    void* unk1C4[UNK_SIZE];
-} struct_8005D8AC_arg1;
-
-typedef struct struct_8005D8AC_arg2 {
-    /* 0x000 */ void* unk0;
-    /* 0x004 */ char pad4[0x11];
-    /* 0x015 */ u8 unk15;
-} struct_8005D8AC_arg2;
-
-s32 func_8005D8AC(GlobalContext* arg0, struct_8005D8AC_arg1* arg1, struct_8005D8AC_arg2* arg2, s32 arg3) {
+// unused
+s32 func_8005D8AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, s32 arg3) {
     Actor* temp_v1;
 
-    if (arg2->unk15 >= 4) {
+    if (arg2->type >= 4) {
         func_80001FF0("pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 0xBDD);
     }
     if (func_800C0D28(arg0) == 1) {
         return -1;
     }
-    D_8011DEF8[arg2->unk15](arg0, arg2);
-    temp_v1 = arg2->unk0;
-    if ((temp_v1 != NULL) && (((Actor*)arg2->unk0)->update == 0)) {
+    D_8011DEF8[arg2->type](arg0, arg2);
+    temp_v1 = arg2->actor;
+    if ((temp_v1 != NULL) && ((arg2->actor)->update == 0)) {
         return -1;
     }
     if (arg1->unk2 & 1) {
@@ -1411,18 +1394,19 @@ s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* 
     return temp_v1;
 }
 
-s32 func_8005DB04(GlobalContext* arg0, struct_8005D8AC_arg1* arg1, struct_8005D8AC_arg2* arg2, s32 arg3) {
+// unused
+s32 func_8005DB04(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, s32 arg3) {
     Actor* temp_v1;
 
-    if ((s32)arg2->unk15 >= 4) {
+    if (arg2->type >= 4) {
         func_80001FF0("pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 0xC51);
     }
     if (func_800C0D28(arg0) == 1) {
         return -1;
     }
-    D_8011DF08[arg2->unk15](arg0, arg2);
-    temp_v1 = arg2->unk0;
-    if ((temp_v1 != NULL) && (((Actor*)arg2->unk0)->update == 0)) {
+    D_8011DF08[arg2->type](arg0, arg2);
+    temp_v1 = arg2->actor;
+    if ((temp_v1 != NULL) && (arg2->actor->update == NULL)) {
         return -1;
     }
     if (arg1->unk2 & 1) {
@@ -1484,24 +1468,25 @@ s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if (simpleBodyGroups->unk2 & 1) {
         return -1;
     }
-    simpleBodyGroups->unk_1C4[temp_v1] = collision;
+    simpleBodyGroups->unk1C4[temp_v1] = collision;
     simpleBodyGroups->unk1C0 += 1;
     return temp_v1;
 }
 
-s32 func_8005DD5C(GlobalContext* arg0, struct_8005D8AC_arg1* arg1, struct_8005D8AC_arg2* arg2, s32 arg3) {
+// unused
+s32 func_8005DD5C(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, s32 arg3) {
     Actor* temp_v1;
 
     if (func_800C0D28(arg0) == 1) {
         return -1;
     }
-    if (arg2->unk15 >= 4) {
+    if (arg2->type >= 4) {
         func_80001FF0("pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 0xCCA);
         if (1) {}
     }
-    D_8011DF18[arg2->unk15](arg0, arg2);
-    temp_v1 = arg2->unk0;
-    if ((temp_v1 != NULL) && (((Actor*)arg2->unk0)->update == 0)) {
+    D_8011DF18[arg2->type](arg0, arg2);
+    temp_v1 = arg2->actor;
+    if ((temp_v1 != NULL) && (arg2->actor->update == NULL)) {
         return -1;
     }
     if (arg1->unk2 & 1) {
