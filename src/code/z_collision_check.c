@@ -1358,16 +1358,7 @@ void func_8005D4DC(GraphicsContext** arg0, struct_8005D4DC* arg1) {
     }
 }
 
-typedef struct struct_8005D62C {
-    s16 unk0;
-    struct_8005D4DC* unk4[(0xCC - 4) / 4];
-    s32 unkCC;
-    struct_8005D4DC* unkD0[(0x1C0 - 0xD0) / 4];
-    s32 unk1C0;
-    struct_8005D4DC* unk1C4[1];
-} struct_8005D62C;
-
-void func_8005D62C(GlobalContext* arg0, struct_8005D62C* arg1) {
+void func_8005D62C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
     s32 var_s1;
 
     if (gGameInfo->data[0x72F] != 0) {
@@ -1388,8 +1379,8 @@ void func_8005D62C(GlobalContext* arg0, struct_8005D62C* arg1) {
         if (gGameInfo->data[0x737] != 0) {
             var_s1 = 0;
             while (var_s1 < arg1->unk1C0) {
-                if (arg1->unk1C4[var_s1]->unk12 & 1) {
-                    func_8005D4DC(arg0, arg1->unk1C4[var_s1]);
+                if (arg1->unk_1C4[var_s1]->unk12 & 1) {
+                    func_8005D4DC(arg0, arg1->unk_1C4[var_s1]);
                 }
                 var_s1 += 1;
             }
@@ -1832,10 +1823,14 @@ void func_8005E10C(GlobalContext* arg0, s32 arg1, Vec3f* arg2) {
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E10C.s")
 #endif
 
+void func_80062B80(GlobalContext* arg0, Vec3f* arg1);
+
 void func_8005E26C(s32 arg0, s32 arg1, s32 arg2) {
     func_800299AC(arg0, arg2);
     func_80062B80(arg0, arg2);
 }
+
+void func_80062A28(GlobalContext* arg0, Vec3f* arg1);
 
 void func_8005E2A4(s32 arg1, s32 arg2, s32 arg3) {
     func_80062A28(arg1, arg3);
@@ -2327,14 +2322,14 @@ void func_8005F39C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8006110C.s")
 
-typedef void (*callback_800611A0)(GlobalContext*, SubGlobalContext11E60*, struct_800611A0*);
+typedef void (*callback_800611A0)(GlobalContext*, SubGlobalContext11E60*, struct_8006139C*);
 
 extern callback_800611A0 D_8011DF5C[];
 
-void func_80060EBC(GlobalContext*, SubGlobalContext11E60*, struct_800611A0*);
-void func_80060F94(GlobalContext*, SubGlobalContext11E60*, struct_800611A0*);
-void func_80061028(GlobalContext*, SubGlobalContext11E60*, struct_800611A0*);
-void func_8006110C(GlobalContext*, SubGlobalContext11E60*, struct_800611A0*);
+void func_80060EBC(GlobalContext*, SubGlobalContext11E60*, struct_8006139C*);
+void func_80060F94(GlobalContext*, SubGlobalContext11E60*, struct_8006139C*);
+void func_80061028(GlobalContext*, SubGlobalContext11E60*, struct_8006139C*);
+void func_8006110C(GlobalContext*, SubGlobalContext11E60*, struct_8006139C*);
 
 #if 0
 callback_800611A0 D_8011DF5C[] = {
@@ -2346,8 +2341,8 @@ callback_800611A0 D_8011DF5C[] = {
 #endif
 
 void func_800611A0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
-    struct_800611A0** var_s0;
-    struct_800611A0* temp_a2;
+    struct_8006139C** var_s0;
+    struct_8006139C* temp_a2;
 
     var_s0 = colChkCtx->unkD0;
     if ((u32)var_s0 < (u32)&colChkCtx->unkD0[colChkCtx->unkCC]) {
@@ -2803,11 +2798,133 @@ void func_800628A4(s32 arg0, struct_800628A4* arg1) {
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800628A4.s")
 #endif
 
+#ifdef NON_MATCHING
+void func_80062A28(GlobalContext* arg0, Vec3f* arg1) {
+    static struct_8015D8A0 D_8015CF10;
+    s32 sp24;
+
+    D_8015CF10.unk0.x = (s16)(s32)arg1->x;
+    D_8015CF10.unk0.y = (s16)(s32)arg1->y;
+    D_8015CF10.unk0.z = (s16)(s32)arg1->z;
+    D_8015CF10.unk494 = 5;
+    D_8015CF10.unk498 = 5;
+    D_8015CF10.unk49C = 0x80;
+    D_8015CF10.unk49D = 0;
+    D_8015CF10.unk49E = 0x40;
+    D_8015CF10.unk49F = -1;
+    D_8015CF10.unk4A0 = 0x80;
+    D_8015CF10.unk4A1 = 0;
+    D_8015CF10.unk4A2 = 0x40;
+    D_8015CF10.unk4A3 = -1;
+    D_8015CF10.unk4A4 = -1;
+    D_8015CF10.unk4A5 = 0x80;
+    D_8015CF10.unk4A6 = 0;
+    D_8015CF10.unk4A7 = -1;
+    D_8015CF10.unk4A8 = -1;
+    D_8015CF10.unk4A9 = 0x80;
+    D_8015CF10.unk4AA = 0;
+    D_8015CF10.unk4AB = -1;
+    D_8015CF10.unk4AC = 0x40;
+    D_8015CF10.unk4AD = 0;
+    D_8015CF10.unk4AE = 0x20;
+    D_8015CF10.unk4AF = 0;
+    D_8015CF10.unk4B0 = 0x40;
+    D_8015CF10.unk4B1 = 0;
+    D_8015CF10.unk4B2 = 0x20;
+    D_8015CF10.unk4B3 = 0;
+    D_8015CF10.unk4B4 = 0x80;
+    D_8015CF10.unk4B5 = 0;
+    D_8015CF10.unk4B6 = 0x40;
+    D_8015CF10.unk4B7 = 0;
+    D_8015CF10.unk4B8 = 0x80;
+    D_8015CF10.unk4B9 = 0;
+    D_8015CF10.unk4BA = 0x40;
+    D_8015CF10.unk4BB = 0;
+    D_8015CF10.unk4BC = 0;
+    D_8015CF10.unk4C0 = 0x10;
+    D_8015CF10.unk48C = 8.0f;
+    D_8015CF10.unk490 = -1.0f;
+    Effect_Add(arg0, &sp24, 0, 0U, 1U, &D_8015CF10);
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062A28.s")
+#endif
 
+#ifdef NON_MATCHING
+void func_80062B80(GlobalContext* arg0, Vec3f* arg1) {
+    static struct_8015D8A0 D_8015D3D8;
+    s32 sp24;
+
+    D_8015D3D8.unk0.x = (s16)(s32)arg1->x;
+    D_8015D3D8.unk0.y = (s16)(s32)arg1->y;
+    D_8015D3D8.unk0.z = (s16)(s32)arg1->z;
+    D_8015D3D8.unk494 = 5;
+    D_8015D3D8.unk498 = 5;
+    D_8015D3D8.unk49C = -1;
+    D_8015D3D8.unk49D = -1;
+    D_8015D3D8.unk49E = -1;
+    D_8015D3D8.unk49F = -1;
+    D_8015D3D8.unk4A0 = 0x64;
+    D_8015D3D8.unk4A1 = 0x64;
+    D_8015D3D8.unk4A2 = 0x64;
+    D_8015D3D8.unk4A3 = 0x64;
+    D_8015D3D8.unk4A4 = 0x64;
+    D_8015D3D8.unk4A5 = 0x64;
+    D_8015D3D8.unk4A6 = 0x64;
+    D_8015D3D8.unk4A7 = 0x64;
+    D_8015D3D8.unk4A8 = 0x64;
+    D_8015D3D8.unk4A9 = 0x64;
+    D_8015D3D8.unk4AA = 0x64;
+    D_8015D3D8.unk4AB = 0x64;
+    D_8015D3D8.unk4AC = 0x32;
+    D_8015D3D8.unk4AD = 0x32;
+    D_8015D3D8.unk4AE = 0x32;
+    D_8015D3D8.unk4AF = 0x32;
+    D_8015D3D8.unk4B0 = 0x32;
+    D_8015D3D8.unk4B1 = 0x32;
+    D_8015D3D8.unk4B2 = 0x32;
+    D_8015D3D8.unk4B3 = 0x32;
+    D_8015D3D8.unk4B4 = 0x32;
+    D_8015D3D8.unk4B5 = 0x32;
+    D_8015D3D8.unk4B6 = 0x32;
+    D_8015D3D8.unk4B7 = 0x32;
+    D_8015D3D8.unk4B8 = 0;
+    D_8015D3D8.unk4B9 = 0;
+    D_8015D3D8.unk4BA = 0;
+    D_8015D3D8.unk4BB = 0;
+    D_8015D3D8.unk4BC = 0;
+    D_8015D3D8.unk4C0 = 0x10;
+    D_8015D3D8.unk48C = 8.0f;
+    D_8015D3D8.unk490 = -1.0f;
+    Effect_Add(arg0, &sp24, 0, 0U, 1U, &D_8015D3D8);
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062B80.s")
+#endif
 
+typedef struct struct_8011E068 {
+    /* 0x00 */ char unk_0[2];
+    /* 0x02 */ Vec3s unk2;
+    /* 0x08 */ char unk_4[0x26];
+    /* 0x2E */ Vec3s unk2E;
+} struct_8011E068;
+
+#ifdef NON_MATCHING
+void func_80062CD4(GlobalContext* arg0, Vec3f* arg1) {
+    static struct_8011E068 D_8011E028 = { 0 /* TODO import data */ };
+    s32 sp24;
+
+    D_8011E028.unk2.x = (s16)(s32)arg1->x;
+    D_8011E028.unk2.y = (s16)(s32)arg1->y;
+    D_8011E028.unk2.z = (s16)(s32)arg1->z;
+    D_8011E028.unk2E.x = D_8011E028.unk2.x;
+    D_8011E028.unk2E.y = D_8011E028.unk2.y;
+    D_8011E028.unk2E.z = D_8011E028.unk2.z;
+    Effect_Add(arg0, &sp24, 3, 0U, 1U, &D_8011E028);
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062CD4.s")
+#endif
 
 void func_80062D60(GlobalContext* arg0, Vec3f* arg1) {
     func_80062CD4(arg0, arg1);
@@ -2822,13 +2939,6 @@ void func_80062DAC(GlobalContext* arg0, Vec3f* arg1, Vec3f* arg2) {
 void func_80062DF4(GlobalContext* globalCtx, Vec3f* arg1) {
     func_80062D60(globalCtx, arg1);
 }
-
-typedef struct struct_8011E068 {
-    /* 0x00 */ char unk_0[2];
-    /* 0x02 */ Vec3s unk2;
-    /* 0x08 */ char unk_4[0x26];
-    /* 0x2E */ Vec3s unk2E;
-} struct_8011E068;
 
 #ifdef NON_MATCHING
 // https://decomp.me/scratch/swbpd
