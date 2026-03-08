@@ -904,15 +904,14 @@ typedef struct struct_8006139C {
 typedef struct {
     /* 0x000 */ s16 unk0;
     /* 0x002 */ u16 unk2;
-    /* 0x004 */ struct_8006139C* unk4[1];
-    /* 0x008 */ char unk_8[0xC4];
+    /* 0x004 */ struct_8006139C* unk4[50];
     /* 0x0CC */ s32 unkCC;
-    /* 0x0D0 */ struct_8006139C* unkD0[1];
-    /* 0x0D4 */ char unk_D4[0xEC];
+    /* 0x0D0 */ struct_8006139C* unkD0[60];
     /* 0x1C0 */ s32 unk1C0;
-    /* 0x1C4 */ struct_8006139C* unk_1C4[1];
-    /* 0x1C8 */ char unk_1C8[0xCC];
-} SubGlobalContext11E60; // size = 0x28C
+    /* 0x1C4 */ struct_8006139C* unk_1C4[50];
+    s32 unk28C;
+    void* unk290[3];
+} SubGlobalContext11E60; // size = 0x29C
 
 typedef struct {
     /* 0x00 */ char unk_00[0x10];
@@ -1094,7 +1093,7 @@ typedef struct GlobalContext {
     /* 0x11E5E */ u8 fadeTransition;
     /* 0x11E5F */ char unk_11E5F[0x1];
     /* 0x11E60 */ SubGlobalContext11E60 sub_11E60;
-    /* 0x120EC */ char unk_120EC[0x38];
+    /* 0x120FC */ char unk_120FC[0x28];
     /* 0x12124 */ PreRenderContext preRenderCtx;
     /* 0x121C8 */ TransitionContext transitionCtx;
     /* 0x12418 */ char unk_12418[0x3];

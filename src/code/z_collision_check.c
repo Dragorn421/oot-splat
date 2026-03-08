@@ -1215,21 +1215,9 @@ s32 func_8005D3A4(s32 arg0, struct_8005D3A4* arg1) {
     return 1;
 }
 
-typedef struct struct_8005D40C {
-    s16 unk0;
-    u16 unk2;
-    s32 unk4[0xC8 / 4];
-    s32 unkCC;
-    s32 unkD0[(0x1C0 - 0xD0) / 4];
-    s32 unk1C0;
-    s32 unk1C4[(0x28C - 0x1C4) / 4];
-    s32 unk28C;
-    s32 unk290[0xC / 4];
-} struct_8005D40C;
+void func_8005D40C(GlobalContext* arg0, SubGlobalContext11E60* arg1);
 
-void func_8005D40C(s32 arg0, struct_8005D40C* arg1);
-
-void func_8005D3BC(s32 arg0, struct_8005D40C* arg1) {
+void func_8005D3BC(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
     arg1->unk2 = 0;
     func_8005D40C(arg0, arg1);
     gGameInfo->data[0x735] = 1;
@@ -1240,7 +1228,7 @@ void func_8005D3BC(s32 arg0, struct_8005D40C* arg1) {
 void func_8005D400(GlobalContext* globalCtx, SubGlobalContext11E60* sub_11E60) {
 }
 
-void func_8005D40C(s32 arg0, struct_8005D40C* arg1) {
+void func_8005D40C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
     s32* var_v0;
 
     if (!(arg1->unk2 & 1)) {
@@ -1249,23 +1237,23 @@ void func_8005D40C(s32 arg0, struct_8005D40C* arg1) {
         arg1->unk1C0 = 0;
         arg1->unk28C = 0;
         // clang-format off
-        var_v0 = arg1->unk4; while ((u32)var_v0 < (u32)&arg1->unkCC) {
+        var_v0 = arg1->unk4; while ((u32)var_v0 < (u32)(arg1->unk4 + ARRAY_COUNT(arg1->unk4))) {
             // clang-format on
             *var_v0 = 0;
             var_v0++;
         }
         var_v0 = arg1->unkD0;
-        while ((u32)var_v0 < (u32)&arg1->unk1C0) {
+        while ((u32)var_v0 < (u32)(arg1->unkD0 + ARRAY_COUNT(arg1->unkD0))) {
             *var_v0 = 0;
             var_v0++;
         }
-        var_v0 = arg1->unk1C4;
-        while ((u32)var_v0 < (u32)&arg1->unk28C) {
+        var_v0 = arg1->unk_1C4;
+        while ((u32)var_v0 < (u32)(arg1->unk_1C4 + ARRAY_COUNT(arg1->unk_1C4))) {
             *var_v0 = 0;
             var_v0++;
         }
         var_v0 = arg1->unk290;
-        while ((u32)var_v0 < (u32)((s32)arg1 + 0x29C)) {
+        while ((u32)var_v0 < (u32)(arg1->unk290 + ARRAY_COUNT(arg1->unk290))) {
             *var_v0 = 0;
             var_v0++;
         }
@@ -1320,7 +1308,7 @@ typedef struct struct_8005D4DC {
     Vec3f unk64;
 } struct_8005D4DC;
 
-void func_8005D4DC(GraphicsContext** arg0, struct_8005D4DC* arg1) {
+void func_8005D4DC(GraphicsContext** arg0, struct_8006139C* arg1) {
     struct_8005D4DC* new_var;
     s32 var_s0;
 
@@ -1330,29 +1318,31 @@ void func_8005D4DC(GraphicsContext** arg0, struct_8005D4DC* arg1) {
                 new_var = arg1;
                 var_s0 = 0;
                 while (var_s0 < new_var->unk18) {
-                    func_800D05D0((s32)arg0, (s32)((s32)&arg1->unk1C.b[var_s0] + 0x30));
+                    func_800D05D0((s32)arg0, (s32)((s32)&new_var->unk1C.b[var_s0] + 0x30));
                     var_s0 += 1;
                     if (!arg1) {}
                 }
                 break;
 
             case 1:
-                func_800D05DC((s32)arg0, (s32)&arg1->unk40);
+                new_var = arg1;
+                func_800D05DC((s32)arg0, (s32)&new_var->unk40);
                 break;
 
             case 2:
                 new_var = arg1;
                 var_s0 = 0;
                 while (var_s0 < new_var->unk18) {
-                    func_8005B280(*arg0, &arg1->unk1C.a[var_s0].unk28, &arg1->unk1C.a[var_s0].unk34,
-                                  &arg1->unk1C.a[var_s0].unk40);
+                    func_8005B280(*arg0, &new_var->unk1C.a[var_s0].unk28, &new_var->unk1C.a[var_s0].unk34,
+                                  &new_var->unk1C.a[var_s0].unk40);
                     var_s0 += 1;
                 }
                 break;
 
             case 3:
-                func_8005B280(*arg0, &arg1->unk58, &arg1->unk64, &arg1->unk4C);
-                func_8005B280(*arg0, &arg1->unk4C, &arg1->unk40, &arg1->unk58);
+                new_var = arg1;
+                func_8005B280(*arg0, &new_var->unk58, &new_var->unk64, &new_var->unk4C);
+                func_8005B280(*arg0, &new_var->unk4C, &new_var->unk40, &new_var->unk58);
                 break;
         }
     }
