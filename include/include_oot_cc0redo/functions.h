@@ -685,7 +685,7 @@ void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body);
 void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body);
 // ? func_8005BA1C(?);
 // ? func_8005BA30(?);
-s32 func_8005BA74(UNK_TYPE, UNK_TYPE);
+s32 func_8005BA74(GlobalContext*, UNK_TYPE);
 // ? func_8005BA84(?);
 // ? func_8005BAD8(?);
 // ? func_8005BB10(?);
@@ -702,7 +702,7 @@ s32 ActorCollider_FreeCylinder(GlobalContext* globalCtx, ColliderCylinderMain* c
 s32 func_8005C3F4(GlobalContext* globalCtx, ColliderCylinderMain* collision, ColliderCylinderInit* arg2);
 s32 ActorCollider_InitCylinder(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor,
                                ColliderCylinderInit* src);
-s32 func_8005C508(GlobalContext* globalCtx, ColliderCylinderMain* collision);
+s32 func_8005C508_SetAT_1(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 s32 func_8005C540(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 s32 func_8005C578(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 // ? func_8005C5B0(?);
@@ -723,7 +723,7 @@ s32 func_8005D018(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 s32 func_8005D060(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 s32 func_8005D0A8(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor, ColliderCylinderInit* src);
 s32 func_8005D104(GlobalContext* globalCtx, ColliderCylinderMain* collision, Actor* actor, ColliderCylinderInit* src);
-s32 func_8005D160(GlobalContext* globalCtx, ColliderCylinderMain* collision);
+s32 func_8005D160_SetAT_3(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 s32 func_8005D1A8(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 s32 func_8005D1E0(GlobalContext* globalCtx, ColliderCylinderMain* collision);
 // ? func_8005D218(?);
@@ -735,11 +735,11 @@ void func_8005D400(GlobalContext*, SubGlobalContext11E60*);
 // ? func_8005D4DC(?);
 // ? func_8005D62C(?);
 s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
-                               ColliderCylinderMain* collision);
+                               Collider* collision);
 s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
-                               ColliderCylinderMain* collision);
+                               Collider* collision);
 s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
-                               ColliderCylinderMain* collision);
+                               Collider* collision);
 // ? func_8005DF2C(?);
 // ? func_8005DF50(?);
 // ? func_8005DF74(?);

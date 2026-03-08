@@ -232,12 +232,12 @@ typedef struct struct_8011DE54 {
 
 extern struct_8011DE54 D_8011DE54;
 
-s32 func_8005BA30(s32 arg0, struct_8011DE54* arg1) {
+s32 func_8005BA30(GlobalContext* arg0, struct_8011DE54* arg1) {
     *arg1 = D_8011DE54;
     return 1;
 }
 
-s32 func_8005BA74(UNK_TYPE arg0, UNK_TYPE arg1) {
+s32 func_8005BA74(GlobalContext* arg0, UNK_TYPE arg1) {
     return 1;
 }
 
@@ -273,7 +273,7 @@ typedef struct struct_8005BB48_arg1 {
     struct_8005BA84_arg1 unk28;
 } struct_8005BB48_arg1; /* size = 0x40 */
 
-s32 func_8005BAD8(s32 arg0, struct_8005BB48_arg1* arg1) {
+s32 func_8005BAD8(GlobalContext* arg0, struct_8005BB48_arg1* arg1) {
     func_8005B884(arg0, &arg1->unk0);
     func_8005BA30(arg0, &arg1->unk28);
     return 1;
@@ -430,20 +430,16 @@ typedef struct struct_8005BE50_arg1 {
     struct_8005BB48_arg1* unk1C;
 } struct_8005BE50_arg1;
 
-typedef struct struct_8005BE50_arg3_ptrC {
-    char unk_0[0x24];
-} struct_8005BE50_arg3_ptrC; /* size = 0x24 */
-
 typedef struct struct_8005BE50_arg3 {
     ColliderBodyInfo unk0;
     s32 unk8;
-    struct_8005BE50_arg3_ptrC* unkC;
+    struct_8005BB48_arg2* unkC;
 } struct_8005BE50_arg3;
 
 s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, struct_8005BE50_arg3* arg3) {
     s32 temp_v0;
     struct_8005BB48_arg1* var_s0;
-    struct_8005BE50_arg3_ptrC* var_s1;
+    struct_8005BB48_arg2* var_s1;
 
     func_8005B6EC(arg0, &arg1->unk0, arg2, &arg3->unk0);
     arg1->unk18 = arg3->unk8;
@@ -460,8 +456,8 @@ s32 func_8005BE50(GlobalContext* arg0, struct_8005BE50_arg1* arg1, Actor* arg2, 
     var_s1 = arg3->unkC;
     if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
         do {
-            func_8005BAD8((s32)arg0, (struct_8005BB48_arg1*)var_s0);
-            func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
+            func_8005BAD8((s32)arg0, var_s0);
+            func_8005BB48(arg0, var_s0, var_s1);
             var_s0++;
             var_s1++;
         } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
@@ -475,20 +471,16 @@ typedef struct struct_8005BF50_arg1 {
     struct_8005BB48_arg1* unk1C;
 } struct_8005BF50_arg1;
 
-typedef struct struct_8005BF50_arg3_ptrC {
-    char unk_0[0x24];
-} struct_8005BF50_arg3_ptrC;
-
 typedef struct struct_8005BF50_arg3 {
     ColliderBodyInfo unk0;
     s32 unk8;
-    struct_8005BF50_arg3_ptrC* unkC;
+    struct_8005BB48_arg2* unkC;
 } struct_8005BF50_arg3;
 
 s32 func_8005BF50(GlobalContext* arg0, struct_8005BF50_arg1* arg1, Actor* arg2, struct_8005BF50_arg3* arg3) {
     s32 temp_v0;
     struct_8005BB48_arg1* var_s0;
-    struct_8005BF50_arg3_ptrC* var_s1;
+    struct_8005BB48_arg2* var_s1;
 
     func_8005B72C(arg0, &arg1->unk0, arg2, &arg3->unk0);
     arg1->unk18 = arg3->unk8;
@@ -506,7 +498,7 @@ s32 func_8005BF50(GlobalContext* arg0, struct_8005BF50_arg1* arg1, Actor* arg2, 
     if ((u32)var_s0 < (u32)(var_s0 + (arg1->unk18))) {
         do {
             func_8005BAD8((s32)arg0, var_s0);
-            func_8005BB48(arg0, (struct_8005BB48_arg1*)var_s0, (struct_8005BB48_arg2*)var_s1);
+            func_8005BB48(arg0, var_s0, var_s1);
             var_s0++;
             var_s1++;
         } while ((u32)var_s0 < (u32)(arg1->unk1C + (arg1->unk18)));
@@ -527,20 +519,20 @@ typedef struct struct_8005C050_arg3 {
 } struct_8005C050_arg3;
 
 s32 func_8005C050(GlobalContext* globalCtx, struct_8005C050_arg1* collision, Actor* actor, struct_8005C050_arg3* arg3,
-                  s32 arg4) {
+                  struct_8005BB48_arg1* arg4) {
     struct_8005BB48_arg1* var_s0;
     struct_8005BB48_arg2* var_s1;
 
     func_8005B72C(globalCtx, &collision->unk0, actor, &arg3->unk0);
     collision->unk18 = arg3->unk8;
     collision->unk1C = arg4;
-    if (arg4 == 0) {
+    if (arg4 == NULL) {
         func_80001FF0("pclobj_jntsph->elem_tbl != NULL", "../z_collision_check.c", 0x643);
     }
     var_s0 = collision->unk1C;
     var_s1 = arg3->unkC;
     while (var_s0 < (collision->unk1C + (collision->unk18))) {
-        func_8005BAD8((s32)globalCtx, (struct_8005BB48_arg1*)var_s0);
+        func_8005BAD8((s32)globalCtx, var_s0);
         func_8005BB48(globalCtx, var_s0, var_s1);
         var_s0++;
         var_s1++;
@@ -548,22 +540,26 @@ s32 func_8005C050(GlobalContext* globalCtx, struct_8005C050_arg1* collision, Act
     return 1;
 }
 
-typedef struct struct_8005C124_arg1 {
+typedef struct Collider_Type0_ptr1C {
+    char unk_0[0x40];
+} Collider_Type0_ptr1C; /* size = 0x40 */
+
+typedef struct Collider_Type0 {
     Collider unk0;
     s32 unk18;
-    s32 unk1C;
-} struct_8005C124_arg1;
+    Collider_Type0_ptr1C* unk1C;
+} Collider_Type0;
 
-s32 func_8005C124(GlobalContext* arg0, struct_8005C124_arg1* arg1) {
-    struct_8005C124_arg1* new_var;
-    s32 var_s0;
+s32 func_8005C124_SetAT_0(GlobalContext* arg0, Collider* arg1) {
+    Collider_Type0* new_var;
+    Collider_Type0_ptr1C* var_s0;
 
     new_var = arg1;
     func_8005B76C(arg0, &new_var->unk0);
     var_s0 = new_var->unk1C;
-    while (((u32)var_s0) < ((u32)(new_var->unk1C + (new_var->unk18 << 6)))) {
+    while (((u32)var_s0) < ((u32)(new_var->unk1C + (new_var->unk18)))) {
         func_8005BB8C(arg0, (ColliderBody*)var_s0);
-        var_s0 += 0x40;
+        var_s0++;
     }
 
     return 1;
@@ -677,7 +673,7 @@ s32 ActorCollider_InitCylinder(GlobalContext* globalCtx, ColliderCylinderMain* c
     return 1;
 }
 
-s32 func_8005C508(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+s32 func_8005C508_SetAT_1(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
     func_8005B76C(globalCtx, &collision->base);
     func_8005B9B0(globalCtx, &collision->body);
     return 1;
@@ -974,7 +970,7 @@ typedef struct struct_8005CC98 {
     struct_8005CC98_ptr* unk1C;
 } struct_8005CC98;
 
-s32 func_8005CC98(GlobalContext* arg0, struct_8005CC98* arg1) {
+s32 func_8005CC98_SetAT_2(GlobalContext* arg0, struct_8005CC98* arg1) {
     struct_8005CC98_ptr* var_s0;
     struct_8005CC98* new_var;
 
@@ -1116,7 +1112,7 @@ s32 func_8005D104(GlobalContext* globalCtx, ColliderCylinderMain* collision, Act
     return 1;
 }
 
-s32 func_8005D160(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
+s32 func_8005D160_SetAT_3(GlobalContext* globalCtx, ColliderCylinderMain* collision) {
     func_8005B76C(globalCtx, &collision->base);
     func_8005B9B0(globalCtx, &collision->body);
     func_8005CEC4(globalCtx, &collision->dim);
@@ -1385,11 +1381,19 @@ void func_8005D62C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
     }
 }
 
-typedef void (*callback_8011DEF8)(GlobalContext*, void*);
+typedef void (*callback_8011DEF8)(GlobalContext*, Collider*);
 extern callback_8011DEF8 D_8011DEF8[];
 
-s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
-                               ColliderCylinderMain* collision) {
+#if 0
+extern callback_8011DEF8 D_8011DEF8[] = {
+    func_8005C124_SetAT_0,
+    func_8005C508_SetAT_1,
+    func_8005CC98_SetAT_2,
+    func_8005D160_SetAT_3,
+};
+#endif
+
+s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups, Collider* collision) {
     s16 temp_v1;
     Actor* new_var;
 
@@ -1397,13 +1401,13 @@ s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if (func_800C0D28(globalCtx) == 1) {
         return -1;
     }
-    if (collision->base.type >= 4) {
+    if (collision->type >= 4) {
         func_80001FF0("pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 0xBB5, simpleBodyGroups);
         if (1) {}
     }
-    D_8011DEF8[collision->base.type](globalCtx, collision);
-    new_var = collision->base.actor;
-    if ((new_var != NULL) && (collision->base.actor->update == NULL)) {
+    D_8011DEF8[collision->type](globalCtx, collision);
+    new_var = collision->actor;
+    if ((new_var != NULL) && (collision->actor->update == NULL)) {
         return -1;
     }
     temp_v1 = simpleBodyGroups->unk0;
@@ -1471,8 +1475,7 @@ s32 func_8005D8AC(GlobalContext* arg0, struct_8005D8AC_arg1* arg1, struct_8005D8
 
 extern callback_8011DEF8 D_8011DF08[];
 
-s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
-                               ColliderCylinderMain* collision) {
+s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups, Collider* collision) {
     Actor* temp_v1_2;
     s32 temp_v1;
 
@@ -1480,13 +1483,13 @@ s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if (func_800C0D28(globalCtx) == 1) {
         return -1;
     }
-    if (collision->base.type >= 4) {
+    if (collision->type >= 4) {
         func_80001FF0("pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 0xC2A, simpleBodyGroups);
         if (1) {}
     }
-    D_8011DF08[collision->base.type](globalCtx, collision);
-    temp_v1_2 = collision->base.actor;
-    if ((temp_v1_2 != NULL) && (collision->base.actor->update == NULL)) {
+    D_8011DF08[collision->type](globalCtx, collision);
+    temp_v1_2 = collision->actor;
+    if ((temp_v1_2 != NULL) && (collision->actor->update == NULL)) {
         return -1;
     }
     temp_v1 = simpleBodyGroups->unkCC;
@@ -1536,8 +1539,7 @@ s32 func_8005DB04(GlobalContext* arg0, struct_8005D8AC_arg1* arg1, struct_8005D8
 
 extern callback_8011DEF8 D_8011DF18[];
 
-s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
-                               ColliderCylinderMain* collision) {
+s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups, Collider* collision) {
     Actor* temp_v1_2;
     s32 temp_v1;
 
@@ -1545,13 +1547,13 @@ s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if (func_800C0D28(globalCtx) == 1) {
         return -1;
     }
-    if (collision->base.type >= 4) {
+    if (collision->type >= 4) {
         func_80001FF0("pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 0xC9D, simpleBodyGroups);
         if (1) {}
     }
-    D_8011DF18[collision->base.type](globalCtx, collision);
-    temp_v1_2 = collision->base.actor;
-    if ((temp_v1_2 != NULL) && (collision->base.actor->update == NULL)) {
+    D_8011DF18[collision->type](globalCtx, collision);
+    temp_v1_2 = collision->actor;
+    if ((temp_v1_2 != NULL) && (collision->actor->update == NULL)) {
         return -1;
     }
     temp_v1 = simpleBodyGroups->unk1C0;
