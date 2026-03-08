@@ -736,8 +736,8 @@ s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* 
 // ? func_8005E604(?);
 // ? func_8005E800(?);
 // ? func_8005E81C(?);
-// ? func_800611A0(?);
-// ? func_80061274(?);
+// ? func_800611A0_processAC_(?);
+// ? func_80061274_processATvsAC(?);
 // ? func_8006139C(?);
 // ? func_8006146C(?);
 // ? func_800614A4(?);

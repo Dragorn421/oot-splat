@@ -12,7 +12,7 @@ typedef enum {
     COLTYPE_TRIANGLE_GROUP = 2
 } ColliderType;
 
-typedef struct {
+typedef struct Collider {
     /* 0x00 */ struct Actor* actor;
     /* 0x04 */ struct Actor* at;
     /* 0x08 */ struct Actor* ac;

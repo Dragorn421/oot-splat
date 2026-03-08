@@ -1778,7 +1778,7 @@ s32 func_8005E81C(GlobalContext* arg0, Collider* arg1, ColliderBody* arg2, s32 a
 }
 
 #ifdef NON_MATCHING
-void func_8005E9C0_0vs0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
+void func_8005E9C0_0ATvs0AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
     f32 sp8C;
     f32 sp88;
     Vec3f sp78;
@@ -1823,11 +1823,11 @@ void func_8005E9C0_0vs0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collid
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E9C0_0vs0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E9C0_0ATvs0AC.s")
 #endif
 
 #ifdef NON_MATCHING
-void func_8005EC6C_0vs1(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
+void func_8005EC6C_0ATvs1AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
     f32 sp80;
     f32 sp7C;
     Vec3f sp70;
@@ -1871,11 +1871,11 @@ void func_8005EC6C_0vs1(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collid
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EC6C_0vs1.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EC6C_0ATvs1AC.s")
 #endif
 
 #ifdef NON_MATCHING
-void func_8005EEE0_1vs0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
+void func_8005EEE0_1ATvs0AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
     f32 sp9C;
     f32 sp98;
     Vec3f sp88;
@@ -1923,11 +1923,11 @@ void func_8005EEE0_1vs0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collid
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EEE0_1vs0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EEE0_1ATvs0AC.s")
 #endif
 
 #ifdef NON_MATCHING
-void func_8005F17C_0vs2(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
+void func_8005F17C_0ATvs2AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
     Vec3f sp6C;
     Vec3f sp60;
     Vec3f sp54;
@@ -1967,11 +1967,11 @@ void func_8005F17C_0vs2(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collid
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F17C_0vs2.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F17C_0ATvs2AC.s")
 #endif
 
 #ifdef NON_MATCHING
-void func_8005F39C(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
+void func_8005F39C_2ATvs0AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
     Vec3f sp7C;
     Vec3f sp70;
     Vec3f sp64;
@@ -2009,36 +2009,49 @@ void func_8005F39C(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* a
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F39C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F39C_2ATvs0AC.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F5B0_0vs3.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F5B0_0ATvs3AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F7D0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F7D0_3ATvs0AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FA30_1vs1.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FA30_1ATvs1AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FC04.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FC04_1ATvs2AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FDCC.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FDCC_2ATvs1AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FF90.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FF90_1ATvs3AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060204.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060204_3ATvs1AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800604B0_2vs2.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800604B0_2ATvs2AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060704.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060704_2ATvs3AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060994.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060994_3ATvs2AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C_3vs3.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C_3ATvs3AC.s")
 
-#if 0
+void func_80060EBC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
+    Collider_Type0* arg2_0 = arg2;
+    Collider_Type0_ptr1C* var_v0;
+    Vec3f sp24;
 
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060EBC.s")
-#endif
+    var_v0 = arg2_0->unk1C;
+    while (var_v0 < (arg2_0->unk1C + (arg2_0->unk18))) {
+        if (var_v0->unk0.bumperFlags & 0x80) {
+            if ((var_v0->unk0.colliding != NULL) && !(var_v0->unk0.colliding->toucherFlags & 0x40)) {
+                Math_Vec3s_ToVec3f(&sp24, &var_v0->unk0.bumper.unk_06);
+                func_8005E604(arg0, var_v0->unk0.colBuf, var_v0->unk0.colliding, &arg2_0->unk0, &var_v0->unk0, &sp24);
+                var_v0->unk0.colliding->toucherFlags |= 0x40;
+                return;
+            }
+        }
+        var_v0++;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060F94.s")
 
@@ -2064,7 +2077,7 @@ callback_800611A0 D_8011DF5C[] = {
 };
 #endif
 
-void func_800611A0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
+void func_800611A0_processAC_(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider** var_s0;
     Collider* temp_a2;
 
@@ -2081,35 +2094,35 @@ void func_800611A0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
 
 typedef void (*callback_8011DF6C)(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 
-extern callback_8011DF6C D_8011DF6C[4][4];
+extern callback_8011DF6C D_8011DF6C_ATvsAC[4][4];
 
-void func_8005E9C0_0vs0(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005EC6C_0vs1(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005F17C_0vs2(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005F5B0_0vs3(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005EEE0_1vs0(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005FA30_1vs1(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005FC04(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005FF90(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005F39C(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005FDCC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_800604B0_2vs2(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_80060704(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_8005F7D0(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_80060204(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_80060994(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-void func_80060C2C_3vs3(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005E9C0_0ATvs0AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005EC6C_0ATvs1AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F17C_0ATvs2AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F5B0_0ATvs3AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005EEE0_1ATvs0AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FA30_1ATvs1AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FC04_1ATvs2AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FF90_1ATvs3AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F39C_2ATvs0AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FDCC_2ATvs1AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_800604B0_2ATvs2AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060704_2ATvs3AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F7D0_3ATvs0AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060204_3ATvs1AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060994_3ATvs2AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060C2C_3ATvs3AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 
 #if 0
-callback_8011DF6C D_8011DF6C[4][4] = {
-    { func_8005E9C0_0vs0, func_8005EC6C_0vs1, func_8005F17C_0vs2, func_8005F5B0_0vs3 },
-    { func_8005EEE0_1vs0, func_8005FA30_1vs1, func_8005FC04, func_8005FF90 },
-    { func_8005F39C, func_8005FDCC, func_800604B0_2vs2, func_80060704 },
-    { func_8005F7D0, func_80060204, func_80060994, func_80060C2C_3vs3 },
+callback_8011DF6C D_8011DF6C_ATvsAC[4][4] = {
+    { func_8005E9C0_0ATvs0AC, func_8005EC6C_0ATvs1AC, func_8005F17C_0ATvs2AC, func_8005F5B0_0ATvs3AC },
+    { func_8005EEE0_1ATvs0AC, func_8005FA30_1ATvs1AC, func_8005FC04_1ATvs2AC, func_8005FF90_1ATvs3AC },
+    { func_8005F39C_2ATvs0AC, func_8005FDCC_2ATvs1AC, func_800604B0_2ATvs2AC, func_80060704_2ATvs3AC },
+    { func_8005F7D0_3ATvs0AC, func_80060204_3ATvs1AC, func_80060994_3ATvs2AC, func_80060C2C_3ATvs3AC },
 };
 #endif
 
-void func_80061274(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2) {
+void func_80061274_processATvsAC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2) {
     Collider** var_s1;
     Collider* temp_a3;
 
@@ -2120,7 +2133,7 @@ void func_80061274(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, C
             if ((temp_a3->collideFlags & 1) && (((temp_a3->actor == NULL)) || (temp_a3->actor->update != NULL))) {
                 if ((temp_a3->collideFlags & arg2->colliderFlags & 0x38) && (arg2 != temp_a3) &&
                     ((arg2->colliderFlags & 0x40) || ((arg2->actor == NULL)) || (temp_a3->actor != arg2->actor))) {
-                    D_8011DF6C[arg2->type][temp_a3->type](globalCtx, colChkCtx, arg2, temp_a3);
+                    D_8011DF6C_ATvsAC[arg2->type][temp_a3->type](globalCtx, colChkCtx, arg2, temp_a3);
                 }
             }
         }
@@ -2134,14 +2147,14 @@ void func_8006139C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider* temp_a2_2;
 
     if ((colChkCtx->unk0_nAT != 0) && (colChkCtx->unkCC_nAC != 0)) {
-        for (var_s0 = colChkCtx->unk4_AT; (u32)var_s0 < (u32)&colChkCtx->unk4_AT[colChkCtx->unk0_nAT]; var_s0 += 1) {
+        for (var_s0 = colChkCtx->unk4_AT; var_s0 < &colChkCtx->unk4_AT[colChkCtx->unk0_nAT]; var_s0++) {
             temp_a2_2 = *var_s0;
             if ((temp_a2_2 != NULL) && (temp_a2_2->colliderFlags & 1) &&
                 (((temp_a2_2->actor == NULL)) || (temp_a2_2->actor->update != NULL))) {
-                func_80061274(globalCtx, colChkCtx, temp_a2_2);
+                func_80061274_processATvsAC(globalCtx, colChkCtx, temp_a2_2);
             }
         }
-        func_800611A0(globalCtx, colChkCtx);
+        func_800611A0_processAC_(globalCtx, colChkCtx);
     }
 }
 
