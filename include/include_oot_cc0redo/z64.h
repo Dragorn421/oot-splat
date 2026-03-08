@@ -891,13 +891,13 @@ typedef struct {
 } RoomContext; // size = 0x74
 
 typedef struct {
-    /* 0x000 */ s16 unk0;
+    /* 0x000 */ s16 unk0_nAT;
     /* 0x002 */ u16 unk2;
-    /* 0x004 */ Collider* unk4[50];
-    /* 0x0CC */ s32 unkCC;
-    /* 0x0D0 */ Collider* unkD0[60];
-    /* 0x1C0 */ s32 unk1C0;
-    /* 0x1C4 */ Collider* unk1C4[50];
+    /* 0x004 */ Collider* unk4_AT[50];
+    /* 0x0CC */ s32 unkCC_nAC;
+    /* 0x0D0 */ Collider* unkD0_AC[60];
+    /* 0x1C0 */ s32 unk1C0_nOT;
+    /* 0x1C4 */ Collider* unk1C4_OT[50];
     s32 unk28C;
     void* unk290[3];
 } SubGlobalContext11E60; // size = 0x29C

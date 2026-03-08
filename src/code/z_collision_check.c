@@ -1120,23 +1120,23 @@ void func_8005D40C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
     s32* var_v0;
 
     if (!(arg1->unk2 & 1)) {
-        arg1->unk0 = 0;
-        arg1->unkCC = 0;
-        arg1->unk1C0 = 0;
+        arg1->unk0_nAT = 0;
+        arg1->unkCC_nAC = 0;
+        arg1->unk1C0_nOT = 0;
         arg1->unk28C = 0;
         // clang-format off
-        var_v0 = arg1->unk4; while ((u32)var_v0 < (u32)(arg1->unk4 + ARRAY_COUNT(arg1->unk4))) {
+        var_v0 = arg1->unk4_AT; while ((u32)var_v0 < (u32)(arg1->unk4_AT + ARRAY_COUNT(arg1->unk4_AT))) {
             // clang-format on
             *var_v0 = 0;
             var_v0++;
         }
-        var_v0 = arg1->unkD0;
-        while ((u32)var_v0 < (u32)(arg1->unkD0 + ARRAY_COUNT(arg1->unkD0))) {
+        var_v0 = arg1->unkD0_AC;
+        while ((u32)var_v0 < (u32)(arg1->unkD0_AC + ARRAY_COUNT(arg1->unkD0_AC))) {
             *var_v0 = 0;
             var_v0++;
         }
-        var_v0 = arg1->unk1C4;
-        while ((u32)var_v0 < (u32)(arg1->unk1C4 + ARRAY_COUNT(arg1->unk1C4))) {
+        var_v0 = arg1->unk1C4_OT;
+        while ((u32)var_v0 < (u32)(arg1->unk1C4_OT + ARRAY_COUNT(arg1->unk1C4_OT))) {
             *var_v0 = 0;
             var_v0++;
         }
@@ -1238,23 +1238,23 @@ void func_8005D62C(GlobalContext* arg0, SubGlobalContext11E60* arg1) {
     if (gGameInfo->data[0x72F] != 0) {
         if (gGameInfo->data[0x735] != 0) {
             var_s1 = 0;
-            while (var_s1 < arg1->unk0) {
-                func_8005D4DC(arg0, arg1->unk4[var_s1]);
+            while (var_s1 < arg1->unk0_nAT) {
+                func_8005D4DC(arg0, arg1->unk4_AT[var_s1]);
                 var_s1 += 1;
             }
         }
         if (gGameInfo->data[0x736] != 0) {
             var_s1 = 0;
-            while (var_s1 < arg1->unkCC) {
-                func_8005D4DC(arg0, arg1->unkD0[var_s1]);
+            while (var_s1 < arg1->unkCC_nAC) {
+                func_8005D4DC(arg0, arg1->unkD0_AC[var_s1]);
                 var_s1 += 1;
             }
         }
         if (gGameInfo->data[0x737] != 0) {
             var_s1 = 0;
-            while (var_s1 < arg1->unk1C0) {
-                if (arg1->unk1C4[var_s1]->maskA & 1) {
-                    func_8005D4DC(arg0, arg1->unk1C4[var_s1]);
+            while (var_s1 < arg1->unk1C0_nOT) {
+                if (arg1->unk1C4_OT[var_s1]->maskA & 1) {
+                    func_8005D4DC(arg0, arg1->unk1C4_OT[var_s1]);
                 }
                 var_s1 += 1;
             }
@@ -1302,7 +1302,7 @@ s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if ((new_var != NULL) && (collision->actor->update == NULL)) {
         return -1;
     }
-    temp_v1 = simpleBodyGroups->unk0;
+    temp_v1 = simpleBodyGroups->unk0_nAT;
     if (temp_v1 >= 0x32) {
         osSyncPrintf("CollisionCheck_setAT():インデックスがオーバーして追加不能\n");
         return -1;
@@ -1310,8 +1310,8 @@ s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if (simpleBodyGroups->unk2 & 1) {
         return -1;
     }
-    simpleBodyGroups->unk4[temp_v1] = collision;
-    simpleBodyGroups->unk0 += 1;
+    simpleBodyGroups->unk4_AT[temp_v1] = collision;
+    simpleBodyGroups->unk0_nAT += 1;
     return temp_v1;
 }
 
@@ -1331,19 +1331,19 @@ s32 func_8005D8AC(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* ar
         return -1;
     }
     if (arg1->unk2 & 1) {
-        if (arg3 >= arg1->unk0) {
+        if (arg3 >= arg1->unk0_nAT) {
             osSyncPrintf("CollisionCheck_setAT_SAC():全データ数より大きいところに登録しようとしている。\n");
             return -1;
         }
-        arg1->unk4[arg3] = arg2;
+        arg1->unk4_AT[arg3] = arg2;
     } else {
-        if (arg1->unk0 >= 0x32) {
+        if (arg1->unk0_nAT >= ARRAY_COUNT(arg1->unk4_AT)) {
             osSyncPrintf("CollisionCheck_setAT():インデックスがオーバーして追加不能\n");
             return -1;
         }
-        arg3 = arg1->unk0;
-        arg1->unk4[arg1->unk0] = arg2;
-        arg1->unk0 += 1;
+        arg3 = arg1->unk0_nAT;
+        arg1->unk4_AT[arg1->unk0_nAT] = arg2;
+        arg1->unk0_nAT += 1;
     }
     return arg3;
 }
@@ -1381,16 +1381,16 @@ s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if ((temp_v1_2 != NULL) && (collision->actor->update == NULL)) {
         return -1;
     }
-    temp_v1 = simpleBodyGroups->unkCC;
-    if (temp_v1 >= 0x3C) {
+    temp_v1 = simpleBodyGroups->unkCC_nAC;
+    if (temp_v1 >= ARRAY_COUNT(simpleBodyGroups->unkD0_AC)) {
         osSyncPrintf("CollisionCheck_setAC():インデックスがオーバして追加不能\n");
         return -1;
     }
     if (simpleBodyGroups->unk2 & 1) {
         return -1;
     }
-    simpleBodyGroups->unkD0[temp_v1] = collision;
-    simpleBodyGroups->unkCC += 1;
+    simpleBodyGroups->unkD0_AC[temp_v1] = collision;
+    simpleBodyGroups->unkCC_nAC += 1;
     return temp_v1;
 }
 
@@ -1410,19 +1410,19 @@ s32 func_8005DB04(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* ar
         return -1;
     }
     if (arg1->unk2 & 1) {
-        if (arg3 >= arg1->unkCC) {
+        if (arg3 >= arg1->unkCC_nAC) {
             osSyncPrintf("CollisionCheck_setAC_SAC():全データ数より大きいところに登録しようとしている。\n");
             return -1;
         }
-        arg1->unkD0[arg3] = arg2;
+        arg1->unkD0_AC[arg3] = arg2;
     } else {
-        if (arg1->unkCC >= 0x3C) {
+        if (arg1->unkCC_nAC >= ARRAY_COUNT(arg1->unkD0_AC)) {
             osSyncPrintf("CollisionCheck_setAC():インデックスがオーバして追加不能\n");
             return -1;
         }
-        arg3 = arg1->unkCC;
-        arg1->unkD0[arg3] = arg2;
-        arg1->unkCC += 1;
+        arg3 = arg1->unkCC_nAC;
+        arg1->unkD0_AC[arg3] = arg2;
+        arg1->unkCC_nAC += 1;
     }
     return arg3;
 }
@@ -1460,7 +1460,7 @@ s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if ((temp_v1_2 != NULL) && (collision->actor->update == NULL)) {
         return -1;
     }
-    temp_v1 = simpleBodyGroups->unk1C0;
+    temp_v1 = simpleBodyGroups->unk1C0_nOT;
     if (temp_v1 >= 0x32) {
         osSyncPrintf("CollisionCheck_setOC():インデックスがオーバして追加不能\n");
         return -1;
@@ -1468,8 +1468,8 @@ s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* 
     if (simpleBodyGroups->unk2 & 1) {
         return -1;
     }
-    simpleBodyGroups->unk1C4[temp_v1] = collision;
-    simpleBodyGroups->unk1C0 += 1;
+    simpleBodyGroups->unk1C4_OT[temp_v1] = collision;
+    simpleBodyGroups->unk1C0_nOT += 1;
     return temp_v1;
 }
 
@@ -1490,19 +1490,19 @@ s32 func_8005DD5C(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* ar
         return -1;
     }
     if (arg1->unk2 & 1) {
-        if (arg3 >= arg1->unk1C0) {
+        if (arg3 >= arg1->unk1C0_nOT) {
             osSyncPrintf("CollisionCheck_setOC_SAC():全データ数より大きいところに登録しようとしている。\n");
             return -1;
         }
-        arg1->unk4[arg3] = arg2;
+        arg1->unk4_AT[arg3] = arg2;
     } else {
-        if (arg1->unk1C0 >= 0x32) {
+        if (arg1->unk1C0_nOT >= ARRAY_COUNT(arg1->unk1C4_OT)) {
             osSyncPrintf("CollisionCheck_setOC():インデックスがオーバして追加不能\n");
             return -1;
         }
-        arg3 = arg1->unk1C0;
-        arg1->unk1C4[arg3] = arg2;
-        arg1->unk1C0 += 1;
+        arg3 = arg1->unk1C0_nOT;
+        arg1->unk1C4_OT[arg3] = arg2;
+        arg1->unk1C0_nOT += 1;
     }
     return arg3;
 }
@@ -1954,7 +1954,7 @@ s32 func_8005E81C(GlobalContext* arg0, struct_8005E800* arg1, struct_8005E2EC_ar
 }
 
 #ifdef NON_MATCHING
-void func_8005E9C0(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
+void func_8005E9C0_0vs0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2, Collider* arg3) {
     f32 sp8C;
     f32 sp88;
     Vec3f sp78;
@@ -1997,11 +1997,11 @@ void func_8005E9C0(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E9C0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E9C0_0vs0.s")
 #endif
 
 #ifdef NON_MATCHING
-void func_8005EC6C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
+void func_8005EC6C_0vs1(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
     f32 sp80;
     f32 sp7C;
     Vec3f sp70;
@@ -2045,11 +2045,11 @@ void func_8005EC6C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EC6C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EC6C_0vs1.s")
 #endif
 
 #ifdef NON_MATCHING
-void func_8005EEE0(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
+void func_8005EEE0_1vs0(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
     f32 sp9C;
     f32 sp98;
     Vec3f sp88;
@@ -2097,7 +2097,7 @@ void func_8005EEE0(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EEE0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005EEE0_1vs0.s")
 #endif
 
 typedef struct struct_8005F17C {
@@ -2109,7 +2109,7 @@ typedef struct struct_8005F17C {
 } struct_8005F17C; /* size = 0x5C */
 
 #ifdef NON_MATCHING
-void func_8005F17C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
+void func_8005F17C_0vs2(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_8005E800* arg3) {
     Vec3f sp6C;
     Vec3f sp60;
     Vec3f sp54;
@@ -2145,7 +2145,7 @@ void func_8005F17C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
     }
 }
 #else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F17C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F17C_0vs2.s")
 #endif
 
 #ifdef NON_MATCHING
@@ -2186,11 +2186,11 @@ void func_8005F39C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F39C.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F5B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F5B0_0vs3.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005F7D0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FA30.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FA30_1vs1.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FC04.s")
 
@@ -2200,13 +2200,13 @@ void func_8005F39C(GlobalContext* arg0, s32 arg1, struct_8005E800* arg2, struct_
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060204.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800604B0.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800604B0_2vs2.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060704.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060994.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C.s")
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C_3vs3.s")
 
 #if 0
 
@@ -2242,8 +2242,8 @@ void func_800611A0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider** var_s0;
     Collider* temp_a2;
 
-    var_s0 = colChkCtx->unkD0;
-    if ((u32)var_s0 < (u32)&colChkCtx->unkD0[colChkCtx->unkCC]) {
+    var_s0 = colChkCtx->unkD0_AC;
+    if ((u32)var_s0 < (u32)&colChkCtx->unkD0_AC[colChkCtx->unkCC_nAC]) {
         do {
             temp_a2 = *var_s0;
             if ((temp_a2 != NULL) && (temp_a2->collideFlags & 1) &&
@@ -2251,20 +2251,66 @@ void func_800611A0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
                 D_8011DF5C[temp_a2->type](globalCtx, colChkCtx, temp_a2);
             }
             var_s0++;
-        } while ((u32)var_s0 < (u32)&colChkCtx->unkD0[colChkCtx->unkCC]);
+        } while ((u32)var_s0 < (u32)&colChkCtx->unkD0_AC[colChkCtx->unkCC_nAC]);
     }
 }
 
-void func_80061274(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061274.s")
+typedef void (*callback_8011DF6C)(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+
+extern callback_8011DF6C D_8011DF6C[4][4];
+
+void func_8005E9C0_0vs0(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005EC6C_0vs1(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F17C_0vs2(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F5B0_0vs3(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005EEE0_1vs0(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FA30_1vs1(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FC04(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FF90(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F39C(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005FDCC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_800604B0_2vs2(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060704(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_8005F7D0(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060204(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060994(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+void func_80060C2C_3vs3(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
+
+#if 0
+callback_8011DF6C D_8011DF6C[4][4] = {
+    { func_8005E9C0_0vs0, func_8005EC6C_0vs1, func_8005F17C_0vs2, func_8005F5B0_0vs3 },
+    { func_8005EEE0_1vs0, func_8005FA30_1vs1, func_8005FC04, func_8005FF90 },
+    { func_8005F39C, func_8005FDCC, func_800604B0_2vs2, func_80060704 },
+    { func_8005F7D0, func_80060204, func_80060994, func_80060C2C_3vs3 },
+};
+#endif
+
+void func_80061274(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2) {
+    Collider** var_s1;
+    Collider* temp_a3;
+
+    var_s1 = colChkCtx->unkD0_AC;
+    while ((u32)var_s1 < (u32)&colChkCtx->unkD0_AC[colChkCtx->unkCC_nAC]) {
+        temp_a3 = *var_s1;
+        if (temp_a3 != NULL) {
+            if ((temp_a3->collideFlags & 1) && (((temp_a3->actor == NULL)) || (temp_a3->actor->update != NULL))) {
+                if ((temp_a3->collideFlags & arg2->colliderFlags & 0x38) && (arg2 != temp_a3) &&
+                    ((arg2->colliderFlags & 0x40) || ((arg2->actor == NULL)) || (temp_a3->actor != arg2->actor))) {
+                    D_8011DF6C[arg2->type][temp_a3->type](globalCtx, colChkCtx, arg2, temp_a3);
+                }
+            }
+        }
+        var_s1++;
+    }
+}
 
 void func_8006139C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Actor* temp_v0;
     Collider** var_s0;
     Collider* temp_a2_2;
 
-    if ((colChkCtx->unk0 != 0) && (colChkCtx->unkCC != 0)) {
-        for (var_s0 = colChkCtx->unk4; (u32)var_s0 < (u32)&colChkCtx->unk4[colChkCtx->unk0]; var_s0 += 1) {
+    if ((colChkCtx->unk0_nAT != 0) && (colChkCtx->unkCC_nAC != 0)) {
+        for (var_s0 = colChkCtx->unk4_AT; (u32)var_s0 < (u32)&colChkCtx->unk4_AT[colChkCtx->unk0_nAT]; var_s0 += 1) {
             temp_a2_2 = *var_s0;
             if ((temp_a2_2 != NULL) && (temp_a2_2->colliderFlags & 1) &&
                 (((temp_a2_2->actor == NULL)) || (temp_a2_2->actor->update != NULL))) {
@@ -2379,25 +2425,27 @@ void func_80061F64(s32 arg0, void* arg1, struct_80061F64* arg2, sub_struct_80061
     }
 }
 
-void func_8006216C(s32 arg0, void* arg1, struct_80061F64* arg2) {
-    struct_80061F64* new_var2 = arg2;
-    struct_80061F64* new_var = arg2;
+void func_8006216C_Type0(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
+    Collider_Type0* new_var2 = arg2;
+    Collider_Type0* new_var = arg2;
     s32 i;
 
-    if (new_var->unk18.unk0 <= 0 || new_var->unk18.unk4 == NULL) {
+    if (new_var->unk18 <= 0 || new_var->unk1C == NULL) {
         return;
     }
 
-    for (i = 0; i < new_var2->unk18.unk0; i++) {
-        func_80061F64(arg0, arg1, new_var, (void*)(((u8*)new_var->unk18.unk4) + (i * 0x40)));
+    for (i = 0; i < new_var2->unk18; i++) {
+        func_80061F64(arg0, arg1, new_var, (void*)(new_var->unk1C + i));
     }
 }
 
-void func_80062210(s32 arg0, void* arg1, struct_80061F64* arg2) {
-    func_80061F64(arg0, arg1, arg2, &arg2->unk18);
+void func_80062210_Type1(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
+    Collider_Type1* new_var = arg2;
+
+    func_80061F64(arg0, arg1, arg2, &new_var->unk18);
 }
 
-void func_80062230(s32 arg0, void* arg1, struct_80061F64* arg2) {
+void func_80062230_Type2(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
     s32 i;
     struct_80061F64* new_var = arg2;
 
@@ -2406,8 +2454,10 @@ void func_80062230(s32 arg0, void* arg1, struct_80061F64* arg2) {
     }
 }
 
-void func_800622C4(s32 arg0, s32 arg1, struct_80061F64* arg2) {
-    func_80061F64(arg0, arg1, arg2, &arg2->unk18);
+void func_800622C4_Type3(GlobalContext* arg0, SubGlobalContext11E60* arg1, Collider* arg2) {
+    Collider_Type3* new_var = arg2;
+
+    func_80061F64(arg0, arg1, arg2, &new_var->unk18);
 }
 
 typedef struct sub_struct_800622E4 {
@@ -2420,17 +2470,31 @@ typedef struct sub_struct_800622E4 {
 typedef void (*func_ptr_800622E4)(GlobalContext*, SubGlobalContext11E60*, sub_struct_800622E4*);
 extern func_ptr_800622E4 D_8011E008[];
 
+void func_8006216C_Type0(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_80062210_Type1(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_80062230_Type2(GlobalContext*, SubGlobalContext11E60*, Collider*);
+void func_800622C4_Type3(GlobalContext*, SubGlobalContext11E60*, Collider*);
+
+#if 0
+func_ptr_800622E4 D_8011E008[] = {
+    func_8006216C_Type0,
+    func_80062210_Type1,
+    func_80062230_Type2,
+    func_800622C4_Type3,
+};
+#endif
+
 void func_800622E4(GlobalContext* globalCtx, SubGlobalContext11E60* subContext) {
-    sub_struct_800622E4* entry;
+    Collider* entry;
     s32 i;
 
-    for (i = 0; i < subContext->unkCC; i++) {
-        entry = subContext->unkD0[i];
+    for (i = 0; i < subContext->unkCC_nAC; i++) {
+        entry = subContext->unkD0_AC[i];
 
         if (entry == NULL) {
-        } else if (entry->unk11 & 0x40) {
+        } else if (entry->collideFlags & 0x40) {
         } else {
-            D_8011E008[entry->unk15](globalCtx, subContext, entry);
+            D_8011E008[entry->type](globalCtx, subContext, entry);
         }
     }
 }
