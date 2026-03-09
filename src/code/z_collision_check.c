@@ -2442,19 +2442,16 @@ void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* ar
     Actor* temp_t0;
     Actor* temp_t1;
     s32 sp18;
-    f32 temp_fa1_2;
-    f32 temp_ft4_2;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
+    f32 new_var;
     f32 var_fa0;
-    f32 var_ft3;
-    f32 var_ft3_2;
     f32 var_ft5;
     f32 var_fv1;
     s32 temp_v0;
+    f32 dx;
+    f32 dz;
 
-    temp_t1 = arg3->actor;
     temp_t0 = arg0->actor;
+    temp_t1 = arg3->actor;
     arg0->maskA |= 2;
     arg0->ot = temp_t1;
     arg1->flags2 |= 2;
@@ -2470,22 +2467,18 @@ void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* ar
     if ((temp_t0 != NULL) && (temp_t1 != NULL) && !(arg0->maskA & 4) && !(arg3->maskA & 4)) {
         sp18 = func_8006146C(temp_t0->sub_98.mass);
         temp_v0 = func_8006146C(temp_t1->sub_98.mass);
-        var_ft5 = (f32)temp_t0->sub_98.mass;
-        if ((s32)temp_t0->sub_98.mass < 0) {
-            var_ft5 += 4294967296.0f;
-        }
-        var_ft3 = (f32)temp_t1->sub_98.mass;
-        if ((s32)temp_t1->sub_98.mass < 0) {
-            var_ft3 += 4294967296.0f;
-        }
-        sp38 = var_ft3;
+        var_ft5 = temp_t0->sub_98.mass;
+        sp38 = temp_t1->sub_98.mass;
         sp34 = var_ft5 + sp38;
         if (fabsf(sp34) < 0.008f) {
             var_ft5 = 1.0f;
             sp38 = 1.0f;
             sp34 = 2.0f;
         }
-        sp40 = sqrtf(((arg5->x - arg2->x) * (arg5->x - arg2->x)) + ((arg5->z - arg2->z) * (arg5->z - arg2->z)));
+        dx = arg5->x;
+        dx = dx - arg2->x;
+        dz = arg5->z - arg2->z;
+        sp40 = sqrtf((dx * dx) + (dz * dz));
         if (sp18 == 0) {
             if (temp_v0 != 0) {
                 var_fv1 = 0.0f;
@@ -2498,38 +2491,36 @@ void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* ar
                 var_fv1 = 1.0f;
                 var_fa0 = 0.0f;
             } else if (temp_v0 == 1) {
-                var_fa0 = 0.5f;
-                var_fv1 = 0.5f;
+                var_fa0 = var_fv1 = 0.5f;
             } else {
                 var_fv1 = 0.0f;
                 var_fa0 = 1.0f;
             }
-        } else if (temp_v0 == 2) {
-            temp_fv0_2 = 1.0f / sp34;
-            var_fv1 = sp38 * temp_fv0_2;
-            var_fa0 = var_ft5 * temp_fv0_2;
         } else {
-            var_fv1 = 1.0f;
-            var_fa0 = 0.0f;
+            if (temp_v0 == 2) {
+                new_var = 1.0f / sp34;
+                var_fv1 = sp38 * new_var;
+                var_fa0 = var_ft5 * new_var;
+            } else {
+                var_fv1 = 1.0f;
+                var_fa0 = 0.0f;
+            }
         }
-
         if (!(fabsf(sp40) < 0.008f)) {
-            temp_fv0_3 = arg6 / sp40;
-            temp_fa1_2 = (arg5->x - arg2->x) * temp_fv0_3;
-            temp_ft4_2 = (arg5->z - arg2->z) * temp_fv0_3;
-            temp_t0->sub_98.displacement.x += -temp_fa1_2 * var_fv1;
-            temp_t0->sub_98.displacement.z += -temp_ft4_2 * var_fv1;
-            temp_t1->sub_98.displacement.x += temp_fa1_2 * var_fa0;
-            temp_t1->sub_98.displacement.z += temp_ft4_2 * var_fa0;
+            dx *= arg6 / sp40;
+            dz *= arg6 / sp40;
+            temp_t0->sub_98.displacement.x += (-dx) * var_fv1;
+            temp_t0->sub_98.displacement.z += (-dz) * var_fv1;
+            temp_t1->sub_98.displacement.x += dx * var_fa0;
+            temp_t1->sub_98.displacement.z += dz * var_fa0;
         } else {
             if (arg6 != 0.0f) {
-                temp_t0->sub_98.displacement.x += -arg6 * var_fv1;
-                var_ft3_2 = temp_t1->sub_98.displacement.x + (arg6 * var_fa0);
+                temp_t0->sub_98.displacement.x += (-arg6) * var_fv1;
+                temp_t1->sub_98.displacement.x += arg6 * var_fa0;
             } else {
                 temp_t0->sub_98.displacement.x -= var_fv1;
-                var_ft3_2 = temp_t1->sub_98.displacement.x + var_fa0;
+                temp_t1->sub_98.displacement.x += var_fa0;
             }
-            temp_t1->sub_98.displacement.x = var_ft3_2;
         }
     }
 }
