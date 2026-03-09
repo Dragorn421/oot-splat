@@ -7,7 +7,9 @@ void func_8005B280(GraphicsContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3)
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005B2AC.s")
 
-extern Collider D_8011DE00;
+Collider D_8011DE00 = {
+    NULL, NULL, NULL, NULL, 0, 0, 0, 0, 3, 4,
+};
 
 // multi-type
 s32 func_8005B65C_InitColliderDefault(GlobalContext* globalCtx, Collider* arg1) {
@@ -74,12 +76,7 @@ void func_8005B79C(GlobalContext* globalCtx, Collider* collision) {
     collision->maskB &= ~0x1;
 }
 
-typedef struct struct_8011DE18 {
-    s32 unk0;
-    s32 unk4;
-} struct_8011DE18; /* size = 0x8 */
-
-extern ColliderTouch D_8011DE18;
+ColliderTouch D_8011DE18 = { 0, 0, 0 };
 
 // multi-type
 s32 func_8005B7C0(GlobalContext* globalCtx, ColliderTouch* arg1) {
@@ -104,7 +101,7 @@ s32 func_8005B7F4(GlobalContext* globalCtx, ColliderTouch* arg1, ColliderTouchSr
 void func_8005B818(GlobalContext* globalCtx, UNK_PTR body) {
 }
 
-extern ColliderBump D_8011DE20;
+ColliderBump D_8011DE20 = { 0xFFCFFFFF, 0, 0, { 0, 0, 0 } };
 
 // multi-type
 s32 func_8005B824(GlobalContext* globalCtx, ColliderBump* arg1) {
@@ -125,7 +122,9 @@ s32 func_8005B860(GlobalContext* globalCtx, ColliderBump* arg1, ColliderBumpSrc*
     return 1;
 }
 
-extern ColliderBody D_8011DE2C;
+ColliderBody D_8011DE2C = {
+    { 0, 0, 0 }, { 0xFFCFFFFF, 0, 0, { 0, 0, 0 } }, 0, 0, 0, 0, NULL, NULL, NULL, NULL,
+};
 
 // multi-type
 s32 func_8005B884(GlobalContext* globalCtx, ColliderBody* arg1) {
@@ -175,7 +174,7 @@ void func_8005BA1C(GlobalContext* globalCtx, ColliderBody* body) {
     body->flags2 &= ~0x2;
 }
 
-extern struct_8011DE54 D_8011DE54;
+struct_8011DE54 D_8011DE54 = { { { 0, 0, 0 }, 0 }, { { 0, 0, 0 }, 0 }, 0.0f, 0 };
 
 s32 func_8005BA30_Type0(GlobalContext* globalCtx, struct_8011DE54* arg1) {
     *arg1 = D_8011DE54;
@@ -410,7 +409,7 @@ s32 func_8005C234_SetOT_0(GlobalContext* globalCtx, Collider* arg1) {
     return 1;
 }
 
-extern Cylinder16 D_8011DE6C;
+Cylinder16 D_8011DE6C = { 0, 0, 0, { 0, 0, 0 } };
 
 s32 func_8005C2BC(GlobalContext* globalCtx, Cylinder16* arg1) {
     Cylinder16 sp4;
@@ -491,7 +490,10 @@ s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision_) {
     return 1;
 }
 
-extern TriNorm D_8011DE78;
+TriNorm D_8011DE78 = {
+    { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+    { { 0.0f, 0.0f, 0.0f }, 0.0f },
+};
 
 s32 func_8005C5B0(GlobalContext* globalCtx, TriNorm* arg1) {
     *arg1 = D_8011DE78;
@@ -752,7 +754,15 @@ s32 func_8005CDD0_SetOT_2(GlobalContext* globalCtx, Collider* arg1) {
     return 1;
 }
 
-extern struct_Collider_Type3_subc D_8011DEAC;
+struct_Collider_Type3_subc D_8011DEAC = {
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0, 0, 0 },
+    { 0, 0, 0 },
+    1e38f,
+};
 
 s32 func_8005CE6C(GlobalContext* globalCtx, struct_Collider_Type3_subc* arg1) {
     *arg1 = D_8011DEAC;
@@ -875,7 +885,7 @@ s32 func_8005D218(GlobalContext* globalCtx, Collider_Type3* arg1, Vec3f* arg2) {
     }
 }
 
-extern Vec3f D_8011DEEC;
+Vec3f D_8011DEEC = { 0.0f, 0.0f, 0.0f };
 
 // unused
 s32 func_8005D2C4(s32 arg0, Vec3f* arg1) {
@@ -1065,21 +1075,18 @@ void func_8005D62C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
 }
 
 typedef void (*callback_8011DEF8)(GlobalContext*, Collider*);
-extern callback_8011DEF8 D_8011DEF8_SetAT[];
 
 void func_8005C234_SetAT_0(GlobalContext*, Collider*);
 void func_8005C578_SetAT_1(GlobalContext*, Collider*);
 void func_8005CDD0_SetAT_2(GlobalContext*, Collider*);
 void func_8005D1E0_SetAT_3(GlobalContext*, Collider*);
 
-#if 0
-extern callback_8011DEF8 D_8011DEF8_SetAT[] = {
+callback_8011DEF8 D_8011DEF8_SetAT[] = {
     func_8005C124_SetAT_0,
     func_8005C508_SetAT_1,
     func_8005CC98_SetAT_2,
     func_8005D160_SetAT_3,
 };
-#endif
 
 s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* collision) {
     s16 temp_v1;
@@ -1142,21 +1149,17 @@ s32 func_8005D8AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Co
     return arg3;
 }
 
-extern callback_8011DEF8 D_8011DF08_SetAC[];
-
 s32 func_8005C1AC_SetAC_0(GlobalContext*, Collider*);
 s32 func_8005C540_SetAC_1(GlobalContext*, Collider*);
 s32 func_8005CD34_SetAC_2(GlobalContext*, Collider*);
 s32 func_8005D1A8_SetAC_3(GlobalContext*, Collider*);
 
-#if 0
 callback_8011DEF8 D_8011DF08_SetAC[] = {
     func_8005C1AC_SetAC_0,
     func_8005C540_SetAC_1,
     func_8005CD34_SetAC_2,
     func_8005D1A8_SetAC_3,
 };
-#endif
 
 s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* collision) {
     Actor* temp_v1_2;
@@ -1219,21 +1222,17 @@ s32 func_8005DB04(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Co
     return arg3;
 }
 
-extern callback_8011DEF8 D_8011DF18[];
-
 s32 func_8005C234_SetOT_0(GlobalContext*, Collider*);
 s32 func_8005C578_SetOT_1(GlobalContext*, Collider*);
 s32 func_8005CDD0_SetOT_2(GlobalContext*, Collider*);
 s32 func_8005D1E0_SetOT_3(GlobalContext*, Collider*);
 
-#if 0
 callback_8011DEF8 D_8011DF18[] = {
     func_8005C234_SetOT_0,
     func_8005C578_SetOT_1,
     func_8005CDD0_SetOT_2,
     func_8005D1E0_SetOT_3,
 };
-#endif
 
 s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* collision) {
     Actor* temp_v1_2;
@@ -1568,10 +1567,7 @@ s32 func_8005E4F8(Collider* arg0, ColliderBody* arg1) {
 }
 
 typedef void (*callback_8011DF28)(GlobalContext*, Collider*, Vec3f*);
-extern callback_8011DF28 D_8011DF28[];
-extern u8 D_8011DF40[][2];
 
-#if 0
 callback_8011DF28 D_8011DF28[] = {
     func_8005DF9C, func_8005DFAC, func_8005E10C, func_8005E26C, func_8005E2A4, func_8005E2C8,
 };
@@ -1579,7 +1575,6 @@ u8 D_8011DF40[][2] = {
     { 0x01, 0x00 }, { 0x00, 0x01 }, { 0x02, 0x01 }, { 0x00, 0x00 }, { 0x03, 0x05 }, { 0x00, 0x02 }, { 0x02, 0x00 },
     { 0x04, 0x00 }, { 0x01, 0x02 }, { 0x00, 0x03 }, { 0x00, 0x05 }, { 0x00, 0x03 }, { 0x00, 0x03 }, { 0x00, 0x04 },
 };
-#endif
 
 void func_80062CD4(GlobalContext* globalCtx, Vec3f* arg1);
 void func_80062E14(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2);
@@ -2019,6 +2014,7 @@ void func_8005FC04_1ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
         }
     }
 }
+
 extern Vec3f D_8015E310;
 
 void func_8005FDCC_2ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type2* arg2_,
@@ -2346,21 +2342,17 @@ void func_8006110C_Type3_processAC_(GlobalContext* globalCtx, SubGlobalContext11
 
 typedef void (*callback_800611A0)(GlobalContext*, SubGlobalContext11E60*, Collider*);
 
-extern callback_800611A0 D_8011DF5C_processAC_[];
-
 void func_80060EBC_Type0_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
 void func_80060F94_Type1_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
 void func_80061028_Type2_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
 void func_8006110C_Type3_processAC_(GlobalContext*, SubGlobalContext11E60*, Collider*);
 
-#if 0
 callback_800611A0 D_8011DF5C_processAC_[] = {
     func_80060EBC_Type0_processAC_,
     func_80060F94_Type1_processAC_,
     func_80061028_Type2_processAC_,
     func_8006110C_Type3_processAC_,
 };
-#endif
 
 void func_800611A0_processAC_(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider** var_s0;
@@ -2378,8 +2370,6 @@ void func_800611A0_processAC_(GlobalContext* globalCtx, SubGlobalContext11E60* c
 }
 
 typedef void (*callback_8011DF6C)(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-
-extern callback_8011DF6C D_8011DF6C_ATvsAC[4][4];
 
 void func_8005E9C0_0ATvs0AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 void func_8005EC6C_0ATvs1AC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
@@ -2401,14 +2391,12 @@ void func_80060994_3ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
 void func_80060C2C_3ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type3*, Collider_Type3*);
 // clang-format on
 
-#if 0
 callback_8011DF6C D_8011DF6C_ATvsAC[4][4] = {
     { func_8005E9C0_0ATvs0AC, func_8005EC6C_0ATvs1AC, func_8005F17C_0ATvs2AC, func_8005F5B0_0ATvs3AC },
     { func_8005EEE0_1ATvs0AC, func_8005FA30_1ATvs1AC, func_8005FC04_1ATvs2AC, func_8005FF90_1ATvs3AC },
     { func_8005F39C_2ATvs0AC, func_8005FDCC_2ATvs1AC, func_800604B0_2ATvs2AC, func_80060704_2ATvs3AC },
     { func_8005F7D0_3ATvs0AC, func_80060204_3ATvs1AC, func_80060994_3ATvs2AC, func_80060C2C_3ATvs3AC },
 };
-#endif
 
 void func_80061274_processATvsAC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2) {
     Collider** var_s1;
@@ -2659,21 +2647,18 @@ s32 func_80061C18(Collider* arg0, Collider* arg1) {
 }
 
 typedef void (*callback_8011DFAC)(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
-extern callback_8011DFAC D_8011DFAC[4][4];
 
 void func_800617D4_0OCvs0OC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 void func_8006199C_0OCvs1OC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 void func_80061AF8_1OCvs0OC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 void func_80061B24_1OCvs1OC(GlobalContext*, SubGlobalContext11E60*, Collider*, Collider*);
 
-#if 0
 callback_8011DFAC D_8011DFAC[4][4] = {
     { func_800617D4_0OCvs0OC, func_8006199C_0OCvs1OC, NULL, NULL },
     { func_80061AF8_1OCvs0OC, func_80061B24_1OCvs1OC, NULL, NULL },
     { NULL, NULL, NULL, NULL },
     { NULL, NULL, NULL, NULL },
 };
-#endif
 
 void func_80061C98_OC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider** var_s0;
@@ -2698,7 +2683,9 @@ void func_80061C98_OC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx
     }
 }
 
-extern SubActorStruct98 D_8011DFEC;
+SubActorStruct98 D_8011DFEC = {
+    NULL, { 0.0f, 0.0f, 0.0f }, 0xA, 0xA, 0, 0x32, 8, 0, 0, 0, 0,
+};
 
 void func_80061E48(SubActorStruct98* arg0) {
     *arg0 = D_8011DFEC;
@@ -2835,21 +2822,18 @@ void func_800622C4_Type3(GlobalContext* globalCtx, SubGlobalContext11E60* colChk
 }
 
 typedef void (*func_ptr_800622E4)(GlobalContext*, SubGlobalContext11E60*, Collider*);
-extern func_ptr_800622E4 D_8011E008[];
 
 void func_8006216C_Type0(GlobalContext*, SubGlobalContext11E60*, Collider*);
 void func_80062210_Type1(GlobalContext*, SubGlobalContext11E60*, Collider*);
 void func_80062230_Type2(GlobalContext*, SubGlobalContext11E60*, Collider*);
 void func_800622C4_Type3(GlobalContext*, SubGlobalContext11E60*, Collider*);
 
-#if 0
 func_ptr_800622E4 D_8011E008[] = {
     func_8006216C_Type0,
     func_80062210_Type1,
     func_80062230_Type2,
     func_800622C4_Type3,
 };
-#endif
 
 void func_800622E4(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider* entry;
@@ -2893,10 +2877,11 @@ s32 func_800623A4_Type0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkC
     return 0;
 }
 
+extern Vec3f D_8015E628;
+extern Vec3f D_8015E638;
+
 s32 func_800624BC_Type1(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_, Vec3f* arg3,
                         Vec3f* arg4) {
-    extern Vec3f D_8015E628;
-    extern Vec3f D_8015E638;
     Collider_Type1* arg2 = (Collider_Type1*)arg2_;
 
     if (!(arg2->unk18.flags2 & 1)) {
@@ -2911,16 +2896,13 @@ s32 func_800624BC_Type1(GlobalContext* globalCtx, SubGlobalContext11E60* colChkC
 }
 
 typedef s32 (*func_ptr_80062530)(GlobalContext*, SubGlobalContext11E60*, Collider*, Vec3f*, Vec3f*);
-extern func_ptr_80062530 D_8011E018[];
 
-#if 0
 func_ptr_80062530 D_8011E018[] = {
     func_800623A4_Type0,
     func_800624BC_Type1,
     NULL,
     NULL,
 };
-#endif
 
 s32 func_80062530(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Vec3f* arg2, Vec3f* arg3, Actor** unkList,
                   s32 unkListCount) {
@@ -3186,13 +3168,23 @@ void func_80062B80(GlobalContext* globalCtx, Vec3f* arg1) {
 typedef struct struct_8011E068 {
     /* 0x00 */ char unk_0[2];
     /* 0x02 */ Vec3s unk2;
-    /* 0x08 */ char unk_4[0x26];
+    /* 0x08 */ char unk_8[0x26];
     /* 0x2E */ Vec3s unk2E;
+    /* 0x34 */ char unk_34[0xC];
 } struct_8011E068;
 
-#ifdef NON_MATCHING
 void func_80062CD4(GlobalContext* globalCtx, Vec3f* arg1) {
-    static struct_8011E068 D_8011E028 = { 0 /* TODO import data */ };
+    static struct_8011E068 D_8011E028 = {
+        { 0x10, 0 },
+        { 0, 0, 0 },
+        {
+            0,    0xC8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x80, 0xFF, 0xFF,
+            0xFF, 0,    0xFF, 0xFF, 0x40, 0,    0xC8, 0xFF, 0,    0,    0xFF, 0x40, 6,
+            0x66, 0x66, 0x42, 0xC,  0,    0,    0x41, 0xF0, 0,    0,    8,    0,
+        },
+        { 0, 0, 0 },
+        { 0, 0x80, 0xFF, 0, 1, 0x2C, 0, 0, 0, 0, 0, 1 },
+    };
     s32 sp24;
 
     D_8011E028.unk2.x = (s16)(s32)arg1->x;
@@ -3203,9 +3195,6 @@ void func_80062CD4(GlobalContext* globalCtx, Vec3f* arg1) {
     D_8011E028.unk2E.z = D_8011E028.unk2.z;
     Effect_Add(globalCtx, &sp24, 3, 0U, 1U, &D_8011E028);
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062CD4.s")
-#endif
 
 void func_80062D60(GlobalContext* globalCtx, Vec3f* arg1) {
     func_80062CD4(globalCtx, arg1);
@@ -3221,10 +3210,18 @@ void func_80062DF4(GlobalContext* globalCtx, Vec3f* arg1) {
     func_80062D60(globalCtx, arg1);
 }
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/swbpd
 void func_80062E14(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2) {
-    static struct_8011E068 D_8011E068 = { 0 /* TODO import .data */ };
+    static struct_8011E068 D_8011E068 = {
+        { 0x10, 0 },
+        { 0, 0, 0 },
+        {
+            0,    0xC8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x80, 0xFF, 0xFF,
+            0xFF, 0,    0xFF, 0xFF, 0x40, 0,    0xC8, 0xFF, 0,    0,    0xFF, 0x40, 6,
+            0x66, 0x66, 0x42, 0xC,  0,    0,    0x41, 0xF0, 0,    0,    8,    0,
+        },
+        { 0, 0, 0 },
+        { 0, 0x80, 0xFF, 0, 1, 0x2C, 0, 0, 0, 0, 0, 0 },
+    };
     s32 sp24;
 
     D_8011E068.unk2.x = arg1->x;
@@ -3236,9 +3233,6 @@ void func_80062E14(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2) {
     Effect_Add(globalCtx, &sp24, 3, 0U, 1U, &D_8011E068);
     Audio_PlaySoundGeneral(0x1837U, arg2, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062E14.s")
-#endif
 
 #ifdef NON_MATCHING
 // https://decomp.me/scratch/OTLXt
