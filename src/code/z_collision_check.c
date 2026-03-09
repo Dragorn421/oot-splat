@@ -2431,22 +2431,21 @@ s32 func_8006146C(u8 arg0) {
 }
 
 void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* arg3, ColliderBody* arg4, Vec3f* arg5,
-                   f32 arg6);
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/LnMzV
-void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* arg3, ColliderBody* arg4, Vec3f* arg5,
                    f32 arg6) {
+    s32 pad;
+    s32 pad2;
+    s32 pad3;
     f32 sp40;
+    f32 var_ft5;
     f32 sp38;
     f32 sp34;
-    Actor* temp_t0;
-    Actor* temp_t1;
-    s32 sp18;
     f32 new_var;
     f32 var_fa0;
-    f32 var_ft5;
     f32 var_fv1;
+    Actor* temp_t0;
+    Actor* temp_t1;
     s32 temp_v0;
+    s32 sp18;
     f32 dx;
     f32 dz;
 
@@ -2475,35 +2474,34 @@ void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* ar
             sp38 = 1.0f;
             sp34 = 2.0f;
         }
-        dx = arg5->x;
-        dx = dx - arg2->x;
+        dx = arg5->x - arg2->x;
         dz = arg5->z - arg2->z;
         sp40 = sqrtf((dx * dx) + (dz * dz));
         if (sp18 == 0) {
             if (temp_v0 != 0) {
-                var_fv1 = 0.0f;
-                var_fa0 = 1.0f;
+                var_fv1 = 0;
+                var_fa0 = 1;
             } else {
                 return;
             }
         } else if (sp18 == 1) {
             if (temp_v0 == 0) {
-                var_fv1 = 1.0f;
-                var_fa0 = 0.0f;
+                var_fv1 = 1;
+                var_fa0 = 0;
             } else if (temp_v0 == 1) {
                 var_fa0 = var_fv1 = 0.5f;
             } else {
-                var_fv1 = 0.0f;
-                var_fa0 = 1.0f;
+                var_fv1 = 0;
+                var_fa0 = 1;
             }
         } else {
             if (temp_v0 == 2) {
-                new_var = 1.0f / sp34;
+                new_var = 1 / sp34;
                 var_fv1 = sp38 * new_var;
                 var_fa0 = var_ft5 * new_var;
             } else {
-                var_fv1 = 1.0f;
-                var_fa0 = 0.0f;
+                var_fv1 = 1;
+                var_fa0 = 0;
             }
         }
         if (!(fabsf(sp40) < 0.008f)) {
@@ -2524,9 +2522,6 @@ void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* ar
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800614A4.s")
-#endif
 
 void func_800617D4_0OCvs0OC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
