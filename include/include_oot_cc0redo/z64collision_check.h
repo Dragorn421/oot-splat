@@ -208,7 +208,7 @@ typedef struct ColliderSrc_Type2_8005B6EC {
 typedef struct Collider_Type2_ptr1C {
     ColliderBody unk0;
     TriNorm unk28;
-} Collider_Type2_ptr1C;
+} Collider_Type2_ptr1C; /* size = 0x5C */
 
 typedef struct Collider_Type2 {
     Collider unk0;
