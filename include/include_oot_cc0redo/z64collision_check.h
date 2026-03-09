@@ -6,10 +6,11 @@
 struct Actor;
 
 typedef enum {
-    COLTYPE_CYLINDER = 1,
-    COLTYPE_CYLINDER_GROUP = 0,
-    COLTYPE_QUAD = 3,
-    COLTYPE_TRIANGLE_GROUP = 2
+    /* 0 */ COLTYPE_CYLINDER_GROUP,
+    /* 1 */ COLTYPE_CYLINDER,
+    /* 2 */ COLTYPE_TRIANGLE_GROUP,
+    /* 3 */ COLTYPE_QUAD,
+    /* 4 */ COLTYPE_MAX
 } ColliderType;
 
 typedef struct Collider {
