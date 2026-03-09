@@ -2459,6 +2459,7 @@ s32 func_8006146C(u8 arg0) {
 void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* arg3, ColliderBody* arg4, Vec3f* arg5,
                    f32 arg6);
 #ifdef NON_MATCHING
+// https://decomp.me/scratch/LnMzV
 void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* arg3, ColliderBody* arg4, Vec3f* arg5,
                    f32 arg6) {
     f32 sp40;
@@ -2611,7 +2612,7 @@ void func_8006199C_0OCvs1OC(GlobalContext* globalCtx, SubGlobalContext11E60* col
                 if (func_800CFD84(&var_s0->unk28.unk8, &arg3->unk40, &sp78) == 1) {
                     Math_Vec3s_ToVec3f(&sp6C, &var_s0->unk28.unk8.center);
                     Math_Vec3s_ToVec3f(&sp60, &arg3->unk40.pos);
-                    func_800614A4(arg2, &var_s0->unk0, &sp6C, arg3, &arg3->unk18, &sp60, sp78);
+                    func_800614A4(&arg2->unk0, &var_s0->unk0, &sp6C, &arg3->unk0, &arg3->unk18, &sp60, sp78);
                 }
             }
         }
@@ -2635,12 +2636,9 @@ void func_80061B24_1OCvs1OC(GlobalContext* globalCtx, SubGlobalContext11E60* col
         (Math3D_CylinderOutCylinder(&arg2->unk40, &arg3->unk40, &sp4C) == 1)) {
         Math_Vec3s_ToVec3f(&sp40, &arg2->unk40.pos);
         Math_Vec3s_ToVec3f(&sp34, &arg3->unk40.pos);
-        func_800614A4(arg2, &arg2->unk18, &sp40, arg3, &arg3->unk18, &sp34, sp4C);
+        func_800614A4(&arg2->unk0, &arg2->unk18, &sp40, &arg3->unk0, &arg3->unk18, &sp34, sp4C);
     }
 }
-#if 0
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061B24_1OCvs1OC.s")
-#endif
 
 s32 func_80061BF4(Collider* arg0) {
     if (!(arg0->maskA & 1)) {
@@ -2700,21 +2698,65 @@ void func_80061C98_OC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx
     }
 }
 
-void func_80061E48(SubActorStruct98*);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061E48.s")
+extern SubActorStruct98 D_8011DFEC;
 
-void func_80061E8C(SubActorStruct98*);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061E8C.s")
+void func_80061E48(SubActorStruct98* arg0) {
+    *arg0 = D_8011DFEC;
+}
+
+void func_80061E8C(SubActorStruct98* arg0) {
+    arg0->damage = 0;
+    arg0->damageEffect = 0;
+    arg0->impactEffect = 0;
+    arg0->unk_1B = 0;
+    arg0->displacement.x = arg0->displacement.y = arg0->displacement.z = 0.0f;
+}
+
+typedef struct struct_80061EB0_arg0 {
+    /* 0x00 */ char unk_0[0x10];
+    /* 0x10 */ s16 unk10;
+    /* 0x12 */ s16 unk12;
+    /* 0x14 */ char unk_14[2];
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+} struct_80061EB0_arg0;
+
+typedef struct struct_80061EB0_arg1 {
+    /* 0x00 */ u8 unk0;
+    /* 0x02 */ s16 unk2;
+    /* 0x04 */ s16 unk4;
+    /* 0x06 */ u8 unk6;
+} struct_80061EB0_arg1;
 
 // unused
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061EB0.s")
+void func_80061EB0(struct_80061EB0_arg0* arg0, struct_80061EB0_arg1* arg1) {
+    arg0->unk17 = arg1->unk0;
+    arg0->unk10 = arg1->unk2;
+    arg0->unk12 = arg1->unk4;
+    arg0->unk16 = arg1->unk6;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061ED4.s")
+void func_80061ED4(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init4* sub98Init) {
+    sub98->health = sub98Init->health;
+    sub98->damageChart = damageChart;
+    sub98->unk_10 = sub98Init->unk_02;
+    sub98->unk_12 = sub98Init->unk_04;
+    sub98->mass = sub98Init->mass;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061EFC.s")
+void func_80061EFC(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init5* sub98Init) {
+    sub98->health = sub98Init->health;
+    sub98->damageChart = damageChart;
+    sub98->unk_10 = sub98Init->unk_10;
+    sub98->unk_12 = sub98Init->unk_12;
+    sub98->unk_14 = sub98Init->unk_14;
+    sub98->mass = sub98Init->mass;
+}
 
 // unused
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80061F2C.s")
+void func_80061F2C(SubActorStruct98* arg0, s32 arg1, Sub98Init5* arg2) {
+    func_80061EFC(arg0, CollisionBtlTbl_Get(arg1), arg2);
+}
 
 void func_80061F64(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2, ColliderBody* obj_elem) {
     f32 unkf;

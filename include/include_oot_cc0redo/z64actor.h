@@ -177,7 +177,7 @@ typedef struct {
     /* 0x00 */ u8 health;
     /* 0x02 */ s16 unk_10;
     /* 0x04 */ s16 unk_12;
-    /* 0x06 */ u16 unk_14;
+    /* 0x06 */ s16 unk_14;
     /* 0x08 */ u8 mass;
 } Sub98Init5;
 

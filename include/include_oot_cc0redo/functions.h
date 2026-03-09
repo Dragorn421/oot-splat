@@ -660,7 +660,7 @@ s32 func_8005AA90(Camera*, s32, Vec3f*);
 // ? func_8005AFB4(?);
 // ? func_8005B044(?);
 // ? func_8005B1A4(?);
-s32 CollisionBtlTbl_Get(s32 index);
+ActorDamageChart* CollisionBtlTbl_Get(s32 index);
 // ? func_8005B280(?);
 void func_8005B2AC(GraphicsContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, u8 arg4, u8 arg5, u8 arg6);
 // ? func_8005B65C_InitColliderDefault(?);
@@ -747,7 +747,7 @@ s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* 
 // ? func_80061E48(?);
 // ? func_80061E8C(?);
 void func_80061ED4(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init4* sub98Init);
-void func_80061EFC(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init4* sub98Init);
+void func_80061EFC(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init5* sub98Init);
 // ? func_80061F64(?);
 // ? func_800622E4(?);
 // ? func_80062530(?);
