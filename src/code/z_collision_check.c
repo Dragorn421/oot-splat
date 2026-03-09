@@ -2063,15 +2063,188 @@ void func_8005FDCC_2ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005FF90_1ATvs3AC.s")
+extern TriNorm D_8015E320;
+extern TriNorm D_8015E358;
+extern Vec3f D_8015E390;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060204_3ATvs1AC.s")
+void func_8005FF90_1ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type1* arg2_,
+                            Collider_Type3* arg3_) {
+    Collider_Type1* arg2 = arg2_;
+    Collider_Type3* arg3 = arg3_;
+    Vec3f sp64;
+    Vec3f sp58;
+    Vec3f sp4C;
+    Vec3f sp40;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800604B0_2ATvs2AC.s")
+    if ((arg2->unk40.height > 0) && ((arg2->unk40.radius > 0)) && ((func_8005DF2C(&arg2->unk18) != 1)) &&
+        ((func_8005DF50(&arg3->unk18) != 1)) && (func_8005DF74(&arg2->unk18, &arg3->unk18) != 1)) {
+        Math3D_TriNorm(&D_8015E320, &arg3->unk40.unk18, &arg3->unk40.unk24, &arg3->unk40.unkC);
+        Math3D_TriNorm(&D_8015E358, &arg3->unk40.unkC, &arg3->unk40.unk0, &arg3->unk40.unk18);
+        if (Math3D_CylTriTouchingIntersect(&arg2->unk40, &D_8015E320, &D_8015E390) == 1) {
+            Math_Vec3s_ToVec3f(&sp64, &arg2->unk40.pos);
+            sp58.x = (arg3->unk40.unk18.x + arg3->unk40.unk24.x + arg3->unk40.unkC.x + arg3->unk40.unk0.x) * 0.25f;
+            sp58.y = (arg3->unk40.unk18.y + arg3->unk40.unk24.y + arg3->unk40.unkC.y + arg3->unk40.unk0.y) * 0.25f;
+            sp58.z = (arg3->unk40.unk18.z + arg3->unk40.unk24.z + arg3->unk40.unkC.z + arg3->unk40.unk0.z) * 0.25f;
+            func_8005E81C(globalCtx, &arg2->unk0, &arg2->unk18, &sp64, &arg3->unk0, &arg3->unk18, &sp58, &D_8015E390);
+        } else if (Math3D_CylTriTouchingIntersect(&arg2->unk40, &D_8015E358, &D_8015E390) == 1) {
+            Math_Vec3s_ToVec3f(&sp4C, &arg2->unk40.pos);
+            sp40.x = (arg3->unk40.unk18.x + arg3->unk40.unk24.x + arg3->unk40.unkC.x + arg3->unk40.unk0.x) * 0.25f;
+            sp40.y = (arg3->unk40.unk18.y + arg3->unk40.unk24.y + arg3->unk40.unkC.y + arg3->unk40.unk0.y) * 0.25f;
+            sp40.z = (arg3->unk40.unk18.z + arg3->unk40.unk24.z + arg3->unk40.unkC.z + arg3->unk40.unk0.z) * 0.25f;
+            func_8005E81C(globalCtx, &arg2->unk0, &arg2->unk18, &sp4C, &arg3->unk0, &arg3->unk18, &sp40, &D_8015E390);
+        }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060704_2ATvs3AC.s")
+extern TriNorm D_8015E3A0;
+extern TriNorm D_8015E3D8;
+extern Vec3f D_8015E410;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060994_3ATvs2AC.s")
+void func_80060204_3ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type3* arg2_,
+                            Collider_Type1* arg3_) {
+    Collider_Type3* arg2 = arg2_;
+    Collider_Type1* arg3 = arg3_;
+    Vec3f sp64;
+    Vec3f sp58;
+    Vec3f sp4C;
+    Vec3f sp40;
+
+    if ((arg3->unk40.height > 0) && ((arg3->unk40.radius > 0)) && ((func_8005DF50(&arg3->unk18) != 1)) &&
+        ((func_8005DF2C(&arg2->unk18) != 1)) && (func_8005DF74(&arg2->unk18, &arg3->unk18) != 1)) {
+        Math3D_TriNorm(&D_8015E3A0, &arg2->unk40.unk18, &arg2->unk40.unk24, &arg2->unk40.unkC);
+        Math3D_TriNorm(&D_8015E3D8, &arg2->unk40.unk18, &arg2->unk40.unkC, &arg2->unk40.unk0);
+        if ((Math3D_CylTriTouchingIntersect(&arg3->unk40, &D_8015E3A0, &D_8015E410) == 1) &&
+            (func_8005D218(globalCtx, arg2, &D_8015E410) != 0)) {
+            sp64.x = (arg2->unk40.unk18.x + arg2->unk40.unk24.x + arg2->unk40.unkC.x + arg2->unk40.unk0.x) * 0.25f;
+            sp64.y = (arg2->unk40.unk18.y + arg2->unk40.unk24.y + arg2->unk40.unkC.y + arg2->unk40.unk0.y) * 0.25f;
+            sp64.z = (arg2->unk40.unk18.z + arg2->unk40.unk24.z + arg2->unk40.unkC.z + arg2->unk40.unk0.z) * 0.25f;
+            Math_Vec3s_ToVec3f(&sp58, &arg3->unk40.pos);
+            func_8005E81C(globalCtx, &arg2->unk0, &arg2->unk18, &sp64, &arg3->unk0, &arg3->unk18, &sp58, &D_8015E410);
+        } else if ((Math3D_CylTriTouchingIntersect(&arg3->unk40, &D_8015E3D8, &D_8015E410) == 1) &&
+                   (func_8005D218(globalCtx, arg2, &D_8015E410) != 0)) {
+            sp4C.x = (arg2->unk40.unk18.x + arg2->unk40.unk24.x + arg2->unk40.unkC.x + arg2->unk40.unk0.x) * 0.25f;
+            sp4C.y = (arg2->unk40.unk18.y + arg2->unk40.unk24.y + arg2->unk40.unkC.y + arg2->unk40.unk0.y) * 0.25f;
+            sp4C.z = (arg2->unk40.unk18.z + arg2->unk40.unk24.z + arg2->unk40.unkC.z + arg2->unk40.unk0.z) * 0.25f;
+            Math_Vec3s_ToVec3f(&sp40, &arg3->unk40.pos);
+            func_8005E81C(globalCtx, &arg2->unk0, &arg2->unk18, &sp4C, &arg3->unk0, &arg3->unk18, &sp40, &D_8015E410);
+        }
+    }
+}
+
+extern Vec3f D_8015E420;
+
+void func_800604B0_2ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type2* arg2_,
+                            Collider_Type2* arg3_) {
+    Collider_Type2* arg2 = arg2_;
+    Collider_Type2* arg3 = arg3_;
+    Collider_Type2_ptr1C* var_s0;
+    Collider_Type2_ptr1C* var_s2;
+    Vec3f sp5C;
+    Vec3f sp50;
+
+    if ((arg3->unk18 > 0) && ((arg3->unk1C != NULL)) && (arg2->unk18 > 0) && (arg2->unk1C != NULL)) {
+
+        for (var_s2 = arg3->unk1C; (((var_s2 < &arg3->unk1C[arg3->unk18]))); var_s2++) {
+            if (func_8005DF50(&var_s2->unk0) != 1) {
+                for (var_s0 = arg2->unk1C; var_s0 < &arg2->unk1C[arg2->unk18]; var_s0++) {
+                    if (0) {}
+                    if ((func_8005DF2C(&var_s0->unk0) != 1) && (func_8005DF74(&var_s0->unk0, &var_s2->unk0) != 1) &&
+                        (Math3D_TrisIntersect(&var_s0->unk28, &var_s2->unk28, &D_8015E420) == 1)) {
+                        sp5C.x =
+                            (var_s0->unk28.vtx[0].x + var_s0->unk28.vtx[1].x + var_s0->unk28.vtx[2].x) * 0.33333334f;
+                        sp5C.y =
+                            (var_s0->unk28.vtx[0].y + var_s0->unk28.vtx[1].y + var_s0->unk28.vtx[2].y) * 0.33333334f;
+                        sp5C.z =
+                            (var_s0->unk28.vtx[0].z + var_s0->unk28.vtx[1].z + var_s0->unk28.vtx[2].z) * 0.33333334f;
+                        sp50.x =
+                            (var_s2->unk28.vtx[0].x + var_s2->unk28.vtx[1].x + var_s2->unk28.vtx[2].x) * 0.33333334f;
+                        sp50.y =
+                            (var_s2->unk28.vtx[0].y + var_s2->unk28.vtx[1].y + var_s2->unk28.vtx[2].y) * 0.33333334f;
+                        sp50.z =
+                            (var_s2->unk28.vtx[0].z + var_s2->unk28.vtx[1].z + var_s2->unk28.vtx[2].z) * 0.33333334f;
+                        func_8005E81C(globalCtx, &arg2->unk0, &var_s0->unk0, &sp5C, &arg3->unk0, &var_s2->unk0, &sp50,
+                                      &D_8015E420);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
+
+extern Vec3f D_8015E430;
+extern TriNorm D_8015E440;
+extern TriNorm D_8015E478;
+
+void func_80060704_2ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type2* arg2_,
+                            Collider_Type3* arg3_) {
+    Collider_Type2* arg2 = arg2_;
+    Collider_Type3* arg3 = arg3_;
+    Collider_Type2_ptr1C* var_s1;
+    Vec3f sp68;
+    Vec3f sp5C;
+
+    if ((arg2->unk18 > 0) && ((arg2->unk1C != NULL)) && (func_8005DF50(&arg3->unk18) != 1)) {
+        Math3D_TriNorm(&D_8015E440, &arg3->unk40.unk18, &arg3->unk40.unk24, &arg3->unk40.unkC);
+        Math3D_TriNorm(&D_8015E478, &arg3->unk40.unkC, &arg3->unk40.unk0, &arg3->unk40.unk18);
+        for (var_s1 = arg2->unk1C; var_s1 < &arg2->unk1C[arg2->unk18]; var_s1++) {
+            if ((func_8005DF2C(&var_s1->unk0) != 1) && (func_8005DF74(&var_s1->unk0, &arg3->unk18) != 1) &&
+                (((Math3D_TrisIntersect(&D_8015E440, &var_s1->unk28, &D_8015E430) == 1)) ||
+                 (Math3D_TrisIntersect(&D_8015E478, &var_s1->unk28, &D_8015E430) == 1))) {
+                sp68.x = (var_s1->unk28.vtx[0].x + var_s1->unk28.vtx[1].x + var_s1->unk28.vtx[2].x) * 0.33333334f;
+                sp68.y = (var_s1->unk28.vtx[0].y + var_s1->unk28.vtx[1].y + var_s1->unk28.vtx[2].y) * 0.33333334f;
+                sp68.z = (var_s1->unk28.vtx[0].z + var_s1->unk28.vtx[1].z + var_s1->unk28.vtx[2].z) * 0.33333334f;
+                sp5C.x = (arg3->unk40.unk18.x + arg3->unk40.unk24.x + arg3->unk40.unkC.x + arg3->unk40.unk0.x) * 0.25f;
+                sp5C.y = (arg3->unk40.unk18.y + arg3->unk40.unk24.y + arg3->unk40.unkC.y + arg3->unk40.unk0.y) * 0.25f;
+                sp5C.z = (arg3->unk40.unk18.z + arg3->unk40.unk24.z + arg3->unk40.unkC.z + arg3->unk40.unk0.z) * 0.25f;
+                func_8005E81C(globalCtx, &arg2->unk0, &var_s1->unk0, &sp68, &arg3->unk0, &arg3->unk18, &sp5C,
+                              &D_8015E430);
+                return;
+            }
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+            if (1) {}
+        }
+    }
+}
+
+extern Vec3f D_8015E4B0;
+extern TriNorm D_8015E4C0;
+extern TriNorm D_8015E4F8;
+
+void func_80060994_3ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider_Type3* arg2_,
+                            Collider_Type2* arg3_) {
+    Collider_Type3* arg2 = arg2_;
+    Collider_Type2* arg3 = arg3_;
+    Collider_Type2_ptr1C* var_s1;
+    Vec3f sp68;
+    Vec3f sp5C;
+
+    if ((arg3->unk18 > 0) && ((arg3->unk1C != NULL)) && (func_8005DF2C(&arg2->unk18) != 1)) {
+        Math3D_TriNorm(&D_8015E4C0, &arg2->unk40.unk18, &arg2->unk40.unk24, &arg2->unk40.unkC);
+        Math3D_TriNorm(&D_8015E4F8, &arg2->unk40.unkC, &arg2->unk40.unk0, &arg2->unk40.unk18);
+        if (var_s1 && var_s1) {}
+        for (var_s1 = arg3->unk1C; var_s1 < &arg3->unk1C[arg3->unk18]; var_s1++) {
+            if ((func_8005DF50(&var_s1->unk0) != 1) && (func_8005DF74(&arg2->unk18, &var_s1->unk0) != 1) &&
+                (((Math3D_TrisIntersect(&D_8015E4C0, &var_s1->unk28, &D_8015E4B0) == 1)) ||
+                 (Math3D_TrisIntersect(&D_8015E4F8, &var_s1->unk28, &D_8015E4B0) == 1)) &&
+                (func_8005D218(globalCtx, arg2, &D_8015E4B0) != 0)) {
+                sp5C.x = (var_s1->unk28.vtx[0].x + var_s1->unk28.vtx[1].x + var_s1->unk28.vtx[2].x) * 0.33333334f;
+                sp5C.y = (var_s1->unk28.vtx[0].y + var_s1->unk28.vtx[1].y + var_s1->unk28.vtx[2].y) * 0.33333334f;
+                sp5C.z = (var_s1->unk28.vtx[0].z + var_s1->unk28.vtx[1].z + var_s1->unk28.vtx[2].z) * 0.33333334f;
+                sp68.x = (arg2->unk40.unk18.x + arg2->unk40.unk24.x + arg2->unk40.unkC.x + arg2->unk40.unk0.x) * 0.25f;
+                sp68.y = (arg2->unk40.unk18.y + arg2->unk40.unk24.y + arg2->unk40.unkC.y + arg2->unk40.unk0.y) * 0.25f;
+                sp68.z = (arg2->unk40.unk18.z + arg2->unk40.unk24.z + arg2->unk40.unkC.z + arg2->unk40.unk0.z) * 0.25f;
+                func_8005E81C(globalCtx, &arg2->unk0, &arg2->unk18, &sp68, &arg3->unk0, &var_s1->unk0, &sp5C,
+                              &D_8015E4B0);
+                return;
+            }
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80060C2C_3ATvs3AC.s")
 
@@ -2373,7 +2546,7 @@ s32 func_800624BC_Type1(GlobalContext* globalCtx, SubGlobalContext11E60* colChkC
                         Vec3f* arg4) {
     extern Vec3f D_8015E628;
     extern Vec3f D_8015E638;
-    Collider_Type1* arg2 = arg2_;
+    Collider_Type1* arg2 = (Collider_Type1*)arg2_;
 
     if (!(arg2->unk18.flags2 & 1)) {
         return 0;
