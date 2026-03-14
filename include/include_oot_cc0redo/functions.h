@@ -689,9 +689,9 @@ s32 func_8005BA74(GlobalContext*, struct_8011DE54*);
 // ? func_8005BBD4_SetOT_sub_0(?);
 // void func_8005C050_jntsph_Type0(GlobalContext* globalCtx, Collider* collision, Actor* actor, UNK_TYPE arg3, UNK_TYPE arg4);
 // ? func_8005C2BC(?);
-s32 ActorCollider_AllocThing_Type1(GlobalContext* globalCtx, Collider_Type1* collision);
-s32 ActorCollider_FreeThing_Type1(GlobalContext* globalCtx, Collider_Type1* collision);
-s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, Collider_Type1* collision, Actor* actor,
+s32 ActorCollider_AllocThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision);
+s32 ActorCollider_FreeThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision);
+s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision, Actor* actor,
                                ColliderSrc_Type1* src);
 s32 func_8005C540_SetAC_1(GlobalContext* globalCtx, Collider* collision);
 s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision);
@@ -707,9 +707,9 @@ s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005CEC4(?);
 // ? func_8005CEDC(?);
 // ? func_8005CF90_Type3(?);
-s32 func_8005D018_Type3(GlobalContext* globalCtx, Collider_Type3* collision);
-s32 func_8005D060_Type3(GlobalContext* globalCtx, Collider_Type3* collision);
-s32 func_8005D104_Type3(GlobalContext* globalCtx, Collider_Type3* collision, Actor* actor, ColliderSrc_Type3* src);
+s32 func_8005D018_Type3(GlobalContext* globalCtx, ColliderQuad* collision);
+s32 func_8005D060_Type3(GlobalContext* globalCtx, ColliderQuad* collision);
+s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderSrc_Type3* src);
 s32 func_8005D1A8_SetAC_3(GlobalContext* globalCtx, Collider* collision);
 s32 func_8005D1E0_SetOT_3(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005D218(?);
@@ -752,7 +752,7 @@ void func_80061EFC(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98
 // ? func_800622E4(?);
 // ? func_80062530(?);
 // ? func_800626B0(?);
-void ActorCollider_Type1_Update(Actor* actor, Collider_Type1* collision);
+void ActorCollider_Type1_Update(Actor* actor, ColliderCylinder* collision);
 // ? func_80062734(?);
 // ? func_80062A28(?);
 // ? func_80062B80(?);

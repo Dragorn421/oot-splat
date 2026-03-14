@@ -131,11 +131,11 @@ typedef struct Collider_Type0_ptr1C {
     struct_8011DE54 unk28;
 } Collider_Type0_ptr1C; /* size = 0x40 */
 
-typedef struct Collider_Type0 {
+typedef struct ColliderJntSph {
     Collider base;
     s32 unk18;
     Collider_Type0_ptr1C* unk1C;
-} Collider_Type0;
+} ColliderJntSph;
 
 typedef struct ColliderSrc_Type0_ptrC {
     ColliderElementSrc unk0;
@@ -162,11 +162,11 @@ typedef struct ColliderSrc_Type0_8005B6EC {
 
 // type1 - cylinder
 
-typedef struct Collider_Type1 {
+typedef struct ColliderCylinder {
     Collider base;
     ColliderElement unk18;
     Cylinder16 unk40;
-} Collider_Type1;
+} ColliderCylinder;
 
 typedef struct ColliderSrc_Type1 {
     /* 0x00 */ ColliderSrc unk0;
@@ -211,11 +211,11 @@ typedef struct Collider_Type2_ptr1C {
     TriNorm unk28;
 } Collider_Type2_ptr1C; /* size = 0x5C */
 
-typedef struct Collider_Type2 {
+typedef struct ColliderTris {
     Collider base;
     s32 unk18;
     Collider_Type2_ptr1C* unk1C;
-} Collider_Type2;
+} ColliderTris;
 
 // type3 - quad
 
@@ -241,11 +241,11 @@ typedef struct struct_Collider_Type3_subc {
     /* 0x3C */ f32 unk3C;
 } struct_Collider_Type3_subc; /* size = 0x40 */
 
-typedef struct Collider_Type3 {
+typedef struct ColliderQuad {
     Collider base;
     ColliderElement unk18;
     struct_Collider_Type3_subc unk40;
-} Collider_Type3;
+} ColliderQuad;
 
 // ?
 
