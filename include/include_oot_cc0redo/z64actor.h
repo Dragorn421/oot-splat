@@ -63,11 +63,11 @@ typedef struct {
 
 typedef struct {
     union {
+        u8 raw;
         struct {
             char damage : 4;
             char effect : 4;
         };
-        u8 raw;
     } attack[32];
 } ActorDamageChart;
 
