@@ -71,6 +71,9 @@ typedef struct {
     } attack[32];
 } ActorDamageChart;
 
+#define MASS_IMMOVABLE 0xFF // Cannot be pushed by OC colliders
+#define MASS_HEAVY 0xFE // Can only be pushed by OC colliders from actors with IMMOVABLE or HEAVY mass.
+
 typedef struct {
     /* 0x00 */ ActorDamageChart* damageChart;  // For actors which contain a damage chart (example: Stalfos)...
     /* 0x04 */ Vec3f displacement; // Amount to correct velocity (0x5C) by when colliding into a body

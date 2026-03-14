@@ -7,9 +7,9 @@
 struct Actor;
 
 typedef enum {
-    /* 0 */ COLTYPE_CYLINDER_GROUP,
+    /* 0 */ COLTYPE_JNTSPH,
     /* 1 */ COLTYPE_CYLINDER,
-    /* 2 */ COLTYPE_TRIANGLE_GROUP,
+    /* 2 */ COLTYPE_TRIANGLES,
     /* 3 */ COLTYPE_QUAD,
     /* 4 */ COLTYPE_MAX
 } ColliderType;
@@ -127,12 +127,12 @@ typedef struct struct_8011DE54 {
 } struct_8011DE54; /* size = 0x18 */
 
 typedef struct Collider_Type0_ptr1C {
-    ColliderElement unk0;
+    ColliderElement base;
     struct_8011DE54 unk28;
 } Collider_Type0_ptr1C; /* size = 0x40 */
 
 typedef struct Collider_Type0 {
-    Collider unk0;
+    Collider base;
     s32 unk18;
     Collider_Type0_ptr1C* unk1C;
 } Collider_Type0;
@@ -163,7 +163,7 @@ typedef struct ColliderSrc_Type0_8005B6EC {
 // type1 - cylinder
 
 typedef struct Collider_Type1 {
-    Collider unk0;
+    Collider base;
     ColliderElement unk18;
     Cylinder16 unk40;
 } Collider_Type1;
@@ -207,12 +207,12 @@ typedef struct ColliderSrc_Type2_8005B6EC {
 } ColliderSrc_Type2_8005B6EC;
 
 typedef struct Collider_Type2_ptr1C {
-    ColliderElement unk0;
+    ColliderElement base;
     TriNorm unk28;
 } Collider_Type2_ptr1C; /* size = 0x5C */
 
 typedef struct Collider_Type2 {
-    Collider unk0;
+    Collider base;
     s32 unk18;
     Collider_Type2_ptr1C* unk1C;
 } Collider_Type2;
@@ -242,7 +242,7 @@ typedef struct struct_Collider_Type3_subc {
 } struct_Collider_Type3_subc; /* size = 0x40 */
 
 typedef struct Collider_Type3 {
-    Collider unk0;
+    Collider base;
     ColliderElement unk18;
     struct_Collider_Type3_subc unk40;
 } Collider_Type3;
