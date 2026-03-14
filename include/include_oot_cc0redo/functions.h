@@ -716,15 +716,15 @@ s32 func_8005D1E0_SetOT_3(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005D334(?);
 // ? func_8005D3A4(?);
 // ? func_8005D3BC(?);
-void func_8005D400(GlobalContext*, SubGlobalContext11E60*);
+void func_8005D400(GlobalContext*, CollisionCheckContext*);
 // ? func_8005D40C(?);
 // ? func_8005D4DC(?);
 // ? func_8005D62C(?);
-s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
+s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
                                Collider* collision);
-s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
+s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
                                Collider* collision);
-s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, SubGlobalContext11E60* simpleBodyGroups,
+s32 Actor_CollisionCheck_SetOT(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
                                Collider* collision);
 // ? func_8005DF2C(?);
 // ? func_8005DF50(?);

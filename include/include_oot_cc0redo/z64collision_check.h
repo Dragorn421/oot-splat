@@ -95,8 +95,8 @@ typedef struct ColliderElementDamageInfoAC {
 } ColliderElementDamageInfoAC; // size = 0x0C
 
 typedef struct ColliderElementDamageInfoACSrc {
-    s32 bumperMask; /* Bumper Exclusion Mask */
-    u8 unk4;
+    s32 dmgFlags; /* Bumper Exclusion Mask */
+    u8 hitBacklash;
     u8 unk5;
 } ColliderElementDamageInfoACSrc;
 
