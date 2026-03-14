@@ -729,7 +729,7 @@ s32 Collider_AddOC(GlobalContext* globalCtx, ColliderContext* simpleBodyGroups,
 // ? Collider_IsElementATOff(?);
 // ? Collider_IsElementACOff(?);
 // ? Collider_AreDmgFlagsDisjoint(?);
-// ? func_8005DFAC(?);
+// ? Collider_BlueBlood(?);
 // ? func_8005E2EC(?);
 // ? func_8005E4F8(?);
 // ? func_8005E604(?);
