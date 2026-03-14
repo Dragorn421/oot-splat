@@ -200,7 +200,7 @@ void func_8005BA1C_ClearColliderElementOCHit(GlobalContext* globalCtx, ColliderE
     elem->ocElemFlags &= ~OCELEM_HIT;
 }
 
-ColliderJntSphElementShape D_8011DE54 = {
+ColliderSpheresElementShape D_8011DE54 = {
     {
         { 0, 0, 0 },
         0,
@@ -213,16 +213,16 @@ ColliderJntSphElementShape D_8011DE54 = {
     0,
 };
 
-s32 func_8005BA30_Type0(GlobalContext* globalCtx, ColliderJntSphElementShape* arg1) {
+s32 func_8005BA30_Type0(GlobalContext* globalCtx, ColliderSpheresElementShape* arg1) {
     *arg1 = D_8011DE54;
     return 1;
 }
 
-s32 func_8005BA74(GlobalContext* globalCtx, ColliderJntSphElementShape* arg1) {
+s32 func_8005BA74(GlobalContext* globalCtx, ColliderSpheresElementShape* arg1) {
     return 1;
 }
 
-s32 func_8005BA84_Type0(GlobalContext* globalCtx, ColliderJntSphElementShape* arg1,
+s32 func_8005BA84_Type0(GlobalContext* globalCtx, ColliderSpheresElementShape* arg1,
                         ColliderSrc_Type0_ptrC_sub18* arg2) {
     arg1->unk14 = arg2->unk0;
     arg1->unk0 = arg2->unk2;
@@ -230,41 +230,41 @@ s32 func_8005BA84_Type0(GlobalContext* globalCtx, ColliderJntSphElementShape* ar
     return 1;
 }
 
-s32 func_8005BAD8_InitJntSphElement(GlobalContext* globalCtx, ColliderJntSphElement* jntSphElem) {
+s32 func_8005BAD8_InitJntSphElement(GlobalContext* globalCtx, ColliderSpheresElement* jntSphElem) {
     func_8005B884_InitElement(globalCtx, &jntSphElem->base);
     func_8005BA30_Type0(globalCtx, &jntSphElem->unk28);
     return 1;
 }
 
-s32 func_8005BB10_Type0(GlobalContext* globalCtx, ColliderJntSphElement* jntSphElem) {
+s32 func_8005BB10_Type0(GlobalContext* globalCtx, ColliderSpheresElement* jntSphElem) {
     func_8005B904_DestroyElement(globalCtx, &jntSphElem->base);
     func_8005BA74(globalCtx, &jntSphElem->unk28);
     return 1;
 }
 
-s32 func_8005BAD8_LoadJntSphElement(GlobalContext* globalCtx, ColliderJntSphElement* jntSphElem,
-                                    ColliderJntSphElementSrc* jntSphElemSrc) {
+s32 func_8005BAD8_LoadJntSphElement(GlobalContext* globalCtx, ColliderSpheresElement* jntSphElem,
+                                    ColliderSpheresElementSrc* jntSphElemSrc) {
     func_8005B93C_LoadElement(globalCtx, &jntSphElem->base, &jntSphElemSrc->base);
     func_8005BA84_Type0(globalCtx, &jntSphElem->unk28, &jntSphElemSrc->unk18);
     return 1;
 }
 
-s32 func_8005BB8C_SetAT_sub_0(GlobalContext* globalCtx, ColliderJntSphElement* jntSphElem) {
+s32 func_8005BB8C_SetAT_sub_0(GlobalContext* globalCtx, ColliderSpheresElement* jntSphElem) {
     func_8005B9B0_ClearColliderElementATHit(globalCtx, &jntSphElem->base);
     return 1;
 }
 
-s32 func_8005BBB0_SetAC_sub_0(GlobalContext* globalCtx, ColliderJntSphElement* jntSphElem) {
+s32 func_8005BBB0_SetAC_sub_0(GlobalContext* globalCtx, ColliderSpheresElement* jntSphElem) {
     func_8005B9E8_ClearColliderElementACHit(globalCtx, &jntSphElem->base);
     return 1;
 }
 
-s32 func_8005BBD4_SetOT_sub_0(GlobalContext* globalCtx, ColliderJntSphElement* jntSphElem) {
+s32 func_8005BBD4_SetOT_sub_0(GlobalContext* globalCtx, ColliderSpheresElement* jntSphElem) {
     func_8005BA1C_ClearColliderElementOCHit(globalCtx, &jntSphElem->base);
     return 1;
 }
 
-s32 func_8005BBF8_InitJntSph(GlobalContext* globalCtx, ColliderJntSph* arg1) {
+s32 func_8005BBF8_InitJntSph(GlobalContext* globalCtx, ColliderSpheres* arg1) {
     func_8005B65C_InitColliderDefault(globalCtx, &arg1->base);
     arg1->nElements = 0;
     arg1->elements = 0;
@@ -272,8 +272,8 @@ s32 func_8005BBF8_InitJntSph(GlobalContext* globalCtx, ColliderJntSph* arg1) {
 }
 
 // only used by EnNwc
-s32 func_8005BC28(GlobalContext* globalCtx, ColliderJntSph* arg1) {
-    ColliderJntSphElement* var_s0;
+s32 func_8005BC28(GlobalContext* globalCtx, ColliderSpheres* arg1) {
+    ColliderSpheresElement* var_s0;
 
     func_8005B6A0(globalCtx, &arg1->base);
     for (var_s0 = arg1->elements; var_s0 < (arg1->elements + arg1->nElements); var_s0++) {
@@ -287,8 +287,8 @@ s32 func_8005BC28(GlobalContext* globalCtx, ColliderJntSph* arg1) {
     return 1;
 }
 
-s32 func_8005BCC8_Type0(GlobalContext* globalCtx, ColliderJntSph* arg1) {
-    ColliderJntSphElement* var_s0;
+s32 func_8005BCC8_Type0(GlobalContext* globalCtx, ColliderSpheres* arg1) {
+    ColliderSpheresElement* var_s0;
 
     func_8005B6A0(globalCtx, &arg1->base);
     for (var_s0 = arg1->elements; var_s0 < (arg1->elements + arg1->nElements); var_s0++) {
@@ -300,9 +300,9 @@ s32 func_8005BCC8_Type0(GlobalContext* globalCtx, ColliderJntSph* arg1) {
 }
 
 // unused
-s32 func_8005BD50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, ColliderJntSphSrcAltWithActor* arg2) {
-    ColliderJntSphElement* var_s0;
-    ColliderJntSphElementSrc* var_s1;
+s32 func_8005BD50_jntsph(GlobalContext* globalCtx, ColliderSpheres* arg1, ColliderSpheresSrcAltWithActor* arg2) {
+    ColliderSpheresElement* var_s0;
+    ColliderSpheresElementSrc* var_s1;
 
     func_8005B6B0_LoadColliderAltWithActor(globalCtx, &arg1->base, &arg2->base);
     arg1->nElements = arg2->nElements;
@@ -323,9 +323,9 @@ s32 func_8005BD50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Collide
 }
 
 // only used by EnNwc
-s32 func_8005BE50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Actor* arg2, ColliderJntSphSrcAlt* arg3) {
-    ColliderJntSphElement* var_s0;
-    ColliderJntSphElementSrc* var_s1;
+s32 func_8005BE50_jntsph(GlobalContext* globalCtx, ColliderSpheres* arg1, Actor* arg2, ColliderSpheresSrcAlt* arg3) {
+    ColliderSpheresElement* var_s0;
+    ColliderSpheresElementSrc* var_s1;
 
     func_8005B6B0_LoadColliderAlt(globalCtx, &arg1->base, arg2, &arg3->base);
     arg1->nElements = arg3->nElements;
@@ -346,10 +346,10 @@ s32 func_8005BE50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Actor* 
 }
 
 // unused
-s32 func_8005BF50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Actor* arg2, ColliderJntSphSrc* arg3) {
+s32 func_8005BF50_jntsph(GlobalContext* globalCtx, ColliderSpheres* arg1, Actor* arg2, ColliderSpheresSrc* arg3) {
     s32 temp_v0;
-    ColliderJntSphElement* var_s0;
-    ColliderJntSphElementSrc* var_s1;
+    ColliderSpheresElement* var_s0;
+    ColliderSpheresElementSrc* var_s1;
 
     func_8005B72C_LoadCollider(globalCtx, &arg1->base, arg2, &arg3->base);
     arg1->nElements = arg3->nElements;
@@ -369,10 +369,10 @@ s32 func_8005BF50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Actor* 
     return 1;
 }
 
-s32 func_8005C050_jntsph_Type0(GlobalContext* globalCtx, ColliderJntSph* jntSph, Actor* actor,
-                               ColliderJntSphSrc* jntSphSrc, ColliderJntSphElement* jntSphElements) {
-    ColliderJntSphElement* jntSphElem;
-    ColliderJntSphElementSrc* jntSphElemSrc;
+s32 func_8005C050_jntsph_Type0(GlobalContext* globalCtx, ColliderSpheres* jntSph, Actor* actor,
+                               ColliderSpheresSrc* jntSphSrc, ColliderSpheresElement* jntSphElements) {
+    ColliderSpheresElement* jntSphElem;
+    ColliderSpheresElementSrc* jntSphElemSrc;
 
     func_8005B72C_LoadCollider(globalCtx, &jntSph->base, actor, &jntSphSrc->base);
     jntSph->nElements = jntSphSrc->nElements;
@@ -389,8 +389,8 @@ s32 func_8005C050_jntsph_Type0(GlobalContext* globalCtx, ColliderJntSph* jntSph,
 }
 
 s32 func_8005C124_SetAT_0(GlobalContext* globalCtx, Collider* collider) {
-    ColliderJntSph* new_var = (ColliderJntSph*)collider;
-    ColliderJntSphElement* var_s0;
+    ColliderSpheres* new_var = (ColliderSpheres*)collider;
+    ColliderSpheresElement* var_s0;
 
     func_8005B76C_ClearColliderATHit(globalCtx, &new_var->base);
     for (var_s0 = new_var->elements; var_s0 < (new_var->elements + new_var->nElements); var_s0++) {
@@ -401,8 +401,8 @@ s32 func_8005C124_SetAT_0(GlobalContext* globalCtx, Collider* collider) {
 }
 
 s32 func_8005C1AC_SetAC_0(GlobalContext* globalCtx, Collider* collider) {
-    ColliderJntSph* new_var = (ColliderJntSph*)collider;
-    ColliderJntSphElement* var_s0;
+    ColliderSpheres* new_var = (ColliderSpheres*)collider;
+    ColliderSpheresElement* var_s0;
 
     func_8005B784_ClearColliderACHit(globalCtx, &new_var->base);
     for (var_s0 = new_var->elements; var_s0 < (new_var->elements + new_var->nElements); var_s0++) {
@@ -412,8 +412,8 @@ s32 func_8005C1AC_SetAC_0(GlobalContext* globalCtx, Collider* collider) {
 }
 
 s32 func_8005C234_SetOT_0(GlobalContext* globalCtx, Collider* collider) {
-    ColliderJntSph* new_var = (ColliderJntSph*)collider;
-    ColliderJntSphElement* var_s0;
+    ColliderSpheres* new_var = (ColliderSpheres*)collider;
+    ColliderSpheresElement* var_s0;
 
     func_8005B79C_ClearColliderOCHit(globalCtx, &new_var->base);
     for (var_s0 = new_var->elements; var_s0 < (new_var->elements + new_var->nElements); var_s0++) {
@@ -742,45 +742,47 @@ s32 func_8005CDD0_SetOT_2(GlobalContext* globalCtx, Collider* collider) {
     return 1;
 }
 
-struct_Collider_Type3_subc D_8011DEAC = {
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
+ColliderQuadShape D_8011DEAC = {
+    {
+        { 0.0f, 0.0f, 0.0f },
+        { 0.0f, 0.0f, 0.0f },
+        { 0.0f, 0.0f, 0.0f },
+        { 0.0f, 0.0f, 0.0f },
+    },
     { 0, 0, 0 },
     { 0, 0, 0 },
     1e38f,
 };
 
-s32 func_8005CE6C(GlobalContext* globalCtx, struct_Collider_Type3_subc* arg1) {
+s32 func_8005CE6C(GlobalContext* globalCtx, ColliderQuadShape* arg1) {
     *arg1 = D_8011DEAC;
     return 1;
 }
 
-s32 func_8005CEB4_Type3(GlobalContext* globalCtx, struct_Collider_Type3_subc* dim) {
+s32 func_8005CEB4_Type3(GlobalContext* globalCtx, ColliderQuadShape* dim) {
     return 1;
 }
 
-s32 func_8005CEC4(GlobalContext* globalCtx, struct_Collider_Type3_subc* arg1) {
+s32 func_8005CEC4(GlobalContext* globalCtx, ColliderQuadShape* arg1) {
     arg1->unk3C = 1e38f;
     return 1;
 }
 
-void func_8005CEDC(struct_Collider_Type3_subc* arg0) {
-    arg0->middleAB.x = (arg0->cornerA.x + arg0->cornerB.x) * 0.5f;
-    arg0->middleAB.y = (arg0->cornerA.y + arg0->cornerB.y) * 0.5f;
-    arg0->middleAB.z = (arg0->cornerA.z + arg0->cornerB.z) * 0.5f;
-    arg0->middleCD.x = (arg0->cornerD.x + arg0->cornerC.x) * 0.5f;
-    arg0->middleCD.y = (arg0->cornerD.y + arg0->cornerC.y) * 0.5f;
-    arg0->middleCD.z = (arg0->cornerD.z + arg0->cornerC.z) * 0.5f;
+void func_8005CEDC(ColliderQuadShape* arg0) {
+    arg0->middleAB.x = (arg0->corners.cornerA.x + arg0->corners.cornerB.x) * 0.5f;
+    arg0->middleAB.y = (arg0->corners.cornerA.y + arg0->corners.cornerB.y) * 0.5f;
+    arg0->middleAB.z = (arg0->corners.cornerA.z + arg0->corners.cornerB.z) * 0.5f;
+    arg0->middleCD.x = (arg0->corners.cornerD.x + arg0->corners.cornerC.x) * 0.5f;
+    arg0->middleCD.y = (arg0->corners.cornerD.y + arg0->corners.cornerC.y) * 0.5f;
+    arg0->middleCD.z = (arg0->corners.cornerD.z + arg0->corners.cornerC.z) * 0.5f;
 }
 
-s32 func_8005CF90_Type3(GlobalContext* globalCtx, struct_Collider_Type3_subc* arg1, Vec3f* arg2) {
-    arg1->cornerD = arg2[0];
-    arg1->cornerC = arg2[1];
-    arg1->cornerA = arg2[2];
-    arg1->cornerB = arg2[3];
-    func_8005CEDC(arg1);
+s32 func_8005CF90_Type3(GlobalContext* globalCtx, ColliderQuadShape* quadShape, ColliderQuadShapeCorners* cornersSrc) {
+    quadShape->corners.cornerD = cornersSrc->cornerD;
+    quadShape->corners.cornerC = cornersSrc->cornerC;
+    quadShape->corners.cornerA = cornersSrc->cornerA;
+    quadShape->corners.cornerB = cornersSrc->cornerB;
+    func_8005CEDC(quadShape);
     return 1;
 }
 
@@ -802,14 +804,14 @@ s32 func_8005D060_Type3(GlobalContext* globalCtx, ColliderQuad* collision) {
 s32 func_8005D0A8(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrcAlt* src) {
     func_8005B6B0_LoadColliderAlt(globalCtx, &collision->base, actor, &src->base);
     func_8005B93C_LoadElement(globalCtx, &collision->elem, &src->elem);
-    func_8005CF90_Type3(globalCtx, &collision->unk40, src->corners);
+    func_8005CF90_Type3(globalCtx, &collision->unk40, &src->corners);
     return 1;
 }
 
 s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrc* src) {
     func_8005B72C_LoadCollider(globalCtx, &collision->base, actor, &src->base);
     func_8005B93C_LoadElement(globalCtx, &collision->elem, &src->elem);
-    func_8005CF90_Type3(globalCtx, &collision->unk40, src->corners);
+    func_8005CF90_Type3(globalCtx, &collision->unk40, &src->corners);
     return 1;
 }
 
@@ -959,7 +961,7 @@ void func_8005D4C8(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx) {
 }
 
 void func_8005D4DC(GlobalContext* globalCtx, Collider* collider) {
-    ColliderJntSph* jntSph;
+    ColliderSpheres* jntSph;
     ColliderCylinder* cylinder;
     ColliderTris* tris;
     ColliderQuad* quad;
@@ -968,7 +970,7 @@ void func_8005D4DC(GlobalContext* globalCtx, Collider* collider) {
     if (collider != NULL) {
         switch (collider->colType) {
             case COLTYPE_JNTSPH:
-                jntSph = (ColliderJntSph*)collider;
+                jntSph = (ColliderSpheres*)collider;
 
                 for (i = 0; i < jntSph->nElements; i++) {
                     func_800D05D0(globalCtx, &jntSph->elements[i].unk28.unk8);
@@ -990,10 +992,10 @@ void func_8005D4DC(GlobalContext* globalCtx, Collider* collider) {
 
             case COLTYPE_QUAD:
                 quad = (ColliderQuad*)collider;
-                func_8005B280(globalCtx->state.gfxCtx, &quad->unk40.cornerA, &quad->unk40.cornerB,
-                              &quad->unk40.cornerC);
-                func_8005B280(globalCtx->state.gfxCtx, &quad->unk40.cornerC, &quad->unk40.cornerD,
-                              &quad->unk40.cornerA);
+                func_8005B280(globalCtx->state.gfxCtx, &quad->unk40.corners.cornerA, &quad->unk40.corners.cornerB,
+                              &quad->unk40.corners.cornerC);
+                func_8005B280(globalCtx->state.gfxCtx, &quad->unk40.corners.cornerC, &quad->unk40.corners.cornerD,
+                              &quad->unk40.corners.cornerA);
                 break;
         }
     }
@@ -1539,10 +1541,10 @@ s32 func_8005E81C(GlobalContext* globalCtx, Collider* atCollider, ColliderElemen
 
 void CollisionCheck_ATJntSphVsACJntSph(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                                        Collider* acCollider) {
-    ColliderJntSph* atJntSph = (ColliderJntSph*)atCollider;
-    ColliderJntSph* acJntSph = (ColliderJntSph*)acCollider;
-    ColliderJntSphElement* atJntSphElem;
-    ColliderJntSphElement* acJntSphElem;
+    ColliderSpheres* atJntSph = (ColliderSpheres*)atCollider;
+    ColliderSpheres* acJntSph = (ColliderSpheres*)acCollider;
+    ColliderSpheresElement* atJntSphElem;
+    ColliderSpheresElement* acJntSphElem;
     f32 sp8C;
     f32 sp88;
     f32 temp_fv0_2;
@@ -1589,9 +1591,9 @@ void CollisionCheck_ATJntSphVsACJntSph(GlobalContext* globalCtx, CollisionCheckC
 
 void CollisionCheck_ATJntSphVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                                     Collider* acCollider) {
-    ColliderJntSph* atJntSph = (ColliderJntSph*)atCollider;
+    ColliderSpheres* atJntSph = (ColliderSpheres*)atCollider;
     ColliderCylinder* acCylinder = (ColliderCylinder*)acCollider;
-    ColliderJntSphElement* atJntSphElem;
+    ColliderSpheresElement* atJntSphElem;
     f32 sp80;
     f32 sp7C;
     Vec3f sp70;
@@ -1637,10 +1639,10 @@ void CollisionCheck_ATJntSphVsACCyl(GlobalContext* globalCtx, CollisionCheckCont
 void CollisionCheck_ATCylVsACJntSph(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                                     Collider* acCollider) {
     ColliderCylinder* atCylinder = (ColliderCylinder*)atCollider;
-    ColliderJntSph* acJntSph = (ColliderJntSph*)acCollider;
+    ColliderSpheres* acJntSph = (ColliderSpheres*)acCollider;
     f32 sp9C;
     f32 sp98;
-    ColliderJntSphElement* acJntSphElem;
+    ColliderSpheresElement* acJntSphElem;
     Vec3f sp88;
     Vec3f atCylinderPos;
     Vec3f acJntSphElemPos;
@@ -1684,9 +1686,9 @@ void CollisionCheck_ATCylVsACJntSph(GlobalContext* globalCtx, CollisionCheckCont
 
 void CollisionCheck_ATJntSphVsACTris(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                                      Collider* acCollider) {
-    ColliderJntSph* atJntSph = (ColliderJntSph*)atCollider;
+    ColliderSpheres* atJntSph = (ColliderSpheres*)atCollider;
     ColliderTris* acTris = (ColliderTris*)acCollider;
-    ColliderJntSphElement* atJntSphElem;
+    ColliderSpheresElement* atJntSphElem;
     ColliderTrisElement* acTrisElem;
     Vec3f sp6C;
     Vec3f sp60;
@@ -1730,8 +1732,8 @@ void CollisionCheck_ATTrisVsACJntSph(GlobalContext* globalCtx, CollisionCheckCon
                                      Collider* acCollider) {
     ColliderTris* atTris = (ColliderTris*)atCollider;
     ColliderTrisElement* atTrisElem;
-    ColliderJntSph* acJntSph = (ColliderJntSph*)acCollider;
-    ColliderJntSphElement* acJntSphElem;
+    ColliderSpheres* acJntSph = (ColliderSpheres*)acCollider;
+    ColliderSpheresElement* acJntSphElem;
     Vec3f sp7C;
     Vec3f atTrisElemPos;
     Vec3f acJntSphElemPos;
@@ -1783,17 +1785,19 @@ BSS_DUMMY;
 
 void CollisionCheck_ATJntSphVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                                      Collider* acCollider) {
-    ColliderJntSph* atJntSph = (ColliderJntSph*)atCollider;
+    ColliderSpheres* atJntSph = (ColliderSpheres*)atCollider;
     ColliderQuad* acQuad = (ColliderQuad*)acCollider;
     Vec3f sp7C;
-    ColliderJntSphElement* atJntSphElem;
+    ColliderSpheresElement* atJntSphElem;
     Vec3f atJntSphElemPos;
     Vec3f acQuadPos;
 
     if ((atJntSph->nElements > 0) && ((atJntSph->elements != NULL)) &&
         (func_8005DF50_IsElementACOff(&acQuad->elem) != 1)) {
-        Math3D_TriNorm(&D_8015E230, &acQuad->unk40.cornerA, &acQuad->unk40.cornerB, &acQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E268, &acQuad->unk40.cornerC, &acQuad->unk40.cornerD, &acQuad->unk40.cornerA);
+        Math3D_TriNorm(&D_8015E230, &acQuad->unk40.corners.cornerA, &acQuad->unk40.corners.cornerB,
+                       &acQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E268, &acQuad->unk40.corners.cornerC, &acQuad->unk40.corners.cornerD,
+                       &acQuad->unk40.corners.cornerA);
         for (atJntSphElem = atJntSph->elements; atJntSphElem < &atJntSph->elements[atJntSph->nElements];
              atJntSphElem++) {
             if (func_8005DF2C_IsElementATOff(&atJntSphElem->base) != 1) {
@@ -1801,14 +1805,14 @@ void CollisionCheck_ATJntSphVsACQuad(GlobalContext* globalCtx, CollisionCheckCon
                     ((func_800CE934(&atJntSphElem->unk28.unk8, &D_8015E230, &sp7C) == 1) ||
                      (func_800CE934(&atJntSphElem->unk28.unk8, &D_8015E268, &sp7C) == 1))) {
                     Math_Vec3s_ToVec3f(&atJntSphElemPos, &atJntSphElem->unk28.unk8.center);
-                    acQuadPos.x = (acQuad->unk40.cornerA.x + acQuad->unk40.cornerB.x + acQuad->unk40.cornerC.x +
-                                   acQuad->unk40.cornerD.x) *
+                    acQuadPos.x = (acQuad->unk40.corners.cornerA.x + acQuad->unk40.corners.cornerB.x +
+                                   acQuad->unk40.corners.cornerC.x + acQuad->unk40.corners.cornerD.x) *
                                   0.25f;
-                    acQuadPos.y = (acQuad->unk40.cornerA.y + acQuad->unk40.cornerB.y + acQuad->unk40.cornerC.y +
-                                   acQuad->unk40.cornerD.y) *
+                    acQuadPos.y = (acQuad->unk40.corners.cornerA.y + acQuad->unk40.corners.cornerB.y +
+                                   acQuad->unk40.corners.cornerC.y + acQuad->unk40.corners.cornerD.y) *
                                   0.25f;
-                    acQuadPos.z = (acQuad->unk40.cornerA.z + acQuad->unk40.cornerB.z + acQuad->unk40.cornerC.z +
-                                   acQuad->unk40.cornerD.z) *
+                    acQuadPos.z = (acQuad->unk40.corners.cornerA.z + acQuad->unk40.corners.cornerB.z +
+                                   acQuad->unk40.corners.cornerC.z + acQuad->unk40.corners.cornerD.z) *
                                   0.25f;
                     func_8005E81C(globalCtx, &atJntSph->base, &atJntSphElem->base, &atJntSphElemPos, &acQuad->base,
                                   &acQuad->elem, &acQuadPos, &sp7C);
@@ -1827,15 +1831,17 @@ void CollisionCheck_ATQuadVsACJntSph(GlobalContext* globalCtx, CollisionCheckCon
                                      Collider* acCollider) {
     ColliderQuad* atQuad = (ColliderQuad*)atCollider;
     Vec3f sp88;
-    ColliderJntSph* acJntSph = (ColliderJntSph*)acCollider;
-    ColliderJntSphElement* acJntSphElem;
+    ColliderSpheres* acJntSph = (ColliderSpheres*)acCollider;
+    ColliderSpheresElement* acJntSphElem;
     Vec3f atQuadPos;
     Vec3f acJntSphElemPos;
 
     if (acJntSph->nElements > 0) {
         if ((acJntSph->elements != NULL) && (func_8005DF2C_IsElementATOff(&atQuad->elem) != 1)) {
-            Math3D_TriNorm(&D_8015E2A0, &atQuad->unk40.cornerA, &atQuad->unk40.cornerB, &atQuad->unk40.cornerC);
-            Math3D_TriNorm(&D_8015E2D8, &atQuad->unk40.cornerA, &atQuad->unk40.cornerC, &atQuad->unk40.cornerD);
+            Math3D_TriNorm(&D_8015E2A0, &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerB,
+                           &atQuad->unk40.corners.cornerC);
+            Math3D_TriNorm(&D_8015E2D8, &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerC,
+                           &atQuad->unk40.corners.cornerD);
 
             for (acJntSphElem = acJntSph->elements; acJntSphElem < &acJntSph->elements[acJntSph->nElements];
                  acJntSphElem++) {
@@ -1847,14 +1853,14 @@ void CollisionCheck_ATQuadVsACJntSph(GlobalContext* globalCtx, CollisionCheckCon
                     acJntSphElemPos.x = acJntSphElem->unk28.unk8.center.x;
                     acJntSphElemPos.y = acJntSphElem->unk28.unk8.center.y;
                     acJntSphElemPos.z = acJntSphElem->unk28.unk8.center.z;
-                    atQuadPos.x = (atQuad->unk40.cornerA.x + atQuad->unk40.cornerB.x + atQuad->unk40.cornerC.x +
-                                   atQuad->unk40.cornerD.x) *
+                    atQuadPos.x = (atQuad->unk40.corners.cornerA.x + atQuad->unk40.corners.cornerB.x +
+                                   atQuad->unk40.corners.cornerC.x + atQuad->unk40.corners.cornerD.x) *
                                   0.25f;
-                    atQuadPos.y = (atQuad->unk40.cornerA.y + atQuad->unk40.cornerB.y + atQuad->unk40.cornerC.y +
-                                   atQuad->unk40.cornerD.y) *
+                    atQuadPos.y = (atQuad->unk40.corners.cornerA.y + atQuad->unk40.corners.cornerB.y +
+                                   atQuad->unk40.corners.cornerC.y + atQuad->unk40.corners.cornerD.y) *
                                   0.25f;
-                    atQuadPos.z = (atQuad->unk40.cornerA.z + atQuad->unk40.cornerB.z + atQuad->unk40.cornerC.z +
-                                   atQuad->unk40.cornerD.z) *
+                    atQuadPos.z = (atQuad->unk40.corners.cornerA.z + atQuad->unk40.corners.cornerB.z +
+                                   atQuad->unk40.corners.cornerC.z + atQuad->unk40.corners.cornerD.z) *
                                   0.25f;
                     func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acJntSph->base,
                                   &acJntSphElem->base, &acJntSphElemPos, &sp88);
@@ -1990,21 +1996,23 @@ void CollisionCheck_ATCylVsACQuad(GlobalContext* globalCtx, CollisionCheckContex
         ((func_8005DF2C_IsElementATOff(&atCylinder->elem) != 1)) &&
         ((func_8005DF50_IsElementACOff(&acQuad->elem) != 1)) &&
         (func_8005DF74_AreDmgFlagsDisjoint(&atCylinder->elem, &acQuad->elem) != 1)) {
-        Math3D_TriNorm(&D_8015E320, &acQuad->unk40.cornerA, &acQuad->unk40.cornerB, &acQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E358, &acQuad->unk40.cornerC, &acQuad->unk40.cornerD, &acQuad->unk40.cornerA);
+        Math3D_TriNorm(&D_8015E320, &acQuad->unk40.corners.cornerA, &acQuad->unk40.corners.cornerB,
+                       &acQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E358, &acQuad->unk40.corners.cornerC, &acQuad->unk40.corners.cornerD,
+                       &acQuad->unk40.corners.cornerA);
         if (Math3D_CylTriTouchingIntersect(&atCylinder->unk40, &D_8015E320, &D_8015E390) == 1) {
             Vec3f atCylinderPos;
             Vec3f acQuadPos;
 
             Math_Vec3s_ToVec3f(&atCylinderPos, &atCylinder->unk40.pos);
-            acQuadPos.x = (acQuad->unk40.cornerA.x + acQuad->unk40.cornerB.x + acQuad->unk40.cornerC.x +
-                           acQuad->unk40.cornerD.x) *
+            acQuadPos.x = (acQuad->unk40.corners.cornerA.x + acQuad->unk40.corners.cornerB.x +
+                           acQuad->unk40.corners.cornerC.x + acQuad->unk40.corners.cornerD.x) *
                           0.25f;
-            acQuadPos.y = (acQuad->unk40.cornerA.y + acQuad->unk40.cornerB.y + acQuad->unk40.cornerC.y +
-                           acQuad->unk40.cornerD.y) *
+            acQuadPos.y = (acQuad->unk40.corners.cornerA.y + acQuad->unk40.corners.cornerB.y +
+                           acQuad->unk40.corners.cornerC.y + acQuad->unk40.corners.cornerD.y) *
                           0.25f;
-            acQuadPos.z = (acQuad->unk40.cornerA.z + acQuad->unk40.cornerB.z + acQuad->unk40.cornerC.z +
-                           acQuad->unk40.cornerD.z) *
+            acQuadPos.z = (acQuad->unk40.corners.cornerA.z + acQuad->unk40.corners.cornerB.z +
+                           acQuad->unk40.corners.cornerC.z + acQuad->unk40.corners.cornerD.z) *
                           0.25f;
             func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acQuad->base, &acQuad->elem,
                           &acQuadPos, &D_8015E390);
@@ -2013,14 +2021,14 @@ void CollisionCheck_ATCylVsACQuad(GlobalContext* globalCtx, CollisionCheckContex
             Vec3f acQuadPos;
 
             Math_Vec3s_ToVec3f(&atCylinderPos, &atCylinder->unk40.pos);
-            acQuadPos.x = (acQuad->unk40.cornerA.x + acQuad->unk40.cornerB.x + acQuad->unk40.cornerC.x +
-                           acQuad->unk40.cornerD.x) *
+            acQuadPos.x = (acQuad->unk40.corners.cornerA.x + acQuad->unk40.corners.cornerB.x +
+                           acQuad->unk40.corners.cornerC.x + acQuad->unk40.corners.cornerD.x) *
                           0.25f;
-            acQuadPos.y = (acQuad->unk40.cornerA.y + acQuad->unk40.cornerB.y + acQuad->unk40.cornerC.y +
-                           acQuad->unk40.cornerD.y) *
+            acQuadPos.y = (acQuad->unk40.corners.cornerA.y + acQuad->unk40.corners.cornerB.y +
+                           acQuad->unk40.corners.cornerC.y + acQuad->unk40.corners.cornerD.y) *
                           0.25f;
-            acQuadPos.z = (acQuad->unk40.cornerA.z + acQuad->unk40.cornerB.z + acQuad->unk40.cornerC.z +
-                           acQuad->unk40.cornerD.z) *
+            acQuadPos.z = (acQuad->unk40.corners.cornerA.z + acQuad->unk40.corners.cornerB.z +
+                           acQuad->unk40.corners.cornerC.z + acQuad->unk40.corners.cornerD.z) *
                           0.25f;
             func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acQuad->base, &acQuad->elem,
                           &acQuadPos, &D_8015E390);
@@ -2041,21 +2049,23 @@ void CollisionCheck_ATQuadVsACCyl(GlobalContext* globalCtx, CollisionCheckContex
         ((func_8005DF50_IsElementACOff(&acCylinder->elem) != 1)) &&
         ((func_8005DF2C_IsElementATOff(&atQuad->elem) != 1)) &&
         (func_8005DF74_AreDmgFlagsDisjoint(&atQuad->elem, &acCylinder->elem) != 1)) {
-        Math3D_TriNorm(&D_8015E3A0, &atQuad->unk40.cornerA, &atQuad->unk40.cornerB, &atQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E3D8, &atQuad->unk40.cornerA, &atQuad->unk40.cornerC, &atQuad->unk40.cornerD);
+        Math3D_TriNorm(&D_8015E3A0, &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerB,
+                       &atQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E3D8, &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerC,
+                       &atQuad->unk40.corners.cornerD);
         if ((Math3D_CylTriTouchingIntersect(&acCylinder->unk40, &D_8015E3A0, &D_8015E410) == 1) &&
             func_8005D218(globalCtx, atQuad, &D_8015E410)) {
             Vec3f sp64;
             Vec3f sp58;
 
-            sp64.x = (atQuad->unk40.cornerA.x + atQuad->unk40.cornerB.x + atQuad->unk40.cornerC.x +
-                      atQuad->unk40.cornerD.x) *
+            sp64.x = (atQuad->unk40.corners.cornerA.x + atQuad->unk40.corners.cornerB.x +
+                      atQuad->unk40.corners.cornerC.x + atQuad->unk40.corners.cornerD.x) *
                      0.25f;
-            sp64.y = (atQuad->unk40.cornerA.y + atQuad->unk40.cornerB.y + atQuad->unk40.cornerC.y +
-                      atQuad->unk40.cornerD.y) *
+            sp64.y = (atQuad->unk40.corners.cornerA.y + atQuad->unk40.corners.cornerB.y +
+                      atQuad->unk40.corners.cornerC.y + atQuad->unk40.corners.cornerD.y) *
                      0.25f;
-            sp64.z = (atQuad->unk40.cornerA.z + atQuad->unk40.cornerB.z + atQuad->unk40.cornerC.z +
-                      atQuad->unk40.cornerD.z) *
+            sp64.z = (atQuad->unk40.corners.cornerA.z + atQuad->unk40.corners.cornerB.z +
+                      atQuad->unk40.corners.cornerC.z + atQuad->unk40.corners.cornerD.z) *
                      0.25f;
             Math_Vec3s_ToVec3f(&sp58, &acCylinder->unk40.pos);
             func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &sp64, &acCylinder->base, &acCylinder->elem, &sp58,
@@ -2065,14 +2075,14 @@ void CollisionCheck_ATQuadVsACCyl(GlobalContext* globalCtx, CollisionCheckContex
             Vec3f sp4C;
             Vec3f sp40;
 
-            sp4C.x = (atQuad->unk40.cornerA.x + atQuad->unk40.cornerB.x + atQuad->unk40.cornerC.x +
-                      atQuad->unk40.cornerD.x) *
+            sp4C.x = (atQuad->unk40.corners.cornerA.x + atQuad->unk40.corners.cornerB.x +
+                      atQuad->unk40.corners.cornerC.x + atQuad->unk40.corners.cornerD.x) *
                      0.25f;
-            sp4C.y = (atQuad->unk40.cornerA.y + atQuad->unk40.cornerB.y + atQuad->unk40.cornerC.y +
-                      atQuad->unk40.cornerD.y) *
+            sp4C.y = (atQuad->unk40.corners.cornerA.y + atQuad->unk40.corners.cornerB.y +
+                      atQuad->unk40.corners.cornerC.y + atQuad->unk40.corners.cornerD.y) *
                      0.25f;
-            sp4C.z = (atQuad->unk40.cornerA.z + atQuad->unk40.cornerB.z + atQuad->unk40.cornerC.z +
-                      atQuad->unk40.cornerD.z) *
+            sp4C.z = (atQuad->unk40.corners.cornerA.z + atQuad->unk40.corners.cornerB.z +
+                      atQuad->unk40.corners.cornerC.z + atQuad->unk40.corners.cornerD.z) *
                      0.25f;
             Math_Vec3s_ToVec3f(&sp40, &acCylinder->unk40.pos);
             func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &sp4C, &acCylinder->base, &acCylinder->elem, &sp40,
@@ -2137,8 +2147,10 @@ void CollisionCheck_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckConte
     Vec3f sp5C;
 
     if ((atTris->nElements > 0) && ((atTris->elements != NULL)) && (func_8005DF50_IsElementACOff(&acQuad->elem) != 1)) {
-        Math3D_TriNorm(&D_8015E440, &acQuad->unk40.cornerA, &acQuad->unk40.cornerB, &acQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E478, &acQuad->unk40.cornerC, &acQuad->unk40.cornerD, &acQuad->unk40.cornerA);
+        Math3D_TriNorm(&D_8015E440, &acQuad->unk40.corners.cornerA, &acQuad->unk40.corners.cornerB,
+                       &acQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E478, &acQuad->unk40.corners.cornerC, &acQuad->unk40.corners.cornerD,
+                       &acQuad->unk40.corners.cornerA);
         for (var_s1 = atTris->elements; var_s1 < &atTris->elements[atTris->nElements]; var_s1++) {
             if ((func_8005DF2C_IsElementATOff(&var_s1->base) != 1) &&
                 (func_8005DF74_AreDmgFlagsDisjoint(&var_s1->base, &acQuad->elem) != 1) &&
@@ -2147,14 +2159,14 @@ void CollisionCheck_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckConte
                 sp68.x = (var_s1->unk28.vtx[0].x + var_s1->unk28.vtx[1].x + var_s1->unk28.vtx[2].x) * (1.0f / 3.0f);
                 sp68.y = (var_s1->unk28.vtx[0].y + var_s1->unk28.vtx[1].y + var_s1->unk28.vtx[2].y) * (1.0f / 3.0f);
                 sp68.z = (var_s1->unk28.vtx[0].z + var_s1->unk28.vtx[1].z + var_s1->unk28.vtx[2].z) * (1.0f / 3.0f);
-                sp5C.x = (acQuad->unk40.cornerA.x + acQuad->unk40.cornerB.x + acQuad->unk40.cornerC.x +
-                          acQuad->unk40.cornerD.x) *
+                sp5C.x = (acQuad->unk40.corners.cornerA.x + acQuad->unk40.corners.cornerB.x +
+                          acQuad->unk40.corners.cornerC.x + acQuad->unk40.corners.cornerD.x) *
                          0.25f;
-                sp5C.y = (acQuad->unk40.cornerA.y + acQuad->unk40.cornerB.y + acQuad->unk40.cornerC.y +
-                          acQuad->unk40.cornerD.y) *
+                sp5C.y = (acQuad->unk40.corners.cornerA.y + acQuad->unk40.corners.cornerB.y +
+                          acQuad->unk40.corners.cornerC.y + acQuad->unk40.corners.cornerD.y) *
                          0.25f;
-                sp5C.z = (acQuad->unk40.cornerA.z + acQuad->unk40.cornerB.z + acQuad->unk40.cornerC.z +
-                          acQuad->unk40.cornerD.z) *
+                sp5C.z = (acQuad->unk40.corners.cornerA.z + acQuad->unk40.corners.cornerB.z +
+                          acQuad->unk40.corners.cornerC.z + acQuad->unk40.corners.cornerD.z) *
                          0.25f;
                 func_8005E81C(globalCtx, &atTris->base, &var_s1->base, &sp68, &acQuad->base, &acQuad->elem, &sp5C,
                               &D_8015E430);
@@ -2183,8 +2195,10 @@ void CollisionCheck_ATQuadVsACTris(GlobalContext* globalCtx, CollisionCheckConte
     Vec3f sp5C;
 
     if ((acTris->nElements > 0) && ((acTris->elements != NULL)) && (func_8005DF2C_IsElementATOff(&atQuad->elem) != 1)) {
-        Math3D_TriNorm(&D_8015E4C0, &atQuad->unk40.cornerA, &atQuad->unk40.cornerB, &atQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E4F8, &atQuad->unk40.cornerC, &atQuad->unk40.cornerD, &atQuad->unk40.cornerA);
+        Math3D_TriNorm(&D_8015E4C0, &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerB,
+                       &atQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E4F8, &atQuad->unk40.corners.cornerC, &atQuad->unk40.corners.cornerD,
+                       &atQuad->unk40.corners.cornerA);
         if (var_s1 && var_s1) {}
         for (var_s1 = acTris->elements; var_s1 < &acTris->elements[acTris->nElements]; var_s1++) {
             if ((func_8005DF50_IsElementACOff(&var_s1->base) != 1) &&
@@ -2195,14 +2209,14 @@ void CollisionCheck_ATQuadVsACTris(GlobalContext* globalCtx, CollisionCheckConte
                 sp5C.x = (var_s1->unk28.vtx[0].x + var_s1->unk28.vtx[1].x + var_s1->unk28.vtx[2].x) * (1.0f / 3.0f);
                 sp5C.y = (var_s1->unk28.vtx[0].y + var_s1->unk28.vtx[1].y + var_s1->unk28.vtx[2].y) * (1.0f / 3.0f);
                 sp5C.z = (var_s1->unk28.vtx[0].z + var_s1->unk28.vtx[1].z + var_s1->unk28.vtx[2].z) * (1.0f / 3.0f);
-                sp68.x = (atQuad->unk40.cornerA.x + atQuad->unk40.cornerB.x + atQuad->unk40.cornerC.x +
-                          atQuad->unk40.cornerD.x) *
+                sp68.x = (atQuad->unk40.corners.cornerA.x + atQuad->unk40.corners.cornerB.x +
+                          atQuad->unk40.corners.cornerC.x + atQuad->unk40.corners.cornerD.x) *
                          0.25f;
-                sp68.y = (atQuad->unk40.cornerA.y + atQuad->unk40.cornerB.y + atQuad->unk40.cornerC.y +
-                          atQuad->unk40.cornerD.y) *
+                sp68.y = (atQuad->unk40.corners.cornerA.y + atQuad->unk40.corners.cornerB.y +
+                          atQuad->unk40.corners.cornerC.y + atQuad->unk40.corners.cornerD.y) *
                          0.25f;
-                sp68.z = (atQuad->unk40.cornerA.z + atQuad->unk40.cornerB.z + atQuad->unk40.cornerC.z +
-                          atQuad->unk40.cornerD.z) *
+                sp68.z = (atQuad->unk40.corners.cornerA.z + atQuad->unk40.corners.cornerB.z +
+                          atQuad->unk40.corners.cornerC.z + atQuad->unk40.corners.cornerD.z) *
                          0.25f;
                 func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &sp68, &acTris->base, &var_s1->base, &sp5C,
                               &D_8015E4B0);
@@ -2227,32 +2241,36 @@ void CollisionCheck_ATQuadVsACQuad(GlobalContext* globalCtx, CollisionCheckConte
 
     if ((func_8005DF2C_IsElementATOff(&atQuad->elem) != 1) && ((func_8005DF50_IsElementACOff(&acQuad->elem) != 1)) &&
         (func_8005DF74_AreDmgFlagsDisjoint(&atQuad->elem, &acQuad->elem) != 1)) {
-        Math3D_TriNorm(&D_8015E5A8[0], &atQuad->unk40.cornerA, &atQuad->unk40.cornerB, &atQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E5A8[1], &atQuad->unk40.cornerA, &atQuad->unk40.cornerC, &atQuad->unk40.cornerD);
-        Math3D_TriNorm(&D_8015E530[0], &acQuad->unk40.cornerA, &acQuad->unk40.cornerB, &acQuad->unk40.cornerC);
-        Math3D_TriNorm(&D_8015E530[1], &acQuad->unk40.cornerA, &acQuad->unk40.cornerC, &acQuad->unk40.cornerD);
+        Math3D_TriNorm(&D_8015E5A8[0], &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerB,
+                       &atQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E5A8[1], &atQuad->unk40.corners.cornerA, &atQuad->unk40.corners.cornerC,
+                       &atQuad->unk40.corners.cornerD);
+        Math3D_TriNorm(&D_8015E530[0], &acQuad->unk40.corners.cornerA, &acQuad->unk40.corners.cornerB,
+                       &acQuad->unk40.corners.cornerC);
+        Math3D_TriNorm(&D_8015E530[1], &acQuad->unk40.corners.cornerA, &acQuad->unk40.corners.cornerC,
+                       &acQuad->unk40.corners.cornerD);
 
         for (i = 0; i < 2; i++) {
             for (j = 0; j < 2; j++) {
                 if ((Math3D_TrisIntersect(&D_8015E5A8[j], &D_8015E530[i], &D_8015E598) == 1) &&
                     func_8005D218(globalCtx, atQuad, &D_8015E598)) {
-                    atQuadPos.x = (atQuad->unk40.cornerA.x + atQuad->unk40.cornerB.x + atQuad->unk40.cornerC.x +
-                                   atQuad->unk40.cornerD.x) *
+                    atQuadPos.x = (atQuad->unk40.corners.cornerA.x + atQuad->unk40.corners.cornerB.x +
+                                   atQuad->unk40.corners.cornerC.x + atQuad->unk40.corners.cornerD.x) *
                                   0.25f;
-                    atQuadPos.y = (atQuad->unk40.cornerA.y + atQuad->unk40.cornerB.y + atQuad->unk40.cornerC.y +
-                                   atQuad->unk40.cornerD.y) *
+                    atQuadPos.y = (atQuad->unk40.corners.cornerA.y + atQuad->unk40.corners.cornerB.y +
+                                   atQuad->unk40.corners.cornerC.y + atQuad->unk40.corners.cornerD.y) *
                                   0.25f;
-                    atQuadPos.z = (atQuad->unk40.cornerA.z + atQuad->unk40.cornerB.z + atQuad->unk40.cornerC.z +
-                                   atQuad->unk40.cornerD.z) *
+                    atQuadPos.z = (atQuad->unk40.corners.cornerA.z + atQuad->unk40.corners.cornerB.z +
+                                   atQuad->unk40.corners.cornerC.z + atQuad->unk40.corners.cornerD.z) *
                                   0.25f;
-                    acQuadPos.x = (acQuad->unk40.cornerA.x + acQuad->unk40.cornerB.x + acQuad->unk40.cornerC.x +
-                                   acQuad->unk40.cornerD.x) *
+                    acQuadPos.x = (acQuad->unk40.corners.cornerA.x + acQuad->unk40.corners.cornerB.x +
+                                   acQuad->unk40.corners.cornerC.x + acQuad->unk40.corners.cornerD.x) *
                                   0.25f;
-                    acQuadPos.y = (acQuad->unk40.cornerA.y + acQuad->unk40.cornerB.y + acQuad->unk40.cornerC.y +
-                                   acQuad->unk40.cornerD.y) *
+                    acQuadPos.y = (acQuad->unk40.corners.cornerA.y + acQuad->unk40.corners.cornerB.y +
+                                   acQuad->unk40.corners.cornerC.y + acQuad->unk40.corners.cornerD.y) *
                                   0.25f;
-                    acQuadPos.z = (acQuad->unk40.cornerA.z + acQuad->unk40.cornerB.z + acQuad->unk40.cornerC.z +
-                                   acQuad->unk40.cornerD.z) *
+                    acQuadPos.z = (acQuad->unk40.corners.cornerA.z + acQuad->unk40.corners.cornerB.z +
+                                   acQuad->unk40.corners.cornerC.z + acQuad->unk40.corners.cornerD.z) *
                                   0.25f;
                     func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acQuad->base, &acQuad->elem,
                                   &acQuadPos, &D_8015E598);
@@ -2264,8 +2282,8 @@ void CollisionCheck_ATQuadVsACQuad(GlobalContext* globalCtx, CollisionCheckConte
 }
 
 void func_80060EBC_Type0_processAC_(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider) {
-    ColliderJntSph* jntSph = (ColliderJntSph*)collider;
-    ColliderJntSphElement* jntSphElem;
+    ColliderSpheres* jntSph = (ColliderSpheres*)collider;
+    ColliderSpheresElement* jntSphElem;
     Vec3f sp24;
 
     for (jntSphElem = jntSph->elements; jntSphElem < (jntSph->elements + jntSph->nElements); jntSphElem++) {
@@ -2525,10 +2543,10 @@ void CollisionCheck_SetOCvsOC(Collider* leftCollider, ColliderElement* leftEleme
 
 void func_800617D4_0OCvs0OC(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* leftCollider,
                             Collider* rightCollider) {
-    ColliderJntSph* leftJntSph = (ColliderJntSph*)leftCollider;
-    ColliderJntSph* rightJntSph = (ColliderJntSph*)rightCollider;
-    ColliderJntSphElement* rightJntSphElem;
-    ColliderJntSphElement* leftJntSphElem;
+    ColliderSpheres* leftJntSph = (ColliderSpheres*)leftCollider;
+    ColliderSpheres* rightJntSph = (ColliderSpheres*)rightCollider;
+    ColliderSpheresElement* rightJntSphElem;
+    ColliderSpheresElement* leftJntSphElem;
     f32 sp74;
     Vec3f leftJntSphElemPos;
     Vec3f rightJntSphElemPos;
@@ -2559,9 +2577,9 @@ void func_800617D4_0OCvs0OC(GlobalContext* globalCtx, CollisionCheckContext* col
 
 void func_8006199C_0OCvs1OC(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* leftCollider,
                             Collider* rightCollider) {
-    ColliderJntSph* leftJntSph = (ColliderJntSph*)leftCollider;
+    ColliderSpheres* leftJntSph = (ColliderSpheres*)leftCollider;
     ColliderCylinder* rightCylinder = (ColliderCylinder*)rightCollider;
-    ColliderJntSphElement* leftJntSphElem;
+    ColliderSpheresElement* leftJntSphElem;
     f32 sp78;
     Vec3f leftJntSphElemPos;
     Vec3f rightCylinderPos;
@@ -2761,8 +2779,8 @@ void func_80061F64(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, C
 }
 
 void func_8006216C_Type0(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider) {
-    ColliderJntSph* new_var2 = (ColliderJntSph*)collider;
-    ColliderJntSph* new_var = (ColliderJntSph*)collider;
+    ColliderSpheres* new_var2 = (ColliderSpheres*)collider;
+    ColliderSpheres* new_var = (ColliderSpheres*)collider;
     s32 i;
 
     if (new_var->nElements <= 0 || new_var->elements == NULL) {
@@ -2823,11 +2841,11 @@ Linef D_8015E610;
 
 s32 func_800623A4_Type0(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider, Vec3f* arg3,
                         Vec3f* arg4) {
-    ColliderJntSph* new_var;
+    ColliderSpheres* new_var;
     s32 i;
-    ColliderJntSphElement* entry;
+    ColliderSpheresElement* entry;
 
-    new_var = (ColliderJntSph*)collider;
+    new_var = (ColliderSpheres*)collider;
     for (i = 0; i < new_var->nElements; i++) {
         entry = new_var->elements + i;
 
@@ -2955,15 +2973,15 @@ void func_80062718(struct_80062718_1* arg0, struct_80062718_2* arg1) {
 
 typedef struct struct_80062734 {
     char unk_0[0x40];
-    struct_Collider_Type3_subc unk40;
+    ColliderQuadShape unk40;
 } struct_80062734;
 
 // uses not decompiled
-void func_80062734(struct_80062734* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
-    Math_Vec3f_Copy(&arg0->unk40.cornerA, arg3);
-    Math_Vec3f_Copy(&arg0->unk40.cornerB, arg4);
-    Math_Vec3f_Copy(&arg0->unk40.cornerD, arg1);
-    Math_Vec3f_Copy(&arg0->unk40.cornerC, arg2);
+void func_80062734(struct_80062734* arg0, Vec3f* cornerD, Vec3f* cornerC, Vec3f* cornerA, Vec3f* cornerB) {
+    Math_Vec3f_Copy(&arg0->unk40.corners.cornerA, cornerA);
+    Math_Vec3f_Copy(&arg0->unk40.corners.cornerB, cornerB);
+    Math_Vec3f_Copy(&arg0->unk40.corners.cornerD, cornerD);
+    Math_Vec3f_Copy(&arg0->unk40.corners.cornerC, cornerC);
     func_8005CEDC(&arg0->unk40);
 }
 
@@ -3004,7 +3022,7 @@ void func_8006285C(GlobalContext* globalCtx, struct_800627A0* arg1, s32 arg2, Ve
     func_8005C608(globalCtx, &new_var->unk28, arg3);
 }
 
-void func_800628A4_Type0(s32 arg0, ColliderJntSph* jntSph) {
+void func_800628A4_Type0(s32 arg0, ColliderSpheres* jntSph) {
     static Vec3f D_8015CF00;
     // bss block number rollover!
     static Vec3f D_8015E648;

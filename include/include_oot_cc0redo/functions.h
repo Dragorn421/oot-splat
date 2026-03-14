@@ -679,7 +679,7 @@ void func_8005B9B0_ClearColliderElementATHit(GlobalContext* globalCtx, ColliderE
 void func_8005B9E8_ClearColliderElementACHit(GlobalContext* globalCtx, ColliderElement* body);
 // ? func_8005BA1C_ClearColliderElementOCHit(?);
 // ? func_8005BA30_Type0(?);
-s32 func_8005BA74(GlobalContext*, ColliderJntSphElementShape*);
+s32 func_8005BA74(GlobalContext*, ColliderSpheresElementShape*);
 // ? func_8005BA84_Type0(?);
 // ? func_8005BAD8_InitJntSphElement(?);
 // ? func_8005BB10_Type0(?);

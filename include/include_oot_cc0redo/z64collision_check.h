@@ -93,14 +93,14 @@ typedef enum HitBacklash {
 } HitBacklash;
 
 typedef struct ColliderElementDamageInfoAC {
-    /* 0x00 */ s32 dmgFlags; /* Collision Exclusion Mask */
+    /* 0x00 */ u32 dmgFlags; /* Collision Exclusion Mask */
     /* 0x04 */ u8 hitBacklash; /* Damage Effect (Knockback, Fire, etc.) */
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ Vec3s unk_06;
 } ColliderElementDamageInfoAC; // size = 0x0C
 
 typedef struct ColliderElementDamageInfoACSrc {
-    s32 dmgFlags; /* Bumper Exclusion Mask */
+    u32 dmgFlags; /* Bumper Exclusion Mask */
     u8 hitBacklash;
     u8 unk5;
 } ColliderElementDamageInfoACSrc;
@@ -146,50 +146,54 @@ typedef struct ColliderSrc_Type0_ptrC_sub18 {
     s16 unkA;
 } ColliderSrc_Type0_ptrC_sub18; /* size >= 0xC */
 
-// type0 - jntsph
+/*
+ * Spheres
+ */
 
-typedef struct ColliderJntSphElementShape {
+typedef struct ColliderSpheresElementShape {
     Sphere16 unk0;
     Sphere16 unk8;
     f32 unk10;
     u8 unk14;
-} ColliderJntSphElementShape; /* size = 0x18 */
+} ColliderSpheresElementShape; /* size = 0x18 */
 
-typedef struct ColliderJntSphElement {
+typedef struct ColliderSpheresElement {
     ColliderElement base;
-    ColliderJntSphElementShape unk28;
-} ColliderJntSphElement; /* size = 0x40 */
+    ColliderSpheresElementShape unk28;
+} ColliderSpheresElement; /* size = 0x40 */
 
-typedef struct ColliderJntSph {
+typedef struct ColliderSpheres {
     Collider base;
     s32 nElements;
-    ColliderJntSphElement* elements;
-} ColliderJntSph;
+    ColliderSpheresElement* elements;
+} ColliderSpheres;
 
-typedef struct ColliderJntSphElementSrc {
+typedef struct ColliderSpheresElementSrc {
     ColliderElementSrc base;
     ColliderSrc_Type0_ptrC_sub18 unk18;
-} ColliderJntSphElementSrc; /* size = 0x24 */
+} ColliderSpheresElementSrc; /* size = 0x24 */
 
-typedef struct ColliderJntSphSrc {
+typedef struct ColliderSpheresSrc {
     ColliderSrc base;
     s32 nElements;
-    ColliderJntSphElementSrc* elements;
-} ColliderJntSphSrc;
+    ColliderSpheresElementSrc* elements;
+} ColliderSpheresSrc;
 
-typedef struct ColliderJntSphSrcAltWithActor {
+typedef struct ColliderSpheresSrcAltWithActor {
     ColliderSrcAltWithActor base;
     s32 nElements;
-    ColliderJntSphElementSrc* elements;
-} ColliderJntSphSrcAltWithActor;
+    ColliderSpheresElementSrc* elements;
+} ColliderSpheresSrcAltWithActor;
 
-typedef struct ColliderJntSphSrcAlt {
+typedef struct ColliderSpheresSrcAlt {
     ColliderSrcAlt base;
     s32 nElements;
-    ColliderJntSphElementSrc* elements;
-} ColliderJntSphSrcAlt;
+    ColliderSpheresElementSrc* elements;
+} ColliderSpheresSrcAlt;
 
-// type1 - cylinder
+/*
+ * Cylinder
+ */
 
 typedef struct ColliderCylinder {
     Collider base;
@@ -215,7 +219,9 @@ typedef struct ColliderCylinderSrcAltWithActor {
     /* 0x20 */ Cylinder16 unk20;
 } ColliderCylinderSrcAltWithActor;
 
-// type2 - tris
+/*
+ * Tris
+ */
 
 typedef struct ColliderTrisElementSrc {
     ColliderElementSrc base;
@@ -245,37 +251,45 @@ typedef struct ColliderTris {
     ColliderTrisElement* elements;
 } ColliderTris;
 
-// type3 - quad
+/*
+ * Quad
+ */
+
+typedef struct ColliderQuadShapeCorners {
+    /* 0x00 */ Vec3f cornerD;
+    /* 0x0C */ Vec3f cornerC;
+    /* 0x18 */ Vec3f cornerA;
+    /* 0x24 */ Vec3f cornerB;
+} ColliderQuadShapeCorners; // size = 0x30
 
 typedef struct ColliderQuadSrc {
     ColliderSrc base;
     ColliderElementSrc elem;
-    Vec3f corners[4];
+    ColliderQuadShapeCorners corners;
 } ColliderQuadSrc;
 
 typedef struct ColliderQuadSrcAlt {
     /* 0x00 */ ColliderSrcAlt base;
     /* 0x08 */ ColliderElementSrc elem;
-    /* 0x20 */ Vec3f corners[4];
+    /* 0x20 */ ColliderQuadShapeCorners corners;
 } ColliderQuadSrcAlt;
 
-typedef struct struct_Collider_Type3_subc {
-    /* 0x00 */ Vec3f cornerD;
-    /* 0x0C */ Vec3f cornerC;
-    /* 0x18 */ Vec3f cornerA;
-    /* 0x24 */ Vec3f cornerB;
+typedef struct ColliderQuadShape {
+    /* 0x00 */ ColliderQuadShapeCorners corners;
     /* 0x30 */ Vec3s middleAB;
     /* 0x36 */ Vec3s middleCD;
     /* 0x3C */ f32 unk3C;
-} struct_Collider_Type3_subc; /* size = 0x40 */
+} ColliderQuadShape; /* size = 0x40 */
 
 typedef struct ColliderQuad {
     Collider base;
     ColliderElement elem;
-    struct_Collider_Type3_subc unk40;
+    ColliderQuadShape unk40;
 } ColliderQuad;
 
-// ?
+/*
+ * ?
+ */
 
 typedef struct struct_ColChkCtx_290 {
     char unk_0[0x18];
