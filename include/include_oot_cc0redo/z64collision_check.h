@@ -159,7 +159,7 @@ typedef struct ColliderSpheresElementShape {
 
 typedef struct ColliderSpheresElement {
     ColliderElement base;
-    ColliderSpheresElementShape unk28;
+    ColliderSpheresElementShape shape;
 } ColliderSpheresElement; /* size = 0x40 */
 
 typedef struct ColliderSpheres {
@@ -198,25 +198,25 @@ typedef struct ColliderSpheresSrcAlt {
 typedef struct ColliderCylinder {
     Collider base;
     ColliderElement elem;
-    Cylinder16 unk40;
+    Cylinder16 shape;
 } ColliderCylinder;
 
 typedef struct ColliderCylinderSrc {
     /* 0x00 */ ColliderSrc base;
     /* 0x08 */ ColliderElementSrc elem;
-    /* 0x20 */ Cylinder16 unk20;
+    /* 0x20 */ Cylinder16 shape;
 } ColliderCylinderSrc;
 
 typedef struct ColliderCylinderSrcAlt {
     ColliderSrcAlt base;
     ColliderElementSrc elem;
-    Cylinder16 unk20;
+    Cylinder16 shape;
 } ColliderCylinderSrcAlt;
 
 typedef struct ColliderCylinderSrcAltWithActor {
     /* 0x00 */ ColliderSrcAltWithActor base;
     /* 0x08 */ ColliderElementSrc elem;
-    /* 0x20 */ Cylinder16 unk20;
+    /* 0x20 */ Cylinder16 shape;
 } ColliderCylinderSrcAltWithActor;
 
 /*
@@ -225,7 +225,7 @@ typedef struct ColliderCylinderSrcAltWithActor {
 
 typedef struct ColliderTrisElementSrc {
     ColliderElementSrc base;
-    Vec3f unk18[3];
+    Vec3f vertices[3];
 } ColliderTrisElementSrc; /* size = 0x48 */
 
 typedef struct ColliderTrisSrc {
@@ -242,7 +242,7 @@ typedef struct ColliderTrisSrcAlt {
 
 typedef struct ColliderTrisElement {
     ColliderElement base;
-    TriNorm unk28;
+    TriNorm shape;
 } ColliderTrisElement; /* size = 0x5C */
 
 typedef struct ColliderTris {
@@ -284,7 +284,7 @@ typedef struct ColliderQuadShape {
 typedef struct ColliderQuad {
     Collider base;
     ColliderElement elem;
-    ColliderQuadShape unk40;
+    ColliderQuadShape shape;
 } ColliderQuad;
 
 /*

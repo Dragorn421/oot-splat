@@ -242,7 +242,7 @@ extern s32 D_8011D3AC;
 //extern ? D_8011DE54;
 //extern ? D_8011DE6C;
 //extern ? D_8011DE78;
-//extern ? D_8011DEAC;
+//extern ? sColliderQuadShapeInit;
 //extern ? D_8011DEEC;
 //extern ? D_8011DF5C_processAC_;
 //extern ? D_8011DF6C_ATvsAC;
