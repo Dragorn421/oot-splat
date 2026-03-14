@@ -35,7 +35,7 @@ typedef struct Collider {
     /* 0x00 */ struct Actor* actor;
     /* 0x04 */ struct Actor* at;
     /* 0x08 */ struct Actor* ac;
-    /* 0x0C */ struct Actor* ot;
+    /* 0x0C */ struct Actor* oc;
     /* 0x10 */ u8 atFlags;
     /* 0x11 */ u8 acFlags;
     /* 0x12 */ u8 ocFlags1;
