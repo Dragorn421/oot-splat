@@ -289,10 +289,10 @@ typedef struct ColliderQuad {
  * ?
  */
 
-typedef struct struct_ColChkCtx_290 {
+typedef struct struct_ColliderCtx_290 {
     char unk_0[0x18];
     u16 unk18;
-} struct_ColChkCtx_290;
+} struct_ColliderCtx_290;
 
 /*
  * Collider properties, for all types

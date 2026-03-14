@@ -899,8 +899,8 @@ typedef struct {
     /* 0x1C0 */ s32 nOCColliders;
     /* 0x1C4 */ Collider* ocColliders[50];
     s32 unk28C;
-    struct_ColChkCtx_290* unk290[3];
-} CollisionCheckContext; // size = 0x29C
+    struct_ColliderCtx_290* unk290[3];
+} ColliderContext; // size = 0x29C
 
 typedef struct {
     /* 0x00 */ char unk_00[0x10];
@@ -1081,7 +1081,7 @@ typedef struct GlobalContext {
     /* 0x11E5D */ s8 bombchuBowlingAmmo; // "bombchu_game_flag"
     /* 0x11E5E */ u8 fadeTransition;
     /* 0x11E5F */ char unk_11E5F[0x1];
-    /* 0x11E60 */ CollisionCheckContext colChkCtx;
+    /* 0x11E60 */ ColliderContext colliderCtx;
     /* 0x120FC */ char unk_120FC[0x28];
     /* 0x12124 */ PreRenderContext preRenderCtx;
     /* 0x121C8 */ TransitionContext transitionCtx;

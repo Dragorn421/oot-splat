@@ -716,15 +716,15 @@ s32 Collider_ClearQuadOCHit(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005D334(?);
 // ? func_8005D3A4(?);
 // ? func_8005D3BC(?);
-void func_8005D400(GlobalContext*, CollisionCheckContext*);
+void func_8005D400(GlobalContext*, ColliderContext*);
 // ? func_8005D40C(?);
 // ? func_8005D4DC(?);
 // ? func_8005D62C(?);
-s32 Collider_AddAT(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
+s32 Collider_AddAT(GlobalContext* globalCtx, ColliderContext* simpleBodyGroups,
                                Collider* collision);
-s32 Collider_AddAC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
+s32 Collider_AddAC(GlobalContext* globalCtx, ColliderContext* simpleBodyGroups,
                                Collider* collision);
-s32 Collider_AddOC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
+s32 Collider_AddOC(GlobalContext* globalCtx, ColliderContext* simpleBodyGroups,
                                Collider* collision);
 // ? Collider_IsElementATOff(?);
 // ? Collider_IsElementACOff(?);
@@ -740,14 +740,14 @@ s32 Collider_AddOC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGr
 // ? func_8006139C_ProcessAllATvsAC(?);
 // ? func_8006146C(?);
 // ? func_800614A4(?);
-// ? func_8006199C_0OCvs1OC(?);
-// ? func_80061BF4(?);
-// ? func_80061C18(?);
+// ? Collider_OCSpheresVsOCCylinder(?);
+// ? Collider_IsColliderOCOff(?);
+// ? Collider_CheckSkipOCVsOC(?);
 // ? func_80061C98_OC(?);
-// ? func_80061E48(?);
+// ? Collider_InitCollideData(?);
 // ? func_80061E8C(?);
-void func_80061ED4(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init4* sub98Init);
-void func_80061EFC(SubActorStruct98* sub98, ActorDamageChart* damageChart, Sub98Init5* sub98Init);
+void func_80061ED4(CollideData* sub98, ActorDamageChart* damageChart, CollideDataInit* sub98Init);
+void func_80061EFC(CollideData* sub98, ActorDamageChart* damageChart, CollideDataInitAlt* sub98Init);
 // ? func_80061F64(?);
 // ? func_800622E4(?);
 // ? func_80062530(?);
