@@ -679,7 +679,7 @@ void func_8005B9B0_ClearColliderElementATHit(GlobalContext* globalCtx, ColliderE
 void func_8005B9E8_ClearColliderElementACHit(GlobalContext* globalCtx, ColliderElement* body);
 // ? func_8005BA1C_ClearColliderElementOCHit(?);
 // ? func_8005BA30_Type0(?);
-s32 func_8005BA74(GlobalContext*, struct_8011DE54*);
+s32 func_8005BA74(GlobalContext*, ColliderJntSphElementShape*);
 // ? func_8005BA84_Type0(?);
 // ? func_8005BAD8_InitJntSphElement(?);
 // ? func_8005BB10_Type0(?);
@@ -690,14 +690,14 @@ s32 func_8005BA74(GlobalContext*, struct_8011DE54*);
 // void func_8005C050_jntsph_Type0(GlobalContext* globalCtx, Collider* collision, Actor* actor, UNK_TYPE arg3, UNK_TYPE arg4);
 // ? func_8005C2BC(?);
 s32 ActorCollider_AllocThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision);
-s32 ActorCollider_FreeThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision);
+s32 ActorCollider_DestroyCylinder(GlobalContext* globalCtx, ColliderCylinder* collision);
 s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision, Actor* actor,
                                ColliderCylinderSrc* src);
 s32 func_8005C540_SetAC_1(GlobalContext* globalCtx, Collider* collision);
 s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision);
-// ? func_8005C5B0(?);
+// ? func_8005C5B0_InitTriNorm(?);
 // ? func_8005C608(?);
-// ? func_8005C6C0_tris(?);
+// ? func_8005C6C0_InitTrisElement(?);
 // ? func_8005C6F8(?);
 // ? func_8005C730(?);
 // ? func_8005C774(?);

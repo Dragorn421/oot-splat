@@ -140,29 +140,24 @@ typedef struct ColliderElementSrc {
 
 // ?
 
-typedef struct struct_8005BA84_arg1_sub {
-    Vec3s unk0;
-    s16 unk6;
-} struct_8005BA84_arg1_sub; /* size = 0x8 */
-
 typedef struct ColliderSrc_Type0_ptrC_sub18 {
     u8 unk0;
-    struct_8005BA84_arg1_sub unk2;
+    Sphere16 unk2;
     s16 unkA;
 } ColliderSrc_Type0_ptrC_sub18; /* size >= 0xC */
 
 // type0 - jntsph
 
-typedef struct struct_8011DE54 {
-    struct_8005BA84_arg1_sub unk0;
+typedef struct ColliderJntSphElementShape {
+    Sphere16 unk0;
     Sphere16 unk8;
     f32 unk10;
     u8 unk14;
-} struct_8011DE54; /* size = 0x18 */
+} ColliderJntSphElementShape; /* size = 0x18 */
 
 typedef struct ColliderJntSphElement {
     ColliderElement base;
-    struct_8011DE54 unk28;
+    ColliderJntSphElementShape unk28;
 } ColliderJntSphElement; /* size = 0x40 */
 
 typedef struct ColliderJntSph {
@@ -269,8 +264,8 @@ typedef struct struct_Collider_Type3_subc {
     /* 0x0C */ Vec3f cornerC;
     /* 0x18 */ Vec3f cornerA;
     /* 0x24 */ Vec3f cornerB;
-    /* 0x30 */ Vec3s unk30;
-    /* 0x36 */ Vec3s unk36;
+    /* 0x30 */ Vec3s middleAB;
+    /* 0x36 */ Vec3s middleCD;
     /* 0x3C */ f32 unk3C;
 } struct_Collider_Type3_subc; /* size = 0x40 */
 
