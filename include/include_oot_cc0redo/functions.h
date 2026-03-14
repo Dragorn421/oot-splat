@@ -736,14 +736,14 @@ s32 Collider_AddOC(GlobalContext* globalCtx, ColliderContext* simpleBodyGroups,
 // ? func_8005E800(?);
 // ? Collider_ATVsACHit(?);
 // ? func_800611A0_processAC_(?);
-// ? func_80061274_processATvsAC(?);
-// ? func_8006139C_ProcessAllATvsAC(?);
+// ? Collider_DoATColliderVsAC(?);
+// ? Collider_DoATVsAC(?);
 // ? func_8006146C(?);
 // ? func_800614A4(?);
 // ? Collider_OCSpheresVsOCCylinder(?);
 // ? Collider_IsColliderOCOff(?);
 // ? Collider_CheckSkipOCVsOC(?);
-// ? func_80061C98_OC(?);
+// ? Collider_DoOCVsOC(?);
 // ? Collider_InitCollideData(?);
 // ? func_80061E8C(?);
 void func_80061ED4(CollideData* sub98, ActorDamageChart* damageChart, CollideDataInit* sub98Init);
@@ -752,7 +752,7 @@ void func_80061EFC(CollideData* sub98, ActorDamageChart* damageChart, CollideDat
 // ? func_800622E4(?);
 // ? func_80062530(?);
 // ? func_800626B0(?);
-void ActorCollider_Type1_Update(Actor* actor, ColliderCylinder* collision);
+void Collider_UpdateCylinderShape(Actor* actor, ColliderCylinder* collision);
 // ? func_80062734(?);
 // ? func_80062A28(?);
 // ? func_80062B80(?);
