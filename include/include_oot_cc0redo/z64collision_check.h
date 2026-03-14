@@ -39,7 +39,7 @@ typedef struct {
     /* 0x06 */ Vec3s unk_06;
 } ColliderBump; // size = 0x0C
 
-typedef struct ColliderBody {
+typedef struct ColliderElement {
     /* 0x00 */ ColliderTouch toucher;
     /* 0x08 */ ColliderBump bumper;
     /* 0x14 */ u8 flags;
@@ -48,9 +48,9 @@ typedef struct ColliderBody {
     /* 0x17 */ u8 flags2;
     /* 0x18 */ struct Collider* unk_18;
     /* 0x1C */ struct Collider* colBuf;
-    /* 0x20 */ struct ColliderBody* unk_20;
-    /* 0x24 */ struct ColliderBody* colliding;
-} ColliderBody; // size = 0x28
+    /* 0x20 */ struct ColliderElement* unk_20;
+    /* 0x24 */ struct ColliderElement* colliding;
+} ColliderElement; // size = 0x28
 
 typedef struct ColliderTouchSrc {
      s32 toucherMask; /* Attack Toucher Exclusion Mask */
@@ -65,7 +65,7 @@ typedef struct ColliderBumpSrc {
     u8 unk5;
 } ColliderBumpSrc;
 
-typedef struct ColliderBodySrc {
+typedef struct ColliderElementSrc {
     /* 0x00 */ u8 bodyFlags;
     /* 0x01 */ u8 unk_09[0x3]; /* 000000 */
     /* 0x04 */ ColliderTouchSrc unk4;
@@ -74,7 +74,7 @@ typedef struct ColliderBodySrc {
     /* 0x15 */ u8 bumperFlags; /* Bumper Flags */
     /* 0x16 */ u8 bodyFlags2;
     /* 0x17 */ u8 unk_1F; /* 00 */
-} ColliderBodySrc; // size = 0x18
+} ColliderElementSrc; // size = 0x18
 
 typedef struct {
     /* 0x00 */ u8 unk_00;
@@ -126,7 +126,7 @@ typedef struct struct_8011DE54 {
 } struct_8011DE54; /* size = 0x18 */
 
 typedef struct Collider_Type0_ptr1C {
-    ColliderBody unk0;
+    ColliderElement unk0;
     struct_8011DE54 unk28;
 } Collider_Type0_ptr1C; /* size = 0x40 */
 
@@ -137,7 +137,7 @@ typedef struct Collider_Type0 {
 } Collider_Type0;
 
 typedef struct ColliderSrc_Type0_ptrC {
-    ColliderBodySrc unk0;
+    ColliderElementSrc unk0;
     ColliderSrc_Type0_ptrC_sub18 unk18;
 } ColliderSrc_Type0_ptrC; /* size = 0x24 */
 
@@ -163,32 +163,32 @@ typedef struct ColliderSrc_Type0_8005B6EC {
 
 typedef struct Collider_Type1 {
     Collider unk0;
-    ColliderBody unk18;
+    ColliderElement unk18;
     Cylinder16 unk40;
 } Collider_Type1;
 
 typedef struct ColliderSrc_Type1 {
     /* 0x00 */ ColliderSrc unk0;
-    /* 0x08 */ ColliderBodySrc unk8;
+    /* 0x08 */ ColliderElementSrc unk8;
     /* 0x20 */ Cylinder16 unk20;
 } ColliderSrc_Type1;
 
 typedef struct ColliderSrc_Type1_8005B6EC {
     ColliderSrc_8005B6EC unk0;
-    ColliderBodySrc unk8;
+    ColliderElementSrc unk8;
     Cylinder16 unk20;
 } ColliderSrc_Type1_8005B6EC;
 
 typedef struct ColliderSrc_Type1_8005B6B0 {
     /* 0x00 */ ColliderSrc_8005B6B0 unk0;
-    /* 0x08 */ ColliderBodySrc unk8;
+    /* 0x08 */ ColliderElementSrc unk8;
     /* 0x20 */ Cylinder16 unk20;
 } ColliderSrc_Type1_8005B6B0;
 
 // type2 - tris
 
 typedef struct ColliderSrc_Type2_ptrC {
-    ColliderBodySrc unk0;
+    ColliderElementSrc unk0;
     Vec3f unk18;
     char unk_24[0x18];
 } ColliderSrc_Type2_ptrC; /* size = 0x48 */
@@ -206,7 +206,7 @@ typedef struct ColliderSrc_Type2_8005B6EC {
 } ColliderSrc_Type2_8005B6EC;
 
 typedef struct Collider_Type2_ptr1C {
-    ColliderBody unk0;
+    ColliderElement unk0;
     TriNorm unk28;
 } Collider_Type2_ptr1C; /* size = 0x5C */
 
@@ -220,13 +220,13 @@ typedef struct Collider_Type2 {
 
 typedef struct ColliderSrc_Type3 {
     ColliderSrc unk0;
-    ColliderBodySrc unk8;
+    ColliderElementSrc unk8;
     Vec3f unk20[4];
 } ColliderSrc_Type3;
 
 typedef struct ColliderSrc_Type3_8005B6EC {
     /* 0x00 */ ColliderSrc_8005B6EC unk0;
-    /* 0x08 */ ColliderBodySrc unk8;
+    /* 0x08 */ ColliderElementSrc unk8;
     /* 0x20 */ Vec3f unk20[4];
 } ColliderSrc_Type3_8005B6EC;
 
@@ -242,7 +242,7 @@ typedef struct struct_Collider_Type3_subc {
 
 typedef struct Collider_Type3 {
     Collider unk0;
-    ColliderBody unk18;
+    ColliderElement unk18;
     struct_Collider_Type3_subc unk40;
 } Collider_Type3;
 

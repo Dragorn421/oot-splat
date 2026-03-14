@@ -122,12 +122,12 @@ s32 func_8005B860(GlobalContext* globalCtx, ColliderBump* arg1, ColliderBumpSrc*
     return 1;
 }
 
-ColliderBody D_8011DE2C = {
+ColliderElement D_8011DE2C = {
     { 0, 0, 0 }, { 0xFFCFFFFF, 0, 0, { 0, 0, 0 } }, 0, 0, 0, 0, NULL, NULL, NULL, NULL,
 };
 
 // multi-type
-s32 func_8005B884(GlobalContext* globalCtx, ColliderBody* arg1) {
+s32 func_8005B884(GlobalContext* globalCtx, ColliderElement* arg1) {
     *arg1 = D_8011DE2C;
     func_8005B7C0(globalCtx, &arg1->toucher);
     func_8005B824(globalCtx, &arg1->bumper);
@@ -135,14 +135,14 @@ s32 func_8005B884(GlobalContext* globalCtx, ColliderBody* arg1) {
 }
 
 // multi-type
-s32 func_8005B904(GlobalContext* globalCtx, ColliderBody* body) {
+s32 func_8005B904(GlobalContext* globalCtx, ColliderElement* body) {
     func_8005B7E4(globalCtx, &body->toucher);
     func_8005B850(globalCtx, &body->bumper);
     return 1;
 }
 
 // multi-type
-s32 func_8005B93C(GlobalContext* globalCtx, ColliderBody* body, ColliderBodySrc* bodyInfoInner) {
+s32 func_8005B93C(GlobalContext* globalCtx, ColliderElement* body, ColliderElementSrc* bodyInfoInner) {
     body->flags = bodyInfoInner->bodyFlags;
     func_8005B7F4(globalCtx, &body->toucher, &bodyInfoInner->unk4);
     func_8005B860(globalCtx, &body->bumper, &bodyInfoInner->unkC);
@@ -153,7 +153,7 @@ s32 func_8005B93C(GlobalContext* globalCtx, ColliderBody* body, ColliderBodySrc*
 }
 
 // multi-type
-void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body) {
+void func_8005B9B0(GlobalContext* globalCtx, ColliderElement* body) {
     body->unk_18 = 0;
     body->unk_20 = 0;
     body->toucherFlags &= ~0x2;
@@ -162,7 +162,7 @@ void func_8005B9B0(GlobalContext* globalCtx, ColliderBody* body) {
 }
 
 // multi-type
-void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body) {
+void func_8005B9E8(GlobalContext* globalCtx, ColliderElement* body) {
     body->bumperFlags &= ~0x2;
     body->bumperFlags &= ~0x80;
     body->colBuf = NULL;
@@ -170,7 +170,7 @@ void func_8005B9E8(GlobalContext* globalCtx, ColliderBody* body) {
     body->bumper.unk_06.x = body->bumper.unk_06.y = body->bumper.unk_06.z = 0;
 }
 
-void func_8005BA1C(GlobalContext* globalCtx, ColliderBody* body) {
+void func_8005BA1C(GlobalContext* globalCtx, ColliderElement* body) {
     body->flags2 &= ~0x2;
 }
 
@@ -535,7 +535,7 @@ s32 func_8005C6C0_tris(GlobalContext* globalCtx, Collider_Type2_ptr1C* arg1) {
 }
 
 typedef struct struct_8005C6F8 {
-    ColliderBody unk0;
+    ColliderElement unk0;
     char unk_28[0x5C - 0x28];
 } struct_8005C6F8; /* size = 0x5C */
 
@@ -551,12 +551,12 @@ s32 func_8005C730(GlobalContext* globalCtx, Collider_Type2_ptr1C* arg1, Collider
     return 1;
 }
 
-s32 func_8005C774(GlobalContext* globalCtx, ColliderBody* arg1) {
+s32 func_8005C774(GlobalContext* globalCtx, ColliderElement* arg1) {
     func_8005B9B0(globalCtx, arg1);
     return 1;
 }
 
-s32 func_8005C798_SetAC_sub_2(GlobalContext* globalCtx, ColliderBody* arg1) {
+s32 func_8005C798_SetAC_sub_2(GlobalContext* globalCtx, ColliderElement* arg1) {
     func_8005B9E8(globalCtx, arg1);
     return 1;
 }
@@ -1278,21 +1278,21 @@ s32 func_8005DE9C(GlobalContext* globalCtx, SubGlobalContext11E60* arg1, struct_
     return temp_v1;
 }
 
-s32 func_8005DF2C(ColliderBody* arg0) {
+s32 func_8005DF2C(ColliderElement* arg0) {
     if (!(arg0->toucherFlags & 1)) {
         return 1;
     }
     return 0;
 }
 
-s32 func_8005DF50(ColliderBody* arg0) {
+s32 func_8005DF50(ColliderElement* arg0) {
     if (!(arg0->bumperFlags & 1)) {
         return 1;
     }
     return 0;
 }
 
-s32 func_8005DF74(ColliderBody* arg0, ColliderBody* arg1) {
+s32 func_8005DF74(ColliderElement* arg0, ColliderElement* arg1) {
     if (!(arg0->toucher.flags & arg1->bumper.flags)) {
         return 1;
     }
@@ -1446,7 +1446,7 @@ void func_8005E2C8(GlobalContext* globalCtx, Collider* arg2, Vec3f* arg3) {
 void func_80062D60(GlobalContext* globalCtx, Vec3f* arg1);
 void func_80062DAC(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2);
 
-void func_8005E2EC(GlobalContext* globalCtx, ColliderBody* arg1, Collider* arg2, Vec3f* arg3) {
+void func_8005E2EC(GlobalContext* globalCtx, ColliderElement* arg1, Collider* arg2, Vec3f* arg3) {
     if (((arg1->toucherFlags & 0x18) == 0) && (arg2->unk_14 != 9)) {
         func_80029CA4(globalCtx, 0, arg3);
         if (arg2->actor == NULL) {
@@ -1478,7 +1478,7 @@ void func_8005E2EC(GlobalContext* globalCtx, ColliderBody* arg1, Collider* arg2,
     }
 }
 
-s32 func_8005E4F8(Collider* arg0, ColliderBody* arg1) {
+s32 func_8005E4F8(Collider* arg0, ColliderElement* arg1) {
     Actor* temp_v1;
 
     temp_v1 = arg0->actor;
@@ -1509,7 +1509,7 @@ u8 D_8011DF40[][2] = {
 void func_80062CD4(GlobalContext* globalCtx, Vec3f* arg1);
 void func_80062E14(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2);
 
-void func_8005E604(GlobalContext* globalCtx, Collider* arg1, ColliderBody* arg2, Collider* arg3, ColliderBody* arg4,
+void func_8005E604(GlobalContext* globalCtx, Collider* arg1, ColliderElement* arg2, Collider* arg3, ColliderElement* arg4,
                    Vec3f* arg5) {
     if (!(arg4->bumperFlags & 0x40) && ((((arg2->toucherFlags & 0x20) != 0)) || !(arg2->toucherFlags & 0x40))) {
         if (arg3->actor != NULL) {
@@ -1549,8 +1549,8 @@ void func_8005E800(Collider* arg0, Collider* arg1) {
     arg1->collideFlags |= 0x80;
 }
 
-s32 func_8005E81C(GlobalContext* globalCtx, Collider* arg1, ColliderBody* arg2, Vec3f* arg3, Collider* arg4,
-                  ColliderBody* arg5, Vec3f* arg6, Vec3f* arg7) {
+s32 func_8005E81C(GlobalContext* globalCtx, Collider* arg1, ColliderElement* arg2, Vec3f* arg3, Collider* arg4,
+                  ColliderElement* arg5, Vec3f* arg6, Vec3f* arg7) {
     if ((arg4->collideFlags & 4) && (arg1->actor != NULL) && (arg4->actor != NULL)) {
         func_8005E800(arg1, arg4);
     }
@@ -2379,7 +2379,7 @@ s32 func_8006146C(u8 arg0) {
     return 2;
 }
 
-void func_800614A4(Collider* arg0, ColliderBody* arg1, Vec3f* arg2, Collider* arg3, ColliderBody* arg4, Vec3f* arg5,
+void func_800614A4(Collider* arg0, ColliderElement* arg1, Vec3f* arg2, Collider* arg3, ColliderElement* arg4, Vec3f* arg5,
                    f32 arg6) {
     s32 pad;
     s32 pad2;
@@ -2666,7 +2666,7 @@ void func_80061F2C(SubActorStruct98* arg0, s32 arg1, Sub98Init5* arg2) {
     func_80061EFC(arg0, CollisionBtlTbl_Get(arg1), arg2);
 }
 
-void func_80061F64(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2, ColliderBody* obj_elem) {
+void func_80061F64(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2, ColliderElement* obj_elem) {
     f32 unkf;
     s32 i;
     u32 unk0;
