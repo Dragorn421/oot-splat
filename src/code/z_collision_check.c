@@ -3173,25 +3173,23 @@ void func_80062E14(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2) {
     Audio_PlaySoundGeneral(0x1837U, arg2, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
 }
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/OTLXt
 s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6_out,
                   Vec3f* arg7_out) {
     Vec3f sp6C;
-    Vec3f* new_var;
     Vec3f sp60;
     Vec3f sp54;
+    f32 var_ft4_real;
     f32 sp4C;
-    f32 temp_fa0;
     float new_var2;
     f32 temp_fa1_2;
     f32 temp_fv0_2;
     f32 temp_fv1;
-    f32 var_ft4_real;
+    f32 temp_fa0;
     s32 var_a0;
     s32 var_a0_2;
     s32 var_v0_2;
     s32 var_v1_2;
+    Vec3f* new_var;
 
     new_var = arg6_out;
     sp6C.x = arg4->x - arg3->x;
@@ -3209,7 +3207,7 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
     if (((sp60.y > 0.0f) && (sp60.y < arg1)) && (sqrtf((sp60.x * sp60.x) + (sp60.z * sp60.z)) < arg0)) {
         return 3;
     }
-    new_var2 = 0.0f;
+    new_var2 = 0.0f; // fake
     temp_fa0 = ((sp6C.x * sp6C.x) + (sp6C.z * sp6C.z)) - (arg0 * arg0);
     temp_fv1 = (sp54.x * sp54.x) + (sp54.z * sp54.z);
     if (!(fabsf(temp_fv1) < 0.008f)) {
@@ -3223,10 +3221,10 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
             var_v1_2 = 1;
             var_v0_2 = 0;
         }
-        do {
-            temp_fv0_2 = sqrtf((temp_fa1_2 * temp_fa1_2) - ((4.0f * temp_fv1) * temp_fa0));
-        } while (0);
-        var_ft4_real = (temp_fv0_2 - temp_fa1_2) / (2.0f * temp_fv1);
+        temp_fv0_2 = sqrtf((temp_fa1_2 * temp_fa1_2) - ((4.0f * temp_fv1) * temp_fa0));
+        if (var_v1_2 == 1) {
+            var_ft4_real = (temp_fv0_2 - temp_fa1_2) / (2.0f * temp_fv1);
+        }
         if (var_v0_2 == 1) {
             sp4C = ((-temp_fa1_2) - temp_fv0_2) / (2.0f * temp_fv1);
         }
@@ -3309,9 +3307,6 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
         return 1;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062ECC.s")
-#endif
 
 s16 func_800635D0(s32 arg0) {
     s16 var_v1;
