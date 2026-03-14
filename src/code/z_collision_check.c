@@ -2055,38 +2055,38 @@ void CollisionCheck_ATQuadVsACCyl(GlobalContext* globalCtx, CollisionCheckContex
                        &atQuad->shape.corners.cornerD);
         if ((Math3D_CylTriTouchingIntersect(&acCylinder->shape, &D_8015E3A0, &D_8015E410) == 1) &&
             func_8005D218(globalCtx, atQuad, &D_8015E410)) {
-            Vec3f sp64;
-            Vec3f sp58;
+            Vec3f atQuadPos;
+            Vec3f acCylinderPos;
 
-            sp64.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
-                      atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
-                     0.25f;
-            sp64.y = (atQuad->shape.corners.cornerA.y + atQuad->shape.corners.cornerB.y +
-                      atQuad->shape.corners.cornerC.y + atQuad->shape.corners.cornerD.y) *
-                     0.25f;
-            sp64.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
-                      atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
-                     0.25f;
-            Math_Vec3s_ToVec3f(&sp58, &acCylinder->shape.pos);
-            func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &sp64, &acCylinder->base, &acCylinder->elem, &sp58,
-                          &D_8015E410);
+            atQuadPos.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
+                           atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
+                          0.25f;
+            atQuadPos.y = (atQuad->shape.corners.cornerA.y + atQuad->shape.corners.cornerB.y +
+                           atQuad->shape.corners.cornerC.y + atQuad->shape.corners.cornerD.y) *
+                          0.25f;
+            atQuadPos.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
+                           atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
+                          0.25f;
+            Math_Vec3s_ToVec3f(&acCylinderPos, &acCylinder->shape.pos);
+            func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acCylinder->base, &acCylinder->elem,
+                          &acCylinderPos, &D_8015E410);
         } else if ((Math3D_CylTriTouchingIntersect(&acCylinder->shape, &D_8015E3D8, &D_8015E410) == 1) &&
                    func_8005D218(globalCtx, atQuad, &D_8015E410)) {
-            Vec3f sp4C;
-            Vec3f sp40;
+            Vec3f atQuadPos;
+            Vec3f acCylinderPos;
 
-            sp4C.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
-                      atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
-                     0.25f;
-            sp4C.y = (atQuad->shape.corners.cornerA.y + atQuad->shape.corners.cornerB.y +
-                      atQuad->shape.corners.cornerC.y + atQuad->shape.corners.cornerD.y) *
-                     0.25f;
-            sp4C.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
-                      atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
-                     0.25f;
-            Math_Vec3s_ToVec3f(&sp40, &acCylinder->shape.pos);
-            func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &sp4C, &acCylinder->base, &acCylinder->elem, &sp40,
-                          &D_8015E410);
+            atQuadPos.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
+                           atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
+                          0.25f;
+            atQuadPos.y = (atQuad->shape.corners.cornerA.y + atQuad->shape.corners.cornerB.y +
+                           atQuad->shape.corners.cornerC.y + atQuad->shape.corners.cornerD.y) *
+                          0.25f;
+            atQuadPos.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
+                           atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
+                          0.25f;
+            Math_Vec3s_ToVec3f(&acCylinderPos, &acCylinder->shape.pos);
+            func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acCylinder->base, &acCylinder->elem,
+                          &acCylinderPos, &D_8015E410);
         }
     }
 }
@@ -2097,35 +2097,41 @@ void CollisionCheck_ATTrisVsACTris(GlobalContext* globalCtx, CollisionCheckConte
                                    Collider* acCollider) {
     ColliderTris* atTris = (ColliderTris*)atCollider;
     ColliderTris* acTris = (ColliderTris*)acCollider;
-    ColliderTrisElement* var_s0;
-    ColliderTrisElement* var_s2;
-    Vec3f sp5C;
-    Vec3f sp50;
+    ColliderTrisElement* atTrisElem;
+    ColliderTrisElement* acTrisElem;
+    Vec3f atTrisElemPos;
+    Vec3f acTrisElemPos;
 
     if ((acTris->nElements > 0) && ((acTris->elements != NULL)) && (atTris->nElements > 0) &&
         (atTris->elements != NULL)) {
 
-        for (var_s2 = acTris->elements; (((var_s2 < &acTris->elements[acTris->nElements]))); var_s2++) {
-            if (func_8005DF50_IsElementACOff(&var_s2->base) != 1) {
-                for (var_s0 = atTris->elements; var_s0 < &atTris->elements[atTris->nElements]; var_s0++) {
+        for (acTrisElem = acTris->elements; (((acTrisElem < &acTris->elements[acTris->nElements]))); acTrisElem++) {
+            if (func_8005DF50_IsElementACOff(&acTrisElem->base) != 1) {
+                for (atTrisElem = atTris->elements; atTrisElem < &atTris->elements[atTris->nElements]; atTrisElem++) {
                     if (0) {}
-                    if ((func_8005DF2C_IsElementATOff(&var_s0->base) != 1) &&
-                        (func_8005DF74_AreDmgFlagsDisjoint(&var_s0->base, &var_s2->base) != 1) &&
-                        (Math3D_TrisIntersect(&var_s0->shape, &var_s2->shape, &D_8015E420) == 1)) {
-                        sp5C.x =
-                            (var_s0->shape.vtx[0].x + var_s0->shape.vtx[1].x + var_s0->shape.vtx[2].x) * (1.0f / 3.0f);
-                        sp5C.y =
-                            (var_s0->shape.vtx[0].y + var_s0->shape.vtx[1].y + var_s0->shape.vtx[2].y) * (1.0f / 3.0f);
-                        sp5C.z =
-                            (var_s0->shape.vtx[0].z + var_s0->shape.vtx[1].z + var_s0->shape.vtx[2].z) * (1.0f / 3.0f);
-                        sp50.x =
-                            (var_s2->shape.vtx[0].x + var_s2->shape.vtx[1].x + var_s2->shape.vtx[2].x) * (1.0f / 3.0f);
-                        sp50.y =
-                            (var_s2->shape.vtx[0].y + var_s2->shape.vtx[1].y + var_s2->shape.vtx[2].y) * (1.0f / 3.0f);
-                        sp50.z =
-                            (var_s2->shape.vtx[0].z + var_s2->shape.vtx[1].z + var_s2->shape.vtx[2].z) * (1.0f / 3.0f);
-                        func_8005E81C(globalCtx, &atTris->base, &var_s0->base, &sp5C, &acTris->base, &var_s2->base,
-                                      &sp50, &D_8015E420);
+                    if ((func_8005DF2C_IsElementATOff(&atTrisElem->base) != 1) &&
+                        (func_8005DF74_AreDmgFlagsDisjoint(&atTrisElem->base, &acTrisElem->base) != 1) &&
+                        (Math3D_TrisIntersect(&atTrisElem->shape, &acTrisElem->shape, &D_8015E420) == 1)) {
+                        atTrisElemPos.x =
+                            (atTrisElem->shape.vtx[0].x + atTrisElem->shape.vtx[1].x + atTrisElem->shape.vtx[2].x) *
+                            (1.0f / 3.0f);
+                        atTrisElemPos.y =
+                            (atTrisElem->shape.vtx[0].y + atTrisElem->shape.vtx[1].y + atTrisElem->shape.vtx[2].y) *
+                            (1.0f / 3.0f);
+                        atTrisElemPos.z =
+                            (atTrisElem->shape.vtx[0].z + atTrisElem->shape.vtx[1].z + atTrisElem->shape.vtx[2].z) *
+                            (1.0f / 3.0f);
+                        acTrisElemPos.x =
+                            (acTrisElem->shape.vtx[0].x + acTrisElem->shape.vtx[1].x + acTrisElem->shape.vtx[2].x) *
+                            (1.0f / 3.0f);
+                        acTrisElemPos.y =
+                            (acTrisElem->shape.vtx[0].y + acTrisElem->shape.vtx[1].y + acTrisElem->shape.vtx[2].y) *
+                            (1.0f / 3.0f);
+                        acTrisElemPos.z =
+                            (acTrisElem->shape.vtx[0].z + acTrisElem->shape.vtx[1].z + acTrisElem->shape.vtx[2].z) *
+                            (1.0f / 3.0f);
+                        func_8005E81C(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos, &acTris->base,
+                                      &acTrisElem->base, &acTrisElemPos, &D_8015E420);
                         return;
                     }
                 }
@@ -2142,34 +2148,40 @@ void CollisionCheck_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckConte
                                    Collider* acCollider) {
     ColliderTris* atTris = (ColliderTris*)atCollider;
     ColliderQuad* acQuad = (ColliderQuad*)acCollider;
-    ColliderTrisElement* var_s1;
-    Vec3f sp68;
-    Vec3f sp5C;
+    ColliderTrisElement* atTrisElem;
+    Vec3f acTrisElemPos;
+    Vec3f acQuadPos;
 
     if ((atTris->nElements > 0) && ((atTris->elements != NULL)) && (func_8005DF50_IsElementACOff(&acQuad->elem) != 1)) {
         Math3D_TriNorm(&D_8015E440, &acQuad->shape.corners.cornerA, &acQuad->shape.corners.cornerB,
                        &acQuad->shape.corners.cornerC);
         Math3D_TriNorm(&D_8015E478, &acQuad->shape.corners.cornerC, &acQuad->shape.corners.cornerD,
                        &acQuad->shape.corners.cornerA);
-        for (var_s1 = atTris->elements; var_s1 < &atTris->elements[atTris->nElements]; var_s1++) {
-            if ((func_8005DF2C_IsElementATOff(&var_s1->base) != 1) &&
-                (func_8005DF74_AreDmgFlagsDisjoint(&var_s1->base, &acQuad->elem) != 1) &&
-                (((Math3D_TrisIntersect(&D_8015E440, &var_s1->shape, &D_8015E430) == 1)) ||
-                 (Math3D_TrisIntersect(&D_8015E478, &var_s1->shape, &D_8015E430) == 1))) {
-                sp68.x = (var_s1->shape.vtx[0].x + var_s1->shape.vtx[1].x + var_s1->shape.vtx[2].x) * (1.0f / 3.0f);
-                sp68.y = (var_s1->shape.vtx[0].y + var_s1->shape.vtx[1].y + var_s1->shape.vtx[2].y) * (1.0f / 3.0f);
-                sp68.z = (var_s1->shape.vtx[0].z + var_s1->shape.vtx[1].z + var_s1->shape.vtx[2].z) * (1.0f / 3.0f);
-                sp5C.x = (acQuad->shape.corners.cornerA.x + acQuad->shape.corners.cornerB.x +
-                          acQuad->shape.corners.cornerC.x + acQuad->shape.corners.cornerD.x) *
-                         0.25f;
-                sp5C.y = (acQuad->shape.corners.cornerA.y + acQuad->shape.corners.cornerB.y +
-                          acQuad->shape.corners.cornerC.y + acQuad->shape.corners.cornerD.y) *
-                         0.25f;
-                sp5C.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
-                          acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
-                         0.25f;
-                func_8005E81C(globalCtx, &atTris->base, &var_s1->base, &sp68, &acQuad->base, &acQuad->elem, &sp5C,
-                              &D_8015E430);
+        for (atTrisElem = atTris->elements; atTrisElem < &atTris->elements[atTris->nElements]; atTrisElem++) {
+            if ((func_8005DF2C_IsElementATOff(&atTrisElem->base) != 1) &&
+                (func_8005DF74_AreDmgFlagsDisjoint(&atTrisElem->base, &acQuad->elem) != 1) &&
+                (((Math3D_TrisIntersect(&D_8015E440, &atTrisElem->shape, &D_8015E430) == 1)) ||
+                 (Math3D_TrisIntersect(&D_8015E478, &atTrisElem->shape, &D_8015E430) == 1))) {
+                acTrisElemPos.x =
+                    (atTrisElem->shape.vtx[0].x + atTrisElem->shape.vtx[1].x + atTrisElem->shape.vtx[2].x) *
+                    (1.0f / 3.0f);
+                acTrisElemPos.y =
+                    (atTrisElem->shape.vtx[0].y + atTrisElem->shape.vtx[1].y + atTrisElem->shape.vtx[2].y) *
+                    (1.0f / 3.0f);
+                acTrisElemPos.z =
+                    (atTrisElem->shape.vtx[0].z + atTrisElem->shape.vtx[1].z + atTrisElem->shape.vtx[2].z) *
+                    (1.0f / 3.0f);
+                acQuadPos.x = (acQuad->shape.corners.cornerA.x + acQuad->shape.corners.cornerB.x +
+                               acQuad->shape.corners.cornerC.x + acQuad->shape.corners.cornerD.x) *
+                              0.25f;
+                acQuadPos.y = (acQuad->shape.corners.cornerA.y + acQuad->shape.corners.cornerB.y +
+                               acQuad->shape.corners.cornerC.y + acQuad->shape.corners.cornerD.y) *
+                              0.25f;
+                acQuadPos.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
+                               acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
+                              0.25f;
+                func_8005E81C(globalCtx, &atTris->base, &atTrisElem->base, &acTrisElemPos, &acQuad->base, &acQuad->elem,
+                              &acQuadPos, &D_8015E430);
                 return;
             }
             if (1) {}
@@ -2190,36 +2202,42 @@ void CollisionCheck_ATQuadVsACTris(GlobalContext* globalCtx, CollisionCheckConte
                                    Collider* acCollider) {
     ColliderQuad* atQuad = (ColliderQuad*)atCollider;
     ColliderTris* acTris = (ColliderTris*)acCollider;
-    ColliderTrisElement* var_s1;
-    Vec3f sp68;
-    Vec3f sp5C;
+    ColliderTrisElement* acTrisElem;
+    Vec3f atQuadPos;
+    Vec3f acTrisElemPos;
 
     if ((acTris->nElements > 0) && ((acTris->elements != NULL)) && (func_8005DF2C_IsElementATOff(&atQuad->elem) != 1)) {
         Math3D_TriNorm(&D_8015E4C0, &atQuad->shape.corners.cornerA, &atQuad->shape.corners.cornerB,
                        &atQuad->shape.corners.cornerC);
         Math3D_TriNorm(&D_8015E4F8, &atQuad->shape.corners.cornerC, &atQuad->shape.corners.cornerD,
                        &atQuad->shape.corners.cornerA);
-        if (var_s1 && var_s1) {}
-        for (var_s1 = acTris->elements; var_s1 < &acTris->elements[acTris->nElements]; var_s1++) {
-            if ((func_8005DF50_IsElementACOff(&var_s1->base) != 1) &&
-                (func_8005DF74_AreDmgFlagsDisjoint(&atQuad->elem, &var_s1->base) != 1) &&
-                (((Math3D_TrisIntersect(&D_8015E4C0, &var_s1->shape, &D_8015E4B0) == 1)) ||
-                 (Math3D_TrisIntersect(&D_8015E4F8, &var_s1->shape, &D_8015E4B0) == 1)) &&
+        if (acTrisElem && acTrisElem) {}
+        for (acTrisElem = acTris->elements; acTrisElem < &acTris->elements[acTris->nElements]; acTrisElem++) {
+            if ((func_8005DF50_IsElementACOff(&acTrisElem->base) != 1) &&
+                (func_8005DF74_AreDmgFlagsDisjoint(&atQuad->elem, &acTrisElem->base) != 1) &&
+                (((Math3D_TrisIntersect(&D_8015E4C0, &acTrisElem->shape, &D_8015E4B0) == 1)) ||
+                 (Math3D_TrisIntersect(&D_8015E4F8, &acTrisElem->shape, &D_8015E4B0) == 1)) &&
                 func_8005D218(globalCtx, atQuad, &D_8015E4B0)) {
-                sp5C.x = (var_s1->shape.vtx[0].x + var_s1->shape.vtx[1].x + var_s1->shape.vtx[2].x) * (1.0f / 3.0f);
-                sp5C.y = (var_s1->shape.vtx[0].y + var_s1->shape.vtx[1].y + var_s1->shape.vtx[2].y) * (1.0f / 3.0f);
-                sp5C.z = (var_s1->shape.vtx[0].z + var_s1->shape.vtx[1].z + var_s1->shape.vtx[2].z) * (1.0f / 3.0f);
-                sp68.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
-                          atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
-                         0.25f;
-                sp68.y = (atQuad->shape.corners.cornerA.y + atQuad->shape.corners.cornerB.y +
-                          atQuad->shape.corners.cornerC.y + atQuad->shape.corners.cornerD.y) *
-                         0.25f;
-                sp68.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
-                          atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
-                         0.25f;
-                func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &sp68, &acTris->base, &var_s1->base, &sp5C,
-                              &D_8015E4B0);
+                acTrisElemPos.x =
+                    (acTrisElem->shape.vtx[0].x + acTrisElem->shape.vtx[1].x + acTrisElem->shape.vtx[2].x) *
+                    (1.0f / 3.0f);
+                acTrisElemPos.y =
+                    (acTrisElem->shape.vtx[0].y + acTrisElem->shape.vtx[1].y + acTrisElem->shape.vtx[2].y) *
+                    (1.0f / 3.0f);
+                acTrisElemPos.z =
+                    (acTrisElem->shape.vtx[0].z + acTrisElem->shape.vtx[1].z + acTrisElem->shape.vtx[2].z) *
+                    (1.0f / 3.0f);
+                atQuadPos.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
+                               atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
+                              0.25f;
+                atQuadPos.y = (atQuad->shape.corners.cornerA.y + atQuad->shape.corners.cornerB.y +
+                               atQuad->shape.corners.cornerC.y + atQuad->shape.corners.cornerD.y) *
+                              0.25f;
+                atQuadPos.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
+                               atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
+                              0.25f;
+                func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acTris->base, &acTrisElem->base,
+                              &acTrisElemPos, &D_8015E4B0);
                 return;
             }
         }
@@ -2287,14 +2305,13 @@ void func_80060EBC_Type0_processAC_(GlobalContext* globalCtx, CollisionCheckCont
     Vec3f sp24;
 
     for (jntSphElem = jntSph->elements; jntSphElem < (jntSph->elements + jntSph->nElements); jntSphElem++) {
-        if (jntSphElem->base.acElemFlags & ACELEM_DRAW_HITMARK) {
-            if ((jntSphElem->base.acHitElem != NULL) && !(jntSphElem->base.acHitElem->atElemFlags & 0x40)) {
-                Math_Vec3s_ToVec3f(&sp24, &jntSphElem->base.acDmgInfo.unk_06);
-                func_8005E604(globalCtx, jntSphElem->base.acHit, jntSphElem->base.acHitElem, &jntSph->base,
-                              &jntSphElem->base, &sp24);
-                jntSphElem->base.acHitElem->atElemFlags |= 0x40;
-                return;
-            }
+        if ((jntSphElem->base.acElemFlags & ACELEM_DRAW_HITMARK) && (jntSphElem->base.acHitElem != NULL) &&
+            !(jntSphElem->base.acHitElem->atElemFlags & ATELEM_DREW_HITMARK)) {
+            Math_Vec3s_ToVec3f(&sp24, &jntSphElem->base.acDmgInfo.unk_06);
+            func_8005E604(globalCtx, jntSphElem->base.acHit, jntSphElem->base.acHitElem, &jntSph->base,
+                          &jntSphElem->base, &sp24);
+            jntSphElem->base.acHitElem->atElemFlags |= ATELEM_DREW_HITMARK;
+            return;
         }
     }
 }
