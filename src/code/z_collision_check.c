@@ -504,14 +504,6 @@ s32 func_8005C5F8(GlobalContext* globalCtx, UNK_PTR arg1) {
     return 1;
 }
 
-typedef struct struct_8005C608_arg1 {
-    /* 0x00 */ Vec3f unk0[3];
-    /* 0x24 */ f32 unk24;
-    /* 0x28 */ f32 unk28;
-    /* 0x2C */ f32 unk2C;
-    /* 0x30 */ f32 unk30;
-} struct_8005C608_arg1;
-
 s32 func_8005C608(GlobalContext* globalCtx, TriNorm* arg1, Vec3f* arg2) {
     Vec3f* var_v1;
     Vec3f* var_v0;
@@ -810,20 +802,8 @@ s32 func_8005D060_Type3(GlobalContext* globalCtx, Collider_Type3* collision) {
     return 1;
 }
 
-typedef struct struct_8005D0A8_arg1 {
-    /* 0x00 */ Collider unk0;
-    /* 0x18 */ ColliderBody unk18;
-    /* 0x40 */ struct_Collider_Type3_subc unk40;
-} struct_8005D0A8_arg1;
-
-typedef struct struct_8005D0A8_arg3 {
-    /* 0x00 */ ColliderSrc_8005B6EC unk0;
-    /* 0x08 */ ColliderBodySrc unk8;
-    /* 0x20 */ Vec3f unk20[4];
-} struct_8005D0A8_arg3;
-
 // unused
-s32 func_8005D0A8(GlobalContext* globalCtx, struct_8005D0A8_arg1* collision, Actor* actor, struct_8005D0A8_arg3* src) {
+s32 func_8005D0A8(GlobalContext* globalCtx, Collider_Type3* collision, Actor* actor, ColliderSrc_Type3_8005B6EC* src) {
     func_8005B6EC(globalCtx, &collision->unk0, actor, &src->unk0);
     func_8005B93C(globalCtx, &collision->unk18, &src->unk8);
     func_8005CF90_Type3(globalCtx, &collision->unk40, src->unk20);
@@ -909,8 +889,7 @@ s32 func_8005D334(s32 arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3) {
 }
 
 typedef struct struct_8005D378_arg1 {
-    Vec3f unk0;
-    char unk_C[0xC];
+    Vec3f unk0[2];
     u16 unk18;
 } struct_8005D378_arg1;
 
@@ -922,18 +901,13 @@ typedef struct struct_8005D378_arg2 {
 
 // unused
 s32 func_8005D378(s32 arg0, struct_8005D378_arg1* arg1, struct_8005D378_arg2* arg2) {
-    arg1->unk18 = (u16)arg2->unk18;
-    func_8005D334(arg0, &arg1->unk0, &arg2->unk0, &arg2->unkC);
+    arg1->unk18 = arg2->unk18;
+    func_8005D334(arg0, arg1->unk0, &arg2->unk0, &arg2->unkC);
     return 1;
 }
 
-typedef struct struct_8005D3A4 {
-    char unk_0[0x18];
-    u16 unk18;
-} struct_8005D3A4;
-
-s32 func_8005D3A4(GlobalContext* globalCtx, struct_8005D3A4* arg1) {
-    arg1->unk18 = (u16)(arg1->unk18 & 0xFFFE);
+s32 func_8005D3A4(GlobalContext* globalCtx, struct_ColChkCtx_290* arg1) {
+    arg1->unk18 &= 0xFFFE;
     return 1;
 }
 
@@ -952,6 +926,7 @@ void func_8005D400(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
 
 void func_8005D40C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     Collider** var_v0;
+    struct_ColChkCtx_290** var;
 
     if (!(colChkCtx->unk2 & 1)) {
         colChkCtx->unk0_nAT = 0;
@@ -971,10 +946,10 @@ void func_8005D40C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
             *var_v0 = NULL;
             var_v0++;
         }
-        var_v0 = colChkCtx->unk290;
-        while ((u32)var_v0 < (u32)(colChkCtx->unk290 + ARRAY_COUNT(colChkCtx->unk290))) {
-            *var_v0 = NULL;
-            var_v0++;
+        var = colChkCtx->unk290;
+        while (var < (colChkCtx->unk290 + ARRAY_COUNT(colChkCtx->unk290))) {
+            *var = NULL;
+            var++;
         }
     }
 }
@@ -1285,14 +1260,8 @@ s32 func_8005DD5C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Co
     return arg3;
 }
 
-typedef struct struct_8005DE9C {
-    char unk_0[0x28C];
-    s32 unk28C;
-    void* unk_290[UNK_SIZE];
-} struct_8005DE9C;
-
 // unused
-s32 func_8005DE9C(GlobalContext* globalCtx, struct_8005DE9C* arg1, struct_8005D3A4* arg2) {
+s32 func_8005DE9C(GlobalContext* globalCtx, SubGlobalContext11E60* arg1, struct_ColChkCtx_290* arg2) {
     s32 temp_v1;
 
     if (func_800C0D28(globalCtx) == 1) {
@@ -1304,8 +1273,8 @@ s32 func_8005DE9C(GlobalContext* globalCtx, struct_8005DE9C* arg1, struct_8005D3
         osSyncPrintf("CollisionCheck_setOCLine():インデックスがオーバして追加不能\n");
         return -1;
     }
-    arg1->unk_290[temp_v1] = arg2;
-    arg1->unk28C = (s32)(arg1->unk28C + 1);
+    arg1->unk290[temp_v1] = arg2;
+    arg1->unk28C++;
     return temp_v1;
 }
 

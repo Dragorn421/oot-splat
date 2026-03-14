@@ -899,7 +899,7 @@ typedef struct {
     /* 0x1C0 */ s32 unk1C0_nOT;
     /* 0x1C4 */ Collider* unk1C4_OT[50];
     s32 unk28C;
-    void* unk290[3];
+    struct_ColChkCtx_290* unk290[3];
 } SubGlobalContext11E60; // size = 0x29C
 
 typedef struct {

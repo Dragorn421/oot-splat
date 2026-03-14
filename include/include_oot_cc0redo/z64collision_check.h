@@ -224,6 +224,12 @@ typedef struct ColliderSrc_Type3 {
     Vec3f unk20[4];
 } ColliderSrc_Type3;
 
+typedef struct ColliderSrc_Type3_8005B6EC {
+    /* 0x00 */ ColliderSrc_8005B6EC unk0;
+    /* 0x08 */ ColliderBodySrc unk8;
+    /* 0x20 */ Vec3f unk20[4];
+} ColliderSrc_Type3_8005B6EC;
+
 typedef struct struct_Collider_Type3_subc {
     /* 0x00 */ Vec3f unk0;
     /* 0x0C */ Vec3f unkC;
@@ -239,5 +245,12 @@ typedef struct Collider_Type3 {
     ColliderBody unk18;
     struct_Collider_Type3_subc unk40;
 } Collider_Type3;
+
+// ?
+
+typedef struct struct_ColChkCtx_290 {
+    char unk_0[0x18];
+    u16 unk18;
+} struct_ColChkCtx_290;
 
 #endif
