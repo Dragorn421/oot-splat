@@ -159,7 +159,7 @@ typedef struct ColliderSrc_Type0_8005B6EC {
     ColliderSrc_Type0_ptrC* unkC;
 } ColliderSrc_Type0_8005B6EC;
 
-// type1
+// type1 - cylinder
 
 typedef struct Collider_Type1 {
     Collider unk0;
@@ -216,7 +216,7 @@ typedef struct Collider_Type2 {
     Collider_Type2_ptr1C* unk1C;
 } Collider_Type2;
 
-// type3
+// type3 - quad
 
 typedef struct ColliderSrc_Type3 {
     ColliderSrc unk0;
