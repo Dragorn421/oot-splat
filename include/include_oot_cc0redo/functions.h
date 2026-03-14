@@ -704,14 +704,14 @@ s32 Collider_ClearCylinderOCHit(GlobalContext* globalCtx, Collider* collision);
 // ? Collider_ClearTrisElementACHit(?);
 // ? Collider_ClearTrisElementOCHit(?);
 // ? Collider_InitQuadShape(?);
-// ? func_8005CEC4(?);
+// ? Collider_ClearQuadShapeATHit(?);
 // ? Collider_QuadShapeUpdateMidPoints(?);
 // ? Collider_LoadQuadShape(?);
-s32 func_8005D018_Type3(GlobalContext* globalCtx, ColliderQuad* collision);
-s32 func_8005D060_Type3(GlobalContext* globalCtx, ColliderQuad* collision);
-s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrc* src);
-s32 func_8005D1A8_SetAC_3(GlobalContext* globalCtx, Collider* collision);
-s32 func_8005D1E0_SetOT_3(GlobalContext* globalCtx, Collider* collision);
+s32 Collider_InitQuad(GlobalContext* globalCtx, ColliderQuad* collision);
+s32 Collider_DestroyQuad(GlobalContext* globalCtx, ColliderQuad* collision);
+s32 Collider_LoadQuad(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrc* src);
+s32 Collider_ClearQuadACHit(GlobalContext* globalCtx, Collider* collision);
+s32 Collider_ClearQuadOCHit(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005D218(?);
 // ? func_8005D334(?);
 // ? func_8005D3A4(?);
@@ -720,15 +720,15 @@ void func_8005D400(GlobalContext*, CollisionCheckContext*);
 // ? func_8005D40C(?);
 // ? func_8005D4DC(?);
 // ? func_8005D62C(?);
-s32 Actor_CollisionCheck_SetAT(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
+s32 Collider_AddAT(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
                                Collider* collision);
-s32 Actor_CollisionCheck_SetAC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
+s32 Collider_AddAC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
                                Collider* collision);
-s32 Actor_CollisionCheck_SetOC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
+s32 Collider_AddOC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGroups,
                                Collider* collision);
-// ? func_8005DF2C_IsElementATOff(?);
-// ? func_8005DF50_IsElementACOff(?);
-// ? func_8005DF74_AreDmgFlagsDisjoint(?);
+// ? Collider_IsElementATOff(?);
+// ? Collider_IsElementACOff(?);
+// ? Collider_AreDmgFlagsDisjoint(?);
 // ? func_8005DFAC(?);
 // ? func_8005E2EC(?);
 // ? func_8005E4F8(?);
