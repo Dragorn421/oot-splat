@@ -6,7 +6,7 @@
 
 struct Actor;
 
-typedef enum {
+typedef enum ColliderType {
     /* 0 */ COLTYPE_JNTSPH,
     /* 1 */ COLTYPE_CYLINDER,
     /* 2 */ COLTYPE_TRIANGLES,
@@ -14,78 +14,44 @@ typedef enum {
     /* 4 */ COLTYPE_MAX
 } ColliderType;
 
+typedef enum ColliderMaterial {
+    /*  0 */ COL_MATERIAL_HIT0, // Blue blood, white hitmark
+    /*  1 */ COL_MATERIAL_HIT1, // No blood, dust hitmark
+    /*  2 */ COL_MATERIAL_HIT2, // Green blood, dust hitmark
+    /*  3 */ COL_MATERIAL_HIT3, // No blood, white hitmark
+    /*  4 */ COL_MATERIAL_HIT4, // Water burst, no hitmark
+    /*  5 */ COL_MATERIAL_HIT5, // No blood, red hitmark
+    /*  6 */ COL_MATERIAL_HIT6, // Green blood, white hitmark
+    /*  7 */ COL_MATERIAL_HIT7, // Red blood, white hitmark
+    /*  8 */ COL_MATERIAL_HIT8, // Blue blood, red hitmark
+    /*  9 */ COL_MATERIAL_METAL,
+    /* 10 */ COL_MATERIAL_NONE,
+    /* 11 */ COL_MATERIAL_WOOD,
+    /* 12 */ COL_MATERIAL_HARD,
+    /* 13 */ COL_MATERIAL_TREE
+} ColliderMaterial;
+
 typedef struct Collider {
     /* 0x00 */ struct Actor* actor;
     /* 0x04 */ struct Actor* at;
     /* 0x08 */ struct Actor* ac;
     /* 0x0C */ struct Actor* ot;
-    /* 0x10 */ u8 colliderFlags; /* Compared to 0x11 */
-    /* 0x11 */ u8 collideFlags; /* Compared to 0x10 */
-    /* 0x12 */ u8 maskA; /* Bitwise-and compared to 0x13 */
-    /* 0x13 */ u8 maskB; /* Bitwise-and compared to 0x12 */
-    /* 0x14 */ u8 unk_14;
-    /* 0x15 */ u8 type; /* Cylinder Collection, Cylinder, Triangle Collection, Quad */
+    /* 0x10 */ u8 atFlags;
+    /* 0x11 */ u8 acFlags;
+    /* 0x12 */ u8 maskA;
+    /* 0x13 */ u8 maskB;
+    /* 0x14 */ u8 colMaterial;
+    /* 0x15 */ u8 colType; // See `ColliderType` enum
 } Collider; // size = 0x18
 
-typedef struct {
-    /* 0x00 */ s32 flags; /* Toucher Attack Identifier Flags */
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 damage; /* Damage or Stun Timer */
-} ColliderTouch; // size = 0x08
-
-typedef struct {
-    /* 0x00 */ s32 flags; /* Collision Exclusion Mask */
-    /* 0x04 */ u8 effect; /* Damage Effect (Knockback, Fire, etc.) */
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ Vec3s unk_06;
-} ColliderBump; // size = 0x0C
-
-typedef struct ColliderElement {
-    /* 0x00 */ ColliderTouch toucher;
-    /* 0x08 */ ColliderBump bumper;
-    /* 0x14 */ u8 flags;
-    /* 0x15 */ u8 toucherFlags;
-    /* 0x16 */ u8 bumperFlags;
-    /* 0x17 */ u8 flags2;
-    /* 0x18 */ struct Collider* unk_18;
-    /* 0x1C */ struct Collider* colBuf;
-    /* 0x20 */ struct ColliderElement* unk_20;
-    /* 0x24 */ struct ColliderElement* colliding;
-} ColliderElement; // size = 0x28
-
-typedef struct ColliderTouchSrc {
-     s32 toucherMask; /* Attack Toucher Exclusion Mask */
-     u8 bumperEffect; /* Damage Effect (Knockback, Fire, etc.) */
-     u8 toucherDamage; /* Damage Amount or Stun Timer */
-    /* 0x0A */ u8 unk_12[0x2]; /* 0000 */
-} ColliderTouchSrc;
-
-typedef struct ColliderBumpSrc {
-    s32 bumperMask; /* Bumper Exclusion Mask */
-    u8 unk4;
-    u8 unk5;
-} ColliderBumpSrc;
-
-typedef struct ColliderElementSrc {
-    /* 0x00 */ u8 bodyFlags;
-    /* 0x01 */ u8 unk_09[0x3]; /* 000000 */
-    /* 0x04 */ ColliderTouchSrc unk4;
-    /* 0x0C */ ColliderBumpSrc unkC;
-    /* 0x14 */ u8 toucherFlags; /* Attack Toucher Flags */
-    /* 0x15 */ u8 bumperFlags; /* Bumper Flags */
-    /* 0x16 */ u8 bodyFlags2;
-    /* 0x17 */ u8 unk_1F; /* 00 */
-} ColliderElementSrc; // size = 0x18
-
-typedef struct {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 colliderFlags; /* Collider Flags */
-    /* 0x02 */ u8 collideFlags; /* Collide Flags */
-    /* 0x03 */ u8 maskA; /* Bitwise-And with Mask B */
-    /* 0x04 */ u8 maskB; /* Bitwise-And with Mask A */
-    /* 0x05 */ u8 type; /* Collider Type */
-    /* 0x06 */ u8 unk_06[0x2]; /* 0000 */
-} ColliderSrc; // size = 0x08
+typedef struct ColliderSrc {
+    /* 0x00 */ u8 colMaterial;
+    /* 0x01 */ u8 atFlags;
+    /* 0x02 */ u8 acFlags;
+    /* 0x03 */ u8 maskA;
+    /* 0x04 */ u8 maskB;
+    /* 0x05 */ u8 colType; // See `ColliderType` enum
+} ColliderSrc; // size = 0x06
 
 typedef struct ColliderSrc_8005B6EC {
     u8 unk0;
@@ -103,6 +69,71 @@ typedef struct ColliderSrc_8005B6B0 {
     u8 unk6;
     u8 unk7;
 } ColliderSrc_8005B6B0;
+
+typedef enum HitSpecialEffect {
+    HIT_SPECIAL_EFFECT_NONE,
+    HIT_SPECIAL_EFFECT_FIRE,
+    HIT_SPECIAL_EFFECT_ICE,
+    HIT_SPECIAL_EFFECT_ELECTRIC,
+    HIT_SPECIAL_EFFECT_KNOCKBACK,
+    HIT_SPECIAL_EFFECT_7 = 7, // Same effect as `HIT_SPECIAL_EFFECT_NONE`
+    HIT_SPECIAL_EFFECT_8, // Same effect as `HIT_SPECIAL_EFFECT_NONE`
+    HIT_SPECIAL_EFFECT_9 // Same effect as `HIT_SPECIAL_EFFECT_NONE`
+} HitSpecialEffect;
+
+typedef struct ColliderElementDamageInfoAT {
+    /* 0x00 */ u32 dmgFlags; // Damage types dealt by this collider element as AT.
+    /* 0x04 */ u8 hitSpecialEffect; // The hit special effect applied to any actor attacked by this AT collider.
+    /* 0x05 */ u8 damage; // Damage
+} ColliderElementDamageInfoAT; // size = 0x08
+
+typedef struct ColliderElementDamageInfoAC {
+    /* 0x00 */ s32 dmgFlags; /* Collision Exclusion Mask */
+    /* 0x04 */ u8 hitBacklash; /* Damage Effect (Knockback, Fire, etc.) */
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ Vec3s unk_06;
+} ColliderElementDamageInfoAC; // size = 0x0C
+
+typedef struct ColliderElementDamageInfoACSrc {
+    s32 bumperMask; /* Bumper Exclusion Mask */
+    u8 unk4;
+    u8 unk5;
+} ColliderElementDamageInfoACSrc;
+
+typedef enum ElementMaterial {
+    /* 0 */ ELEM_MATERIAL_UNK0,
+    /* 1 */ ELEM_MATERIAL_UNK1,
+    /* 2 */ ELEM_MATERIAL_UNK2,
+    /* 3 */ ELEM_MATERIAL_UNK3,
+    /* 4 */ ELEM_MATERIAL_UNK4,
+    /* 5 */ ELEM_MATERIAL_UNK5,
+    /* 6 */ ELEM_MATERIAL_UNK6,
+    /* 7 */ ELEM_MATERIAL_UNK7
+} ElementMaterial;
+
+typedef struct ColliderElement {
+    /* 0x00 */ ColliderElementDamageInfoAT atDmgInfo;
+    /* 0x08 */ ColliderElementDamageInfoAC acDmgInfo;
+    /* 0x14 */ u8 elemMaterial;
+    /* 0x15 */ u8 atElemFlags;
+    /* 0x16 */ u8 acElemFlags;
+    /* 0x17 */ u8 ocElemFlags;
+    /* 0x18 */ Collider* atHit;
+    /* 0x1C */ Collider* acHit;
+    /* 0x20 */ struct ColliderElement* atHitElem;
+    /* 0x24 */ struct ColliderElement* acHitElem;
+} ColliderElement; // size = 0x28
+
+typedef struct ColliderElementSrc {
+    /* 0x00 */ u8 bodyFlags;
+    /* 0x01 */ u8 unk_09[0x3]; /* 000000 */
+    /* 0x04 */ ColliderElementDamageInfoAT unk4;
+    /* 0x0C */ ColliderElementDamageInfoACSrc unkC;
+    /* 0x14 */ u8 toucherFlags; /* Attack Toucher Flags */
+    /* 0x15 */ u8 bumperFlags; /* Bumper Flags */
+    /* 0x16 */ u8 bodyFlags2;
+    /* 0x17 */ u8 unk_1F; /* 00 */
+} ColliderElementSrc; // size = 0x18
 
 // ?
 
