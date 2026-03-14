@@ -3189,9 +3189,8 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
     s32 var_a0_2;
     s32 var_v0_2;
     s32 var_v1_2;
-    Vec3f* new_var;
+    s32 pad;
 
-    new_var = arg6_out;
     sp6C.x = arg4->x - arg3->x;
     sp6C.y = (arg4->y - arg3->y) - arg2;
     sp6C.z = arg4->z - arg3->z;
@@ -3207,7 +3206,7 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
     if (((sp60.y > 0.0f) && (sp60.y < arg1)) && (sqrtf((sp60.x * sp60.x) + (sp60.z * sp60.z)) < arg0)) {
         return 3;
     }
-    new_var2 = 0.0f; // fake
+    new_var2 = 0.0f; // fake?
     temp_fa0 = ((sp6C.x * sp6C.x) + (sp6C.z * sp6C.z)) - (arg0 * arg0);
     temp_fv1 = (sp54.x * sp54.x) + (sp54.z * sp54.z);
     if (!(fabsf(temp_fv1) < 0.008f)) {
@@ -3216,7 +3215,7 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
             return 0;
         }
         if (((temp_fa1_2 * temp_fa1_2) - ((4.0f * temp_fv1) * temp_fa0)) > new_var2) {
-            var_v1_2 = (var_v0_2 = 1);
+            var_v1_2 = var_v0_2 = 1;
         } else {
             var_v1_2 = 1;
             var_v0_2 = 0;
@@ -3233,20 +3232,20 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
         var_v0_2 = 0;
         var_ft4_real = (-temp_fa0) / (((2.0f * sp54.x) * sp6C.x) + ((2.0f * sp54.z) * sp6C.z));
     } else {
-        if (temp_fa0 <= new_var2) {
-            var_a0 = (sp6C.y > new_var2) && (sp6C.y < arg1);
-            var_a0_2 = (sp60.y > new_var2) && (sp60.y < arg1);
+        if (temp_fa0 <= 0.0f) {
+            var_a0 = (sp6C.y > 0.0f) && (sp6C.y < arg1);
+            var_a0_2 = (sp60.y > 0.0f) && (sp60.y < arg1);
             if ((var_a0 != 0) && (var_a0_2 != 0)) {
-                *new_var = sp6C;
+                *arg6_out = sp6C;
                 *arg7_out = sp60;
                 return 2;
             }
             if (var_a0 != 0) {
-                *new_var = sp6C;
+                *arg6_out = sp6C;
                 return 1;
             }
             if (var_a0_2 != 0) {
-                *new_var = sp60;
+                *arg6_out = sp60;
                 return 1;
             }
         }
@@ -3254,11 +3253,11 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
     }
     {
         if (var_v0_2 == 0) {
-            if ((var_ft4_real < new_var2) || (var_ft4_real > 1.0f)) {
+            if ((var_ft4_real < 0.0f) || (var_ft4_real > 1.0f)) {
                 return 0;
             }
         } else {
-            var_a0 = (var_ft4_real < new_var2) || (var_ft4_real > 1.0f);
+            var_a0 = (var_ft4_real < 0.0f) || (var_ft4_real > 1.0f);
             var_a0_2 = (sp4C < 0.0f) || (sp4C > 1.0f);
             if ((var_a0 != 0) && (var_a0_2 != 0)) {
                 return 0;
@@ -3284,24 +3283,24 @@ s32 func_80062ECC(f32 arg0, f32 arg1, f32 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f*
             return 0;
         }
         if ((var_v1_2 == 1) && (var_v0_2 == 1)) {
-            new_var->x = ((var_ft4_real * sp54.x) + sp6C.x) + arg3->x;
-            new_var->y = ((var_ft4_real * sp54.y) + sp6C.y) + arg3->y;
-            new_var->z = ((var_ft4_real * sp54.z) + sp6C.z) + arg3->z;
+            arg6_out->x = ((var_ft4_real * sp54.x) + sp6C.x) + arg3->x;
+            arg6_out->y = ((var_ft4_real * sp54.y) + sp6C.y) + arg3->y;
+            arg6_out->z = ((var_ft4_real * sp54.z) + sp6C.z) + arg3->z;
             arg7_out->x = ((sp4C * sp54.x) + sp6C.x) + arg3->x;
             arg7_out->y = ((sp4C * sp54.y) + sp6C.y) + arg3->y;
             arg7_out->z = ((sp4C * sp54.z) + sp6C.z) + arg3->z;
             return 2;
         }
         if (var_v1_2 == 1) {
-            new_var->x = ((var_ft4_real * sp54.x) + sp6C.x) + arg3->x;
-            new_var->y = ((var_ft4_real * sp54.y) + sp6C.y) + arg3->y;
-            new_var->z = ((var_ft4_real * sp54.z) + sp6C.z) + arg3->z;
+            arg6_out->x = ((var_ft4_real * sp54.x) + sp6C.x) + arg3->x;
+            arg6_out->y = ((var_ft4_real * sp54.y) + sp6C.y) + arg3->y;
+            arg6_out->z = ((var_ft4_real * sp54.z) + sp6C.z) + arg3->z;
             return 1;
         }
         if (var_v0_2 == 1) {
-            new_var->x = ((sp4C * sp54.x) + sp6C.x) + arg3->x;
-            new_var->y = ((sp4C * sp54.y) + sp6C.y) + arg3->y;
-            new_var->z = ((sp4C * sp54.z) + sp6C.z) + arg3->z;
+            arg6_out->x = ((sp4C * sp54.x) + sp6C.x) + arg3->x;
+            arg6_out->y = ((sp4C * sp54.y) + sp6C.y) + arg3->y;
+            arg6_out->z = ((sp4C * sp54.z) + sp6C.z) + arg3->z;
             return 1;
         }
         return 1;
