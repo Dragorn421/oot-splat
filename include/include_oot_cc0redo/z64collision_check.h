@@ -7,7 +7,7 @@
 struct Actor;
 
 typedef enum ColliderType {
-    /* 0 */ COLTYPE_JNTSPH,
+    /* 0 */ COLTYPE_SPHERES,
     /* 1 */ COLTYPE_CYLINDER,
     /* 2 */ COLTYPE_TRIANGLES,
     /* 3 */ COLTYPE_QUAD,
@@ -138,14 +138,6 @@ typedef struct ColliderElementSrc {
     /* 0x16 */ u8 ocElemFlags;
 } ColliderElementSrc; // size = 0x18
 
-// ?
-
-typedef struct ColliderSrc_Type0_ptrC_sub18 {
-    u8 unk0;
-    Sphere16 unk2;
-    s16 unkA;
-} ColliderSrc_Type0_ptrC_sub18; /* size >= 0xC */
-
 /*
  * Spheres
  */
@@ -168,9 +160,15 @@ typedef struct ColliderSpheres {
     ColliderSpheresElement* elements;
 } ColliderSpheres;
 
+typedef struct ColliderSpheresElementShapeSrc {
+    u8 unk0;
+    Sphere16 unk2;
+    s16 unkA;
+} ColliderSpheresElementShapeSrc;
+
 typedef struct ColliderSpheresElementSrc {
     ColliderElementSrc base;
-    ColliderSrc_Type0_ptrC_sub18 unk18;
+    ColliderSpheresElementShapeSrc shape;
 } ColliderSpheresElementSrc; /* size = 0x24 */
 
 typedef struct ColliderSpheresSrc {
