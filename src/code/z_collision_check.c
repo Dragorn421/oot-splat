@@ -237,10 +237,8 @@ s32 func_8005BC28(GlobalContext* globalCtx, ColliderJntSph* arg1) {
     Collider_Type0_ptr1C* var_s0;
 
     func_8005B6A0(globalCtx, &arg1->base);
-    var_s0 = arg1->unk1C;
-    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+    for (var_s0 = arg1->unk1C; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++) {
         func_8005BB10_Type0(globalCtx, var_s0);
-        var_s0++;
     }
     arg1->unk18 = 0;
     if (arg1->unk1C != NULL) {
@@ -254,10 +252,8 @@ s32 func_8005BCC8_Type0(GlobalContext* globalCtx, ColliderJntSph* arg1) {
     Collider_Type0_ptr1C* var_s0;
 
     func_8005B6A0(globalCtx, &arg1->base);
-    var_s0 = arg1->unk1C;
-    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+    for (var_s0 = arg1->unk1C; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++) {
         func_8005BB10_Type0(globalCtx, var_s0);
-        var_s0++;
     }
     arg1->unk18 = 0;
     arg1->unk1C = NULL;
@@ -279,13 +275,9 @@ s32 func_8005BD50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Collide
         osSyncPrintf("\x1b[m");
         return 0;
     }
-    var_s0 = arg1->unk1C;
-    var_s1 = arg2->unkC;
-    while (var_s0 < (arg1->unk1C + (arg1->unk18))) {
+    for (var_s0 = arg1->unk1C, var_s1 = arg2->unkC; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++, var_s1++) {
         func_8005BAD8_Type0(globalCtx, var_s0);
         func_8005BB48_Type0(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -306,13 +298,9 @@ s32 func_8005BE50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Actor* 
         osSyncPrintf("\x1b[m");
         return 0;
     }
-    var_s0 = arg1->unk1C;
-    var_s1 = arg3->unkC;
-    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+    for (var_s0 = arg1->unk1C, var_s1 = arg3->unkC; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++, var_s1++) {
         func_8005BAD8_Type0(globalCtx, var_s0);
         func_8005BB48_Type0(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -333,13 +321,9 @@ s32 func_8005BF50_jntsph(GlobalContext* globalCtx, ColliderJntSph* arg1, Actor* 
         osSyncPrintf("\x1b[m");
         return 0;
     }
-    var_s0 = arg1->unk1C;
-    var_s1 = arg3->unkC;
-    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+    for (var_s0 = arg1->unk1C, var_s1 = arg3->unkC; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++, var_s1++) {
         func_8005BAD8_Type0(globalCtx, var_s0);
         func_8005BB48_Type0(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -355,13 +339,10 @@ s32 func_8005C050_jntsph_Type0(GlobalContext* globalCtx, ColliderJntSph* collisi
     if (arg4 == NULL) {
         __assert("pclobj_jntsph->elem_tbl != NULL", "../z_collision_check.c", 0x643);
     }
-    var_s0 = collision->unk1C;
-    var_s1 = arg3->unkC;
-    while (var_s0 < (collision->unk1C + collision->unk18)) {
+    for (var_s0 = collision->unk1C, var_s1 = arg3->unkC; var_s0 < (collision->unk1C + collision->unk18);
+         var_s0++, var_s1++) {
         func_8005BAD8_Type0(globalCtx, var_s0);
         func_8005BB48_Type0(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -372,10 +353,8 @@ s32 func_8005C124_SetAT_0(GlobalContext* globalCtx, Collider* collider) {
 
     new_var = (ColliderJntSph*)collider;
     func_8005B76C(globalCtx, &new_var->base);
-    var_s0 = new_var->unk1C;
-    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+    for (var_s0 = new_var->unk1C; var_s0 < (new_var->unk1C + new_var->unk18); var_s0++) {
         func_8005BB8C_SetAT_sub_0(globalCtx, var_s0);
-        var_s0++;
     }
 
     return 1;
@@ -387,10 +366,8 @@ s32 func_8005C1AC_SetAC_0(GlobalContext* globalCtx, Collider* collider) {
 
     new_var = (ColliderJntSph*)collider;
     func_8005B784(globalCtx, &new_var->base);
-    var_s0 = new_var->unk1C;
-    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+    for (var_s0 = new_var->unk1C; var_s0 < (new_var->unk1C + new_var->unk18); var_s0++) {
         func_8005BBB0_SetAC_sub_0(globalCtx, var_s0);
-        var_s0++;
     }
     return 1;
 }
@@ -401,10 +378,8 @@ s32 func_8005C234_SetOT_0(GlobalContext* globalCtx, Collider* collider) {
 
     new_var = (ColliderJntSph*)collider;
     func_8005B79C(globalCtx, &new_var->base);
-    var_s0 = new_var->unk1C;
-    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+    for (var_s0 = new_var->unk1C; var_s0 < (new_var->unk1C + new_var->unk18); var_s0++) {
         func_8005BBD4_SetOT_sub_0(globalCtx, var_s0);
-        var_s0++;
     }
     return 1;
 }
@@ -512,12 +487,8 @@ s32 func_8005C608(GlobalContext* globalCtx, TriNorm* arg1, Vec3f* arg2) {
     f32 sp3C;
     f32 sp38;
 
-    var_v0 = &arg1->vtx[0];
-    var_v1 = arg2;
-    while (var_v0 < arg1->vtx + 3) {
+    for (var_v0 = &arg1->vtx[0], var_v1 = arg2; var_v0 < arg1->vtx + 3; var_v0++, var_v1++) {
         *var_v0 = *var_v1;
-        var_v0++;
-        var_v1++;
     }
 
     func_800CC8B4(arg2, arg2 + 1, arg2 + 2, &sp44, &sp40, &sp3C, &sp38);
@@ -591,10 +562,8 @@ s32 func_8005C810(GlobalContext* globalCtx, struct_8005C810* arg1) {
     struct_8005C6F8* var_s0;
 
     func_8005B6A0(globalCtx, &arg1->unk0);
-    var_s0 = arg1->unk1C;
-    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+    for (var_s0 = arg1->unk1C; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++) {
         func_8005C6F8(globalCtx, var_s0);
-        var_s0++;
     }
     arg1->unk18 = 0;
     if (arg1->unk1C != NULL) {
@@ -615,12 +584,8 @@ s32 func_8005C8C8(GlobalContext* globalCtx, struct_8005C8C8* arg1) {
     struct_8005C6F8* var_s0;
 
     func_8005B6A0(globalCtx, &arg1->unk0);
-    var_s0 = arg1->unk1C;
-    if ((u32)var_s0 < (u32)&var_s0[arg1->unk18]) {
-        do {
-            func_8005C6F8(globalCtx, var_s0);
-            var_s0++;
-        } while ((u32)var_s0 < (u32)&arg1->unk1C[arg1->unk18]);
+    for (var_s0 = arg1->unk1C; var_s0 < &arg1->unk1C[arg1->unk18]; var_s0++) {
+        func_8005C6F8(globalCtx, var_s0);
     }
     arg1->unk18 = 0;
     arg1->unk1C = NULL;
@@ -642,13 +607,9 @@ s32 func_8005C964_tris(GlobalContext* globalCtx, ColliderTris* arg1, Actor* arg2
         osSyncPrintf("\x1b[m");
         return 0;
     }
-    var_s0 = arg1->unk1C;
-    var_s1 = arg3->unkC;
-    while (var_s0 < (arg1->unk1C + arg1->unk18)) {
+    for (var_s0 = arg1->unk1C, var_s1 = arg3->unkC; var_s0 < (arg1->unk1C + arg1->unk18); var_s0++, var_s1++) {
         func_8005C6C0_tris(globalCtx, var_s0);
         func_8005C730(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -670,13 +631,9 @@ s32 func_8005CA88_tris(GlobalContext* globalCtx, ColliderTris* arg1, Actor* arg2
         arg1->unk18 = 0;
         return 0;
     }
-    var_s0 = arg1->unk1C;
-    var_s1 = arg3->unkC;
-    while (var_s0 < &arg1->unk1C[arg1->unk18]) {
+    for (var_s0 = arg1->unk1C, var_s1 = arg3->unkC; var_s0 < &arg1->unk1C[arg1->unk18]; var_s0++, var_s1++) {
         func_8005C6C0_tris(globalCtx, var_s0);
         func_8005C730(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -693,13 +650,9 @@ s32 func_8005CBAC_tris(GlobalContext* globalCtx, ColliderTris* arg1, Actor* arg2
     if (arg1->unk1C == 0) {
         __assert("pclobj_tris->elem_tbl != NULL", "../z_collision_check.c", 0x8D2);
     }
-    var_s0 = arg1->unk1C;
-    var_s1 = arg3->unkC;
-    while (var_s0 < &arg1->unk1C[arg1->unk18]) {
+    for (var_s0 = arg1->unk1C, var_s1 = arg3->unkC; var_s0 < &arg1->unk1C[arg1->unk18]; var_s0++, var_s1++) {
         func_8005C6C0_tris(globalCtx, var_s0);
         func_8005C730(globalCtx, var_s0, var_s1);
-        var_s0++;
-        var_s1++;
     }
     return 1;
 }
@@ -710,10 +663,8 @@ s32 func_8005CC98_SetAT_2(GlobalContext* globalCtx, Collider* collider) {
 
     new_var = (ColliderTris*)collider;
     func_8005B76C(globalCtx, &new_var->base);
-    var_s0 = new_var->unk1C;
-    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+    for (var_s0 = new_var->unk1C; var_s0 < (new_var->unk1C + new_var->unk18); var_s0++) {
         func_8005C774(globalCtx, &var_s0->base);
-        var_s0++;
     }
     return 1;
 }
@@ -724,10 +675,8 @@ s32 func_8005CD34_SetAC_2(GlobalContext* globalCtx, Collider* collider) {
 
     new_var = (ColliderTris*)collider;
     func_8005B784(globalCtx, &new_var->base);
-    var_s0 = new_var->unk1C;
-    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+    for (var_s0 = new_var->unk1C; var_s0 < (new_var->unk1C + new_var->unk18); var_s0++) {
         func_8005C798_SetAC_sub_2(globalCtx, &var_s0->base);
-        var_s0++;
     }
     return 1;
 }
@@ -738,10 +687,9 @@ s32 func_8005CDD0_SetOT_2(GlobalContext* globalCtx, Collider* collider) {
 
     new_var = (ColliderTris*)collider;
     func_8005B79C(globalCtx, &new_var->base);
-    var_s0 = new_var->unk1C;
-    while (var_s0 < (new_var->unk1C + new_var->unk18)) {
+
+    for (var_s0 = new_var->unk1C; var_s0 < (new_var->unk1C + new_var->unk18); var_s0++) {
         func_8005C7BC_Type2(globalCtx, var_s0);
-        var_s0++;
     }
     return 1;
 }
@@ -907,7 +855,7 @@ s32 func_8005D378(s32 arg0, struct_8005D378_arg1* arg1, struct_8005D378_arg2* ar
 }
 
 s32 func_8005D3A4(GlobalContext* globalCtx, struct_ColChkCtx_290* arg1) {
-    arg1->unk18 &= 0xFFFE;
+    arg1->unk18 &= ~1;
     return 1;
 }
 
@@ -936,20 +884,17 @@ void func_8005D40C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
         for (var_v0 = colChkCtx->unk4_AT; var_v0 < (colChkCtx->unk4_AT + ARRAY_COUNT(colChkCtx->unk4_AT)); var_v0++) {
             *var_v0 = NULL;
         }
-        var_v0 = colChkCtx->unkD0_AC;
-        while (var_v0 < (colChkCtx->unkD0_AC + ARRAY_COUNT(colChkCtx->unkD0_AC))) {
+
+        for (var_v0 = colChkCtx->unkD0_AC; var_v0 < (colChkCtx->unkD0_AC + ARRAY_COUNT(colChkCtx->unkD0_AC));
+             var_v0++) {
             *var_v0 = NULL;
-            var_v0++;
         }
-        var_v0 = colChkCtx->unk1C4_OT;
-        while (var_v0 < (colChkCtx->unk1C4_OT + ARRAY_COUNT(colChkCtx->unk1C4_OT))) {
+        for (var_v0 = colChkCtx->unk1C4_OT; var_v0 < (colChkCtx->unk1C4_OT + ARRAY_COUNT(colChkCtx->unk1C4_OT));
+             var_v0++) {
             *var_v0 = NULL;
-            var_v0++;
         }
-        var = colChkCtx->unk290;
-        while (var < (colChkCtx->unk290 + ARRAY_COUNT(colChkCtx->unk290))) {
+        for (var = colChkCtx->unk290; var < (colChkCtx->unk290 + ARRAY_COUNT(colChkCtx->unk290)); var++) {
             *var = NULL;
-            var++;
         }
     }
 }
@@ -1018,26 +963,20 @@ void func_8005D62C(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
 
     if (gGameInfo->data[0x72F] != 0) {
         if (gGameInfo->data[0x735] != 0) {
-            var_s1 = 0;
-            while (var_s1 < colChkCtx->unk0_nAT) {
+            for (var_s1 = 0; var_s1 < colChkCtx->unk0_nAT; var_s1++) {
                 func_8005D4DC(globalCtx, colChkCtx->unk4_AT[var_s1]);
-                var_s1 += 1;
             }
         }
         if (gGameInfo->data[0x736] != 0) {
-            var_s1 = 0;
-            while (var_s1 < colChkCtx->unkCC_nAC) {
+            for (var_s1 = 0; var_s1 < colChkCtx->unkCC_nAC; var_s1++) {
                 func_8005D4DC(globalCtx, colChkCtx->unkD0_AC[var_s1]);
-                var_s1 += 1;
             }
         }
         if (gGameInfo->data[0x737] != 0) {
-            var_s1 = 0;
-            while (var_s1 < colChkCtx->unk1C0_nOT) {
+            for (var_s1 = 0; var_s1 < colChkCtx->unk1C0_nOT; var_s1++) {
                 if (colChkCtx->unk1C4_OT[var_s1]->maskA & 1) {
                     func_8005D4DC(globalCtx, colChkCtx->unk1C4_OT[var_s1]);
                 }
-                var_s1 += 1;
             }
         }
         if (gGameInfo->data[0x738] != 0) {
@@ -1674,8 +1613,7 @@ void CollisionCheck_ATCylVsACJntSph(GlobalContext* globalCtx, SubGlobalContext11
 
     if ((acJntSph->unk18 > 0) && (acJntSph->unk1C != 0) && (atCylinder->unk40.radius > 0)) {
         if ((atCylinder->unk40.height > 0) && (func_8005DF2C(&atCylinder->unk18) != 1)) {
-            var_s0 = acJntSph->unk1C;
-            while (var_s0 < (acJntSph->unk1C + (acJntSph->unk18))) {
+            for (var_s0 = acJntSph->unk1C; var_s0 < (acJntSph->unk1C + (acJntSph->unk18)); var_s0++) {
                 if ((func_8005DF50(&var_s0->base) != 1) && (func_8005DF74(&atCylinder->unk18, &var_s0->base) != 1) &&
                     (func_800CFDA4(&var_s0->unk28.unk8, &atCylinder->unk40, &sp9C, &sp98) != 0)) {
                     sp7C.x = (f32)atCylinder->unk40.pos.x;
@@ -1702,7 +1640,6 @@ void CollisionCheck_ATCylVsACJntSph(GlobalContext* globalCtx, SubGlobalContext11
                         return;
                     }
                 }
-                var_s0++;
             }
         }
     }
@@ -1808,8 +1745,7 @@ void CollisionCheck_ATJntSphVsACQuad(GlobalContext* globalCtx, SubGlobalContext1
     if ((atJntSph->unk18 > 0) && ((atJntSph->unk1C != NULL)) && (func_8005DF50(&acQuad->unk18) != 1)) {
         Math3D_TriNorm(&D_8015E230, &acQuad->unk40.unk18, &acQuad->unk40.unk24, &acQuad->unk40.unkC);
         Math3D_TriNorm(&D_8015E268, &acQuad->unk40.unkC, &acQuad->unk40.unk0, &acQuad->unk40.unk18);
-        var_s0 = atJntSph->unk1C;
-        while (var_s0 < &atJntSph->unk1C[atJntSph->unk18]) {
+        for (var_s0 = atJntSph->unk1C; var_s0 < &atJntSph->unk1C[atJntSph->unk18]; var_s0++) {
             if (func_8005DF2C(&var_s0->base) != 1) {
                 if ((func_8005DF74(&var_s0->base, &acQuad->unk18) != 1) &&
                     ((func_800CE934(&var_s0->unk28.unk8, &D_8015E230, &sp7C) == 1) ||
@@ -1829,7 +1765,6 @@ void CollisionCheck_ATJntSphVsACQuad(GlobalContext* globalCtx, SubGlobalContext1
                     return;
                 }
             }
-            var_s0++;
             if (1) {}
         }
     }
@@ -2240,8 +2175,7 @@ void func_80060EBC_Type0_processAC_(GlobalContext* globalCtx, SubGlobalContext11
     Collider_Type0_ptr1C* var_v0;
     Vec3f sp24;
 
-    var_v0 = arg2_0->unk1C;
-    while (var_v0 < (arg2_0->unk1C + (arg2_0->unk18))) {
+    for (var_v0 = arg2_0->unk1C; var_v0 < (arg2_0->unk1C + arg2_0->unk18); var_v0++) {
         if (var_v0->base.bumperFlags & 0x80) {
             if ((var_v0->base.colliding != NULL) && !(var_v0->base.colliding->toucherFlags & 0x40)) {
                 Math_Vec3s_ToVec3f(&sp24, &var_v0->base.bumper.unk_06);
@@ -2251,7 +2185,6 @@ void func_80060EBC_Type0_processAC_(GlobalContext* globalCtx, SubGlobalContext11
                 return;
             }
         }
-        var_v0++;
     }
 }
 
@@ -2273,8 +2206,7 @@ void func_80061028_Type2_processAC_(GlobalContext* globalCtx, SubGlobalContext11
     Collider_Type2_ptr1C* var_v0;
     Vec3f sp24;
 
-    var_v0 = arg2->unk1C;
-    while (var_v0 < &arg2->unk1C[arg2->unk18]) {
+    for (var_v0 = arg2->unk1C; var_v0 < &arg2->unk1C[arg2->unk18]; var_v0++) {
         if (var_v0->base.bumperFlags & 0x80) {
             if ((var_v0->base.colliding != NULL) && !(var_v0->base.colliding->toucherFlags & 0x40)) {
                 Math_Vec3s_ToVec3f(&sp24, &var_v0->base.bumper.unk_06);
@@ -2284,7 +2216,6 @@ void func_80061028_Type2_processAC_(GlobalContext* globalCtx, SubGlobalContext11
                 return;
             }
         }
-        var_v0++;
     }
 }
 
