@@ -2,6 +2,7 @@
 #define Z64COLLISION_CHECK_H
 
 #include "ultra64.h"
+#include "z64math.h"
 
 struct Actor;
 
