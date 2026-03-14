@@ -96,7 +96,7 @@ typedef struct ColliderElementDamageInfoAC {
     /* 0x00 */ u32 dmgFlags; /* Collision Exclusion Mask */
     /* 0x04 */ u8 hitBacklash; /* Damage Effect (Knockback, Fire, etc.) */
     /* 0x05 */ u8 unk_05;
-    /* 0x06 */ Vec3s unk_06;
+    /* 0x06 */ Vec3s hitPos;
 } ColliderElementDamageInfoAC; // size = 0x0C
 
 typedef struct ColliderElementDamageInfoACSrc {

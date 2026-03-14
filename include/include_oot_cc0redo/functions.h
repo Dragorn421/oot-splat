@@ -734,7 +734,7 @@ s32 Collider_AddOC(GlobalContext* globalCtx, CollisionCheckContext* simpleBodyGr
 // ? func_8005E4F8(?);
 // ? func_8005E604(?);
 // ? func_8005E800(?);
-// ? func_8005E81C(?);
+// ? Collider_ATVsACHit(?);
 // ? func_800611A0_processAC_(?);
 // ? func_80061274_processATvsAC(?);
 // ? func_8006139C_ProcessAllATvsAC(?);

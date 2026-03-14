@@ -173,7 +173,7 @@ void Collider_ClearElementACHit(GlobalContext* globalCtx, ColliderElement* elem)
     elem->acElemFlags &= ~ACELEM_DRAW_HITMARK;
     elem->acHit = NULL;
     elem->acHitElem = NULL;
-    elem->acDmgInfo.unk_06.x = elem->acDmgInfo.unk_06.y = elem->acDmgInfo.unk_06.z = 0;
+    elem->acDmgInfo.hitPos.x = elem->acDmgInfo.hitPos.y = elem->acDmgInfo.hitPos.z = 0;
 }
 
 void Collider_ClearElementOCHit(GlobalContext* globalCtx, ColliderElement* elem) {
@@ -1469,37 +1469,37 @@ struct_8011DF40 D_8011DF40[] = {
 void func_80062CD4(GlobalContext* globalCtx, Vec3f* arg1);
 void func_80062E14(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2);
 
-void func_8005E604(GlobalContext* globalCtx, Collider* arg1, ColliderElement* arg2, Collider* arg3,
-                   ColliderElement* arg4, Vec3f* arg5) {
-    if (!(arg4->acElemFlags & ACELEM_NO_HITMARK) &&
-        ((arg2->atElemFlags & ATELEM_AT_HITMARK) || !(arg2->atElemFlags & ATELEM_DREW_HITMARK))) {
-        if (arg3->actor != NULL) {
-            D_8011DF28[D_8011DF40[arg3->colMaterial].unk0](globalCtx, arg3, arg5);
+void func_8005E604(GlobalContext* globalCtx, Collider* atCollider, ColliderElement* atElem, Collider* acCollider,
+                   ColliderElement* acElem, Vec3f* arg5) {
+    if (!(acElem->acElemFlags & ACELEM_NO_HITMARK) &&
+        ((atElem->atElemFlags & ATELEM_AT_HITMARK) || !(atElem->atElemFlags & ATELEM_DREW_HITMARK))) {
+        if (acCollider->actor != NULL) {
+            D_8011DF28[D_8011DF40[acCollider->colMaterial].unk0](globalCtx, acCollider, arg5);
         }
         do {
         } while (0);
-        if (arg3->actor != NULL) {
-            if (D_8011DF40[arg3->colMaterial].unk1 == 3) {
-                func_8005E2EC(globalCtx, arg2, arg3, arg5);
-            } else if (D_8011DF40[arg3->colMaterial].unk1 == 4) {
-                if (arg1->actor == NULL) {
+        if (acCollider->actor != NULL) {
+            if (D_8011DF40[acCollider->colMaterial].unk1 == 3) {
+                func_8005E2EC(globalCtx, atElem, acCollider, arg5);
+            } else if (D_8011DF40[acCollider->colMaterial].unk1 == 4) {
+                if (atCollider->actor == NULL) {
                     func_80062CD4(globalCtx, arg5);
                     Audio_PlaySoundGeneral(0x1837U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
                 } else {
-                    func_80062E14(globalCtx, arg5, &arg1->actor->unk_E4);
+                    func_80062E14(globalCtx, arg5, &atCollider->actor->unk_E4);
                 }
-            } else if (D_8011DF40[arg3->colMaterial].unk1 != 5) {
-                func_80029CA4(globalCtx, D_8011DF40[arg3->colMaterial].unk1, arg5);
-                if (!(arg4->acElemFlags & ACELEM_NO_SWORD_SFX)) {
-                    func_8005E4F8(arg1, arg4);
+            } else if (D_8011DF40[acCollider->colMaterial].unk1 != 5) {
+                func_80029CA4(globalCtx, D_8011DF40[acCollider->colMaterial].unk1, arg5);
+                if (!(acElem->acElemFlags & ACELEM_NO_SWORD_SFX)) {
+                    func_8005E4F8(atCollider, acElem);
                 }
             }
         } else {
             func_80029CA4(globalCtx, 0U, arg5);
-            if (arg3->actor == NULL) {
+            if (acCollider->actor == NULL) {
                 Audio_PlaySoundGeneral(0x1806U, &D_801333D4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
             } else {
-                Audio_PlaySoundGeneral(0x1806U, &arg3->actor->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+                Audio_PlaySoundGeneral(0x1806U, &acCollider->actor->unk_E4, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
             }
         }
     }
@@ -1510,8 +1510,8 @@ void func_8005E800(Collider* arg0, Collider* arg1) {
     arg1->acFlags |= AC_BOUNCED;
 }
 
-s32 func_8005E81C(GlobalContext* globalCtx, Collider* atCollider, ColliderElement* atElem, Vec3f* atElemPos,
-                  Collider* acCollider, ColliderElement* acElem, Vec3f* acElemPos, Vec3f* arg7) {
+s32 Collider_ATVsACHit(GlobalContext* globalCtx, Collider* atCollider, ColliderElement* atElem, Vec3f* atElemPos,
+                       Collider* acCollider, ColliderElement* acElem, Vec3f* acElemPos, Vec3f* hitPos) {
     if ((acCollider->acFlags & AC_HARD) && (atCollider->actor != NULL) && (acCollider->actor != NULL)) {
         func_8005E800(atCollider, acCollider);
     }
@@ -1527,20 +1527,20 @@ s32 func_8005E81C(GlobalContext* globalCtx, Collider* atCollider, ColliderElemen
     }
     acCollider->acFlags |= AC_HIT;
     acCollider->ac = atCollider->actor;
-    acElem->acHit = (struct Collider*)atCollider;
+    acElem->acHit = atCollider;
     acElem->acHitElem = atElem;
     acElem->acElemFlags |= ACELEM_HIT;
     if (acCollider->actor != NULL) {
         acCollider->actor->sub_98.unk_1B = atElem->atDmgInfo.hitSpecialEffect;
     }
-    acElem->acDmgInfo.unk_06.x = arg7->x;
-    acElem->acDmgInfo.unk_06.y = arg7->y;
-    acElem->acDmgInfo.unk_06.z = arg7->z;
+    acElem->acDmgInfo.hitPos.x = hitPos->x;
+    acElem->acDmgInfo.hitPos.y = hitPos->y;
+    acElem->acDmgInfo.hitPos.z = hitPos->z;
     if (!(atElem->atElemFlags & ATELEM_AT_HITMARK) && ((acCollider->colMaterial != COL_MATERIAL_METAL)) &&
         (acCollider->colMaterial != COL_MATERIAL_WOOD) && (acCollider->colMaterial != COL_MATERIAL_HARD)) {
         acElem->acElemFlags |= ACELEM_DRAW_HITMARK;
     } else {
-        func_8005E604(globalCtx, atCollider, atElem, acCollider, acElem, arg7);
+        func_8005E604(globalCtx, atCollider, atElem, acCollider, acElem, hitPos);
         atElem->atElemFlags |= ATELEM_DREW_HITMARK;
     }
     return 1;
@@ -1555,7 +1555,7 @@ void Collider_ATSpheresVsACSpheres(GlobalContext* globalCtx, CollisionCheckConte
     f32 sp8C;
     f32 sp88;
     f32 temp_fv0_2;
-    Vec3f sp78;
+    Vec3f hitPos;
     Vec3f atSpheresElemPos;
     Vec3f acSpheresElemPos;
 
@@ -1577,15 +1577,15 @@ void Collider_ATSpheresVsACSpheres(GlobalContext* globalCtx, CollisionCheckConte
                         acSpheresElemPos.y = acSpheresElem->shape.world.center.y;
                         acSpheresElemPos.z = acSpheresElem->shape.world.center.z;
                         if (!(fabsf(sp88) < 0.008f)) {
-                            temp_fv0_2 = ((f32)acSpheresElem->shape.world.radius) / sp88;
-                            sp78.x = ((atSpheresElemPos.x - acSpheresElemPos.x) * temp_fv0_2) + acSpheresElemPos.x;
-                            sp78.y = ((atSpheresElemPos.y - acSpheresElemPos.y) * temp_fv0_2) + acSpheresElemPos.y;
-                            sp78.z = ((atSpheresElemPos.z - acSpheresElemPos.z) * temp_fv0_2) + acSpheresElemPos.z;
+                            temp_fv0_2 = (f32)acSpheresElem->shape.world.radius / sp88;
+                            hitPos.x = ((atSpheresElemPos.x - acSpheresElemPos.x) * temp_fv0_2) + acSpheresElemPos.x;
+                            hitPos.y = ((atSpheresElemPos.y - acSpheresElemPos.y) * temp_fv0_2) + acSpheresElemPos.y;
+                            hitPos.z = ((atSpheresElemPos.z - acSpheresElemPos.z) * temp_fv0_2) + acSpheresElemPos.z;
                         } else {
-                            Math_Vec3f_Copy(&sp78, &atSpheresElemPos);
+                            Math_Vec3f_Copy(&hitPos, &atSpheresElemPos);
                         }
-                        func_8005E81C(globalCtx, &atSpheres->base, &atSpheresElem->base, &atSpheresElemPos,
-                                      &acSpheres->base, &acSpheresElem->base, &acSpheresElemPos, &sp78);
+                        Collider_ATVsACHit(globalCtx, &atSpheres->base, &atSpheresElem->base, &atSpheresElemPos,
+                                           &acSpheres->base, &acSpheresElem->base, &acSpheresElemPos, &hitPos);
                         if (!(acSpheres->base.ocFlags2 & OC2_FIRST_ONLY)) {
                             return;
                         }
@@ -1596,61 +1596,60 @@ void Collider_ATSpheresVsACSpheres(GlobalContext* globalCtx, CollisionCheckConte
     }
 }
 
-void Collider_ATSpheresVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                               Collider* acCollider) {
+void Collider_ATSpheresVsACCylinder(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                    Collider* acCollider) {
     ColliderSpheres* atSpheres = (ColliderSpheres*)atCollider;
     ColliderCylinder* acCylinder = (ColliderCylinder*)acCollider;
     ColliderSpheresElement* atSpheresElem;
     f32 sp80;
     f32 sp7C;
-    Vec3f sp70;
+    Vec3f hitPos;
     Vec3f atSpheresElemPos;
     Vec3f acCylinderPos;
     f32 temp_fv0_2;
 
-    if ((atSpheres->nElements > 0) && (atSpheres->elements != NULL) && (acCylinder->shape.radius > 0)) {
-        if (((acCylinder->shape.height > 0)) && (Collider_IsElementACOff(&acCylinder->elem) != 1)) {
-            if (&atSpheresElem->shape && &atSpheresElem->shape) {}
-            for (atSpheresElem = atSpheres->elements; atSpheresElem < &atSpheres->elements[atSpheres->nElements];
-                 atSpheresElem++) {
-                if ((Collider_IsElementATOff(&atSpheresElem->base) != 1) &&
-                    (Collider_AreDmgFlagsDisjoint(&atSpheresElem->base, &acCylinder->elem) != 1) &&
-                    (func_800CFDA4(&atSpheresElem->shape.world, &acCylinder->shape, &sp80, &sp7C) != 0)) {
-                    atSpheresElemPos.x = (f32)atSpheresElem->shape.world.center.x;
-                    atSpheresElemPos.y = (f32)atSpheresElem->shape.world.center.y;
-                    atSpheresElemPos.z = (f32)atSpheresElem->shape.world.center.z;
-                    acCylinderPos.x = (f32)acCylinder->shape.pos.x;
-                    acCylinderPos.y = (f32)acCylinder->shape.pos.y;
-                    acCylinderPos.z = (f32)acCylinder->shape.pos.z;
-                    if (!(fabsf(sp7C) < 0.008f)) {
-                        temp_fv0_2 = (f32)acCylinder->shape.radius / sp7C;
-                        if (temp_fv0_2 <= 1.0f) {
-                            sp70.x = ((atSpheresElemPos.x - acCylinderPos.x) * temp_fv0_2) + acCylinderPos.x;
-                            sp70.y = ((atSpheresElemPos.y - acCylinderPos.y) * temp_fv0_2) + acCylinderPos.y;
-                            sp70.z = ((atSpheresElemPos.z - acCylinderPos.z) * temp_fv0_2) + acCylinderPos.z;
-                        } else {
-                            Math_Vec3f_Copy(&sp70, &atSpheresElemPos);
-                        }
+    if ((atSpheres->nElements > 0) && (atSpheres->elements != NULL) && (acCylinder->shape.radius > 0) &&
+        (acCylinder->shape.height > 0) && (Collider_IsElementACOff(&acCylinder->elem) != 1)) {
+        if (&atSpheresElem->shape && &atSpheresElem->shape) {}
+        for (atSpheresElem = atSpheres->elements; atSpheresElem < &atSpheres->elements[atSpheres->nElements];
+             atSpheresElem++) {
+            if ((Collider_IsElementATOff(&atSpheresElem->base) != 1) &&
+                (Collider_AreDmgFlagsDisjoint(&atSpheresElem->base, &acCylinder->elem) != 1) &&
+                (func_800CFDA4(&atSpheresElem->shape.world, &acCylinder->shape, &sp80, &sp7C) != 0)) {
+                atSpheresElemPos.x = atSpheresElem->shape.world.center.x;
+                atSpheresElemPos.y = atSpheresElem->shape.world.center.y;
+                atSpheresElemPos.z = atSpheresElem->shape.world.center.z;
+                acCylinderPos.x = acCylinder->shape.pos.x;
+                acCylinderPos.y = acCylinder->shape.pos.y;
+                acCylinderPos.z = acCylinder->shape.pos.z;
+                if (!(fabsf(sp7C) < 0.008f)) {
+                    temp_fv0_2 = (f32)acCylinder->shape.radius / sp7C;
+                    if (temp_fv0_2 <= 1.0f) {
+                        hitPos.x = ((atSpheresElemPos.x - acCylinderPos.x) * temp_fv0_2) + acCylinderPos.x;
+                        hitPos.y = ((atSpheresElemPos.y - acCylinderPos.y) * temp_fv0_2) + acCylinderPos.y;
+                        hitPos.z = ((atSpheresElemPos.z - acCylinderPos.z) * temp_fv0_2) + acCylinderPos.z;
                     } else {
-                        Math_Vec3f_Copy(&sp70, &atSpheresElemPos);
+                        Math_Vec3f_Copy(&hitPos, &atSpheresElemPos);
                     }
-                    func_8005E81C(globalCtx, &atSpheres->base, &atSpheresElem->base, &atSpheresElemPos,
-                                  &acCylinder->base, &acCylinder->elem, &acCylinderPos, &sp70);
-                    return;
+                } else {
+                    Math_Vec3f_Copy(&hitPos, &atSpheresElemPos);
                 }
+                Collider_ATVsACHit(globalCtx, &atSpheres->base, &atSpheresElem->base, &atSpheresElemPos,
+                                   &acCylinder->base, &acCylinder->elem, &acCylinderPos, &hitPos);
+                return;
             }
         }
     }
 }
 
-void Collider_ATCylVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                               Collider* acCollider) {
+void Collider_ATCylinderVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                    Collider* acCollider) {
     ColliderCylinder* atCylinder = (ColliderCylinder*)atCollider;
     ColliderSpheres* acSpheres = (ColliderSpheres*)acCollider;
     f32 sp9C;
     f32 sp98;
     ColliderSpheresElement* acSpheresElem;
-    Vec3f sp88;
+    Vec3f hitPos;
     Vec3f atCylinderPos;
     Vec3f acSpheresElemPos;
     f32 temp_fv0_2;
@@ -1671,17 +1670,17 @@ void Collider_ATCylVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext* 
                     if (!(fabsf(sp98) < 0.008f)) {
                         temp_fv0_2 = (f32)acSpheresElem->shape.world.radius / sp98;
                         if (temp_fv0_2 <= 1.0f) {
-                            sp88.x = ((atCylinderPos.x - acSpheresElemPos.x) * temp_fv0_2) + acSpheresElemPos.x;
-                            sp88.y = ((atCylinderPos.y - acSpheresElemPos.y) * temp_fv0_2) + acSpheresElemPos.y;
-                            sp88.z = ((atCylinderPos.z - acSpheresElemPos.z) * temp_fv0_2) + acSpheresElemPos.z;
+                            hitPos.x = ((atCylinderPos.x - acSpheresElemPos.x) * temp_fv0_2) + acSpheresElemPos.x;
+                            hitPos.y = ((atCylinderPos.y - acSpheresElemPos.y) * temp_fv0_2) + acSpheresElemPos.y;
+                            hitPos.z = ((atCylinderPos.z - acSpheresElemPos.z) * temp_fv0_2) + acSpheresElemPos.z;
                         } else {
-                            Math_Vec3f_Copy(&sp88, &atCylinderPos);
+                            Math_Vec3f_Copy(&hitPos, &atCylinderPos);
                         }
                     } else {
-                        Math_Vec3f_Copy(&sp88, &atCylinderPos);
+                        Math_Vec3f_Copy(&hitPos, &atCylinderPos);
                     }
-                    func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acSpheres->base,
-                                  &acSpheresElem->base, &acSpheresElemPos, &sp88);
+                    Collider_ATVsACHit(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos,
+                                       &acSpheres->base, &acSpheresElem->base, &acSpheresElemPos, &hitPos);
                     if (!(acSpheres->base.ocFlags2 & OC2_FIRST_ONLY)) {
                         return;
                     }
@@ -1697,7 +1696,7 @@ void Collider_ATSpheresVsACTris(GlobalContext* globalCtx, CollisionCheckContext*
     ColliderTris* acTris = (ColliderTris*)acCollider;
     ColliderSpheresElement* atSpheresElem;
     ColliderTrisElement* acTrisElem;
-    Vec3f sp6C;
+    Vec3f hitPos;
     Vec3f sp60;
     Vec3f sp54;
 
@@ -1710,7 +1709,7 @@ void Collider_ATSpheresVsACTris(GlobalContext* globalCtx, CollisionCheckContext*
                          acTrisElem++) {
                         if ((Collider_IsElementACOff(&acTrisElem->base) != 1) &&
                             (Collider_AreDmgFlagsDisjoint(&atSpheresElem->base, &acTrisElem->base) != 1) &&
-                            (func_800CE934(&atSpheresElem->shape.world, &acTrisElem->shape, &sp6C) == 1)) {
+                            (func_800CE934(&atSpheresElem->shape.world, &acTrisElem->shape, &hitPos) == 1)) {
                             sp60.x = atSpheresElem->shape.world.center.x;
                             sp60.y = atSpheresElem->shape.world.center.y;
                             sp60.z = atSpheresElem->shape.world.center.z;
@@ -1723,8 +1722,8 @@ void Collider_ATSpheresVsACTris(GlobalContext* globalCtx, CollisionCheckContext*
                             sp54.z =
                                 (acTrisElem->shape.vtx[0].z + acTrisElem->shape.vtx[1].z + acTrisElem->shape.vtx[2].z) *
                                 (1.0f / 3.0f);
-                            func_8005E81C(globalCtx, &atSpheres->base, &atSpheresElem->base, &sp60, &acTris->base,
-                                          &acTrisElem->base, &sp54, &sp6C);
+                            Collider_ATVsACHit(globalCtx, &atSpheres->base, &atSpheresElem->base, &sp60, &acTris->base,
+                                               &acTrisElem->base, &sp54, &hitPos);
                             return;
                         }
                     }
@@ -1741,7 +1740,7 @@ void Collider_ATTrisVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext*
     ColliderTrisElement* atTrisElem;
     ColliderSpheres* acSpheres = (ColliderSpheres*)acCollider;
     ColliderSpheresElement* acSpheresElem;
-    Vec3f sp7C;
+    Vec3f hitPos;
     Vec3f atTrisElemPos;
     Vec3f acSpheresElemPos;
 
@@ -1754,7 +1753,7 @@ void Collider_ATTrisVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext*
                          atTrisElem++) {
                         if (((Collider_IsElementATOff(&atTrisElem->base) != 1))) {
                             if (((Collider_AreDmgFlagsDisjoint(&atTrisElem->base, &acSpheresElem->base) != 1) &&
-                                 (func_800CE934(&acSpheresElem->shape.world, &atTrisElem->shape, &sp7C) == 1))) {
+                                 (func_800CE934(&acSpheresElem->shape.world, &atTrisElem->shape, &hitPos) == 1))) {
                                 Math_Vec3s_ToVec3f(&acSpheresElemPos, &acSpheresElem->shape.world.center);
                                 atTrisElemPos.x = (atTrisElem->shape.vtx[0].x + atTrisElem->shape.vtx[1].x +
                                                    atTrisElem->shape.vtx[2].x) *
@@ -1765,8 +1764,8 @@ void Collider_ATTrisVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext*
                                 atTrisElemPos.z = (atTrisElem->shape.vtx[0].z + atTrisElem->shape.vtx[1].z +
                                                    atTrisElem->shape.vtx[2].z) *
                                                   (1.0f / 3.0f);
-                                func_8005E81C(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos,
-                                              &acSpheres->base, &acSpheresElem->base, &acSpheresElemPos, &sp7C);
+                                Collider_ATVsACHit(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos,
+                                                   &acSpheres->base, &acSpheresElem->base, &acSpheresElemPos, &hitPos);
                                 if (!(acSpheres->base.ocFlags2 & OC2_FIRST_ONLY)) {
                                     return;
                                 }
@@ -1794,7 +1793,7 @@ void Collider_ATSpheresVsACQuad(GlobalContext* globalCtx, CollisionCheckContext*
                                 Collider* acCollider) {
     ColliderSpheres* atSpheres = (ColliderSpheres*)atCollider;
     ColliderQuad* acQuad = (ColliderQuad*)acCollider;
-    Vec3f sp7C;
+    Vec3f hitPos;
     ColliderSpheresElement* atSpheresElem;
     Vec3f atSpheresElemPos;
     Vec3f acQuadPos;
@@ -1809,8 +1808,8 @@ void Collider_ATSpheresVsACQuad(GlobalContext* globalCtx, CollisionCheckContext*
              atSpheresElem++) {
             if (Collider_IsElementATOff(&atSpheresElem->base) != 1) {
                 if ((Collider_AreDmgFlagsDisjoint(&atSpheresElem->base, &acQuad->elem) != 1) &&
-                    ((func_800CE934(&atSpheresElem->shape.world, &D_8015E230, &sp7C) == 1) ||
-                     (func_800CE934(&atSpheresElem->shape.world, &D_8015E268, &sp7C) == 1))) {
+                    ((func_800CE934(&atSpheresElem->shape.world, &D_8015E230, &hitPos) == 1) ||
+                     (func_800CE934(&atSpheresElem->shape.world, &D_8015E268, &hitPos) == 1))) {
                     Math_Vec3s_ToVec3f(&atSpheresElemPos, &atSpheresElem->shape.world.center);
                     acQuadPos.x = (acQuad->shape.corners.cornerA.x + acQuad->shape.corners.cornerB.x +
                                    acQuad->shape.corners.cornerC.x + acQuad->shape.corners.cornerD.x) *
@@ -1821,8 +1820,8 @@ void Collider_ATSpheresVsACQuad(GlobalContext* globalCtx, CollisionCheckContext*
                     acQuadPos.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
                                    acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
                                   0.25f;
-                    func_8005E81C(globalCtx, &atSpheres->base, &atSpheresElem->base, &atSpheresElemPos, &acQuad->base,
-                                  &acQuad->elem, &acQuadPos, &sp7C);
+                    Collider_ATVsACHit(globalCtx, &atSpheres->base, &atSpheresElem->base, &atSpheresElemPos,
+                                       &acQuad->base, &acQuad->elem, &acQuadPos, &hitPos);
                     return;
                 }
             }
@@ -1837,7 +1836,7 @@ TriNorm D_8015E2D8;
 void Collider_ATQuadVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                                 Collider* acCollider) {
     ColliderQuad* atQuad = (ColliderQuad*)atCollider;
-    Vec3f sp88;
+    Vec3f hitPos;
     ColliderSpheres* acSpheres = (ColliderSpheres*)acCollider;
     ColliderSpheresElement* acSpheresElem;
     Vec3f atQuadPos;
@@ -1854,9 +1853,9 @@ void Collider_ATQuadVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext*
                  acSpheresElem++) {
                 if ((Collider_IsElementACOff(&acSpheresElem->base) != 1) &&
                     ((Collider_AreDmgFlagsDisjoint(&atQuad->elem, &acSpheresElem->base) != 1)) &&
-                    ((func_800CE934(&acSpheresElem->shape.world, &D_8015E2A0, &sp88) == 1) ||
-                     (func_800CE934(&acSpheresElem->shape.world, &D_8015E2D8, &sp88) == 1)) &&
-                    func_8005D218(globalCtx, atQuad, &sp88)) {
+                    ((func_800CE934(&acSpheresElem->shape.world, &D_8015E2A0, &hitPos) == 1) ||
+                     (func_800CE934(&acSpheresElem->shape.world, &D_8015E2D8, &hitPos) == 1)) &&
+                    func_8005D218(globalCtx, atQuad, &hitPos)) {
                     acSpheresElemPos.x = acSpheresElem->shape.world.center.x;
                     acSpheresElemPos.y = acSpheresElem->shape.world.center.y;
                     acSpheresElemPos.z = acSpheresElem->shape.world.center.z;
@@ -1869,8 +1868,8 @@ void Collider_ATQuadVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext*
                     atQuadPos.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
                                    atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
                                   0.25f;
-                    func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acSpheres->base,
-                                  &acSpheresElem->base, &acSpheresElemPos, &sp88);
+                    Collider_ATVsACHit(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acSpheres->base,
+                                       &acSpheresElem->base, &acSpheresElemPos, &hitPos);
                     if (!(acSpheres->base.ocFlags2 & OC2_FIRST_ONLY)) {
                         return;
                     }
@@ -1881,13 +1880,13 @@ void Collider_ATQuadVsACSpheres(GlobalContext* globalCtx, CollisionCheckContext*
     }
 }
 
-void Collider_ATCylVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                           Collider* acCollider) {
+void Collider_ATCylinderVsACCylinder(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                     Collider* acCollider) {
     ColliderCylinder* atCylinder = (ColliderCylinder*)atCollider;
     ColliderCylinder* acCylinder = (ColliderCylinder*)acCollider;
     f32 sp6C;
     f32 sp68;
-    Vec3f sp5C;
+    Vec3f hitPos;
     Vec3f atCylinderPos;
     Vec3f acCylinderPos;
     f32 temp_fv0;
@@ -1902,28 +1901,28 @@ void Collider_ATCylVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* colC
                 Math_Vec3s_ToVec3f(&acCylinderPos, &acCylinder->shape.pos);
                 if (!(fabsf(sp68) < 0.008f)) {
                     temp_fv0 = (f32)acCylinder->shape.radius / sp68;
-                    sp5C.y = (f32)acCylinder->shape.pos.y + (f32)acCylinder->shape.yShift +
-                             ((f32)acCylinder->shape.height * 0.5f);
-                    sp5C.x = (((f32)atCylinder->shape.pos.x - (f32)acCylinder->shape.pos.x) * temp_fv0) +
-                             (f32)acCylinder->shape.pos.x;
-                    sp5C.z = (((f32)atCylinder->shape.pos.z - (f32)acCylinder->shape.pos.z) * temp_fv0) +
-                             (f32)acCylinder->shape.pos.z;
+                    hitPos.y = (f32)acCylinder->shape.pos.y + (f32)acCylinder->shape.yShift +
+                               ((f32)acCylinder->shape.height * 0.5f);
+                    hitPos.x = (((f32)atCylinder->shape.pos.x - (f32)acCylinder->shape.pos.x) * temp_fv0) +
+                               (f32)acCylinder->shape.pos.x;
+                    hitPos.z = (((f32)atCylinder->shape.pos.z - (f32)acCylinder->shape.pos.z) * temp_fv0) +
+                               (f32)acCylinder->shape.pos.z;
                 } else {
-                    Math_Vec3s_ToVec3f(&sp5C, &acCylinder->shape.pos);
+                    Math_Vec3s_ToVec3f(&hitPos, &acCylinder->shape.pos);
                 }
-                func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acCylinder->base,
-                              &acCylinder->elem, &acCylinderPos, &sp5C);
+                Collider_ATVsACHit(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acCylinder->base,
+                                   &acCylinder->elem, &acCylinderPos, &hitPos);
             }
         }
     }
 }
 
-void Collider_ATCylVsACTris(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                            Collider* acCollider) {
+void Collider_ATCylinderVsACTris(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                 Collider* acCollider) {
     ColliderCylinder* atCylinder = (ColliderCylinder*)atCollider;
     ColliderTris* acTris = (ColliderTris*)acCollider;
     ColliderTrisElement* acTrisElem;
-    Vec3f sp68;
+    Vec3f hitPos;
     Vec3f atCylinderPos;
     Vec3f acTrisElemPos;
 
@@ -1932,7 +1931,7 @@ void Collider_ATCylVsACTris(GlobalContext* globalCtx, CollisionCheckContext* col
         for (acTrisElem = acTris->elements; acTrisElem < &acTris->elements[acTris->nElements]; acTrisElem++) {
             if ((Collider_IsElementACOff(&acTrisElem->base) != 1) &&
                 (Collider_AreDmgFlagsDisjoint(&atCylinder->elem, &acTrisElem->base) != 1) &&
-                (Math3D_CylTriTouchingIntersect(&atCylinder->shape, &acTrisElem->shape, &sp68) == 1)) {
+                (Math3D_CylTriTouchingIntersect(&atCylinder->shape, &acTrisElem->shape, &hitPos) == 1)) {
                 Math_Vec3s_ToVec3f(&atCylinderPos, &atCylinder->shape.pos);
                 acTrisElemPos.x =
                     (acTrisElem->shape.vtx[0].x + acTrisElem->shape.vtx[1].x + acTrisElem->shape.vtx[2].x) *
@@ -1943,8 +1942,8 @@ void Collider_ATCylVsACTris(GlobalContext* globalCtx, CollisionCheckContext* col
                 acTrisElemPos.z =
                     (acTrisElem->shape.vtx[0].z + acTrisElem->shape.vtx[1].z + acTrisElem->shape.vtx[2].z) *
                     (1.0f / 3.0f);
-                func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acTris->base,
-                              &acTrisElem->base, &acTrisElemPos, &sp68);
+                Collider_ATVsACHit(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acTris->base,
+                                   &acTrisElem->base, &acTrisElemPos, &hitPos);
                 return;
             }
             if (1) {}
@@ -1953,10 +1952,10 @@ void Collider_ATCylVsACTris(GlobalContext* globalCtx, CollisionCheckContext* col
     }
 }
 
-Vec3f D_8015E310;
+void Collider_ATTrisVsACCylinder(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                 Collider* acCollider) {
+    static Vec3f sHitPos;
 
-void Collider_ATTrisVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                            Collider* acCollider) {
     ColliderTris* atTris = (ColliderTris*)atCollider;
     ColliderCylinder* acCylinder = (ColliderCylinder*)acCollider;
     ColliderTrisElement* atTrisElem;
@@ -1969,7 +1968,7 @@ void Collider_ATTrisVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* col
         for (atTrisElem = atTris->elements; atTrisElem < &atTris->elements[atTris->nElements]; atTrisElem++) {
             if ((Collider_IsElementATOff(&atTrisElem->base) != 1) &&
                 (Collider_AreDmgFlagsDisjoint(&atTrisElem->base, &acCylinder->elem) != 1) &&
-                (Math3D_CylTriTouchingIntersect(&acCylinder->shape, &atTrisElem->shape, &D_8015E310) == 1)) {
+                (Math3D_CylTriTouchingIntersect(&acCylinder->shape, &atTrisElem->shape, &sHitPos) == 1)) {
                 atTrisElemPos.x =
                     (atTrisElem->shape.vtx[0].x + atTrisElem->shape.vtx[1].x + atTrisElem->shape.vtx[2].x) *
                     (1.0f / 3.0f);
@@ -1980,8 +1979,8 @@ void Collider_ATTrisVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* col
                     (atTrisElem->shape.vtx[0].z + atTrisElem->shape.vtx[1].z + atTrisElem->shape.vtx[2].z) *
                     (1.0f / 3.0f);
                 Math_Vec3s_ToVec3f(&acCylinderPos, &acCylinder->shape.pos);
-                func_8005E81C(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos, &acCylinder->base,
-                              &acCylinder->elem, &acCylinderPos, &D_8015E310);
+                Collider_ATVsACHit(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos, &acCylinder->base,
+                                   &acCylinder->elem, &acCylinderPos, &sHitPos);
                 return;
             }
             if (1) {}
@@ -1990,23 +1989,23 @@ void Collider_ATTrisVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* col
     }
 }
 
-TriNorm D_8015E320;
-TriNorm D_8015E358;
-Vec3f D_8015E390;
+void Collider_ATCylinderVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                 Collider* acCollider) {
+    static TriNorm D_8015E320;
+    static TriNorm D_8015E358;
+    static Vec3f sHitPos;
 
-void Collider_ATCylVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                            Collider* acCollider) {
     ColliderCylinder* atCylinder = (ColliderCylinder*)atCollider;
     ColliderQuad* acQuad = (ColliderQuad*)acCollider;
 
-    if ((atCylinder->shape.height > 0) && ((atCylinder->shape.radius > 0)) &&
-        ((Collider_IsElementATOff(&atCylinder->elem) != 1)) && ((Collider_IsElementACOff(&acQuad->elem) != 1)) &&
+    if ((atCylinder->shape.height > 0) && (atCylinder->shape.radius > 0) &&
+        (Collider_IsElementATOff(&atCylinder->elem) != 1) && (Collider_IsElementACOff(&acQuad->elem) != 1) &&
         (Collider_AreDmgFlagsDisjoint(&atCylinder->elem, &acQuad->elem) != 1)) {
         Math3D_TriNorm(&D_8015E320, &acQuad->shape.corners.cornerA, &acQuad->shape.corners.cornerB,
                        &acQuad->shape.corners.cornerC);
         Math3D_TriNorm(&D_8015E358, &acQuad->shape.corners.cornerC, &acQuad->shape.corners.cornerD,
                        &acQuad->shape.corners.cornerA);
-        if (Math3D_CylTriTouchingIntersect(&atCylinder->shape, &D_8015E320, &D_8015E390) == 1) {
+        if (Math3D_CylTriTouchingIntersect(&atCylinder->shape, &D_8015E320, &sHitPos) == 1) {
             Vec3f atCylinderPos;
             Vec3f acQuadPos;
 
@@ -2020,9 +2019,9 @@ void Collider_ATCylVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* col
             acQuadPos.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
                            acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
                           0.25f;
-            func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acQuad->base, &acQuad->elem,
-                          &acQuadPos, &D_8015E390);
-        } else if (Math3D_CylTriTouchingIntersect(&atCylinder->shape, &D_8015E358, &D_8015E390) == 1) {
+            Collider_ATVsACHit(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acQuad->base,
+                               &acQuad->elem, &acQuadPos, &sHitPos);
+        } else if (Math3D_CylTriTouchingIntersect(&atCylinder->shape, &D_8015E358, &sHitPos) == 1) {
             Vec3f atCylinderPos;
             Vec3f acQuadPos;
 
@@ -2036,30 +2035,30 @@ void Collider_ATCylVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* col
             acQuadPos.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
                            acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
                           0.25f;
-            func_8005E81C(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acQuad->base, &acQuad->elem,
-                          &acQuadPos, &D_8015E390);
+            Collider_ATVsACHit(globalCtx, &atCylinder->base, &atCylinder->elem, &atCylinderPos, &acQuad->base,
+                               &acQuad->elem, &acQuadPos, &sHitPos);
         }
     }
 }
 
-TriNorm D_8015E3A0;
-TriNorm D_8015E3D8;
-Vec3f D_8015E410;
+void Collider_ATQuadVsACCylinder(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
+                                 Collider* acCollider) {
+    static TriNorm D_8015E3A0;
+    static TriNorm D_8015E3D8;
+    static Vec3f sHitPos;
 
-void Collider_ATQuadVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
-                            Collider* acCollider) {
     ColliderQuad* atQuad = (ColliderQuad*)atCollider;
     ColliderCylinder* acCylinder = (ColliderCylinder*)acCollider;
 
     if ((acCylinder->shape.height > 0) && ((acCylinder->shape.radius > 0)) &&
-        ((Collider_IsElementACOff(&acCylinder->elem) != 1)) && ((Collider_IsElementATOff(&atQuad->elem) != 1)) &&
+        (Collider_IsElementACOff(&acCylinder->elem) != 1) && (Collider_IsElementATOff(&atQuad->elem) != 1) &&
         (Collider_AreDmgFlagsDisjoint(&atQuad->elem, &acCylinder->elem) != 1)) {
         Math3D_TriNorm(&D_8015E3A0, &atQuad->shape.corners.cornerA, &atQuad->shape.corners.cornerB,
                        &atQuad->shape.corners.cornerC);
         Math3D_TriNorm(&D_8015E3D8, &atQuad->shape.corners.cornerA, &atQuad->shape.corners.cornerC,
                        &atQuad->shape.corners.cornerD);
-        if ((Math3D_CylTriTouchingIntersect(&acCylinder->shape, &D_8015E3A0, &D_8015E410) == 1) &&
-            func_8005D218(globalCtx, atQuad, &D_8015E410)) {
+        if ((Math3D_CylTriTouchingIntersect(&acCylinder->shape, &D_8015E3A0, &sHitPos) == 1) &&
+            func_8005D218(globalCtx, atQuad, &sHitPos)) {
             Vec3f atQuadPos;
             Vec3f acCylinderPos;
 
@@ -2073,10 +2072,10 @@ void Collider_ATQuadVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* col
                            atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
                           0.25f;
             Math_Vec3s_ToVec3f(&acCylinderPos, &acCylinder->shape.pos);
-            func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acCylinder->base, &acCylinder->elem,
-                          &acCylinderPos, &D_8015E410);
-        } else if ((Math3D_CylTriTouchingIntersect(&acCylinder->shape, &D_8015E3D8, &D_8015E410) == 1) &&
-                   func_8005D218(globalCtx, atQuad, &D_8015E410)) {
+            Collider_ATVsACHit(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acCylinder->base,
+                               &acCylinder->elem, &acCylinderPos, &sHitPos);
+        } else if ((Math3D_CylTriTouchingIntersect(&acCylinder->shape, &D_8015E3D8, &sHitPos) == 1) &&
+                   func_8005D218(globalCtx, atQuad, &sHitPos)) {
             Vec3f atQuadPos;
             Vec3f acCylinderPos;
 
@@ -2090,16 +2089,16 @@ void Collider_ATQuadVsACCyl(GlobalContext* globalCtx, CollisionCheckContext* col
                            atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
                           0.25f;
             Math_Vec3s_ToVec3f(&acCylinderPos, &acCylinder->shape.pos);
-            func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acCylinder->base, &acCylinder->elem,
-                          &acCylinderPos, &D_8015E410);
+            Collider_ATVsACHit(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acCylinder->base,
+                               &acCylinder->elem, &acCylinderPos, &sHitPos);
         }
     }
 }
 
-Vec3f D_8015E420;
-
 void Collider_ATTrisVsACTris(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                              Collider* acCollider) {
+    static Vec3f sHitPos;
+
     ColliderTris* atTris = (ColliderTris*)atCollider;
     ColliderTris* acTris = (ColliderTris*)acCollider;
     ColliderTrisElement* atTrisElem;
@@ -2107,16 +2106,16 @@ void Collider_ATTrisVsACTris(GlobalContext* globalCtx, CollisionCheckContext* co
     Vec3f atTrisElemPos;
     Vec3f acTrisElemPos;
 
-    if ((acTris->nElements > 0) && ((acTris->elements != NULL)) && (atTris->nElements > 0) &&
+    if ((acTris->nElements > 0) && (acTris->elements != NULL) && (atTris->nElements > 0) &&
         (atTris->elements != NULL)) {
 
-        for (acTrisElem = acTris->elements; (((acTrisElem < &acTris->elements[acTris->nElements]))); acTrisElem++) {
+        for (acTrisElem = acTris->elements; acTrisElem < &acTris->elements[acTris->nElements]; acTrisElem++) {
             if (Collider_IsElementACOff(&acTrisElem->base) != 1) {
                 for (atTrisElem = atTris->elements; atTrisElem < &atTris->elements[atTris->nElements]; atTrisElem++) {
                     if (0) {}
                     if ((Collider_IsElementATOff(&atTrisElem->base) != 1) &&
                         (Collider_AreDmgFlagsDisjoint(&atTrisElem->base, &acTrisElem->base) != 1) &&
-                        (Math3D_TrisIntersect(&atTrisElem->shape, &acTrisElem->shape, &D_8015E420) == 1)) {
+                        (Math3D_TrisIntersect(&atTrisElem->shape, &acTrisElem->shape, &sHitPos) == 1)) {
                         atTrisElemPos.x =
                             (atTrisElem->shape.vtx[0].x + atTrisElem->shape.vtx[1].x + atTrisElem->shape.vtx[2].x) *
                             (1.0f / 3.0f);
@@ -2135,8 +2134,8 @@ void Collider_ATTrisVsACTris(GlobalContext* globalCtx, CollisionCheckContext* co
                         acTrisElemPos.z =
                             (acTrisElem->shape.vtx[0].z + acTrisElem->shape.vtx[1].z + acTrisElem->shape.vtx[2].z) *
                             (1.0f / 3.0f);
-                        func_8005E81C(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos, &acTris->base,
-                                      &acTrisElem->base, &acTrisElemPos, &D_8015E420);
+                        Collider_ATVsACHit(globalCtx, &atTris->base, &atTrisElem->base, &atTrisElemPos, &acTris->base,
+                                           &acTrisElem->base, &acTrisElemPos, &sHitPos);
                         return;
                     }
                 }
@@ -2145,19 +2144,19 @@ void Collider_ATTrisVsACTris(GlobalContext* globalCtx, CollisionCheckContext* co
     }
 }
 
-Vec3f D_8015E430;
-TriNorm D_8015E440;
-TriNorm D_8015E478;
-
 void Collider_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                              Collider* acCollider) {
+    static Vec3f sHitPos;
+    static TriNorm D_8015E440;
+    static TriNorm D_8015E478;
+
     ColliderTris* atTris = (ColliderTris*)atCollider;
     ColliderQuad* acQuad = (ColliderQuad*)acCollider;
     ColliderTrisElement* atTrisElem;
     Vec3f acTrisElemPos;
     Vec3f acQuadPos;
 
-    if ((atTris->nElements > 0) && ((atTris->elements != NULL)) && (Collider_IsElementACOff(&acQuad->elem) != 1)) {
+    if ((atTris->nElements > 0) && (atTris->elements != NULL) && (Collider_IsElementACOff(&acQuad->elem) != 1)) {
         Math3D_TriNorm(&D_8015E440, &acQuad->shape.corners.cornerA, &acQuad->shape.corners.cornerB,
                        &acQuad->shape.corners.cornerC);
         Math3D_TriNorm(&D_8015E478, &acQuad->shape.corners.cornerC, &acQuad->shape.corners.cornerD,
@@ -2165,8 +2164,8 @@ void Collider_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* co
         for (atTrisElem = atTris->elements; atTrisElem < &atTris->elements[atTris->nElements]; atTrisElem++) {
             if ((Collider_IsElementATOff(&atTrisElem->base) != 1) &&
                 (Collider_AreDmgFlagsDisjoint(&atTrisElem->base, &acQuad->elem) != 1) &&
-                (((Math3D_TrisIntersect(&D_8015E440, &atTrisElem->shape, &D_8015E430) == 1)) ||
-                 (Math3D_TrisIntersect(&D_8015E478, &atTrisElem->shape, &D_8015E430) == 1))) {
+                ((Math3D_TrisIntersect(&D_8015E440, &atTrisElem->shape, &sHitPos) == 1) ||
+                 (Math3D_TrisIntersect(&D_8015E478, &atTrisElem->shape, &sHitPos) == 1))) {
                 acTrisElemPos.x =
                     (atTrisElem->shape.vtx[0].x + atTrisElem->shape.vtx[1].x + atTrisElem->shape.vtx[2].x) *
                     (1.0f / 3.0f);
@@ -2185,8 +2184,8 @@ void Collider_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* co
                 acQuadPos.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
                                acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
                               0.25f;
-                func_8005E81C(globalCtx, &atTris->base, &atTrisElem->base, &acTrisElemPos, &acQuad->base, &acQuad->elem,
-                              &acQuadPos, &D_8015E430);
+                Collider_ATVsACHit(globalCtx, &atTris->base, &atTrisElem->base, &acTrisElemPos, &acQuad->base,
+                                   &acQuad->elem, &acQuadPos, &sHitPos);
                 return;
             }
             if (1) {}
@@ -2199,19 +2198,19 @@ void Collider_ATTrisVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* co
     }
 }
 
-Vec3f D_8015E4B0;
-TriNorm D_8015E4C0;
-TriNorm D_8015E4F8;
-
 void Collider_ATQuadVsACTris(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                              Collider* acCollider) {
+    static Vec3f sHitPos;
+    static TriNorm D_8015E4C0;
+    static TriNorm D_8015E4F8;
+
     ColliderQuad* atQuad = (ColliderQuad*)atCollider;
     ColliderTris* acTris = (ColliderTris*)acCollider;
     ColliderTrisElement* acTrisElem;
     Vec3f atQuadPos;
     Vec3f acTrisElemPos;
 
-    if ((acTris->nElements > 0) && ((acTris->elements != NULL)) && (Collider_IsElementATOff(&atQuad->elem) != 1)) {
+    if ((acTris->nElements > 0) && (acTris->elements != NULL) && (Collider_IsElementATOff(&atQuad->elem) != 1)) {
         Math3D_TriNorm(&D_8015E4C0, &atQuad->shape.corners.cornerA, &atQuad->shape.corners.cornerB,
                        &atQuad->shape.corners.cornerC);
         Math3D_TriNorm(&D_8015E4F8, &atQuad->shape.corners.cornerC, &atQuad->shape.corners.cornerD,
@@ -2220,9 +2219,9 @@ void Collider_ATQuadVsACTris(GlobalContext* globalCtx, CollisionCheckContext* co
         for (acTrisElem = acTris->elements; acTrisElem < &acTris->elements[acTris->nElements]; acTrisElem++) {
             if ((Collider_IsElementACOff(&acTrisElem->base) != 1) &&
                 (Collider_AreDmgFlagsDisjoint(&atQuad->elem, &acTrisElem->base) != 1) &&
-                (((Math3D_TrisIntersect(&D_8015E4C0, &acTrisElem->shape, &D_8015E4B0) == 1)) ||
-                 (Math3D_TrisIntersect(&D_8015E4F8, &acTrisElem->shape, &D_8015E4B0) == 1)) &&
-                func_8005D218(globalCtx, atQuad, &D_8015E4B0)) {
+                ((Math3D_TrisIntersect(&D_8015E4C0, &acTrisElem->shape, &sHitPos) == 1) ||
+                 (Math3D_TrisIntersect(&D_8015E4F8, &acTrisElem->shape, &sHitPos) == 1)) &&
+                func_8005D218(globalCtx, atQuad, &sHitPos)) {
                 acTrisElemPos.x =
                     (acTrisElem->shape.vtx[0].x + acTrisElem->shape.vtx[1].x + acTrisElem->shape.vtx[2].x) *
                     (1.0f / 3.0f);
@@ -2241,20 +2240,20 @@ void Collider_ATQuadVsACTris(GlobalContext* globalCtx, CollisionCheckContext* co
                 atQuadPos.z = (atQuad->shape.corners.cornerA.z + atQuad->shape.corners.cornerB.z +
                                atQuad->shape.corners.cornerC.z + atQuad->shape.corners.cornerD.z) *
                               0.25f;
-                func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acTris->base, &acTrisElem->base,
-                              &acTrisElemPos, &D_8015E4B0);
+                Collider_ATVsACHit(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acTris->base,
+                                   &acTrisElem->base, &acTrisElemPos, &sHitPos);
                 return;
             }
         }
     }
 }
 
-TriNorm D_8015E530[2];
-Vec3f D_8015E598;
-TriNorm D_8015E5A8[2];
-
 void Collider_ATQuadVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* atCollider,
                              Collider* acCollider) {
+    static TriNorm D_8015E530[2];
+    static Vec3f sHitPos;
+    static TriNorm D_8015E5A8[2];
+
     ColliderQuad* atQuad = (ColliderQuad*)atCollider;
     ColliderQuad* acQuad = (ColliderQuad*)acCollider;
     s32 i;
@@ -2262,7 +2261,7 @@ void Collider_ATQuadVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* co
     Vec3f atQuadPos;
     Vec3f acQuadPos;
 
-    if ((Collider_IsElementATOff(&atQuad->elem) != 1) && ((Collider_IsElementACOff(&acQuad->elem) != 1)) &&
+    if ((Collider_IsElementATOff(&atQuad->elem) != 1) && (Collider_IsElementACOff(&acQuad->elem) != 1) &&
         (Collider_AreDmgFlagsDisjoint(&atQuad->elem, &acQuad->elem) != 1)) {
         Math3D_TriNorm(&D_8015E5A8[0], &atQuad->shape.corners.cornerA, &atQuad->shape.corners.cornerB,
                        &atQuad->shape.corners.cornerC);
@@ -2275,8 +2274,8 @@ void Collider_ATQuadVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* co
 
         for (i = 0; i < 2; i++) {
             for (j = 0; j < 2; j++) {
-                if ((Math3D_TrisIntersect(&D_8015E5A8[j], &D_8015E530[i], &D_8015E598) == 1) &&
-                    func_8005D218(globalCtx, atQuad, &D_8015E598)) {
+                if ((Math3D_TrisIntersect(&D_8015E5A8[j], &D_8015E530[i], &sHitPos) == 1) &&
+                    func_8005D218(globalCtx, atQuad, &sHitPos)) {
                     atQuadPos.x = (atQuad->shape.corners.cornerA.x + atQuad->shape.corners.cornerB.x +
                                    atQuad->shape.corners.cornerC.x + atQuad->shape.corners.cornerD.x) *
                                   0.25f;
@@ -2295,8 +2294,8 @@ void Collider_ATQuadVsACQuad(GlobalContext* globalCtx, CollisionCheckContext* co
                     acQuadPos.z = (acQuad->shape.corners.cornerA.z + acQuad->shape.corners.cornerB.z +
                                    acQuad->shape.corners.cornerC.z + acQuad->shape.corners.cornerD.z) *
                                   0.25f;
-                    func_8005E81C(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acQuad->base, &acQuad->elem,
-                                  &acQuadPos, &D_8015E598);
+                    Collider_ATVsACHit(globalCtx, &atQuad->base, &atQuad->elem, &atQuadPos, &acQuad->base,
+                                       &acQuad->elem, &acQuadPos, &sHitPos);
                     return;
                 }
             }
@@ -2312,7 +2311,7 @@ void func_80060EBC_Type0_processAC_(GlobalContext* globalCtx, CollisionCheckCont
     for (spheresElem = spheres->elements; spheresElem < (spheres->elements + spheres->nElements); spheresElem++) {
         if ((spheresElem->base.acElemFlags & ACELEM_DRAW_HITMARK) && (spheresElem->base.acHitElem != NULL) &&
             !(spheresElem->base.acHitElem->atElemFlags & ATELEM_DREW_HITMARK)) {
-            Math_Vec3s_ToVec3f(&sp24, &spheresElem->base.acDmgInfo.unk_06);
+            Math_Vec3s_ToVec3f(&sp24, &spheresElem->base.acDmgInfo.hitPos);
             func_8005E604(globalCtx, spheresElem->base.acHit, spheresElem->base.acHitElem, &spheres->base,
                           &spheresElem->base, &sp24);
             spheresElem->base.acHitElem->atElemFlags |= ATELEM_DREW_HITMARK;
@@ -2325,42 +2324,40 @@ void func_80060F94_Type1_processAC_(GlobalContext* globalCtx, CollisionCheckCont
     ColliderCylinder* arg2 = (ColliderCylinder*)collider;
     Vec3f sp28;
 
-    if (arg2->elem.acElemFlags & ACELEM_DRAW_HITMARK) {
-        if ((arg2->elem.acHitElem != NULL) && !(arg2->elem.acHitElem->atElemFlags & 0x40)) {
-            Math_Vec3s_ToVec3f(&sp28, &arg2->elem.acDmgInfo.unk_06);
-            func_8005E604(globalCtx, arg2->elem.acHit, arg2->elem.acHitElem, &arg2->base, &arg2->elem, &sp28);
-            arg2->elem.acHitElem->atElemFlags |= 0x40;
-        }
+    if ((arg2->elem.acElemFlags & ACELEM_DRAW_HITMARK) && (arg2->elem.acHitElem != NULL) &&
+        !(arg2->elem.acHitElem->atElemFlags & ATELEM_DREW_HITMARK)) {
+        Math_Vec3s_ToVec3f(&sp28, &arg2->elem.acDmgInfo.hitPos);
+        func_8005E604(globalCtx, arg2->elem.acHit, arg2->elem.acHitElem, &arg2->base, &arg2->elem, &sp28);
+        arg2->elem.acHitElem->atElemFlags |= ATELEM_DREW_HITMARK;
     }
 }
 
 void func_80061028_Type2_processAC_(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider) {
-    ColliderTris* arg2 = (ColliderTris*)collider;
-    ColliderTrisElement* var_v0;
+    ColliderTris* tris = (ColliderTris*)collider;
+    ColliderTrisElement* trisElem;
     Vec3f sp24;
 
-    for (var_v0 = arg2->elements; var_v0 < &arg2->elements[arg2->nElements]; var_v0++) {
-        if (var_v0->base.acElemFlags & ACELEM_DRAW_HITMARK) {
-            if ((var_v0->base.acHitElem != NULL) && !(var_v0->base.acHitElem->atElemFlags & 0x40)) {
-                Math_Vec3s_ToVec3f(&sp24, &var_v0->base.acDmgInfo.unk_06);
-                func_8005E604(globalCtx, var_v0->base.acHit, var_v0->base.acHitElem, &arg2->base, &var_v0->base, &sp24);
-                var_v0->base.acHitElem->atElemFlags |= 0x40;
-                return;
-            }
+    for (trisElem = tris->elements; trisElem < &tris->elements[tris->nElements]; trisElem++) {
+        if ((trisElem->base.acElemFlags & ACELEM_DRAW_HITMARK) && (trisElem->base.acHitElem != NULL) &&
+            !(trisElem->base.acHitElem->atElemFlags & 0x40)) {
+            Math_Vec3s_ToVec3f(&sp24, &trisElem->base.acDmgInfo.hitPos);
+            func_8005E604(globalCtx, trisElem->base.acHit, trisElem->base.acHitElem, &tris->base, &trisElem->base,
+                          &sp24);
+            trisElem->base.acHitElem->atElemFlags |= 0x40;
+            return;
         }
     }
 }
 
 void func_8006110C_Type3_processAC_(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider) {
-    ColliderQuad* arg2 = (ColliderQuad*)collider;
+    ColliderQuad* quad = (ColliderQuad*)collider;
     Vec3f sp28;
 
-    if (arg2->elem.acElemFlags & 0x80) {
-        if ((arg2->elem.acHitElem != NULL) && !(arg2->elem.acHitElem->atElemFlags & 0x40)) {
-            Math_Vec3s_ToVec3f(&sp28, &arg2->elem.acDmgInfo.unk_06);
-            func_8005E604(globalCtx, arg2->elem.acHit, arg2->elem.acHitElem, &arg2->base, &arg2->elem, &sp28);
-            arg2->elem.acHitElem->atElemFlags |= 0x40;
-        }
+    if ((quad->elem.acElemFlags & ACELEM_DRAW_HITMARK) && (quad->elem.acHitElem != NULL) &&
+        !(quad->elem.acHitElem->atElemFlags & 0x40)) {
+        Math_Vec3s_ToVec3f(&sp28, &quad->elem.acDmgInfo.hitPos);
+        func_8005E604(globalCtx, quad->elem.acHit, quad->elem.acHitElem, &quad->base, &quad->elem, &sp28);
+        quad->elem.acHitElem->atElemFlags |= ATELEM_DREW_HITMARK;
     }
 }
 
@@ -2392,25 +2389,25 @@ typedef void (*callback_8011DF6C)(GlobalContext*, CollisionCheckContext*, Collid
 callback_8011DF6C D_8011DF6C_ATvsAC[COLTYPE_MAX][COLTYPE_MAX] = {
     {
         Collider_ATSpheresVsACSpheres,
-        Collider_ATSpheresVsACCyl,
+        Collider_ATSpheresVsACCylinder,
         Collider_ATSpheresVsACTris,
         Collider_ATSpheresVsACQuad,
     },
     {
-        Collider_ATCylVsACSpheres,
-        Collider_ATCylVsACCyl,
-        Collider_ATCylVsACTris,
-        Collider_ATCylVsACQuad,
+        Collider_ATCylinderVsACSpheres,
+        Collider_ATCylinderVsACCylinder,
+        Collider_ATCylinderVsACTris,
+        Collider_ATCylinderVsACQuad,
     },
     {
         Collider_ATTrisVsACSpheres,
-        Collider_ATTrisVsACCyl,
+        Collider_ATTrisVsACCylinder,
         Collider_ATTrisVsACTris,
         Collider_ATTrisVsACQuad,
     },
     {
         Collider_ATQuadVsACSpheres,
-        Collider_ATQuadVsACCyl,
+        Collider_ATQuadVsACCylinder,
         Collider_ATQuadVsACTris,
         Collider_ATQuadVsACQuad,
     },
