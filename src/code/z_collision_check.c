@@ -1377,6 +1377,14 @@ typedef struct struct_8015D8A0 {
     s32 unk4C0;
 } struct_8015D8A0;
 
+#ifndef GLUE
+#define GLUE(a, b) a##b
+#endif
+#ifndef GLUE2
+#define GLUE2(a, b) GLUE(a, b)
+#endif
+#define BSS_DUMMY GLUE2(s8 sBssDummy, __LINE__)
+
 void func_8005DFAC(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2);
 #ifdef NON_MATCHING
 // https://decomp.me/scratch/aKq4j
@@ -1429,8 +1437,14 @@ void func_8005DFAC(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2) {
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015D8A0);
 }
 #else
+struct_8015D8A0 D_8015D8A0;
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DFAC.s")
 #endif
+
+BSS_DUMMY;
+BSS_DUMMY;
+BSS_DUMMY;
+BSS_DUMMY;
 
 void func_8005E10C(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2);
 #ifdef NON_MATCHING
@@ -1482,6 +1496,7 @@ void func_8005E10C(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2) {
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015DD68);
 }
 #else
+struct_8015D8A0 D_8015DD68;
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E10C.s")
 #endif
 
@@ -1859,8 +1874,13 @@ void func_8005F39C_2ATvs0AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern TriNorm D_8015E230;
-extern TriNorm D_8015E268;
+TriNorm D_8015E230;
+BSS_DUMMY;
+BSS_DUMMY;
+BSS_DUMMY;
+BSS_DUMMY;
+TriNorm D_8015E268;
+BSS_DUMMY;
 
 void func_8005F5B0_0ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -1898,8 +1918,8 @@ void func_8005F5B0_0ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern TriNorm D_8015E2A0;
-extern TriNorm D_8015E2D8;
+TriNorm D_8015E2A0;
+TriNorm D_8015E2D8;
 
 void func_8005F7D0_3ATvs0AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2004,7 +2024,7 @@ void func_8005FC04_1ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern Vec3f D_8015E310;
+Vec3f D_8015E310;
 
 void func_8005FDCC_2ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2035,9 +2055,9 @@ void func_8005FDCC_2ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern TriNorm D_8015E320;
-extern TriNorm D_8015E358;
-extern Vec3f D_8015E390;
+TriNorm D_8015E320;
+TriNorm D_8015E358;
+Vec3f D_8015E390;
 
 void func_8005FF90_1ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2068,9 +2088,9 @@ void func_8005FF90_1ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern TriNorm D_8015E3A0;
-extern TriNorm D_8015E3D8;
-extern Vec3f D_8015E410;
+TriNorm D_8015E3A0;
+TriNorm D_8015E3D8;
+Vec3f D_8015E410;
 
 void func_80060204_3ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2103,7 +2123,7 @@ void func_80060204_3ATvs1AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern Vec3f D_8015E420;
+Vec3f D_8015E420;
 
 void func_800604B0_2ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2144,9 +2164,9 @@ void func_800604B0_2ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern Vec3f D_8015E430;
-extern TriNorm D_8015E440;
-extern TriNorm D_8015E478;
+Vec3f D_8015E430;
+TriNorm D_8015E440;
+TriNorm D_8015E478;
 
 void func_80060704_2ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2183,9 +2203,9 @@ void func_80060704_2ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern Vec3f D_8015E4B0;
-extern TriNorm D_8015E4C0;
-extern TriNorm D_8015E4F8;
+Vec3f D_8015E4B0;
+TriNorm D_8015E4C0;
+TriNorm D_8015E4F8;
 
 void func_80060994_3ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2218,9 +2238,9 @@ void func_80060994_3ATvs2AC(GlobalContext* globalCtx, SubGlobalContext11E60* col
     }
 }
 
-extern TriNorm D_8015E530[2];
-extern Vec3f D_8015E598;
-extern TriNorm D_8015E5A8[2];
+TriNorm D_8015E530[2];
+Vec3f D_8015E598;
+TriNorm D_8015E5A8[2];
 
 void func_80060C2C_3ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
                             Collider* arg3_) {
@@ -2822,7 +2842,7 @@ void func_800622E4(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx) {
     }
 }
 
-extern Linef D_8015E610;
+Linef D_8015E610;
 
 s32 func_800623A4_Type0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2, Vec3f* arg3,
                         Vec3f* arg4) {
@@ -2849,8 +2869,8 @@ s32 func_800623A4_Type0(GlobalContext* globalCtx, SubGlobalContext11E60* colChkC
     return 0;
 }
 
-extern Vec3f D_8015E628;
-extern Vec3f D_8015E638;
+Vec3f D_8015E628;
+Vec3f D_8015E638;
 
 s32 func_800624BC_Type1(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_, Vec3f* arg3,
                         Vec3f* arg4) {
@@ -3007,31 +3027,26 @@ void func_8006285C(GlobalContext* globalCtx, struct_800627A0* arg1, s32 arg2, Ve
     func_8005C608(globalCtx, &new_var->unk28, arg3);
 }
 
-void func_800628A4_Type0(s32 arg0, Collider_Type0* arg1);
-#ifdef NON_MATCHING
-// need import bss
 void func_800628A4_Type0(s32 arg0, Collider_Type0* arg1) {
     static Vec3f D_8015CF00;
+    // bss block number rollover!
     static Vec3f D_8015E648;
 
     s32 i;
 
     for (i = 0; i < arg1->unk18; i++) {
         if (arg0 == arg1->unk1C[i].unk28.unk14) {
-            D_8015E648.x = arg1->unk1C[i].unk28.unk0.unk0.x;
-            D_8015E648.y = arg1->unk1C[i].unk28.unk0.unk0.y;
-            D_8015E648.z = arg1->unk1C[i].unk28.unk0.unk0.z;
-            Matrix_MultVec3f(&D_8015E648, &D_8015CF00);
-            arg1->unk1C[i].unk28.unk8.center.x = D_8015CF00.x;
-            arg1->unk1C[i].unk28.unk8.center.y = D_8015CF00.y;
-            arg1->unk1C[i].unk28.unk8.center.z = D_8015CF00.z;
+            D_8015CF00.x = arg1->unk1C[i].unk28.unk0.unk0.x;
+            D_8015CF00.y = arg1->unk1C[i].unk28.unk0.unk0.y;
+            D_8015CF00.z = arg1->unk1C[i].unk28.unk0.unk0.z;
+            Matrix_MultVec3f(&D_8015CF00, &D_8015E648);
+            arg1->unk1C[i].unk28.unk8.center.x = D_8015E648.x;
+            arg1->unk1C[i].unk28.unk8.center.y = D_8015E648.y;
+            arg1->unk1C[i].unk28.unk8.center.z = D_8015E648.z;
             arg1->unk1C[i].unk28.unk8.radius = (arg1->unk1C[i].unk28.unk0.unk6 * arg1->unk1C[i].unk28.unk10);
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_800628A4_Type0.s")
-#endif
 
 #ifdef NON_MATCHING
 void func_80062A28(GlobalContext* globalCtx, Vec3f* arg1) {
@@ -3082,6 +3097,7 @@ void func_80062A28(GlobalContext* globalCtx, Vec3f* arg1) {
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015CF10);
 }
 #else
+struct_8015D8A0 D_8015CF10;
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062A28.s")
 #endif
 
@@ -3134,6 +3150,7 @@ void func_80062B80(GlobalContext* globalCtx, Vec3f* arg1) {
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015D3D8);
 }
 #else
+struct_8015D8A0 D_8015D3D8;
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062B80.s")
 #endif
 

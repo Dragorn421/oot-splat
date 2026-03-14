@@ -897,7 +897,7 @@ segments:
       - { name: z_actor_dlftbls_bss, type: bss, vram: 0x8015BC20 }
       - { name: z_bgcheck_bss, type: bss, vram: 0x8015BC30 }
       - { name: z_camera_bss, type: bss, vram: 0x8015BD50 }
-      - { name: z_collision_check_bss, type: bss, vram: 0x8015CF00 }
+      - { name: code/z_collision_check, type: .bss, vram: 0x8015CF00 }
       - { name: z_common_data_bss, type: bss, vram: 0x8015E660 }
       - { name: code/z_debug, type: .bss, vram: 0x8015FA90 }
       - { name: z_debug_display_bss, type: bss, vram: 0x8015FCB0 }
