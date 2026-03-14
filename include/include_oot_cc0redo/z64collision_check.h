@@ -143,9 +143,9 @@ typedef struct ColliderElementSrc {
  */
 
 typedef struct ColliderSpheresElementShape {
-    Sphere16 unk0;
-    Sphere16 unk8;
-    f32 unk10;
+    Sphere16 model;
+    Sphere16 world;
+    f32 unkRadiusScale;
     u8 unk14;
 } ColliderSpheresElementShape; /* size = 0x18 */
 
