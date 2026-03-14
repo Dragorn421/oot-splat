@@ -445,25 +445,25 @@ s32 ActorCollider_FreeThing_Type1(GlobalContext* globalCtx, ColliderCylinder* co
 }
 
 // only used by ObjDekujr
-s32 func_8005C3F4(GlobalContext* globalCtx, ColliderCylinder* collision, ColliderSrc_Type1_8005B6B0* src) {
-    func_8005B6B0_InitColliderAltWithActor(globalCtx, &collision->base, &src->unk0);
-    func_8005B93C(globalCtx, &collision->elem, &src->unk8);
+s32 func_8005C3F4(GlobalContext* globalCtx, ColliderCylinder* collision, ColliderCylinderSrcAltWithActor* src) {
+    func_8005B6B0_InitColliderAltWithActor(globalCtx, &collision->base, &src->base);
+    func_8005B93C(globalCtx, &collision->elem, &src->elem);
     func_8005C328_Type1(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
 
 s32 func_8005C450_Type1(GlobalContext* globalCtx, ColliderCylinder* collision, Actor* actor,
-                        ColliderSrc_Type1_8005B6EC* src) {
-    func_8005B6B0_InitColliderAlt(globalCtx, &collision->base, actor, &src->unk0);
-    func_8005B93C(globalCtx, &collision->elem, &src->unk8);
+                        ColliderCylinderSrcAlt* src) {
+    func_8005B6B0_InitColliderAlt(globalCtx, &collision->base, actor, &src->base);
+    func_8005B93C(globalCtx, &collision->elem, &src->elem);
     func_8005C328_Type1(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
 
 s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision, Actor* actor,
-                                  ColliderSrc_Type1* src) {
-    func_8005B72C_InitCollider(globalCtx, &collision->base, actor, &src->unk0);
-    func_8005B93C(globalCtx, &collision->elem, &src->unk8);
+                                  ColliderCylinderSrc* src) {
+    func_8005B72C_InitCollider(globalCtx, &collision->base, actor, &src->base);
+    func_8005B93C(globalCtx, &collision->elem, &src->elem);
     func_8005C328_Type1(globalCtx, &collision->unk40, &src->unk20);
     return 1;
 }
@@ -781,17 +781,17 @@ s32 func_8005D060_Type3(GlobalContext* globalCtx, ColliderQuad* collision) {
 }
 
 // unused
-s32 func_8005D0A8(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderSrc_Type3_8005B6EC* src) {
-    func_8005B6B0_InitColliderAlt(globalCtx, &collision->base, actor, &src->unk0);
-    func_8005B93C(globalCtx, &collision->elem, &src->unk8);
-    func_8005CF90_Type3(globalCtx, &collision->unk40, src->unk20);
+s32 func_8005D0A8(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrcAlt* src) {
+    func_8005B6B0_InitColliderAlt(globalCtx, &collision->base, actor, &src->base);
+    func_8005B93C(globalCtx, &collision->elem, &src->elem);
+    func_8005CF90_Type3(globalCtx, &collision->unk40, src->corners);
     return 1;
 }
 
-s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderSrc_Type3* src) {
-    func_8005B72C_InitCollider(globalCtx, &collision->base, actor, &src->unk0);
-    func_8005B93C(globalCtx, &collision->elem, &src->unk8);
-    func_8005CF90_Type3(globalCtx, &collision->unk40, src->unk20);
+s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrc* src) {
+    func_8005B72C_InitCollider(globalCtx, &collision->base, actor, &src->base);
+    func_8005B93C(globalCtx, &collision->elem, &src->elem);
+    func_8005CF90_Type3(globalCtx, &collision->unk40, src->corners);
     return 1;
 }
 

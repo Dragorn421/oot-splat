@@ -692,7 +692,7 @@ s32 func_8005BA74(GlobalContext*, struct_8011DE54*);
 s32 ActorCollider_AllocThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision);
 s32 ActorCollider_FreeThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision);
 s32 ActorCollider_InitThing_Type1(GlobalContext* globalCtx, ColliderCylinder* collision, Actor* actor,
-                               ColliderSrc_Type1* src);
+                               ColliderCylinderSrc* src);
 s32 func_8005C540_SetAC_1(GlobalContext* globalCtx, Collider* collision);
 s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005C5B0(?);
@@ -709,7 +709,7 @@ s32 func_8005C578_SetOT_1(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005CF90_Type3(?);
 s32 func_8005D018_Type3(GlobalContext* globalCtx, ColliderQuad* collision);
 s32 func_8005D060_Type3(GlobalContext* globalCtx, ColliderQuad* collision);
-s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderSrc_Type3* src);
+s32 func_8005D104_Type3(GlobalContext* globalCtx, ColliderQuad* collision, Actor* actor, ColliderQuadSrc* src);
 s32 func_8005D1A8_SetAC_3(GlobalContext* globalCtx, Collider* collision);
 s32 func_8005D1E0_SetOT_3(GlobalContext* globalCtx, Collider* collision);
 // ? func_8005D218(?);

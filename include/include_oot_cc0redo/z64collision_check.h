@@ -202,23 +202,23 @@ typedef struct ColliderCylinder {
     Cylinder16 unk40;
 } ColliderCylinder;
 
-typedef struct ColliderSrc_Type1 {
-    /* 0x00 */ ColliderSrc unk0;
-    /* 0x08 */ ColliderElementSrc unk8;
+typedef struct ColliderCylinderSrc {
+    /* 0x00 */ ColliderSrc base;
+    /* 0x08 */ ColliderElementSrc elem;
     /* 0x20 */ Cylinder16 unk20;
-} ColliderSrc_Type1;
+} ColliderCylinderSrc;
 
-typedef struct ColliderSrc_Type1_8005B6EC {
-    ColliderSrcAlt unk0;
-    ColliderElementSrc unk8;
+typedef struct ColliderCylinderSrcAlt {
+    ColliderSrcAlt base;
+    ColliderElementSrc elem;
     Cylinder16 unk20;
-} ColliderSrc_Type1_8005B6EC;
+} ColliderCylinderSrcAlt;
 
-typedef struct ColliderSrc_Type1_8005B6B0 {
-    /* 0x00 */ ColliderSrcAltWithActor unk0;
-    /* 0x08 */ ColliderElementSrc unk8;
+typedef struct ColliderCylinderSrcAltWithActor {
+    /* 0x00 */ ColliderSrcAltWithActor base;
+    /* 0x08 */ ColliderElementSrc elem;
     /* 0x20 */ Cylinder16 unk20;
-} ColliderSrc_Type1_8005B6B0;
+} ColliderCylinderSrcAltWithActor;
 
 // type2 - tris
 
@@ -252,17 +252,17 @@ typedef struct ColliderTris {
 
 // type3 - quad
 
-typedef struct ColliderSrc_Type3 {
-    ColliderSrc unk0;
-    ColliderElementSrc unk8;
-    Vec3f unk20[4];
-} ColliderSrc_Type3;
+typedef struct ColliderQuadSrc {
+    ColliderSrc base;
+    ColliderElementSrc elem;
+    Vec3f corners[4];
+} ColliderQuadSrc;
 
-typedef struct ColliderSrc_Type3_8005B6EC {
-    /* 0x00 */ ColliderSrcAlt unk0;
-    /* 0x08 */ ColliderElementSrc unk8;
-    /* 0x20 */ Vec3f unk20[4];
-} ColliderSrc_Type3_8005B6EC;
+typedef struct ColliderQuadSrcAlt {
+    /* 0x00 */ ColliderSrcAlt base;
+    /* 0x08 */ ColliderElementSrc elem;
+    /* 0x20 */ Vec3f corners[4];
+} ColliderQuadSrcAlt;
 
 typedef struct struct_Collider_Type3_subc {
     /* 0x00 */ Vec3f cornerD;
@@ -288,7 +288,7 @@ typedef struct struct_ColChkCtx_290 {
 } struct_ColChkCtx_290;
 
 /*
- * Collider properties, for all shapes
+ * Collider properties, for all types
  */
 
 #define AT_NONE 0 // No flags set. Cannot have AT collisions when set as AT
