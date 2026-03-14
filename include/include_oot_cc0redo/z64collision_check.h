@@ -131,13 +131,11 @@ typedef struct ColliderElement {
 
 typedef struct ColliderElementSrc {
     /* 0x00 */ u8 elemMaterial;
-    /* 0x01 */ u8 unk_09[0x3]; /* 000000 */
     /* 0x04 */ ColliderElementDamageInfoAT atDmgInfo;
     /* 0x0C */ ColliderElementDamageInfoACSrc acDmgInfo;
     /* 0x14 */ u8 atElemFlags; /* Attack Toucher Flags */
     /* 0x15 */ u8 acElemFlags; /* Bumper Flags */
     /* 0x16 */ u8 ocElemFlags;
-    /* 0x17 */ u8 unk_1F; /* 00 */
 } ColliderElementSrc; // size = 0x18
 
 // ?
@@ -162,39 +160,39 @@ typedef struct struct_8011DE54 {
     u8 unk14;
 } struct_8011DE54; /* size = 0x18 */
 
-typedef struct Collider_Type0_ptr1C {
+typedef struct ColliderJntSphElement {
     ColliderElement base;
     struct_8011DE54 unk28;
-} Collider_Type0_ptr1C; /* size = 0x40 */
+} ColliderJntSphElement; /* size = 0x40 */
 
 typedef struct ColliderJntSph {
     Collider base;
-    s32 unk18;
-    Collider_Type0_ptr1C* unk1C;
+    s32 nElements;
+    ColliderJntSphElement* elements;
 } ColliderJntSph;
 
-typedef struct ColliderSrc_Type0_ptrC {
-    ColliderElementSrc unk0;
+typedef struct ColliderJntSphElementSrc {
+    ColliderElementSrc base;
     ColliderSrc_Type0_ptrC_sub18 unk18;
-} ColliderSrc_Type0_ptrC; /* size = 0x24 */
+} ColliderJntSphElementSrc; /* size = 0x24 */
 
-typedef struct ColliderSrc_Type0 {
-    ColliderSrc unk0;
-    s32 unk8;
-    ColliderSrc_Type0_ptrC* unkC;
-} ColliderSrc_Type0;
+typedef struct ColliderJntSphSrc {
+    ColliderSrc base;
+    s32 nElements;
+    ColliderJntSphElementSrc* elements;
+} ColliderJntSphSrc;
 
-typedef struct ColliderSrc_Type0_8005B6B0 {
-    ColliderSrcAltWithActor unk0;
-    s32 unk8;
-    ColliderSrc_Type0_ptrC* unkC;
-} ColliderSrc_Type0_8005B6B0;
+typedef struct ColliderJntSphSrcAltWithActor {
+    ColliderSrcAltWithActor base;
+    s32 nElements;
+    ColliderJntSphElementSrc* elements;
+} ColliderJntSphSrcAltWithActor;
 
-typedef struct ColliderSrc_Type0_8005B6EC {
-    ColliderSrcAlt unk0;
-    s32 unk8;
-    ColliderSrc_Type0_ptrC* unkC;
-} ColliderSrc_Type0_8005B6EC;
+typedef struct ColliderJntSphSrcAlt {
+    ColliderSrcAlt base;
+    s32 nElements;
+    ColliderJntSphElementSrc* elements;
+} ColliderJntSphSrcAlt;
 
 // type1 - cylinder
 
