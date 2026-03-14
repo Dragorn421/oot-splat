@@ -222,33 +222,32 @@ typedef struct ColliderSrc_Type1_8005B6B0 {
 
 // type2 - tris
 
-typedef struct ColliderSrc_Type2_ptrC {
-    ColliderElementSrc unk0;
-    Vec3f unk18;
-    char unk_24[0x18];
-} ColliderSrc_Type2_ptrC; /* size = 0x48 */
+typedef struct ColliderTrisElementSrc {
+    ColliderElementSrc base;
+    Vec3f unk18[3];
+} ColliderTrisElementSrc; /* size = 0x48 */
 
-typedef struct ColliderSrc_Type2 {
-    ColliderSrc unk0;
-    s32 unk8;
-    ColliderSrc_Type2_ptrC* unkC;
-} ColliderSrc_Type2;
+typedef struct ColliderTrisSrc {
+    ColliderSrc base;
+    s32 nElements;
+    ColliderTrisElementSrc* elements;
+} ColliderTrisSrc;
 
-typedef struct ColliderSrc_Type2_8005B6EC {
-    ColliderSrcAlt unk0;
-    s32 unk8;
-    ColliderSrc_Type2_ptrC* unkC;
-} ColliderSrc_Type2_8005B6EC;
+typedef struct ColliderTrisSrcAlt {
+    ColliderSrcAlt base;
+    s32 nElements;
+    ColliderTrisElementSrc* elements;
+} ColliderTrisSrcAlt;
 
-typedef struct Collider_Type2_ptr1C {
+typedef struct ColliderTrisElement {
     ColliderElement base;
     TriNorm unk28;
-} Collider_Type2_ptr1C; /* size = 0x5C */
+} ColliderTrisElement; /* size = 0x5C */
 
 typedef struct ColliderTris {
     Collider base;
-    s32 unk18;
-    Collider_Type2_ptr1C* unk1C;
+    s32 nElements;
+    ColliderTrisElement* elements;
 } ColliderTris;
 
 // type3 - quad
