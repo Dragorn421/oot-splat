@@ -164,7 +164,7 @@ typedef struct ColliderSrc_Type0_8005B6EC {
 
 typedef struct ColliderCylinder {
     Collider base;
-    ColliderElement unk18;
+    ColliderElement elem;
     Cylinder16 unk40;
 } ColliderCylinder;
 
@@ -232,10 +232,10 @@ typedef struct ColliderSrc_Type3_8005B6EC {
 } ColliderSrc_Type3_8005B6EC;
 
 typedef struct struct_Collider_Type3_subc {
-    /* 0x00 */ Vec3f unk0;
-    /* 0x0C */ Vec3f unkC;
-    /* 0x18 */ Vec3f unk18;
-    /* 0x24 */ Vec3f unk24;
+    /* 0x00 */ Vec3f cornerD;
+    /* 0x0C */ Vec3f cornerC;
+    /* 0x18 */ Vec3f cornerA;
+    /* 0x24 */ Vec3f cornerB;
     /* 0x30 */ Vec3s unk30;
     /* 0x36 */ Vec3s unk36;
     /* 0x3C */ f32 unk3C;
@@ -243,7 +243,7 @@ typedef struct struct_Collider_Type3_subc {
 
 typedef struct ColliderQuad {
     Collider base;
-    ColliderElement unk18;
+    ColliderElement elem;
     struct_Collider_Type3_subc unk40;
 } ColliderQuad;
 
