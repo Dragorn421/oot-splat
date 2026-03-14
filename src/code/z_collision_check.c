@@ -1341,38 +1341,8 @@ typedef struct struct_8015D8A0 {
     /* 0x490 */ f32 unk490;
     /* 0x494 */ s32 unk494;
     /* 0x498 */ s32 unk498;
-    /* 0x49C */ s8 unk49C;
-    /* 0x49D */ s8 unk49D;
-    /* 0x49E */ s8 unk49E;
-    /* 0x49F */ s8 unk49F;
-    /* 0x4A0 */ s8 unk4A0;
-    /* 0x4A1 */ s8 unk4A1;
-    /* 0x4A2 */ s8 unk4A2;
-    /* 0x4A3 */ s8 unk4A3;
-    /* 0x4A4 */ s8 unk4A4;
-    /* 0x4A5 */ s8 unk4A5;
-    /* 0x4A6 */ s8 unk4A6;
-    /* 0x4A7 */ s8 unk4A7;
-    /* 0x4A8 */ s8 unk4A8;
-    /* 0x4A9 */ s8 unk4A9;
-    /* 0x4AA */ s8 unk4AA;
-    /* 0x4AB */ s8 unk4AB;
-    /* 0x4AC */ s8 unk4AC;
-    /* 0x4AD */ s8 unk4AD;
-    /* 0x4AE */ s8 unk4AE;
-    /* 0x4AF */ s8 unk4AF;
-    /* 0x4B0 */ s8 unk4B0;
-    /* 0x4B1 */ s8 unk4B1;
-    /* 0x4B2 */ s8 unk4B2;
-    /* 0x4B3 */ s8 unk4B3;
-    /* 0x4B4 */ s8 unk4B4;
-    /* 0x4B5 */ s8 unk4B5;
-    /* 0x4B6 */ s8 unk4B6;
-    /* 0x4B7 */ s8 unk4B7;
-    /* 0x4B8 */ s8 unk4B8;
-    /* 0x4B9 */ s8 unk4B9;
-    /* 0x4BA */ s8 unk4BA;
-    /* 0x4BB */ s8 unk4BB;
+    Color_RGBA8 unk49C[4];
+    Color_RGBA8 unk4AC[4];
     s32 unk4BC;
     s32 unk4C0;
 } struct_8015D8A0;
@@ -1385,9 +1355,6 @@ typedef struct struct_8015D8A0 {
 #endif
 #define BSS_DUMMY GLUE2(s8 sBssDummy, __LINE__)
 
-void func_8005DFAC(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2);
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/aKq4j
 void func_8005DFAC(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2) {
     static struct_8015D8A0 D_8015D8A0;
 
@@ -1398,56 +1365,50 @@ void func_8005DFAC(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2) {
     D_8015D8A0.unk0.z = (s16)(s32)arg2->z;
     D_8015D8A0.unk494 = 5;
     D_8015D8A0.unk498 = 5;
-    D_8015D8A0.unk49C = 0xA;
-    D_8015D8A0.unk49D = 0xA;
-    D_8015D8A0.unk49E = -0x38;
-    D_8015D8A0.unk49F = -1;
-    D_8015D8A0.unk4A0 = 0;
-    D_8015D8A0.unk4A1 = 0;
-    D_8015D8A0.unk4A2 = 0x80;
-    D_8015D8A0.unk4A3 = -1;
-    D_8015D8A0.unk4A4 = 0;
-    D_8015D8A0.unk4A5 = 0;
-    D_8015D8A0.unk4A6 = 0x80;
-    D_8015D8A0.unk4A7 = -1;
-    D_8015D8A0.unk4A8 = 0;
-    D_8015D8A0.unk4A9 = 0;
-    D_8015D8A0.unk4AA = 0x80;
-    D_8015D8A0.unk4AB = -1;
-    D_8015D8A0.unk4AC = 0;
-    D_8015D8A0.unk4AD = 0;
-    D_8015D8A0.unk4AE = 0x20;
-    D_8015D8A0.unk4AF = 0;
-    D_8015D8A0.unk4B0 = 0;
-    D_8015D8A0.unk4B1 = 0;
-    D_8015D8A0.unk4B2 = 0x20;
-    D_8015D8A0.unk4B3 = 0;
-    D_8015D8A0.unk4B4 = 0;
-    D_8015D8A0.unk4B5 = 0;
-    D_8015D8A0.unk4B6 = 0x40;
-    D_8015D8A0.unk4B7 = 0;
-    D_8015D8A0.unk4B8 = 0;
-    D_8015D8A0.unk4B9 = 0;
-    D_8015D8A0.unk4BA = 0x40;
-    D_8015D8A0.unk4BB = 0;
+    D_8015D8A0.unk49C[0].r = 0xA;
+    D_8015D8A0.unk49C[0].g = 0xA;
+    D_8015D8A0.unk49C[0].b = 0xC8;
+    D_8015D8A0.unk49C[0].a = 0xFF;
+    D_8015D8A0.unk49C[1].r = 0;
+    D_8015D8A0.unk49C[1].g = 0;
+    D_8015D8A0.unk49C[1].b = 0x80;
+    D_8015D8A0.unk49C[1].a = 0xFF;
+    D_8015D8A0.unk49C[2].r = 0;
+    D_8015D8A0.unk49C[2].g = 0;
+    D_8015D8A0.unk49C[2].b = 0x80;
+    D_8015D8A0.unk49C[2].a = 0xFF;
+    D_8015D8A0.unk49C[3].r = 0;
+    D_8015D8A0.unk49C[3].g = 0;
+    D_8015D8A0.unk49C[3].b = 0x80;
+    D_8015D8A0.unk49C[3].a = 0xFF;
+    D_8015D8A0.unk4AC[0].r = 0;
+    D_8015D8A0.unk4AC[0].g = 0;
+    D_8015D8A0.unk4AC[0].b = 0x20;
+    D_8015D8A0.unk4AC[0].a = 0;
+    D_8015D8A0.unk4AC[1].r = 0;
+    D_8015D8A0.unk4AC[1].g = 0;
+    D_8015D8A0.unk4AC[1].b = 0x20;
+    D_8015D8A0.unk4AC[1].a = 0;
+    D_8015D8A0.unk4AC[2].r = 0;
+    D_8015D8A0.unk4AC[2].g = 0;
+    D_8015D8A0.unk4AC[2].b = 0x40;
+    D_8015D8A0.unk4AC[2].a = 0;
+    D_8015D8A0.unk4AC[3].r = 0;
+    D_8015D8A0.unk4AC[3].g = 0;
+    D_8015D8A0.unk4AC[3].b = 0x40;
+    D_8015D8A0.unk4AC[3].a = 0;
     D_8015D8A0.unk4BC = 0;
     D_8015D8A0.unk4C0 = 0x10;
     D_8015D8A0.unk48C = 8.0f;
     D_8015D8A0.unk490 = -1.0f;
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015D8A0);
 }
-#else
-struct_8015D8A0 D_8015D8A0;
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005DFAC.s")
-#endif
 
 BSS_DUMMY;
 BSS_DUMMY;
 BSS_DUMMY;
 BSS_DUMMY;
 
-void func_8005E10C(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2);
-#ifdef NON_MATCHING
 void func_8005E10C(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2) {
     static struct_8015D8A0 D_8015DD68;
     s32 sp24;
@@ -1457,48 +1418,44 @@ void func_8005E10C(GlobalContext* globalCtx, Collider* arg1, Vec3f* arg2) {
     D_8015DD68.unk0.z = (s16)(s32)arg2->z;
     D_8015DD68.unk494 = 5;
     D_8015DD68.unk498 = 5;
-    D_8015DD68.unk49C = 0xA;
-    D_8015DD68.unk49D = -0x38;
-    D_8015DD68.unk49E = 0xA;
-    D_8015DD68.unk49F = -1;
-    D_8015DD68.unk4A0 = 0;
-    D_8015DD68.unk4A1 = 0x80;
-    D_8015DD68.unk4A2 = 0;
-    D_8015DD68.unk4A3 = -1;
-    D_8015DD68.unk4A4 = 0;
-    D_8015DD68.unk4A5 = 0x80;
-    D_8015DD68.unk4A6 = 0;
-    D_8015DD68.unk4A7 = -1;
-    D_8015DD68.unk4A8 = 0;
-    D_8015DD68.unk4A9 = 0x80;
-    D_8015DD68.unk4AA = 0;
-    D_8015DD68.unk4AB = -1;
-    D_8015DD68.unk4AC = 0;
-    D_8015DD68.unk4AD = 0x20;
-    D_8015DD68.unk4AE = 0;
-    D_8015DD68.unk4AF = 0;
-    D_8015DD68.unk4B0 = 0;
-    D_8015DD68.unk4B1 = 0x20;
-    D_8015DD68.unk4B2 = 0;
-    D_8015DD68.unk4B3 = 0;
-    D_8015DD68.unk4B4 = 0;
-    D_8015DD68.unk4B5 = 0x40;
-    D_8015DD68.unk4B6 = 0;
-    D_8015DD68.unk4B7 = 0;
-    D_8015DD68.unk4B8 = 0;
-    D_8015DD68.unk4B9 = 0x40;
-    D_8015DD68.unk4BA = 0;
-    D_8015DD68.unk4BB = 0;
+    D_8015DD68.unk49C[0].r = 0xA;
+    D_8015DD68.unk49C[0].g = 0xC8;
+    D_8015DD68.unk49C[0].b = 0xA;
+    D_8015DD68.unk49C[0].a = 0xFF;
+    D_8015DD68.unk49C[1].r = 0;
+    D_8015DD68.unk49C[1].g = 0x80;
+    D_8015DD68.unk49C[1].b = 0;
+    D_8015DD68.unk49C[1].a = 0xFF;
+    D_8015DD68.unk49C[2].r = 0;
+    D_8015DD68.unk49C[2].g = 0x80;
+    D_8015DD68.unk49C[2].b = 0;
+    D_8015DD68.unk49C[2].a = 0xFF;
+    D_8015DD68.unk49C[3].r = 0;
+    D_8015DD68.unk49C[3].g = 0x80;
+    D_8015DD68.unk49C[3].b = 0;
+    D_8015DD68.unk49C[3].a = 0xFF;
+    D_8015DD68.unk4AC[0].r = 0;
+    D_8015DD68.unk4AC[0].g = 0x20;
+    D_8015DD68.unk4AC[0].b = 0;
+    D_8015DD68.unk4AC[0].a = 0;
+    D_8015DD68.unk4AC[1].r = 0;
+    D_8015DD68.unk4AC[1].g = 0x20;
+    D_8015DD68.unk4AC[1].b = 0;
+    D_8015DD68.unk4AC[1].a = 0;
+    D_8015DD68.unk4AC[2].r = 0;
+    D_8015DD68.unk4AC[2].g = 0x40;
+    D_8015DD68.unk4AC[2].b = 0;
+    D_8015DD68.unk4AC[2].a = 0;
+    D_8015DD68.unk4AC[3].r = 0;
+    D_8015DD68.unk4AC[3].g = 0x40;
+    D_8015DD68.unk4AC[3].b = 0;
+    D_8015DD68.unk4AC[3].a = 0;
     D_8015DD68.unk4BC = 0;
     D_8015DD68.unk4C0 = 0x10;
     D_8015DD68.unk48C = 8.0f;
     D_8015DD68.unk490 = -1.0f;
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015DD68);
 }
-#else
-struct_8015D8A0 D_8015DD68;
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_8005E10C.s")
-#endif
 
 void func_80062B80(GlobalContext* globalCtx, Vec3f* arg1);
 
@@ -1880,6 +1837,9 @@ BSS_DUMMY;
 BSS_DUMMY;
 BSS_DUMMY;
 TriNorm D_8015E268;
+BSS_DUMMY;
+BSS_DUMMY;
+BSS_DUMMY;
 BSS_DUMMY;
 
 void func_8005F5B0_0ATvs3AC(GlobalContext* globalCtx, SubGlobalContext11E60* colChkCtx, Collider* arg2_,
@@ -3048,7 +3008,6 @@ void func_800628A4_Type0(s32 arg0, Collider_Type0* arg1) {
     }
 }
 
-#ifdef NON_MATCHING
 void func_80062A28(GlobalContext* globalCtx, Vec3f* arg1) {
     static struct_8015D8A0 D_8015CF10;
     s32 sp24;
@@ -3058,50 +3017,45 @@ void func_80062A28(GlobalContext* globalCtx, Vec3f* arg1) {
     D_8015CF10.unk0.z = (s16)(s32)arg1->z;
     D_8015CF10.unk494 = 5;
     D_8015CF10.unk498 = 5;
-    D_8015CF10.unk49C = 0x80;
-    D_8015CF10.unk49D = 0;
-    D_8015CF10.unk49E = 0x40;
-    D_8015CF10.unk49F = -1;
-    D_8015CF10.unk4A0 = 0x80;
-    D_8015CF10.unk4A1 = 0;
-    D_8015CF10.unk4A2 = 0x40;
-    D_8015CF10.unk4A3 = -1;
-    D_8015CF10.unk4A4 = -1;
-    D_8015CF10.unk4A5 = 0x80;
-    D_8015CF10.unk4A6 = 0;
-    D_8015CF10.unk4A7 = -1;
-    D_8015CF10.unk4A8 = -1;
-    D_8015CF10.unk4A9 = 0x80;
-    D_8015CF10.unk4AA = 0;
-    D_8015CF10.unk4AB = -1;
-    D_8015CF10.unk4AC = 0x40;
-    D_8015CF10.unk4AD = 0;
-    D_8015CF10.unk4AE = 0x20;
-    D_8015CF10.unk4AF = 0;
-    D_8015CF10.unk4B0 = 0x40;
-    D_8015CF10.unk4B1 = 0;
-    D_8015CF10.unk4B2 = 0x20;
-    D_8015CF10.unk4B3 = 0;
-    D_8015CF10.unk4B4 = 0x80;
-    D_8015CF10.unk4B5 = 0;
-    D_8015CF10.unk4B6 = 0x40;
-    D_8015CF10.unk4B7 = 0;
-    D_8015CF10.unk4B8 = 0x80;
-    D_8015CF10.unk4B9 = 0;
-    D_8015CF10.unk4BA = 0x40;
-    D_8015CF10.unk4BB = 0;
+    D_8015CF10.unk49C[0].r = 0x80;
+    D_8015CF10.unk49C[0].g = 0;
+    D_8015CF10.unk49C[0].b = 0x40;
+    D_8015CF10.unk49C[0].a = 0xFF;
+    D_8015CF10.unk49C[1].r = 0x80;
+    D_8015CF10.unk49C[1].g = 0;
+    D_8015CF10.unk49C[1].b = 0x40;
+    D_8015CF10.unk49C[1].a = 0xFF;
+    D_8015CF10.unk49C[2].r = 0xFF;
+    D_8015CF10.unk49C[2].g = 0x80;
+    D_8015CF10.unk49C[2].b = 0;
+    D_8015CF10.unk49C[2].a = 0xFF;
+    D_8015CF10.unk49C[3].r = 0xFF;
+    D_8015CF10.unk49C[3].g = 0x80;
+    D_8015CF10.unk49C[3].b = 0;
+    D_8015CF10.unk49C[3].a = 0xFF;
+    D_8015CF10.unk4AC[0].r = 0x40;
+    D_8015CF10.unk4AC[0].g = 0;
+    D_8015CF10.unk4AC[0].b = 0x20;
+    D_8015CF10.unk4AC[0].a = 0;
+    D_8015CF10.unk4AC[1].r = 0x40;
+    D_8015CF10.unk4AC[1].g = 0;
+    D_8015CF10.unk4AC[1].b = 0x20;
+    D_8015CF10.unk4AC[1].a = 0;
+    D_8015CF10.unk4AC[2].r = 0x80;
+    D_8015CF10.unk4AC[2].g = 0;
+    D_8015CF10.unk4AC[2].b = 0x40;
+    D_8015CF10.unk4AC[2].a = 0;
+    D_8015CF10.unk4AC[3].r = 0x80;
+    D_8015CF10.unk4AC[3].g = 0;
+    D_8015CF10.unk4AC[3].b = 0x40;
+    D_8015CF10.unk4AC[3].a = 0;
     D_8015CF10.unk4BC = 0;
     D_8015CF10.unk4C0 = 0x10;
     D_8015CF10.unk48C = 8.0f;
     D_8015CF10.unk490 = -1.0f;
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015CF10);
 }
-#else
-struct_8015D8A0 D_8015CF10;
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062A28.s")
-#endif
 
-#ifdef NON_MATCHING
 void func_80062B80(GlobalContext* globalCtx, Vec3f* arg1) {
     static struct_8015D8A0 D_8015D3D8;
     s32 sp24;
@@ -3111,48 +3065,44 @@ void func_80062B80(GlobalContext* globalCtx, Vec3f* arg1) {
     D_8015D3D8.unk0.z = (s16)(s32)arg1->z;
     D_8015D3D8.unk494 = 5;
     D_8015D3D8.unk498 = 5;
-    D_8015D3D8.unk49C = -1;
-    D_8015D3D8.unk49D = -1;
-    D_8015D3D8.unk49E = -1;
-    D_8015D3D8.unk49F = -1;
-    D_8015D3D8.unk4A0 = 0x64;
-    D_8015D3D8.unk4A1 = 0x64;
-    D_8015D3D8.unk4A2 = 0x64;
-    D_8015D3D8.unk4A3 = 0x64;
-    D_8015D3D8.unk4A4 = 0x64;
-    D_8015D3D8.unk4A5 = 0x64;
-    D_8015D3D8.unk4A6 = 0x64;
-    D_8015D3D8.unk4A7 = 0x64;
-    D_8015D3D8.unk4A8 = 0x64;
-    D_8015D3D8.unk4A9 = 0x64;
-    D_8015D3D8.unk4AA = 0x64;
-    D_8015D3D8.unk4AB = 0x64;
-    D_8015D3D8.unk4AC = 0x32;
-    D_8015D3D8.unk4AD = 0x32;
-    D_8015D3D8.unk4AE = 0x32;
-    D_8015D3D8.unk4AF = 0x32;
-    D_8015D3D8.unk4B0 = 0x32;
-    D_8015D3D8.unk4B1 = 0x32;
-    D_8015D3D8.unk4B2 = 0x32;
-    D_8015D3D8.unk4B3 = 0x32;
-    D_8015D3D8.unk4B4 = 0x32;
-    D_8015D3D8.unk4B5 = 0x32;
-    D_8015D3D8.unk4B6 = 0x32;
-    D_8015D3D8.unk4B7 = 0x32;
-    D_8015D3D8.unk4B8 = 0;
-    D_8015D3D8.unk4B9 = 0;
-    D_8015D3D8.unk4BA = 0;
-    D_8015D3D8.unk4BB = 0;
+    D_8015D3D8.unk49C[0].r = 0xFF;
+    D_8015D3D8.unk49C[0].g = 0xFF;
+    D_8015D3D8.unk49C[0].b = 0xFF;
+    D_8015D3D8.unk49C[0].a = 0xFF;
+    D_8015D3D8.unk49C[1].r = 0x64;
+    D_8015D3D8.unk49C[1].g = 0x64;
+    D_8015D3D8.unk49C[1].b = 0x64;
+    D_8015D3D8.unk49C[1].a = 0x64;
+    D_8015D3D8.unk49C[2].r = 0x64;
+    D_8015D3D8.unk49C[2].g = 0x64;
+    D_8015D3D8.unk49C[2].b = 0x64;
+    D_8015D3D8.unk49C[2].a = 0x64;
+    D_8015D3D8.unk49C[3].r = 0x64;
+    D_8015D3D8.unk49C[3].g = 0x64;
+    D_8015D3D8.unk49C[3].b = 0x64;
+    D_8015D3D8.unk49C[3].a = 0x64;
+    D_8015D3D8.unk4AC[0].r = 0x32;
+    D_8015D3D8.unk4AC[0].g = 0x32;
+    D_8015D3D8.unk4AC[0].b = 0x32;
+    D_8015D3D8.unk4AC[0].a = 0x32;
+    D_8015D3D8.unk4AC[1].r = 0x32;
+    D_8015D3D8.unk4AC[1].g = 0x32;
+    D_8015D3D8.unk4AC[1].b = 0x32;
+    D_8015D3D8.unk4AC[1].a = 0x32;
+    D_8015D3D8.unk4AC[2].r = 0x32;
+    D_8015D3D8.unk4AC[2].g = 0x32;
+    D_8015D3D8.unk4AC[2].b = 0x32;
+    D_8015D3D8.unk4AC[2].a = 0x32;
+    D_8015D3D8.unk4AC[3].r = 0;
+    D_8015D3D8.unk4AC[3].g = 0;
+    D_8015D3D8.unk4AC[3].b = 0;
+    D_8015D3D8.unk4AC[3].a = 0;
     D_8015D3D8.unk4BC = 0;
     D_8015D3D8.unk4C0 = 0x10;
     D_8015D3D8.unk48C = 8.0f;
     D_8015D3D8.unk490 = -1.0f;
     Effect_Add(globalCtx, &sp24, 0, 0U, 1U, &D_8015D3D8);
 }
-#else
-struct_8015D8A0 D_8015D3D8;
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_collision_check/func_80062B80.s")
-#endif
 
 typedef struct struct_8011E068 {
     /* 0x00 */ char unk_0[2];
