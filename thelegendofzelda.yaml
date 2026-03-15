@@ -1412,9 +1412,9 @@ segments:
     follows_vram: ovl_Bg_Haka_Ship
     bss_size: 0x0
     subsegments:
-      - [0xC4E9E0, c, overlays/ovl_Bg_Haka_Trap]
-      - [0xC4FC70, .data, overlays/ovl_Bg_Haka_Trap]
-      - [0xC4FD80, .rodata, overlays/ovl_Bg_Haka_Trap]
+      - [0xC4E9E0, asm, overlays/ovl_Bg_Haka_Trap]
+      - [0xC4FC70, data, overlays/ovl_Bg_Haka_Trap]
+      - [0xC4FD80, rodata, overlays/ovl_Bg_Haka_Trap]
       - [0xC4FDB0, rodatabin, rodatabin_80881070]
 
   - name: ovl_Bg_Haka_Tubo
