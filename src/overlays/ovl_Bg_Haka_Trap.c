@@ -19,8 +19,8 @@ void func_808809E4(BgHakaTrap* this, GlobalContext* globalCtx, s16);
 void func_80880AE8(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_80880C0C(BgHakaTrap* this, GlobalContext* globalCtx);
 
-extern const ActorInit Bg_Haka_Trap_InitVars;
-#if 0
+s32 D_80880F30 = 0;
+
 const ActorInit Bg_Haka_Trap_InitVars = {
     /**/ ACTOR_BG_HAKA_TRAP,
     /**/ ACTORTYPE_BG,
@@ -32,26 +32,54 @@ const ActorInit Bg_Haka_Trap_InitVars = {
     /**/ BgHakaTrap_Update,
     /**/ BgHakaTrap_Draw,
 };
-#endif
 
 extern UNK_TYPE D_60081D0;
 extern UNK_TYPE D_6008D10;
 extern UNK_TYPE D_6009CD0;
 
-extern s32 D_80880F30;
-extern ColliderCylinderSrc D_80880F54;
-extern Vec3f D_80880F98;
-extern Vec3f D_80880FA4;
-extern Vec3f D_80880FB0;
-extern Vec3f D_80880FEC;
-extern ColliderTrisSrc D_80880FF8;
-extern CollideDataInit D_80881008;
-extern InitChainEntry D_80881010;
-extern s32 D_80881014;
-extern s32 D_80881018;
-extern Vec3f D_8088101C;
-extern Gfx* D_80881028[];
-extern Color_RGBA8 D_8088103C;
+ColliderCylinderSrc D_80880F54 = {
+    { 9, 0x11, 0xD, 9, 0x20, 1 },
+    { 0, { 0xFFCFFFFF, 0, 4 }, { 0xFFCFFFFF, 0, 0 }, 1, 1, 1 },
+    { 0x1E, 0x5A, 0, { 0, 0, 0 } },
+};
+
+ColliderTrisElementSrc D_80880F80[2] = {
+    {
+        { 0, { 0, 0, 0 }, { 0x20000, 0, 0 }, 0, 1, 0 },
+        {
+            { 1800.0f, 1200.0f, 0.0f },
+            { -1800.0f, 1200.0f, 0.0f },
+            { -1800.0f, 0.0f, 0.0f },
+        },
+    },
+    {
+        { 0, { 0, 0, 0 }, { 0x20000, 0, 0 }, 0, 1, 0 },
+        {
+            { 1800.0f, 1200.0f, 0.0f },
+            { -1800.0f, 0.0f, 0.0f },
+            { 1800.0f, 0.0f, 0.0f },
+        },
+    },
+};
+
+ColliderTrisSrc D_80880FF8 = { { 0xA, 0, 9, 0, 0x20, 2 }, 2, D_80880F80 };
+CollideDataInit D_80881008 = { 0, 0x50, 0x64, 0xFF };
+
+InitChainEntry D_80881010[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
+};
+
+s32 D_80881014 = 0;
+s32 D_80881018 = 0;
+Vec3f D_8088101C = { 0.0f, 0.0f, 0.0f };
+Gfx *D_80881028[5] = {
+    (Gfx *)0x06007610,
+    (Gfx *)0x06009860,
+    (Gfx *)0x06007EF0,
+    (Gfx *)0x06008A20,
+    (Gfx *)0x060072C0,
+};
+Color_RGBA8 D_8088103C = { 0 };
 
 void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32* new_var;
@@ -103,8 +131,7 @@ void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
                     DynaPolyInfo_Alloc(&D_6008D10, &sp2C);
                 }
                 func_8005C7E0(globalCtx, &this->unk1C4);
-                Collider_LoadTris(globalCtx, (ColliderTris*)&this->unk1C4, &this->dyna.actor, &D_80880FF8,
-                                  &this->unk1E4);
+                Collider_LoadTris(globalCtx, &this->unk1C4, &this->dyna.actor, &D_80880FF8, &this->unk1E4);
                 this->unk178.shape.radius = 0x12;
                 this->unk178.shape.height = 0x73;
                 this->unk178.elem.atElemFlags |= 0;
@@ -407,11 +434,11 @@ void func_80880D68(BgHakaTrap* this) {
     Vec3f sp30;
     Vec3f sp24;
 
-    Matrix_MultVec3f(&D_80880F98, &sp24);
-    Matrix_MultVec3f(&D_80880FA4, &sp30);
-    Matrix_MultVec3f(&D_80880FB0, &sp3C);
+    Matrix_MultVec3f(&D_80880F80[0].vertices[0], &sp24);
+    Matrix_MultVec3f(&D_80880F80[0].vertices[1], &sp30);
+    Matrix_MultVec3f(&D_80880F80[0].vertices[2], &sp3C);
     func_800627A0(&this->unk1C4, 0, &sp24, &sp30, &sp3C);
-    Matrix_MultVec3f(&D_80880FEC, &sp30);
+    Matrix_MultVec3f(&D_80880F80[1].vertices[2], &sp30);
     func_800627A0(&this->unk1C4, 1, &sp24, &sp3C, &sp30);
 }
 

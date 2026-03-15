@@ -221,9 +221,9 @@ typedef struct ColliderCylinderSrcAltWithActor {
  */
 
 typedef struct ColliderTrisElementSrc {
-    ColliderElementSrc base;
-    Vec3f vertices[3];
-} ColliderTrisElementSrc; /* size = 0x48 */
+    /* 0x00 */ ColliderElementSrc base;
+    /* 0x18 */ Vec3f vertices[3];
+} ColliderTrisElementSrc; /* size = 0x3C */
 
 typedef struct ColliderTrisSrc {
     ColliderSrc base;
