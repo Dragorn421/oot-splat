@@ -193,10 +193,10 @@ typedef struct ColliderSpheresSrcAlt {
  */
 
 typedef struct ColliderCylinder {
-    Collider base;
-    ColliderElement elem;
-    Cylinder16 shape;
-} ColliderCylinder;
+    /* 0x00 */ Collider base;
+    /* 0x18 */ ColliderElement elem;
+    /* 0x40 */ Cylinder16 shape;
+} ColliderCylinder; // size = 0x4C
 
 typedef struct ColliderCylinderSrc {
     /* 0x00 */ ColliderSrc base;
@@ -292,6 +292,12 @@ typedef struct struct_ColliderCtx_290 {
     char unk_0[0x18];
     u16 unk18;
 } struct_ColliderCtx_290;
+
+typedef struct struct_8005C7E0 {
+    Collider unk0;
+    s32 unk18;
+    s32 unk1C;
+} struct_8005C7E0;
 
 /*
  * Collider properties, for all types

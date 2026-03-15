@@ -735,6 +735,8 @@ s32 Collider_LoadCylinder(GlobalContext* globalCtx, ColliderCylinder* collision,
                                ColliderCylinderSrc* src);
 s32 Collider_ClearCylinderACHit(GlobalContext* globalCtx, Collider* collision);
 s32 Collider_ClearCylinderOCHit(GlobalContext* globalCtx, Collider* collision);
+s32 Collider_LoadTris(GlobalContext* globalCtx, ColliderTris* tris, Actor* actor, ColliderTrisSrc* trisSrc,
+                      ColliderTrisElement* trisElements);
 // ? Collider_InitTrisElementShape(?);
 // ? Collider_LoadTrisElementShape(?);
 // ? Collider_InitTrisElement(?);
@@ -743,6 +745,7 @@ s32 Collider_ClearCylinderOCHit(GlobalContext* globalCtx, Collider* collision);
 // ? Collider_ClearTrisElementATHit(?);
 // ? Collider_ClearTrisElementACHit(?);
 // ? Collider_ClearTrisElementOCHit(?);
+s32 func_8005C7E0(GlobalContext* globalCtx, struct_8005C7E0* arg1);
 // ? Collider_InitQuadShape(?);
 // ? Collider_ClearQuadShapeATHit(?);
 // ? Collider_QuadShapeUpdateMidPoints(?);
