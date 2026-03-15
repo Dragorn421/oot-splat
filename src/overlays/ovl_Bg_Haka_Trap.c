@@ -402,7 +402,7 @@ void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-void func_80880D68(BgHakaTrap *this) {
+void func_80880D68(BgHakaTrap* this) {
     Vec3f sp3C;
     Vec3f sp30;
     Vec3f sp24;
@@ -415,4 +415,26 @@ void func_80880D68(BgHakaTrap *this) {
     func_800627A0(&this->unk1C4, 1, &sp24, &sp3C, &sp30);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/BgHakaTrap_Draw.s")
+void BgHakaTrap_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    BgHakaTrap* this = (BgHakaTrap*)thisx;
+    s32 pad;
+    Vec3f sp2C;
+
+    if (this->unk164 == func_808802D8) {
+        func_80026230(globalCtx, &D_8088103C, this->unk168 + 0x14, 0x28);
+    }
+    Gfx_DrawDListOpa(globalCtx, D_80881028[this->dyna.actor.params]);
+    if (this->unk164 == func_808801B8) {
+        func_80880D68(this);
+    }
+    if (this->unk164 == func_808802D8) {
+        func_80026608(globalCtx);
+    }
+    if ((this->unk164 == func_808808F4) && ((u8)this->unk169 == 0)) {
+        sp2C.x = this->dyna.actor.posRot.pos.x;
+        sp2C.z = this->dyna.actor.posRot.pos.z;
+        sp2C.y = this->dyna.actor.posRot.pos.y + 110.0f;
+        func_800A6EF4(&globalCtx->mf_11D60, &sp2C, &this->unk16C);
+        func_80078914(&this->unk16C, 0x200DU);
+    }
+}
