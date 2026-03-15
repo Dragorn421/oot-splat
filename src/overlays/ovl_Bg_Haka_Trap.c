@@ -15,7 +15,9 @@ void func_808805C0(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808806BC(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808808F4(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808809B0(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_808809E4(BgHakaTrap* this, GlobalContext* globalCtx, s16);
 void func_80880AE8(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_80880C0C(BgHakaTrap* this, GlobalContext* globalCtx);
 
 extern const ActorInit Bg_Haka_Trap_InitVars;
 #if 0
@@ -38,12 +40,18 @@ extern UNK_TYPE D_6009CD0;
 
 extern s32 D_80880F30;
 extern ColliderCylinderSrc D_80880F54;
+extern Vec3f D_80880F98;
+extern Vec3f D_80880FA4;
+extern Vec3f D_80880FB0;
+extern Vec3f D_80880FEC;
 extern ColliderTrisSrc D_80880FF8;
 extern CollideDataInit D_80881008;
 extern InitChainEntry D_80881010;
 extern s32 D_80881014;
 extern s32 D_80881018;
 extern Vec3f D_8088101C;
+extern Gfx* D_80881028[];
+extern Color_RGBA8 D_8088103C;
 
 void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32* new_var;
@@ -329,11 +337,50 @@ void func_808809B0(BgHakaTrap* this, GlobalContext* globalCtx) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808809E4.s")
+void func_808809E4(BgHakaTrap* this, GlobalContext* globalCtx, s16 arg2) {
+    Player* player = PLAYER;
+    Vec3f sp18;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_80880AE8.s")
+    func_8002DBD0(&this->dyna.actor, &sp18, &player->actor.posRot.pos);
+    if ((fabsf(sp18.x) < 70.0f) && (fabsf(sp18.y) < 100.0f) && (sp18.z < 500.0f) && (PLAYER->currentBoots != 1)) {
+        player->fanWindSpeed = (((500.0f - sp18.z) * 0.06f) + 5.0f) * arg2 * (1.0f / 14848.0f) * (2.0f / 3.0f);
+        player->fanWindDirection = this->dyna.actor.shape.rot.y;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_80880C0C.s")
+void func_80880AE8(BgHakaTrap* this, GlobalContext* globalCtx) {
+    if (this->unk168 != 0) {
+        if (Math_ApproxUpdateScaledS(&this->dyna.actor.posRot.rot.z, 0,
+                                     (this->dyna.actor.posRot.rot.z * 0.03f) + 5.0f) != 0) {
+            this->unk168 = 0x28;
+            this->unk164 = func_808809B0;
+        }
+    } else {
+        if (Math_ApproxUpdateScaledS(&this->dyna.actor.posRot.rot.z, 0x3A00,
+                                     (this->dyna.actor.posRot.rot.z * 0.03f) + 5.0f) != 0) {
+            this->unk168 = 0x64;
+            this->unk164 = func_80880C0C;
+        }
+    }
+    this->dyna.actor.shape.rot.z += this->dyna.actor.posRot.rot.z;
+    if (this->dyna.actor.posRot.rot.z > 0x1800) {
+        func_8002F974(&this->dyna.actor, 0x2057U);
+    }
+    func_808809E4(this, globalCtx, this->dyna.actor.posRot.rot.z);
+}
+
+void func_80880C0C(BgHakaTrap* this, GlobalContext* globalCtx) {
+    if (this->unk168 != 0) {
+        this->unk168--;
+    }
+    func_8002F974(&this->dyna.actor, 0x2057U);
+    if (this->unk168 == 0) {
+        this->unk168 = 1;
+        this->unk164 = func_80880AE8;
+    }
+    this->dyna.actor.shape.rot.z += this->dyna.actor.posRot.rot.z;
+    func_808809E4(this, globalCtx, this->dyna.actor.posRot.rot.z);
+}
 
 void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaTrap* this = (BgHakaTrap*)thisx;
@@ -355,6 +402,17 @@ void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_80880D68.s")
+void func_80880D68(BgHakaTrap *this) {
+    Vec3f sp3C;
+    Vec3f sp30;
+    Vec3f sp24;
+
+    Matrix_MultVec3f(&D_80880F98, &sp24);
+    Matrix_MultVec3f(&D_80880FA4, &sp30);
+    Matrix_MultVec3f(&D_80880FB0, &sp3C);
+    func_800627A0(&this->unk1C4, 0, &sp24, &sp30, &sp3C);
+    Matrix_MultVec3f(&D_80880FEC, &sp30);
+    func_800627A0(&this->unk1C4, 1, &sp24, &sp3C, &sp30);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/BgHakaTrap_Draw.s")

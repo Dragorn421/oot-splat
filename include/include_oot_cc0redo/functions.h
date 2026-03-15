@@ -798,6 +798,7 @@ void func_80061EFC(CollideData* sub98, ActorDamageChart* damageChart, CollideDat
 // ? func_800626B0(?);
 void Collider_UpdateCylinderShape(Actor* actor, ColliderCylinder* collision);
 // ? func_80062734(?);
+void func_800627A0(struct_800627A0* arg0, s32 arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4);
 // ? func_80062A28(?);
 // ? func_80062B80(?);
 // ? func_80062CD4(?);

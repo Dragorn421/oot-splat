@@ -310,6 +310,16 @@ typedef struct struct_8005C8C8 {
     struct_8005C6F8* unk1C;
 } struct_8005C8C8;
 
+typedef struct struct_800627A0_ptr {
+    /* 0x00 */ char unk_0[0x28];
+    /* 0x28 */ TriNorm unk28;
+} struct_800627A0_ptr;
+
+typedef struct struct_800627A0 {
+    char unk_0[0x1C];
+    struct_800627A0_ptr* unk1C;
+} struct_800627A0;
+
 /*
  * Collider properties, for all types
  */
