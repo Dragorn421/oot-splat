@@ -299,6 +299,17 @@ typedef struct struct_8005C7E0 {
     s32 unk1C;
 } struct_8005C7E0;
 
+typedef struct struct_8005C6F8 {
+    ColliderElement base;
+    char unk_28[0x5C - 0x28];
+} struct_8005C6F8; /* size = 0x5C */
+
+typedef struct struct_8005C8C8 {
+    Collider unk0;
+    s32 unk18;
+    struct_8005C6F8* unk1C;
+} struct_8005C8C8;
+
 /*
  * Collider properties, for all types
  */

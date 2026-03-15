@@ -735,6 +735,7 @@ s32 Collider_LoadCylinder(GlobalContext* globalCtx, ColliderCylinder* collision,
                                ColliderCylinderSrc* src);
 s32 Collider_ClearCylinderACHit(GlobalContext* globalCtx, Collider* collision);
 s32 Collider_ClearCylinderOCHit(GlobalContext* globalCtx, Collider* collision);
+s32 func_8005C8C8(GlobalContext* globalCtx, struct_8005C8C8* arg1);
 s32 Collider_LoadTris(GlobalContext* globalCtx, ColliderTris* tris, Actor* actor, ColliderTrisSrc* trisSrc,
                       ColliderTrisElement* trisElements);
 // ? Collider_InitTrisElementShape(?);
