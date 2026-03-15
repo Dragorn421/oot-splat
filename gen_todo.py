@@ -13,7 +13,7 @@ map.readMapFile(Path("build/rom.map"))
 c_p = Path(args.c_file)
 c = c_p.read_text()
 global_asm_lines = [_l for _l in c.splitlines() if "GLOBAL_ASM" in _l]
-todo_lines = [["", "", ""]]
+todo_lines = [["function name", "size (bytes)"]]
 for gal in global_asm_lines:
     s_p = PurePosixPath(gal.split('"')[1])
     func_name = s_p.stem
@@ -23,4 +23,6 @@ for gal in global_asm_lines:
         continue
     func_size = fsi.symbol.size
     todo_lines.append([func_name, f"{func_size}"])
-print("\n".join(" ".join(_tl) for _tl in todo_lines))
+
+Path("todo.txt").write_text("\n".join("\t".join(_tl) for _tl in todo_lines))
+print("wrote to todo.txt")
