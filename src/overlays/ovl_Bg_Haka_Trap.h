@@ -3,11 +3,15 @@
 
 #include "global.h"
 
+struct BgHakaTrap;
+
+typedef void (*BgHakaTrapActionFunc)(struct BgHakaTrap*, GlobalContext*);
+
 typedef struct BgHakaTrap {
     /* 0x000 */ Actor actor;
     /* 0x14C */ u32 unk14C;
     /* 0x150 */ char pad150[0x14];
-    /* 0x164 */ UNK_PTR unk164;
+    /* 0x164 */ BgHakaTrapActionFunc unk164;
     /* 0x168 */ s8 unk168;
     /* 0x169 */ char pad169[1];
     /* 0x16A */ s16 unk16A;

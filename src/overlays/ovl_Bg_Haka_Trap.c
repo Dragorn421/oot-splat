@@ -8,11 +8,11 @@ void BgHakaTrap_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgHakaTrap_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_808801B8();
-void func_80880484();
-void func_808806BC();
-void func_808808F4();
-void func_808809B0();
+void func_808801B8(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_80880484(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_808806BC(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_808808F4(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_808809B0(BgHakaTrap* this, GlobalContext* globalCtx);
 
 extern const ActorInit Bg_Haka_Trap_InitVars;
 #if 0
@@ -130,7 +130,25 @@ void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_80880C0C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/BgHakaTrap_Update.s")
+void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx) {
+    BgHakaTrap* this = (BgHakaTrap*)thisx;
+    s32 pad;
+
+    this->unk164(this, globalCtx);
+
+    if ((thisx->params != 4) && (thisx->params != 1)) {
+        this->unk178.shape.pos.y = this->actor.posRot.pos.y;
+        if ((thisx->params == 0) || (thisx->params == 5)) {
+            Collider_AddAC(globalCtx, &globalCtx->colliderCtx, &this->unk178.base);
+            Collider_AddOC(globalCtx, &globalCtx->colliderCtx, &this->unk178.base);
+        } else {
+            if (this->unk164 == func_808801B8) {
+                Collider_AddAC(globalCtx, &globalCtx->colliderCtx, &this->unk1C4.unk0);
+            }
+            Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk178.base);
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_80880D68.s")
 
