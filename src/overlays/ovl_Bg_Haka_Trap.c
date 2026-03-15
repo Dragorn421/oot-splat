@@ -1,6 +1,27 @@
 #include "global.h"
+#include "ovl_Bg_Haka_Trap.h"
+
+#define FLAGS 0
+
+void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx);
+void BgHakaTrap_Destroy(Actor* thisx, GlobalContext* globalCtx);
+void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx);
+void BgHakaTrap_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 extern const ActorInit Bg_Haka_Trap_InitVars;
+#if 0
+const ActorInit Bg_Haka_Trap_InitVars = {
+    /**/ ACTOR_BG_HAKA_TRAP,
+    /**/ ACTORTYPE_BG,
+    /**/ FLAGS,
+    /**/ OBJECT_HAKA_OBJECTS,
+    /**/ sizeof(BgHakaTrap),
+    /**/ BgHakaTrap_Init,
+    /**/ BgHakaTrap_Destroy,
+    /**/ BgHakaTrap_Update,
+    /**/ BgHakaTrap_Draw,
+};
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/BgHakaTrap_Init.s")
 
