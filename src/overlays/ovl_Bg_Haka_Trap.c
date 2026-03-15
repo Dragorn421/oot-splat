@@ -11,9 +11,11 @@ void BgHakaTrap_Draw(Actor* thisx, GlobalContext* globalCtx);
 void func_808801B8(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808802D8(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_80880484(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_808805C0(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808806BC(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808808F4(BgHakaTrap* this, GlobalContext* globalCtx);
 void func_808809B0(BgHakaTrap* this, GlobalContext* globalCtx);
+void func_80880AE8(BgHakaTrap* this, GlobalContext* globalCtx);
 
 extern const ActorInit Bg_Haka_Trap_InitVars;
 #if 0
@@ -41,6 +43,7 @@ extern CollideDataInit D_80881008;
 extern InitChainEntry D_80881010;
 extern s32 D_80881014;
 extern s32 D_80881018;
+extern Vec3f D_8088101C;
 
 void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32* new_var;
@@ -178,17 +181,153 @@ void func_808801B8(BgHakaTrap* this, GlobalContext* globalCtx) {
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808801B8.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808802D8.s")
+void func_808802D8(BgHakaTrap* this, GlobalContext* globalCtx) {
+    Vec3f sp94;
+    s32 var_s0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_80880484.s")
+    if (this->unk168 != 0) {
+        this->unk168--;
+    }
+    func_8002F974(&this->dyna.actor, 0x205BU);
+    for (var_s0 = 0; var_s0 < 2; var_s0++) {
+        sp94.x =
+            (Math_Rand_ZeroOne() * ((this->dyna.actor.params == 2) ? -30.0f : 30.0f)) + this->dyna.actor.posRot.pos.x;
+        sp94.y = (Math_Rand_ZeroOne() * 10.0f) + this->dyna.actor.posRot.pos.y + 30.0f;
+        sp94.z = Math_Rand_CenteredFloat(320.0f) + this->dyna.actor.posRot.pos.z;
+        func_8002A6B8(globalCtx, &sp94, &D_8088101C, &D_8088101C, 0x82U, 0x14, 0xFFU, 0xFFU, 0x96U, 0xAAU, 0xFFU, 0U,
+                      0U, 1U, 9U, 0U);
+    }
+    if (this->unk168 == 0) {
+        D_80880F30 = 0;
+        Actor_Kill(&this->dyna.actor);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808805C0.s")
+void func_80880484(BgHakaTrap* this, GlobalContext* globalCtx) {
+    s32 sp24;
+    s32 unk168;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808806BC.s")
+    if (this->unk16A) {
+        this->dyna.actor.velocity.y *= 3.0f;
+    } else {
+        this->dyna.actor.velocity.y *= 2.0f;
+    }
+    if (this->unk168 != 0) {
+        this->unk168 -= 1;
+    }
+    sp24 = Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y - 185.0f,
+                        this->dyna.actor.velocity.y);
+    unk168 = this->unk168;
+    if (((unk168 == 0xA) && !this->unk16A) || ((unk168 == 0xD) && this->unk16A)) {
+        Audio_PlayActorSound2(&this->dyna.actor, 0x284BU);
+    }
+    if (this->unk168 == 0) {
+        this->dyna.actor.velocity.y = 0.0f;
+        if (this->unk16A) {
+            this->unk168 = 0xA;
+        } else {
+            this->unk168 = 0x28;
+        }
+        Audio_PlayActorSound2(&this->dyna.actor, 0x284AU);
+        this->unk164 = func_808805C0;
+    }
+    func_8087FFC0(this, globalCtx);
+    if (!sp24) {
+        Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk178.base);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808808F4.s")
+void func_808805C0(BgHakaTrap* this, GlobalContext* globalCtx) {
+    if (this->unk168 != 0) {
+        this->unk168 -= 1;
+    }
+    if (this->unk16A) {
+        Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y, 27.0f);
+    } else {
+        if (this->unk168 >= 0x15) {
+            Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y - 90.0f, 9.0f);
+        } else {
+            Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y, 4.5f);
+        }
+        if (this->unk168 == 0x14) {
+            Audio_PlayActorSound2(&this->dyna.actor, 0x284AU);
+        }
+    }
+    if (this->unk168 == 0) {
+        this->unk168 = 0x14;
+        this->dyna.actor.posRot.pos.y = this->dyna.actor.initPosRot.pos.y;
+        this->dyna.actor.velocity.y = 0.1f;
+        this->unk164 = func_80880484;
+    }
+    func_8087FFC0(this, globalCtx);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808809B0.s")
+void func_808806BC(BgHakaTrap* this, GlobalContext* globalCtx) {
+    Vec3f sp74;
+    f32 temp_fv1;
+    f32 var_fs0;
+    s32 var_s0;
+    UNK_TYPE sp64;
+
+    this->dyna.actor.velocity.y *= 1.6f;
+    if (this->unk168 != 0) {
+        this->unk168 -= 1;
+    }
+    sp74.x = this->dyna.actor.posRot.pos.x + 90.0f;
+    sp74.y = this->dyna.actor.posRot.pos.y + 1.0f + 25.0f;
+    sp74.z = this->dyna.actor.posRot.pos.z;
+    var_fs0 = this->dyna.actor.unk_80;
+    for (var_s0 = 0; var_s0 < 3; var_s0++) {
+        temp_fv1 =
+            func_8003C9A4(&globalCtx->colCtx, &this->dyna.actor.floorPoly, &sp64, &this->dyna.actor, &sp74) - 25.0f;
+        if (var_fs0 < temp_fv1) {
+            var_fs0 = temp_fv1;
+        }
+        sp74.x -= 90.0f;
+    }
+    if (Math_ApproxF(&this->dyna.actor.posRot.pos.y, var_fs0, this->dyna.actor.velocity.y) != 0) {
+        if (this->dyna.actor.velocity.y > 0.01f) {
+            Audio_PlayActorSound2(&this->dyna.actor, 0x2851U);
+        }
+        this->dyna.actor.velocity.y = 0.0f;
+    }
+    if (this->dyna.actor.velocity.y >= 0.01f) {
+        func_8002F974(&this->dyna.actor, 0x204DU);
+    }
+    if (this->unk168 == 0) {
+        this->dyna.actor.velocity.y = 0.0f;
+        this->unk168 = 0x1E;
+        this->unk16A = (s16)this->dyna.actor.posRot.pos.y + 50.0f;
+        this->unk16A = MIN(this->dyna.actor.initPosRot.pos.y, this->unk16A);
+        this->unk164 = func_808808F4;
+    }
+}
+
+void func_808808F4(BgHakaTrap* this, GlobalContext* globalCtx) {
+    if (this->unk168 != 0) {
+        this->unk168--;
+    }
+    if (this->unk168 >= 0x15) {
+        this->unk169 = Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->unk16A, 15.0f);
+    } else {
+        this->unk169 = Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y, 20.0f);
+    }
+    if (this->unk168 == 0) {
+        this->unk168 = 0x1E;
+        this->dyna.actor.posRot.pos.y = this->dyna.actor.initPosRot.pos.y;
+        this->dyna.actor.velocity.y = 0.5f;
+        this->unk164 = func_808806BC;
+    }
+}
+
+void func_808809B0(BgHakaTrap* this, GlobalContext* globalCtx) {
+    if (this->unk168 != 0) {
+        this->unk168 -= 1;
+    }
+    if (this->unk168 == 0) {
+        this->unk164 = func_80880AE8;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Haka_Trap/func_808809E4.s")
 

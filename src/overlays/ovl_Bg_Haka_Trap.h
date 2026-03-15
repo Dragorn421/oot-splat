@@ -11,8 +11,8 @@ typedef void (*BgHakaTrapActionFunc)(struct BgHakaTrap*, GlobalContext*);
 typedef struct BgHakaTrap {
     /* 0x000 */ DynaPolyActor dyna;
     /* 0x164 */ BgHakaTrapActionFunc unk164;
-    /* 0x168 */ s8 unk168;
-    /* 0x169 */ char pad169[1];
+    /* 0x168 */ u8 unk168;
+    /* 0x169 */ s8 unk169;
     /* 0x16A */ s16 unk16A;
     /* 0x16C */ Vec3f unk16C;
     /* 0x178 */ ColliderCylinder unk178;
