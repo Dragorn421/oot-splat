@@ -77,7 +77,7 @@ void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32 sp2C;
 
     sp2C = 0;
-    Actor_ProcessInitChain(&this->dyna.actor, &D_80881010);
+    Actor_ProcessInitChain(&this->dyna.actor, D_80881010);
     this->dyna.actor.params &= 0xFF;
     new_var = &D_80881014;
     if (this->dyna.actor.params != BG_HAKA_TRAP_PROPELLER) {
@@ -185,7 +185,7 @@ void func_808801B8(BgHakaTrap* this, GlobalContext* globalCtx) {
 
     if ((D_80880F30 == 0) && (func_8008E988(globalCtx) == 0)) {
         if (Math_ApproxF(&this->dyna.actor.posRot.pos.x, this->dyna.actor.initPosRot.pos.x, 0.5f) == 0) {
-            func_8002F974(&this->dyna.actor, 0x2058U);
+            func_8002F974(&this->dyna.actor, NA_SE_EV_TRAP_OBJ_SLIDE - 0x800);
         } else {
             if (this->dyna.actor.params == BG_HAKA_TRAP_SPIKED_WOODEN_WALL_1) {
                 D_80881018 |= 1;
@@ -214,7 +214,7 @@ void func_808802D8(BgHakaTrap* this, GlobalContext* globalCtx) {
     if (this->unk168 != 0) {
         this->unk168--;
     }
-    func_8002F974(&this->dyna.actor, 0x205BU);
+    func_8002F974(&this->dyna.actor, NA_SE_EV_BURN_OUT - 0x800);
     for (var_s0 = 0; var_s0 < 2; var_s0++) {
         sp94.x =
             (Math_Rand_ZeroOne() * ((this->dyna.actor.params == BG_HAKA_TRAP_SPIKED_WOODEN_WALL_1) ? -30.0f : 30.0f)) +
@@ -246,7 +246,7 @@ void func_80880484(BgHakaTrap* this, GlobalContext* globalCtx) {
                         this->dyna.actor.velocity.y);
     unk168 = this->unk168;
     if (((unk168 == 0xA) && !this->unk16A) || ((unk168 == 0xD) && this->unk16A)) {
-        Audio_PlayActorSound2(&this->dyna.actor, 0x284BU);
+        Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_GUILLOTINE_BOUND);
     }
     if (this->unk168 == 0) {
         this->dyna.actor.velocity.y = 0.0f;
@@ -255,7 +255,7 @@ void func_80880484(BgHakaTrap* this, GlobalContext* globalCtx) {
         } else {
             this->unk168 = 0x28;
         }
-        Audio_PlayActorSound2(&this->dyna.actor, 0x284AU);
+        Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_GUILLOTINE_UP);
         this->actionFunc = func_808805C0;
     }
     func_8087FFC0(this, globalCtx);
@@ -277,7 +277,7 @@ void func_808805C0(BgHakaTrap* this, GlobalContext* globalCtx) {
             Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y, 4.5f);
         }
         if (this->unk168 == 0x14) {
-            Audio_PlayActorSound2(&this->dyna.actor, 0x284AU);
+            Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_GUILLOTINE_UP);
         }
     }
     if (this->unk168 == 0) {
@@ -314,12 +314,12 @@ void func_808806BC(BgHakaTrap* this, GlobalContext* globalCtx) {
     }
     if (Math_ApproxF(&this->dyna.actor.posRot.pos.y, var_fs0, this->dyna.actor.velocity.y) != 0) {
         if (this->dyna.actor.velocity.y > 0.01f) {
-            Audio_PlayActorSound2(&this->dyna.actor, 0x2851U);
+            Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_TRAP_BOUND);
         }
         this->dyna.actor.velocity.y = 0.0f;
     }
     if (this->dyna.actor.velocity.y >= 0.01f) {
-        func_8002F974(&this->dyna.actor, 0x204DU);
+        func_8002F974(&this->dyna.actor, NA_SE_EV_CHINETRAP_DOWN - 0x800);
     }
     if (this->unk168 == 0) {
         this->dyna.actor.velocity.y = 0.0f;
@@ -383,7 +383,7 @@ void func_80880AE8(BgHakaTrap* this, GlobalContext* globalCtx) {
     }
     this->dyna.actor.shape.rot.z += this->dyna.actor.posRot.rot.z;
     if (this->dyna.actor.posRot.rot.z > 0x1800) {
-        func_8002F974(&this->dyna.actor, 0x2057U);
+        func_8002F974(&this->dyna.actor, NA_SE_EV_WIND_TRAP - 0x800);
     }
     func_808809E4(this, globalCtx, this->dyna.actor.posRot.rot.z);
 }
@@ -392,7 +392,7 @@ void func_80880C0C(BgHakaTrap* this, GlobalContext* globalCtx) {
     if (this->unk168 != 0) {
         this->unk168--;
     }
-    func_8002F974(&this->dyna.actor, 0x2057U);
+    func_8002F974(&this->dyna.actor, NA_SE_EV_WIND_TRAP - 0x800);
     if (this->unk168 == 0) {
         this->unk168 = 1;
         this->actionFunc = func_80880AE8;
@@ -463,6 +463,6 @@ void BgHakaTrap_Draw(Actor* thisx, GlobalContext* globalCtx) {
         sp2C.z = this->dyna.actor.posRot.pos.z;
         sp2C.y = this->dyna.actor.posRot.pos.y + 110.0f;
         func_800A6EF4(&globalCtx->mf_11D60, &sp2C, &this->unk16C);
-        func_80078914(&this->unk16C, 0x200DU);
+        func_80078914(&this->unk16C, NA_SE_EV_BRIDGE_CLOSE - 0x800);
     }
 }
