@@ -2,7 +2,15 @@
 #define BG_HAKA_TRAP_H
 
 #include "global.h"
-#include "z64actor.h"
+
+typedef enum BgHakaTrapType {
+    /* 0 */ BG_HAKA_TRAP_GUILLOTINE,
+    /* 1 */ BG_HAKA_TRAP_SPIKED_CRUSHER,
+    /* 2 */ BG_HAKA_TRAP_SPIKED_WOODEN_WALL_1,
+    /* 3 */ BG_HAKA_TRAP_SPIKED_WOODEN_WALL_2,
+    /* 4 */ BG_HAKA_TRAP_PROPELLER,
+    /* 5 */ BG_HAKA_TRAP_GUILLOTINE_ALT,
+} BgHakaTrapType;
 
 struct BgHakaTrap;
 
@@ -10,7 +18,7 @@ typedef void (*BgHakaTrapActionFunc)(struct BgHakaTrap*, GlobalContext*);
 
 typedef struct BgHakaTrap {
     /* 0x000 */ DynaPolyActor dyna;
-    /* 0x164 */ BgHakaTrapActionFunc unk164;
+    /* 0x164 */ BgHakaTrapActionFunc actionFunc;
     /* 0x168 */ u8 unk168;
     /* 0x169 */ s8 unk169;
     /* 0x16A */ s16 unk16A;
