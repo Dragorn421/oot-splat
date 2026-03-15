@@ -195,7 +195,7 @@ void func_808801B8(BgHakaTrap* this, GlobalContext* globalCtx) {
         }
     }
     func_8087FFC0(this, globalCtx);
-    if (this->unk1C4.unk0.acFlags & 2) {
+    if (this->unk1C4.base.acFlags & 2) {
         this->unk168 = 0x14;
         D_80880F30 = 1;
         this->actionFunc = func_808802D8;
@@ -414,7 +414,7 @@ void BgHakaTrap_Update(Actor* thisx, GlobalContext* globalCtx) {
             Collider_AddOC(globalCtx, &globalCtx->colliderCtx, &this->unk178.base);
         } else {
             if (this->actionFunc == func_808801B8) {
-                Collider_AddAC(globalCtx, &globalCtx->colliderCtx, &this->unk1C4.unk0);
+                Collider_AddAC(globalCtx, &globalCtx->colliderCtx, &this->unk1C4.base);
             }
             Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk178.base);
         }

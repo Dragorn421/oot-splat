@@ -9,7 +9,7 @@ typedef enum BgHakaTrapType {
     /* 2 */ BG_HAKA_TRAP_SPIKED_WOODEN_WALL_1,
     /* 3 */ BG_HAKA_TRAP_SPIKED_WOODEN_WALL_2,
     /* 4 */ BG_HAKA_TRAP_PROPELLER,
-    /* 5 */ BG_HAKA_TRAP_GUILLOTINE_ALT,
+    /* 5 */ BG_HAKA_TRAP_GUILLOTINE_ALT
 } BgHakaTrapType;
 
 struct BgHakaTrap;
@@ -24,9 +24,8 @@ typedef struct BgHakaTrap {
     /* 0x16A */ s16 unk16A;
     /* 0x16C */ Vec3f unk16C;
     /* 0x178 */ ColliderCylinder unk178;
-    /* 0x1C4 */ struct_8005C7E0 unk1C4;
-    /* 0x1E4 */ ColliderTrisElement unk1E4;
-    /* 0x240 */ char pad240[0x5C];
+    /* 0x1C4 */ ColliderTris unk1C4;
+    /* 0x1E4 */ ColliderTrisElement unk1E4[2];
 } BgHakaTrap; // size = 0x29C
 
 #endif
