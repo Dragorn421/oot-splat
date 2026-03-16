@@ -6,31 +6,6 @@ void EnMd_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_80AAA250(EnMd* this);
-void func_80AAA274(EnMd* this);
-void func_80AAA308(EnMd* this);
-void func_80AAA39C(EnMd* this);
-void func_80AAA474(EnMd* this);
-void func_80AAA508(EnMd* this);
-void func_80AAA5A4(EnMd* this);
-void func_80AAA638(EnMd* this);
-void func_80AAA6D4(EnMd* this);
-void func_80AAA768(EnMd* this);
-void func_80AAA7FC(EnMd* this);
-void func_80AAA890(EnMd* this);
-void func_80AAAA24(EnMd* this);
-void func_80AAA93C(EnMd* this);
-s16 func_80AAAC78(Actor* thisx, GlobalContext* globalCtx);
-u16 func_80AAACF8(GlobalContext* globalCtx, EnMd* this);
-u16 func_80AAADE0(GlobalContext* globalCtx, EnMd* this);
-u16 func_80AAAE14(GlobalContext* globalCtx, EnMd* this);
-u16 func_80AAAE94(GlobalContext* globalCtx, Actor* thisx);
-s16 func_80AAAF04(GlobalContext* globalCtx, Actor* thisx);
-s32 func_80AAB03C(EnMd* this, GlobalContext* globalCtx);
-void func_80AAB0E0(EnMd* this);
-void func_80AAB158(EnMd* this, GlobalContext* globalCtx);
-s32 func_80AAB370(EnMd* this, GlobalContext* globalCtx);
-void func_80AAB5A4(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB874(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB8F8(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB948(EnMd* this, GlobalContext* globalCtx);
@@ -62,13 +37,13 @@ void func_80AAA274(EnMd* this) {
     switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 2);
-            this->unk20A = (u8)this->unk20A + 1;
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 3);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
@@ -76,13 +51,13 @@ void func_80AAA308(EnMd* this) {
     switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 4);
-            this->unk20A = (u8)this->unk20A + 1;
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 5);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
@@ -91,18 +66,18 @@ void func_80AAA39C(EnMd* this) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 2);
             func_80AAA250(this);
-            this->unk20A = (u8)this->unk20A + 1;
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 7);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             } else {
                 break;
             }
         case 2:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 8);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
     }
 }
@@ -111,118 +86,112 @@ void func_80AAA474(EnMd* this) {
     switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 7);
-            this->unk20A = (u8)this->unk20A + 1;
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA508(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 2);
             func_80AAA250(this);
-            this->unk20A = (u8)this->unk20A + 1;
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA5A4(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 9);
-            this->unk20A = (u8)this->unk20A + 1;
-            /* fallthrough */
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 6);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA638(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 9);
             func_80AAA250(this);
-            this->unk20A = (u8)this->unk20A + 1;
-            /* fallthrough */
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA6D4(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 0xB);
-            this->unk20A = (u8)this->unk20A + 1;
-            /* fallthrough */
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 6);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA768(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 0xC);
-            this->unk20A = (u8)this->unk20A + 1;
-            /* fallthrough */
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 3);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA7FC(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 0xD);
-            this->unk20A = (u8)this->unk20A + 1;
-            /* fallthrough */
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 6);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
-            return;
+            break;
     }
 }
 
 void func_80AAA890(EnMd* this) {
-    switch (this->unk20A) { /* irregular */
+    switch (this->unk20A) {
         case 0:
             func_80034EC0(&this->unk14C, D_80AAC348, 7);
             func_80AAA250(this);
-            this->unk20A = (u8)this->unk20A + 1;
-            /* fallthrough */
+            this->unk20A++;
         case 1:
             if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
                 func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
-                this->unk20A = (u8)this->unk20A + 1;
+                this->unk20A++;
             }
             break;
     }
@@ -237,39 +206,39 @@ void func_80AAA93C(EnMd* this) {
     switch (this->unk20B) {
         case 1:
             func_80AAA274(this);
-            return;
+            break;
         case 2:
             func_80AAA308(this);
-            return;
+            break;
         case 3:
             func_80AAA39C(this);
-            return;
+            break;
         case 4:
             func_80AAA474(this);
-            return;
+            break;
         case 5:
             func_80AAA508(this);
-            return;
+            break;
         case 6:
             func_80AAA5A4(this);
-            return;
+            break;
         case 7:
             func_80AAA638(this);
-            return;
+            break;
         case 8:
             func_80AAA6D4(this);
-            return;
+            break;
         case 9:
             func_80AAA768(this);
-            return;
+            break;
         case 10:
             func_80AAA7FC(this);
-            return;
+            break;
         case 11:
             func_80AAA890(this);
-            /* fallthrough */
+            break;
         default:
-            return;
+            break;
     }
 }
 
@@ -450,15 +419,14 @@ s32 func_80AAB03C(EnMd* this, GlobalContext* globalCtx) {
     if ((globalCtx->sceneNum == 0x55) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
         !(gSaveContext.eventChkInf[4] & 1)) {
         return 1;
-    }
-    if ((globalCtx->sceneNum == 0x28) &&
-        ((gSaveContext.eventChkInf[1] & 0x1000) || (gSaveContext.eventChkInf[4] & 1)) && LINK_IS_CHILD) {
+    } else if ((globalCtx->sceneNum == 0x28) &&
+               ((gSaveContext.eventChkInf[1] & 0x1000) || (gSaveContext.eventChkInf[4] & 1)) && LINK_IS_CHILD) {
         return 1;
-    }
-    if (globalCtx->sceneNum == 0x5B) {
+    } else if (globalCtx->sceneNum == 0x5B) {
         return 1;
+    } else {
+        return 0;
     }
-    return 0;
 }
 
 void func_80AAB0E0(EnMd* arg0) {
