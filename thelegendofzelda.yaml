@@ -447,7 +447,7 @@ segments:
       - [0xABA240, asm, code/z_bg_collect]
       - [0xABA620, asm, code/z_bg_item]
       - [0xABA990, asm, code/z_camera]
-      - [0xAD23A0, c, code/z_collision_btltbls]
+      - [0xAD23A0, asm, code/z_collision_btltbls]
       - [0xAD2420, asm, code/z_collision_check]
       - [0xADA7E0, asm, code/z_common_data]
       - [0xADA860, asm, code/z_debug]
@@ -665,7 +665,7 @@ segments:
       - [0xB8D440, data, code/z_actor_dlftbls]
       - [0xB90F30, data, code/z_bgcheck]
       - [0xB91080, data, code/z_camera]
-      - [0xB94CC0, .data, code/z_collision_btltbls]
+      - [0xB94CC0, data, code/z_collision_btltbls]
       - [0xB94FA0, data, code/z_collision_check]
       - [0xB95250, data, code/z_debug]
       - [0xB95310, data, code/z_debug_display]
@@ -777,7 +777,7 @@ segments:
       - [0xBB0170, rodata, code/z_bg_collect]
       - [0xBB01F0, rodata, code/z_bg_item]
       - [0xBB0200, rodata, code/z_camera]
-      - [0xBB1720, .rodata, code/z_collision_btltbls]
+      - [0xBB1720, rodata, code/z_collision_btltbls]
       - [0xBB1750, rodata, code/z_collision_check]
       - [0xBB1EE0, rodata, code/z_debug]
       - [0xBB1F40, rodata, code/z_debug_display]
@@ -1591,9 +1591,9 @@ segments:
     follows_vram: ovl_Bg_Hidan_Rock
     bss_size: 0x0
     subsegments:
-      - [0xC5AF40, c, overlays/ovl_Bg_Hidan_Rsekizou]
-      - [0xC5B9A0, .data, overlays/ovl_Bg_Hidan_Rsekizou]
-      - [0xC5BAE0, .rodata, overlays/ovl_Bg_Hidan_Rsekizou]
+      - [0xC5AF40, asm, overlays/ovl_Bg_Hidan_Rsekizou]
+      - [0xC5B9A0, data, overlays/ovl_Bg_Hidan_Rsekizou]
+      - [0xC5BAE0, rodata, overlays/ovl_Bg_Hidan_Rsekizou]
       - [0xC5BB60, rodatabin, rodatabin_8088CE20]
 
   - name: ovl_Bg_Hidan_Sekizou
@@ -2083,9 +2083,9 @@ segments:
     follows_vram: ovl_Bg_Po_Event
     bss_size: 0x0
     subsegments:
-      - [0xC76DB0, c, overlays/ovl_Bg_Po_Syokudai]
-      - [0xC77660, .data, overlays/ovl_Bg_Po_Syokudai]
-      - [0xC776D0, .rodata, overlays/ovl_Bg_Po_Syokudai]
+      - [0xC76DB0, asm, overlays/ovl_Bg_Po_Syokudai]
+      - [0xC77660, data, overlays/ovl_Bg_Po_Syokudai]
+      - [0xC776D0, rodata, overlays/ovl_Bg_Po_Syokudai]
       - [0xC77750, rodatabin, rodatabin_808A8A50]
 
   - name: ovl_Bg_Pushbox
