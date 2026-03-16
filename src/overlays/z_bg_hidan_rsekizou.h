@@ -11,8 +11,7 @@ typedef struct BgHidanRsekizou {
     /* 0x164 */ s16 unk164;
     /* 0x166 */ s16 unk166;
     /* 0x168 */ ColliderSpheres unk168;
-    /* 0x188 */ ColliderSpheresElement unk188[1]; // probably 6
-    /* 0x1C8 */ char pad1C8[0x140];
+    /* 0x188 */ ColliderSpheresElement unk188[6];
 } BgHidanRsekizou; // size = 0x0308
 
 extern const ActorInit Bg_Hidan_Rsekizou_InitVars;

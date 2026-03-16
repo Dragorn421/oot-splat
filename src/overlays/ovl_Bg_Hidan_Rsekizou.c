@@ -56,8 +56,8 @@ InitChainEntry D_8088CD68[] = {
     ICHAIN_F32(uncullZoneScale, 400, ICHAIN_CONTINUE),
     ICHAIN_F32(uncullZoneForward, 1500, ICHAIN_STOP),
 };
-s32 D_8088CD74[0xB] = {
-    0x06015D20, 0x06016120, 0x06016520, 0x06016920, 0x06016D20, 0x06017120, 0x06017520, 0x06017920, 0, 0, 0,
+s32 D_8088CD74[] = {
+    0x06015D20, 0x06016120, 0x06016520, 0x06016920, 0x06016D20, 0x06017120, 0x06017520, 0x06017920,
 };
 
 void BgHidanRsekizou_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -67,8 +67,8 @@ void BgHidanRsekizou_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32 sp30;
 
     sp30 = 0;
-    Actor_ProcessInitChain(&this->dyna.actor, &D_8088CD68);
-    DynaPolyInfo_SetActorMove((DynaPolyActor*)this, DPM_UNK);
+    Actor_ProcessInitChain(&this->dyna.actor, D_8088CD68);
+    DynaPolyInfo_SetActorMove(&this->dyna, DPM_UNK);
     DynaPolyInfo_Alloc(&D_600D5C0, &sp30);
     this->dyna.dynaPolyId = DynaPolyInfo_RegisterActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp30);
     Collider_InitSpheres(globalCtx, &this->unk168);
@@ -83,7 +83,7 @@ void BgHidanRsekizou_Init(Actor* thisx, GlobalContext* globalCtx) {
 void BgHidanRsekizou_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRsekizou* this = (BgHidanRsekizou*)thisx;
 
-    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
     Collider_DestroySpheres(globalCtx, &this->unk168);
 }
 
@@ -97,7 +97,7 @@ void BgHidanRsekizou_Update(Actor* thisx, GlobalContext* globalCtx) {
 
     this->unk166 = (this->unk166 + 1) % 8;
     if (this->unk164 != 0) {
-        this->unk164 = this->unk164 - 1;
+        this->unk164--;
     }
     if (this->unk164 == 0) {
         this->unk164 = 3;
@@ -126,13 +126,13 @@ Gfx* func_8088C70C(GraphicsContext** arg0, BgHidanRsekizou* arg1, s16 arg2, MtxF
     f32 var_fa0;
     f32 temp_fv1;
 
-    i = (s32)((f32)(((s32)(arg1->unk166 + arg2) % 8) * 7) * 0.14285715f);
+    i = (s32)(((arg1->unk166 + arg2) % 8) * 7 * 0.14285715f);
     gSPSegment(arg5++, 9, SEGMENTED_TO_VIRTUAL(D_8088CD74[i]));
     arg2 = arg2 + 1;
     if (arg2 != 4) {
-        var_fa1 = (f32)arg2 + ((f32)(3 - arg1->unk164) * 0.33333334f);
+        var_fa1 = arg2 + ((3 - arg1->unk164) * 0.33333334f);
     } else {
-        var_fa1 = (f32)arg2;
+        var_fa1 = arg2;
     }
     gDPSetPrimColor(arg5++, 0x00, 0x01, 255, 255, 0, 150);
     gDPSetEnvColor(arg5++, 255, 0, 0, 255);
@@ -150,7 +150,7 @@ Gfx* func_8088C70C(GraphicsContext** arg0, BgHidanRsekizou* arg1, s16 arg2, MtxF
     arg3->mf[3][1] = arg1->dyna.actor.posRot.pos.y + 30.0f + (0.70f * var_fa1);
     arg3->mf[3][2] = (temp_fv1 * var_fa0) + arg1->dyna.actor.posRot.pos.z;
     gSPMatrix(arg5++,
-              Matrix_MtxFToMtx(Matrix_CheckFloats(arg3, "../z_bg_hidan_rsekizou.c", 0x21F), Graph_Alloc(*arg0, 0x40U)),
+              Matrix_MtxFToMtx(Matrix_CheckFloats(arg3, "../z_bg_hidan_rsekizou.c", 543), Graph_Alloc(*arg0, 0x40U)),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(arg5++, D_600DC30);
     return arg5;
@@ -165,9 +165,9 @@ void BgHidanRsekizou_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Gfx* sp48[4];
 
     temp_a1 = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(sp48, globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", 0x234);
+    Graph_OpenDisps(sp48, globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", 564);
     func_80093D18(globalCtx->state.gfxCtx);
-    gSPMatrix(temp_a1->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", 0x238),
+    gSPMatrix(temp_a1->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", 568),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(temp_a1->polyOpa.p++, D_600AD00);
     Matrix_MtxFCopy(&sp5C, &gMtxFClear);
@@ -188,5 +188,5 @@ void BgHidanRsekizou_Draw(Actor* thisx, GlobalContext* globalCtx) {
             temp_a1->polyXlu.p = func_8088C70C(&globalCtx->state.gfxCtx, this, var_s0, &sp5C, 0, temp_a1->polyXlu.p);
         }
     }
-    Graph_CloseDisps(sp48, globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", 0x258);
+    Graph_CloseDisps(sp48, globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", 600);
 }
