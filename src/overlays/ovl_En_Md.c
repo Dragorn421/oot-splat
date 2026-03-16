@@ -1,4 +1,10 @@
+#include "global.h"
+#include "ovl_En_Md.h"
 
+void EnMd_Init(Actor* thisx, GlobalContext* globalCtx);
+void EnMd_Destroy(Actor* thisx, GlobalContext* globalCtx);
+void EnMd_Update(Actor* thisx, GlobalContext* globalCtx);
+void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA250.s")
 
