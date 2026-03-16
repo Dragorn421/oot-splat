@@ -1,17 +1,64 @@
 #include "global.h"
 #include "z_bg_hidan_rsekizou.h"
 
+#define FLAGS 0x00000000
+
 void BgHidanRsekizou_Init(Actor* thisx, GlobalContext* globalCtx);
 void BgHidanRsekizou_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgHidanRsekizou_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgHidanRsekizou_Draw(Actor* thisx, GlobalContext* globalCtx);
 
+const ActorInit Bg_Hidan_Rsekizou_InitVars = {
+    ACTOR_BG_HIDAN_RSEKIZOU,
+    ACTORTYPE_BG,
+    FLAGS,
+    OBJECT_HIDAN_OBJECTS,
+    sizeof(BgHidanRsekizou),
+    (ActorFunc)BgHidanRsekizou_Init,
+    (ActorFunc)BgHidanRsekizou_Destroy,
+    (ActorFunc)BgHidanRsekizou_Update,
+    (ActorFunc)BgHidanRsekizou_Draw,
+};
+
 extern Gfx D_600AD00[];
 extern UNK_TYPE D_600D5C0;
 extern Gfx D_600DC30[];
-extern ColliderSpheresSrc D_8088CD58;
-extern InitChainEntry D_8088CD68;
-extern s32 D_8088CD74[];
+
+static ColliderSpheresElementSrc D_8088CC80[6] = {
+    {
+        { 0, { 0x20000000, 1, 4 }, { 0, 0, 0 }, 0x19, 0, 0 },
+        { 1, { { 0, 0x1E, 0x28 }, 0x19 }, 0x64 },
+    },
+    {
+        { 0, { 0x20000000, 1, 4 }, { 0, 0, 0 }, 0x19, 0, 0 },
+        { 1, { { -0x23, 0x20, 0x4D }, 0x20 }, 0x64 },
+    },
+    {
+        { 0, { 0x20000000, 1, 4 }, { 0, 0, 0 }, 0x19, 0, 0 },
+        { 1, { { -0x50, 0x23, 0x82 }, 0x2A }, 0x64 },
+    },
+    {
+        { 0, { 0x20000000, 1, 4 }, { 0, 0, 0 }, 0x19, 0, 0 },
+        { 1, { { 0, 0x1E, -0x28 }, 0x19 }, 0x64 },
+    },
+    {
+        { 0, { 0x20000000, 1, 4 }, { 0, 0, 0 }, 0x19, 0, 0 },
+        { 1, { { 0x23, 0x20, -0x4D }, 0x20 }, 0x64 },
+    },
+    {
+        { 0, { 0x20000000, 1, 4 }, { 0, 0, 0 }, 0x19, 0, 0 },
+        { 1, { { 0x50, 0x23, -0x82 }, 0x2A }, 0x64 },
+    },
+};
+ColliderSpheresSrc D_8088CD58 = { { 0xA, 0x11, 0, 0, 0x20, 0 }, 6, D_8088CC80 };
+InitChainEntry D_8088CD68[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 400, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneForward, 1500, ICHAIN_STOP),
+};
+s32 D_8088CD74[0xB] = {
+    0x06015D20, 0x06016120, 0x06016520, 0x06016920, 0x06016D20, 0x06017120, 0x06017520, 0x06017920, 0, 0, 0,
+};
 
 void BgHidanRsekizou_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRsekizou* this = (BgHidanRsekizou*)thisx;
