@@ -315,14 +315,13 @@ u16 func_80AAACF8(GlobalContext* globalCtx, EnMd* this) {
     }
     this->unk208 = 0;
     this->unk209 = 0;
-    if (gBitFlags[0x12] & gSaveContext.questItems) {
+    if (CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD)) {
         return 0x1045;
     }
     if (gSaveContext.eventChkInf[0] & 0x10) {
         return 0x1034;
     }
-    if ((((s32)(gSaveContext.equips.equipment & gEquipMasks[1]) >> gEquipShifts[1]) == 1) &&
-        (((s32)(gSaveContext.equips.equipment & gEquipMasks[0]) >> gEquipShifts[0]) == 1)) {
+    if ((CUR_EQUIP_VALUE(EQUIP_SHIELD) == 1) && (CUR_EQUIP_VALUE(EQUIP_SWORD) == 1)) {
         return 0x1033;
     }
     if (gSaveContext.infTable[0] & 0x1000) {
@@ -362,11 +361,11 @@ u16 func_80AAAE94(GlobalContext* globalCtx, Actor* thisx) {
     EnMd* this = (EnMd*)thisx;
 
     switch (globalCtx->sceneNum) {
-        case 0x55:
+        case SCENE_SPOT04:
             return func_80AAACF8(globalCtx, this);
-        case 0x28:
+        case SCENE_KOKIRI_HOME4:
             return func_80AAADE0(globalCtx, this);
-        case 0x5B:
+        case SCENE_SPOT10:
             return func_80AAAE14(globalCtx, this);
         default:
             return 0;
@@ -416,13 +415,13 @@ s16 func_80AAAF04(GlobalContext* globalCtx, Actor* thisx) {
 }
 
 s32 func_80AAB03C(EnMd* this, GlobalContext* globalCtx) {
-    if ((globalCtx->sceneNum == 0x55) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
+    if ((globalCtx->sceneNum == SCENE_SPOT04) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
         !(gSaveContext.eventChkInf[4] & 1)) {
         return 1;
-    } else if ((globalCtx->sceneNum == 0x28) &&
+    } else if ((globalCtx->sceneNum == SCENE_KOKIRI_HOME4) &&
                ((gSaveContext.eventChkInf[1] & 0x1000) || (gSaveContext.eventChkInf[4] & 1)) && LINK_IS_CHILD) {
         return 1;
-    } else if (globalCtx->sceneNum == 0x5B) {
+    } else if (globalCtx->sceneNum == SCENE_SPOT10) {
         return 1;
     } else {
         return 0;
@@ -541,9 +540,9 @@ s32 func_80AAB4DC(EnMd* this, GlobalContext* globalCtx) {
 void func_80AAB5A4(EnMd* this, GlobalContext* globalCtx) {
     f32 var_fv0;
 
-    if (globalCtx->sceneNum != 0x28) {
-        if ((gBitFlags[0x12] & gSaveContext.questItems) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
-            (globalCtx->sceneNum == 0x55)) {
+    if (globalCtx->sceneNum != SCENE_KOKIRI_HOME4) {
+        if (CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
+            (globalCtx->sceneNum == SCENE_SPOT04)) {
             var_fv0 = 100.0f;
         } else {
             var_fv0 = 400.0f;
@@ -577,7 +576,7 @@ void EnMd_Init(Actor* thisx, GlobalContext* globalCtx) {
                         this->actor.posRot.pos.y, this->actor.posRot.pos.z, 0, 0, 0, 3);
     if (((globalCtx->sceneNum == SCENE_SPOT04) && !(gSaveContext.eventChkInf[0] & 0x10)) ||
         ((globalCtx->sceneNum == SCENE_SPOT04) && (gSaveContext.eventChkInf[0] & 0x10) &&
-         (gBitFlags[0x12] & gSaveContext.questItems)) ||
+         CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD)) ||
         ((globalCtx->sceneNum == SCENE_SPOT10) && !(gSaveContext.eventChkInf[0] & 0x400))) {
         this->actor.initPosRot.pos = this->actor.posRot.pos;
         this->unk190 = func_80AAB948;
@@ -632,14 +631,14 @@ void func_80AAB948(EnMd* this, GlobalContext* globalCtx) {
         this->unk14C.animPlaybackSpeed = CLAMP(temp_fv1, 1.0f, 3.0f);
     }
     if (this->unk1E0.unk_00 == 2) {
-        if ((gBitFlags[0x12] & gSaveContext.questItems) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
-            (globalCtx->sceneNum == 0x55)) {
+        if (CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
+            (globalCtx->sceneNum == SCENE_SPOT04)) {
             globalCtx->msgCtx.msgMode = 0x37;
         }
-        if (globalCtx->sceneNum == 0x55) {
+        if (globalCtx->sceneNum == SCENE_SPOT04) {
             gSaveContext.eventChkInf[0] |= 0x10;
         }
-        if (globalCtx->sceneNum == 0x5B) {
+        if (globalCtx->sceneNum == SCENE_SPOT10) {
             gSaveContext.eventChkInf[0] |= 0x400;
         }
         func_80AAA92C(this, 3);
@@ -652,7 +651,7 @@ void func_80AAB948(EnMd* this, GlobalContext* globalCtx) {
         if (this->unk14C.animCurrentSeg == &D_60002C8) {
             func_80034F54(globalCtx, &this->unk214, &this->unk236, 0x11);
         }
-        if ((this->unk1E0.unk_00 == 0) && (globalCtx->sceneNum == 0x5B)) {
+        if ((this->unk1E0.unk_00 == 0) && (globalCtx->sceneNum == SCENE_SPOT10)) {
             if (sp2C->stateFlags2 & 0x01000000) {
                 sp2C->stateFlags2 |= 0x02000000;
                 sp2C->unk_6A8 = &this->actor;
@@ -688,8 +687,8 @@ void func_80AABD0C(EnMd* this, GlobalContext* globalCtx) {
     func_80AAA93C(this);
     if ((func_80AAB370(this, globalCtx) == 0) || (this->unk212 != 0)) {
         this->actor.shape.rot = this->actor.posRot.rot;
-    } else if ((gBitFlags[0x12] & gSaveContext.questItems) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
-               (globalCtx->sceneNum == 0x55)) {
+    } else if (CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD) && !(gSaveContext.eventChkInf[1] & 0x1000) &&
+               (globalCtx->sceneNum == SCENE_SPOT04)) {
         func_80106CCC(globalCtx);
         gSaveContext.eventChkInf[1] |= 0x1000;
         Actor_Kill(&this->actor);
