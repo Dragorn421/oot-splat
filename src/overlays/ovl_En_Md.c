@@ -1,6 +1,8 @@
 #include "global.h"
 #include "ovl_En_Md.h"
 
+#define FLAGS 0x02000019
+
 void EnMd_Init(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Update(Actor* thisx, GlobalContext* globalCtx);
@@ -15,11 +17,35 @@ void func_80AABD0C(EnMd* this, GlobalContext* globalCtx);
 extern AnimationHeader D_60002C8;
 extern SkeletonHeader D_6007FB8;
 
-extern ColliderCylinderSrc D_80AAC310;
-extern CollideDataInitAlt D_80AAC33C;
-extern struct_80034EC0_Entry D_80AAC348[];
-extern Vec3f D_80AAC498;
-extern s32 D_80AAC4A4[3];
+const ActorInit En_Md_InitVars = {
+    /**/ ACTOR_EN_MD,
+    /**/ ACTORTYPE_NPC,
+    /**/ FLAGS,
+    /**/ OBJECT_MD,
+    /**/ sizeof(EnMd),
+    /**/ EnMd_Init,
+    /**/ EnMd_Destroy,
+    /**/ EnMd_Update,
+    /**/ EnMd_Draw,
+};
+
+ColliderCylinderSrc D_80AAC310 = {
+    { 0xA, 0, 0, 0x39, 0x20, 1 },
+    { 0, { 0, 0, 0 }, { 0, 0, 0 }, 0, 0, 1 },
+    { 0x24, 0x2E, 0, { 0, 0, 0 } },
+};
+CollideDataInitAlt D_80AAC33C = { 0, 0, 0, 0, 0xFF };
+struct_80034EC0_Entry D_80AAC348[] = {
+    { 0x060002C8, 0.0f, 0.0f, -1.0f, 0, 0.0f },  { 0x060002C8, 0.0f, 0.0f, -1.0f, 0, -10.0f },
+    { 0x0600917C, 1.0f, 0.0f, -1.0f, 2, -1.0f }, { 0x06009E68, 1.0f, 0.0f, -1.0f, 0, -1.0f },
+    { 0x06009B1C, 1.0f, 0.0f, -1.0f, 2, -1.0f }, { 0x06008E84, 1.0f, 0.0f, -1.0f, 0, -1.0f },
+    { 0x060097F0, 1.0f, 0.0f, -1.0f, 0, -1.0f }, { 0x060092B0, 1.0f, 0.0f, -1.0f, 2, -1.0f },
+    { 0x0600A138, 1.0f, 0.0f, -1.0f, 0, -1.0f }, { 0x06008FC0, 1.0f, 0.0f, -1.0f, 2, -1.0f },
+    { 0x060002C8, 0.0f, 0.0f, -1.0f, 0, -8.0f }, { 0x06008510, 1.0f, 0.0f, -1.0f, 0, -1.0f },
+    { 0x060095BC, 1.0f, 0.0f, -1.0f, 2, -1.0f }, { 0x06008738, 1.0f, 0.0f, -1.0f, 0, -1.0f },
+};
+Vec3f D_80AAC498 = { 400.0f, 0.0f, 0.0f };
+s32 D_80AAC4A4[3] = { 0x06004FF0, 0x06005930, 0x06005D30 };
 
 void func_80AAA250(EnMd* this) {
     f32 temp_fv0;
