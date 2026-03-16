@@ -6,9 +6,20 @@ void EnMd_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_80AAAA24(EnMd* this);      // TODO
-void func_80AAA92C(EnMd* this, s32); // TODO
-void func_80AAA93C(EnMd* this);      // TODO
+void func_80AAA250(EnMd* this);
+void func_80AAA274(EnMd* this);
+void func_80AAA308(EnMd* this);
+void func_80AAA39C(EnMd* this);
+void func_80AAA474(EnMd* this);
+void func_80AAA508(EnMd* this);
+void func_80AAA5A4(EnMd* this);
+void func_80AAA638(EnMd* this);
+void func_80AAA6D4(EnMd* this);
+void func_80AAA768(EnMd* this);
+void func_80AAA7FC(EnMd* this);
+void func_80AAA890(EnMd* this);
+void func_80AAAA24(EnMd* this);
+void func_80AAA93C(EnMd* this);
 s16 func_80AAAC78(Actor* thisx, GlobalContext* globalCtx);
 u16 func_80AAACF8(GlobalContext* globalCtx, EnMd* this);
 u16 func_80AAADE0(GlobalContext* globalCtx, EnMd* this);
@@ -18,7 +29,7 @@ s16 func_80AAAF04(GlobalContext* globalCtx, Actor* thisx);
 s32 func_80AAB03C(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB0E0(EnMd* this);
 void func_80AAB158(EnMd* this, GlobalContext* globalCtx);
-s32 func_80AAB370(EnMd* this, GlobalContext* globalCtx); // TODO
+s32 func_80AAB370(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB5A4(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB874(EnMd* this, GlobalContext* globalCtx);
 void func_80AAB8F8(EnMd* this, GlobalContext* globalCtx);
@@ -32,36 +43,286 @@ extern SkeletonHeader D_6007FB8;
 extern ColliderCylinderSrc D_80AAC310;
 extern CollideDataInitAlt D_80AAC33C;
 extern struct_80034EC0_Entry D_80AAC348[];
+extern Vec3f D_80AAC498;
+extern s32 D_80AAC4A4[];
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA250.s")
+void func_80AAA250(EnMd* this) {
+    f32 temp_fv0;
+    f32 temp_fv1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA274.s")
+    temp_fv0 = this->unk14C.initialFrame;
+    temp_fv1 = this->unk14C.animFrameCount;
+    this->unk14C.initialFrame = temp_fv1;
+    this->unk14C.animCurrentFrame = temp_fv1;
+    this->unk14C.animFrameCount = temp_fv0;
+    this->unk14C.animPlaybackSpeed = -1.0f;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA308.s")
+void func_80AAA274(EnMd* this) {
+    switch (this->unk20A) {
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 2);
+            this->unk20A = (u8)this->unk20A + 1;
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 3);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA39C.s")
+void func_80AAA308(EnMd* this) {
+    switch (this->unk20A) {
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 4);
+            this->unk20A = (u8)this->unk20A + 1;
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 5);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA474.s")
+void func_80AAA39C(EnMd* this) {
+    switch (this->unk20A) {
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 2);
+            func_80AAA250(this);
+            this->unk20A = (u8)this->unk20A + 1;
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 7);
+                this->unk20A = (u8)this->unk20A + 1;
+            } else {
+                break;
+            }
+        case 2:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 8);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA508.s")
+void func_80AAA474(EnMd* this) {
+    switch (this->unk20A) {
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 7);
+            this->unk20A = (u8)this->unk20A + 1;
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA5A4.s")
+void func_80AAA508(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 2);
+            func_80AAA250(this);
+            this->unk20A = (u8)this->unk20A + 1;
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA638.s")
+void func_80AAA5A4(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 9);
+            this->unk20A = (u8)this->unk20A + 1;
+            /* fallthrough */
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 6);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA6D4.s")
+void func_80AAA638(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 9);
+            func_80AAA250(this);
+            this->unk20A = (u8)this->unk20A + 1;
+            /* fallthrough */
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA768.s")
+void func_80AAA6D4(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 0xB);
+            this->unk20A = (u8)this->unk20A + 1;
+            /* fallthrough */
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 6);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA7FC.s")
+void func_80AAA768(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 0xC);
+            this->unk20A = (u8)this->unk20A + 1;
+            /* fallthrough */
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 3);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA890.s")
+void func_80AAA7FC(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 0xD);
+            this->unk20A = (u8)this->unk20A + 1;
+            /* fallthrough */
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 6);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA92C.s")
+void func_80AAA890(EnMd* this) {
+    switch (this->unk20A) { /* irregular */
+        case 0:
+            func_80034EC0(&this->unk14C, D_80AAC348, 7);
+            func_80AAA250(this);
+            this->unk20A = (u8)this->unk20A + 1;
+            /* fallthrough */
+        case 1:
+            if (func_800A56C8(&this->unk14C, this->unk14C.animFrameCount) != 0) {
+                func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
+                this->unk20A = (u8)this->unk20A + 1;
+            }
+            break;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAA93C.s")
+void func_80AAA92C(EnMd* this, u8 arg1) {
+    this->unk20B = arg1;
+    this->unk20A = 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAAA24.s")
+void func_80AAA93C(EnMd* this) {
+    switch (this->unk20B) {
+        case 1:
+            func_80AAA274(this);
+            return;
+        case 2:
+            func_80AAA308(this);
+            return;
+        case 3:
+            func_80AAA39C(this);
+            return;
+        case 4:
+            func_80AAA474(this);
+            return;
+        case 5:
+            func_80AAA508(this);
+            return;
+        case 6:
+            func_80AAA5A4(this);
+            return;
+        case 7:
+            func_80AAA638(this);
+            return;
+        case 8:
+            func_80AAA6D4(this);
+            return;
+        case 9:
+            func_80AAA768(this);
+            return;
+        case 10:
+            func_80AAA7FC(this);
+            return;
+        case 11:
+            func_80AAA890(this);
+            /* fallthrough */
+        default:
+            return;
+    }
+}
+
+void func_80AAAA24(EnMd* this) {
+    if (this->unk1E0.unk_00 != 0) {
+        switch (this->actor.textId) {
+            case 0x102F:
+                if ((this->unk208 == 0) && (this->unk20B != 1)) {
+                    func_80AAA92C(this, 1);
+                }
+                if ((this->unk208 == 2) && (this->unk20B != 2)) {
+                    func_80AAA92C(this, 2);
+                }
+                if ((this->unk208 == 5) && (this->unk20B != 8)) {
+                    func_80AAA92C(this, 8);
+                }
+                if ((this->unk208 == 0xB) && (this->unk20B != 9)) {
+                    func_80AAA92C(this, 9);
+                }
+                break;
+            case 0x1033:
+                if ((this->unk208 == 0) && (this->unk20B != 1)) {
+                    func_80AAA92C(this, 1);
+                }
+                if ((this->unk208 == 1) && (this->unk20B != 2)) {
+                    func_80AAA92C(this, 2);
+                }
+                if ((this->unk208 == 5) && (this->unk20B != 0xA)) {
+                    func_80AAA92C(this, 0xA);
+                }
+                if ((this->unk208 == 7) && (this->unk20B != 9)) {
+                    func_80AAA92C(this, 9);
+                }
+                break;
+            case 0x1030:
+            case 0x1034:
+            case 0x1045:
+                if ((this->unk208 == 0) && (this->unk20B != 1)) {
+                    func_80AAA92C(this, 1);
+                }
+                break;
+            case 0x1046:
+                if ((this->unk208 == 0) && (this->unk20B != 6)) {
+                    func_80AAA92C(this, 6);
+                }
+                break;
+        }
+    } else if (this->unk14C.animCurrentSeg != &D_60002C8) {
+        func_80034EC0(&this->unk14C, D_80AAC348, 0xA);
+        func_80AAA92C(this, 0);
+    }
+    func_80AAA93C(this);
+}
 
 s16 func_80AAAC78(Actor* thisx, GlobalContext* globalCtx) {
     EnMd* this = (EnMd*)thisx;
@@ -262,7 +523,34 @@ void func_80AAB158(EnMd* this, GlobalContext* globalCtx) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAB370.s")
+s32 func_80AAB370(EnMd* this, GlobalContext* globalCtx) {
+    Path* temp_a0;
+    s32 pad;
+    f32 temp_fa0;
+    f32 temp_fa1;
+    Vec3s* temp_v0;
+    s32 temp_a2;
+
+    temp_a2 = this->actor.params & 0xFF00;
+    if (temp_a2 == 0xFF00) {
+        return 0;
+    }
+    temp_a0 = &globalCtx->setupPathList[temp_a2 >> 8];
+    temp_v0 = SEGMENTED_TO_VIRTUAL(temp_a0->points);
+    temp_v0 += this->unk212;
+    temp_fa0 = (f32)temp_v0->x - this->actor.posRot.pos.x;
+    temp_fa1 = (f32)temp_v0->z - this->actor.posRot.pos.z;
+    Math_SmoothScaleMaxMinS(&this->actor.posRot.rot.y, (s16)(s32)(Math_atan2f(temp_fa0, temp_fa1) * 10430.378f), 4,
+                            0xFA0, 1);
+    if (((temp_fa0 * temp_fa0) + (temp_fa1 * temp_fa1)) < 100.0f) {
+        this->unk212 += 1;
+        if (this->unk212 >= (s32)temp_a0->count) {
+            this->unk212 = 0;
+        }
+        return 1;
+    }
+    return 0;
+}
 
 s32 func_80AAB4DC(EnMd* this, GlobalContext* globalCtx) {
     Path* temp_a1;

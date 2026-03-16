@@ -17,7 +17,7 @@ typedef struct EnMd {
     /* 0x1E0 */ struct_80034A14_arg1 unk1E0;
     /* 0x208 */ u8 unk208;
     /* 0x209 */ u8 unk209;
-    /* 0x20A */ char pad20A[1];
+    /* 0x20A */ u8 unk20A;
     /* 0x20B */ u8 unk20B;
     /* 0x20C */ s16 unk20C;
     /* 0x20E */ s16 unk20E;
