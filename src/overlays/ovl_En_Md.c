@@ -755,13 +755,13 @@ void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Gfx* sp38[4];
 
     sp48 = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(sp38, globalCtx->state.gfxCtx, "../z_en_md.c", 0x500);
+    Graph_OpenDisps(sp38, globalCtx->state.gfxCtx, "../z_en_md.c", 1280);
     if (this->unk210 == 0xFF) {
         gSPSegment(sp48->polyOpa.p++, 8, SEGMENTED_TO_VIRTUAL(D_80AAC4A4[this->unk20E]));
-        func_80034BA0(globalCtx, &this->unk14C, func_80AABEF0, func_80AAC104, &this->actor, (s16)(s32)this->unk210);
+        func_80034BA0(globalCtx, &this->unk14C, func_80AABEF0, func_80AAC104, &this->actor, this->unk210);
     } else if (this->unk210 != 0) {
         gSPSegment(sp48->polyXlu.p++, 8, SEGMENTED_TO_VIRTUAL(D_80AAC4A4[this->unk20E]));
-        func_80034CC4(globalCtx, &this->unk14C, func_80AABEF0, func_80AAC104, &this->actor, (s16)(s32)this->unk210);
+        func_80034CC4(globalCtx, &this->unk14C, func_80AABEF0, func_80AAC104, &this->actor, this->unk210);
     }
-    Graph_CloseDisps(sp38, globalCtx->state.gfxCtx, "../z_en_md.c", 0x525);
+    Graph_CloseDisps(sp38, globalCtx->state.gfxCtx, "../z_en_md.c", 1317);
 }
