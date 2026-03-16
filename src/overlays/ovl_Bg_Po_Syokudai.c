@@ -9,28 +9,9 @@ void BgPoSyokudai_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgPoSyokudai_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgPoSyokudai_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-/*
-const ActorInit Bg_Po_Syokudai_InitVars = {
-    ACTOR_BG_PO_SYOKUDAI,
-    ACTORTYPE_PROP,
-    FLAGS,
-    OBJECT_SYOKUDAI,
-    sizeof(BgPoSyokudai),
-    (ActorFunc)BgPoSyokudai_Init,
-    (ActorFunc)BgPoSyokudai_Destroy,
-    (ActorFunc)BgPoSyokudai_Update,
-    (ActorFunc)BgPoSyokudai_Draw,
-};
-*/
-
 extern Gfx D_404D4E0[];
 extern Gfx D_60003A0[];
 
-extern ColliderCylinderSrc D_808A8960;
-extern Color_RGBA8 D_808A898C[4];
-extern Color_RGBA8 D_808A899C[4];
-extern InitChainEntry D_808A89CC[];
-/*
 static ColliderCylinderSrc D_808A8960 = {
     { 9, 0, 0xD, 0x39, 0x20, 1 },
     { 0, { 0, 0, 0 }, { 0xFFCFFFFF, 0, 0 }, 0, 1, 1 },
@@ -48,8 +29,22 @@ static Color_RGBA8 D_808A899C[4] = {
     { 0x00, 0x00, 0xFF, 0xFF },
     { 0x00, 0x96, 0x00, 0xFF },
 };
-static InitChainEntry D_808A89CC[];
-*/
+
+const ActorInit Bg_Po_Syokudai_InitVars = {
+    ACTOR_BG_PO_SYOKUDAI,
+    ACTORTYPE_PROP,
+    FLAGS,
+    OBJECT_SYOKUDAI,
+    sizeof(BgPoSyokudai),
+    (ActorFunc)BgPoSyokudai_Init,
+    (ActorFunc)BgPoSyokudai_Destroy,
+    (ActorFunc)BgPoSyokudai_Update,
+    (ActorFunc)BgPoSyokudai_Draw,
+};
+
+static InitChainEntry D_808A89CC[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 1000, ICHAIN_STOP),
+};
 
 void BgPoSyokudai_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgPoSyokudai* this = (BgPoSyokudai*)thisx;
