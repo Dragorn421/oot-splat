@@ -50,7 +50,7 @@ void BgDdanJd_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->dyna.dynaPolyId = DynaPolyInfo_RegisterActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp24);
     this->unk16A = 0x64;
     this->unk168 = 0;
-    if (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0) {
+    if (Flags_GetSwitch(globalCtx, this->dyna.actor.params)) {
         this->unk169 = 5;
     } else {
         this->unk169 = 1;
@@ -61,7 +61,7 @@ void BgDdanJd_Init(Actor* thisx, GlobalContext* globalCtx) {
 void BgDdanJd_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     BgDdanJd* this = (BgDdanJd*)thisx;
 
-    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
 }
 
 void func_80870B88(BgDdanJd* this, GlobalContext* globalCtx) {
@@ -69,7 +69,7 @@ void func_80870B88(BgDdanJd* this, GlobalContext* globalCtx) {
         this->unk16A--;
     }
     if (this->unk169 == 1) {
-        if ((this->dyna.actor.params < 0x40) && (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0)) {
+        if ((this->dyna.actor.params < 0x40) && (Flags_GetSwitch(globalCtx, this->dyna.actor.params))) {
             this->unk169 = 5;
             this->unk168 = 1;
             this->unk16A = 0;
@@ -113,26 +113,26 @@ void func_80870D2C(BgDdanJd* this, GlobalContext* globalCtx) {
     if (globalCtx->gameplayFrames & 1) {
         sp34.x = this->dyna.actor.posRot.pos.x + 65.0f;
         sp34.z = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.z;
-        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+        func_80033480(globalCtx, &sp34, 5.0f, 1, 0x14, 0x3C, 1U);
         sp34.x = this->dyna.actor.posRot.pos.x - 65.0f;
         sp34.z = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.z;
-        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+        func_80033480(globalCtx, &sp34, 5.0f, 1, 0x14, 0x3C, 1U);
     } else {
         sp34.x = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.x;
         sp34.z = this->dyna.actor.posRot.pos.z + 65.0f;
-        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+        func_80033480(globalCtx, &sp34, 5.0f, 1, 0x14, 0x3C, 1U);
         sp34.x = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.x;
         sp34.z = this->dyna.actor.posRot.pos.z - 65.0f;
-        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+        func_80033480(globalCtx, &sp34, 5.0f, 1, 0x14, 0x3C, 1U);
     }
     if (this->unk169 == 5) {
-        func_8002F974(&this->dyna.actor, 0x2024U);
+        func_8002F974(&this->dyna.actor, NA_SE_EV_ELEVATOR_MOVE - SFX_FLAG);
     }
 }
 
 void func_80870F00(BgDdanJd* this, GlobalContext* globalCtx) {
-    if ((this->unk169 == 1) && (((this->dyna.actor.params < 0x40))) &&
-        (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0)) {
+    if ((this->unk169 == 1) && (this->dyna.actor.params < 0x40) &&
+        Flags_GetSwitch(globalCtx, this->dyna.actor.params)) {
         this->unk169 = 5;
         this->unk168 = 1;
         this->dyna.actor.posRot.pos.y = this->dyna.actor.initPosRot.pos.y + 140.0f;
@@ -140,8 +140,8 @@ void func_80870F00(BgDdanJd* this, GlobalContext* globalCtx) {
         this->actionFunc = func_80870B88;
         func_800800F8(globalCtx, 0xBF4, -0x63, &this->dyna.actor, 0);
     } else {
-        if (Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->unk16C, this->unk169) != 0) {
-            Audio_PlayActorSound2(&this->dyna.actor, 0x28F1U);
+        if (Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->unk16C, this->unk169)) {
+            Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_PILLAR_MOVE_STOP);
             this->actionFunc = func_80870B88;
         }
     }
