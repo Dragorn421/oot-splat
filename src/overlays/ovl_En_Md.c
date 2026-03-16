@@ -19,7 +19,7 @@ extern ColliderCylinderSrc D_80AAC310;
 extern CollideDataInitAlt D_80AAC33C;
 extern struct_80034EC0_Entry D_80AAC348[];
 extern Vec3f D_80AAC498;
-extern s32 D_80AAC4A4[];
+extern s32 D_80AAC4A4[3];
 
 void func_80AAA250(EnMd* this) {
     f32 temp_fv0;
@@ -507,11 +507,10 @@ s32 func_80AAB370(EnMd* this, GlobalContext* globalCtx) {
     temp_v0 += this->unk212;
     temp_fa0 = (f32)temp_v0->x - this->actor.posRot.pos.x;
     temp_fa1 = (f32)temp_v0->z - this->actor.posRot.pos.z;
-    Math_SmoothScaleMaxMinS(&this->actor.posRot.rot.y, (s16)(s32)(Math_atan2f(temp_fa0, temp_fa1) * 10430.378f), 4,
-                            0xFA0, 1);
+    Math_SmoothScaleMaxMinS(&this->actor.posRot.rot.y, (Math_atan2f(temp_fa0, temp_fa1) * 10430.378f), 4, 0xFA0, 1);
     if (((temp_fa0 * temp_fa0) + (temp_fa1 * temp_fa1)) < 100.0f) {
-        this->unk212 += 1;
-        if (this->unk212 >= (s32)temp_a0->count) {
+        this->unk212++;
+        if (this->unk212 >= temp_a0->count) {
             this->unk212 = 0;
         }
         return 1;
@@ -531,9 +530,9 @@ s32 func_80AAB4DC(EnMd* this, GlobalContext* globalCtx) {
     temp_a1 = &globalCtx->setupPathList[temp_v1 >> 8];
     temp_a3 = SEGMENTED_TO_VIRTUAL(temp_a1->points);
     temp_a3 += temp_a1->count - 1;
-    this->actor.posRot.pos.x = (f32)temp_a3->x; // unk-6;
-    this->actor.posRot.pos.y = (f32)temp_a3->y;
-    this->actor.posRot.pos.z = (f32)temp_a3->z;
+    this->actor.posRot.pos.x = temp_a3->x;
+    this->actor.posRot.pos.y = temp_a3->y;
+    this->actor.posRot.pos.z = temp_a3->z;
     return 1;
 }
 
@@ -596,7 +595,7 @@ void EnMd_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_80AAB874(EnMd* this, GlobalContext* globalCtx) {
     if (this->unk14C.animCurrentSeg == &D_60002C8) {
-        func_80034F54(globalCtx, &this->unk214, &this->unk236, 0x11);
+        func_80034F54(globalCtx, this->unk214, this->unk236, 0x11);
     } else if ((this->unk1E0.unk_00 == 0) && (this->unk20B != 7)) {
         func_80AAA92C(this, 7);
     }
@@ -605,7 +604,7 @@ void func_80AAB874(EnMd* this, GlobalContext* globalCtx) {
 
 void func_80AAB8F8(EnMd* this, GlobalContext* globalCtx) {
     if (this->unk14C.animCurrentSeg == &D_60002C8) {
-        func_80034F54(globalCtx, &this->unk214, &this->unk236, 0x11);
+        func_80034F54(globalCtx, this->unk214, this->unk236, 0x11);
     }
     func_80AAA93C(this);
 }
@@ -649,7 +648,7 @@ void func_80AAB948(EnMd* this, GlobalContext* globalCtx) {
         this->actor.speedXZ = 1.5f;
     } else {
         if (this->unk14C.animCurrentSeg == &D_60002C8) {
-            func_80034F54(globalCtx, &this->unk214, &this->unk236, 0x11);
+            func_80034F54(globalCtx, this->unk214, this->unk236, 0x11);
         }
         if ((this->unk1E0.unk_00 == 0) && (globalCtx->sceneNum == SCENE_SPOT10)) {
             if (sp2C->stateFlags2 & 0x01000000) {
@@ -683,7 +682,7 @@ void func_80AABC10(EnMd* this, GlobalContext* globalCtx) {
 }
 
 void func_80AABD0C(EnMd* this, GlobalContext* globalCtx) {
-    func_80034F54(globalCtx, &this->unk214, &this->unk236, 0x11);
+    func_80034F54(globalCtx, this->unk214, this->unk236, 0x11);
     func_80AAA93C(this);
     if ((func_80AAB370(this, globalCtx) == 0) || (this->unk212 != 0)) {
         this->actor.shape.rot = this->actor.posRot.rot;
@@ -716,8 +715,53 @@ void EnMd_Update(Actor* thisx, GlobalContext* globalCtx) {
     this->unk190(this, globalCtx);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AABEF0.s")
+s32 func_80AABEF0(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* actor,
+                  Gfx** gfx) {
+    EnMd* this = (EnMd*)actor;
+    Vec3s sp2C;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAC104.s")
+    if (limbIndex == 0x10) {
+        Matrix_Translate(1200.0f, 0.0f, 0.0f, 1U);
+        sp2C = this->unk1E0.unk_08;
+        Matrix_RotateX(((f32)sp2C.y / 32768.0f) * 3.1415927f, 1U);
+        Matrix_RotateZ(((f32)sp2C.x / 32768.0f) * 3.1415927f, 1U);
+        Matrix_Translate(-1200.0f, 0.0f, 0.0f, 1U);
+    }
+    if (limbIndex == 9) {
+        sp2C = this->unk1E0.unk_0E;
+        Matrix_RotateX(((f32)sp2C.x / 32768.0f) * 3.1415927f, 1U);
+        Matrix_RotateY(((f32)sp2C.y / 32768.0f) * 3.1415927f, 1U);
+    }
+    if ((limbIndex == 9) || (limbIndex == 0xA) || (limbIndex == 0xD)) {
+        rot->y += (Math_Sins(this->unk214[limbIndex]) * 200.0f);
+        rot->z += (Math_Coss(this->unk236[limbIndex]) * 200.0f);
+    }
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/EnMd_Draw.s")
+void func_80AAC104(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor* actor, Gfx** gfx) {
+    s32 pad;
+    Vec3f sp18;
+
+    sp18 = D_80AAC498;
+    if (limbIndex == 0x10) {
+        Matrix_MultVec3f(&sp18, &actor->posRot2.pos);
+    }
+}
+
+void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    EnMd* this = (EnMd*)thisx;
+    GraphicsContext* sp48;
+    Gfx* sp38[4];
+
+    sp48 = globalCtx->state.gfxCtx;
+    Graph_OpenDisps(sp38, globalCtx->state.gfxCtx, "../z_en_md.c", 0x500);
+    if (this->unk210 == 0xFF) {
+        gSPSegment(sp48->polyOpa.p++, 8, SEGMENTED_TO_VIRTUAL(D_80AAC4A4[this->unk20E]));
+        func_80034BA0(globalCtx, &this->unk14C, func_80AABEF0, func_80AAC104, &this->actor, (s16)(s32)this->unk210);
+    } else if (this->unk210 != 0) {
+        gSPSegment(sp48->polyXlu.p++, 8, SEGMENTED_TO_VIRTUAL(D_80AAC4A4[this->unk20E]));
+        func_80034CC4(globalCtx, &this->unk14C, func_80AABEF0, func_80AAC104, &this->actor, (s16)(s32)this->unk210);
+    }
+    Graph_CloseDisps(sp38, globalCtx->state.gfxCtx, "../z_en_md.c", 0x525);
+}
