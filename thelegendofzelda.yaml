@@ -450,7 +450,7 @@ segments:
       - [0xAD23A0, c, code/z_collision_btltbls]
       - [0xAD2420, asm, code/z_collision_check]
       - [0xADA7E0, asm, code/z_common_data]
-      - [0xADA860, c, code/z_debug]
+      - [0xADA860, asm, code/z_debug]
       - [0xADB030, asm, code/z_debug_display]
       - [0xADB590, asm, code/z_demo]
       - [0xAE05C0, asm, code/z_memory_utils]
@@ -667,7 +667,7 @@ segments:
       - [0xB91080, data, code/z_camera]
       - [0xB94CC0, .data, code/z_collision_btltbls]
       - [0xB94FA0, data, code/z_collision_check]
-      - [0xB95250, .data, code/z_debug]
+      - [0xB95250, data, code/z_debug]
       - [0xB95310, data, code/z_debug_display]
       - [0xB95360, data, code/z_demo]
       - [0xB954C0, data, code/z_draw]
@@ -779,7 +779,7 @@ segments:
       - [0xBB0200, rodata, code/z_camera]
       - [0xBB1720, .rodata, code/z_collision_btltbls]
       - [0xBB1750, rodata, code/z_collision_check]
-      - [0xBB1EE0, .rodata, code/z_debug]
+      - [0xBB1EE0, rodata, code/z_debug]
       - [0xBB1F40, rodata, code/z_debug_display]
       - [0xBB1FD0, rodata, code/z_demo]
       - [0xBB2570, rodata, code/z_draw]
@@ -899,7 +899,7 @@ segments:
       - { name: z_camera_bss, type: bss, vram: 0x8015BD50 }
       - { name: code/z_collision_check, type: bss, vram: 0x8015CF00 }
       - { name: z_common_data_bss, type: bss, vram: 0x8015E660 }
-      - { name: code/z_debug, type: .bss, vram: 0x8015FA90 }
+      - { name: code/z_debug, type: bss, vram: 0x8015FA90 }
       - { name: z_debug_display_bss, type: bss, vram: 0x8015FCB0 }
       - { name: z_demo_bss, type: bss, vram: 0x8015FCC0 }
       - { name: z_kankyo_bss, type: bss, vram: 0x8015FCF0 }
@@ -4984,9 +4984,9 @@ segments:
     follows_vram: ovl_En_Mb
     bss_size: 0x0
     subsegments:
-      - [0xE602C0, c, overlays/ovl_En_Md]
-      - [0xE62360, .data, overlays/ovl_En_Md]
-      - [0xE62520, .rodata, overlays/ovl_En_Md]
+      - [0xE602C0, asm, overlays/ovl_En_Md]
+      - [0xE62360, data, overlays/ovl_En_Md]
+      - [0xE62520, rodata, overlays/ovl_En_Md]
       - [0xE62610, rodatabin, rodatabin_80AAC5A0]
 
   - name: ovl_En_Mk
