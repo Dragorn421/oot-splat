@@ -22,7 +22,7 @@ typedef struct EnMd {
     /* 0x20C */ s16 unk20C;
     /* 0x20E */ s16 unk20E;
     /* 0x210 */ s16 unk210;
-    /* 0x212 */ char pad212[2];
+    /* 0x212 */ s16 unk212;
     /* 0x214 */ s16 unk214;
     /* 0x216 */ char pad216[0x20];
     /* 0x236 */ s16 unk236;
