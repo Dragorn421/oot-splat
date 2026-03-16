@@ -15,13 +15,18 @@ typedef struct EnMd {
     /* 0x190 */ EnMdActionFunc unk190;
     /* 0x194 */ ColliderCylinder unk194;
     /* 0x1E0 */ struct_80034A14_arg1 unk1E0;
-    /* 0x208 */ s8 unk208;
-    /* 0x209 */ s8 unk209;
-    /* 0x20A */ char pad20A[2];
+    /* 0x208 */ u8 unk208;
+    /* 0x209 */ u8 unk209;
+    /* 0x20A */ char pad20A[1];
+    /* 0x20B */ u8 unk20B;
     /* 0x20C */ s16 unk20C;
     /* 0x20E */ s16 unk20E;
     /* 0x210 */ s16 unk210;
-    /* 0x212 */ char pad212[0x46];
+    /* 0x212 */ char pad212[2];
+    /* 0x214 */ s16 unk214;
+    /* 0x216 */ char pad216[0x20];
+    /* 0x236 */ s16 unk236;
+    /* 0x238 */ char pad238[0x20];
     /* 0x258 */ Vec3s unk258[17];
     /* 0x2BE */ Vec3s unk2BE[17];
 } EnMd; // size = 0x0324
