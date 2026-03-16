@@ -2083,9 +2083,9 @@ segments:
     follows_vram: ovl_Bg_Po_Event
     bss_size: 0x0
     subsegments:
-      - [0xC76DB0, asm, overlays/ovl_Bg_Po_Syokudai]
+      - [0xC76DB0, c, overlays/ovl_Bg_Po_Syokudai]
       - [0xC77660, data, overlays/ovl_Bg_Po_Syokudai]
-      - [0xC776D0, rodata, overlays/ovl_Bg_Po_Syokudai]
+      - [0xC776D0, .rodata, overlays/ovl_Bg_Po_Syokudai]
       - [0xC77750, rodatabin, rodatabin_808A8A50]
 
   - name: ovl_Bg_Pushbox
