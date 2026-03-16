@@ -9,11 +9,9 @@ struct BgPoSyokudai;
 typedef struct BgPoSyokudai {
     /* 0x000 */ Actor actor;
     /* 0x14C */ u8 unk14C;
-    /* 0x14D */ char pad14D[1];
     /* 0x14E */ s16 unk14E;
     /* 0x150 */ LightNode* unk150;
     /* 0x154 */ LightInfo unk154;
-    /* 0x162 */ char pad162[2];
     /* 0x164 */ ColliderCylinder unk164;
 } BgPoSyokudai; // size = 0x01B0
 
