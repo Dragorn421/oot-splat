@@ -6,6 +6,10 @@ void EnMd_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx);
 
+u32 func_80AAAC78(Actor* thisx, GlobalContext* globalCtx);
+u16 func_80AAACF8(GlobalContext* globalCtx, EnMd* this);
+u16 func_80AAADE0(GlobalContext* globalCtx, EnMd* this);
+u16 func_80AAAE14(GlobalContext* globalCtx, EnMd* this);
 u16 func_80AAAE94(GlobalContext* globalCtx, Actor* thisx);
 s16 func_80AAAF04(GlobalContext* globalCtx, Actor* thisx);
 s32 func_80AAB03C(EnMd* this, GlobalContext* globalCtx);
@@ -57,15 +61,114 @@ extern struct_80034EC0_Entry D_80AAC348[];
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAAC78.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAACF8.s")
+u16 func_80AAACF8(GlobalContext* globalCtx, EnMd* this) {
+    u16 temp_v0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAADE0.s")
+    temp_v0 = Text_GetFaceReaction(globalCtx, 0x11);
+    if (temp_v0 != 0) {
+        return temp_v0;
+    }
+    this->unk208 = 0;
+    this->unk209 = 0;
+    if (gBitFlags[0x12] & gSaveContext.questItems) {
+        return 0x1045;
+    }
+    if (gSaveContext.eventChkInf[0] & 0x10) {
+        return 0x1034;
+    }
+    if ((((s32)(gSaveContext.equips.equipment & gEquipMasks[1]) >> gEquipShifts[1]) == 1) &&
+        (((s32)(gSaveContext.equips.equipment & gEquipMasks[0]) >> gEquipShifts[0]) == 1)) {
+        return 0x1033;
+    }
+    if (gSaveContext.infTable[0] & 0x1000) {
+        return 0x1030;
+    }
+    return 0x102F;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAAE14.s")
+u16 func_80AAADE0(GlobalContext* globalCtx, EnMd* this) {
+    this->unk208 = 0;
+    this->unk209 = 0;
+    if (gSaveContext.eventChkInf[4] & 1) {
+        return 0x1028;
+    }
+    return 0x1046;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAAE94.s")
+u16 func_80AAAE14(GlobalContext* globalCtx, EnMd* this) {
+    this->unk208 = 0;
+    this->unk209 = 0;
+    if (gSaveContext.eventChkInf[4] & 0x100) {
+        if (gSaveContext.infTable[1] & 0x200) {
+            return 0x1071;
+        } else {
+            return 0x1070;
+        }
+    } else if (gSaveContext.eventChkInf[0] & 0x400) {
+        return 0x1068;
+    } else if (gSaveContext.infTable[1] & 0x20) {
+        return 0x1061;
+    } else {
+        return 0x1060;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Md/func_80AAAF04.s")
+u16 func_80AAAE94(GlobalContext* globalCtx, Actor* thisx) {
+    EnMd* this = (EnMd*)thisx;
+
+    switch (globalCtx->sceneNum) {
+        case 0x55:
+            return func_80AAACF8(globalCtx, this);
+        case 0x28:
+            return func_80AAADE0(globalCtx, this);
+        case 0x5B:
+            return func_80AAAE14(globalCtx, this);
+        default:
+            return 0;
+    }
+}
+
+s16 func_80AAAF04(GlobalContext* globalCtx, Actor* thisx) {
+    switch (func_80AAAC78(thisx, globalCtx)) {
+        case 0:
+        case 1:
+        case 3:
+        case 4:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            return 1;
+
+        case 2:
+            switch (thisx->textId) {
+                case 0x1028:
+                    gSaveContext.eventChkInf[0] |= 0x8000;
+                    break;
+                case 0x102F:
+                    gSaveContext.eventChkInf[0] |= 4;
+                    gSaveContext.infTable[0] |= 0x1000;
+                    break;
+                case 0x1060:
+                    gSaveContext.infTable[1] |= 0x20;
+                    break;
+                case 0x1070:
+                    gSaveContext.infTable[1] |= 0x200;
+                    break;
+                case 0x1033:
+                case 0x1067:
+                    return 2;
+            }
+            return 0;
+
+        case 5:
+            if (func_80106BC8(globalCtx) != 0) {
+                return 2;
+            }
+            break;
+    }
+    return 1;
+}
 
 s32 func_80AAB03C(EnMd* this, GlobalContext* globalCtx) {
     if ((globalCtx->sceneNum == 0x55) && !(gSaveContext.eventChkInf[1] & 0x1000) &&

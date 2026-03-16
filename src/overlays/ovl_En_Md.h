@@ -15,7 +15,9 @@ typedef struct EnMd {
     /* 0x190 */ EnMdActionFunc unk190;
     /* 0x194 */ ColliderCylinder unk194;
     /* 0x1E0 */ struct_80034A14_arg1 unk1E0;
-    /* 0x208 */ char pad208[4];
+    /* 0x208 */ s8 unk208;
+    /* 0x209 */ s8 unk209;
+    /* 0x20A */ char pad20A[2];
     /* 0x20C */ s16 unk20C;
     /* 0x20E */ s16 unk20E;
     /* 0x210 */ s16 unk210;
