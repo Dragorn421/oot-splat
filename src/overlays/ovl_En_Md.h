@@ -14,7 +14,10 @@ typedef struct EnMd {
     /* 0x14C */ SkelAnime unk14C;
     /* 0x190 */ EnMdActionFunc unk190;
     /* 0x194 */ ColliderCylinder unk194;
-    /* 0x1E0 */ char pad1E0[0x30];
+    /* 0x1E0 */ struct_80034A14_arg1 unk1E0;
+    /* 0x208 */ char pad208[4];
+    /* 0x20C */ s16 unk20C;
+    /* 0x20E */ s16 unk20E;
     /* 0x210 */ s16 unk210;
     /* 0x212 */ char pad212[0x46];
     /* 0x258 */ Vec3s unk258[17];
