@@ -1184,7 +1184,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC3F880, c, overlays/ovl_Bg_Ddan_Jd]
-      - [0xC3FE30, data, overlays/ovl_Bg_Ddan_Jd]
+      - [0xC3FE30, .data, overlays/ovl_Bg_Ddan_Jd]
       - [0xC3FE60, rodatabin, rodatabin_80871090]
 
   - name: ovl_Bg_Ddan_Kd

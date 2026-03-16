@@ -22,7 +22,6 @@ void func_80870F00(BgDdanJd* this, GlobalContext* globalCtx);
 extern Gfx D_60037B8;
 extern UNK_TYPE D_6003CE0;
 
-/*
 const ActorInit Bg_Ddan_Jd_InitVars = {
     ACTOR_BG_DDAN_JD,
     ACTORTYPE_BG,
@@ -34,8 +33,10 @@ const ActorInit Bg_Ddan_Jd_InitVars = {
     (ActorFunc)BgDdanJd_Update,
     (ActorFunc)BgDdanJd_Draw,
 };
-*/
-extern InitChainEntry D_80871080[];
+
+static InitChainEntry D_80871080[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
+};
 
 void BgDdanJd_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgDdanJd* this = (BgDdanJd*)thisx;
