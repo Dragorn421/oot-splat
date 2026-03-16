@@ -1,14 +1,24 @@
 #ifndef _Z_EN_MD_H_
 #define _Z_EN_MD_H_
 
+#include "z64.h"
 #include <ultra64.h>
 #include <global.h>
 
 struct EnMd;
 
+typedef void (*EnMdActionFunc)(struct EnMd*, GlobalContext*);
+
 typedef struct EnMd {
-    /* 0x0000 */ Actor actor;
-    /* 0x014C */ char unk_14C[0x1D8];
+    /* 0x000 */ Actor actor;
+    /* 0x14C */ SkelAnime unk14C;
+    /* 0x190 */ EnMdActionFunc unk190;
+    /* 0x194 */ ColliderCylinder unk194;
+    /* 0x1E0 */ char pad1E0[0x30];
+    /* 0x210 */ s16 unk210;
+    /* 0x212 */ char pad212[0x46];
+    /* 0x258 */ Vec3s unk258[17];
+    /* 0x2BE */ Vec3s unk2BE[17];
 } EnMd; // size = 0x0324
 
 extern const ActorInit En_Md_InitVars;
