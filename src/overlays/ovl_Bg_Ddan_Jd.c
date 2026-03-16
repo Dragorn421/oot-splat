@@ -19,6 +19,9 @@ void func_80870B88(BgDdanJd* this, GlobalContext* globalCtx);
 void func_80870D2C(BgDdanJd* this, GlobalContext* globalCtx);
 void func_80870F00(BgDdanJd* this, GlobalContext* globalCtx);
 
+extern Gfx D_60037B8;
+extern UNK_TYPE D_6003CE0;
+
 /*
 const ActorInit Bg_Ddan_Jd_InitVars = {
     ACTOR_BG_DDAN_JD,
@@ -32,17 +35,126 @@ const ActorInit Bg_Ddan_Jd_InitVars = {
     (ActorFunc)BgDdanJd_Draw,
 };
 */
+extern InitChainEntry D_80871080[];
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/BgDdanJd_Init.s")
+void BgDdanJd_Init(Actor* thisx, GlobalContext* globalCtx) {
+    BgDdanJd* this = (BgDdanJd*)thisx;
+    s32 pad;
+    s32 sp24;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/BgDdanJd_Destroy.s")
+    sp24 = 0;
+    Actor_ProcessInitChain(&this->dyna.actor, D_80871080);
+    DynaPolyInfo_SetActorMove(&this->dyna, DPM_PLAYER);
+    DynaPolyInfo_Alloc(&D_6003CE0, &sp24);
+    this->dyna.dynaPolyId = DynaPolyInfo_RegisterActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp24);
+    this->unk16A = 0x64;
+    this->unk168 = 0;
+    if (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0) {
+        this->unk169 = 5;
+    } else {
+        this->unk169 = 1;
+    }
+    this->actionFunc = func_80870B88;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/func_80870B88.s")
+void BgDdanJd_Destroy(Actor* thisx, GlobalContext* globalCtx) {
+    BgDdanJd* this = (BgDdanJd*)thisx;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/func_80870D2C.s")
+    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/func_80870F00.s")
+void func_80870B88(BgDdanJd* this, GlobalContext* globalCtx) {
+    if (this->unk16A != 0) {
+        this->unk16A--;
+    }
+    if (this->unk169 == 1) {
+        if ((this->dyna.actor.params < 0x40) && (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0)) {
+            this->unk169 = 5;
+            this->unk168 = 1;
+            this->unk16A = 0;
+            this->dyna.actor.posRot.pos.y = this->dyna.actor.initPosRot.pos.y + 140.0f;
+            func_800800F8(globalCtx, 0xBF4, -0x63, &this->dyna.actor, 0);
+        }
+    }
+    if (this->unk16A == 0) {
+        this->unk16A = 0x64;
+        if (this->unk168 == 0) {
+            this->unk168 = 1;
+            this->unk16C = this->dyna.actor.initPosRot.pos.y + 140.0f;
+        } else if (this->unk168 == 1) {
+            if (this->unk169 != 1) {
+                this->unk168 = 3;
+                this->unk16C = this->dyna.actor.initPosRot.pos.y + 700.0f;
+            } else {
+                this->unk168 = 0;
+                this->unk16C = this->dyna.actor.initPosRot.pos.y;
+            }
+        } else if (this->unk168 == 2) {
+            if (this->unk169 != 1) {
+                this->unk168 = 3;
+                this->unk16C = this->dyna.actor.initPosRot.pos.y + 700.0f;
+            } else {
+                this->unk168 = 0;
+                this->unk16C = this->dyna.actor.initPosRot.pos.y;
+            }
+        } else if (this->unk168 == 3) {
+            this->unk168 = 2;
+            this->unk16C = this->dyna.actor.initPosRot.pos.y + 140.0f;
+        }
+        this->actionFunc = func_80870F00;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/BgDdanJd_Update.s")
+void func_80870D2C(BgDdanJd* this, GlobalContext* globalCtx) {
+    Vec3f sp34;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ddan_Jd/BgDdanJd_Draw.s")
+    sp34.y = this->dyna.actor.initPosRot.pos.y;
+    if (globalCtx->gameplayFrames & 1) {
+        sp34.x = this->dyna.actor.posRot.pos.x + 65.0f;
+        sp34.z = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.z;
+        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+        sp34.x = this->dyna.actor.posRot.pos.x - 65.0f;
+        sp34.z = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.z;
+        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+    } else {
+        sp34.x = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.x;
+        sp34.z = this->dyna.actor.posRot.pos.z + 65.0f;
+        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+        sp34.x = Math_Rand_CenteredFloat(110.0f) + this->dyna.actor.posRot.pos.x;
+        sp34.z = this->dyna.actor.posRot.pos.z - 65.0f;
+        func_80033480(globalCtx, (Vec3f*)&sp34, 5.0f, 1, 0x14, 0x3C, 1U);
+    }
+    if (this->unk169 == 5) {
+        func_8002F974(&this->dyna.actor, 0x2024U);
+    }
+}
+
+void func_80870F00(BgDdanJd* this, GlobalContext* globalCtx) {
+    if ((this->unk169 == 1) && (((this->dyna.actor.params < 0x40))) &&
+        (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0)) {
+        this->unk169 = 5;
+        this->unk168 = 1;
+        this->dyna.actor.posRot.pos.y = this->dyna.actor.initPosRot.pos.y + 140.0f;
+        this->unk16A = 0;
+        this->actionFunc = func_80870B88;
+        func_800800F8(globalCtx, 0xBF4, -0x63, &this->dyna.actor, 0);
+    } else {
+        if (Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->unk16C, this->unk169) != 0) {
+            Audio_PlayActorSound2(&this->dyna.actor, 0x28F1U);
+            this->actionFunc = func_80870B88;
+        }
+    }
+    func_80870D2C(this, globalCtx);
+}
+
+void BgDdanJd_Update(Actor* thisx, GlobalContext* globalCtx) {
+    BgDdanJd* this = (BgDdanJd*)thisx;
+
+    this->actionFunc(this, globalCtx);
+}
+
+void BgDdanJd_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    BgDdanJd* this = (BgDdanJd*)thisx;
+
+    Gfx_DrawDListOpa(globalCtx, &D_60037B8);
+}
