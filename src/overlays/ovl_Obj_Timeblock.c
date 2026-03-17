@@ -33,7 +33,6 @@ void func_80BA084C(ObjTimeblock* arg0, GlobalContext* arg1);
 extern Gfx D_6000980[];
 extern UNK_TYPE D_6000B30;
 
-/*
 const ActorInit Obj_Timeblock_InitVars = {
     ACTOR_OBJ_TIMEBLOCK,
     ACTORTYPE_ITEMACTION,
@@ -45,29 +44,23 @@ const ActorInit Obj_Timeblock_InitVars = {
     (ActorFunc)ObjTimeblock_Update,
     (ActorFunc)ObjTimeblock_Draw,
 };
-struct_80BA0AF0 D_80BA0AF0[2] = { { 1.0f, 60.0f, 0x18 }, { 0.6f, 40.0f, 0x19 } };
-static f32 D_80BA0B08[8] = { 60.0f, 100.0f, 140.0f, 180.0f, 220.0f, 260.0f, 300.0f, 300.0f };
-static InitChainEntry D_80BA0B28[4] = {...};
-static Color_RGB8 D_80BA0B38[8] = {
-    { 0x64, 0x78, 0x8C },
-    { 0x50, 0x8C, 0xC8 },
-    { 0x64, 0x96, 0xC8 },
-    { 0x64, 0xC8, 0xF0 },
-    { 0x50, 0x6E, 0x8C },
-    { 0x46, 0xA0, 0xE1 },
-    { 0x50, 0x64, 0x82 },
-    { 0x64, 0x6E, 0xBE },
-};
-*/
 typedef struct struct_80BA0AF0 {
     f32 unk0;
     f32 unk4;
     s16 unk8;
 } struct_80BA0AF0;
-extern struct_80BA0AF0 D_80BA0AF0[2];
-extern f32 D_80BA0B08[8];
-extern InitChainEntry D_80BA0B28[4];
-extern Color_RGB8 D_80BA0B38[8];
+struct_80BA0AF0 D_80BA0AF0[2] = { { 1.0f, 60.0f, 0x18 }, { 0.6f, 40.0f, 0x19 } };
+static f32 D_80BA0B08[8] = { 60.0f, 100.0f, 140.0f, 180.0f, 220.0f, 260.0f, 300.0f, 300.0f };
+static InitChainEntry D_80BA0B28[4] = {
+    ICHAIN_U8(unk_1F, 2, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneForward, 1800, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 300, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneDownward, 1500, ICHAIN_STOP),
+};
+static Color_RGB8 D_80BA0B38[8] = {
+    { 0x64, 0x78, 0x8C }, { 0x50, 0x8C, 0xC8 }, { 0x64, 0x96, 0xC8 }, { 0x64, 0xC8, 0xF0 },
+    { 0x50, 0x6E, 0x8C }, { 0x46, 0xA0, 0xE1 }, { 0x50, 0x64, 0x82 }, { 0x64, 0x6E, 0xBE },
+};
 
 s32 func_80B9FFA0(ObjTimeblock* arg0) {
     s32 var_a1;
