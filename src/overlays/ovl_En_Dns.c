@@ -191,97 +191,97 @@ void func_809EF51C(EnDns* arg0, u8 arg1) {
 
 u32 func_809EF5A4_8t0(EnDns* arg0) {
     if ((CUR_CAPACITY(UPG_NUTS) != 0) && (AMMO(ITEM_NUT) >= (s32)CUR_CAPACITY(UPG_NUTS))) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_NUT) == ITEM_NONE) {
-        return EN_DNS_UNK8RESULT_2;
+        return EN_DNS_UNK8RESULT_OK_ALT;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF658_8t1(EnDns* arg0) {
     if ((CUR_CAPACITY(UPG_STICKS) != 0) && (AMMO(ITEM_STICK) >= (s32)CUR_CAPACITY(UPG_STICKS))) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_STICK) == ITEM_NONE) {
-        return EN_DNS_UNK8RESULT_2;
+        return EN_DNS_UNK8RESULT_OK_ALT;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF70C_8t2910(EnDns* arg0) {
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF73C_8t3(EnDns* arg0) {
     if (INV_CONTENT(ITEM_SLINGSHOT) == ITEM_NONE) {
-        return EN_DNS_UNK8RESULT_3;
+        return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_SLINGSHOT) >= CUR_CAPACITY(UPG_BULLET_BAG)) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_SEEDS) == ITEM_NONE) {
-        return EN_DNS_UNK8RESULT_2;
+        return EN_DNS_UNK8RESULT_OK_ALT;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF800_8t4(EnDns* arg0) {
     if (gBitFlags[4] & gSaveContext.inventory.equipment) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF854_8t5(EnDns* arg0) {
     if (!CHECK_QUEST_ITEM(QUEST_GORON_RUBY)) {
-        return EN_DNS_UNK8RESULT_3;
+        return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_BOMB) >= CUR_CAPACITY(UPG_BOMB_BAG)) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF8F4_8t6(EnDns* arg0) {
     if (Item_CheckObtainability(ITEM_BOW) == ITEM_NONE) {
-        return EN_DNS_UNK8RESULT_3;
+        return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_BOW) >= CUR_CAPACITY(UPG_QUIVER)) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 u32 func_809EF9A4_8t78(EnDns* arg0) {
     if (!Inventory_HasEmptyBottle()) {
-        return EN_DNS_UNK8RESULT_1;
+        return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return EN_DNS_UNK8RESULT_0;
+        return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
-    return EN_DNS_UNK8RESULT_4;
+    return EN_DNS_UNK8RESULT_OK;
 }
 
 void func_809EF9F8_Ct13478(EnDns* arg0) {
@@ -343,21 +343,21 @@ void func_809EFC9C(EnDns* arg0, GlobalContext* arg1) {
     if ((func_8010BDBC(&arg1->msgCtx) == 4) && (func_80106BC8(arg1) != 0)) {
         switch (arg1->msgCtx.choiceIndex) {
             case 0:
-                switch (arg0->unk2C0->unk8(arg0)) {
-                    case EN_DNS_UNK8RESULT_0:
+                switch (arg0->unk2C0->unk8_checkPurchase(arg0)) {
+                    case EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES:
                         func_8010B720(arg1, 0x10A5);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case EN_DNS_UNK8RESULT_1:
+                    case EN_DNS_UNK8RESULT_ALREADY_FULL:
                         func_8010B720(arg1, 0x10A6);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case EN_DNS_UNK8RESULT_3:
+                    case EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW:
                         func_8010B720(arg1, 0x10DE);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case EN_DNS_UNK8RESULT_2:
-                    case EN_DNS_UNK8RESULT_4:
+                    case EN_DNS_UNK8RESULT_OK_ALT:
+                    case EN_DNS_UNK8RESULT_OK:
                         func_8010B720(arg1, 0x10A7);
                         arg0->unk268 = func_809EFEE8;
                         return;

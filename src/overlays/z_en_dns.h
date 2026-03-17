@@ -21,18 +21,18 @@ typedef enum EnDnsType {
 struct EnDns;
 
 typedef enum EnDnsUnk8Result {
-    EN_DNS_UNK8RESULT_0,
-    EN_DNS_UNK8RESULT_1,
-    EN_DNS_UNK8RESULT_2,
-    EN_DNS_UNK8RESULT_3,
-    EN_DNS_UNK8RESULT_4
+    EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES,
+    EN_DNS_UNK8RESULT_ALREADY_FULL,
+    EN_DNS_UNK8RESULT_OK_ALT,
+    EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW,
+    EN_DNS_UNK8RESULT_OK
 } EnDnsUnk8Result;
 
 typedef struct struct_EnDns_2C0ptr {
     /* 0x00 */ s16 unk0;
     /* 0x02 */ s16 unk_2; // unused
     /* 0x04 */ s32 unk4_gid;
-    /* 0x08 */ u32 (*unk8)(struct EnDns*);
+    /* 0x08 */ u32 (*unk8_checkPurchase)(struct EnDns*);
     /* 0x0C */ void (*unkC)(struct EnDns*);
 } struct_EnDns_2C0ptr;
 
