@@ -65,154 +65,134 @@ void BgIceTurara_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->dyna.dynaPolyId = DynaPolyInfo_RegisterActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp24);
     if (this->dyna.actor.params == 0) {
         this->unk164 = func_80892220;
-        return;
+    } else {
+        this->dyna.actor.shape.rot.x = -0x8000;
+        this->dyna.actor.shape.unk_08 = 1200.0f;
+        this->unk164 = func_80892280;
     }
-    this->dyna.actor.shape.rot.x = -0x8000;
-    this->dyna.actor.shape.unk_08 = 1200.0f;
-    this->unk164 = func_80892280;
 }
 
 void BgIceTurara_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     BgIceTurara* this = (BgIceTurara*)thisx;
 
-    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
     Collider_DestroyCylinder(globalCtx, &this->unk16C);
 }
 
-void func_80892040(BgIceTurara* arg0, GlobalContext* arg1, f32 arg2) {
+void func_80892040(BgIceTurara* this, GlobalContext* globalCtx, f32 arg2) {
     Vec3f sp9C;
     Vec3f sp90;
     s32 var_s0;
     s32 sp88;
 
-    Audio_PlaySoundAtPosition(arg1, &arg0->dyna.actor.posRot.pos, 0x1E, 0x28CBU);
+    Audio_PlaySoundAtPosition(globalCtx, &this->dyna.actor.posRot.pos, 30, NA_SE_EV_ICE_BROKEN);
     sp88 = 0;
     do {
         for (var_s0 = 0; var_s0 < 10; var_s0++) {
-            sp90.x = Math_Rand_CenteredFloat(8.0f) + arg0->dyna.actor.posRot.pos.x;
-            sp90.y = (Math_Rand_ZeroOne() * arg2) + arg0->dyna.actor.posRot.pos.y + ((f32)sp88 * arg2);
-            sp90.z = Math_Rand_CenteredFloat(8.0f) + arg0->dyna.actor.posRot.pos.z;
+            sp90.x = Math_Rand_CenteredFloat(8.0f) + this->dyna.actor.posRot.pos.x;
+            sp90.y = (Math_Rand_ZeroOne() * arg2) + this->dyna.actor.posRot.pos.y + (sp88 * arg2);
+            sp90.z = Math_Rand_CenteredFloat(8.0f) + this->dyna.actor.posRot.pos.z;
             sp9C.x = Math_Rand_CenteredFloat(7.0f);
             sp9C.z = Math_Rand_CenteredFloat(7.0f);
             sp9C.y = (Math_Rand_ZeroOne() * 4.0f) + 8.0f;
-            EffectSsEnIce_Spawn(arg1, (Vec3f*)&sp90, (Math_Rand_ZeroOne() * 0.2f) + 0.1f, (Vec3f*)&sp9C, &D_8089267C,
-                                &D_80892688, &D_8089268C, 0x1E);
+            EffectSsEnIce_Spawn(globalCtx, &sp90, (Math_Rand_ZeroOne() * 0.2f) + 0.1f, &sp9C, &D_8089267C, &D_80892688,
+                                &D_8089268C, 30);
         }
         sp88 = sp88 + 1;
     } while (sp88 != 2);
 }
 
-void func_80892220(BgIceTurara* arg0, GlobalContext* arg1) {
-    if (arg0->unk16C.base.acFlags & 2) {
-        func_80892040(arg0, arg1, 50.0f);
-        Actor_Kill(&arg0->dyna.actor);
-        return;
-    }
-    Collider_AddAC(arg1, &arg1->colliderCtx, &arg0->unk16C.base);
-}
-
-void func_80892280(BgIceTurara* arg0, GlobalContext* arg1) {
-    if (arg0->dyna.actor.xzDistFromLink < 60.0f) {
-        arg0->unk168 = 0xA;
-        arg0->unk164 = func_808922B8;
+void func_80892220(BgIceTurara* this, GlobalContext* globalCtx) {
+    if (this->unk16C.base.acFlags & 2) {
+        func_80892040(this, globalCtx, 50.0f);
+        Actor_Kill(&this->dyna.actor);
+    } else {
+        Collider_AddAC(globalCtx, &globalCtx->colliderCtx, &this->unk16C.base);
     }
 }
 
-void func_808922B8(BgIceTurara* arg0, GlobalContext* arg1) {
+void func_80892280(BgIceTurara* this, GlobalContext* globalCtx) {
+    if (this->dyna.actor.xzDistFromLink < 60.0f) {
+        this->unk168 = 0xA;
+        this->unk164 = func_808922B8;
+    }
+}
+
+void func_808922B8(BgIceTurara* this, GlobalContext* globalCtx) {
     s32 var_v0_2;
     f32 sp28;
 
-    if (arg0->unk168 != 0) {
-        arg0->unk168 -= 1;
+    if (this->unk168 != 0) {
+        this->unk168 -= 1;
     }
-    if (!(arg0->unk168 % 4)) {
-        Audio_PlayActorSound2(&arg0->dyna.actor, 0x28D4U);
+    if (!(this->unk168 % 4)) {
+        Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_ICE_SWING);
     }
-    if (arg0->unk168 == 0) {
-        arg0->dyna.actor.posRot.pos.x = arg0->dyna.actor.initPosRot.pos.x;
-        arg0->dyna.actor.posRot.pos.z = arg0->dyna.actor.initPosRot.pos.z;
-        Collider_UpdateCylinderShape(&arg0->dyna.actor, &arg0->unk16C);
-        Collider_AddAT(arg1, &arg1->colliderCtx, &arg0->unk16C.base);
-        func_8003EBF8(arg1, &arg1->colCtx.dyna, (s32)arg0->dyna.dynaPolyId);
-        arg0->unk164 = func_80892424;
-        return;
-    }
-    sp28 = Math_Rand_ZeroOne();
-    if (Math_Rand_ZeroOne() < 0.5f) {
-        var_v0_2 = -1;
+    if (this->unk168 == 0) {
+        this->dyna.actor.posRot.pos.x = this->dyna.actor.initPosRot.pos.x;
+        this->dyna.actor.posRot.pos.z = this->dyna.actor.initPosRot.pos.z;
+        Collider_UpdateCylinderShape(&this->dyna.actor, &this->unk16C);
+        Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk16C.base);
+        func_8003EBF8(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
+        this->unk164 = func_80892424;
     } else {
-        var_v0_2 = 1;
+        sp28 = Math_Rand_ZeroOne();
+        if (Math_Rand_ZeroOne() < 0.5f) {
+            var_v0_2 = -1;
+        } else {
+            var_v0_2 = 1;
+        }
+        this->dyna.actor.posRot.pos.x = (var_v0_2 * ((0.5f * sp28) + 0.5f)) + this->dyna.actor.initPosRot.pos.x;
+        sp28 = Math_Rand_ZeroOne();
+        if (Math_Rand_ZeroOne() < 0.5f) {
+            var_v0_2 = -1;
+        } else {
+            var_v0_2 = 1;
+        }
+        this->dyna.actor.posRot.pos.z = (var_v0_2 * ((0.5f * sp28) + 0.5f)) + this->dyna.actor.initPosRot.pos.z;
     }
-    arg0->dyna.actor.posRot.pos.x = ((f32)var_v0_2 * ((0.5f * sp28) + 0.5f)) + arg0->dyna.actor.initPosRot.pos.x;
-    sp28 = Math_Rand_ZeroOne();
-    if (Math_Rand_ZeroOne() < 0.5f) {
-        var_v0_2 = -1;
-    } else {
-        var_v0_2 = 1;
-    }
-    arg0->dyna.actor.posRot.pos.z = ((f32)var_v0_2 * ((0.5f * sp28) + 0.5f)) + arg0->dyna.actor.initPosRot.pos.z;
 }
 
-void func_80892424(BgIceTurara* arg0, GlobalContext* arg1) {
-    if ((arg0->unk16C.base.atFlags & 2) || (arg0->dyna.actor.bgCheckFlags & 1)) {
-        arg0->unk16C.base.atFlags &= 0xFFFD;
-        arg0->dyna.actor.bgCheckFlags &= 0xFFFE;
-        if (arg0->dyna.actor.posRot.pos.y < arg0->dyna.actor.groundY) {
-            arg0->dyna.actor.posRot.pos.y = arg0->dyna.actor.groundY;
+void func_80892424(BgIceTurara* this, GlobalContext* globalCtx) {
+    if ((this->unk16C.base.atFlags & 2) || (this->dyna.actor.bgCheckFlags & 1)) {
+        this->unk16C.base.atFlags &= ~2;
+        this->dyna.actor.bgCheckFlags &= ~1;
+        if (this->dyna.actor.posRot.pos.y < this->dyna.actor.groundY) {
+            this->dyna.actor.posRot.pos.y = this->dyna.actor.groundY;
         }
-        func_80892040(arg0, arg1, 40.0f);
-        if (arg0->dyna.actor.params == 2) {
-            arg0->dyna.actor.posRot.pos.y = arg0->dyna.actor.initPosRot.pos.y + 120.0f;
-            func_8003EC50(arg1, &arg1->colCtx.dyna, (s32)arg0->dyna.dynaPolyId);
-            arg0->unk164 = func_80892574;
-            return;
+        func_80892040(this, globalCtx, 40.0f);
+        if (this->dyna.actor.params == 2) {
+            this->dyna.actor.posRot.pos.y = this->dyna.actor.initPosRot.pos.y + 120.0f;
+            func_8003EC50(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
+            this->unk164 = func_80892574;
+        } else {
+            Actor_Kill(&this->dyna.actor);
         }
-        Actor_Kill(&arg0->dyna.actor);
-        return;
+    } else {
+        Actor_MoveForward(&this->dyna.actor);
+        this->dyna.actor.posRot.pos.y += 40.0f;
+        func_8002E4B4(globalCtx, &this->dyna.actor, 0.0f, 0.0f, 0.0f, 4);
+        this->dyna.actor.posRot.pos.y -= 40.0f;
+        Collider_UpdateCylinderShape(&this->dyna.actor, &this->unk16C);
+        Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk16C.base);
     }
-    Actor_MoveForward(&arg0->dyna.actor);
-    arg0->dyna.actor.posRot.pos.y += 40.0f;
-    func_8002E4B4(arg1, &arg0->dyna.actor, 0.0f, 0.0f, 0.0f, 4);
-    arg0->dyna.actor.posRot.pos.y -= 40.0f;
-    Collider_UpdateCylinderShape(&arg0->dyna.actor, &arg0->unk16C);
-    Collider_AddAT(arg1, &arg1->colliderCtx, &arg0->unk16C.base);
 }
 
-void func_80892574(BgIceTurara* arg0, GlobalContext* arg1) {
-    if (Math_ApproxF(&arg0->dyna.actor.posRot.pos.y, arg0->dyna.actor.initPosRot.pos.y, 1.0f) != 0) {
-        arg0->unk164 = func_80892280;
-        arg0->dyna.actor.velocity.y = 0.0f;
+void func_80892574(BgIceTurara* this, GlobalContext* globalCtx) {
+    if (Math_ApproxF(&this->dyna.actor.posRot.pos.y, this->dyna.actor.initPosRot.pos.y, 1.0f)) {
+        this->unk164 = func_80892280;
+        this->dyna.actor.velocity.y = 0.0f;
     }
 }
 
 void BgIceTurara_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgIceTurara* this = (BgIceTurara*)thisx;
+
     this->unk164(this, globalCtx);
 }
 
 void BgIceTurara_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgIceTurara* this = (BgIceTurara*)thisx;
+
     Gfx_DrawDListOpa(globalCtx, D_60023D0);
 }
-
-/*
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/BgIceTurara_Init.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/BgIceTurara_Destroy.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/func_80892040.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/func_80892220.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/func_80892280.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/func_808922B8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/func_80892424.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/func_80892574.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/BgIceTurara_Update.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Ice_Turara/BgIceTurara_Draw.s")
-*/
