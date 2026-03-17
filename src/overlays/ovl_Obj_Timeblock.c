@@ -228,7 +228,7 @@ void func_80BA0524(ObjTimeblock* this, GlobalContext* globalCtx) {
         this->unk170 -= 1;
         if (this->unk170 == 0) {
             if (this->unk177 == 0) {
-                if (((s16)this->dyna.actor.params >> 0xF) & 1) {
+                if ((this->dyna.actor.params >> 0xF) & 1) {
                     this->unk175 = 1;
                 } else {
                     this->unk175 = 0;
@@ -290,7 +290,7 @@ void func_80BA0768(ObjTimeblock* this, GlobalContext* globalCtx) {
     }
     func_80BA06AC(this, globalCtx);
     if (this->unk16C == 0x32) {
-        func_80078884(0x4807U);
+        func_80078884(NA_SE_SY_TRE_BOX_APPEAR);
     }
     if ((this->unk178 == 0) && (this->unk16C <= 0)) {
         func_80BA083C(this);
@@ -335,10 +335,10 @@ void ObjTimeblock_Update(Actor* thisx, GlobalContext* globalCtx) {
         this->unk16C = temp_v0 - 1;
     }
     if (this->unk178 != 0) {
-        func_8003EC50(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+        func_8003EC50(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
         return;
     }
-    func_8003EBF8(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+    func_8003EBF8(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
 }
 
 void ObjTimeblock_Draw(Actor* thisx, GlobalContext* globalCtx) {
@@ -346,12 +346,12 @@ void ObjTimeblock_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     if (((ObjTimeblock*)thisx)->unk178 != 0) {
         sp44 = &D_80BA0B38[thisx->initPosRot.rot.z & 7];
-        OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_timeblock.c", 0x2FA);
+        OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_timeblock.c", 762);
         func_80093D18(globalCtx->state.gfxCtx);
-        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_timeblock.c", 0x2FE),
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_timeblock.c", 766),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, sp44->r, sp44->g, sp44->b, 255);
         gSPDisplayList(POLY_OPA_DISP++, D_6000980);
-        CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_timeblock.c", 0x304);
+        CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_timeblock.c", 772);
     }
 }
