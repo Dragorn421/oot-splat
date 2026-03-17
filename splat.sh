@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 -m splat split --disassemble-all thelegendofzelda.yaml
+python3 -m splat split thelegendofzelda.yaml

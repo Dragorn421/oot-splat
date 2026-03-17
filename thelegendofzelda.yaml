@@ -53,6 +53,9 @@ options:
 
   nonmatchings_path: non_matchings
 
+  disassemble_all: true
+  make_full_disasm_for_code: true
+
 segments:
   - name: header
     type: header
