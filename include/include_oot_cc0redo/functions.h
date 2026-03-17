@@ -886,7 +886,7 @@ void func_80061EFC(CollideData* sub98, ActorDamageChart* damageChart, CollideDat
 // ? func_800626B0(?);
 void Collider_UpdateCylinderShape(Actor* actor, ColliderCylinder* collider);
 void Collider_CylinderSetPos(ColliderCylinder* cylinder, Vec3s* pos);
-// ? func_80062734(?);
+void func_80062734(ColliderQuad* arg0, Vec3f* cornerD, Vec3f* cornerC, Vec3f* cornerA, Vec3f* cornerB);
 void func_800627A0(ColliderTris* tris, s32 elemIndex, Vec3f* vtx0, Vec3f* vtx1, Vec3f* vtx2);
 void func__800628A4_Type0(s32 arg0, ColliderSpheres* collider);
 void func_80062CD4(GlobalContext* globalCtx, Vec3f* arg1);
@@ -959,7 +959,7 @@ s32 func_8006F0A0(s32 arg0);
 // ? func_8006F0FC(?);
 u8 func_8006F140(GlobalContext*, EnvironmentContext*, UNK_TYPE);
 f32 func_8006F93C(u16, u16, u16);
-f32 func_8006F9BC(u16, u16, u16, u16, u16);
+f32 func_8006F9BC(u16 endFrame, u16 startFrame, u16 frames, u16, u16);
 // ? func_8006FB94(?);
 // ? func_8006FC88(?);
 // ? func_80070600(?);
@@ -1096,7 +1096,7 @@ Vec3f* OLib_Vec3fDiffRad(Vec3f* dest, Vec3f* a, Vec3f* b);
 s16 func_800800F8(GlobalContext* globalCtx, s16 arg1, s16 arg2, Actor* actor, s16 arg4);
 void func_800803F0(GlobalContext* globalCtx, s16 camId);
 s16 func_80080480(GlobalContext* globalCtx, Actor* actor);
-UNK_TYPE func_800806BC(GlobalContext* globalCtx, Actor* actor, UNK_TYPE);
+void func_800806BC(GlobalContext* globalCtx, Actor* actor, u16 sfxId);
 UNK_TYPE func_80080728(GlobalContext* globalCtx, u8 actorType);
 void func_80080788(UNK_TYPE, UNK_TYPE);
 void Map_SavePlayerInitialInfo(GlobalContext* globalCtx);
@@ -1253,6 +1253,7 @@ Gfx* Gfx_TwoTexScroll(GraphicsContext* gfxCtx, s32 tile1, u32 x1, u32 y1, s32 wi
                       u32 y2, s32 width2, s32 height2);
 Gfx* Gfx_TwoTexScrollEnvColor(GraphicsContext* gfxCtx, s32 tile1, u32 x1, u32 y1, s32 width1, s32 height1, s32 tile2,
                               u32 x2, u32 y2, s32 width2, s32 height2, s32 r, s32 g, s32 b, s32 a);
+Gfx* Gfx_EnvColor(GraphicsContext* gfxCtx, s32 r, s32 g, s32 b, s32 a);
 void func_80095248(GraphicsContext* gfxCtx, u8 r, u8 g, u8 b);
 void func_80095974(GraphicsContext* gfxCtx);
 void func_80095AA0(GlobalContext* globalCtx, Room* room, Input* arg2, UNK_TYPE arg3);
@@ -1335,7 +1336,7 @@ void func_800A43B8(GlobalContext* globalCtx, SkelAnime* skelAnime, LinkAnimation
 s32 func_800A4530(SkelAnime* skelAnime, f32 arg1);
 s32 SkelAnime_Init(GlobalContext* globalCtx, SkelAnime* skelAnime, SkeletonHeader* skeletonHeaderSeg,
                     AnimationHeader* animationseg, Vec3s* limbDrawTable, Vec3s* arg5, s32 limbCount);
-void SkelAnime_InitFlex(GlobalContext* globalCtx, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg,
+s32 SkelAnime_InitFlex(GlobalContext* globalCtx, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg,
                         AnimationHeader* animationseg, Vec3s* limbDrawTable, Vec3s* arg5, s32 limbCount);
 void SkelAnime_InitSkin(GlobalContext* globalCtx, SkelAnime* skelAnime, SkeletonHeader* skeletonHeaderSeg,
                         AnimationHeader* animationseg);
@@ -2331,7 +2332,7 @@ void func_800F87A0(u8);
 void func_800F8884(u8, Vec3f*);
 void func_800F89A0(u8, Vec3f*);
 void func_800F89E8(Vec3f*);
-void func_800F8A44(Vec3f*, u16);
+void func_800F8A44(Vec3f* pos, u16 sfxId);
 void func_800F8BA0(u8, u16);
 void func_800F8D04(u32 sfxId);
 void func_800F8E3C(void);
