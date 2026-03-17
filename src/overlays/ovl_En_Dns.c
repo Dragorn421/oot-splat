@@ -9,7 +9,6 @@ void EnDns_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnDns_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnDns_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_809EF51C(EnDns* arg0, u8 arg1);
 u32 func_809EF5A4(EnDns* arg0);
 u32 func_809EF658(EnDns* arg0);
 u32 func_809EF70C(EnDns* arg0);
@@ -28,7 +27,6 @@ void func_809EFB40(EnDns* arg0);
 void func_809EFB84(EnDns*, GlobalContext*);
 void func_809EFBC8(EnDns*, GlobalContext*);
 void func_809EFC9C(EnDns*, GlobalContext*);
-void func_809EFDD0(Actor* arg0, GlobalContext* arg1);
 void func_809EFEE8(EnDns*, GlobalContext*);
 void func_809EFF50(EnDns*, GlobalContext*);
 void func_809EFF98(EnDns*, GlobalContext*);
@@ -105,20 +103,18 @@ void EnDns_Init(Actor* thisx, GlobalContext* globalCtx) {
         Actor_Kill(&this->actor);
         return;
     }
-    if (this->actor.params == 6) {
-        if (LINK_AGE_IN_YEARS == 5) {
-            this->actor.params = 3;
-        }
+    if ((this->actor.params == 6) && (LINK_AGE_IN_YEARS == 5)) {
+        this->actor.params = 3;
     }
     osSyncPrintf("\x1b[32m◆◆◆ 売りナッツ『%s』 ◆◆◆\x1b[m\n", D_809F0424[this->actor.params]);
     Actor_ProcessInitChain(&this->actor, D_809F052C);
-    SkelAnime_InitSV(globalCtx, &this->unk14C, &D_60041A8, &D_60009A0, &this->unk190, &this->unk1FC, 0x12);
+    SkelAnime_InitSV(globalCtx, &this->unk14C, &D_60041A8, &D_60009A0, this->unk190, this->unk1FC, 0x12);
     Collider_InitCylinder(globalCtx, &this->unk26C);
     Collider_LoadCylinderAlt(globalCtx, &this->unk26C, &this->actor, &D_809F03E0);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Circle, 35.0f);
     this->actor.textId = D_809F040C[this->actor.params];
     Actor_SetScale(&this->actor, 0.01f);
-    this->actor.collideData.mass = 0xFF;
+    this->actor.collideData.mass = MASS_IMMOVABLE;
     this->unk2BB = 1;
     this->unk2BC = 1;
     this->unk2BD = 0;
@@ -145,7 +141,7 @@ void func_809EF51C(EnDns* arg0, u8 arg1) {
 }
 
 u32 func_809EF5A4(EnDns* arg0) {
-    if ((CUR_CAPACITY(7) != 0) && (gSaveContext.inventory.ammo[gItemSlots[1]] >= (s32)CUR_CAPACITY(7))) {
+    if ((CUR_CAPACITY(7) != 0) && (AMMO(1) >= (s32)CUR_CAPACITY(7))) {
         return 1U;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
@@ -158,7 +154,7 @@ u32 func_809EF5A4(EnDns* arg0) {
 }
 
 u32 func_809EF658(EnDns* arg0) {
-    if ((CUR_CAPACITY(6) != 0) && (gSaveContext.inventory.ammo[*gItemSlots] >= (s32)CUR_CAPACITY(6))) {
+    if ((CUR_CAPACITY(6) != 0) && (AMMO(0) >= (s32)CUR_CAPACITY(6))) {
         return 1U;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
@@ -204,11 +200,10 @@ u32 func_809EF800(EnDns* arg0) {
 }
 
 u32 func_809EF854(EnDns* arg0) {
-    if (!(gBitFlags[0x13] & gSaveContext.inventory.questItems)) {
+    if (!CHECK_QUEST_ITEM(0x13)) {
         return 3U;
     }
-    if (gSaveContext.inventory.ammo[gItemSlots[2]] >=
-        (s32)gUpgradeCapacities[1][(s32)(gSaveContext.inventory.upgrades & gUpgradeMasks[1]) >> gUpgradeShifts[1]]) {
+    if (AMMO(2) >= CUR_CAPACITY(1)) {
         return 1U;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
@@ -221,7 +216,7 @@ u32 func_809EF8F4(EnDns* arg0) {
     if (Item_CheckObtainability(3U) == 0xFF) {
         return 3U;
     }
-    if (gSaveContext.inventory.ammo[gItemSlots[3]] >= CUR_CAPACITY(0)) {
+    if (AMMO(3) >= CUR_CAPACITY(0)) {
         return 1U;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
@@ -244,34 +239,34 @@ u32 func_809EF9A4(EnDns* arg0) {
 }
 
 void func_809EF9F8(EnDns* arg0) {
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFA28(EnDns* arg0) {
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFA58(EnDns* arg0) {
     gSaveContext.itemGetInf[0] |= 0x800;
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFA9C(EnDns* arg0) {
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFACC(EnDns* arg0) {
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFAFC(EnDns* arg0) {
     gSaveContext.infTable[0x19] |= 4;
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFB40(EnDns* arg0) {
     gSaveContext.infTable[0x19] |= 8;
-    Rupees_ChangeBy((s16)(arg0->unk2C0->unk0 * -1));
+    Rupees_ChangeBy(-arg0->unk2C0->unk0);
 }
 
 void func_809EFB84(EnDns* arg0, GlobalContext* arg1) {
@@ -286,78 +281,66 @@ void func_809EFBC8(EnDns* arg0, GlobalContext* arg1) {
     arg0->actor.posRot.rot.y = arg0->actor.shape.rot.y;
     if (func_8002F194(&arg0->actor, arg1) != 0) {
         arg0->unk268 = func_809EFC9C;
-        return;
-    }
-    if ((arg0->unk26C.base.ocFlags1 & 2) || (arg0->actor.unk_10C != 0)) {
-        arg0->actor.flags |= 0x10000;
     } else {
-        arg0->actor.flags &= 0xFFFEFFFF;
-    }
-    if (arg0->actor.xzDistFromLink < 130.0f) {
-        func_8002F2F4(&arg0->actor, arg1);
+        if ((arg0->unk26C.base.ocFlags1 & 2) || (arg0->actor.unk_10C != 0)) {
+            arg0->actor.flags |= 0x10000;
+        } else {
+            arg0->actor.flags &= ~0x10000;
+        }
+        if (arg0->actor.xzDistFromLink < 130.0f) {
+            func_8002F2F4(&arg0->actor, arg1);
+        }
     }
 }
 
 void func_809EFC9C(EnDns* arg0, GlobalContext* arg1) {
-    u32 temp_v0_2;
-    u8 temp_v0;
-
     if ((func_8010BDBC(&arg1->msgCtx) == 4) && (func_80106BC8(arg1) != 0)) {
-        temp_v0 = arg1->msgCtx.choiceIndex;
-        switch (temp_v0) { /* switch 1; irregular */
-            case 0:        /* switch 1 */
-                temp_v0_2 = arg0->unk2C0->unk8(arg0);
-                switch (temp_v0_2) { /* switch 2 */
-                    case 0:          /* switch 2 */
+        switch (arg1->msgCtx.choiceIndex) {
+            case 0:
+                switch (arg0->unk2C0->unk8(arg0)) {
+                    case 0:
                         func_8010B720(arg1, 0x10A5U);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case 1: /* switch 2 */
+                    case 1:
                         func_8010B720(arg1, 0x10A6U);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case 3: /* switch 2 */
+                    case 3:
                         func_8010B720(arg1, 0x10DEU);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case 2: /* switch 2 */
-                    case 4: /* switch 2 */
+                    case 2:
+                    case 4:
                         func_8010B720(arg1, 0x10A7U);
                         arg0->unk268 = func_809EFEE8;
                         return;
                 }
                 break;
-            case 1: /* switch 1 */
+            case 1:
                 func_8010B720(arg1, 0x10A4U);
                 arg0->unk268 = func_809F008C;
                 break;
         }
-    } else {
-        // default:                                        /* switch 2 */
     }
 }
 
 void func_809EFDD0(Actor* arg0, GlobalContext* arg1) {
-    s16 temp_v0;
-
-    temp_v0 = arg0->params;
-    if (temp_v0 == 9) {
-        if (((s32)(gSaveContext.inventory.upgrades & gUpgradeMasks[6]) >> gUpgradeShifts[6]) < 2) {
+    if (arg0->params == 9) {
+        if (CUR_UPG_VALUE(6) < 2) {
             func_8002F434(arg0, arg1, 0x77, 130.0f, 100.0f);
-            return;
+        } else {
+            func_8002F434(arg0, arg1, 0x78, 130.0f, 100.0f);
         }
-        func_8002F434(arg0, arg1, 0x78, 130.0f, 100.0f);
-        return;
-    }
-    if (temp_v0 == 0xA) {
-        if (((s32)(gSaveContext.inventory.upgrades & gUpgradeMasks[7]) >> gUpgradeShifts[7]) < 2) {
+    } else if (arg0->params == 0xA) {
+        if (CUR_UPG_VALUE(7) < 2) {
             func_8002F434(arg0, arg1, 0x79, 130.0f, 100.0f);
-            return;
+        } else {
+            func_8002F434(arg0, arg1, 0x7A, 130.0f, 100.0f);
         }
-        func_8002F434(arg0, arg1, 0x7A, 130.0f, 100.0f);
-        return;
+    } else {
+        func_8002F434(arg0, arg1, ((EnDns*)arg0)->unk2C0->unk4, 130.0f, 100.0f);
     }
-    func_8002F434(arg0, arg1, ((EnDns*)arg0)->unk2C0->unk4, 130.0f, 100.0f);
 }
 
 void func_809EFEE8(EnDns* arg0, GlobalContext* arg1) {
@@ -372,9 +355,9 @@ void func_809EFF50(EnDns* arg0, GlobalContext* arg1) {
     if (Actor_HasParent(&arg0->actor, arg1) != 0) {
         arg0->actor.parent = NULL;
         arg0->unk268 = func_809EFF98;
-        return;
+    } else {
+        func_809EFDD0(&arg0->actor, arg1);
     }
-    func_809EFDD0(&arg0->actor, arg1);
 }
 
 void func_809EFF98(EnDns* arg0, GlobalContext* globalCtx) {
@@ -412,7 +395,7 @@ void func_809F0100(EnDns* arg0, GlobalContext* arg1) {
     f32 f = SkelAnime_GetFrameCount(&D_6004404);
 
     if (arg0->unk14C.animCurrentFrame == f) {
-        Audio_PlayActorSound2(&arg0->actor, 0x3987U);
+        Audio_PlayActorSound2(&arg0->actor, NA_SE_EN_AKINDONUTS_HIDE);
         arg0->unk268 = func_809F017C;
         arg0->unk2BC = 0;
         arg0->unk2C4 = arg0->actor.posRot.pos.y;
@@ -425,23 +408,21 @@ void func_809F017C(EnDns* arg0, GlobalContext* arg1) {
     s32 var_s0;
 
     var_fv0 = arg0->unk2C4 - arg0->actor.posRot.pos.y;
-    if (!(arg0->unk2B8 & 3)) {
+    if ((arg0->unk2B8 % 4) == 0) {
         sp38.x = arg0->actor.posRot.pos.x;
         sp38.y = arg0->unk2C4;
         sp38.z = arg0->actor.posRot.pos.z;
-        func_80028990(arg1, 20.0f, (Vec3f*)&sp38);
+        func_80028990(arg1, 20.0f, &sp38);
     }
     arg0->actor.shape.rot.y += 0x2000;
     if (var_fv0 > 400.0f) {
-        if ((u8)arg0->unk2BD != 0) {
+        if (arg0->unk2BD != 0) {
             sp38.x = arg0->actor.posRot.pos.x;
             sp38.y = arg0->unk2C4;
             sp38.z = arg0->actor.posRot.pos.z;
-            var_s0 = 0;
-            do {
-                Item_DropCollectible(arg1, (Vec3f*)&sp38, 3);
-                var_s0 += 1;
-            } while (var_s0 != 3);
+            for (var_s0 = 0; var_s0 < 3; var_s0++) {
+                Item_DropCollectible(arg1, &sp38, 3);
+            }
         }
         Actor_Kill(&arg0->actor);
     }
@@ -451,7 +432,7 @@ void EnDns_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnDns* this = (EnDns*)thisx;
     s32 pad;
 
-    this->unk2B8 += 1;
+    this->unk2B8++;
     this->actor.textId = D_809F040C[this->actor.params];
     Actor_SetHeight(&this->actor, 60.0f);
     Actor_SetScale(&this->actor, 0.01f);
@@ -471,6 +452,6 @@ void EnDns_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnDns* this = (EnDns*)thisx;
 
     func_80093D18(globalCtx->state.gfxCtx);
-    SkelAnime_DrawSV(globalCtx, this->unk14C.skeleton, this->unk14C.limbDrawTbl, (s32)this->unk14C.dListCount, NULL,
-                     NULL, &this->actor);
+    SkelAnime_DrawSV(globalCtx, this->unk14C.skeleton, this->unk14C.limbDrawTbl, this->unk14C.dListCount, NULL, NULL,
+                     &this->actor);
 }
