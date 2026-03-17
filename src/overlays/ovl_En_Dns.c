@@ -9,21 +9,21 @@ void EnDns_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnDns_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnDns_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-u32 func_809EF5A4_8t0(EnDns* arg0);
-u32 func_809EF658_8t1(EnDns* arg0);
-u32 func_809EF70C_8t2910(EnDns* arg0);
-u32 func_809EF73C_8t3(EnDns* arg0);
-u32 func_809EF800_8t4(EnDns* arg0);
-u32 func_809EF854_8t5(EnDns* arg0);
-u32 func_809EF8F4_8t6(EnDns* arg0);
-u32 func_809EF9A4_8t78(EnDns* arg0);
+u32 EnDns_CheckPurchase_DekuNuts(EnDns* arg0);
+u32 EnDns_CheckPurchase_DekuSticks(EnDns* arg0);
+u32 EnDns_CheckPurchase_Generic(EnDns* arg0);
+u32 EnDns_CheckPurchase_DekuSeeds(EnDns* arg0);
+u32 EnDns_CheckPurchase_DekuShield(EnDns* arg0);
+u32 EnDns_CheckPurchase_Bombs(EnDns* arg0);
+u32 EnDns_CheckPurchase_Arrows(EnDns* arg0);
+u32 EnDns_CheckPurchase_Potion(EnDns* arg0);
 void func_809EF9F8_Ct13478(EnDns* arg0);
-void func_809EFA28_Ct0(EnDns* arg0);
-void func_809EFA58_Ct2(EnDns* arg0);
-void func_809EFA9C_Ct5(EnDns* arg0);
-void func_809EFACC_Ct6(EnDns* arg0);
-void func_809EFAFC_Ct9(EnDns* arg0);
-void func_809EFB40_Ct10(EnDns* arg0);
+void EnDns_ConcludePurchase_DekuNuts(EnDns* arg0);
+void EnDns_ConcludePurchase_HeartPiece(EnDns* arg0);
+void EnDns_ConcludePurchase_Bombs(EnDns* arg0);
+void EnDns_ConcludePurchase_Arrows(EnDns* arg0);
+void EnDns_ConcludePurchase_DekuSticksCapacity(EnDns* arg0);
+void EnDns_ConcludePurchase_DekuNutsCapacity(EnDns* arg0);
 void func_809EFB84(EnDns*, GlobalContext*);
 void func_809EFBC8(EnDns*, GlobalContext*);
 void func_809EFC9C(EnDns*, GlobalContext*);
@@ -87,40 +87,40 @@ static char* D_809F0424[] = {
     "デクの棒持てる数を増やす", // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
     "デクの実持てる数を増やす", // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
 };
-static struct_EnDns_2C0ptr D_809F0450_t0_dekunuts = {
-    20, 5, GI_NUTS_5_2, func_809EF5A4_8t0, func_809EFA28_Ct0,
+static EnDnsPurchaseInfo D_809F0450_t0_dekunuts = {
+    20, 5, GI_NUTS_5_2, EnDns_CheckPurchase_DekuNuts, EnDns_ConcludePurchase_DekuNuts,
 };
-static struct_EnDns_2C0ptr D_809F0460_t1_dekusticks = {
-    15, 1, GI_STICKS_1, func_809EF658_8t1, func_809EF9F8_Ct13478,
+static EnDnsPurchaseInfo D_809F0460_t1_dekusticks = {
+    15, 1, GI_STICKS_1, EnDns_CheckPurchase_DekuSticks, func_809EF9F8_Ct13478,
 };
-static struct_EnDns_2C0ptr D_809F0470_t2_heartpiece = {
-    10, 1, GI_HEART_PIECE, func_809EF70C_8t2910, func_809EFA58_Ct2,
+static EnDnsPurchaseInfo D_809F0470_t2_heartpiece = {
+    10, 1, GI_HEART_PIECE, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_HeartPiece,
 };
-static struct_EnDns_2C0ptr D_809F0480_t3_dekuseeds = {
-    40, 30, GI_SEEDS_30, func_809EF73C_8t3, func_809EF9F8_Ct13478,
+static EnDnsPurchaseInfo D_809F0480_t3_dekuseeds = {
+    40, 30, GI_SEEDS_30, EnDns_CheckPurchase_DekuSeeds, func_809EF9F8_Ct13478,
 };
-static struct_EnDns_2C0ptr D_809F0490_t4_dekushield = {
-    50, 1, GI_SHIELD_DEKU, func_809EF800_8t4, func_809EF9F8_Ct13478,
+static EnDnsPurchaseInfo D_809F0490_t4_dekushield = {
+    50, 1, GI_SHIELD_DEKU, EnDns_CheckPurchase_DekuShield, func_809EF9F8_Ct13478,
 };
-static struct_EnDns_2C0ptr D_809F04A0_t5_bombs = {
-    40, 5, GI_BOMBS_5, func_809EF854_8t5, func_809EFA9C_Ct5,
+static EnDnsPurchaseInfo D_809F04A0_t5_bombs = {
+    40, 5, GI_BOMBS_5, EnDns_CheckPurchase_Bombs, EnDns_ConcludePurchase_Bombs,
 };
-static struct_EnDns_2C0ptr D_809F04B0_t6_arrows = {
-    70, 20, GI_ARROWS_LARGE, func_809EF8F4_8t6, func_809EFACC_Ct6,
+static EnDnsPurchaseInfo D_809F04B0_t6_arrows = {
+    70, 20, GI_ARROWS_LARGE, EnDns_CheckPurchase_Arrows, EnDns_ConcludePurchase_Arrows,
 };
-static struct_EnDns_2C0ptr D_809F04C0_t7_redpotion = {
-    40, 1, GI_POTION_RED, func_809EF9A4_8t78, func_809EF9F8_Ct13478,
+static EnDnsPurchaseInfo D_809F04C0_t7_redpotion = {
+    40, 1, GI_POTION_RED, EnDns_CheckPurchase_Potion, func_809EF9F8_Ct13478,
 };
-static struct_EnDns_2C0ptr D_809F04D0_t8_greenpotion = {
-    40, 1, GI_POTION_GREEN, func_809EF9A4_8t78, func_809EF9F8_Ct13478,
+static EnDnsPurchaseInfo D_809F04D0_t8_greenpotion = {
+    40, 1, GI_POTION_GREEN, EnDns_CheckPurchase_Potion, func_809EF9F8_Ct13478,
 };
-static struct_EnDns_2C0ptr D_809F04E0_t9_stickscapacity = {
-    40, 1, GI_STICK_UPGRADE_20, func_809EF70C_8t2910, func_809EFAFC_Ct9,
+static EnDnsPurchaseInfo D_809F04E0_t9_stickscapacity = {
+    40, 1, GI_STICK_UPGRADE_20, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_DekuSticksCapacity,
 };
-static struct_EnDns_2C0ptr D_809F04F0_t10_nutscapacity = {
-    40, 1, GI_NUT_UPGRADE_30, func_809EF70C_8t2910, func_809EFB40_Ct10,
+static EnDnsPurchaseInfo D_809F04F0_t10_nutscapacity = {
+    40, 1, GI_NUT_UPGRADE_30, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_DekuNutsCapacity,
 };
-static struct_EnDns_2C0ptr* D_809F0500[] = {
+static EnDnsPurchaseInfo* D_809F0500[] = {
     &D_809F0450_t0_dekunuts,       // EN_DNS_TYPE_DEKU_NUTS
     &D_809F0460_t1_dekusticks,     // EN_DNS_TYPE_DEKU_STICKS
     &D_809F0470_t2_heartpiece,     // EN_DNS_TYPE_HEART_PIECE
@@ -189,11 +189,11 @@ void func_809EF51C(EnDns* this, u8 arg1) {
                          (u8)(s32)D_809F0538[arg1].unk4, D_809F0538[arg1].unk8);
 }
 
-u32 func_809EF5A4_8t0(EnDns* this) {
+u32 EnDns_CheckPurchase_DekuNuts(EnDns* this) {
     if ((CUR_CAPACITY(UPG_NUTS) != 0) && (AMMO(ITEM_NUT) >= (s32)CUR_CAPACITY(UPG_NUTS))) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_NUT) == ITEM_NONE) {
@@ -202,11 +202,11 @@ u32 func_809EF5A4_8t0(EnDns* this) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF658_8t1(EnDns* this) {
+u32 EnDns_CheckPurchase_DekuSticks(EnDns* this) {
     if ((CUR_CAPACITY(UPG_STICKS) != 0) && (AMMO(ITEM_STICK) >= (s32)CUR_CAPACITY(UPG_STICKS))) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_STICK) == ITEM_NONE) {
@@ -215,21 +215,21 @@ u32 func_809EF658_8t1(EnDns* this) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF70C_8t2910(EnDns* this) {
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+u32 EnDns_CheckPurchase_Generic(EnDns* this) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF73C_8t3(EnDns* this) {
+u32 EnDns_CheckPurchase_DekuSeeds(EnDns* this) {
     if (INV_CONTENT(ITEM_SLINGSHOT) == ITEM_NONE) {
         return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_SLINGSHOT) >= CUR_CAPACITY(UPG_BULLET_BAG)) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_SEEDS) == ITEM_NONE) {
@@ -238,81 +238,81 @@ u32 func_809EF73C_8t3(EnDns* this) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF800_8t4(EnDns* this) {
+u32 EnDns_CheckPurchase_DekuShield(EnDns* this) {
     if (gBitFlags[4] & gSaveContext.inventory.equipment) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF854_8t5(EnDns* this) {
+u32 EnDns_CheckPurchase_Bombs(EnDns* this) {
     if (!CHECK_QUEST_ITEM(QUEST_GORON_RUBY)) {
         return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_BOMB) >= CUR_CAPACITY(UPG_BOMB_BAG)) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF8F4_8t6(EnDns* this) {
+u32 EnDns_CheckPurchase_Arrows(EnDns* this) {
     if (Item_CheckObtainability(ITEM_BOW) == ITEM_NONE) {
         return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_BOW) >= CUR_CAPACITY(UPG_QUIVER)) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF9A4_8t78(EnDns* this) {
+u32 EnDns_CheckPurchase_Potion(EnDns* this) {
     if (!Inventory_HasEmptyBottle()) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < this->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->price) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
 void func_809EF9F8_Ct13478(EnDns* this) {
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
-void func_809EFA28_Ct0(EnDns* this) {
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+void EnDns_ConcludePurchase_DekuNuts(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
-void func_809EFA58_Ct2(EnDns* this) {
+void EnDns_ConcludePurchase_HeartPiece(EnDns* this) {
     gSaveContext.itemGetInf[0] |= 0x800;
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
-void func_809EFA9C_Ct5(EnDns* this) {
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+void EnDns_ConcludePurchase_Bombs(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
-void func_809EFACC_Ct6(EnDns* this) {
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+void EnDns_ConcludePurchase_Arrows(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
-void func_809EFAFC_Ct9(EnDns* this) {
+void EnDns_ConcludePurchase_DekuSticksCapacity(EnDns* this) {
     gSaveContext.infTable[0x19] |= 4;
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
-void func_809EFB40_Ct10(EnDns* this) {
+void EnDns_ConcludePurchase_DekuNutsCapacity(EnDns* this) {
     gSaveContext.infTable[0x19] |= 8;
-    Rupees_ChangeBy(-this->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->price);
 }
 
 void func_809EFB84(EnDns* this, GlobalContext* globalCtx) {
@@ -343,7 +343,7 @@ void func_809EFC9C(EnDns* this, GlobalContext* globalCtx) {
     if ((func_8010BDBC(&globalCtx->msgCtx) == 4) && (func_80106BC8(globalCtx) != 0)) {
         switch (globalCtx->msgCtx.choiceIndex) {
             case 0:
-                switch (this->unk2C0->unk8_checkPurchase(this)) {
+                switch (this->unk2C0->checkPurchase(this)) {
                     case EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES:
                         func_8010B720(globalCtx, 0x10A5);
                         this->unk268 = func_809F008C;
@@ -371,7 +371,7 @@ void func_809EFC9C(EnDns* this, GlobalContext* globalCtx) {
     }
 }
 
-void func_809EFDD0(EnDns* this, GlobalContext* globalCtx) {
+void EnDns_OfferItem(EnDns* this, GlobalContext* globalCtx) {
     if (this->actor.params == EN_DNS_TYPE_DEKU_STICKS_CAPACITY) {
         if (CUR_UPG_VALUE(UPG_STICKS) < 2) {
             func_8002F434(&this->actor, globalCtx, GI_STICK_UPGRADE_20, 130.0f, 100.0f);
@@ -385,24 +385,24 @@ void func_809EFDD0(EnDns* this, GlobalContext* globalCtx) {
             func_8002F434(&this->actor, globalCtx, GI_NUT_UPGRADE_40, 130.0f, 100.0f);
         }
     } else {
-        func_8002F434(&this->actor, globalCtx, this->unk2C0->unk4_gid, 130.0f, 100.0f);
+        func_8002F434(&this->actor, globalCtx, this->unk2C0->gid, 130.0f, 100.0f);
     }
 }
 
 void func_809EFEE8(EnDns* this, GlobalContext* globalCtx) {
     if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        func_809EFDD0(this, globalCtx);
+        EnDns_OfferItem(this, globalCtx);
         this->unk268 = func_809EFF50;
     }
 }
 
 void func_809EFF50(EnDns* this, GlobalContext* globalCtx) {
-    if (Actor_HasParent(&this->actor, globalCtx) != 0) {
+    if (Actor_HasParent(&this->actor, globalCtx)) {
         this->actor.parent = NULL;
         this->unk268 = func_809EFF98;
     } else {
-        func_809EFDD0(this, globalCtx);
+        EnDns_OfferItem(this, globalCtx);
     }
 }
 
@@ -411,7 +411,7 @@ void func_809EFF98(EnDns* this, GlobalContext* globalCtx) {
 
     if (player->stateFlags1 & 0x400) {
         if ((func_8010BDBC(&globalCtx->msgCtx) == 6) && (func_80106BC8(globalCtx) != 0)) {
-            this->unk2C0->unkC(this);
+            this->unk2C0->concludePurchase(this);
             this->unk2BD = 1;
             this->unk2BB = 0;
             this->actor.flags &= ~1;
@@ -419,7 +419,7 @@ void func_809EFF98(EnDns* this, GlobalContext* globalCtx) {
             this->unk268 = func_809F0100;
         }
     } else {
-        this->unk2C0->unkC(this);
+        this->unk2C0->concludePurchase(this);
         this->unk2BD = 1;
         this->unk2BB = 0;
         this->actor.flags &= ~1;
