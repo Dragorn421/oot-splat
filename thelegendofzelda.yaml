@@ -6462,9 +6462,9 @@ segments:
     follows_vram: ovl_Obj_Syokudai
     bss_size: 0x0
     subsegments:
-      - [0xF4EBB0, asm, overlays/ovl_Obj_Timeblock]
+      - [0xF4EBB0, c, overlays/ovl_Obj_Timeblock]
       - [0xF4F6E0, data, overlays/ovl_Obj_Timeblock]
-      - [0xF4F760, rodata, overlays/ovl_Obj_Timeblock]
+      - [0xF4F760, .rodata, overlays/ovl_Obj_Timeblock]
       - [0xF4F860, rodatabin, rodatabin_80BA0C50]
 
   - name: ovl_Obj_Tsubo
