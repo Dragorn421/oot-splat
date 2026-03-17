@@ -20,22 +20,6 @@ typedef enum EnDnsType {
 
 struct EnDns;
 
-typedef enum EnDnsUnk8Result {
-    EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES,
-    EN_DNS_UNK8RESULT_ALREADY_FULL,
-    EN_DNS_UNK8RESULT_OK_ALT,
-    EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW,
-    EN_DNS_UNK8RESULT_OK
-} EnDnsUnk8Result;
-
-typedef struct EnDnsPurchaseInfo {
-    /* 0x00 */ s16 price;
-    /* 0x02 */ s16 unk_2; // unused
-    /* 0x04 */ s32 gid;
-    /* 0x08 */ u32 (*checkPurchase)(struct EnDns*);
-    /* 0x0C */ void (*concludePurchase)(struct EnDns*);
-} EnDnsPurchaseInfo;
-
 typedef struct EnDns {
     /* 0x0000 */ Actor actor;
     /* 0x14C */ SkelAnime unk14C;
@@ -48,7 +32,7 @@ typedef struct EnDns {
     /* 0x2BB */ u8 unk2BB;
     /* 0x2BC */ u8 unk2BC;
     /* 0x2BD */ u8 unk2BD;
-    /* 0x2C0 */ EnDnsPurchaseInfo* unk2C0;
+    /* 0x2C0 */ struct EnDnsPurchaseInfo* unk2C0;
     /* 0x2C4 */ f32 unk2C4;
 } EnDns; // size = 0x02C8
 

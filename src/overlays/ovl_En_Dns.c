@@ -34,6 +34,22 @@ void func_809F008C(EnDns*, GlobalContext*);
 void func_809F0100(EnDns*, GlobalContext*);
 void func_809F017C(EnDns*, GlobalContext*);
 
+typedef enum EnDnsUnk8Result {
+    EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES,
+    EN_DNS_UNK8RESULT_ALREADY_FULL,
+    EN_DNS_UNK8RESULT_OK_ALT,
+    EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW,
+    EN_DNS_UNK8RESULT_OK
+} EnDnsUnk8Result;
+
+typedef struct EnDnsPurchaseInfo {
+    /* 0x00 */ s16 price;
+    /* 0x02 */ s16 unk_2; // unused
+    /* 0x04 */ s32 gid;
+    /* 0x08 */ u32 (*checkPurchase)(struct EnDns*);
+    /* 0x0C */ void (*concludePurchase)(struct EnDns*);
+} EnDnsPurchaseInfo;
+
 typedef struct _struct_D_809F0538_0xC {
     /* 0x0 */ GenericAnimationHeader* unk0; /* inferred */
     /* 0x4 */ u8 unk4;                      /* inferred */
@@ -87,51 +103,51 @@ static char* D_809F0424[] = {
     "デクの棒持てる数を増やす", // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
     "デクの実持てる数を増やす", // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
 };
-static EnDnsPurchaseInfo D_809F0450_t0_dekunuts = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuNuts = {
     20, 5, GI_NUTS_5_2, EnDns_CheckPurchase_DekuNuts, EnDns_ConcludePurchase_DekuNuts,
 };
-static EnDnsPurchaseInfo D_809F0460_t1_dekusticks = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuSticks = {
     15, 1, GI_STICKS_1, EnDns_CheckPurchase_DekuSticks, func_809EF9F8_Ct13478,
 };
-static EnDnsPurchaseInfo D_809F0470_t2_heartpiece = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoHeartPiece = {
     10, 1, GI_HEART_PIECE, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_HeartPiece,
 };
-static EnDnsPurchaseInfo D_809F0480_t3_dekuseeds = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuSeeds = {
     40, 30, GI_SEEDS_30, EnDns_CheckPurchase_DekuSeeds, func_809EF9F8_Ct13478,
 };
-static EnDnsPurchaseInfo D_809F0490_t4_dekushield = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuShield = {
     50, 1, GI_SHIELD_DEKU, EnDns_CheckPurchase_DekuShield, func_809EF9F8_Ct13478,
 };
-static EnDnsPurchaseInfo D_809F04A0_t5_bombs = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoBombs = {
     40, 5, GI_BOMBS_5, EnDns_CheckPurchase_Bombs, EnDns_ConcludePurchase_Bombs,
 };
-static EnDnsPurchaseInfo D_809F04B0_t6_arrows = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoArrows = {
     70, 20, GI_ARROWS_LARGE, EnDns_CheckPurchase_Arrows, EnDns_ConcludePurchase_Arrows,
 };
-static EnDnsPurchaseInfo D_809F04C0_t7_redpotion = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoRedPotion = {
     40, 1, GI_POTION_RED, EnDns_CheckPurchase_Potion, func_809EF9F8_Ct13478,
 };
-static EnDnsPurchaseInfo D_809F04D0_t8_greenpotion = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoGreenPotion = {
     40, 1, GI_POTION_GREEN, EnDns_CheckPurchase_Potion, func_809EF9F8_Ct13478,
 };
-static EnDnsPurchaseInfo D_809F04E0_t9_stickscapacity = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuSticksCapacity = {
     40, 1, GI_STICK_UPGRADE_20, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_DekuSticksCapacity,
 };
-static EnDnsPurchaseInfo D_809F04F0_t10_nutscapacity = {
+static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuNutsCapacity = {
     40, 1, GI_NUT_UPGRADE_30, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_DekuNutsCapacity,
 };
-static EnDnsPurchaseInfo* D_809F0500[] = {
-    &D_809F0450_t0_dekunuts,       // EN_DNS_TYPE_DEKU_NUTS
-    &D_809F0460_t1_dekusticks,     // EN_DNS_TYPE_DEKU_STICKS
-    &D_809F0470_t2_heartpiece,     // EN_DNS_TYPE_HEART_PIECE
-    &D_809F0480_t3_dekuseeds,      // EN_DNS_TYPE_DEKU_SEEDS
-    &D_809F0490_t4_dekushield,     // EN_DNS_TYPE_DEKU_SHIELD
-    &D_809F04A0_t5_bombs,          // EN_DNS_TYPE_BOMBS
-    &D_809F04B0_t6_arrows,         // EN_DNS_TYPE_ARROWS
-    &D_809F04C0_t7_redpotion,      // EN_DNS_TYPE_RED_POTION
-    &D_809F04D0_t8_greenpotion,    // EN_DNS_TYPE_GREEN_POTION
-    &D_809F04E0_t9_stickscapacity, // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
-    &D_809F04F0_t10_nutscapacity,  // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
+static EnDnsPurchaseInfo* sEnDnsPurchaseInfos[] = {
+    &sEnDnsPurchaseInfoDekuNuts,           // EN_DNS_TYPE_DEKU_NUTS
+    &sEnDnsPurchaseInfoDekuSticks,         // EN_DNS_TYPE_DEKU_STICKS
+    &sEnDnsPurchaseInfoHeartPiece,         // EN_DNS_TYPE_HEART_PIECE
+    &sEnDnsPurchaseInfoDekuSeeds,          // EN_DNS_TYPE_DEKU_SEEDS
+    &sEnDnsPurchaseInfoDekuShield,         // EN_DNS_TYPE_DEKU_SHIELD
+    &sEnDnsPurchaseInfoBombs,              // EN_DNS_TYPE_BOMBS
+    &sEnDnsPurchaseInfoArrows,             // EN_DNS_TYPE_ARROWS
+    &sEnDnsPurchaseInfoRedPotion,          // EN_DNS_TYPE_RED_POTION
+    &sEnDnsPurchaseInfoGreenPotion,        // EN_DNS_TYPE_GREEN_POTION
+    &sEnDnsPurchaseInfoDekuSticksCapacity, // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
+    &sEnDnsPurchaseInfoDekuNutsCapacity,   // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
 };
 static InitChainEntry D_809F052C[3] = {
     ICHAIN_S8(naviEnemyId, 78, ICHAIN_CONTINUE),
@@ -170,7 +186,7 @@ void EnDns_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->actor.speedXZ = 0.0f;
     this->actor.velocity.y = 0.0f;
     this->actor.gravity = -1.0f;
-    this->unk2C0 = D_809F0500[this->actor.params];
+    this->unk2C0 = sEnDnsPurchaseInfos[this->actor.params];
     this->unk268 = func_809EFB84;
 }
 
