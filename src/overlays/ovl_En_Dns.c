@@ -51,15 +51,14 @@ typedef struct EnDnsPurchaseInfo {
 } EnDnsPurchaseInfo;
 
 typedef struct _struct_D_809F0538_0xC {
-    /* 0x0 */ GenericAnimationHeader* unk0; /* inferred */
-    /* 0x4 */ u8 unk4;                      /* inferred */
-    /* 0x5 */ char pad5[3];                 /* maybe part of unk4[4]? */
-    /* 0x8 */ f32 unk8;                     /* inferred */
+    /* 0x0 */ AnimationHeader* unk0;
+    /* 0x4 */ u8 unk4;
+    /* 0x8 */ f32 unk8;
 } _struct_D_809F0538_0xC;
 
 extern AnimationHeader D_60009A0;
 extern SkeletonHeader D_60041A8;
-extern GenericAnimationHeader D_6004404;
+extern AnimationHeader D_6004404;
 
 const ActorInit En_Dns_InitVars = {
     ACTOR_EN_DNS,
@@ -155,9 +154,9 @@ static InitChainEntry D_809F052C[3] = {
     ICHAIN_F32(unk_4C, 30, ICHAIN_STOP),
 };
 static struct _struct_D_809F0538_0xC D_809F0538[3] = {
-    { (GenericAnimationHeader*)0x06001108, 0, 0.0f },
-    { (GenericAnimationHeader*)0x06004404, 2, 0.0f },
-    { (GenericAnimationHeader*)0x060009A0, 2, 0.0f },
+    { 0x06001108, 0, 0.0f },
+    { 0x06004404, 2, 0.0f },
+    { 0x060009A0, 2, 0.0f },
 };
 
 void EnDns_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -199,10 +198,10 @@ void EnDns_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 void func_809EF51C(EnDns* this, u8 arg1) {
     s16 temp_ft0;
 
-    temp_ft0 = SkelAnime_GetFrameCount(D_809F0538[arg1].unk0);
+    temp_ft0 = SkelAnime_GetFrameCount(&D_809F0538[arg1].unk0->genericHeader);
     this->unk2BA = arg1;
-    SkelAnime_ChangeAnim(&this->unk14C, (AnimationHeader*)D_809F0538[arg1].unk0, 1.0f, 0.0f, (f32)temp_ft0,
-                         (u8)(s32)D_809F0538[arg1].unk4, D_809F0538[arg1].unk8);
+    SkelAnime_ChangeAnim(&this->unk14C, D_809F0538[arg1].unk0, 1.0f, 0.0f, temp_ft0, D_809F0538[arg1].unk4,
+                         D_809F0538[arg1].unk8);
 }
 
 u32 EnDns_CheckPurchase_DekuNuts(EnDns* this) {
