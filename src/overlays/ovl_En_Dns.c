@@ -87,29 +87,51 @@ static char* D_809F0424[] = {
     "デクの棒持てる数を増やす", // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
     "デクの実持てる数を増やす", // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
 };
-static struct_EnDns_2C0ptr D_809F0450_t0 = { 20, 5, 0x63, func_809EF5A4_8t0, func_809EFA28_Ct0 };
-static struct_EnDns_2C0ptr D_809F0460_t1 = { 15, 1, 7, func_809EF658_8t1, func_809EF9F8_Ct13478 };
-static struct_EnDns_2C0ptr D_809F0470_t2 = { 10, 1, 0x3E, func_809EF70C_8t2910, func_809EFA58_Ct2 };
-static struct_EnDns_2C0ptr D_809F0480_t3 = { 40, 30, 0x69, func_809EF73C_8t3, func_809EF9F8_Ct13478 };
-static struct_EnDns_2C0ptr D_809F0490_t4 = { 50, 1, 0x29, func_809EF800_8t4, func_809EF9F8_Ct13478 };
-static struct_EnDns_2C0ptr D_809F04A0_t5 = { 40, 5, 1, func_809EF854_8t5, func_809EFA9C_Ct5 };
-static struct_EnDns_2C0ptr D_809F04B0_t6 = { 70, 20, 0x4B, func_809EF8F4_8t6, func_809EFACC_Ct6 };
-static struct_EnDns_2C0ptr D_809F04C0_t7 = { 40, 1, 0x10, func_809EF9A4_8t78, func_809EF9F8_Ct13478 };
-static struct_EnDns_2C0ptr D_809F04D0_t8 = { 40, 1, 0x11, func_809EF9A4_8t78, func_809EF9F8_Ct13478 };
-static struct_EnDns_2C0ptr D_809F04E0_t9 = { 40, 1, 0x77, func_809EF70C_8t2910, func_809EFAFC_Ct9 };
-static struct_EnDns_2C0ptr D_809F04F0_t10 = { 40, 1, 0x79, func_809EF70C_8t2910, func_809EFB40_Ct10 };
+static struct_EnDns_2C0ptr D_809F0450_t0_dekunuts = {
+    20, 5, GI_NUTS_5_2, func_809EF5A4_8t0, func_809EFA28_Ct0,
+};
+static struct_EnDns_2C0ptr D_809F0460_t1_dekusticks = {
+    15, 1, GI_STICKS_1, func_809EF658_8t1, func_809EF9F8_Ct13478,
+};
+static struct_EnDns_2C0ptr D_809F0470_t2_heartpiece = {
+    10, 1, GI_HEART_PIECE, func_809EF70C_8t2910, func_809EFA58_Ct2,
+};
+static struct_EnDns_2C0ptr D_809F0480_t3_dekuseeds = {
+    40, 30, GI_SEEDS_30, func_809EF73C_8t3, func_809EF9F8_Ct13478,
+};
+static struct_EnDns_2C0ptr D_809F0490_t4_dekushield = {
+    50, 1, GI_SHIELD_DEKU, func_809EF800_8t4, func_809EF9F8_Ct13478,
+};
+static struct_EnDns_2C0ptr D_809F04A0_t5_bombs = {
+    40, 5, GI_BOMBS_5, func_809EF854_8t5, func_809EFA9C_Ct5,
+};
+static struct_EnDns_2C0ptr D_809F04B0_t6_arrows = {
+    70, 20, GI_ARROWS_LARGE, func_809EF8F4_8t6, func_809EFACC_Ct6,
+};
+static struct_EnDns_2C0ptr D_809F04C0_t7_redpotion = {
+    40, 1, GI_POTION_RED, func_809EF9A4_8t78, func_809EF9F8_Ct13478,
+};
+static struct_EnDns_2C0ptr D_809F04D0_t8_greenpotion = {
+    40, 1, GI_POTION_GREEN, func_809EF9A4_8t78, func_809EF9F8_Ct13478,
+};
+static struct_EnDns_2C0ptr D_809F04E0_t9_stickscapacity = {
+    40, 1, GI_STICK_UPGRADE_20, func_809EF70C_8t2910, func_809EFAFC_Ct9,
+};
+static struct_EnDns_2C0ptr D_809F04F0_t10_nutscapacity = {
+    40, 1, GI_NUT_UPGRADE_30, func_809EF70C_8t2910, func_809EFB40_Ct10,
+};
 static struct_EnDns_2C0ptr* D_809F0500[] = {
-    &D_809F0450_t0,  // EN_DNS_TYPE_DEKU_NUTS
-    &D_809F0460_t1,  // EN_DNS_TYPE_DEKU_STICKS
-    &D_809F0470_t2,  // EN_DNS_TYPE_HEART_PIECE
-    &D_809F0480_t3,  // EN_DNS_TYPE_DEKU_SEEDS
-    &D_809F0490_t4,  // EN_DNS_TYPE_DEKU_SHIELD
-    &D_809F04A0_t5,  // EN_DNS_TYPE_BOMBS
-    &D_809F04B0_t6,  // EN_DNS_TYPE_ARROWS
-    &D_809F04C0_t7,  // EN_DNS_TYPE_RED_POTION
-    &D_809F04D0_t8,  // EN_DNS_TYPE_GREEN_POTION
-    &D_809F04E0_t9,  // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
-    &D_809F04F0_t10, // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
+    &D_809F0450_t0_dekunuts,       // EN_DNS_TYPE_DEKU_NUTS
+    &D_809F0460_t1_dekusticks,     // EN_DNS_TYPE_DEKU_STICKS
+    &D_809F0470_t2_heartpiece,     // EN_DNS_TYPE_HEART_PIECE
+    &D_809F0480_t3_dekuseeds,      // EN_DNS_TYPE_DEKU_SEEDS
+    &D_809F0490_t4_dekushield,     // EN_DNS_TYPE_DEKU_SHIELD
+    &D_809F04A0_t5_bombs,          // EN_DNS_TYPE_BOMBS
+    &D_809F04B0_t6_arrows,         // EN_DNS_TYPE_ARROWS
+    &D_809F04C0_t7_redpotion,      // EN_DNS_TYPE_RED_POTION
+    &D_809F04D0_t8_greenpotion,    // EN_DNS_TYPE_GREEN_POTION
+    &D_809F04E0_t9_stickscapacity, // EN_DNS_TYPE_DEKU_STICKS_CAPACITY
+    &D_809F04F0_t10_nutscapacity,  // EN_DNS_TYPE_DEKU_NUTS_CAPACITY
 };
 static InitChainEntry D_809F052C[3] = {
     ICHAIN_S8(naviEnemyId, 78, ICHAIN_CONTINUE),
@@ -169,98 +191,97 @@ void func_809EF51C(EnDns* arg0, u8 arg1) {
 
 u32 func_809EF5A4_8t0(EnDns* arg0) {
     if ((CUR_CAPACITY(UPG_NUTS) != 0) && (AMMO(ITEM_NUT) >= (s32)CUR_CAPACITY(UPG_NUTS))) {
-        return 1U;
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0U;
+        return EN_DNS_UNK8RESULT_0;
     }
     if (Item_CheckObtainability(ITEM_NUT) == ITEM_NONE) {
-        return 2U;
+        return EN_DNS_UNK8RESULT_2;
     }
-    return 4U;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF658_8t1(EnDns* arg0) {
     if ((CUR_CAPACITY(UPG_STICKS) != 0) && (AMMO(ITEM_STICK) >= (s32)CUR_CAPACITY(UPG_STICKS))) {
-        return 1U;
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0U;
+        return EN_DNS_UNK8RESULT_0;
     }
     if (Item_CheckObtainability(ITEM_STICK) == ITEM_NONE) {
-        return 2U;
+        return EN_DNS_UNK8RESULT_2;
     }
-    return 4U;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF70C_8t2910(EnDns* arg0) {
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0U;
+        return EN_DNS_UNK8RESULT_0;
     }
-    return 4U;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF73C_8t3(EnDns* arg0) {
     if (INV_CONTENT(ITEM_SLINGSHOT) == ITEM_NONE) {
-        return 3U;
+        return EN_DNS_UNK8RESULT_3;
     }
     if (AMMO(ITEM_SLINGSHOT) >= CUR_CAPACITY(UPG_BULLET_BAG)) {
-        return 1U;
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0U;
+        return EN_DNS_UNK8RESULT_0;
     }
     if (Item_CheckObtainability(ITEM_SEEDS) == ITEM_NONE) {
-        return 2U;
+        return EN_DNS_UNK8RESULT_2;
     }
-    return 4U;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF800_8t4(EnDns* arg0) {
     if (gBitFlags[4] & gSaveContext.inventory.equipment) {
-        return 1U;
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0U;
+        return EN_DNS_UNK8RESULT_0;
     }
-    return 4U;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF854_8t5(EnDns* arg0) {
     if (!CHECK_QUEST_ITEM(QUEST_GORON_RUBY)) {
-        return 3U;
+        return EN_DNS_UNK8RESULT_3;
     }
     if (AMMO(ITEM_BOMB) >= CUR_CAPACITY(UPG_BOMB_BAG)) {
-        return 1U;
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0U;
+        return EN_DNS_UNK8RESULT_0;
     }
-    return 4U;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF8F4_8t6(EnDns* arg0) {
     if (Item_CheckObtainability(ITEM_BOW) == ITEM_NONE) {
-        return 3U;
+        return EN_DNS_UNK8RESULT_3;
     }
     if (AMMO(ITEM_BOW) >= CUR_CAPACITY(UPG_QUIVER)) {
-        return 1U;
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0;
-    } else {
-        return 4;
+        return EN_DNS_UNK8RESULT_0;
     }
+    return EN_DNS_UNK8RESULT_4;
 }
 
 u32 func_809EF9A4_8t78(EnDns* arg0) {
-    if (!Inventory_HasEmptyBottle() ) {
-        return 1U;
+    if (!Inventory_HasEmptyBottle()) {
+        return EN_DNS_UNK8RESULT_1;
     }
     if (gSaveContext.rupees < arg0->unk2C0->unk0) {
-        return 0;
+        return EN_DNS_UNK8RESULT_0;
     }
-    return 4;
+    return EN_DNS_UNK8RESULT_4;
 }
 
 void func_809EF9F8_Ct13478(EnDns* arg0) {
@@ -323,20 +344,20 @@ void func_809EFC9C(EnDns* arg0, GlobalContext* arg1) {
         switch (arg1->msgCtx.choiceIndex) {
             case 0:
                 switch (arg0->unk2C0->unk8(arg0)) {
-                    case 0:
+                    case EN_DNS_UNK8RESULT_0:
                         func_8010B720(arg1, 0x10A5);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case 1:
+                    case EN_DNS_UNK8RESULT_1:
                         func_8010B720(arg1, 0x10A6);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case 3:
+                    case EN_DNS_UNK8RESULT_3:
                         func_8010B720(arg1, 0x10DE);
                         arg0->unk268 = func_809F008C;
                         return;
-                    case 2:
-                    case 4:
+                    case EN_DNS_UNK8RESULT_2:
+                    case EN_DNS_UNK8RESULT_4:
                         func_8010B720(arg1, 0x10A7);
                         arg0->unk268 = func_809EFEE8;
                         return;
@@ -350,28 +371,28 @@ void func_809EFC9C(EnDns* arg0, GlobalContext* arg1) {
     }
 }
 
-void func_809EFDD0(Actor* arg0, GlobalContext* arg1) {
-    if (arg0->params == EN_DNS_TYPE_DEKU_STICKS_CAPACITY) {
-        if (CUR_UPG_VALUE(6) < 2) {
-            func_8002F434(arg0, arg1, 0x77, 130.0f, 100.0f);
+void func_809EFDD0(EnDns* arg0, GlobalContext* arg1) {
+    if (arg0->actor.params == EN_DNS_TYPE_DEKU_STICKS_CAPACITY) {
+        if (CUR_UPG_VALUE(UPG_STICKS) < 2) {
+            func_8002F434(&arg0->actor, arg1, GI_STICK_UPGRADE_20, 130.0f, 100.0f);
         } else {
-            func_8002F434(arg0, arg1, 0x78, 130.0f, 100.0f);
+            func_8002F434(&arg0->actor, arg1, GI_STICK_UPGRADE_30, 130.0f, 100.0f);
         }
-    } else if (arg0->params == EN_DNS_TYPE_DEKU_NUTS_CAPACITY) {
-        if (CUR_UPG_VALUE(7) < 2) {
-            func_8002F434(arg0, arg1, 0x79, 130.0f, 100.0f);
+    } else if (arg0->actor.params == EN_DNS_TYPE_DEKU_NUTS_CAPACITY) {
+        if (CUR_UPG_VALUE(UPG_NUTS) < 2) {
+            func_8002F434(&arg0->actor, arg1, GI_NUT_UPGRADE_30, 130.0f, 100.0f);
         } else {
-            func_8002F434(arg0, arg1, 0x7A, 130.0f, 100.0f);
+            func_8002F434(&arg0->actor, arg1, GI_NUT_UPGRADE_40, 130.0f, 100.0f);
         }
     } else {
-        func_8002F434(arg0, arg1, ((EnDns*)arg0)->unk2C0->unk4, 130.0f, 100.0f);
+        func_8002F434(&arg0->actor, arg1, arg0->unk2C0->unk4_gid, 130.0f, 100.0f);
     }
 }
 
 void func_809EFEE8(EnDns* arg0, GlobalContext* arg1) {
     if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
         func_80106CCC(arg1);
-        func_809EFDD0(&arg0->actor, arg1);
+        func_809EFDD0(arg0, arg1);
         arg0->unk268 = func_809EFF50;
     }
 }
@@ -381,7 +402,7 @@ void func_809EFF50(EnDns* arg0, GlobalContext* arg1) {
         arg0->actor.parent = NULL;
         arg0->unk268 = func_809EFF98;
     } else {
-        func_809EFDD0(&arg0->actor, arg1);
+        func_809EFDD0(arg0, arg1);
     }
 }
 
