@@ -180,20 +180,20 @@ void EnDns_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Collider_DestroyCylinder(globalCtx, &this->unk26C);
 }
 
-void func_809EF51C(EnDns* arg0, u8 arg1) {
+void func_809EF51C(EnDns* this, u8 arg1) {
     s16 temp_ft0;
 
     temp_ft0 = SkelAnime_GetFrameCount(D_809F0538[arg1].unk0);
-    arg0->unk2BA = arg1;
-    SkelAnime_ChangeAnim(&arg0->unk14C, (AnimationHeader*)D_809F0538[arg1].unk0, 1.0f, 0.0f, (f32)temp_ft0,
+    this->unk2BA = arg1;
+    SkelAnime_ChangeAnim(&this->unk14C, (AnimationHeader*)D_809F0538[arg1].unk0, 1.0f, 0.0f, (f32)temp_ft0,
                          (u8)(s32)D_809F0538[arg1].unk4, D_809F0538[arg1].unk8);
 }
 
-u32 func_809EF5A4_8t0(EnDns* arg0) {
+u32 func_809EF5A4_8t0(EnDns* this) {
     if ((CUR_CAPACITY(UPG_NUTS) != 0) && (AMMO(ITEM_NUT) >= (s32)CUR_CAPACITY(UPG_NUTS))) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_NUT) == ITEM_NONE) {
@@ -202,11 +202,11 @@ u32 func_809EF5A4_8t0(EnDns* arg0) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF658_8t1(EnDns* arg0) {
+u32 func_809EF658_8t1(EnDns* this) {
     if ((CUR_CAPACITY(UPG_STICKS) != 0) && (AMMO(ITEM_STICK) >= (s32)CUR_CAPACITY(UPG_STICKS))) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_STICK) == ITEM_NONE) {
@@ -215,21 +215,21 @@ u32 func_809EF658_8t1(EnDns* arg0) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF70C_8t2910(EnDns* arg0) {
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+u32 func_809EF70C_8t2910(EnDns* this) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF73C_8t3(EnDns* arg0) {
+u32 func_809EF73C_8t3(EnDns* this) {
     if (INV_CONTENT(ITEM_SLINGSHOT) == ITEM_NONE) {
         return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_SLINGSHOT) >= CUR_CAPACITY(UPG_BULLET_BAG)) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     if (Item_CheckObtainability(ITEM_SEEDS) == ITEM_NONE) {
@@ -238,239 +238,239 @@ u32 func_809EF73C_8t3(EnDns* arg0) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF800_8t4(EnDns* arg0) {
+u32 func_809EF800_8t4(EnDns* this) {
     if (gBitFlags[4] & gSaveContext.inventory.equipment) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF854_8t5(EnDns* arg0) {
+u32 func_809EF854_8t5(EnDns* this) {
     if (!CHECK_QUEST_ITEM(QUEST_GORON_RUBY)) {
         return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_BOMB) >= CUR_CAPACITY(UPG_BOMB_BAG)) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF8F4_8t6(EnDns* arg0) {
+u32 func_809EF8F4_8t6(EnDns* this) {
     if (Item_CheckObtainability(ITEM_BOW) == ITEM_NONE) {
         return EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW;
     }
     if (AMMO(ITEM_BOW) >= CUR_CAPACITY(UPG_QUIVER)) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-u32 func_809EF9A4_8t78(EnDns* arg0) {
+u32 func_809EF9A4_8t78(EnDns* this) {
     if (!Inventory_HasEmptyBottle()) {
         return EN_DNS_UNK8RESULT_ALREADY_FULL;
     }
-    if (gSaveContext.rupees < arg0->unk2C0->unk0) {
+    if (gSaveContext.rupees < this->unk2C0->unk0) {
         return EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES;
     }
     return EN_DNS_UNK8RESULT_OK;
 }
 
-void func_809EF9F8_Ct13478(EnDns* arg0) {
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+void func_809EF9F8_Ct13478(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFA28_Ct0(EnDns* arg0) {
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+void func_809EFA28_Ct0(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFA58_Ct2(EnDns* arg0) {
+void func_809EFA58_Ct2(EnDns* this) {
     gSaveContext.itemGetInf[0] |= 0x800;
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFA9C_Ct5(EnDns* arg0) {
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+void func_809EFA9C_Ct5(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFACC_Ct6(EnDns* arg0) {
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+void func_809EFACC_Ct6(EnDns* this) {
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFAFC_Ct9(EnDns* arg0) {
+void func_809EFAFC_Ct9(EnDns* this) {
     gSaveContext.infTable[0x19] |= 4;
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFB40_Ct10(EnDns* arg0) {
+void func_809EFB40_Ct10(EnDns* this) {
     gSaveContext.infTable[0x19] |= 8;
-    Rupees_ChangeBy(-arg0->unk2C0->unk0);
+    Rupees_ChangeBy(-this->unk2C0->unk0);
 }
 
-void func_809EFB84(EnDns* arg0, GlobalContext* arg1) {
-    if (arg0->unk14C.animCurrentFrame == arg0->unk14C.animFrameCount) {
-        arg0->unk268 = func_809EFBC8;
-        func_809EF51C(arg0, 0);
+void func_809EFB84(EnDns* this, GlobalContext* globalCtx) {
+    if (this->unk14C.animCurrentFrame == this->unk14C.animFrameCount) {
+        this->unk268 = func_809EFBC8;
+        func_809EF51C(this, 0);
     }
 }
 
-void func_809EFBC8(EnDns* arg0, GlobalContext* arg1) {
-    Math_SmoothScaleMaxMinS(&arg0->actor.shape.rot.y, arg0->actor.yawTowardsLink, 3, 0x7D0, 0);
-    arg0->actor.posRot.rot.y = arg0->actor.shape.rot.y;
-    if (func_8002F194(&arg0->actor, arg1) != 0) {
-        arg0->unk268 = func_809EFC9C;
+void func_809EFBC8(EnDns* this, GlobalContext* globalCtx) {
+    Math_SmoothScaleMaxMinS(&this->actor.shape.rot.y, this->actor.yawTowardsLink, 3, 0x7D0, 0);
+    this->actor.posRot.rot.y = this->actor.shape.rot.y;
+    if (func_8002F194(&this->actor, globalCtx) != 0) {
+        this->unk268 = func_809EFC9C;
     } else {
-        if ((arg0->unk26C.base.ocFlags1 & 2) || (arg0->actor.unk_10C != 0)) {
-            arg0->actor.flags |= 0x10000;
+        if ((this->unk26C.base.ocFlags1 & 2) || (this->actor.unk_10C != 0)) {
+            this->actor.flags |= 0x10000;
         } else {
-            arg0->actor.flags &= ~0x10000;
+            this->actor.flags &= ~0x10000;
         }
-        if (arg0->actor.xzDistFromLink < 130.0f) {
-            func_8002F2F4(&arg0->actor, arg1);
+        if (this->actor.xzDistFromLink < 130.0f) {
+            func_8002F2F4(&this->actor, globalCtx);
         }
     }
 }
 
-void func_809EFC9C(EnDns* arg0, GlobalContext* arg1) {
-    if ((func_8010BDBC(&arg1->msgCtx) == 4) && (func_80106BC8(arg1) != 0)) {
-        switch (arg1->msgCtx.choiceIndex) {
+void func_809EFC9C(EnDns* this, GlobalContext* globalCtx) {
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 4) && (func_80106BC8(globalCtx) != 0)) {
+        switch (globalCtx->msgCtx.choiceIndex) {
             case 0:
-                switch (arg0->unk2C0->unk8_checkPurchase(arg0)) {
+                switch (this->unk2C0->unk8_checkPurchase(this)) {
                     case EN_DNS_UNK8RESULT_NOT_ENOUGH_RUPEES:
-                        func_8010B720(arg1, 0x10A5);
-                        arg0->unk268 = func_809F008C;
+                        func_8010B720(globalCtx, 0x10A5);
+                        this->unk268 = func_809F008C;
                         return;
                     case EN_DNS_UNK8RESULT_ALREADY_FULL:
-                        func_8010B720(arg1, 0x10A6);
-                        arg0->unk268 = func_809F008C;
+                        func_8010B720(globalCtx, 0x10A6);
+                        this->unk268 = func_809F008C;
                         return;
                     case EN_DNS_UNK8RESULT_CANT_BUY_RIGHT_NOW:
-                        func_8010B720(arg1, 0x10DE);
-                        arg0->unk268 = func_809F008C;
+                        func_8010B720(globalCtx, 0x10DE);
+                        this->unk268 = func_809F008C;
                         return;
                     case EN_DNS_UNK8RESULT_OK_ALT:
                     case EN_DNS_UNK8RESULT_OK:
-                        func_8010B720(arg1, 0x10A7);
-                        arg0->unk268 = func_809EFEE8;
+                        func_8010B720(globalCtx, 0x10A7);
+                        this->unk268 = func_809EFEE8;
                         return;
                 }
                 break;
             case 1:
-                func_8010B720(arg1, 0x10A4);
-                arg0->unk268 = func_809F008C;
+                func_8010B720(globalCtx, 0x10A4);
+                this->unk268 = func_809F008C;
                 break;
         }
     }
 }
 
-void func_809EFDD0(EnDns* arg0, GlobalContext* arg1) {
-    if (arg0->actor.params == EN_DNS_TYPE_DEKU_STICKS_CAPACITY) {
+void func_809EFDD0(EnDns* this, GlobalContext* globalCtx) {
+    if (this->actor.params == EN_DNS_TYPE_DEKU_STICKS_CAPACITY) {
         if (CUR_UPG_VALUE(UPG_STICKS) < 2) {
-            func_8002F434(&arg0->actor, arg1, GI_STICK_UPGRADE_20, 130.0f, 100.0f);
+            func_8002F434(&this->actor, globalCtx, GI_STICK_UPGRADE_20, 130.0f, 100.0f);
         } else {
-            func_8002F434(&arg0->actor, arg1, GI_STICK_UPGRADE_30, 130.0f, 100.0f);
+            func_8002F434(&this->actor, globalCtx, GI_STICK_UPGRADE_30, 130.0f, 100.0f);
         }
-    } else if (arg0->actor.params == EN_DNS_TYPE_DEKU_NUTS_CAPACITY) {
+    } else if (this->actor.params == EN_DNS_TYPE_DEKU_NUTS_CAPACITY) {
         if (CUR_UPG_VALUE(UPG_NUTS) < 2) {
-            func_8002F434(&arg0->actor, arg1, GI_NUT_UPGRADE_30, 130.0f, 100.0f);
+            func_8002F434(&this->actor, globalCtx, GI_NUT_UPGRADE_30, 130.0f, 100.0f);
         } else {
-            func_8002F434(&arg0->actor, arg1, GI_NUT_UPGRADE_40, 130.0f, 100.0f);
+            func_8002F434(&this->actor, globalCtx, GI_NUT_UPGRADE_40, 130.0f, 100.0f);
         }
     } else {
-        func_8002F434(&arg0->actor, arg1, arg0->unk2C0->unk4_gid, 130.0f, 100.0f);
+        func_8002F434(&this->actor, globalCtx, this->unk2C0->unk4_gid, 130.0f, 100.0f);
     }
 }
 
-void func_809EFEE8(EnDns* arg0, GlobalContext* arg1) {
-    if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
-        func_80106CCC(arg1);
-        func_809EFDD0(arg0, arg1);
-        arg0->unk268 = func_809EFF50;
+void func_809EFEE8(EnDns* this, GlobalContext* globalCtx) {
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
+        func_80106CCC(globalCtx);
+        func_809EFDD0(this, globalCtx);
+        this->unk268 = func_809EFF50;
     }
 }
 
-void func_809EFF50(EnDns* arg0, GlobalContext* arg1) {
-    if (Actor_HasParent(&arg0->actor, arg1) != 0) {
-        arg0->actor.parent = NULL;
-        arg0->unk268 = func_809EFF98;
+void func_809EFF50(EnDns* this, GlobalContext* globalCtx) {
+    if (Actor_HasParent(&this->actor, globalCtx) != 0) {
+        this->actor.parent = NULL;
+        this->unk268 = func_809EFF98;
     } else {
-        func_809EFDD0(arg0, arg1);
+        func_809EFDD0(this, globalCtx);
     }
 }
 
-void func_809EFF98(EnDns* arg0, GlobalContext* globalCtx) {
+void func_809EFF98(EnDns* this, GlobalContext* globalCtx) {
     Player* player = PLAYER;
 
     if (player->stateFlags1 & 0x400) {
         if ((func_8010BDBC(&globalCtx->msgCtx) == 6) && (func_80106BC8(globalCtx) != 0)) {
-            arg0->unk2C0->unkC(arg0);
-            arg0->unk2BD = 1;
-            arg0->unk2BB = 0;
-            arg0->actor.flags &= ~1;
-            func_809EF51C(arg0, 1);
-            arg0->unk268 = func_809F0100;
+            this->unk2C0->unkC(this);
+            this->unk2BD = 1;
+            this->unk2BB = 0;
+            this->actor.flags &= ~1;
+            func_809EF51C(this, 1);
+            this->unk268 = func_809F0100;
         }
     } else {
-        arg0->unk2C0->unkC(arg0);
-        arg0->unk2BD = 1;
-        arg0->unk2BB = 0;
-        arg0->actor.flags &= ~1;
-        func_809EF51C(arg0, 1);
-        arg0->unk268 = func_809F0100;
+        this->unk2C0->unkC(this);
+        this->unk2BD = 1;
+        this->unk2BB = 0;
+        this->actor.flags &= ~1;
+        func_809EF51C(this, 1);
+        this->unk268 = func_809F0100;
     }
 }
 
-void func_809F008C(EnDns* arg0, GlobalContext* arg1) {
-    if ((func_8010BDBC(&arg1->msgCtx) == 6) && (func_80106BC8(arg1) != 0)) {
-        arg0->unk2BB = 0;
-        arg0->actor.flags &= ~1;
-        func_809EF51C(arg0, 1);
-        arg0->unk268 = func_809F0100;
+void func_809F008C(EnDns* this, GlobalContext* globalCtx) {
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 6) && (func_80106BC8(globalCtx) != 0)) {
+        this->unk2BB = 0;
+        this->actor.flags &= ~1;
+        func_809EF51C(this, 1);
+        this->unk268 = func_809F0100;
     }
 }
 
-void func_809F0100(EnDns* arg0, GlobalContext* arg1) {
+void func_809F0100(EnDns* this, GlobalContext* globalCtx) {
     f32 f = SkelAnime_GetFrameCount(&D_6004404);
 
-    if (arg0->unk14C.animCurrentFrame == f) {
-        Audio_PlayActorSound2(&arg0->actor, NA_SE_EN_AKINDONUTS_HIDE);
-        arg0->unk268 = func_809F017C;
-        arg0->unk2BC = 0;
-        arg0->unk2C4 = arg0->actor.posRot.pos.y;
+    if (this->unk14C.animCurrentFrame == f) {
+        Audio_PlayActorSound2(&this->actor, NA_SE_EN_AKINDONUTS_HIDE);
+        this->unk268 = func_809F017C;
+        this->unk2BC = 0;
+        this->unk2C4 = this->actor.posRot.pos.y;
     }
 }
 
-void func_809F017C(EnDns* arg0, GlobalContext* arg1) {
+void func_809F017C(EnDns* this, GlobalContext* globalCtx) {
     f32 var_fv0;
     Vec3f sp38;
     s32 var_s0;
 
-    var_fv0 = arg0->unk2C4 - arg0->actor.posRot.pos.y;
-    if ((arg0->unk2B8 % 4) == 0) {
-        sp38.x = arg0->actor.posRot.pos.x;
-        sp38.y = arg0->unk2C4;
-        sp38.z = arg0->actor.posRot.pos.z;
-        func_80028990(arg1, 20.0f, &sp38);
+    var_fv0 = this->unk2C4 - this->actor.posRot.pos.y;
+    if ((this->unk2B8 % 4) == 0) {
+        sp38.x = this->actor.posRot.pos.x;
+        sp38.y = this->unk2C4;
+        sp38.z = this->actor.posRot.pos.z;
+        func_80028990(globalCtx, 20.0f, &sp38);
     }
-    arg0->actor.shape.rot.y += 0x2000;
+    this->actor.shape.rot.y += 0x2000;
     if (var_fv0 > 400.0f) {
-        if (arg0->unk2BD != 0) {
-            sp38.x = arg0->actor.posRot.pos.x;
-            sp38.y = arg0->unk2C4;
-            sp38.z = arg0->actor.posRot.pos.z;
+        if (this->unk2BD != 0) {
+            sp38.x = this->actor.posRot.pos.x;
+            sp38.y = this->unk2C4;
+            sp38.z = this->actor.posRot.pos.z;
             for (var_s0 = 0; var_s0 < 3; var_s0++) {
-                Item_DropCollectible(arg1, &sp38, 3);
+                Item_DropCollectible(globalCtx, &sp38, 3);
             }
         }
-        Actor_Kill(&arg0->actor);
+        Actor_Kill(&this->actor);
     }
 }
 
