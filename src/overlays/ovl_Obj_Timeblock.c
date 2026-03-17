@@ -15,16 +15,11 @@ void ObjTimeblock_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void ObjTimeblock_Update(Actor* thisx, GlobalContext* globalCtx);
 void ObjTimeblock_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_80BA0058(ObjTimeblock* arg0, GlobalContext* arg1);
-void func_80BA00CC(GlobalContext* arg0, s32 arg1);
-s32 func_80BA032C(ObjTimeblock* arg0, GlobalContext* arg1);
 s32 func_80BA040C(ObjTimeblock*, GlobalContext*);
 s32 func_80BA0480(ObjTimeblock*, GlobalContext*);
-void func_80BA04F8(ObjTimeblock* arg0);
 void func_80BA0508(ObjTimeblock* arg0, GlobalContext* arg1);
 void func_80BA0514(ObjTimeblock* arg0);
 void func_80BA0524(ObjTimeblock* arg0, GlobalContext* arg1);
-void func_80BA06AC(ObjTimeblock* arg0, GlobalContext* arg1);
 void func_80BA0758(ObjTimeblock* arg0);
 void func_80BA0768(ObjTimeblock* arg0, GlobalContext* arg1);
 void func_80BA083C(ObjTimeblock* arg0);
@@ -62,44 +57,45 @@ static Color_RGB8 D_80BA0B38[8] = {
     { 0x50, 0x6E, 0x8C }, { 0x46, 0xA0, 0xE1 }, { 0x50, 0x64, 0x82 }, { 0x64, 0x6E, 0xBE },
 };
 
-s32 func_80B9FFA0(ObjTimeblock* arg0) {
+s32 func_80B9FFA0(ObjTimeblock* this) {
     s32 var_a1;
     s32 var_v1;
     s32 var_v1_2;
 
-    if (!((arg0->dyna.actor.params >> 0xA) & 1)) {
-        if (arg0->unk177 == 0) {
-            return arg0->unk175;
+    if (!((this->dyna.actor.params >> 0xA) & 1)) {
+        if (this->unk177 == 0) {
+            return this->unk175;
         }
-        if ((arg0->dyna.actor.params >> 0xF) & 1) {
+        if ((this->dyna.actor.params >> 0xF) & 1) {
             var_a1 = 1;
         } else {
             var_a1 = 0;
         }
-        if (arg0->unk177 == 1) {
-            return arg0->unk174 ^ var_a1;
+        if (this->unk177 == 1) {
+            return this->unk174 ^ var_a1;
         }
         if (LINK_AGE_IN_YEARS == 5) {
             var_v1_2 = 1;
         } else {
             var_v1_2 = 0;
         }
-        return arg0->unk174 ^ var_a1 ^ var_v1_2;
+        return this->unk174 ^ var_a1 ^ var_v1_2;
     }
-    return (((arg0->dyna.actor.params >> 0xF) & 1) ? 1 : 0) ^ arg0->unk174;
+    return (((this->dyna.actor.params >> 0xF) & 1) ? 1 : 0) ^ this->unk174;
 }
 
-void func_80BA0058(ObjTimeblock* arg0, GlobalContext* arg1) {
-    Actor_Spawn(&arg1->actorCtx, arg1, 0x8B, arg0->dyna.actor.posRot.pos.x, arg0->dyna.actor.posRot.pos.y,
-                arg0->dyna.actor.posRot.pos.z, 0, 0, 0, (D_80BA0AF0[(((s16)arg0->dyna.actor.params >> 8) & 1)].unk8));
+void func_80BA0058(ObjTimeblock* this, GlobalContext* globalCtx) {
+    Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_DEMO_EFFECT, this->dyna.actor.posRot.pos.x,
+                this->dyna.actor.posRot.pos.y, this->dyna.actor.posRot.pos.z, 0, 0, 0,
+                (D_80BA0AF0[(this->dyna.actor.params >> 8) & 1].unk8));
 }
 
-void func_80BA00CC(GlobalContext* arg0, s32 arg1) {
-    if (Flags_GetSwitch(arg0, arg1) != 0) {
-        Flags_UnsetSwitch(arg0, arg1);
+void func_80BA00CC(GlobalContext* globalCtx, s32 arg1) {
+    if (Flags_GetSwitch(globalCtx, arg1) != 0) {
+        Flags_UnsetSwitch(globalCtx, arg1);
         return;
     }
-    Flags_SetSwitch(arg0, arg1);
+    Flags_SetSwitch(globalCtx, arg1);
 }
 
 void ObjTimeblock_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -109,12 +105,11 @@ void ObjTimeblock_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     sp2C = 0;
     DynaPolyInfo_SetActorMove(&this->dyna, DPM_UNK);
-    this->dyna.actor.shape.rot.z = 0;
-    this->dyna.actor.posRot.rot.z = this->dyna.actor.shape.rot.z;
+    this->dyna.actor.posRot.rot.z = this->dyna.actor.shape.rot.z = 0;
     DynaPolyInfo_Alloc(&D_6000B30, &sp2C);
     this->dyna.dynaPolyId = DynaPolyInfo_RegisterActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp2C);
     Actor_ProcessInitChain(&this->dyna.actor, D_80BA0B28);
-    Actor_SetScale(&this->dyna.actor, D_80BA0AF0[((s16)this->dyna.actor.params >> 8) & 1].unk0);
+    Actor_SetScale(&this->dyna.actor, D_80BA0AF0[(this->dyna.actor.params >> 8) & 1].unk0);
     if ((this->dyna.actor.params >> 6) & 1) {
         this->unk177 = 0;
     } else if ((this->dyna.actor.params & 0x3F) < 0x38) {
@@ -123,19 +118,19 @@ void ObjTimeblock_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->unk177 = 1;
     }
     this->unk168 = func_80BA040C;
-    Actor_SetHeight(&this->dyna.actor, D_80BA0AF0[((s16)this->dyna.actor.params >> 8) & 1].unk4);
-    if (Flags_GetSwitch(globalCtx, this->dyna.actor.params & 0x3F) != 0) {
+    Actor_SetHeight(&this->dyna.actor, D_80BA0AF0[(this->dyna.actor.params >> 8) & 1].unk4);
+    if (Flags_GetSwitch(globalCtx, this->dyna.actor.params & 0x3F)) {
         this->unk174 = 1;
     } else {
         this->unk174 = 0;
     }
-    if (((s16)this->dyna.actor.params >> 0xF) & 1) {
+    if ((this->dyna.actor.params >> 0xF) & 1) {
         this->unk175 = 1;
     } else {
         this->unk175 = 0;
     }
     this->unk178 = func_80B9FFA0(this);
-    if (!(((s16)this->dyna.actor.params >> 0xA) & 1)) {
+    if (((this->dyna.actor.params >> 0xA) & 1) == 0) {
         func_80BA0514(this);
     } else if (this->unk178 != 0) {
         func_80BA0758(this);
@@ -150,33 +145,34 @@ void ObjTimeblock_Init(Actor* thisx, GlobalContext* globalCtx) {
 void ObjTimeblock_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     ObjTimeblock* this = (ObjTimeblock*)thisx;
 
-    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
+    DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
 }
 
-s32 func_80BA032C(ObjTimeblock* arg0, GlobalContext* arg1) {
+s32 func_80BA032C(ObjTimeblock* this, GlobalContext* globalCtx) {
     Vec3f sp1C;
     f32 temp_fv1;
 
-    if ((arg0->unk178 != 0) && (func_80043590(&arg0->dyna) != 0)) {
+    if ((this->unk178 != 0) && (func_80043590(&this->dyna) != 0)) {
         return 0;
     }
-    if ((arg0->dyna.actor.xzDistFromLink <= D_80BA0B08[((s16)arg0->dyna.actor.params >> 0xB) & 7]) &&
-        ((func_8002DBD0(&arg0->dyna.actor, &sp1C, &arg1->actorCtx.actorList[2].first->posRot.pos),
-          temp_fv1 = (arg0->dyna.actor.scale.x * 50.0f) + 6.0f, (temp_fv1 < fabsf(/*(bitwise f32) sp1C*/ sp1C.x))) ||
-         (temp_fv1 < fabsf(sp1C.z)))) {
-        return 1;
+    if ((this->dyna.actor.xzDistFromLink <= D_80BA0B08[(this->dyna.actor.params >> 0xB) & 7])) {
+        func_8002DBD0(&this->dyna.actor, &sp1C, &PLAYER->actor.posRot.pos);
+        temp_fv1 = (this->dyna.actor.scale.x * 50.0f) + 6.0f;
+        if ((temp_fv1 < fabsf(sp1C.x)) || (temp_fv1 < fabsf(sp1C.z))) {
+            return 1;
+        }
     }
     return 0;
 }
 
-s32 func_80BA040C(ObjTimeblock* arg0, GlobalContext* globalCtx) {
+s32 func_80BA040C(ObjTimeblock* this, GlobalContext* globalCtx) {
     Player* temp_v1;
 
     temp_v1 = PLAYER;
-    if (func_80BA032C(arg0, globalCtx) != 0) {
+    if (func_80BA032C(this, globalCtx) != 0) {
         if (temp_v1->stateFlags2 & 0x01000000) {
             func_8010BD58(globalCtx, 1U);
-            arg0->unk168 = func_80BA0480;
+            this->unk168 = func_80BA0480;
         } else {
             temp_v1->stateFlags2 |= 0x800000;
         }
@@ -184,16 +180,16 @@ s32 func_80BA040C(ObjTimeblock* arg0, GlobalContext* globalCtx) {
     return 0;
 }
 
-s32 func_80BA0480(ObjTimeblock* arg0, GlobalContext* arg1) {
-    if (arg1->msgCtx.unk_E3EE == 4) {
-        arg0->unk168 = func_80BA040C;
+s32 func_80BA0480(ObjTimeblock* this, GlobalContext* globalCtx) {
+    if (globalCtx->msgCtx.unk_E3EE == 4) {
+        this->unk168 = func_80BA040C;
     }
-    if (arg1->msgCtx.unk_E3EC == 0xA) {
-        if (arg0->unk172 == 0xFE) {
-            arg0->unk16E = 0x6E;
+    if (globalCtx->msgCtx.unk_E3EC == 0xA) {
+        if (this->unk172 == 0xFE) {
+            this->unk16E = 0x6E;
         } else {
-            arg0->unk16E -= 1;
-            if (arg0->unk16E == 0) {
+            this->unk16E -= 1;
+            if (this->unk16E == 0) {
                 return 1;
             }
         }
@@ -201,131 +197,131 @@ s32 func_80BA0480(ObjTimeblock* arg0, GlobalContext* arg1) {
     return 0;
 }
 
-void func_80BA04F8(ObjTimeblock* arg0) {
-    arg0->unk164 = func_80BA0508;
+void func_80BA04F8(ObjTimeblock* this) {
+    this->unk164 = func_80BA0508;
 }
 
-void func_80BA0508(ObjTimeblock* arg0, GlobalContext* arg1) {
+void func_80BA0508(ObjTimeblock* this, GlobalContext* globalCtx) {
 }
 
-void func_80BA0514(ObjTimeblock* arg0) {
-    arg0->unk164 = func_80BA0524;
+void func_80BA0514(ObjTimeblock* this) {
+    this->unk164 = func_80BA0524;
 }
 
-void func_80BA0524(ObjTimeblock* arg0, GlobalContext* arg1) {
+void func_80BA0524(ObjTimeblock* this, GlobalContext* globalCtx) {
     s32 var_v1;
 
-    if ((arg0->unk168(arg0, arg1) != 0) && (arg0->unk16C <= 0)) {
-        func_80BA0058(arg0, arg1);
-        arg0->unk16C = 0xA0;
-        func_80080480(arg1, &arg0->dyna.actor);
-        osSyncPrintf("◯◯◯◯ Time Block 注目カメラ (frame counter  %d)\n", arg1->state.frames);
-        arg0->unk170 = 0xC;
-        if (arg0->unk177 == 0) {
-            arg0->dyna.actor.params ^= 0x8000;
+    if ((this->unk168(this, globalCtx) != 0) && (this->unk16C <= 0)) {
+        func_80BA0058(this, globalCtx);
+        this->unk16C = 0xA0;
+        func_80080480(globalCtx, &this->dyna.actor);
+        osSyncPrintf("◯◯◯◯ Time Block 注目カメラ (frame counter  %d)\n", globalCtx->state.frames);
+        this->unk170 = 0xC;
+        if (this->unk177 == 0) {
+            this->dyna.actor.params ^= 0x8000;
         } else {
-            func_80BA00CC(arg1, arg0->dyna.actor.params & 0x3F);
+            func_80BA00CC(globalCtx, this->dyna.actor.params & 0x3F);
         }
     }
-    arg0->unk172 = arg1->msgCtx.unk_E3EC;
-    if (arg0->unk170 > 0) {
-        arg0->unk170 -= 1;
-        if (arg0->unk170 == 0) {
-            if (arg0->unk177 == 0) {
-                if (((s16)arg0->dyna.actor.params >> 0xF) & 1) {
-                    arg0->unk175 = 1;
+    this->unk172 = globalCtx->msgCtx.unk_E3EC;
+    if (this->unk170 > 0) {
+        this->unk170 -= 1;
+        if (this->unk170 == 0) {
+            if (this->unk177 == 0) {
+                if (((s16)this->dyna.actor.params >> 0xF) & 1) {
+                    this->unk175 = 1;
                 } else {
-                    arg0->unk175 = 0;
+                    this->unk175 = 0;
                 }
-            } else if (Flags_GetSwitch(arg1, arg0->dyna.actor.params & 0x3F) != 0) {
-                arg0->unk174 = 1;
+            } else if (Flags_GetSwitch(globalCtx, this->dyna.actor.params & 0x3F) != 0) {
+                this->unk174 = 1;
             } else {
-                arg0->unk174 = 0;
+                this->unk174 = 0;
             }
         }
     }
-    var_v1 = func_80B9FFA0(arg0);
-    if ((arg0->unk177 == 1) && (var_v1 != arg0->unk178)) {
-        func_80BA04F8(arg0);
+    var_v1 = func_80B9FFA0(this);
+    if ((this->unk177 == 1) && (var_v1 != this->unk178)) {
+        func_80BA04F8(this);
     }
-    arg0->unk178 = var_v1;
-    if (arg0->unk16C == 0x32) {
+    this->unk178 = var_v1;
+    if (this->unk16C == 0x32) {
         func_80078884(0x4807U);
     }
 }
 
-void func_80BA06AC(ObjTimeblock* arg0, GlobalContext* arg1) {
+void func_80BA06AC(ObjTimeblock* this, GlobalContext* globalCtx) {
     s32 sp24;
     s16 temp_v0;
 
-    sp24 = arg0->dyna.actor.params & 0x3F;
-    temp_v0 = arg0->unk170;
-    arg0->unk172 = arg1->msgCtx.unk_E3EC;
+    sp24 = this->dyna.actor.params & 0x3F;
+    temp_v0 = this->unk170;
+    this->unk172 = globalCtx->msgCtx.unk_E3EC;
     if (temp_v0 > 0) {
-        arg0->unk170 = temp_v0 - 1;
-        if (arg0->unk170 == 0) {
-            if (Flags_GetSwitch(arg1, sp24) != 0) {
-                arg0->unk174 = 1;
+        this->unk170 = temp_v0 - 1;
+        if (this->unk170 == 0) {
+            if (Flags_GetSwitch(globalCtx, sp24) != 0) {
+                this->unk174 = 1;
             } else {
-                arg0->unk174 = 0;
+                this->unk174 = 0;
             }
         }
     }
-    arg0->unk178 = func_80B9FFA0(arg0);
-    if (Flags_GetSwitch(arg1, sp24) != 0) {
-        arg0->unk176 = 1;
+    this->unk178 = func_80B9FFA0(this);
+    if (Flags_GetSwitch(globalCtx, sp24) != 0) {
+        this->unk176 = 1;
         return;
     }
-    arg0->unk176 = 0;
+    this->unk176 = 0;
 }
 
-void func_80BA0758(ObjTimeblock* arg0) {
-    arg0->unk164 = func_80BA0768;
+void func_80BA0758(ObjTimeblock* this) {
+    this->unk164 = func_80BA0768;
 }
 
-void func_80BA0768(ObjTimeblock* arg0, GlobalContext* arg1) {
-    if ((arg0->unk168(arg0, arg1) != 0) && (arg0->unk16C <= 0)) {
-        arg0->unk170 = 0xC;
-        func_80BA0058(arg0, arg1);
-        arg0->unk16C = 0xA0;
-        func_80080480(arg1, &arg0->dyna.actor);
-        osSyncPrintf("◯◯◯◯ Time Block 注目カメラ (frame counter  %d)\n", arg1->state.frames);
-        func_80BA00CC(arg1, arg0->dyna.actor.params & 0x3F);
+void func_80BA0768(ObjTimeblock* this, GlobalContext* globalCtx) {
+    if ((this->unk168(this, globalCtx) != 0) && (this->unk16C <= 0)) {
+        this->unk170 = 0xC;
+        func_80BA0058(this, globalCtx);
+        this->unk16C = 0xA0;
+        func_80080480(globalCtx, &this->dyna.actor);
+        osSyncPrintf("◯◯◯◯ Time Block 注目カメラ (frame counter  %d)\n", globalCtx->state.frames);
+        func_80BA00CC(globalCtx, this->dyna.actor.params & 0x3F);
     }
-    func_80BA06AC(arg0, arg1);
-    if (arg0->unk16C == 0x32) {
+    func_80BA06AC(this, globalCtx);
+    if (this->unk16C == 0x32) {
         func_80078884(0x4807U);
     }
-    if ((arg0->unk178 == 0) && (arg0->unk16C <= 0)) {
-        func_80BA083C(arg0);
+    if ((this->unk178 == 0) && (this->unk16C <= 0)) {
+        func_80BA083C(this);
     }
 }
 
-void func_80BA083C(ObjTimeblock* arg0) {
-    arg0->unk164 = func_80BA084C;
+void func_80BA083C(ObjTimeblock* this) {
+    this->unk164 = func_80BA084C;
 }
 
-void func_80BA084C(ObjTimeblock* arg0, GlobalContext* arg1) {
+void func_80BA084C(ObjTimeblock* this, GlobalContext* globalCtx) {
     s32 var_v1;
-    s32 flag = arg0->dyna.actor.params & 0x3F;
+    s32 flag = this->dyna.actor.params & 0x3F;
 
-    if (Flags_GetSwitch(arg1, flag) != 0) {
+    if (Flags_GetSwitch(globalCtx, flag) != 0) {
         var_v1 = 1;
     } else {
         var_v1 = 0;
     }
-    if (arg0->unk176 ^ var_v1) {
-        if (((((s16)arg0->dyna.actor.params >> 0xF) & 1) ? 1 : 0) ^ var_v1) {
-            if (arg0->unk16C <= 0) {
-                func_80BA0058(arg0, arg1);
-                arg0->unk16C = 0xA0;
+    if (this->unk176 ^ var_v1) {
+        if (((((s16)this->dyna.actor.params >> 0xF) & 1) ? 1 : 0) ^ var_v1) {
+            if (this->unk16C <= 0) {
+                func_80BA0058(this, globalCtx);
+                this->unk16C = 0xA0;
             }
-            arg0->unk170 = 0xC;
+            this->unk170 = 0xC;
         }
     }
-    func_80BA06AC(arg0, arg1);
-    if ((arg0->unk178 != 0) && (arg0->unk16C <= 0)) {
-        func_80BA0758(arg0);
+    func_80BA06AC(this, globalCtx);
+    if ((this->unk178 != 0) && (this->unk16C <= 0)) {
+        func_80BA0758(this);
     }
 }
 
