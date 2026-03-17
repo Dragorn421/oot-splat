@@ -3929,9 +3929,9 @@ segments:
     follows_vram: ovl_En_Diving_Game
     bss_size: 0x0
     subsegments:
-      - [0xDA5F40, asm, overlays/ovl_En_Dns]
+      - [0xDA5F40, c, overlays/ovl_En_Dns]
       - [0xDA6FB0, data, overlays/ovl_En_Dns]
-      - [0xDA7150, rodata, overlays/ovl_En_Dns]
+      - [0xDA7150, .rodata, overlays/ovl_En_Dns]
       - [0xDA7300, rodatabin, rodatabin_809F0710]
 
   - name: ovl_En_Dnt_Demo
