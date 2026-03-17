@@ -17,7 +17,7 @@ u32 EnDns_CheckPurchase_DekuShield(EnDns* arg0);
 u32 EnDns_CheckPurchase_Bombs(EnDns* arg0);
 u32 EnDns_CheckPurchase_Arrows(EnDns* arg0);
 u32 EnDns_CheckPurchase_Potion(EnDns* arg0);
-void func_809EF9F8_Ct13478(EnDns* arg0);
+void EnDns_ConcludePurchase_Generic(EnDns* arg0);
 void EnDns_ConcludePurchase_DekuNuts(EnDns* arg0);
 void EnDns_ConcludePurchase_HeartPiece(EnDns* arg0);
 void EnDns_ConcludePurchase_Bombs(EnDns* arg0);
@@ -106,16 +106,16 @@ static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuNuts = {
     20, 5, GI_NUTS_5_2, EnDns_CheckPurchase_DekuNuts, EnDns_ConcludePurchase_DekuNuts,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuSticks = {
-    15, 1, GI_STICKS_1, EnDns_CheckPurchase_DekuSticks, func_809EF9F8_Ct13478,
+    15, 1, GI_STICKS_1, EnDns_CheckPurchase_DekuSticks, EnDns_ConcludePurchase_Generic,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoHeartPiece = {
     10, 1, GI_HEART_PIECE, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_HeartPiece,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuSeeds = {
-    40, 30, GI_SEEDS_30, EnDns_CheckPurchase_DekuSeeds, func_809EF9F8_Ct13478,
+    40, 30, GI_SEEDS_30, EnDns_CheckPurchase_DekuSeeds, EnDns_ConcludePurchase_Generic,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuShield = {
-    50, 1, GI_SHIELD_DEKU, EnDns_CheckPurchase_DekuShield, func_809EF9F8_Ct13478,
+    50, 1, GI_SHIELD_DEKU, EnDns_CheckPurchase_DekuShield, EnDns_ConcludePurchase_Generic,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoBombs = {
     40, 5, GI_BOMBS_5, EnDns_CheckPurchase_Bombs, EnDns_ConcludePurchase_Bombs,
@@ -124,10 +124,10 @@ static EnDnsPurchaseInfo sEnDnsPurchaseInfoArrows = {
     70, 20, GI_ARROWS_LARGE, EnDns_CheckPurchase_Arrows, EnDns_ConcludePurchase_Arrows,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoRedPotion = {
-    40, 1, GI_POTION_RED, EnDns_CheckPurchase_Potion, func_809EF9F8_Ct13478,
+    40, 1, GI_POTION_RED, EnDns_CheckPurchase_Potion, EnDns_ConcludePurchase_Generic,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoGreenPotion = {
-    40, 1, GI_POTION_GREEN, EnDns_CheckPurchase_Potion, func_809EF9F8_Ct13478,
+    40, 1, GI_POTION_GREEN, EnDns_CheckPurchase_Potion, EnDns_ConcludePurchase_Generic,
 };
 static EnDnsPurchaseInfo sEnDnsPurchaseInfoDekuSticksCapacity = {
     40, 1, GI_STICK_UPGRADE_20, EnDns_CheckPurchase_Generic, EnDns_ConcludePurchase_DekuSticksCapacity,
@@ -299,7 +299,7 @@ u32 EnDns_CheckPurchase_Potion(EnDns* this) {
     return EN_DNS_UNK8RESULT_OK;
 }
 
-void func_809EF9F8_Ct13478(EnDns* this) {
+void EnDns_ConcludePurchase_Generic(EnDns* this) {
     Rupees_ChangeBy(-this->unk2C0->price);
 }
 
