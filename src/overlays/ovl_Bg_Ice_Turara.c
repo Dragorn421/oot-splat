@@ -24,8 +24,6 @@ void func_80892574(BgIceTurara*, GlobalContext*);
 extern Gfx D_60023D0[];
 extern UNK_TYPE D_6002594;
 
-extern ColliderCylinderSrc D_80892620;
-/*
 static ColliderCylinderSrc D_80892620 = {
     { 0xA, 0x11, 9, 0, 0x20, 1 },
     { 0, { 0xFFCFFFFF, 0, 4 }, { 0x4FC007CA, 0, 0 }, 1, 1, 0 },
@@ -42,11 +40,15 @@ const ActorInit Bg_Ice_Turara_InitVars = {
     (ActorFunc)BgIceTurara_Update,
     (ActorFunc)BgIceTurara_Draw,
 };
-*/
-extern InitChainEntry D_8089266C[4];
-extern Vec3f D_8089267C;
-extern Color_RGBA8 D_80892688;
-extern Color_RGBA8 D_8089268C;
+static InitChainEntry D_8089266C[] = {
+    ICHAIN_F32(uncullZoneScale, 600, ICHAIN_CONTINUE),
+    ICHAIN_F32(gravity, -3, ICHAIN_CONTINUE),
+    ICHAIN_F32(minVelocityY, -30, ICHAIN_CONTINUE),
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
+};
+static Vec3f D_8089267C = { 0.0f, -1.0f, 0.0f };
+static Color_RGBA8 D_80892688 = { 0xAA, 0xFF, 0xFF, 0xFF };
+static Color_RGBA8 D_8089268C = { 0, 0x32, 0x64, 0xFF };
 
 void BgIceTurara_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgIceTurara* this = (BgIceTurara*)thisx;

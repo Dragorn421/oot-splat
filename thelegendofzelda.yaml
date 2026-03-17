@@ -1675,7 +1675,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC60C60, c, overlays/ovl_Bg_Ice_Turara]
-      - [0xC61360, data, overlays/ovl_Bg_Ice_Turara]
+      - [0xC61360, .data, overlays/ovl_Bg_Ice_Turara]
       - [0xC613D0, .rodata, overlays/ovl_Bg_Ice_Turara]
       - [0xC613E0, rodatabin, rodatabin_808926A0]
 
