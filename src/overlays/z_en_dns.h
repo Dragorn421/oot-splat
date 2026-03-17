@@ -4,6 +4,20 @@
 #include "ultra64.h"
 #include "global.h"
 
+typedef enum EnDnsType {
+    /*  0 */ EN_DNS_TYPE_DEKU_NUTS,
+    /*  1 */ EN_DNS_TYPE_DEKU_STICKS,
+    /*  2 */ EN_DNS_TYPE_HEART_PIECE,
+    /*  3 */ EN_DNS_TYPE_DEKU_SEEDS,
+    /*  4 */ EN_DNS_TYPE_DEKU_SHIELD,
+    /*  5 */ EN_DNS_TYPE_BOMBS,
+    /*  6 */ EN_DNS_TYPE_ARROWS,
+    /*  7 */ EN_DNS_TYPE_RED_POTION,
+    /*  8 */ EN_DNS_TYPE_GREEN_POTION,
+    /*  9 */ EN_DNS_TYPE_DEKU_STICKS_CAPACITY,
+    /* 10 */ EN_DNS_TYPE_DEKU_NUTS_CAPACITY
+} EnDnsType;
+
 struct EnDns;
 
 typedef struct struct_EnDns_2C0ptr {
