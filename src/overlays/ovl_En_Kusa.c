@@ -30,8 +30,6 @@ extern Gfx D_40356A0[];
 extern Gfx D_6000140[];
 extern Gfx D_60002E0[];
 
-extern Vec3f D_80A9C23C[4];
-
 static s16 D_80A9C1D0 = 0;
 static s16 D_80A9C1D4 = 0;
 static s16 D_80A9C1D8 = 0;
@@ -47,7 +45,11 @@ const ActorInit En_Kusa_InitVars = {
     (ActorFunc)EnKusa_Update,
     NULL,
 };
-static s16 D_80A9C200[4] = { OBJECT_GAMEPLAY_FIELD_KEEP, OBJECT_KUSA, OBJECT_KUSA };
+static s16 D_80A9C200[4] = {
+    OBJECT_GAMEPLAY_FIELD_KEEP,
+    OBJECT_KUSA,
+    OBJECT_KUSA,
+};
 static ColliderCylinderSrc D_80A9C208 = {
     { 0xA, 0, 9, 0x29, 0x20, 1 },
     { 0, { 0, 0, 0 }, { 0x4FC00758, 0, 0 }, 0, 1, 1 },
@@ -60,13 +62,19 @@ Vec3f D_80A9C23C[4] = {
     { 0.0f, 0.7071f, -0.7071f },
     { -0.7071f, 0.7071f, 0.0f },
 };
-static s16 D_80A9C26C[8] = { 0x6C, 0x66, 0x60, 0x54, 0x42, 0x37, 0x2A, 0x26 };
+static s16 D_80A9C26C[8] = {
+    0x6C, 0x66, 0x60, 0x54, 0x42, 0x37, 0x2A, 0x26,
+};
 static InitChainEntry D_80A9C27C[6] = {
     ICHAIN_VEC3F_DIV1000(scale, 400, ICHAIN_CONTINUE),         ICHAIN_F32_DIV1000(gravity, -3200, ICHAIN_CONTINUE),
     ICHAIN_F32_DIV1000(minVelocityY, -17000, ICHAIN_CONTINUE), ICHAIN_F32(uncullZoneForward, 1200, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),         ICHAIN_F32(uncullZoneDownward, 120, ICHAIN_STOP)
+    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),         ICHAIN_F32(uncullZoneDownward, 120, ICHAIN_STOP),
 };
-static Gfx* D_80A9C294[3] = { (Gfx*)0x0500B9D0, D_6000140, D_6000140 };
+static Gfx* D_80A9C294[3] = {
+    (Gfx*)0x0500B9D0,
+    D_6000140,
+    D_6000140,
+};
 
 void func_80A9AFA0(EnKusa* this, EnKusaActionFunc actionFunc) {
     this->unk19C = 0;
