@@ -95,9 +95,9 @@ void func_80B2EE9C(EnWallTubo* this, GlobalContext* globalCtx) {
                 ((fabsf(diff.z) < 40.0f) || (gGameInfo->data[0x962] != 0))) {
                 this->unk160->unk23E_arr[this->actor.params] = 1;
                 ((ActorDA*)var_v0)->unk150 = 2;
-                func_80078884(0x4807U);
+                func_80078884(NA_SE_SY_TRE_BOX_APPEAR);
                 this->unk150 = 0x3C;
-                EffectSsBomb2_SpawnLayered(globalCtx, &this->unk154, &sp40, &sp4C, 0xC8, 0x28);
+                EffectSsBomb2_SpawnLayered(globalCtx, &this->unk154, &sp40, &sp4C, 200, 40);
                 temp_v0 = Quake_Add(globalCtx->cameraPtrs[globalCtx->activeCamera], 1U);
                 sp32 = temp_v0;
                 Quake_SetSpeed(temp_v0, 0x7FFF);
@@ -123,8 +123,8 @@ void func_80B2F0B8(EnWallTubo* this, GlobalContext* globalCtx) {
         sp38.x = Math_Rand_CenteredFloat(300.0f) + this->unk154.x;
         sp38.y = Math_Rand_CenteredFloat(300.0f) + this->unk154.y;
         sp38.z = this->unk154.z;
-        EffectSsBomb2_SpawnLayered(globalCtx, (Vec3f*)&sp38, &sp44, &sp50, 0x64, 0x1E);
-        EffectSsHahen_SpawnBurst(globalCtx, (Vec3f*)&sp38, 10.0f, 0, 0x32, 0xF, 3, -1, 0xA, NULL);
+        EffectSsBomb2_SpawnLayered(globalCtx, &sp38, &sp44, &sp50, 100, 30);
+        EffectSsHahen_SpawnBurst(globalCtx, &sp38, 10.0f, 0, 50, 15, 3, -1, 10, NULL);
         Audio_PlayActorSound2(&this->actor, 0x180EU);
     }
     if (this->unk150 == 0) {
@@ -142,32 +142,15 @@ void func_80B2F0B8(EnWallTubo* this, GlobalContext* globalCtx) {
 }
 
 void EnWallTubo_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s16 temp_v0;
     EnWallTubo* this = (EnWallTubo*)thisx;
 
-    temp_v0 = this->unk150;
-    if (temp_v0 != 0) {
-        this->unk150 = temp_v0 - 1;
+    if (this->unk150 != 0) {
+        this->unk150--;
     }
     this->unk14C(this, globalCtx);
     if (gGameInfo->data[0x960] != 0) {
         DebugDisplay_AddObject(this->actor.posRot.pos.x, this->actor.posRot.pos.y, this->actor.posRot.pos.z,
-                               this->actor.posRot.rot.x, (s16)(s32)this->actor.posRot.rot.y,
-                               (s16)(s32)this->actor.posRot.rot.z, 1.0f, 1.0f, 1.0f, 0U, 0U, 0xFFU, 0xFFU, 4,
-                               globalCtx->state.gfxCtx);
+                               this->actor.posRot.rot.x, this->actor.posRot.rot.y, this->actor.posRot.rot.z, 1.0f, 1.0f,
+                               1.0f, 0, 0, 255, 255, 4, globalCtx->state.gfxCtx);
     }
 }
-
-/*
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/EnWallTubo_Init.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/EnWallTubo_Destroy.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/func_80B2EE5C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/func_80B2EE9C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/func_80B2F0B8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/EnWallTubo_Update.s")
-*/
