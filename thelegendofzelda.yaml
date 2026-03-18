@@ -3788,7 +3788,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xD8BCB0, c, overlays/ovl_En_Changer]
-      - [0xD8C6A0, data, overlays/ovl_En_Changer]
+      - [0xD8C6A0, .data, overlays/ovl_En_Changer]
       - [0xD8C7A0, .rodata, overlays/ovl_En_Changer]
       - [0xD8CA80, rodatabin, rodatabin_809D3460]
 
