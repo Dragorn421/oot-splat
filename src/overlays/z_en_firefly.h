@@ -17,10 +17,8 @@ typedef struct EnFirefly {
     /* 0x1B9 */ u8 unk1B9;
     /* 0x1BA */ s16 unk1BA;
     /* 0x1BC */ s16 unk1BC;
-    /* 0x1BE */ Vec3s unk1BE;
-    /* 0x1C4 */ char pad1C4[0xA2]; /* maybe part of unk1BE[0x1C]? */
-    /* 0x266 */ Vec3s unk266;
-    /* 0x26C */ char pad26C[0xA4]; /* maybe part of unk266[0x1C]? */
+    /* 0x1BE */ Vec3s unk1BE[0x1C];
+    /* 0x266 */ Vec3s unk266[0x1C];
     /* 0x310 */ f32 unk310;
     /* 0x314 */ ColliderSpheres unk314;
     /* 0x334 */ ColliderSpheresElement unk334;

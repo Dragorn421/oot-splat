@@ -103,7 +103,7 @@ void EnFirefly_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     Actor_ProcessInitChain(&this->actor, D_80A14F8C);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Circle, 25.0f);
-    SkelAnime_Init(globalCtx, &this->unk170, &D_60018B8, &D_600017C, &this->unk1BE, &this->unk266, 0x1C);
+    SkelAnime_Init(globalCtx, &this->unk170, &D_60018B8, &D_600017C, this->unk1BE, this->unk266, 0x1C);
     Collider_InitSpheres(globalCtx, &this->unk314);
     Collider_LoadSpheres(globalCtx, &this->unk314, &this->actor, &D_80A14F54, &this->unk334);
     func_80061ED4(&this->actor.collideData, &D_80A14F6C, &D_80A14F64);
@@ -225,9 +225,8 @@ void func_80A13538(EnFirefly* this) {
 }
 
 void func_80A135A8(EnFirefly* this, GlobalContext* globalCtx) {
-    f32 var_fv0;
-    Vec3f sp78;
     s32 var_s0;
+    Vec3f sp78;
 
     this->actor.flags |= 0x10;
     this->unk1B8 = 0;
