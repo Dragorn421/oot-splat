@@ -6,6 +6,7 @@
 
 #include "z_bg_bowl_wall.h"
 #include "z_en_bom_bowl_man.h"
+#include "z_en_wall_tubo.h"
 
 #define FLAGS 0x00000030
 
@@ -77,15 +78,9 @@ void BgBowlWall_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, (s32)this->dyna.dynaPolyId);
 }
 
-typedef struct Actor1BE {
-    Actor actor;
-    char unk14C[0x154 - 0x14C];
-    Vec3f unk154;
-} Actor1BE;
-
 void func_8086F260(BgBowlWall* this, GlobalContext* globalCtx) {
     Actor* var_v0_2;
-    Actor1BE* temp_v0_2;
+    EnWallTubo* temp_v0_2;
     s32 pad;
     s16 params = this->dyna.actor.params;
 
@@ -98,9 +93,9 @@ void func_8086F260(BgBowlWall* this, GlobalContext* globalCtx) {
     this->unk174.y = D_8086FA40[params].y + this->dyna.actor.posRot.pos.y;
     this->unk174.z = D_8086FA40[params].z + this->dyna.actor.posRot.pos.z;
     if (0) {}
-    temp_v0_2 =
-        (Actor1BE*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_EN_WALL_TUBO,
-                                      this->unk174.x, this->unk174.y, this->unk174.z, 0, 0, 0, this->dyna.actor.params);
+    temp_v0_2 = (EnWallTubo*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_EN_WALL_TUBO,
+                                                this->unk174.x, this->unk174.y, this->unk174.z, 0, 0, 0,
+                                                this->dyna.actor.params);
     if (temp_v0_2 != NULL) {
         temp_v0_2->unk154 = this->unk174;
         if (params != 0) {

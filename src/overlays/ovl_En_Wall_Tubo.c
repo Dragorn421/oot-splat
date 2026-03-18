@@ -63,6 +63,7 @@ void func_80B2EE5C(EnWallTubo* this, GlobalContext* globalCtx) {
     this->unk14C = func_80B2EE9C;
 }
 
+// EnBomChu
 typedef struct ActorDA {
     Actor actor;
     char pad14C[4];

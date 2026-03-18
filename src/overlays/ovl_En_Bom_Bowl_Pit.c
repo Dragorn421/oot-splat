@@ -49,6 +49,7 @@ void func_809C4E60(EnBomBowlPit* this, GlobalContext* globalCtx) {
     }
 }
 
+// EnBomChu
 typedef struct ActorDA {
     Actor actor;
     char pad14C[4];

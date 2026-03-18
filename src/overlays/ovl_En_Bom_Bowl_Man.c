@@ -1,4 +1,5 @@
 #include "z_en_bom_bowl_man.h"
+#include "z_en_bom_bowl_pit.h"
 
 #define FLAGS 0x08000039
 
@@ -57,6 +58,7 @@ Vec3f D_809C4A60[5] = {
 static s16 D_809C4A9C[6] = { 0x4268, 0x4268, -0x3E8, 0, 0x4268, 0 };
 static s32 D_809C4AA8[6] = { 0x06004110, 0x06004910, 0x06005110, 0, 0, 0 };
 
+// EnSyatekiNiw
 typedef struct Actor143 {
     Actor actor;
     char pad14C[0x2F4 - 0x14C];
@@ -217,20 +219,20 @@ void func_809C3DC4(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if (gGameInfo->data[0x963] != 0) {
         osSyncPrintf("\x1b[31m☆ game_play->bomchu_game_flag ☆ %d\n\x1b[m", globalCtx->bombchuBowlingAmmo);
-        osSyncPrintf("\x1b[31m☆ 壁１の状態どう？ ☆ %d\n\x1b[m", this->unk23E);
-        osSyncPrintf("\x1b[31m☆ 壁２の状態どう？ ☆ %d\n\x1b[m", this->unk240);
+        osSyncPrintf("\x1b[31m☆ 壁１の状態どう？ ☆ %d\n\x1b[m", this->unk23E_arr[0]);
+        osSyncPrintf("\x1b[31m☆ 壁２の状態どう？ ☆ %d\n\x1b[m", this->unk23E_arr[1]);
         osSyncPrintf("\x1b[31m☆ 穴情報\t     ☆ %d\n\x1b[m", this->unk25C->unk164);
         osSyncPrintf("\n\n");
     }
     this->unk244 = 0;
     if (this->unk25C != NULL) {
-        if ((this->unk23E != 1) && (this->unk240 != 1) && (this->unk25C->unk164 == 2)) {
+        if ((this->unk23E_arr[0] != 1) && (this->unk23E_arr[1] != 1) && (this->unk25C->unk164 == 2)) {
             this->unk244 = 1;
             this->unk25C->unk164 = 0U;
             osSyncPrintf("\x1b[35m☆☆☆☆☆ 中央ＨＩＴ！！！！ ☆☆☆☆☆ \n\x1b[m");
         }
         if ((globalCtx->bombchuBowlingAmmo == -1) && (globalCtx->actorCtx.actorList[3].length == 0) &&
-            (this->unk25C->unk164 == 0) && (this->unk23E != 1) && (this->unk240 != 1)) {
+            (this->unk25C->unk164 == 0) && (this->unk23E_arr[0] != 1) && (this->unk23E_arr[1] != 1)) {
             this->unk244 = 2;
             osSyncPrintf("\x1b[35m☆☆☆☆☆ ボムチュウ消化 ☆☆☆☆☆ \n\x1b[m");
         }
@@ -273,9 +275,9 @@ void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx) {
             case 0:
                 if (gSaveContext.rupees >= 0x1E) {
                     Rupees_ChangeBy(-0x1E);
-                    this->unk240 = 0;
+                    this->unk23E_arr[1] = 0;
                     this->unk_258 = 1;
-                    this->unk23E = this->unk240;
+                    this->unk23E_arr[0] = this->unk23E_arr[1];
                     globalCtx->bombchuBowlingAmmo = 0xA;
                     Flags_SetSwitch(globalCtx, 0x38);
                     if ((this->unk232 == 0) && (this->unk23C == 0)) {
@@ -388,8 +390,8 @@ void func_809C441C(EnBomBowlMan* this, GlobalContext* globalCtx) {
             D_809C4A60[this->unk230].y + 40.0f, D_809C4A60[this->unk230].z + 300.0f, 0, D_809C4A9C[this->unk230], 0,
             this->unk230 + 5);
         if (this->unk232 == 0) {
-            this->unk25C = (Actor14C*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx,
-                                                         ACTOR_EN_BOM_BOWL_PIT, 0.0f, 90.0f, -860.0f, 0, 0, 0, 0);
+            this->unk25C = (EnBomBowlPit*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx,
+                                                             ACTOR_EN_BOM_BOWL_PIT, 0.0f, 90.0f, -860.0f, 0, 0, 0, 0);
             if (this->unk25C != NULL) {
                 this->unk25C->unk15A = (s16)this->unk230;
             }
