@@ -3655,7 +3655,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xD7CC60, c, overlays/ovl_En_Bom_Bowl_Man]
-      - [0xD7E020, data, overlays/ovl_En_Bom_Bowl_Man]
+      - [0xD7E020, .data, overlays/ovl_En_Bom_Bowl_Man]
       - [0xD7E0F0, .rodata, overlays/ovl_En_Bom_Bowl_Man]
       - [0xD7E2C0, rodatabin, rodatabin_809C4C90]
 
