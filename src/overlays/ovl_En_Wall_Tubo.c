@@ -14,7 +14,10 @@ void EnWallTubo_Init(Actor* thisx, GlobalContext* globalCtx);
 void EnWallTubo_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnWallTubo_Update(Actor* thisx, GlobalContext* globalCtx);
 
-/*
+void func_80B2EE5C(EnWallTubo *this, GlobalContext *globalCtx);
+void func_80B2EE9C(EnWallTubo *this, GlobalContext *globalCtx);
+void func_80B2F0B8(EnWallTubo *this, GlobalContext *globalCtx);
+
 const ActorInit En_Wall_Tubo_InitVars = {
     ACTOR_EN_WALL_TUBO,
     ACTORTYPE_PROP,
@@ -26,7 +29,10 @@ const ActorInit En_Wall_Tubo_InitVars = {
     (ActorFunc)EnWallTubo_Update,
     NULL,
 };
-*/
+Vec3f D_80B2F340 = { 0.0f, 0.1f, 0.0f };
+Vec3f D_80B2F34C = { 0.0f, 0.0f, 0.0f };
+Vec3f D_80B2F358 = { 0.0f, 0.1f, 0.0f };
+Vec3f D_80B2F364 = { 0.0f, 0.0f, 0.0f };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wall_Tubo/EnWallTubo_Init.s")
 

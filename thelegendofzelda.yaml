@@ -5829,7 +5829,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xEE4C20, c, overlays/ovl_En_Wall_Tubo]
-      - [0xEE5150, data, overlays/ovl_En_Wall_Tubo]
+      - [0xEE5150, .data, overlays/ovl_En_Wall_Tubo]
       - [0xEE51A0, .rodata, overlays/ovl_En_Wall_Tubo]
       - [0xEE52B0, rodatabin, rodatabin_80B2F480]
 
