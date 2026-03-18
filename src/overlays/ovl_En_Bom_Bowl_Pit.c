@@ -8,7 +8,8 @@ void EnBomBowlPit_Init(Actor* thisx, GlobalContext* globalCtx);
 void EnBomBowlPit_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnBomBowlPit_Update(Actor* thisx, GlobalContext* globalCtx);
 
-/*
+static s32 D_809C56E0[5] = { 0x33, 0x3E, 3, 0x65, 0x55 };
+
 const ActorInit En_Bom_Bowl_Pit_InitVars = {
     ACTOR_EN_BOM_BOWL_PIT,
     ACTORTYPE_PROP,
@@ -20,7 +21,6 @@ const ActorInit En_Bom_Bowl_Pit_InitVars = {
     (ActorFunc)EnBomBowlPit_Update,
     NULL,
 };
-*/
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Pit/EnBomBowlPit_Init.s")
 
