@@ -17,7 +17,6 @@ void func_809C3A54(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C3B50(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C3C7C(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C3CD4(EnBomBowlMan* this, GlobalContext* globalCtx);
-void func_809C3D40(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C3DC4(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C41FC(EnBomBowlMan* this, GlobalContext* globalCtx);
@@ -45,7 +44,7 @@ const ActorInit En_Bom_Bowl_Man_InitVars = {
 typedef struct struct_809C4A10 {
     f32 unk0;
     f32 unk4;
-    s32 unk8; // unused?
+    s32 unk8; // unused
 } struct_809C4A10;
 struct_809C4A10 D_809C4A10[2] = { { 16.0f, 46.0f, 0 }, { 36.0f, 56.0f, 0 } };
 Vec3f D_809C4A28[2] = { { 60.0f, -60.0f, -430.0f }, { 0.0f, -120.0f, -620.0f } };
@@ -98,11 +97,8 @@ void EnBomBowlMan_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_809C3820(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-
-    temp_fv0 = (f32)SkelAnime_GetFrameCount(&D_6000710);
-    this->unk254 = temp_fv0;
-    SkelAnime_ChangeAnim(&this->unk14C, &D_6000710, 1.0f, 0.0f, temp_fv0, 0U, -10.0f);
+    this->unk254 = (f32)SkelAnime_GetFrameCount(&D_6000710);
+    SkelAnime_ChangeAnim(&this->unk14C, &D_6000710, 1.0f, 0.0f, this->unk254, 0U, -10.0f);
     this->actor.textId = 0xC0;
     this->unk22E = 5;
     this->unk214 = func_809C38A8;
@@ -115,12 +111,12 @@ void func_809C38A8(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if (func_8002F194(&this->actor, globalCtx) != 0) {
         this->unk214 = func_809C395C;
-        return;
-    }
-    temp_v0 = this->actor.yawTowardsLink - this->actor.shape.rot.y;
-    var_v1 = ABS(temp_v0);
-    if (!(this->actor.xzDistFromLink > 120.0f) && (var_v1 < 0x4300)) {
-        func_8002F2CC(&this->actor, globalCtx, 120.0f);
+    } else {
+        temp_v0 = this->actor.yawTowardsLink - this->actor.shape.rot.y;
+        var_v1 = ABS(temp_v0);
+        if (!(this->actor.xzDistFromLink > 120.0f) && (var_v1 < 0x4300)) {
+            func_8002F2CC(&this->actor, globalCtx, 120.0f);
+        }
     }
 }
 
@@ -133,11 +129,8 @@ void func_809C395C(EnBomBowlMan* this, GlobalContext* globalCtx) {
 }
 
 void func_809C39D0(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-
-    temp_fv0 = (f32)SkelAnime_GetFrameCount(&D_6000080);
-    this->unk254 = temp_fv0;
-    SkelAnime_ChangeAnim(&this->unk14C, &D_6000080, 1.0f, 0.0f, temp_fv0, 2U, -10.0f);
+    this->unk254 = SkelAnime_GetFrameCount(&D_6000080);
+    SkelAnime_ChangeAnim(&this->unk14C, &D_6000080, 1.0f, 0.0f, this->unk254, 2U, -10.0f);
     this->unk238 = 1;
     this->unk214 = func_809C3A54;
 }
@@ -175,12 +168,12 @@ void func_809C3B50(EnBomBowlMan* this, GlobalContext* globalCtx) {
         this->unk236 = (s16)Math_Rand_ZeroFloat(60.0f) + 0x14;
         if (!(gSaveContext.eventChkInf[2] & 0x20) && (gGameInfo->data[0x962] == 0)) {
             this->unk214 = func_809C3C7C;
-            return;
+        } else {
+            this->actor.textId = 0x18;
+            this->unk22E = 4;
+            func_8010B720(globalCtx, this->actor.textId);
+            this->unk214 = func_809C4040;
         }
-        this->actor.textId = 0x18;
-        this->unk22E = 4;
-        func_8010B720(globalCtx, this->actor.textId);
-        this->unk214 = func_809C4040;
     }
 }
 
@@ -188,9 +181,9 @@ void func_809C3C7C(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if (func_8002F194(&this->actor, globalCtx) != 0) {
         this->unk214 = func_809C3CD4;
-        return;
+    } else {
+        func_8002F2CC(&this->actor, globalCtx, 120.0f);
     }
-    func_8002F2CC(&this->actor, globalCtx, 120.0f);
 }
 
 void func_809C3CD4(EnBomBowlMan* this, GlobalContext* globalCtx) {
@@ -257,20 +250,18 @@ void func_809C3DC4(EnBomBowlMan* this, GlobalContext* globalCtx) {
             func_8002DF54(globalCtx, NULL, 8U);
         }
         this->unk214 = func_809C4040;
-        return;
-    }
-    if (func_8002F194(&this->actor, globalCtx) != 0) {
+    } else if (func_8002F194(&this->actor, globalCtx) != 0) {
         if (this->unk_258 == 0) {
             this->unk214 = func_809C4040;
-            return;
+        } else {
+            this->unk214 = func_809C41FC;
         }
-        this->unk214 = func_809C41FC;
-        return;
-    }
-    temp_v0_3 = this->actor.yawTowardsLink - this->actor.shape.rot.y;
-    var_v1 = ABS(temp_v0_3);
-    if (!(this->actor.xzDistFromLink > 120.0f) && (var_v1 < 0x4300)) {
-        func_8002F2CC(&this->actor, globalCtx, 120.0f);
+    } else {
+        temp_v0_3 = this->actor.yawTowardsLink - this->actor.shape.rot.y;
+        var_v1 = ABS(temp_v0_3);
+        if (!(this->actor.xzDistFromLink > 120.0f) && (var_v1 < 0x4300)) {
+            func_8002F2CC(&this->actor, globalCtx, 120.0f);
+        }
     }
 }
 
@@ -278,7 +269,7 @@ void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if ((this->unk22E == func_8010BDBC(&globalCtx->msgCtx)) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        switch (globalCtx->msgCtx.choiceIndex) { /* irregular */
+        switch (globalCtx->msgCtx.choiceIndex) {
             case 0:
                 if (gSaveContext.rupees >= 0x1E) {
                     Rupees_ChangeBy(-0x1E);
@@ -292,22 +283,22 @@ void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx) {
                         func_8010B720(globalCtx, this->actor.textId);
                         this->unk22E = 5;
                         this->unk214 = func_809C41FC;
-                        return;
+                    } else {
+                        this->actor.textId = 0x1B;
+                        func_8010B720(globalCtx, this->actor.textId);
+                        this->unk22E = 5;
+                        func_800800F8(globalCtx, 0x1F4A, -0x63, NULL, 0);
+                        func_8002DF54(globalCtx, NULL, 8U);
+                        this->unk214 = func_809C4318;
                     }
-                    this->actor.textId = 0x1B;
+                } else {
+                    this->unk23C = 0;
+                    this->actor.textId = 0x85;
                     func_8010B720(globalCtx, this->actor.textId);
                     this->unk22E = 5;
-                    func_800800F8(globalCtx, 0x1F4A, -0x63, NULL, 0);
-                    func_8002DF54(globalCtx, NULL, 8U);
-                    this->unk214 = func_809C4318;
-                    return;
+                    this->unk214 = func_809C41FC;
                 }
-                this->unk23C = 0;
-                this->actor.textId = 0x85;
-                func_8010B720(globalCtx, this->actor.textId);
-                this->unk22E = 5;
-                this->unk214 = func_809C41FC;
-                return;
+                break;
             case 1:
                 this->unk23C = 0;
                 this->actor.textId = 0x2D;
@@ -320,13 +311,10 @@ void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx) {
 }
 
 void func_809C41FC(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    u16 temp_v0;
-
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if ((this->unk22E == func_8010BDBC(&globalCtx->msgCtx)) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        temp_v0 = this->actor.textId;
-        if (((temp_v0 == 0x2D) || (temp_v0 == 0x85)) && (Flags_GetSwitch(globalCtx, 0x38) != 0)) {
+        if (((this->actor.textId == 0x2D) || (this->actor.textId == 0x85)) && Flags_GetSwitch(globalCtx, 0x38)) {
             Flags_UnsetSwitch(globalCtx, 0x38);
         }
         if (this->unk_258 == 1) {
@@ -336,12 +324,12 @@ void func_809C41FC(EnBomBowlMan* this, GlobalContext* globalCtx) {
             func_800800F8(globalCtx, 0x1F4A, -0x63, NULL, 0);
             func_8002DF54(globalCtx, NULL, 8U);
             this->unk214 = func_809C4318;
-            return;
+        } else {
+            if (this->unk244 == 2) {
+                func_8002DF54(globalCtx, NULL, 7U);
+            }
+            this->unk214 = func_809C3D40;
         }
-        if (this->unk244 == 2) {
-            func_8002DF54(globalCtx, NULL, 7U);
-        }
-        this->unk214 = func_809C3D40;
     }
 }
 
@@ -355,8 +343,8 @@ void func_809C4318(EnBomBowlMan* this, GlobalContext* globalCtx) {
         sp2C.x = 148.0f;
         sp2C.y = 40.0f;
         sp2C.z = 300.0f;
-        EffectSsBomb2_SpawnLayered(globalCtx, (Vec3f*)&sp2C, &sp38, &sp44, 0x32, 0xF);
-        Audio_PlayActorSound2(&this->actor, 0x184BU);
+        EffectSsBomb2_SpawnLayered(globalCtx, &sp2C, &sp38, &sp44, 50, 15);
+        Audio_PlayActorSound2(&this->actor, NA_SE_IT_GOODS_APPEAR);
         this->unk22A = 0xA;
         this->unk214 = func_809C441C;
     }
@@ -395,13 +383,13 @@ void func_809C441C(EnBomBowlMan* this, GlobalContext* globalCtx) {
         if (gGameInfo->data[0x967] != 0) {
             this->unk230 = gGameInfo->data[0x967] - 1;
         }
-        this->unk260 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, 0x168,
-                                          D_809C4A60[this->unk230].x + 148.0f, D_809C4A60[this->unk230].y + 40.0f,
-                                          D_809C4A60[this->unk230].z + 300.0f, 0, (s16)(s32)D_809C4A9C[this->unk230], 0,
-                                          (s16)(this->unk230 + 5));
+        this->unk260 = (Actor168*)Actor_SpawnAsChild(
+            &globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_EX_ITEM, D_809C4A60[this->unk230].x + 148.0f,
+            D_809C4A60[this->unk230].y + 40.0f, D_809C4A60[this->unk230].z + 300.0f, 0, D_809C4A9C[this->unk230], 0,
+            this->unk230 + 5);
         if (this->unk232 == 0) {
-            this->unk25C = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, 0x14C, 0.0f, 90.0f,
-                                              -860.0f, 0, 0, 0, 0);
+            this->unk25C = (Actor14C*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx,
+                                                         ACTOR_EN_BOM_BOWL_PIT, 0.0f, 90.0f, -860.0f, 0, 0, 0, 0);
             if (this->unk25C != NULL) {
                 this->unk25C->unk15A = (s16)this->unk230;
             }
@@ -496,52 +484,10 @@ s32 func_809C48A8(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s*
 void EnBomBowlMan_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnBomBowlMan* this = (EnBomBowlMan*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bom_bowl_man.c", 0x38B);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bom_bowl_man.c", 907);
     func_80093D18(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(D_809C4AA8[this->unk234]));
-    SkelAnime_DrawFlexOpa(globalCtx, this->unk14C.skeleton, this->unk14C.limbDrawTbl, (s32)this->unk14C.dListCount,
-                          (s32(*)(GlobalContext*, s32, Gfx**, Vec3f*, Vec3s*, void*))func_809C48A8, NULL, this);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bom_bowl_man.c", 0x39B);
+    SkelAnime_DrawFlexOpa(globalCtx, this->unk14C.skeleton, this->unk14C.limbDrawTbl, this->unk14C.dListCount,
+                          func_809C48A8, NULL, this);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bom_bowl_man.c", 923);
 }
-
-/*
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/EnBomBowlMan_Init.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/EnBomBowlMan_Destroy.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3820.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C38A8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C395C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C39D0.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3A54.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3B50.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3C7C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3CD4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3D40.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C3DC4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C4040.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C41FC.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C4318.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C441C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C4664.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/EnBomBowlMan_Update.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/func_809C48A8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bom_Bowl_Man/EnBomBowlMan_Draw.s")
-*/
