@@ -13,7 +13,7 @@ typedef struct EnFirefly {
     /* 0x164 */ Vec3f unk164;
     /* 0x170 */ SkelAnime unk170;
     /* 0x1B4 */ void (*unk1B4)(struct EnFirefly*, GlobalContext*);
-    /* 0x1B8 */ s8 unk1B8;
+    /* 0x1B8 */ u8 unk1B8;
     /* 0x1B9 */ u8 unk1B9;
     /* 0x1BA */ s16 unk1BA;
     /* 0x1BC */ s16 unk1BC;
