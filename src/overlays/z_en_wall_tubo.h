@@ -14,7 +14,7 @@ typedef struct EnWallTubo {
     /* 0x150 */ s16 unk150;
     /* 0x152 */ char pad152[2];
     /* 0x154 */ Vec3f unk154;
-    /* 0x160 */ Actor* unk160;
+    /* 0x160 */ struct EnBomBowlMan* unk160;
     /* 0x164 */ Vec3f unk164;
 } EnWallTubo; // size = 0x0170
 
