@@ -162,7 +162,7 @@ void func_809C3B50(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if ((this->unk22E == func_8010BDBC(&globalCtx->msgCtx)) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        this->unk254 = (f32)SkelAnime_GetFrameCount(&D_60072AC);
+        this->unk254 = SkelAnime_GetFrameCount(&D_60072AC);
         SkelAnime_ChangeAnim(&this->unk14C, &D_60072AC, 1.0f, 0.0f, this->unk254, 0U, -10.0f);
         this->unk238 = 3;
         this->unk236 = (s16)Math_Rand_ZeroFloat(60.0f) + 0x14;
@@ -430,7 +430,7 @@ void EnBomBowlMan_Update(Actor* thisx, GlobalContext* globalCtx) {
     this->unk22C += 1;
     this->actor.posRot2.pos.y = 60.0f;
     Actor_SetHeight(&this->actor, 60.0f);
-    switch (this->unk238) { /* irregular */
+    switch (this->unk238) {
         case 0:
             this->unk234 = 2;
             break;
