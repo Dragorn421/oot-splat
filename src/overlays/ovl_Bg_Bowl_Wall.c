@@ -98,9 +98,9 @@ void func_8086F260(BgBowlWall* this, GlobalContext* globalCtx) {
     this->unk174.y = D_8086FA40[params].y + this->dyna.actor.posRot.pos.y;
     this->unk174.z = D_8086FA40[params].z + this->dyna.actor.posRot.pos.z;
     if (0) {}
-    temp_v0_2 = (Actor1BE*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_EN_WALL_TUBO,
-                                              this->unk174.x, this->unk174.y, this->unk174.z, 0, 0, 0,
-                                              (s16)(s32)this->dyna.actor.params);
+    temp_v0_2 =
+        (Actor1BE*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_EN_WALL_TUBO,
+                                      this->unk174.x, this->unk174.y, this->unk174.z, 0, 0, 0, this->dyna.actor.params);
     if (temp_v0_2 != NULL) {
         temp_v0_2->unk154 = this->unk174;
         if (params != 0) {
@@ -129,38 +129,36 @@ void func_8086F440(BgBowlWall* this, GlobalContext* globalCtx) {
 
 void func_8086F464(BgBowlWall* this, GlobalContext* globalCtx) {
     s32 var_s0;
-    Vec3f spA0;
-    Vec3f sp94;
+    Vec3f spA0 = D_8086FA78;
+    Vec3f sp94 = D_8086FA84;
     Vec3f sp88;
     s16 temp_v0;
     s32 var_s0_2;
 
-    spA0 = D_8086FA78;
-    var_s0 = 0;
-    sp94 = D_8086FA84;
+    var_s0 = false;
     if (this->dyna.actor.params == 0) {
         Math_SmoothScaleMaxMinS(&this->dyna.actor.shape.rot.x, -0x3E80, 3, 0x1F4, 0);
         this->dyna.actor.posRot.rot.x = this->dyna.actor.shape.rot.x;
         if (this->dyna.actor.shape.rot.x < -0x3C1E) {
-            var_s0 = 1;
+            var_s0 = true;
         }
     } else {
         Math_SmoothScaleMaxF(&this->dyna.actor.posRot.pos.y, this->unk168.y - 450.0f, 0.3f, 10.0f);
         if (this->dyna.actor.posRot.pos.y < (this->unk168.y - 400.0f)) {
-            var_s0 = 1;
+            var_s0 = true;
         }
     }
-    if (var_s0 != 0) {
+    if (var_s0) {
         for (var_s0_2 = 0; var_s0_2 < 15; var_s0_2++) {
             sp88.x = Math_Rand_CenteredFloat(300.0f) + this->unk174.x;
             sp88.y = -100.0f;
             sp88.z = Math_Rand_CenteredFloat(400.0f) + this->unk174.z;
-            EffectSsBomb2_SpawnLayered(globalCtx, (Vec3f*)&sp88, &sp94, &spA0, 0x64, 0x1E);
+            EffectSsBomb2_SpawnLayered(globalCtx, &sp88, &sp94, &spA0, 100, 30);
             sp88.y = -50.0f;
-            EffectSsHahen_SpawnBurst(globalCtx, (Vec3f*)&sp88, 10.0f, 0, 0x32, 0xF, 3, -1, 0xA, NULL);
-            Audio_PlayActorSound2(&this->dyna.actor, 0x180EU);
+            EffectSsHahen_SpawnBurst(globalCtx, &sp88, 10.0f, 0, 50, 15, 3, -1, 10, NULL);
+            Audio_PlayActorSound2(&this->dyna.actor, NA_SE_IT_BOMB_EXPLOSION);
         }
-        temp_v0 = Quake_Add(globalCtx->cameraPtrs[globalCtx->activeCamera], 1U);
+        temp_v0 = Quake_Add(ACTIVE_CAM, 1U);
         Quake_SetSpeed(temp_v0, 0x7FFF);
         Quake_SetQuakeValues(temp_v0, 0x12C, 0, 0, 0);
         Quake_SetCountdown(temp_v0, 0x1E);
@@ -173,12 +171,10 @@ void func_8086F718(BgBowlWall* this, GlobalContext* globalCtx) {
     if (this->unk182 >= 2) {
         if (this->dyna.actor.params == 0) {
             Math_SmoothScaleMaxMinS(&this->dyna.actor.shape.rot.x, -0x3E80, 1, 0xC8, 0);
-            return;
+        } else {
+            Math_SmoothScaleMaxF(&this->dyna.actor.posRot.pos.y, this->unk168.y - 450.0f, 0.3f, 10.0f);
         }
-        Math_SmoothScaleMaxF(&this->dyna.actor.posRot.pos.y, this->unk168.y - 450.0f, 0.3f, 10.0f);
-        return;
-    }
-    if (this->unk182 == 1) {
+    } else if (this->unk182 == 1) {
         this->dyna.actor.posRot.pos.y = this->unk168.y - 450.0f;
         this->dyna.actor.posRot.rot.x = this->dyna.actor.shape.rot.x = 0;
         this->unk184->unk23E_arr[this->dyna.actor.params] = 2;
@@ -187,13 +183,10 @@ void func_8086F718(BgBowlWall* this, GlobalContext* globalCtx) {
 }
 
 void func_8086F7F8(BgBowlWall* this, GlobalContext* globalCtx) {
-    f32 temp_fv1;
-
-    if ((this->unk184)->unk23E_arr[this->dyna.actor.params] != 2) {
+    if (this->unk184->unk23E_arr[this->dyna.actor.params] != 2) {
         Math_SmoothScaleMaxF(&this->dyna.actor.posRot.pos.y, this->unk168.y, 0.3f, 50.0f);
-        temp_fv1 = this->unk168.y;
-        if (fabsf(this->dyna.actor.posRot.pos.y - temp_fv1) <= 10.0f) {
-            this->dyna.actor.posRot.pos.y = temp_fv1;
+        if (fabsf(this->dyna.actor.posRot.pos.y - this->unk168.y) <= 10.0f) {
+            this->dyna.actor.posRot.pos.y = this->unk168.y;
             this->unk180 = 0;
             this->actionFunc = func_8086F260;
         }
@@ -201,12 +194,10 @@ void func_8086F7F8(BgBowlWall* this, GlobalContext* globalCtx) {
 }
 
 void BgBowlWall_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s16 temp_v0;
     BgBowlWall* this = (BgBowlWall*)thisx;
 
-    temp_v0 = this->unk182;
-    if (temp_v0 != 0) {
-        this->unk182 = temp_v0 - 1;
+    if (this->unk182 != 0) {
+        this->unk182--;
     }
     this->actionFunc(this, globalCtx);
 }
@@ -216,37 +207,17 @@ void BgBowlWall_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgBowlWall* this = (BgBowlWall*)thisx;
     s32 pad;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_bowl_wall.c", 0x1B9);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_bowl_wall.c", 441);
     func_80093D84(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x8,
-               Gfx_TexScroll(globalCtx->state.gfxCtx, 0U, (s32)(new_var2 = globalCtx->state.frames) * -2, 0x10, 0x10));
+               Gfx_TexScroll(globalCtx->state.gfxCtx, 0, (new_var2 = globalCtx->state.frames) * -2, 16, 16));
     gDPPipeSync(POLY_OPA_DISP++);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_bowl_wall.c", 0x1C5),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_bowl_wall.c", 453),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (this->dyna.actor.params == 0) {
         gSPDisplayList(POLY_OPA_DISP++, D_6000610);
     } else {
         gSPDisplayList(POLY_OPA_DISP++, D_6001390);
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_bowl_wall.c", 0x1D0);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_bowl_wall.c", 464);
 }
-
-/*
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/BgBowlWall_Init.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/BgBowlWall_Destroy.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/func_8086F260.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/func_8086F440.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/func_8086F464.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/func_8086F718.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/func_8086F7F8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/BgBowlWall_Update.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Bowl_Wall/BgBowlWall_Draw.s")
-*/
