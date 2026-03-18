@@ -17,7 +17,9 @@ void func_809C54A8(EnBomBowlPit* this, GlobalContext* globalCtx);
 void func_809C55B0(EnBomBowlPit* this, GlobalContext* globalCtx);
 void func_809C5608(EnBomBowlPit* this, GlobalContext* globalCtx);
 
-static s32 D_809C56E0[5] = { 0x33, 0x3E, 3, 0x65, 0x55 };
+static s32 D_809C56E0[5] = {
+    GI_BOMB_BAG_30, GI_HEART_PIECE, GI_BOMBCHUS_10, GI_BOMBS_1, GI_RUPEE_PURPLE,
+};
 
 const ActorInit En_Bom_Bowl_Pit_InitVars = {
     ACTOR_EN_BOM_BOWL_PIT,
@@ -97,7 +99,7 @@ void func_809C4E8C(EnBomBowlPit* this, GlobalContext* globalCtx) {
                 this->unk1D4.x = fabsf(this->unk180.x - this->unk1BC.x) * 0.02f;
                 this->unk1D4.y = fabsf(this->unk180.y - this->unk1BC.y) * 0.02f;
                 this->unk1D4.z = fabsf(this->unk180.z - this->unk1BC.z) * 0.02f;
-                func_800C04D8(globalCtx, this->unk152, (Vec3f*)&this->unk180, (Vec3f*)&this->unk18C);
+                func_800C04D8(globalCtx, this->unk152, &this->unk180, &this->unk18C);
                 this->actor.textId = 0xF;
                 func_8010B680(globalCtx, this->actor.textId, NULL);
                 this->unk154 = 5;
@@ -136,9 +138,9 @@ void func_809C5184(EnBomBowlPit* this, GlobalContext* globalCtx) {
 
 void func_809C5360(EnBomBowlPit* this, GlobalContext* globalCtx) {
     if (this->unk158 == 0) {
-        this->unk1E0 =
-            Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, 0x168, this->actor.posRot.pos.x,
-                               this->actor.posRot.pos.y, this->actor.posRot.pos.z - 70.0f, 0, 0, 0, this->unk15A);
+        this->unk1E0 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_EX_ITEM,
+                                          this->actor.posRot.pos.x, this->actor.posRot.pos.y,
+                                          this->actor.posRot.pos.z - 70.0f, 0, 0, 0, this->unk15A);
         if (this->unk1E0 != NULL) {
             this->unk14C = func_809C53F0;
         }
@@ -167,8 +169,8 @@ void func_809C54A8(EnBomBowlPit* this, GlobalContext* globalCtx) {
 
     func_8002DF54(globalCtx, NULL, 7U);
     this->unk160 = D_809C56E0[this->unk15A];
-    if ((this->unk160 == 0x33) && (CUR_CAPACITY(1) == 30)) {
-        this->unk160 = 0x34;
+    if ((this->unk160 == GI_BOMB_BAG_30) && (CUR_CAPACITY(1) == 30)) {
+        this->unk160 = GI_BOMB_BAG_40;
     }
     player->stateFlags1 &= ~0x20000000;
     this->actor.parent = NULL;
@@ -178,7 +180,7 @@ void func_809C54A8(EnBomBowlPit* this, GlobalContext* globalCtx) {
 }
 
 void func_809C55B0(EnBomBowlPit* this, GlobalContext* globalCtx) {
-    if (Actor_HasParent(&this->actor, globalCtx) != 0) {
+    if (Actor_HasParent(&this->actor, globalCtx)) {
         this->unk14C = func_809C5608;
         return;
     }
@@ -188,7 +190,7 @@ void func_809C55B0(EnBomBowlPit* this, GlobalContext* globalCtx) {
 void func_809C5608(EnBomBowlPit* this, GlobalContext* globalCtx) {
     if ((func_8010BDBC(&globalCtx->msgCtx) == 6) && (func_80106BC8(globalCtx) != 0)) {
         osSyncPrintf("\x1b[32m☆☆☆☆☆ 正常終了 ☆☆☆☆☆ \n\x1b[m");
-        if (this->unk160 == 0x3E) {
+        if (this->unk160 == GI_HEART_PIECE) {
             gSaveContext.healthAccumulator = 0x140;
             osSyncPrintf("\x1b[32m☆☆☆☆☆ あぁ回復！ ☆☆☆☆☆ \n\x1b[m");
         }
