@@ -4857,7 +4857,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xE51010, c, overlays/ovl_En_Kusa]
-      - [0xE52240, data, overlays/ovl_En_Kusa]
+      - [0xE52240, .data, overlays/ovl_En_Kusa]
       - [0xE52310, .rodata, overlays/ovl_En_Kusa]
       - [0xE523B0, rodatabin, rodatabin_80A9C340]
 
