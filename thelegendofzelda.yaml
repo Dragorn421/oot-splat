@@ -4196,7 +4196,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xDC9C60, c, overlays/ovl_En_Firefly]
-      - [0xDCBB00, data, overlays/ovl_En_Firefly]
+      - [0xDCBB00, .data, overlays/ovl_En_Firefly]
       - [0xDCBBD0, .rodata, overlays/ovl_En_Firefly]
       - [0xDCBC40, rodatabin, rodatabin_80A15050]
 
