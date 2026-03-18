@@ -1163,7 +1163,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC3DF30, c, overlays/ovl_Bg_Bowl_Wall]
-      - [0xC3E7F0, data, overlays/ovl_Bg_Bowl_Wall]
+      - [0xC3E7F0, .data, overlays/ovl_Bg_Bowl_Wall]
       - [0xC3E860, .rodata, overlays/ovl_Bg_Bowl_Wall]
       - [0xC3E8F0, rodatabin, rodatabin_8086FB20]
 
