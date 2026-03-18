@@ -44,7 +44,10 @@ typedef struct EnBomBowlMan {
     /* 0x238 */ s16 unk238;
     /* 0x23A */ s16 unk23A;
     /* 0x23C */ s16 unk23C;
-    /* 0x23E */ s16 unk23E;
+    /* 0x23E */ union {
+        s16 unk23E;
+        s16 unk23E_arr[1];
+    };
     /* 0x240 */ s16 unk240;
     /* 0x242 */ s16 unk242;
     /* 0x244 */ s16 unk244;

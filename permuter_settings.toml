@@ -6,6 +6,8 @@ compiler_type = "ido"
 "g[DS]P.*" = "void"
 "G_[AC]CMUX_.*" = "void"
 "NULL" = "void"
+"OPEN_DISPS" = "void"
+"CLOSE_DISPS" = "void"
 
 [decompme.compilers]
 "*/tools/ido_recomp/linux/7.1/cc" = "ido7.1"
