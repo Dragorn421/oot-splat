@@ -21,11 +21,11 @@ typedef struct EnChanger {
     /* 0x150 */ ActorA* unk150;
     /* 0x154 */ ActorA* unk154;
     /* 0x158 */ ActorA* unk158;
-    /* 0x15C */ s16 unk15C;
-    /* 0x15E */ s16 unk15E;
+    /* 0x15C */ s16 unk15C_l;
+    /* 0x15E */ s16 unk15E_r;
     /* 0x160 */ s16 unk160;
     /* 0x162 */ s16 unk162;
-    /* 0x164 */ char pad164[2];
+    /* 0x164 */ s16 unk164;
     /* 0x166 */ s16 unk166;
     /* 0x168 */ s16 unk168;
     /* 0x16A */ char pad16A[2];
