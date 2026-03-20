@@ -56,6 +56,151 @@ static Vec3f D_808987A0 = { 0.0f, 14.0f, 0.0f };
 static Vec3f D_808987AC = { 0.0f, 8.0f, 0.0f };
 static Gfx* D_808987B8[6] = { D_6000880, (Gfx*)0x06000AE0, D_6000600, NULL, NULL, NULL };
 
+void func_808980C0(BgJyaHaheniron* this, GlobalContext* globalCtx) {
+    s32 pad;
+
+    Collider_InitSpheres(globalCtx, &this->unk150);
+    Collider_LoadSpheres(globalCtx, &this->unk150, &this->actor, &D_80898764, this->unk170);
+}
+
+void func_80898114(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2) {
+    Vec3f spB4;
+    Vec3f spA8;
+    f32 temp_fv0;
+    s32 var_s1;
+    s32 var_v0;
+
+    var_s1 = 0;
+    do {
+        temp_fv0 = Math_Rand_ZeroOne() * 10.0f;
+        spB4.x = (Math_Sins(var_s1 * 0x3333) * temp_fv0) + arg2->x;
+        spB4.y = (Math_Rand_ZeroOne() * 10.0f) + arg2->y;
+        spB4.z = (Math_Coss(var_s1 * 0x3333) * temp_fv0) + arg2->z;
+        temp_fv0 = Math_Rand_ZeroOne();
+        if (temp_fv0 < 0.2f) {
+            var_v0 = 0x60;
+        } else {
+            if (temp_fv0 < 0.8f) {
+                var_v0 = 0x40;
+            } else {
+                var_v0 = 0x20;
+            }
+        }
+        EffectSsKakera_Spawn(globalCtx, arg1, (Vec3f*)&spB4, arg1, -0x15E, (s16)var_v0, 0x28, 4, 0, D_80898774[var_s1],
+                             0, 0x14, 0x28, -1, 0x16C, D_6000880);
+        var_s1++;
+    } while (var_s1 != ARRAY_COUNT(D_80898774));
+    spA8.x = arg1->x + (arg2->x * 5.0f);
+    spA8.y = arg1->y + (arg2->y * 5.0f);
+    spA8.z = arg1->z + (arg2->z * 5.0f);
+    func_80033480(globalCtx, (Vec3f*)&spA8, 100.0f, 4, 0x64, 0xA0, 1U);
+}
+
+void BgJyaHaheniron_Init(Actor* thisx, GlobalContext* globalCtx) {
+    s16 temp_v0;
+    BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
+
+    Actor_ProcessInitChain(&this->actor, D_80898780);
+    Actor_SetScale(&this->actor, D_80898794[this->actor.params]);
+    temp_v0 = this->actor.params;
+    if (temp_v0 == 0) {
+        func_808980C0(this, globalCtx);
+        this->actor.shape.rot.z = (s16)(s32)(Math_Rand_ZeroOne() * 65535.0f);
+        func_8089843C(this);
+        return;
+    }
+    if (temp_v0 == 1) {
+        func_80898588(this);
+        return;
+    }
+    if (temp_v0 == 2) {
+        func_8089861C(this);
+    }
+}
+
+void BgJyaHaheniron_Destroy(Actor* thisx, GlobalContext* globalCtx) {
+    BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
+    if (this->actor.params == 0) {
+        Collider_DestroySpheres(globalCtx, &this->unk150);
+    }
+}
+
+void func_8089843C(BgJyaHaheniron* this) {
+    this->unk14C = func_8089844C;
+}
+
+void func_8089844C(BgJyaHaheniron* this, GlobalContext* globalCtx) {
+    Vec3f sp2C;
+    Actor* temp_v0;
+
+    Actor_MoveForward(&this->actor);
+    func_8002E4B4(globalCtx, &this->actor, 5.0f, 8.0f, 0.0f, 0x85);
+    if ((this->actor.bgCheckFlags & 9) ||
+        ((this->unk150.base.atFlags & 2) && (temp_v0 = this->unk150.base.at, (temp_v0 != NULL)) &&
+         (temp_v0->type == 2))) {
+        sp2C.x = -Math_Rand_ZeroOne() * this->actor.velocity.x;
+        sp2C.y = -Math_Rand_ZeroOne() * this->actor.velocity.y;
+        sp2C.z = -Math_Rand_ZeroOne() * this->actor.velocity.z;
+        func_80898114(globalCtx, &this->actor.posRot.pos, (Vec3f*)&sp2C);
+        Actor_Kill(&this->actor);
+    } else if (this->unk1B0 >= 0x3D) {
+        Actor_Kill(&this->actor);
+    } else {
+        Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk150.base);
+    }
+    this->actor.shape.rot.y += 0x4B0;
+    this->actor.shape.rot.x += 0xFA0;
+}
+
+void func_80898588(BgJyaHaheniron* this) {
+    this->unk14C = func_80898598;
+}
+
+void func_80898598(BgJyaHaheniron* this, GlobalContext* globalCtx) {
+    s16 temp_v0;
+
+    temp_v0 = this->unk1B0;
+    if (temp_v0 >= 8) {
+        Actor_MoveForward(&this->actor);
+    } else if (temp_v0 >= 0x11) {
+        func_80898114(globalCtx, &this->actor.posRot.pos, &D_808987A0);
+        Actor_Kill(&this->actor);
+    }
+    this->actor.shape.rot.y += 0x258;
+    this->actor.shape.rot.x += 0x3E8;
+}
+
+void func_8089861C(BgJyaHaheniron* this) {
+    this->unk14C = func_8089862C;
+}
+
+void func_8089862C(BgJyaHaheniron* this, GlobalContext* globalCtx) {
+    if (this->unk1B0 >= 0x11) {
+        func_80898114(globalCtx, &this->actor.posRot.pos, &D_808987AC);
+        Audio_PlaySoundAtPosition(globalCtx, &this->actor.posRot.pos, 0x50, 0x39ACU);
+        Actor_Kill(&this->actor);
+    }
+}
+
+void BgJyaHaheniron_Update(Actor* thisx, GlobalContext* globalCtx) {
+    BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
+    this->unk1B0 += 1;
+    this->unk14C(this, globalCtx);
+}
+
+void BgJyaHaheniron_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    s16 var_v0;
+    BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
+
+    var_v0 = this->actor.params;
+    if (var_v0 == 0) {
+        func__800628A4_Type0(0, &this->unk150);
+        var_v0 = this->actor.params;
+    }
+    Gfx_DrawDListOpa(globalCtx, D_808987B8[var_v0]);
+}
+
+/*
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Jya_Haheniron/func_808980C0.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Jya_Haheniron/func_80898114.s")
@@ -79,3 +224,4 @@ static Gfx* D_808987B8[6] = { D_6000880, (Gfx*)0x06000AE0, D_6000600, NULL, NULL
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Jya_Haheniron/BgJyaHaheniron_Update.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Jya_Haheniron/BgJyaHaheniron_Draw.s")
+*/
