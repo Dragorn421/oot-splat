@@ -1797,9 +1797,9 @@ segments:
     follows_vram: ovl_Bg_Jya_Goroiwa
     bss_size: 0x0
     subsegments:
-      - [0xC66E00, asm, overlays/ovl_Bg_Jya_Haheniron]
+      - [0xC66E00, c, overlays/ovl_Bg_Jya_Haheniron]
       - [0xC67460, data, overlays/ovl_Bg_Jya_Haheniron]
-      - [0xC67510, rodata, overlays/ovl_Bg_Jya_Haheniron]
+      - [0xC67510, .rodata, overlays/ovl_Bg_Jya_Haheniron]
       - [0xC67520, rodatabin, rodatabin_808987E0]
 
   - name: ovl_Bg_Jya_Ironobj
