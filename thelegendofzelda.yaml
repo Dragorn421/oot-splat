@@ -1798,7 +1798,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC66E00, c, overlays/ovl_Bg_Jya_Haheniron]
-      - [0xC67460, data, overlays/ovl_Bg_Jya_Haheniron]
+      - [0xC67460, .data, overlays/ovl_Bg_Jya_Haheniron]
       - [0xC67510, .rodata, overlays/ovl_Bg_Jya_Haheniron]
       - [0xC67520, rodatabin, rodatabin_808987E0]
 
