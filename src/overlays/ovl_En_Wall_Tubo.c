@@ -71,8 +71,8 @@ typedef struct ActorDA {
 } ActorDA;
 
 void func_80B2EE9C(EnWallTubo* this, GlobalContext* globalCtx) {
-    s32 pad;
     Actor* var_v0;
+    Actor* thisx = &this->actor;
     Vec3f sp4C;
     Vec3f sp40;
     Vec3f diff;
@@ -84,7 +84,7 @@ void func_80B2EE9C(EnWallTubo* this, GlobalContext* globalCtx) {
     if ((this->unk160->unk_258 != 0) && (globalCtx->cameraPtrs[0]->setting == 0x15)) {
         var_v0 = globalCtx->actorCtx.actorList[3].first;
         while (var_v0 != NULL) {
-            if ((&var_v0[0] == &this->actor) || (var_v0->id != ACTOR_EN_BOM_CHU)) {
+            if ((var_v0 == thisx) || (var_v0->id != ACTOR_EN_BOM_CHU)) {
                 var_v0 = var_v0->next;
                 continue;
             }
