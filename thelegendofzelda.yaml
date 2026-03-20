@@ -1162,9 +1162,9 @@ segments:
     follows_vram: ovl_Bg_Bombwall
     bss_size: 0x0
     subsegments:
-      - [0xC3DF30, c, overlays/ovl_Bg_Bowl_Wall]
-      - [0xC3E7F0, .data, overlays/ovl_Bg_Bowl_Wall]
-      - [0xC3E860, .rodata, overlays/ovl_Bg_Bowl_Wall]
+      - [0xC3DF30, asm, overlays/ovl_Bg_Bowl_Wall]
+      - [0xC3E7F0, data, overlays/ovl_Bg_Bowl_Wall]
+      - [0xC3E860, rodata, overlays/ovl_Bg_Bowl_Wall]
       - [0xC3E8F0, rodatabin, rodatabin_8086FB20]
 
   - name: ovl_Bg_Breakwall
@@ -3654,9 +3654,9 @@ segments:
     follows_vram: ovl_En_Bom
     bss_size: 0x0
     subsegments:
-      - [0xD7CC60, c, overlays/ovl_En_Bom_Bowl_Man]
-      - [0xD7E020, .data, overlays/ovl_En_Bom_Bowl_Man]
-      - [0xD7E0F0, .rodata, overlays/ovl_En_Bom_Bowl_Man]
+      - [0xD7CC60, asm, overlays/ovl_En_Bom_Bowl_Man]
+      - [0xD7E020, data, overlays/ovl_En_Bom_Bowl_Man]
+      - [0xD7E0F0, rodata, overlays/ovl_En_Bom_Bowl_Man]
       - [0xD7E2C0, rodatabin, rodatabin_809C4C90]
 
   - name: ovl_En_Bom_Bowl_Pit
@@ -3666,9 +3666,9 @@ segments:
     follows_vram: ovl_En_Bom_Bowl_Man
     bss_size: 0x0
     subsegments:
-      - [0xD7E470, c, overlays/ovl_En_Bom_Bowl_Pit]
-      - [0xD7ED10, .data, overlays/ovl_En_Bom_Bowl_Pit]
-      - [0xD7ED50, .rodata, overlays/ovl_En_Bom_Bowl_Pit]
+      - [0xD7E470, asm, overlays/ovl_En_Bom_Bowl_Pit]
+      - [0xD7ED10, data, overlays/ovl_En_Bom_Bowl_Pit]
+      - [0xD7ED50, rodata, overlays/ovl_En_Bom_Bowl_Pit]
       - [0xD7EDC0, rodatabin, rodatabin_809C5790]
 
   - name: ovl_En_Bom_Chu
@@ -3787,9 +3787,9 @@ segments:
     follows_vram: ovl_En_Bx
     bss_size: 0x0
     subsegments:
-      - [0xD8BCB0, c, overlays/ovl_En_Changer]
-      - [0xD8C6A0, .data, overlays/ovl_En_Changer]
-      - [0xD8C7A0, .rodata, overlays/ovl_En_Changer]
+      - [0xD8BCB0, asm, overlays/ovl_En_Changer]
+      - [0xD8C6A0, data, overlays/ovl_En_Changer]
+      - [0xD8C7A0, rodata, overlays/ovl_En_Changer]
       - [0xD8CA80, rodatabin, rodatabin_809D3460]
 
   - name: ovl_En_Clear_Tag
@@ -4195,9 +4195,9 @@ segments:
     follows_vram: ovl_En_Fire_Rock
     bss_size: 0x0
     subsegments:
-      - [0xDC9C60, c, overlays/ovl_En_Firefly]
-      - [0xDCBB00, .data, overlays/ovl_En_Firefly]
-      - [0xDCBBD0, .rodata, overlays/ovl_En_Firefly]
+      - [0xDC9C60, asm, overlays/ovl_En_Firefly]
+      - [0xDCBB00, data, overlays/ovl_En_Firefly]
+      - [0xDCBBD0, rodata, overlays/ovl_En_Firefly]
       - [0xDCBC40, rodatabin, rodatabin_80A15050]
 
   - name: ovl_En_Fish
@@ -4856,9 +4856,9 @@ segments:
     follows_vram: ovl_En_Ko
     bss_size: 0x0
     subsegments:
-      - [0xE51010, c, overlays/ovl_En_Kusa]
-      - [0xE52240, .data, overlays/ovl_En_Kusa]
-      - [0xE52310, .rodata, overlays/ovl_En_Kusa]
+      - [0xE51010, asm, overlays/ovl_En_Kusa]
+      - [0xE52240, data, overlays/ovl_En_Kusa]
+      - [0xE52310, rodata, overlays/ovl_En_Kusa]
       - [0xE523B0, rodatabin, rodatabin_80A9C340]
 
   - name: ovl_En_Kz
@@ -5828,9 +5828,9 @@ segments:
     follows_vram: ovl_En_Vm
     bss_size: 0x0
     subsegments:
-      - [0xEE4C20, c, overlays/ovl_En_Wall_Tubo]
-      - [0xEE5150, .data, overlays/ovl_En_Wall_Tubo]
-      - [0xEE51A0, .rodata, overlays/ovl_En_Wall_Tubo]
+      - [0xEE4C20, asm, overlays/ovl_En_Wall_Tubo]
+      - [0xEE5150, data, overlays/ovl_En_Wall_Tubo]
+      - [0xEE51A0, rodata, overlays/ovl_En_Wall_Tubo]
       - [0xEE52B0, rodatabin, rodatabin_80B2F480]
 
   - name: ovl_En_Wallmas
