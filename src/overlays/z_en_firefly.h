@@ -6,13 +6,18 @@
 
 struct EnFirefly;
 
+typedef enum EnFireflyBodyPart {
+    /* 0 */ EN_FIREFLY_BODY_PART_LIMB_15,
+    /* 1 */ EN_FIREFLY_BODY_PART_LIMB_21,
+    /* 2 */ EN_FIREFLY_BODY_PART_LIMB_10,
+    /* 3 */ EN_FIREFLY_BODY_PART_MAX
+} EnFireflyBodyPart;
+
 typedef void (*EnFireflyActionFunc)(struct EnFirefly*, GlobalContext*);
 
 typedef struct EnFirefly {
     /* 0x000 */ Actor actor;
-    /* 0x14C */ Vec3f unk14C;
-    /* 0x158 */ Vec3f unk158;
-    /* 0x164 */ Vec3f unk164;
+    /* 0x14C */ Vec3f bodyPartsPos[EN_FIREFLY_BODY_PART_MAX];
     /* 0x170 */ SkelAnime skelAnime;
     /* 0x1B4 */ EnFireflyActionFunc actionFunc;
     /* 0x1B8 */ u8 unk1B8;
@@ -22,8 +27,8 @@ typedef struct EnFirefly {
     /* 0x1BE */ Vec3s unk1BE[0x1C];
     /* 0x266 */ Vec3s unk266[0x1C];
     /* 0x310 */ f32 unk310_homeY;
-    /* 0x314 */ ColliderSpheres unk314;
-    /* 0x334 */ ColliderSpheresElement unk334[1];
+    /* 0x314 */ ColliderSpheres collider;
+    /* 0x334 */ ColliderSpheresElement colliderElements[1];
 } EnFirefly; // size = 0x0374
 
 extern const ActorInit En_Firefly_InitVars;
