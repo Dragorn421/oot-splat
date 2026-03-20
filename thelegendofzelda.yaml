@@ -6180,9 +6180,9 @@ segments:
     follows_vram: ovl_Magic_Wind
     bss_size: 0x0
     subsegments:
-      - [0xF3BC70, asm, overlays/ovl_Mir_Ray]
-      - [0xF3D270, data, overlays/ovl_Mir_Ray]
-      - [0xF3D470, rodata, overlays/ovl_Mir_Ray]
+      - [0xF3BC70, c, overlays/ovl_Mir_Ray]
+      - [0xF3D270, .data, overlays/ovl_Mir_Ray]
+      - [0xF3D470, .rodata, overlays/ovl_Mir_Ray]
       - [0xF3D560, rodatabin, rodatabin_80B8E940]
 
   - name: ovl_Obj_Bean
