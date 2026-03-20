@@ -11,7 +11,7 @@ void EnBomBowlMan_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnBomBowlMan_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 void func_809C3820(EnBomBowlMan* this, GlobalContext* globalCtx);
-void func_809C38A8(EnBomBowlMan* this, GlobalContext* globalCtx);
+void func_809C38A8_WaitTalk(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C395C(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C39D0(EnBomBowlMan* this, GlobalContext* globalCtx);
 void func_809C3A54(EnBomBowlMan* this, GlobalContext* globalCtx);
@@ -92,31 +92,31 @@ void EnBomBowlMan_Init(Actor* thisx, GlobalContext* globalCtx2) {
     }
     this->unk242 = (u16)(s32)Math_Rand_ZeroFloat(4.99f);
     this->actor.unk_1F = 1;
-    this->unk214 = func_809C3820;
+    this->actionFunc = func_809C3820;
 }
 
 void EnBomBowlMan_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_809C3820(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    this->unk254 = (f32)SkelAnime_GetFrameCount(&D_6000710);
-    SkelAnime_ChangeAnim(&this->unk14C, &D_6000710, 1.0f, 0.0f, this->unk254, 0U, -10.0f);
+    this->unk254_curAnimFraceCount = SkelAnime_GetFrameCount(&D_6000710);
+    SkelAnime_ChangeAnim(&this->unk14C, &D_6000710, 1.0f, 0.0f, this->unk254_curAnimFraceCount, 0U, -10.0f);
     this->actor.textId = 0xC0;
     this->unk22E = 5;
-    this->unk214 = func_809C38A8;
+    this->actionFunc = func_809C38A8_WaitTalk;
 }
 
-void func_809C38A8(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    s16 temp_v0;
-    s16 var_v1;
+void func_809C38A8_WaitTalk(EnBomBowlMan* this, GlobalContext* globalCtx) {
+    s16 relYawTowardsPlayer;
+    s16 relYawTowardsPlayerAbs;
 
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if (func_8002F194(&this->actor, globalCtx) != 0) {
-        this->unk214 = func_809C395C;
+        this->actionFunc = func_809C395C;
     } else {
-        temp_v0 = this->actor.yawTowardsLink - this->actor.shape.rot.y;
-        var_v1 = ABS(temp_v0);
-        if (!(this->actor.xzDistFromLink > 120.0f) && (var_v1 < 0x4300)) {
+        relYawTowardsPlayer = this->actor.yawTowardsLink - this->actor.shape.rot.y;
+        relYawTowardsPlayerAbs = ABS(relYawTowardsPlayer);
+        if (!(this->actor.xzDistFromLink > 120.0f) && (relYawTowardsPlayerAbs < 0x4300)) {
             func_8002F2CC(&this->actor, globalCtx, 120.0f);
         }
     }
@@ -126,15 +126,15 @@ void func_809C395C(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if ((this->unk22E == func_8010BDBC(&globalCtx->msgCtx)) && (func_80106BC8(globalCtx) != 0)) {
         globalCtx->msgCtx.msgMode = 0x37;
-        this->unk214 = func_809C39D0;
+        this->actionFunc = func_809C39D0;
     }
 }
 
 void func_809C39D0(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    this->unk254 = SkelAnime_GetFrameCount(&D_6000080);
-    SkelAnime_ChangeAnim(&this->unk14C, &D_6000080, 1.0f, 0.0f, this->unk254, 2U, -10.0f);
+    this->unk254_curAnimFraceCount = SkelAnime_GetFrameCount(&D_6000080);
+    SkelAnime_ChangeAnim(&this->unk14C, &D_6000080, 1.0f, 0.0f, this->unk254_curAnimFraceCount, 2U, -10.0f);
     this->unk238 = 1;
-    this->unk214 = func_809C3A54;
+    this->actionFunc = func_809C3A54;
 }
 
 void func_809C3A54(EnBomBowlMan* this, GlobalContext* globalCtx) {
@@ -155,7 +155,7 @@ void func_809C3A54(EnBomBowlMan* this, GlobalContext* globalCtx) {
         this->unk234 = 2;
         this->unk23A += 1;
         if (this->unk23A >= 3) {
-            this->unk214 = func_809C3B50;
+            this->actionFunc = func_809C3B50;
         }
     }
 }
@@ -164,17 +164,17 @@ void func_809C3B50(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if ((this->unk22E == func_8010BDBC(&globalCtx->msgCtx)) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        this->unk254 = SkelAnime_GetFrameCount(&D_60072AC);
-        SkelAnime_ChangeAnim(&this->unk14C, &D_60072AC, 1.0f, 0.0f, this->unk254, 0U, -10.0f);
+        this->unk254_curAnimFraceCount = SkelAnime_GetFrameCount(&D_60072AC);
+        SkelAnime_ChangeAnim(&this->unk14C, &D_60072AC, 1.0f, 0.0f, this->unk254_curAnimFraceCount, 0U, -10.0f);
         this->unk238 = 3;
         this->unk236 = (s16)Math_Rand_ZeroFloat(60.0f) + 0x14;
         if (!(gSaveContext.eventChkInf[2] & 0x20) && (gGameInfo->data[0x962] == 0)) {
-            this->unk214 = func_809C3C7C;
+            this->actionFunc = func_809C3C7C;
         } else {
             this->actor.textId = 0x18;
             this->unk22E = 4;
             func_8010B720(globalCtx, this->actor.textId);
-            this->unk214 = func_809C4040;
+            this->actionFunc = func_809C4040;
         }
     }
 }
@@ -182,7 +182,7 @@ void func_809C3B50(EnBomBowlMan* this, GlobalContext* globalCtx) {
 void func_809C3C7C(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if (func_8002F194(&this->actor, globalCtx) != 0) {
-        this->unk214 = func_809C3CD4;
+        this->actionFunc = func_809C3CD4;
     } else {
         func_8002F2CC(&this->actor, globalCtx, 120.0f);
     }
@@ -192,7 +192,7 @@ void func_809C3CD4(EnBomBowlMan* this, GlobalContext* globalCtx) {
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if ((this->unk22E == func_8010BDBC(&globalCtx->msgCtx)) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        this->unk214 = func_809C3C7C;
+        this->actionFunc = func_809C3C7C;
     }
 }
 
@@ -209,12 +209,12 @@ void func_809C3D40(EnBomBowlMan* this, GlobalContext* globalCtx) {
         this->actor.textId = 0x19;
         this->unk22E = 5;
     }
-    this->unk214 = func_809C3DC4;
+    this->actionFunc = func_809C3DC4;
 }
 
 void func_809C3DC4(EnBomBowlMan* this, GlobalContext* globalCtx) {
-    s16 temp_v0_3;
-    s16 var_v1;
+    s16 relYawTowardsPlayer;
+    s16 relYawTowardsPlayerAbs;
 
     SkelAnime_FrameUpdateMatrix(&this->unk14C);
     if (gGameInfo->data[0x963] != 0) {
@@ -251,17 +251,17 @@ void func_809C3DC4(EnBomBowlMan* this, GlobalContext* globalCtx) {
         if (this->unk244 == 2) {
             func_8002DF54(globalCtx, NULL, 8U);
         }
-        this->unk214 = func_809C4040;
+        this->actionFunc = func_809C4040;
     } else if (func_8002F194(&this->actor, globalCtx) != 0) {
         if (this->unk_258 == 0) {
-            this->unk214 = func_809C4040;
+            this->actionFunc = func_809C4040;
         } else {
-            this->unk214 = func_809C41FC;
+            this->actionFunc = func_809C41FC;
         }
     } else {
-        temp_v0_3 = this->actor.yawTowardsLink - this->actor.shape.rot.y;
-        var_v1 = ABS(temp_v0_3);
-        if (!(this->actor.xzDistFromLink > 120.0f) && (var_v1 < 0x4300)) {
+        relYawTowardsPlayer = this->actor.yawTowardsLink - this->actor.shape.rot.y;
+        relYawTowardsPlayerAbs = ABS(relYawTowardsPlayer);
+        if (!(this->actor.xzDistFromLink > 120.0f) && (relYawTowardsPlayerAbs < 0x4300)) {
             func_8002F2CC(&this->actor, globalCtx, 120.0f);
         }
     }
@@ -284,21 +284,21 @@ void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx) {
                         this->actor.textId = 0x19;
                         func_8010B720(globalCtx, this->actor.textId);
                         this->unk22E = 5;
-                        this->unk214 = func_809C41FC;
+                        this->actionFunc = func_809C41FC;
                     } else {
                         this->actor.textId = 0x1B;
                         func_8010B720(globalCtx, this->actor.textId);
                         this->unk22E = 5;
                         func_800800F8(globalCtx, 0x1F4A, -0x63, NULL, 0);
                         func_8002DF54(globalCtx, NULL, 8U);
-                        this->unk214 = func_809C4318;
+                        this->actionFunc = func_809C4318;
                     }
                 } else {
                     this->unk23C = 0;
                     this->actor.textId = 0x85;
                     func_8010B720(globalCtx, this->actor.textId);
                     this->unk22E = 5;
-                    this->unk214 = func_809C41FC;
+                    this->actionFunc = func_809C41FC;
                 }
                 break;
             case 1:
@@ -306,7 +306,7 @@ void func_809C4040(EnBomBowlMan* this, GlobalContext* globalCtx) {
                 this->actor.textId = 0x2D;
                 func_8010B720(globalCtx, this->actor.textId);
                 this->unk22E = 5;
-                this->unk214 = func_809C41FC;
+                this->actionFunc = func_809C41FC;
                 break;
         }
     }
@@ -325,12 +325,12 @@ void func_809C41FC(EnBomBowlMan* this, GlobalContext* globalCtx) {
             this->unk22E = 5;
             func_800800F8(globalCtx, 0x1F4A, -0x63, NULL, 0);
             func_8002DF54(globalCtx, NULL, 8U);
-            this->unk214 = func_809C4318;
+            this->actionFunc = func_809C4318;
         } else {
             if (this->unk244 == 2) {
                 func_8002DF54(globalCtx, NULL, 7U);
             }
-            this->unk214 = func_809C3D40;
+            this->actionFunc = func_809C3D40;
         }
     }
 }
@@ -348,7 +348,7 @@ void func_809C4318(EnBomBowlMan* this, GlobalContext* globalCtx) {
         EffectSsBomb2_SpawnLayered(globalCtx, &sp2C, &sp38, &sp44, 50, 15);
         Audio_PlayActorSound2(&this->actor, NA_SE_IT_GOODS_APPEAR);
         this->unk22A = 0xA;
-        this->unk214 = func_809C441C;
+        this->actionFunc = func_809C441C;
     }
 }
 
@@ -407,7 +407,7 @@ void func_809C441C(EnBomBowlMan* this, GlobalContext* globalCtx) {
         if ((s16)this->unk242 >= 5) {
             this->unk242 = 0;
         }
-        this->unk214 = func_809C4664;
+        this->actionFunc = func_809C4664;
     }
 }
 
@@ -422,7 +422,7 @@ void func_809C4664(EnBomBowlMan* this, GlobalContext* globalCtx) {
         }
         osSyncPrintf("\x1b[33m☆ わー ☆ %d\n\x1b[m", globalCtx->bombchuBowlingAmmo);
         func_8002DF54(globalCtx, NULL, 7U);
-        this->unk214 = func_809C3D40;
+        this->actionFunc = func_809C3D40;
     }
 }
 
@@ -470,15 +470,16 @@ void EnBomBowlMan_Update(Actor* thisx, GlobalContext* globalCtx) {
     if (this->unk236 != 0) {
         this->unk236 -= 1;
     }
-    this->unk214(this, globalCtx);
+    this->actionFunc(this, globalCtx);
 }
 
-s32 func_809C48A8(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx) {
+s32 EnBomBowlMan_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
+                                  void* thisx) {
     EnBomBowlMan* this = thisx;
 
-    if (arg1 == 4) {
-        arg4->x += this->unk218.y;
-        arg4->z += this->unk218.z;
+    if (limbIndex == 4) {
+        rot->x += this->unk218.y;
+        rot->z += this->unk218.z;
     }
     return 0;
 }
@@ -490,6 +491,6 @@ void EnBomBowlMan_Draw(Actor* thisx, GlobalContext* globalCtx) {
     func_80093D18(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(D_809C4AA8[this->unk234]));
     SkelAnime_DrawFlexOpa(globalCtx, this->unk14C.skeleton, this->unk14C.limbDrawTbl, this->unk14C.dListCount,
-                          func_809C48A8, NULL, this);
+                          EnBomBowlMan_OverrideLimbDraw, NULL, this);
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bom_bowl_man.c", 923);
 }

@@ -22,7 +22,7 @@ typedef struct EnBomBowlMan {
     /* 0x196 */ char pad196[0x3C]; /* maybe part of unk190[0xB]? */
     /* 0x1D2 */ Vec3s unk1D2;
     /* 0x1D8 */ char pad1D8[0x3C]; /* maybe part of unk1D2[0xB]? */
-    /* 0x214 */ EnBomBowlManActionFunc unk214;
+    /* 0x214 */ EnBomBowlManActionFunc actionFunc;
     /* 0x218 */ Vec3s unk218;
     /* 0x21E */ char pad21E[6];
     /* 0x224 */ Vec3s unk224;
@@ -41,7 +41,7 @@ typedef struct EnBomBowlMan {
     /* 0x244 */ s16 unk244;
     /* 0x246 */ char pad246[2];
     /* 0x248 */ Vec3f unk248;
-    /* 0x254 */ f32 unk254;
+    /* 0x254 */ f32 unk254_curAnimFraceCount;
     /* 0x258 */ u8 unk_258;
     /* 0x259 */ char pad259[3]; /* maybe part of unk_258[4]? */
     /* 0x25C */ struct EnBomBowlPit* unk25C;
