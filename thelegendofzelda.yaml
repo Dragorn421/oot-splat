@@ -446,7 +446,7 @@ segments:
       - [0xAA20A0, asm, code/z_DLF]
       - [0xAA2380, asm, code/z_actor]
       - [0xAAF560, asm, code/z_actor_dlftbls]
-      - [0xAAF7A0, asm, code/z_bgcheck]
+      - [0xAAF7A0, c, code/z_bgcheck]
       - [0xABA240, asm, code/z_bg_collect]
       - [0xABA620, asm, code/z_bg_item]
       - [0xABA990, asm, code/z_camera]
@@ -776,7 +776,7 @@ segments:
       - [0xBAD1B0, rodata, code/z_DLF]
       - [0xBAD230, rodata, code/z_actor]
       - [0xBAE1E0, rodata, code/z_actor_dlftbls]
-      - [0xBAF810, rodata, code/z_bgcheck]
+      - [0xBAF810, .rodata, code/z_bgcheck]
       - [0xBB0170, rodata, code/z_bg_collect]
       - [0xBB01F0, rodata, code/z_bg_item]
       - [0xBB0200, rodata, code/z_camera]
@@ -898,7 +898,7 @@ segments:
       - { name: flg_set_bss, type: bss, vram: 0x8015BB90 }
       - { name: z_actor_bss, type: bss, vram: 0x8015BBA0 }
       - { name: z_actor_dlftbls_bss, type: bss, vram: 0x8015BC20 }
-      - { name: z_bgcheck_bss, type: bss, vram: 0x8015BC30 }
+      - { name: code/z_bgcheck, type: bss, vram: 0x8015BC30 }
       - { name: z_camera_bss, type: bss, vram: 0x8015BD50 }
       - { name: code/z_collision_check, type: bss, vram: 0x8015CF00 }
       - { name: z_common_data_bss, type: bss, vram: 0x8015E660 }
