@@ -25,15 +25,13 @@ typedef struct struct_80B8D8A0_4C {
 } struct_80B8D8A0_4C;
 
 typedef struct struct_80B8D8A0 {
-    /* 0x00 */ f32 unk0;
-    /* 0x04 */ f32 unk4;
-    /* 0x08 */ f32 unk8;
-    /* 0x0C */ MtxF unkC;
+    /* 0x00 */ Vec3f reflectionPos;
+    /* 0x0C */ MtxF reflectionTransform;
     /* 0x4C */ struct_80B8D8A0_4C* unk4C;
     /* 0x50 */ u8 unk50;
 } struct_80B8D8A0; // size = 0x54
 
-s32 func_80B8E404(Vec3f* arg0, Vec3f* arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6);
+s32 MirRay_IsInConeFrustum(Vec3f* arg0, Vec3f* arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6);
 
 extern UNK_TYPE D_60000B0;
 extern UNK_TYPE D_6000C50;
@@ -61,53 +59,59 @@ static ColliderQuadSrc D_80B8E674 = {
         { 0.0f, 0.0f, 0.0f },
     },
 };
-static ColliderSpheresElementSrc D_80B8E6C4 = {
-    { 0, { 0x200000, 0, 0 }, { 0, 0, 0 }, 1, 0, 0 },
-    { 0, { { 0, 0, 0 }, 0x32 }, 0x64 },
+static ColliderSpheresElementSrc D_80B8E6C4[1] = {
+    {
+        { 0, { 0x200000, 0, 0 }, { 0, 0, 0 }, 1, 0, 0 },
+        { 0, { { 0, 0, 0 }, 0x32 }, 0x64 },
+    },
 };
-static ColliderSpheresSrc D_80B8E6E8 = { { 0xA, 9, 0, 0, 0, 0 }, 1, &D_80B8E6C4 };
+static ColliderSpheresSrc D_80B8E6E8 = { { 0xA, 9, 0, 0, 0, 0 }, 1, D_80B8E6C4 };
 typedef struct struct_80B8E6F8 {
-    /* 0x00 */ Vec3s unk0;
-    /* 0x06 */ Vec3s unk6;
-    /* 0x0C */ s16 unkC;
-    /* 0x0E */ s16 unkE;
-    /* 0x10 */ f32 unk10;
-    /* 0x14 */ s16 unk14;
-    /* 0x16 */ s16 unk16;
-    /* 0x18 */ f32 unk18;
-    /* 0x1C */ Color_RGB8 unk1C;
+    /* 0x00 */ Vec3s coneFrustumCenterTop;
+    /* 0x06 */ Vec3s coneFrustumCenterBase;
+    /* 0x0C */ s16 coneFrustumRadiusTop;
+    /* 0x0E */ s16 coneFrustumRadiusBase;
+    /* 0x10 */ f32 unk10_sphereColliderPosRatioTowardsBase;
+    /* 0x14 */ s16 unk14_sphereColliderRadiusModel;
+    /* 0x16 */ s16 unk16_pointLightRadius;
+    /* 0x18 */ f32 unk18_pointLightPosRatio;
+    /* 0x1C */ Color_RGB8 unk1C_lightColor;
+#define UNK1F_0 (1 << 0)
+#define UNK1F_1 (1 << 1)
+#define UNK1F_2 (1 << 2)
+#define UNK1F_POINTLIGHTPOS_TO_PLAYER (1 << 3)
     /* 0x1F */ u8 unk1F;
 } struct_80B8E6F8;
 static struct_80B8E6F8 D_80B8E6F8[0xA] = {
     {
-        { -0x488, 0x2AE, -0x370 },
-        { -0x398, 0x1E0, -0x379 },
-        0x1E,
-        0x32,
+        { -1160, 686, -880 },
+        { -920, 480, -889 },
+        30,
+        50,
         1.0f,
         0x32,
         0x96,
         0.8f,
         { 0xFF, 0xFF, 0xFF },
-        2,
+        UNK1F_1,
     },
     {
-        { -0x740, 0x444, -0xBE },
-        { -0x6A7, 0x349, -0xBA },
-        0x1E,
-        0x46,
+        { -1856, 1092, -190 },
+        { -1703, 841, -186 },
+        30,
+        70,
         0.88f,
         0x36,
         0x96,
         0.8f,
         { 0xFF, 0xFF, 0xFF },
-        2,
+        UNK1F_1,
     },
     {
-        { 0x557, 0x2E2, -0x35C },
-        { 0x443, 0x1DC, -0x35C },
-        0x1E,
-        0x55,
+        { 1367, 738, -860 },
+        { 1091, 476, -860 },
+        30,
+        85,
         0.0f,
         0,
         0x96,
@@ -116,22 +120,22 @@ static struct_80B8E6F8 D_80B8E6F8[0xA] = {
         0,
     },
     {
-        { 0x898, 0x44F, -0xDC },
-        { 0x7F8, 0x34B, -0xDC },
-        0x1E,
-        0x3C,
+        { 2200, 1103, -220 },
+        { 2040, 843, -220 },
+        30,
+        60,
         0.0f,
         0,
         0x96,
         0.8f,
         { 0xFF, 0xFF, 0xFF },
-        1,
+        UNK1F_0,
     },
     {
-        { -0x230, 0x879, -0x136 },
-        { -0x230, 0x6CF, -0x136 },
-        0x1E,
-        0x46,
+        { -560, 2169, -310 },
+        { -560, 1743, -310 },
+        30,
+        70,
         0.0f,
         0,
         0x96,
@@ -140,64 +144,64 @@ static struct_80B8E6F8 D_80B8E6F8[0xA] = {
         0,
     },
     {
-        { 0x3C, 0x70A, -0x442 },
-        { 0x3C, 0x3CD, -0x442 },
-        0x1E,
-        0x46,
+        { 60, 1802, -1090 },
+        { 60, 973, -1090 },
+        30,
+        70,
         0.0f,
         0,
         0x96,
         0.9f,
         { 0xFF, 0xFF, 0xFF },
-        0xD,
+        UNK1F_0 | UNK1F_2 | UNK1F_POINTLIGHTPOS_TO_PLAYER,
     },
     {
-        { 0x474, 0x1E0, -0x35C },
-        { 0x474, 0x1E0, -0x35C },
-        0x1E,
-        0x1E,
+        { 1140, 480, -860 },
+        { 1140, 480, -860 },
+        30,
+        30,
         1.0f,
         0xA,
         0x64,
         0.9f,
         { 0xFF, 0xFF, 0xFF },
-        0xE,
+        UNK1F_1 | UNK1F_2 | UNK1F_POINTLIGHTPOS_TO_PLAYER,
     },
     {
-        { -0x230, 0x6CF, -0x136 },
-        { -0x230, 0x6CF, -0x136 },
-        0x1E,
-        0x1E,
+        { -560, 1743, -310 },
+        { -560, 1743, -310 },
+        30,
+        30,
         0.0f,
         0,
         0x64,
         0.94f,
         { 0xFF, 0xFF, 0xFF },
-        0xC,
+        UNK1F_2 | UNK1F_POINTLIGHTPOS_TO_PLAYER,
     },
     {
-        { 0x3C, 0x6CF, -0x136 },
-        { 0x3C, 0x6CF, -0x136 },
-        0x1E,
-        0x1E,
+        { 60, 1743, -310 },
+        { 60, 1743, -310 },
+        30,
+        30,
         0.0f,
         0,
         0x64,
         0.94f,
         { 0xFF, 0xFF, 0xFF },
-        0xC,
+        UNK1F_2 | UNK1F_POINTLIGHTPOS_TO_PLAYER,
     },
     {
-        { -0x496, 0x1C0, 0x4AA },
-        { -0x496, 0x94, 0x4AA },
-        0x32,
-        0x64,
+        { -1174, 448, 1194 },
+        { -1174, 148, 1194 },
+        50,
+        100,
         1.0f,
         0x32,
         0x96,
         0.8f,
         { 0xFF, 0xFF, 0xFF },
-        3,
+        UNK1F_0 | UNK1F_1,
     },
 };
 static InitChainEntry D_80B8E838[] = {
@@ -207,47 +211,52 @@ static InitChainEntry D_80B8E838[] = {
     ICHAIN_F32(uncullZoneDownward, 1000, ICHAIN_STOP),
 };
 
-void func_80B8D050(MirRay* this) {
+void MirRay_UpdateColliderSphereShape(MirRay* this) {
     Vec3f vec;
     struct_80B8E6F8* temp_v0;
     ColliderSpheresElement* new_var;
 
     temp_v0 = &D_80B8E6F8[this->actor.params];
-    vec.x = (this->unk288.x - this->unk27C.x) * temp_v0->unk10;
-    vec.y = (this->unk288.y - this->unk27C.y) * temp_v0->unk10;
-    vec.z = (this->unk288.z - this->unk27C.z) * temp_v0->unk10;
-    this->unk14C.elements[0].shape.world.center.x = this->unk27C.x + vec.x;
-    this->unk14C.elements[0].shape.world.center.y = this->unk27C.y + vec.y;
-    this->unk14C.elements[0].shape.world.center.z = this->unk27C.z + vec.z;
+    vec.x = (this->coneFrustumCenterBase.x - this->coneFrustumCenterTop.x) *
+            temp_v0->unk10_sphereColliderPosRatioTowardsBase;
+    vec.y = (this->coneFrustumCenterBase.y - this->coneFrustumCenterTop.y) *
+            temp_v0->unk10_sphereColliderPosRatioTowardsBase;
+    vec.z = (this->coneFrustumCenterBase.z - this->coneFrustumCenterTop.z) *
+            temp_v0->unk10_sphereColliderPosRatioTowardsBase;
+    this->unk14C.elements[0].shape.world.center.x = this->coneFrustumCenterTop.x + vec.x;
+    this->unk14C.elements[0].shape.world.center.y = this->coneFrustumCenterTop.y + vec.y;
+    this->unk14C.elements[0].shape.world.center.z = this->coneFrustumCenterTop.z + vec.z;
     new_var = &this->unk14C.elements[0];
-    new_var->shape.world.radius = temp_v0->unk14 * new_var->shape.unkRadiusScale;
+    new_var->shape.world.radius = temp_v0->unk14_sphereColliderRadiusModel * new_var->shape.unkRadiusScale;
 }
 
-void func_80B8D110(MirRay* this, GlobalContext* globalCtx) {
+void MirRay_UpdateLight(MirRay* this, GlobalContext* globalCtx) {
     Player* player;
     struct_80B8E6F8* temp_s1;
     Vec3f sp44;
-    Vec3s sp3C;
+    Vec3s pointLightPos;
 
     player = PLAYER;
     temp_s1 = &D_80B8E6F8[this->actor.params];
-    if (func_80B8E404(&this->unk27C, &this->unk288, player->actor.posRot.pos.x, player->actor.posRot.pos.y + 30.0f,
-                      player->actor.posRot.pos.z, this->unk294, this->unk296)) {
-        if (temp_s1->unk1F & 8) {
-            Math_Vec3f_Diff(&player->actor.posRot.pos, &this->unk27C, &sp44);
+    if (MirRay_IsInConeFrustum(&this->coneFrustumCenterTop, &this->coneFrustumCenterBase, player->actor.posRot.pos.x,
+                               player->actor.posRot.pos.y + 30.0f, player->actor.posRot.pos.z,
+                               this->coneFrustumRadiusTop, this->coneFrustumRadiusBase)) {
+        if (temp_s1->unk1F & UNK1F_POINTLIGHTPOS_TO_PLAYER) {
+            Math_Vec3f_Diff(&player->actor.posRot.pos, &this->coneFrustumCenterTop, &sp44);
         } else {
-            Math_Vec3f_Diff(&this->unk288, &this->unk27C, &sp44);
+            Math_Vec3f_Diff(&this->coneFrustumCenterBase, &this->coneFrustumCenterTop, &sp44);
         }
-        sp3C.x = (temp_s1->unk18 * sp44.x) + this->unk27C.x;
-        sp3C.y = (temp_s1->unk18 * sp44.y) + this->unk27C.y;
-        sp3C.z = (temp_s1->unk18 * sp44.z) + this->unk27C.z;
-        Math_ApproxS(&this->unk298, temp_s1->unk16, 6);
-        Lights_PointNoGlowSetInfo(&this->unk2A0, sp3C.x, sp3C.y, sp3C.z, temp_s1->unk1C.r, temp_s1->unk1C.g,
-                                  temp_s1->unk1C.b, this->unk298);
+        pointLightPos.x = (temp_s1->unk18_pointLightPosRatio * sp44.x) + this->coneFrustumCenterTop.x;
+        pointLightPos.y = (temp_s1->unk18_pointLightPosRatio * sp44.y) + this->coneFrustumCenterTop.y;
+        pointLightPos.z = (temp_s1->unk18_pointLightPosRatio * sp44.z) + this->coneFrustumCenterTop.z;
+        Math_ApproxS(&this->pointLightRadius, temp_s1->unk16_pointLightRadius, 6);
+        Lights_PointNoGlowSetInfo(&this->lightInfo, pointLightPos.x, pointLightPos.y, pointLightPos.z,
+                                  temp_s1->unk1C_lightColor.r, temp_s1->unk1C_lightColor.g, temp_s1->unk1C_lightColor.b,
+                                  this->pointLightRadius);
     } else {
-        Math_ApproxS(&this->unk298, 0, 6);
-        Lights_PointSetColorAndRadius(&this->unk2A0, temp_s1->unk1C.r, temp_s1->unk1C.g, temp_s1->unk1C.b,
-                                      this->unk298);
+        Math_ApproxS(&this->pointLightRadius, 0, 6);
+        Lights_PointSetColorAndRadius(&this->lightInfo, temp_s1->unk1C_lightColor.r, temp_s1->unk1C_lightColor.g,
+                                      temp_s1->unk1C_lightColor.b, this->pointLightRadius);
     }
 }
 
@@ -260,41 +269,41 @@ void MirRay_Init(Actor* thisx, GlobalContext* globalCtx) {
     Actor_ProcessInitChain(&this->actor, D_80B8E838);
     ActorShape_Init(&this->actor.shape, 0.0f, NULL, 0.0f);
     osSyncPrintf("反射用 光の発生!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-    LogUtils_LogThreadId("../z_mir_ray.c", 0x206);
+    LogUtils_LogThreadId("../z_mir_ray.c", 518);
     osSyncPrintf("this->actor.arg_data = %d\n", this->actor.params);
-    if (this->actor.params >= 0xA) {
-        LogUtils_LogThreadId("../z_mir_ray.c", 0x209);
+    if (this->actor.params >= ARRAY_COUNT(D_80B8E6F8)) {
+        LogUtils_LogThreadId("../z_mir_ray.c", 521);
         osSyncPrintf("\"反射光 発生失敗\" = %s\n", "反射光 発生失敗");
         Actor_Kill(&this->actor);
     }
-    this->unk27C.x = temp_s1->unk0.x;
-    this->unk27C.y = temp_s1->unk0.y;
-    this->unk27C.z = temp_s1->unk0.z;
-    this->unk294 = temp_s1->unkC;
-    this->unk288.x = temp_s1->unk6.x;
-    this->unk288.y = temp_s1->unk6.y;
-    this->unk288.z = temp_s1->unk6.z;
-    this->unk296 = temp_s1->unkE;
-    Lights_PointNoGlowSetInfo(&this->unk2A0, (s16)(s32)this->unk27C.x, (s16)(s32)this->unk27C.y,
-                              (s16)(s32)this->unk27C.z, 0xFFU, 0xFFU, 0xFFU, 0x64);
-    this->unk29C = LightContext_InsertLight(globalCtx, &globalCtx->lightCtx, &this->unk2A0);
-    this->unk230[0].x = -536.0f;
-    this->unk230[0].y = -939.0f;
-    this->unk230[1].x = -1690.0f;
-    this->unk230[1].y = 0.0f;
-    this->unk230[2].x = -536.0f;
-    this->unk230[2].y = 938.0f;
-    this->unk230[3].x = 921.0f;
-    this->unk230[3].y = 0.0f;
-    this->unk230[4].x = 758.0f;
-    this->unk230[4].y = 800.0f;
-    this->unk230[5].x = 758.0f;
-    this->unk230[5].y = -800.0f;
-    if (temp_s1->unk1F & 2) {
+    this->coneFrustumCenterTop.x = temp_s1->coneFrustumCenterTop.x;
+    this->coneFrustumCenterTop.y = temp_s1->coneFrustumCenterTop.y;
+    this->coneFrustumCenterTop.z = temp_s1->coneFrustumCenterTop.z;
+    this->coneFrustumRadiusTop = temp_s1->coneFrustumRadiusTop;
+    this->coneFrustumCenterBase.x = temp_s1->coneFrustumCenterBase.x;
+    this->coneFrustumCenterBase.y = temp_s1->coneFrustumCenterBase.y;
+    this->coneFrustumCenterBase.z = temp_s1->coneFrustumCenterBase.z;
+    this->coneFrustumRadiusBase = temp_s1->coneFrustumRadiusBase;
+    Lights_PointNoGlowSetInfo(&this->lightInfo, this->coneFrustumCenterTop.x, this->coneFrustumCenterTop.y,
+                              this->coneFrustumCenterTop.z, 255, 255, 255, 100);
+    this->lightNode = LightContext_InsertLight(globalCtx, &globalCtx->lightCtx, &this->lightInfo);
+    this->reflectionOriginModelPositions[0].x = -536.0f;
+    this->reflectionOriginModelPositions[0].y = -939.0f;
+    this->reflectionOriginModelPositions[1].x = -1690.0f;
+    this->reflectionOriginModelPositions[1].y = 0.0f;
+    this->reflectionOriginModelPositions[2].x = -536.0f;
+    this->reflectionOriginModelPositions[2].y = 938.0f;
+    this->reflectionOriginModelPositions[3].x = 921.0f;
+    this->reflectionOriginModelPositions[3].y = 0.0f;
+    this->reflectionOriginModelPositions[4].x = 758.0f;
+    this->reflectionOriginModelPositions[4].y = 800.0f;
+    this->reflectionOriginModelPositions[5].x = 758.0f;
+    this->reflectionOriginModelPositions[5].y = -800.0f;
+    if (temp_s1->unk1F & UNK1F_1) {
         Collider_InitSpheres(globalCtx, &this->unk14C);
         Collider_LoadSpheres(globalCtx, &this->unk14C, &this->actor, &D_80B8E6E8, &this->unk16C);
-        if (!(temp_s1->unk1F & 4)) {
-            func_80B8D050(this);
+        if (!(temp_s1->unk1F & UNK1F_2)) {
+            MirRay_UpdateColliderSphereShape(this);
         }
     }
     Collider_InitQuad(globalCtx, &this->unk1AC);
@@ -307,8 +316,8 @@ void MirRay_Init(Actor* thisx, GlobalContext* globalCtx) {
 void MirRay_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     MirRay* this = (MirRay*)thisx;
 
-    LightContext_RemoveLight(globalCtx, &globalCtx->lightCtx, this->unk29C);
-    if (D_80B8E6F8[this->actor.params].unk1F & 2) {
+    LightContext_RemoveLight(globalCtx, &globalCtx->lightCtx, this->lightNode);
+    if (D_80B8E6F8[this->actor.params].unk1F & UNK1F_1) {
         Collider_DestroySpheres(globalCtx, &this->unk14C);
     }
     Collider_DestroyQuad(globalCtx, &this->unk1AC);
@@ -317,31 +326,29 @@ void MirRay_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 void MirRay_Update(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad[2];
     Player* player;
-    u8 temp_v0;
     MirRay* this = (MirRay*)thisx;
 
     player = PLAYER;
     D_80B8E670 = false;
     if (this->unk2AE == 0) {
-        temp_v0 = D_80B8E6F8[this->actor.params].unk1F;
-        if (temp_v0 & 2) {
-            if (temp_v0 & 4) {
-                func_80B8D050(this);
+        if (D_80B8E6F8[this->actor.params].unk1F & UNK1F_1) {
+            if (D_80B8E6F8[this->actor.params].unk1F & UNK1F_2) {
+                MirRay_UpdateColliderSphereShape(this);
             }
             Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk14C.base);
         }
-        if (this->unk22C > 0.0f) {
+        if (this->lightReflectionFactor > 0.0f) {
             Collider_AddAT(globalCtx, &globalCtx->colliderCtx, &this->unk1AC.base);
         }
-        func_80B8D110(this, globalCtx);
-        if (this->unk22C > 0.0f) {
+        MirRay_UpdateLight(this, globalCtx);
+        if (this->lightReflectionFactor > 0.0f) {
             func_8002F8F0(&player->actor, NA_SE_IT_SHIELD_BEAM - SFX_FLAG);
         }
     }
 }
 
 void func_80B8D6F0(MirRay* this, GlobalContext* globalCtx) {
-    Vec3f sp4C;
+    Vec3f sp4C_lightShineDirection;
     f32 temp_fv0;
     f32 temp_fv0_2;
     f32 temp_fv1_2;
@@ -349,29 +356,31 @@ void func_80B8D6F0(MirRay* this, GlobalContext* globalCtx) {
     Player* player;
 
     player = PLAYER;
-    this->unk22C = 0.0f;
+    this->lightReflectionFactor = 0.0f;
     shieldMf = &player->shieldMf;
-    if (func_80B8E404(&this->unk27C, &this->unk288, player->shieldMf.wx, player->shieldMf.wy, player->shieldMf.wz,
-                      this->unk294, this->unk296)) {
-        temp_fv0 =
-            sqrtf((shieldMf->zz * shieldMf->zz) + ((shieldMf->zx * shieldMf->zx) + (shieldMf->zy * shieldMf->zy)));
+    if (MirRay_IsInConeFrustum(&this->coneFrustumCenterTop, &this->coneFrustumCenterBase, shieldMf->wx, shieldMf->wy,
+                               shieldMf->wz, this->coneFrustumRadiusTop, this->coneFrustumRadiusBase)) {
+        temp_fv0 = sqrtf(SQ(shieldMf->zz) + (SQ(shieldMf->zx) + SQ(shieldMf->zy)));
         if (temp_fv0 == 0.0f) {
-            this->unk278 = 1.0f;
+            this->shieldForwardNormalizeFactor = 1.0f;
         } else {
-            this->unk278 = 1.0f / temp_fv0;
+            this->shieldForwardNormalizeFactor = 1.0f / temp_fv0;
         }
-        if (D_80B8E6F8[this->actor.params].unk1F & 1) {
-            this->unk22C = 1.0f;
+        if (D_80B8E6F8[this->actor.params].unk1F & UNK1F_0) {
+            this->lightReflectionFactor = 1.0f;
         } else {
-            sp4C.x = this->unk288.x - this->unk27C.x;
-            sp4C.y = this->unk288.y - this->unk27C.y;
-            sp4C.z = this->unk288.z - this->unk27C.z;
-            sp4C = sp4C; //! FAKE
-            temp_fv1_2 = ((-shieldMf->zx * sp4C.x) - (shieldMf->zy * sp4C.y)) - (sp4C.z * shieldMf->zz);
+            sp4C_lightShineDirection.x = this->coneFrustumCenterBase.x - this->coneFrustumCenterTop.x;
+            sp4C_lightShineDirection.y = this->coneFrustumCenterBase.y - this->coneFrustumCenterTop.y;
+            sp4C_lightShineDirection.z = this->coneFrustumCenterBase.z - this->coneFrustumCenterTop.z;
+            sp4C_lightShineDirection = sp4C_lightShineDirection; //! FAKE
+            // The shield's forward direction is -z in model space
+            temp_fv1_2 = (-shieldMf->zx * sp4C_lightShineDirection.x) - (shieldMf->zy * sp4C_lightShineDirection.y) -
+                         (sp4C_lightShineDirection.z * shieldMf->zz);
             if (temp_fv1_2 < 0.0f) {
-                temp_fv0_2 = sqrtf((sp4C.z * sp4C.z) + ((sp4C.x * sp4C.x) + (sp4C.y * sp4C.y)));
+                temp_fv0_2 = sqrtf(SQ(sp4C_lightShineDirection.z) +
+                                   (SQ(sp4C_lightShineDirection.x) + SQ(sp4C_lightShineDirection.y)));
                 if ((temp_fv0 != 0.0f) && (temp_fv0_2 != 0.0f)) {
-                    this->unk22C = -temp_fv1_2 / (temp_fv0 * temp_fv0_2);
+                    this->lightReflectionFactor = -temp_fv1_2 / (temp_fv0 * temp_fv0_2);
                 }
             }
         }
@@ -381,29 +390,32 @@ void func_80B8D6F0(MirRay* this, GlobalContext* globalCtx) {
 void func_80B8D8A0(MirRay* this, GlobalContext* globalCtx, struct_80B8D8A0* arg2) {
     s32 pad[2];
     s32 i;
-    Vec3f sp88;
-    Vec3f sp7C;
-    Player* temp_v0;
-    MtxF* temp_s0;
-    UNK_TYPE sp70;
-    void* sp6C;
-    Vec3f sp60;
+    Vec3f reflectionOriginPos; // sp88
+    Vec3f reflectionMaxPos;    // sp7C
+    Player* player;            // v0
+    MtxF* shieldMf;            // s0
+    UNK_TYPE sp70;             // sp70
+    UNK_PTR sp6C;              // sp6C
+    Vec3f forwards;            // sp60
 
-    temp_v0 = PLAYER;
-    temp_s0 = &temp_v0->shieldMf;
-    sp60.x = -(temp_s0->zx * this->unk278) * this->unk22C * 400.0f;
-    sp60.y = -(temp_s0->zy * this->unk278) * this->unk22C * 400.0f;
-    sp60.z = -(temp_s0->zz * this->unk278) * this->unk22C * 400.0f;
+    player = PLAYER;
+    shieldMf = &player->shieldMf;
+    forwards.x = -(shieldMf->zx * this->shieldForwardNormalizeFactor) * this->lightReflectionFactor * 400.0f;
+    forwards.y = -(shieldMf->zy * this->shieldForwardNormalizeFactor) * this->lightReflectionFactor * 400.0f;
+    forwards.z = -(shieldMf->zz * this->shieldForwardNormalizeFactor) * this->lightReflectionFactor * 400.0f;
     for (i = 0; i < 6; i++) {
-        if (!(&sp60) != 0) {} //! FAKE
-        //! FAKE (*temp_s0)
-        sp88.x = temp_s0->wx + (this->unk230[i].x * temp_s0->xx) + (this->unk230[i].y * (*temp_s0).yx);
-        sp88.y = temp_s0->wy + (this->unk230[i].x * temp_s0->xy) + (this->unk230[i].y * (*temp_s0).yy);
-        sp88.z = temp_s0->wz + (this->unk230[i].x * temp_s0->xz) + (this->unk230[i].y * (*temp_s0).yz);
-        sp7C.x = sp60.x + sp88.x;
-        sp7C.y = sp60.y + sp88.y;
-        sp7C.z = sp60.z + sp88.z;
-        if (func_8003E0B8(&globalCtx->colCtx, &sp88, &sp7C, &sp70, &sp6C, 1) != 0) {
+        if (!(&forwards) != 0) {} //! FAKE
+        //! FAKE (*shieldMf)
+        reflectionOriginPos.x = shieldMf->wx + (this->reflectionOriginModelPositions[i].x * shieldMf->xx) +
+                                (this->reflectionOriginModelPositions[i].y * (*shieldMf).yx);
+        reflectionOriginPos.y = shieldMf->wy + (this->reflectionOriginModelPositions[i].x * shieldMf->xy) +
+                                (this->reflectionOriginModelPositions[i].y * (*shieldMf).yy);
+        reflectionOriginPos.z = shieldMf->wz + (this->reflectionOriginModelPositions[i].x * shieldMf->xz) +
+                                (this->reflectionOriginModelPositions[i].y * (*shieldMf).yz);
+        reflectionMaxPos.x = forwards.x + reflectionOriginPos.x;
+        reflectionMaxPos.y = forwards.y + reflectionOriginPos.y;
+        reflectionMaxPos.z = forwards.z + reflectionOriginPos.z;
+        if (func_8003E0B8(&globalCtx->colCtx, &reflectionOriginPos, &reflectionMaxPos, &sp70, &sp6C, 1) != 0) {
             arg2[i].unk4C = sp6C;
         } else {
             arg2[i].unk4C = NULL;
@@ -430,95 +442,116 @@ void func_80B8DA78(struct_80B8D8A0* arg0) {
 
 void func_80B8DB7C(MirRay* this, GlobalContext* globalCtx, struct_80B8D8A0* arg2) {
     s32 pad[2];
-    MtxF* temp_s1;
-    Vec3f sp130;
-    Vec3f sp124;
-    Vec3f sp118;
-    Vec3f sp10C;
-    Vec3f sp100;
-    Vec3f spF4;
-    Vec3f spE8;
-    Vec3f spDC;
-    Player* temp_s3;
-    Vec3f spCC;
-    Vec3f spC0;
-    s32 var_s2;
-    struct_80B8D8A0* var_s0;
+    MtxF* shieldMf;             // s1
+    Vec3f originPos;            // sp130
+    Vec3f inFrontPos;           // sp124
+    Vec3f intersect;            // sp118
+    Vec3f originPosWithOffset;  // sp10C
+    Vec3f inFrontPosWithOffset; // sp100
+    Vec3f intersectWithOffset;  // spF4
+    Vec3f forwards;             // spE8
+    Vec3f spDC;                 // spDC
+    Player* player;             // s3
+    Vec3f upPos;                // spCC
+    Vec3f upAndInFrontPos;      // spC0
+    s32 i;                      // s2
+    struct_80B8D8A0* var_s0;    // s0
     float new_var3;
     f32* new_var;
-    f32 sp80;
+    f32 sp80; // sp80
     float new_var2;
     f32 temp_fv0;
 
-    temp_s3 = globalCtx->actorCtx.actorList[2].first;
-    temp_s1 = &temp_s3->shieldMf;
-    spE8.x = -(temp_s1->zx * this->unk278) * this->unk22C * 400.0f;
+    player = PLAYER;
+    shieldMf = &player->shieldMf;
+    forwards.x = -(shieldMf->zx * this->shieldForwardNormalizeFactor) * this->lightReflectionFactor * 400.0f;
     new_var2 = 100.0f;
-    spE8.y = -(temp_s1->zy * this->unk278) * this->unk22C * 400.0f;
-    spE8.z = -(temp_s1->zz * this->unk278) * this->unk22C * 400.0f;
-    sp130.x = temp_s1->wx;
-    sp130.y = temp_s1->wy;
-    sp130.z = temp_s1->wz;
-    sp124.x = spE8.x + sp130.x;
-    sp124.y = spE8.y + sp130.y;
-    sp124.z = spE8.z + sp130.z;
-    spCC.x = (temp_s1->xx * 300.0f) + sp130.x;
-    spCC.y = (temp_s1->xy * 300.0f) + sp130.y;
-    spCC.z = (temp_s1->xz * 300.0f) + sp130.z;
-    spC0.x = (temp_s1->xx * 300.0f) + sp124.x;
-    spC0.y = (temp_s1->xy * 300.0f) + sp124.y;
-    spC0.z = (temp_s1->xz * 300.0f) + sp124.z;
-    func_80062734(&this->unk1AC, &spCC, &sp130, &spC0, &sp124);
-    for (var_s2 = 0; var_s2 < 6; var_s2++) {
+    forwards.y = -(shieldMf->zy * this->shieldForwardNormalizeFactor) * this->lightReflectionFactor * 400.0f;
+    forwards.z = -(shieldMf->zz * this->shieldForwardNormalizeFactor) * this->lightReflectionFactor * 400.0f;
+    // Where the mirror shield is located
+    originPos.x = shieldMf->wx;
+    originPos.y = shieldMf->wy;
+    originPos.z = shieldMf->wz;
+    // In front of the mirror shield
+    inFrontPos.x = forwards.x + originPos.x;
+    inFrontPos.y = forwards.y + originPos.y;
+    inFrontPos.z = forwards.z + originPos.z;
+    // Above the mirror shield origin
+    upPos.x = (shieldMf->xx * 300.0f) + originPos.x;
+    upPos.y = (shieldMf->xy * 300.0f) + originPos.y;
+    upPos.z = (shieldMf->xz * 300.0f) + originPos.z;
+    // Above and in front of the origin
+    upAndInFrontPos.x = (shieldMf->xx * 300.0f) + inFrontPos.x;
+    upAndInFrontPos.y = (shieldMf->xy * 300.0f) + inFrontPos.y;
+    upAndInFrontPos.z = (shieldMf->xz * 300.0f) + inFrontPos.z;
+    func_80062734(&this->unk1AC, &upPos, &originPos, &upAndInFrontPos, &inFrontPos);
+    for (i = 0; i < 6; i++) {
         new_var = &spDC.x; //! FAKE
-        var_s0 = &arg2[var_s2];
+        var_s0 = &arg2[i];
         if (var_s0->unk4C != NULL) {
-            if (&spE8) {} //! FAKE
+            if (&forwards) {} //! FAKE
             spDC.x = var_s0->unk4C->unk8 * 0.00003051851f;
             spDC.y = var_s0->unk4C->unkA * 0.00003051851f;
             spDC.z = var_s0->unk4C->unkC * 0.00003051851f;
-            if (Math3D_LineSegVsPlane(*new_var, spDC.y, spDC.z, var_s0->unk4C->unkE, &sp130, &sp124, &sp118, 1)) {
-                var_s0->unk0 = sp118.x;
-                var_s0->unk4 = sp118.y;
-                var_s0->unk8 = sp118.z;
-                temp_fv0 = sqrtf(SQ(sp118.x - sp130.x) + SQ(sp118.y - sp130.y) + SQ(sp118.z - sp130.z));
-                if (temp_fv0 < (this->unk22C * 600.0f)) {
-                    var_s0->unk50 = 0xC8;
+            if (Math3D_LineSegVsPlane(*new_var, spDC.y, spDC.z, var_s0->unk4C->unkE, &originPos, &inFrontPos,
+                                      &intersect, true)) {
+                var_s0->reflectionPos.x = intersect.x;
+                var_s0->reflectionPos.y = intersect.y;
+                var_s0->reflectionPos.z = intersect.z;
+                temp_fv0 = sqrtf(SQ(intersect.x - originPos.x) + SQ(intersect.y - originPos.y) +
+                                 SQ(intersect.z - originPos.z));
+                //! @bug temp_fv0 is at most
+                //! norm(sp124_inFront - sp130_origin) = norm(spE8_forwards) = this->lightReflectionFactor * 400
+                //! so this condition always passes. This logic was probably meant to fade the reflections with
+                //! distance. (TODO test in-game)
+                if (temp_fv0 < (this->lightReflectionFactor * 600.0f)) {
+                    var_s0->unk50 = 200;
                 } else {
                     var_s0->unk50 = (u8)(s32)(800.0f - temp_fv0);
                 }
-                sp10C.x = (temp_s1->xx * new_var2) + sp130.x;
-                sp10C.y = (temp_s1->xy * new_var2) + sp130.y;
-                sp10C.z = (temp_s1->xz * 100.0f) + sp130.z;
-                sp100.x = (spE8.x * 4.0f) + sp10C.x;
-                sp100.y = (spE8.y * 4.0f) + sp10C.y;
-                sp100.z = (spE8.z * 4.0f) + sp10C.z;
-                var_s0->unkC.xx = var_s0->unkC.yy = var_s0->unkC.zz = var_s0->unkC.ww = 1.0f;
+
+                // The rest of the function computes a transformation that transforms the XY plane (corresponding to the
+                // reflection in model space) into the surface plane.
+                // It does so by computing the same intersection as above but with an offset in the x direction, which
+                // gives the transformation for the x axis, then the same in the y direction.
+
+                originPosWithOffset.x = (shieldMf->xx * new_var2) + originPos.x;
+                originPosWithOffset.y = (shieldMf->xy * new_var2) + originPos.y;
+                originPosWithOffset.z = (shieldMf->xz * 100.0f) + originPos.z;
+                inFrontPosWithOffset.x = (forwards.x * 4.0f) + originPosWithOffset.x;
+                inFrontPosWithOffset.y = (forwards.y * 4.0f) + originPosWithOffset.y;
+                inFrontPosWithOffset.z = (forwards.z * 4.0f) + originPosWithOffset.z;
+                var_s0->reflectionTransform.xx = var_s0->reflectionTransform.yy = var_s0->reflectionTransform.zz =
+                    var_s0->reflectionTransform.ww = 1.0f;
 
                 //! FAKE
-                sp80 = var_s0->unkC.wz = 0.0f;
-                new_var3 = var_s0->unkC.zx = var_s0->unkC.zy = var_s0->unkC.zw = var_s0->unkC.wx = var_s0->unkC.wy =
-                    sp80;
-                var_s0->unkC.xy = var_s0->unkC.xz = var_s0->unkC.xw = var_s0->unkC.yx = var_s0->unkC.yz =
-                    var_s0->unkC.yw = new_var3;
-                if (Math3D_LineSegVsPlane(spDC.x, spDC.y, spDC.z, var_s0->unk4C->unkE, &sp10C, &sp100, &spF4, true)) {
+                sp80 = var_s0->reflectionTransform.wz = 0.0f;
+                new_var3 = var_s0->reflectionTransform.zx = var_s0->reflectionTransform.zy =
+                    var_s0->reflectionTransform.zw = var_s0->reflectionTransform.wx = var_s0->reflectionTransform.wy =
+                        sp80;
+                var_s0->reflectionTransform.xy = var_s0->reflectionTransform.xz = var_s0->reflectionTransform.xw =
+                    var_s0->reflectionTransform.yx = var_s0->reflectionTransform.yz = var_s0->reflectionTransform.yw =
+                        new_var3;
+                if (Math3D_LineSegVsPlane(spDC.x, spDC.y, spDC.z, var_s0->unk4C->unkE, &originPosWithOffset,
+                                          &inFrontPosWithOffset, &intersectWithOffset, true)) {
                     do {
                     } while (0); //! FAKE
-                    var_s0->unkC.xx = spF4.x - sp118.x;
-                    var_s0->unkC.xy = spF4.y - sp118.y;
-                    var_s0->unkC.xz = spF4.z - sp118.z;
+                    var_s0->reflectionTransform.xx = intersectWithOffset.x - intersect.x;
+                    var_s0->reflectionTransform.xy = intersectWithOffset.y - intersect.y;
+                    var_s0->reflectionTransform.xz = intersectWithOffset.z - intersect.z;
                 }
-                sp10C.x = (temp_s1->yx * 100.0f) + sp130.x;
-                sp10C.y = (temp_s1->yy * 100.0f) + sp130.y;
-                sp10C.z = (temp_s1->yz * 100.0f) + sp130.z;
-                sp100.x = (spE8.x * 4.0f) + sp10C.x;
-                sp100.y = (spE8.y * 4.0f) + sp10C.y;
-                sp100.z = (spE8.z * 4.0f) + sp10C.z;
-                if (Math3D_LineSegVsPlane(spDC.x, spDC.y, spDC.z, var_s0->unk4C->unkE, &sp10C, &sp100, &spF4, true)) {
-                    if (!sp118.z) {} //! FAKE
-                    var_s0->unkC.yx = /*(bitwise f32)spF4*/ spF4.x - /*(bitwise f32)sp118*/ sp118.x;
-                    var_s0->unkC.yy = spF4.y - sp118.y;
-                    var_s0->unkC.yz = spF4.z - sp118.z;
+                originPosWithOffset.x = (shieldMf->yx * 100.0f) + originPos.x;
+                originPosWithOffset.y = (shieldMf->yy * 100.0f) + originPos.y;
+                originPosWithOffset.z = (shieldMf->yz * 100.0f) + originPos.z;
+                inFrontPosWithOffset.x = (forwards.x * 4.0f) + originPosWithOffset.x;
+                inFrontPosWithOffset.y = (forwards.y * 4.0f) + originPosWithOffset.y;
+                inFrontPosWithOffset.z = (forwards.z * 4.0f) + originPosWithOffset.z;
+                if (Math3D_LineSegVsPlane(spDC.x, spDC.y, spDC.z, var_s0->unk4C->unkE, &originPosWithOffset,
+                                          &inFrontPosWithOffset, &intersectWithOffset, true)) {
+                    if (!intersect.z) {} //! FAKE
+                    var_s0->reflectionTransform.yx = intersectWithOffset.x - intersect.x;
+                    var_s0->reflectionTransform.yy = intersectWithOffset.y - intersect.y;
+                    var_s0->reflectionTransform.yz = intersectWithOffset.z - intersect.z;
                 }
             } else {
                 var_s0->unk4C = NULL;
@@ -535,17 +568,18 @@ void MirRay_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Player* player;
 
     player = PLAYER;
-    this->unk22C = 0.0f;
-    if (!D_80B8E670 && (this->unk2AE == 0) && (Player_HasMirrorShieldSetToDraw(globalCtx) != 0)) {
+    this->lightReflectionFactor = 0.0f;
+    if (!D_80B8E670 && (this->unk2AE == 0) && Player_HasMirrorShieldSetToDraw(globalCtx)) {
         Matrix_Mult(&player->shieldMf, MTXMODE_NEW);
         func_80B8D6F0(this, globalCtx);
-        if (!(this->unk22C <= 0.0f)) {
-            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", 0x3C6);
+        if (!(this->lightReflectionFactor <= 0.0f)) {
+            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", 966);
             func_80093D84(globalCtx->state.gfxCtx);
-            Matrix_Scale(1.0f, 1.0f, this->unk22C * 5.0f, MTXMODE_APPLY);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", 0x3CC),
+            Matrix_Scale(1.0f, 1.0f, this->lightReflectionFactor * 5.0f, MTXMODE_APPLY);
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", 972),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, 255, 255, 150, (u8)(s32)(this->unk22C * 100.0f));
+            gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, 255, 255, 150,
+                            (u8)(s32)(this->lightReflectionFactor * 100.0f));
             gSPDisplayList(POLY_XLU_DISP++, &D_6000C50);
             func_80B8D8A0(this, globalCtx, sp7C);
             func_80B8DA78(sp7C);
@@ -554,70 +588,82 @@ void MirRay_Draw(Actor* thisx, GlobalContext* globalCtx) {
                 sp7C[0].unk50 = 0;
             }
             for (i = 1; i < ARRAY_COUNT(sp7C); i++) {
-                if (sp7C[i].unk4C != 0) {
-                    if ((s32)sp7C[0].unk50 < (s32)sp7C[i].unk50) {
+                if (sp7C[i].unk4C != NULL) {
+                    if (sp7C[0].unk50 < sp7C[i].unk50) {
                         sp7C[0].unk50 = sp7C[i].unk50;
                     }
                 }
             }
             for (i = 0; i < ARRAY_COUNT(sp7C); i++) {
                 if (sp7C[i].unk4C != NULL) {
-                    Matrix_Translate(sp7C[i].unk0, sp7C[i].unk4, sp7C[i].unk8, MTXMODE_NEW);
+                    Matrix_Translate(sp7C[i].reflectionPos.x, sp7C[i].reflectionPos.y, sp7C[i].reflectionPos.z,
+                                     MTXMODE_NEW);
                     Matrix_Scale(0.01f, 0.01f, 0.01f, MTXMODE_APPLY);
-                    Matrix_Mult(&sp7C[i].unkC, MTXMODE_APPLY);
-                    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", 0x3EE),
+                    Matrix_Mult(&sp7C[i].reflectionTransform, MTXMODE_APPLY);
+                    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", 1006),
                               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                     gDPSetRenderMode(POLY_XLU_DISP++, G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2);
-                    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, 255, 255, 0x96, sp7C[0].unk50);
+                    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, 255, 255, 150, sp7C[0].unk50);
                     gSPDisplayList(POLY_XLU_DISP++, &D_60000B0);
                 }
             }
             D_80B8E670 = true;
-            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", 0x403);
+            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", 1027);
         }
     }
 }
 
-s32 func_80B8E404(Vec3f* arg0, Vec3f* arg1, f32 arg2, f32 arg3, f32 arg4, s16 arg5, s16 arg6) {
-    f32 temp_fv0;
-    f32 sp80_x;
-    f32 sp7C_y;
-    f32 sp78_z;
-    Vec3f vec_1minus0;
-    f32 temp_fv1_2;
-    Vec3f sp5C;
-    Vec3f sp50;
-    Vec3f sp44;
+/**
+ * Checks if coordinates (x,y,z) lie inside the cone frustum defined by the given top face (a disk centered on
+ * `centerTop` with radius `radiusTop`) and base face (a disk centered on `centerBase` with radius `radiusBase`).
+ */
+s32 MirRay_IsInConeFrustum(Vec3f* centerTop, Vec3f* centerBase, f32 x, f32 y, f32 z, s16 radiusTop, s16 radiusBase) {
+    f32 f;
+    f32 xProj;
+    f32 yProj;
+    f32 zProj;
+    Vec3f hVec;
+    f32 radiusLocal;
+    Vec3f hVec2;
+    Vec3f topToPos;
+    Vec3f baseToPos;
 
-    vec_1minus0.x = arg1->x - arg0->x;
-    vec_1minus0.y = arg1->y - arg0->y;
-    vec_1minus0.z = arg1->z - arg0->z;
-    temp_fv0 = SQ(vec_1minus0.x) + SQ(vec_1minus0.y) + SQ(vec_1minus0.z);
-    if (temp_fv0 == 0.0f) {
+    hVec.x = centerBase->x - centerTop->x;
+    hVec.y = centerBase->y - centerTop->y;
+    hVec.z = centerBase->z - centerTop->z;
+    f = SQ(hVec.x) + SQ(hVec.y) + SQ(hVec.z);
+    if (f == 0.0f) {
         return false;
     }
-    temp_fv0 =
-        (((arg2 - arg0->x) * vec_1minus0.x) + ((arg3 - arg0->y) * vec_1minus0.y) + ((arg4 - arg0->z) * vec_1minus0.z)) /
-        temp_fv0;
-    sp80_x = (vec_1minus0.x * temp_fv0) + arg0->x;
-    sp7C_y = (vec_1minus0.y * temp_fv0) + arg0->y;
-    sp78_z = (vec_1minus0.z * temp_fv0) + arg0->z;
-    temp_fv1_2 = ((f32)((s16)arg6 - (s16)arg5) * temp_fv0) + (f32)(s16)arg5;
-    if ((SQ(sp80_x - arg2) + SQ(sp7C_y - arg3) + SQ(sp78_z - arg4)) <= SQ(temp_fv1_2)) {
-        Math_Vec3f_Diff(arg1, arg0, &sp5C);
-        sp50.x = arg2 - arg0->x;
-        sp50.y = arg3 - arg0->y;
-        sp50.z = arg4 - arg0->z;
-        if (Math3D_Cos(&sp5C, &sp50) < 0.0f) {
+    f = (((x - centerTop->x) * hVec.x) + ((y - centerTop->y) * hVec.y) + ((z - centerTop->z) * hVec.z)) / f;
+    // Project (x,y,z) onto the top-base line
+    xProj = (hVec.x * f) + centerTop->x;
+    yProj = (hVec.y * f) + centerTop->y;
+    zProj = (hVec.z * f) + centerTop->z;
+    // Lerp radius to get local radius
+    radiusLocal = ((radiusBase - radiusTop) * f) + radiusTop;
+    // If the point lies in the infinitely extended double cone containing the frustum of interest
+    if ((SQ(xProj - x) + SQ(yProj - y) + SQ(zProj - z)) <= SQ(radiusLocal)) {
+        Math_Vec3f_Diff(centerBase, centerTop, &hVec2);
+
+        topToPos.x = x - centerTop->x;
+        topToPos.y = y - centerTop->y;
+        topToPos.z = z - centerTop->z;
+        // If the point lies above the top face
+        if (Math3D_Cos(&hVec2, &topToPos) < 0.0f) {
             return false;
         }
-        sp44.x = arg2 - arg1->x;
-        sp44.y = arg3 - arg1->y;
-        sp44.z = arg4 - arg1->z;
-        if (Math3D_Cos(&sp5C, &sp44) > 0.0f) {
+
+        baseToPos.x = x - centerBase->x;
+        baseToPos.y = y - centerBase->y;
+        baseToPos.z = z - centerBase->z;
+        // If the point lies below the base face
+        if (Math3D_Cos(&hVec2, &baseToPos) > 0.0f) {
             return false;
         }
+
         return true;
+    } else {
+        return false;
     }
-    return false;
 }
