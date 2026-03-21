@@ -1726,7 +1726,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC62420, c, overlays/ovl_Bg_Jya_Bigmirror]
-      - [0xC62C10, data, overlays/ovl_Bg_Jya_Bigmirror]
+      - [0xC62C10, .data, overlays/ovl_Bg_Jya_Bigmirror]
       - [0xC62CA0, .rodata, overlays/ovl_Bg_Jya_Bigmirror]
       - [0xC62DE0, rodatabin, rodatabin_808940A0]
 
