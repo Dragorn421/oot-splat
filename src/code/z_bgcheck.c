@@ -138,11 +138,48 @@ void func_80038A28(CollisionPoly* poly, f32 x, f32 y, f32 z, MtxF* mtxF) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003BB18.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003BF18.s")
+extern s16 D_80119E2C[];
+s32 func_8003BF18(GlobalContext* arg0) {
+    s16* var_v0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003BF5C.s")
+    for (var_v0 = D_80119E2C; var_v0 < &D_80119E2C[19]; var_v0++) {
+        if (arg0->sceneNum == *var_v0) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003BFF4.s")
+typedef struct struct_80119E54 {
+    s16 unk0;
+    s32 unk4;
+} struct_80119E54;
+extern struct_80119E54 D_80119E54[];
+s32 func_8003BF5C(s32 arg0, u32* arg1) {
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+        if (arg0 == D_80119E54[i].unk0) {
+            *arg1 = D_80119E54[i].unk4;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4) {
+    float new_var;
+
+    new_var = (*arg2) - arg0;
+    *arg3 = (f32)((s32)(new_var / arg1) + 1);
+    if (*arg3 < 150.0f) {
+        *arg3 = 150.0f;
+    } else {
+        *arg3 = *arg3;
+    }
+    *arg4 = 1.0f / *arg3;
+    *arg2 = (*arg3 * arg1) + arg0;
+}
 
 typedef struct struct_80119E94 {
     /* 0x0 */ s16 unk0; /* inferred */
@@ -154,7 +191,6 @@ typedef struct struct_80119E94 {
 extern struct_80119E94 D_80119E94[];
 s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR arg2);
 s32 func_8003BF18(GlobalContext* arg0);
-s32 func_8003BF5C(s16 arg0, u32* arg1);
 void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4);
 void func_8003E398(UNK_PTR);
 void func_8003E3AC(GlobalContext* arg0, UNK_PTR arg1, u32 arg2, u16 arg3);

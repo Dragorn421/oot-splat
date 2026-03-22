@@ -227,12 +227,12 @@ typedef struct {
     /* 0x1C */ s32 unk1C;                           /* inferred */
     /* 0x20 */ s32 unk20;                           /* inferred */
     /* 0x24 */ s32 unk24;                           /* inferred */
-    /* 0x28 */ UNK_TYPE unk28;                             /* inferred */
-    /* 0x2C */ UNK_TYPE unk2C;                             /* inferred */
-    /* 0x30 */ UNK_TYPE unk30;                             /* inferred */
-    /* 0x34 */ UNK_TYPE unk34;                             /* inferred */
-    /* 0x38 */ UNK_TYPE unk38;                             /* inferred */
-    /* 0x3C */ UNK_TYPE unk3C;                             /* inferred */
+    /* 0x28 */ f32 unk28;                             /* inferred */
+    /* 0x2C */ f32 unk2C;                             /* inferred */
+    /* 0x30 */ f32 unk30;                             /* inferred */
+    /* 0x34 */ f32 unk34;                             /* inferred */
+    /* 0x38 */ f32 unk38;                             /* inferred */
+    /* 0x3C */ f32 unk3C;                             /* inferred */
     /* 0x40 */ UNK_PTR unk40;
     /* 0x44 */ UNK_TYPE unk44;                             /* inferred */
     /* 0x48 */ char pad48[0x8];
