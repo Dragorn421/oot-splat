@@ -192,8 +192,8 @@ extern struct_80119E94 D_80119E94[];
 s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR arg2);
 s32 func_8003BF18(GlobalContext* arg0);
 void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4);
-void func_8003E398(UNK_PTR);
-void func_8003E3AC(GlobalContext* arg0, UNK_PTR arg1, u32 arg2, u16 arg3);
+void func_8003E398(struct_8003E398*);
+void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg3);
 void func_8003E954(GlobalContext* arg0, DynaCollisionContext* arg1);
 void func_8003E9A0(GlobalContext* arg0, DynaCollisionContext* arg1);
 void func_8003C078(CollisionContext* arg0, GlobalContext* arg1, CollisionHeader* arg2) {
@@ -371,9 +371,30 @@ void func_8003C078(CollisionContext* arg0, GlobalContext* arg1, CollisionHeader*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E350.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E398.s")
+void func_8003E398(struct_8003E398* arg0) {
+    arg0->unk0 = 0;
+    arg0->unk2 = 0;
+    arg0->unk4 = 0;
+    arg0->unk8 = 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E3AC.s")
+void func_8003E3AC(GlobalContext *arg0, struct_8003E398 *arg1, u32 arg2, s32 arg3) {
+    UNK_PTR temp_v0;
+    UNK_PTR temp_v0_2;
+
+    arg1->unk0 = (s16) arg2;
+    arg1->unk2 = 0;
+    temp_v0 = THA_AllocEndAlign(&arg0->state.tha, arg2 * 4, -2U);
+    arg1->unk4 = temp_v0;
+    if (temp_v0 == 0) {
+        __assert("this->short_slist_node_tbl != NULL", "../z_bgcheck.c", 0x1757);
+    }
+    temp_v0_2 = GameState_Alloc(&arg0->state, (u32) arg3, "../z_bgcheck.c", 0x175B);
+    arg1->unk8 = temp_v0_2;
+    if (temp_v0_2 == 0) {
+        __assert("this->polygon_check != NULL", "../z_bgcheck.c", 0x175D);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E458.s")
 

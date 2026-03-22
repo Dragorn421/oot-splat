@@ -216,6 +216,13 @@ typedef struct {
     /* 0x28 */ WaterBox* waterBoxes;
 } CollisionHeader;
 
+typedef struct struct_8003E398 {
+    /* 0x0 */ s16 unk0;                             /* inferred */
+    /* 0x2 */ s16 unk2;                             /* inferred */
+    /* 0x4 */ UNK_PTR unk4; // "short_slist_node_tbl"
+    /* 0x8 */ UNK_PTR unk8; // "polygon_check"
+} struct_8003E398;                                  /* size = 0xC */
+
 typedef struct {
     /* 0x00 */ CollisionHeader *colHeader;
     /* 0x04 */ f32 unk4;                            /* inferred */
@@ -234,8 +241,7 @@ typedef struct {
     /* 0x38 */ f32 unk38;                             /* inferred */
     /* 0x3C */ f32 unk3C;                             /* inferred */
     /* 0x40 */ UNK_PTR unk40;
-    /* 0x44 */ UNK_TYPE unk44;                             /* inferred */
-    /* 0x48 */ char pad48[0x8];
+    /* 0x44 */ struct_8003E398 unk44;
 } StaticCollisionContext; // size = 0x50
 
 typedef struct {
