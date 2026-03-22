@@ -1,5 +1,11 @@
 #include "global.h"
 
+typedef struct struct_8003BB18_arg2 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+} struct_8003BB18_arg2;
+
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038600.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038708.s")
@@ -144,9 +150,23 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003937C.s")
 
+void func_80039448(CollisionContext*, u16*, CollisionPoly*, Vec3s*, s16);
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80039448.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003965C.s")
+void func_8003965C(struct_8003BB18_arg2* arg0, CollisionContext* arg1, CollisionPoly* arg2, Vec3s* arg3, s16 arg4) {
+    s16 temp_v0;
+
+    temp_v0 = arg2[arg4].norm.y;
+    if (temp_v0 >= 0x4000) {
+        func_80039448(arg1, &arg0->unk0, arg2, arg3, arg4);
+        return;
+    }
+    if (temp_v0 < -0x6665) {
+        func_80039448(arg1, &arg0->unk4, arg2, arg3, arg4);
+        return;
+    }
+    func_80039448(arg1, &arg0->unk2, arg2, arg3, arg4);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800396F0.s")
 
@@ -329,13 +349,96 @@ void func_8003B218(CollisionContext* arg0, Vec3s* arg1, CollisionPoly* arg2, s32
     func_8003B04C(arg0, &sp4C, arg6, arg7, arg8);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003B3C8.s")
+s32 func_8003B3C8(Vec3f* arg0, Vec3f* arg1, CollisionPoly* arg2, Vec3s* arg3, s16 arg4) {
+    f32 spB4;
+    Vec3f spA8;
+    Vec3f sp9C;
+    Vec3f sp90;
+    CollisionPoly* sp44;
+    f32 sp88;
+    f32 sp84;
+    f32 sp80;
+    f32 sp7C;
+    Vec3f sp70;
+    Vec3f sp64;
+    Vec3f sp58;
+    s32 sp4C[3];
 
-typedef struct struct_8003BB18_arg2 {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-} struct_8003BB18_arg2;
+    sp4C[1] = 0;
+    sp4C[0] = 0;
+    sp44 = &arg2[arg4];
+    func_800388A8(&arg3[sp44->unk2_arr[0] & 0x1FFF], &sp70);
+    sp4C[0] = Math3D_PointRelativeToCubeFaces(&sp70, arg0, arg1);
+    if (sp4C[0] == 0) {
+        return 1;
+    }
+    func_800388A8(&arg3[sp44->unk2_arr[1] & 0x1FFF], &sp64);
+    sp4C[1] = Math3D_PointRelativeToCubeFaces(&sp64, arg0, arg1);
+    if (sp4C[1] == 0) {
+        return 1;
+    }
+    func_800388A8(&arg3[sp44->unk2_arr[2]], &sp58);
+    sp4C[2] = Math3D_PointRelativeToCubeFaces(&sp58, arg0, arg1);
+    if (sp4C[2] == 0) {
+        return 1;
+    }
+    if (sp4C[0] & sp4C[1] & sp4C[2]) {
+        return 0;
+    }
+    sp4C[0] |= Math3D_PointRelativeToCubeEdges(&sp70, arg0, arg1) << 8;
+    sp4C[1] |= Math3D_PointRelativeToCubeEdges(&sp64, arg0, arg1) << 8;
+    sp4C[2] |= (Math3D_PointRelativeToCubeEdges(&sp58, arg0, arg1) << 8);
+    if (sp4C[0] & sp4C[1] & sp4C[2]) {
+        return 0;
+    }
+    sp4C[0] |= Math3D_PointRelativeToCubeVertices(&sp70, arg0, arg1) << 0x18;
+    sp4C[1] |= Math3D_PointRelativeToCubeVertices(&sp64, arg0, arg1) << 0x18;
+    sp4C[2] |= (Math3D_PointRelativeToCubeVertices(&sp58, arg0, arg1) << 0x18);
+    if (sp4C[0] & sp4C[1] & sp4C[2]) {
+        return 0;
+    }
+    func_800389D4(sp44, &sp88, &sp84, &sp80);
+    sp7C = (f32)sp44->dist;
+    if ((Math3D_TriChkLineSegParaYIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg0->z, arg0->x, &spB4,
+                                            arg0->y, arg1->y) != 0) ||
+        (Math3D_TriChkLineSegParaYIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg1->z, arg0->x, &spB4,
+                                            arg0->y, arg1->y) != 0) ||
+        (Math3D_TriChkLineSegParaYIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg0->z, arg1->x, &spB4,
+                                            arg0->y, arg1->y) != 0) ||
+        (Math3D_TriChkLineSegParaYIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg1->z, arg1->x, &spB4,
+                                            arg0->y, arg1->y) != 0)) {
+        return 1;
+    }
+    if ((Math3D_TriChkLineSegParaZIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg0->x, arg0->y, &spB4,
+                                            arg0->z, arg1->z) != 0) ||
+        (Math3D_TriChkLineSegParaZIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg0->x, arg1->y, &spB4,
+                                            arg0->z, arg1->z) != 0) ||
+        (Math3D_TriChkLineSegParaZIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg1->x, arg0->y, &spB4,
+                                            arg0->z, arg1->z) != 0) ||
+        (Math3D_TriChkLineSegParaZIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg1->x, arg1->y, &spB4,
+                                            arg0->z, arg1->z) != 0)) {
+        return 1;
+    }
+    if ((Math3D_TriChkLineSegParaXIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg0->y, arg0->z, &spB4,
+                                            arg0->x, arg1->x) != 0) ||
+        (Math3D_TriChkLineSegParaXIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg0->y, arg1->z, &spB4,
+                                            arg0->x, arg1->x) != 0) ||
+        (Math3D_TriChkLineSegParaXIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg1->y, arg0->z, &spB4,
+                                            arg0->x, arg1->x) != 0) ||
+        (Math3D_TriChkLineSegParaXIntersect(&sp70, &sp64, &sp58, sp88, sp84, sp80, sp7C, arg1->y, arg1->z, &spB4,
+                                            arg0->x, arg1->x) != 0)) {
+        return 1;
+    }
+    func_800388A8(&arg3[sp44->unk2_arr[0] & 0x1FFF], &spA8);
+    func_800388A8(&arg3[sp44->unk2_arr[1] & 0x1FFF], &sp9C);
+    func_800388A8(&arg3[sp44->unk2_arr[2]], &sp90);
+    if ((Math3D_LineVsCube(arg0, arg1, &spA8, &sp9C) != 0) || (Math3D_LineVsCube(arg0, arg1, &sp9C, &sp90) != 0) ||
+        (Math3D_LineVsCube(arg0, arg1, &sp90, &spA8) != 0)) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR /* struct_8003BB18_arg2* */ arg2) {
     void* temp_s5_polygonArray;
     struct_8003BB18_arg2* var_fp;
@@ -394,9 +497,8 @@ s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR /* struct
                 spB8.x = ((arg0->stat.unk28 * (f32)spD8) + arg0->stat.unk4) - 50.0f;
                 spAC.x = spB8.x + temp_fs1;
                 for (var_s1_ix = spD8; var_s1_ix < spCC + 1; var_s1_ix++) {
-                    if (func_8003B3C8(&spB8, &spAC, temp_s5_polygonArray, temp_s4_vertexArray, (s32)(s16)spE8_iPoly) !=
-                        0) {
-                        func_8003965C(var_s0, arg0, temp_s5_polygonArray, temp_s4_vertexArray, (s32)(s16)spE8_iPoly);
+                    if (func_8003B3C8(&spB8, &spAC, temp_s5_polygonArray, temp_s4_vertexArray, spE8_iPoly) != 0) {
+                        func_8003965C(var_s0, arg0, temp_s5_polygonArray, temp_s4_vertexArray, spE8_iPoly);
                     }
                     spB8.x += arg0->stat.unk28;
                     spAC.x += arg0->stat.unk28;
