@@ -214,7 +214,7 @@ void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E890.s")
 
-void func_8003E8EC(GlobalContext *arg0, ActorMesh *arg1) {
+void func_8003E8EC(GlobalContext* arg0, ActorMesh* arg1) {
     arg1->transform1 = arg1->transform2;
 }
 
@@ -265,21 +265,21 @@ DynaPolyActor* DynaPolyInfo_GetActor(CollisionContext* colCtx, s32 dynaPolyId) {
     return (DynaPolyActor*)colCtx->dyna.actorMeshArr[dynaPolyId].actor;
 }
 
-void func_8003EBF8(GlobalContext *globalCtx, DynaCollisionContext *dynaColCtx, s32 dynaPolyId) {
+void func_8003EBF8(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, s32 dynaPolyId) {
     if (func_8003E934(dynaPolyId) != 0) {
         dynaColCtx->flags[dynaPolyId] |= 4;
         dynaColCtx->unk0 |= 1;
     }
 }
 
-void func_8003EC50(GlobalContext *globalCtx, DynaCollisionContext *dynaColCtx, s32 dynaPolyId) {
+void func_8003EC50(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, s32 dynaPolyId) {
     if (func_8003E934(dynaPolyId) != 0) {
         dynaColCtx->flags[dynaPolyId] &= 0xFFFB;
         dynaColCtx->unk0 |= 1;
     }
 }
 
-void func_8003ECA8(GlobalContext *globalCtx, DynaCollisionContext *dynaColCtx, s32 dynaPolyId) {
+void func_8003ECA8(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, s32 dynaPolyId) {
     if (func_8003E934(dynaPolyId) != 0) {
         dynaColCtx->flags[dynaPolyId] |= 8;
         dynaColCtx->unk0 |= 1;
