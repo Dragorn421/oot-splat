@@ -195,13 +195,13 @@
 void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
     arg0->actor = arg1;
     arg0->unk_04 = (void*)arg2;
-    arg0->scale1 = arg1->scale;
-    arg0->rot1 = arg1->shape.rot;
-    arg0->rot1.x -= 1;
-    arg0->pos1 = arg1->posRot.pos;
-    arg0->scale2 = arg1->scale;
-    arg0->rot2 = arg1->shape.rot;
-    arg0->pos2 = arg1->posRot.pos;
+    arg0->transform1.scale = arg1->scale;
+    arg0->transform1.rot = arg1->shape.rot;
+    arg0->transform1.rot.x -= 1;
+    arg0->transform1.pos = arg1->posRot.pos;
+    arg0->transform2.scale = arg1->scale;
+    arg0->transform2.rot = arg1->shape.rot;
+    arg0->transform2.pos = arg1->posRot.pos;
 }
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E804.s")
@@ -214,7 +214,9 @@ void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E890.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E8EC.s")
+void func_8003E8EC(GlobalContext *arg0, ActorMesh *arg1) {
+    arg1->transform1 = arg1->transform2;
+}
 
 s32 func_8003E934(s32 arg0) {
     if ((arg0 < 0) || (arg0 >= 0x32)) {
@@ -305,11 +307,34 @@ void DynaPolyInfo_Free(GlobalContext* globalCtx, DynaCollisionContext* dynaColCt
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EE80.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003F8EC.s")
+void func_8003F8EC(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, Actor* actor) {
+    DynaPolyActor* temp_v0;
+    s32 var_s0;
+
+    for (var_s0 = 0; var_s0 < 50; var_s0++) {
+        if (dynaColCtx->flags[var_s0] & 1) {
+            temp_v0 = DynaPolyInfo_GetActor(&globalCtx->colCtx, var_s0);
+            if ((temp_v0 != NULL) && (&temp_v0->actor == actor)) {
+                func_800434A0((DynaPolyActor*)actor);
+                return;
+            }
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003F984.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003FB64.s")
+void func_8003FB64(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
+    s32 var_s0;
+
+    var_s0 = 0;
+    do {
+        if (dynaColCtx->flags[var_s0] & 1) {
+            func_8003E8EC(globalCtx, &dynaColCtx->actorMeshArr[var_s0]);
+        }
+        var_s0 += 1;
+    } while (var_s0 != 0x32);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003FBF4.s")
 
