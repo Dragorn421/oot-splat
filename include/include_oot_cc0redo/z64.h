@@ -218,12 +218,15 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ CollisionHeader* colHeader;
-    /* 0x04 */ char             unk_04[0x4C];
+    /* 0x04 */ char pad4[0x3C];
+    /* 0x40 */ s32 unk40;      
+    /* 0x44 */ char pad44[0xC];
 } StaticCollisionContext; // size = 0x50
 
 typedef struct {
-    /* 0x0000 */ ActorMesh actorMeshArr[50];
-    /* 0x1388 */ char   unk_1388[0x04];
+    /* 0x0000 */ u8 unk0;
+    /* 0x0001 */ char pad1[3];
+    /* 0x0004 */ ActorMesh actorMeshArr[50];
     /* 0x138C */ u16    flags[50];
     /* 0x13F0 */ char   unk_13F0[0x24];
 } DynaCollisionContext; // size = 0x1414

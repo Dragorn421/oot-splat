@@ -192,7 +192,17 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E6EC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E750.s")
+void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
+    arg0->actor = arg1;
+    arg0->unk_04 = (void*)arg2;
+    arg0->scale1 = arg1->scale;
+    arg0->rot1 = arg1->shape.rot;
+    arg0->rot1.x -= 1;
+    arg0->pos1 = arg1->posRot.pos;
+    arg0->scale2 = arg1->scale;
+    arg0->rot2 = arg1->shape.rot;
+    arg0->pos2 = arg1->posRot.pos;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E804.s")
 
@@ -206,15 +216,52 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E8EC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E934.s")
+s32 func_8003E934(s32 arg0) {
+    if ((arg0 < 0) || (arg0 >= 0x32)) {
+        return 0;
+    }
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E954.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E9A0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/DynaPolyInfo_RegisterActor.s")
+void func_8003E750(ActorMesh*, Actor*, s32);
+u32 DynaPolyInfo_RegisterActor(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, Actor* actor, s32 arg3) {
+    s32 var_t0;
+    u32 var_s0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/DynaPolyInfo_GetActor.s")
+    var_t0 = 0;
+    for (var_s0 = 0; var_s0 < 50; var_s0++) {
+        if (!(dynaColCtx->flags[var_s0] & 1)) {
+            dynaColCtx->flags[var_s0] |= 1;
+            var_t0 = 1;
+            break;
+        }
+    }
+    if (var_t0 == 0) {
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("DynaPolyInfo_setActor():ダイナミックポリゴン 空きインデックスはありません\n");
+        osSyncPrintf("\x1b[m");
+        return 0x32U;
+    }
+    func_8003E750(&dynaColCtx->actorMeshArr[var_s0], actor, arg3);
+    dynaColCtx->unk0 |= 1;
+    dynaColCtx->flags[var_s0] &= 0xFFFD;
+    osSyncPrintf("\x1b[32m");
+    osSyncPrintf("DynaPolyInfo_setActor():index %d\n", var_s0);
+    osSyncPrintf("\x1b[m");
+    return var_s0;
+}
+
+DynaPolyActor* DynaPolyInfo_GetActor(CollisionContext* colCtx, s32 dynaPolyId) {
+    if ((func_8003E934(dynaPolyId) == 0) || (((colCtx->dyna.flags[dynaPolyId] & 1) == 0)) ||
+        (colCtx->dyna.flags[dynaPolyId] & 2)) {
+        return NULL;
+    }
+    return (DynaPolyActor*)colCtx->dyna.actorMeshArr[dynaPolyId].actor;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EBF8.s")
 
@@ -224,7 +271,35 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003ED00.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/DynaPolyInfo_Free.s")
+s32 func_8003E934(s32 arg0);
+void DynaPolyInfo_Free(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, s32 dynaPolyId) {
+    DynaPolyActor* temp_v0;
+
+    osSyncPrintf("\x1b[32m");
+    osSyncPrintf("DynaPolyInfo_delReserve():index %d\n", dynaPolyId);
+    osSyncPrintf("\x1b[m");
+    if (func_8003E934(dynaPolyId) == 0) {
+        if (dynaPolyId == -1) {
+            osSyncPrintf("\x1b[32m");
+            osSyncPrintf(
+                "DynaPolyInfo_delReserve():削除されているはずの(?)\nインデックス(== -1)のため,処理を中止します。\n");
+            osSyncPrintf("\x1b[m");
+            return;
+        }
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("DynaPolyInfo_delReserve():"
+                     "確保していない／出来なかったインデックスの解放のため、処理を中止します。index == %d\n",
+                     dynaPolyId);
+        osSyncPrintf("\x1b[m");
+        return;
+    }
+    temp_v0 = DynaPolyInfo_GetActor(&globalCtx->colCtx, dynaPolyId);
+    if (temp_v0 != NULL) {
+        temp_v0->dynaPolyId = -1U;
+        dynaColCtx->actorMeshArr[dynaPolyId].actor = NULL;
+        dynaColCtx->flags[dynaPolyId] |= 2;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EE6C.s")
 
@@ -360,4 +435,21 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042EF8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042FC4.s")
+s32 func_8003AC54(CollisionContext*, s32, PosRot*);
+void func_80042EF8(GlobalContext*, CollisionContext*, s32, s32, s32, s32);
+
+void func_80042FC4(GlobalContext* globalCtx, CollisionContext* colCtx) {
+    Player* player = PLAYER;
+    s32 sp28;
+
+    sp28 = func_8003AC54(colCtx, colCtx->stat.unk40, &player->actor.posRot);
+    if (gGameInfo->data[0x737] != 0) {
+        func_80042EF8(globalCtx, colCtx, sp28, 0, 0, 0xFF);
+    }
+    if (gGameInfo->data[0x736] != 0) {
+        func_80042EF8(globalCtx, colCtx, sp28 + 2, 0, 0xFF, 0);
+    }
+    if (gGameInfo->data[0x735] != 0) {
+        func_80042EF8(globalCtx, colCtx, sp28 + 4, 0xFF, 0, 0);
+    }
+}
