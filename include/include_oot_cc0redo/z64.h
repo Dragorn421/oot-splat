@@ -207,7 +207,7 @@ typedef struct CollisionHeader {
     /* 0x00 */ Vec3s     colAbsMin;
     /* 0x06 */ Vec3s     colAbsMax;
     /* 0x0C */ s16       nbVertices;
-    /* 0x10 */ void*     vertexArray;
+    /* 0x10 */ Vec3s*     vertexArray;
     /* 0x14 */ s16       nbPolygons;
     /* 0x18 */ void*     polygonArray;
     /* 0x1C */ void*     polygonTypes;
@@ -256,7 +256,7 @@ typedef struct {
     /* 0x0004 */ ActorMesh actorMeshArr[50];
     /* 0x138C */ u16    flags[50];
     /* 0x13F0 */ UNK_TYPE unk13F0;
-    /* 0x13F4 */ UNK_TYPE unk13F4;
+    /* 0x13F4 */ Vec3s* unk13F4;
     /* 0x13F8 */ struct_800387FC unk13F8;
     /* 0x1400 */ char pad1400[0x4];
     /* 0x1404 */ s32 unk1404;                       /* inferred */

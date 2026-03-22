@@ -25,7 +25,11 @@ void func_80038870(struct_800387FC* arg0) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038878.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800388A8.s")
+void func_800388A8(Vec3s* arg0, Vec3f* arg1) {
+    arg1->x = (f32)arg0->x;
+    arg1->y = (f32)arg0->y;
+    arg1->z = (f32)arg0->z;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800388E8.s")
 
@@ -87,11 +91,44 @@ void func_80038A28(CollisionPoly* poly, f32 x, f32 y, f32 z, MtxF* mtxF) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038B7C.s")
+f32 func_80038B7C(CollisionPoly* arg0, Vec3f* arg1) {
+    return ((((f32)arg0->norm.x * arg1->x) + ((f32)arg0->norm.y * arg1->y) + ((f32)arg0->norm.z * arg1->z)) *
+            0.00003051851f) +
+           (f32)arg0->dist;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038BE0.s")
+void func_80038BE0(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2) {
+    func_800388A8(((arg0->unk2 & 0x1FFF)) + arg1, arg2);
+    func_800388A8(((arg0->unk4 & 0x1FFF)) + arg1, &arg2[1]);
+    func_800388A8((arg0->unk6) + arg1, &arg2[2]);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038C78.s")
+void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f* arg3) {
+    Vec3s* var_a1;
+
+    if ((arg0 == NULL) || ((s32)arg1 >= 0x33) || (arg3 == NULL)) {
+        osSyncPrintf("\x1b[41;37m");
+        osSyncPrintf("T_Polygon_GetVertex_bg_ai(): Error %d %d %d 引数が適切ではありません。処理を終了します。\n",
+                     arg0 == NULL, ((s32)arg1 < 0x33) ^ 1, arg3 == NULL);
+        osSyncPrintf("\x1b[m");
+        if (arg3 != NULL) {
+            arg3[2].z = 0.0f;
+            arg3[1].z = 0.0f;
+            arg3[1].y = 0.0f;
+            arg3[1].x = 0.0f;
+            arg3[0].z = 0.0f;
+            arg3[0].y = 0.0f;
+            arg3[0].x = 0.0f;
+        }
+    } else {
+        if (arg1 == 0x32) {
+            var_a1 = arg2->stat.colHeader->vertexArray;
+        } else {
+            var_a1 = arg2->dyna.unk13F4;
+        }
+        func_80038BE0(arg0, var_a1, arg3);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038D48.s")
 

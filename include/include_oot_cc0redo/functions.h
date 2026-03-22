@@ -546,7 +546,7 @@ void ActorOverlayTable_Cleanup(void);
 // ? func_800389D4(?);
 void func_80038A28(CollisionPoly* poly, f32 x, f32 y, f32 z, MtxF* mtxF);
 f32 func_80038B7C(CollisionPoly*, Vec3f*);
-void func_80038C78(CollisionPoly*, u8, CollisionContext*, Vec3f*);
+void func_80038C78(CollisionPoly*, s32, CollisionContext*, Vec3f*);
 // ? func_80038BE0(?);
 // ? func_80038D48(?);
 // ? func_80038E78(?);
