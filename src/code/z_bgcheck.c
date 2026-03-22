@@ -166,11 +166,54 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AB28.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AC54.s")
+void func_8003ADC8(CollisionContext*, PosRot*, s32*);
+s32 func_8003AC54(CollisionContext* arg0, UNK_PTR arg1, PosRot* arg2) {
+    s32 sp1C[3];
+
+    func_8003ADC8(arg0, arg2, sp1C);
+    return (s32)((char*)arg1 + (sp1C[0] * 6) + (sp1C[1] * arg0->stat.unk1C * 6) +
+                 (sp1C[2] * arg0->stat.unk1C * arg0->stat.unk20 * 6));
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AD00.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003ADC8.s")
+void func_8003ADC8(CollisionContext *arg0, PosRot *arg1, s32 *arg2) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v1;
+    s32 temp_v1_2;
+    s32 temp_v1_3;
+
+    arg2[0] = (s32) ((arg1->pos.x - arg0->stat.unk4) * arg0->stat.unk34);
+    arg2[1] = (s32) ((arg1->pos.y - arg0->stat.unk8) * arg0->stat.unk38);
+    arg2[2] = (s32) ((arg1->pos.z - arg0->stat.unkC) * arg0->stat.unk3C);
+    if (arg2[0] < 0) {
+        arg2[0] = 0;
+    } else {
+        temp_v1 = arg0->stat.unk1C;
+        if (arg2[0] >= temp_v1) {
+            arg2[0] = temp_v1 - 1;
+        }
+    }
+    temp_v0 = arg2[1];
+    if (temp_v0 < 0) {
+        arg2[1] = 0;
+    } else {
+        temp_v1_2 = arg0->stat.unk20;
+        if (temp_v0 >= temp_v1_2) {
+            arg2[1] = (s32) (temp_v1_2 - 1);
+        }
+    }
+    temp_v0_2 = arg2[2];
+    if (temp_v0_2 < 0) {
+        arg2[2] = 0;
+        return;
+    }
+    temp_v1_3 = arg0->stat.unk24;
+    if (temp_v0_2 >= temp_v1_3) {
+        arg2[2] = (s32) (temp_v1_3 - 1);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AEA8.s")
 
@@ -849,7 +892,6 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042EF8.s")
 
-s32 func_8003AC54(CollisionContext*, UNK_PTR, PosRot*);
 void func_80042EF8(GlobalContext*, CollisionContext*, s32, s32, s32, s32);
 
 void func_80042FC4(GlobalContext* globalCtx, CollisionContext* colCtx) {
