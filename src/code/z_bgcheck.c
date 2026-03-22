@@ -4,7 +4,9 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038708.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003871C.s")
+void func_8003871C(u16* arg0) {
+    *arg0 = 0xFFFF;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038728.s")
 
@@ -17,7 +19,9 @@ void func_800387FC(GlobalContext* arg0, struct_800387FC* arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003880C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038870.s")
+void func_80038870(struct_800387FC* arg0) {
+    arg0->unk4 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038878.s")
 
@@ -409,7 +413,11 @@ void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E5B4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E688.s")
+void func_8003E688(ActorMesh_sub8* arg0) {
+    func_8003871C(&arg0->unk2);
+    func_8003871C(&arg0->unk4);
+    func_8003871C(&arg0->unk6);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E6C4.s")
 
@@ -573,7 +581,58 @@ void func_8003F8EC(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, A
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003F984.s")
+void func_80038870(struct_800387FC*);
+void func_8003E688(ActorMesh_sub8*);
+void func_8003E6EC(GlobalContext*, ActorMesh*);
+void func_8003EE80(GlobalContext*, DynaCollisionContext*, s32, UNK_PTR, UNK_PTR);
+void func_8003F984(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
+    DynaPolyActor* temp_v0_2;
+    s32 sp60;
+    s32 sp5C;
+    s32 i;
+
+    func_80038870(&dynaColCtx->unk13F8);
+    i = 0;
+    do {
+        func_8003E688(&dynaColCtx->actorMeshArr[i].unk8);
+        i++;
+    } while (i < 50);
+    for (i = 0; i < 50; i++) {
+        if (dynaColCtx->flags[i] & 2) {
+            osSyncPrintf("\x1b[32m");
+            osSyncPrintf("DynaPolyInfo_setup():削除 index=%d\n", i);
+            osSyncPrintf("\x1b[m");
+            dynaColCtx->flags[i] = 0;
+            func_8003E6EC(globalCtx, &dynaColCtx->actorMeshArr[i]);
+            dynaColCtx->unk0 |= 1;
+        }
+        if ((dynaColCtx->actorMeshArr[i].actor != NULL) && (dynaColCtx->actorMeshArr[i].actor->update == NULL)) {
+            osSyncPrintf("\x1b[32m");
+            osSyncPrintf("DynaPolyInfo_setup():削除 index=%d\n", i);
+            osSyncPrintf("\x1b[m");
+            temp_v0_2 = DynaPolyInfo_GetActor(&globalCtx->colCtx, i);
+            if (temp_v0_2 != NULL) {
+                temp_v0_2->dynaPolyId = -1U;
+                dynaColCtx->flags[i] = 0;
+                func_8003E6EC(globalCtx, &dynaColCtx->actorMeshArr[i]);
+                dynaColCtx->unk0 |= 1;
+            } else {
+                return;
+            }
+        }
+    }
+
+    sp60 = 0;
+    sp5C = 0;
+    i = 0;
+    do {
+        if (dynaColCtx->flags[i] & 1) {
+            func_8003EE80(globalCtx, dynaColCtx, i, &sp60, &sp5C);
+        }
+        i += 1;
+    } while (i != 0x32);
+    dynaColCtx->unk0 &= 0xFFFE;
+}
 
 void func_8003FB64(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
     s32 var_s0;
