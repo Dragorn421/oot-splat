@@ -215,9 +215,79 @@ void func_8003ADC8(CollisionContext* arg0, PosRot* arg1, s32* arg2) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AEA8.s")
+void func_8003AEA8(CollisionContext* arg0, Vec3f* arg1, s32* arg2, s32* arg3, s32* arg4) {
+    f32 temp_fa0;
+    f32 temp_fv0;
+    f32 temp_fv1;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003B04C.s")
+    temp_fv0 = arg1->x - arg0->stat.unk4;
+    temp_fv1 = arg1->y - arg0->stat.unk8;
+    temp_fa0 = arg1->z - arg0->stat.unkC;
+    *arg2 = (s32)(arg0->stat.unk34 * temp_fv0);
+    *arg3 = (s32)(arg0->stat.unk38 * temp_fv1);
+    *arg4 = (s32)(arg0->stat.unk3C * temp_fa0);
+    if (((s32)temp_fv0 % (s32)arg0->stat.unk28) < 0x32) {
+        temp_v0 = *arg2;
+        if (temp_v0 > 0) {
+            *arg2 = temp_v0 - 1;
+        }
+    }
+    if (((s32)temp_fv1 % (s32)arg0->stat.unk2C) < 0x32) {
+        temp_v0_2 = *arg3;
+        if (temp_v0_2 > 0) {
+            *arg3 = temp_v0_2 - 1;
+        }
+    }
+    if (((s32)temp_fa0 % (s32)arg0->stat.unk30) < 0x32) {
+        temp_v0_3 = *arg4;
+        if (temp_v0_3 > 0) {
+            *arg4 = temp_v0_3 - 1;
+        }
+    }
+}
+
+void func_8003B04C(CollisionContext* arg0, Vec3f* arg1, s32* arg2, s32* arg3, s32* arg4) {
+    f32 temp_fa0;
+    f32 temp_fv0;
+    f32 temp_fv1;
+    s32 temp_ft1;
+    s32 temp_ft4;
+    s32 temp_ft4_2;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+
+    temp_fv0 = arg1->x - arg0->stat.unk4;
+    temp_fv1 = arg1->y - arg0->stat.unk8;
+    temp_fa0 = arg1->z - arg0->stat.unkC;
+    *arg2 = (s32)(arg0->stat.unk34 * temp_fv0);
+    *arg3 = (s32)(arg0->stat.unk38 * temp_fv1);
+    *arg4 = (s32)(arg0->stat.unk3C * temp_fa0);
+    temp_ft4 = (s32)arg0->stat.unk28;
+    if ((temp_ft4 - 0x32) < ((s32)temp_fv0 % temp_ft4)) {
+        temp_v0 = *arg2;
+        if (temp_v0 < (arg0->stat.unk1C - 1)) {
+            *arg2 = temp_v0 + 1;
+        }
+    }
+    temp_ft1 = (s32)arg0->stat.unk2C;
+    if ((temp_ft1 - 0x32) < ((s32)temp_fv1 % temp_ft1)) {
+        temp_v0_2 = *arg3;
+        if (temp_v0_2 < (arg0->stat.unk20 - 1)) {
+            *arg3 = temp_v0_2 + 1;
+        }
+    }
+    temp_ft4_2 = (s32)arg0->stat.unk30;
+    if ((temp_ft4_2 - 0x32) < ((s32)temp_fa0 % temp_ft4_2)) {
+        temp_v0_3 = *arg4;
+        if (temp_v0_3 < (arg0->stat.unk24 - 1)) {
+            *arg4 = temp_v0_3 + 1;
+        }
+    }
+}
 
 void func_8003B218(CollisionContext* arg0, Vec3s* arg1, CollisionPoly* arg2, s32* arg3, s32* arg4, s32* arg5, s32* arg6,
                    s32* arg7, s32* arg8, s16 arg9) {
