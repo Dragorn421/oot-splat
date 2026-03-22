@@ -217,18 +217,38 @@ typedef struct {
 } CollisionHeader;
 
 typedef struct {
-    /* 0x00 */ CollisionHeader* colHeader;
-    /* 0x04 */ char pad4[0x3C];
-    /* 0x40 */ s32 unk40;      
-    /* 0x44 */ char pad44[0xC];
+    /* 0x00 */ CollisionHeader *colHeader;
+    /* 0x04 */ f32 unk4;                            /* inferred */
+    /* 0x08 */ f32 unk8;                            /* inferred */
+    /* 0x0C */ f32 unkC;                            /* inferred */
+    /* 0x10 */ f32 unk10;                           /* inferred */
+    /* 0x14 */ f32 unk14;                           /* inferred */
+    /* 0x18 */ f32 unk18;                           /* inferred */
+    /* 0x1C */ s32 unk1C;                           /* inferred */
+    /* 0x20 */ s32 unk20;                           /* inferred */
+    /* 0x24 */ s32 unk24;                           /* inferred */
+    /* 0x28 */ UNK_TYPE unk28;                             /* inferred */
+    /* 0x2C */ UNK_TYPE unk2C;                             /* inferred */
+    /* 0x30 */ UNK_TYPE unk30;                             /* inferred */
+    /* 0x34 */ UNK_TYPE unk34;                             /* inferred */
+    /* 0x38 */ UNK_TYPE unk38;                             /* inferred */
+    /* 0x3C */ UNK_TYPE unk3C;                             /* inferred */
+    /* 0x40 */ UNK_PTR unk40;
+    /* 0x44 */ UNK_TYPE unk44;                             /* inferred */
+    /* 0x48 */ char pad48[0x8];
 } StaticCollisionContext; // size = 0x50
 
 typedef struct {
     /* 0x0000 */ u8 unk0;
-    /* 0x0001 */ char pad1[3];
+    /* 0x0001 */ char pad1[1];
+    /* 0x0002 */ s16 unk2;
     /* 0x0004 */ ActorMesh actorMeshArr[50];
     /* 0x138C */ u16    flags[50];
-    /* 0x13F0 */ char   unk_13F0[0x24];
+    /* 0x13F0 */ char pad13F0[0x14];
+    /* 0x1404 */ s32 unk1404;                       /* inferred */
+    /* 0x1408 */ s32 unk1408;                       /* inferred */
+    /* 0x140C */ s32 unk140C;                       /* inferred */
+    /* 0x1410 */ u32 unk1410;                       /* inferred */
 } DynaCollisionContext; // size = 0x1414
 
 typedef struct {

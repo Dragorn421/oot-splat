@@ -577,7 +577,7 @@ void func_80038C78(CollisionPoly*, u8, CollisionContext*, Vec3f*);
 // ? func_8003BF18(?);
 // ? func_8003BF5C(?);
 // ? func_8003BFF4(?);
-// ? func_8003C078(?);
+void func_8003C078(CollisionContext*, GlobalContext*, CollisionHeader*);
 // ? T_BGCheck_getBGDataInfo(?);
 // ? func_8003C55C(?);
 // ? func_8003C614(?);

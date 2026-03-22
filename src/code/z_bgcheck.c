@@ -144,7 +144,120 @@ void func_80038A28(CollisionPoly* poly, f32 x, f32 y, f32 z, MtxF* mtxF) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003BFF4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C078.s")
+typedef struct struct_80119E94 {
+    /* 0x0 */ s16 unk0; /* inferred */
+    /* 0x2 */ s16 unk2; /* inferred */
+    /* 0x4 */ s16 unk4; /* inferred */
+    /* 0x6 */ s16 unk6; /* inferred */
+    /* 0x8 */ s32 unk8; /* inferred */
+} struct_80119E94;      /* size = 0xC */
+extern struct_80119E94 D_80119E94[];
+s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR arg2);
+s32 func_8003BF18(GlobalContext* arg0);
+s32 func_8003BF5C(s16 arg0, u32* arg1);
+void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4);
+void func_8003E398(UNK_PTR);
+void func_8003E3AC(GlobalContext* arg0, UNK_PTR arg1, u32 arg2, u16 arg3);
+void func_8003E954(GlobalContext* arg0, DynaCollisionContext* arg1);
+void func_8003E9A0(GlobalContext* arg0, DynaCollisionContext* arg1);
+void func_8003C078(CollisionContext* arg0, GlobalContext* arg1, CollisionHeader* arg2) {
+    s32 var_a2;
+    u32 sp50;
+    s32 var_a0;
+    u32 temp_s2;
+    s32 var_s2;
+    u32 sp40;
+    s32 i;
+    s32 pad;
+
+    arg0->stat.colHeader = arg2;
+    var_s2 = -1;
+    osSyncPrintf("/*---------------- BGCheck バッファーメモリサイズ -------------*/\n");
+    if ((gGameInfo->data[0x24F] == 0x10) || (gGameInfo->data[0x24F] == 0x20) || (gGameInfo->data[0x24F] == 0x30) ||
+        (gGameInfo->data[0x24F] == 0x40)) {
+        if (arg1->sceneNum == 0x36) {
+            osSyncPrintf("/* BGCheck LonLonサイズ %dbyte */\n", 0x3520);
+            arg0->dyna.unk1410 = 0x3520;
+        } else {
+            osSyncPrintf("/* BGCheck ミニサイズ %dbyte */\n", 0x4E20);
+            arg0->dyna.unk1410 = 0x4E20;
+        }
+        arg0->dyna.unk1404 = 0x1F4;
+        arg0->dyna.unk1408 = 0x100;
+        arg0->dyna.unk140C = 0x100;
+        arg0->stat.unk1C = 2;
+        arg0->stat.unk20 = 2;
+        arg0->stat.unk24 = 2;
+    } else {
+        if (func_8003BF18(arg1) == 1) {
+            arg0->dyna.unk1410 = 0xF000;
+            osSyncPrintf("/* BGCheck Spot用サイズ %dbyte */\n", 0xF000);
+            arg0->dyna.unk1404 = 0x3E8;
+            arg0->dyna.unk1408 = 0x200;
+            arg0->dyna.unk140C = 0x200;
+            arg0->stat.unk1C = 0x10;
+            arg0->stat.unk20 = 4;
+            arg0->stat.unk24 = 0x10;
+        } else {
+            if (func_8003BF5C(arg1->sceneNum, &sp40) != 0) {
+                arg0->dyna.unk1410 = sp40;
+            } else {
+                arg0->dyna.unk1410 = 0x1CC00;
+            }
+            osSyncPrintf("/* BGCheck ノーマルサイズ %dbyte  */\n", arg0->dyna.unk1410);
+            arg0->dyna.unk1404 = 0x3E8;
+            arg0->dyna.unk1408 = 0x200;
+            arg0->dyna.unk140C = 0x200;
+            var_a0 = 0;
+            for (i = 0; i < 2; i++) {
+                if (arg1->sceneNum == D_80119E94[i].unk0) {
+                    var_a0 = 1;
+                    arg0->stat.unk1C = (s32)D_80119E94[i].unk2;
+                    arg0->stat.unk20 = (s32)D_80119E94[i].unk4;
+                    arg0->stat.unk24 = (s32)D_80119E94[i].unk6;
+                    var_s2 = D_80119E94[i].unk8;
+                }
+            }
+            if (var_a0 == 0) {
+                arg0->stat.unk1C = 0x10;
+                arg0->stat.unk20 = 4;
+                arg0->stat.unk24 = 0x10;
+            }
+        }
+    }
+    arg0->stat.unk40 =
+        THA_AllocEndAlign(&arg1->state.tha, arg0->stat.unk1C * 6 * arg0->stat.unk20 * arg0->stat.unk24, -2U);
+    if (arg0->stat.unk40 == 0) {
+        LogUtils_HungupThread("../z_bgcheck.c", 0x1050);
+    }
+    arg0->stat.unk4 = (f32)arg0->stat.colHeader->colAbsMin.x;
+    arg0->stat.unk8 = (f32)arg0->stat.colHeader->colAbsMin.y;
+    arg0->stat.unkC = (f32)arg0->stat.colHeader->colAbsMin.z;
+    arg0->stat.unk10 = (f32)arg0->stat.colHeader->colAbsMax.x;
+    arg0->stat.unk14 = (f32)arg0->stat.colHeader->colAbsMax.y;
+    arg0->stat.unk18 = (f32)arg0->stat.colHeader->colAbsMax.z;
+    func_8003BFF4(arg0->stat.unk4, arg0->stat.unk1C, &arg0->stat.unk10, &arg0->stat.unk28, &arg0->stat.unk34);
+    func_8003BFF4(arg0->stat.unk8, arg0->stat.unk20, &arg0->stat.unk14, &arg0->stat.unk2C, &arg0->stat.unk38);
+    func_8003BFF4(arg0->stat.unkC, arg0->stat.unk24, &arg0->stat.unk18, &arg0->stat.unk30, &arg0->stat.unk3C);
+    sp50 = (arg0->stat.unk1C * 6 * arg0->stat.unk20 * arg0->stat.unk24) + (u16)arg0->stat.colHeader->nbPolygons +
+           (arg0->dyna.unk1404 * 4) + (arg0->dyna.unk1408 * 0x10) + (arg0->dyna.unk140C * 6) + 0x1464;
+    if (var_s2 > 0) {
+        var_a2 = var_s2;
+    } else {
+        if ((u32)arg0->dyna.unk1410 < sp50) {
+            LogUtils_HungupThread("../z_bgcheck.c", 0x1086);
+        }
+        var_a2 = (s32)((u32)(arg0->dyna.unk1410 - sp50) >> 2);
+    }
+    func_8003E398(&arg0->stat.unk44);
+    func_8003E3AC(arg1, &arg0->stat.unk44, (u32)var_a2, (u16)arg0->stat.colHeader->nbPolygons);
+    temp_s2 = func_8003BB18(arg0, arg1, arg0->stat.unk40);
+    osSyncPrintf("\x1b[32m");
+    osSyncPrintf("/*---結局 BG使用サイズ %dbyte---*/\n", sp50 + temp_s2);
+    osSyncPrintf("\x1b[m");
+    func_8003E954(arg1, &arg0->dyna);
+    func_8003E9A0(arg1, &arg0->dyna);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/T_BGCheck_getBGDataInfo.s")
 
@@ -527,7 +640,7 @@ void func_8003FB64(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042EF8.s")
 
-s32 func_8003AC54(CollisionContext*, s32, PosRot*);
+s32 func_8003AC54(CollisionContext*, UNK_PTR, PosRot*);
 void func_80042EF8(GlobalContext*, CollisionContext*, s32, s32, s32, s32);
 
 void func_80042FC4(GlobalContext* globalCtx, CollisionContext* colCtx) {

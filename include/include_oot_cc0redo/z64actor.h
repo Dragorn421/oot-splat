@@ -185,7 +185,8 @@ typedef struct ActorMeshTransform {
 typedef struct {
     /* 0x00 */ Actor* actor;
     /* 0x04 */ void* unk_04; // Struct800417A0*
-    /* 0x08 */ char  unk_08[0x0C];
+    /* 0x08 */ UNK_TYPE unk8;                              /* inferred */
+    /* 0x0C */ char padC[0x8];
     /* 0x14 */ ActorMeshTransform transform1;
     /* 0x34 */ ActorMeshTransform transform2;
     /* 0x54 */ char  unk_54[0x10];
