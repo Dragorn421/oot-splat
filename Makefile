@@ -16,6 +16,9 @@ LD := mips-linux-gnu-ld
 LDFLAGS := -T $(LDSCRIPT) -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map $(BUILD_DIR)/rom.map
 
 default: $(BUILD_DIR)/rom.z64
+ifneq ($(COMPARE),0)
+	md5sum -c checksum.md5
+endif
 .PHONY: default
 
 $(BUILD_DIR)/%.o: %.s
@@ -39,6 +42,3 @@ $(BUILD_DIR)/rom.elf: $(LDSCRIPT) undefined_funcs_auto.txt undefined_syms_auto.t
 $(BUILD_DIR)/rom.z64: $(BUILD_DIR)/rom.elf
 	@mkdir -p $(dir $@)
 	$(OBJCOPY) -O binary $< $@
-ifneq ($(COMPARE),0)
-	md5sum -c checksum.md5
-endif
