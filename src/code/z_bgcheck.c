@@ -219,7 +219,45 @@ void func_8003ADC8(CollisionContext* arg0, PosRot* arg1, s32* arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003B04C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003B218.s")
+void func_8003B218(CollisionContext* arg0, Vec3s* arg1, CollisionPoly* arg2, s32* arg3, s32* arg4, s32* arg5, s32* arg6,
+                   s32* arg7, s32* arg8, s16 arg9) {
+    Vec3s* temp_v0;
+    Vec3f sp58;
+    Vec3f sp4C;
+    f32 temp_fa0;
+    f32 temp_fv0;
+    f32 temp_fv1;
+    u16* var_a0;
+    s16 new_var;
+
+    new_var = arg2[arg9].unk2 & 0x1FFF;
+    Math_Vec3s_ToVec3f(&sp4C, &arg1[new_var]);
+    Math_Vec3f_Copy(&sp58, &sp4C);
+    for (var_a0 = arg2[arg9].unk2_arr + 1; var_a0 < arg2[arg9].unk2_arr + 3; var_a0++) {
+        new_var = *var_a0 & 0x1FFF;
+        temp_v0 = &arg1[new_var];
+        temp_fv0 = (f32)temp_v0->x;
+        temp_fv1 = (f32)temp_v0->y;
+        temp_fa0 = (f32)temp_v0->z;
+        if (temp_fv0 < sp58.x) {
+            sp58.x = temp_fv0;
+        } else if (sp4C.x < temp_fv0) {
+            sp4C.x = temp_fv0;
+        }
+        if (temp_fv1 < sp58.y) {
+            sp58.y = temp_fv1;
+        } else if (sp4C.y < temp_fv1) {
+            sp4C.y = temp_fv1;
+        }
+        if (temp_fa0 < sp58.z) {
+            sp58.z = temp_fa0;
+        } else if (sp4C.z < temp_fa0) {
+            sp4C.z = temp_fa0;
+        }
+    }
+    func_8003AEA8(arg0, &sp58, arg3, arg4, arg5);
+    func_8003B04C(arg0, &sp4C, arg6, arg7, arg8);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003B3C8.s")
 
