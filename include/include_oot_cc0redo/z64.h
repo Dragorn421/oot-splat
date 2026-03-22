@@ -203,7 +203,7 @@ typedef struct {
     // 0x0000_00FF = CamData index
 } WaterBox; // size = 0x10
 
-typedef struct {
+typedef struct CollisionHeader {
     /* 0x00 */ Vec3s     colAbsMin;
     /* 0x06 */ Vec3s     colAbsMax;
     /* 0x0C */ s16       nbVertices;

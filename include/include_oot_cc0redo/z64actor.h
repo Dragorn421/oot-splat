@@ -191,7 +191,7 @@ typedef struct ActorMesh_sub8 {
 
 typedef struct {
     /* 0x00 */ Actor* actor;
-    /* 0x04 */ void* unk_04; // Struct800417A0*
+    /* 0x04 */ struct CollisionHeader* unk_04;
     /* 0x08 */ ActorMesh_sub8 unk8;
     /* 0x10 */ UNK_TYPE2 unk10;
     /* 0x12 */ char unk12[2];

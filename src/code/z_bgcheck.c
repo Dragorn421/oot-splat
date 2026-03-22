@@ -407,7 +407,7 @@ void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E4DC.s")
 
-void func_8003E530(ActorMeshTransform *arg0) {
+void func_8003E530(ActorMeshTransform* arg0) {
     s16 temp_v0;
 
     arg0->rot.z = 0;
@@ -458,9 +458,9 @@ void func_8003E6EC(GlobalContext* arg0, ActorMesh* arg1) {
     arg1->unk54 = temp_v0;
 }
 
-void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
+void func_8003E750(ActorMesh* arg0, Actor* arg1, CollisionHeader* arg2) {
     arg0->actor = arg1;
-    arg0->unk_04 = (void*)arg2;
+    arg0->unk_04 = arg2;
     arg0->transform1.scale = arg1->scale;
     arg0->transform1.rot = arg1->shape.rot;
     arg0->transform1.rot.x -= 1;
@@ -506,8 +506,8 @@ void func_8003E954(GlobalContext* arg0, DynaCollisionContext* arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E9A0.s")
 
-void func_8003E750(ActorMesh*, Actor*, s32);
-u32 DynaPolyInfo_RegisterActor(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, Actor* actor, s32 arg3) {
+u32 DynaPolyInfo_RegisterActor(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, Actor* actor,
+                               CollisionHeader* arg3) {
     s32 var_t0;
     u32 var_s0;
 
@@ -703,9 +703,18 @@ void func_8003FB64(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041648.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800417A0.s")
+void func_800417A0(CollisionHeader* arg0) {
+    arg0->vertexArray = SEGMENTED_TO_VIRTUAL(arg0->vertexArray);
+    arg0->polygonArray = SEGMENTED_TO_VIRTUAL(arg0->polygonArray);
+    arg0->polygonTypes = SEGMENTED_TO_VIRTUAL(arg0->polygonTypes);
+    arg0->cameraData = SEGMENTED_TO_VIRTUAL(arg0->cameraData);
+    arg0->waterBoxes = SEGMENTED_TO_VIRTUAL(arg0->waterBoxes);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/DynaPolyInfo_Alloc.s")
+void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
+    *arg1 = SEGMENTED_TO_VIRTUAL(arg0);
+    func_800417A0(*arg1);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800418D0.s")
 
