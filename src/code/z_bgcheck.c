@@ -407,7 +407,20 @@ void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E4DC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E530.s")
+void func_8003E530(ActorMeshTransform *arg0) {
+    s16 temp_v0;
+
+    arg0->rot.z = 0;
+    temp_v0 = arg0->rot.z;
+    arg0->scale.z = 1.0f;
+    arg0->scale.y = 1.0f;
+    arg0->scale.x = 1.0f;
+    arg0->pos.z = 0.0f;
+    arg0->pos.y = 0.0f;
+    arg0->pos.x = 0.0f;
+    arg0->rot.y = temp_v0;
+    arg0->rot.x = temp_v0;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E568.s")
 
@@ -419,11 +432,31 @@ void func_8003E688(ActorMesh_sub8* arg0) {
     func_8003871C(&arg0->unk6);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E6C4.s")
+void func_8003E6C4(ActorMesh_sub8* arg0) {
+    arg0->unk0 = 0;
+    func_8003E688(arg0);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E6E4.s")
+void func_8003E6E4(UNK_TYPE2* arg0) {
+    *arg0 = 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E6EC.s")
+void func_8003E530(ActorMeshTransform*);
+void func_8003E6EC(GlobalContext* arg0, ActorMesh* arg1) {
+    s16 temp_v0;
+
+    arg1->actor = NULL;
+    arg1->unk_04 = NULL;
+    func_8003E530(&arg1->transform1);
+    func_8003E530(&arg1->transform2);
+    func_8003E6C4(&arg1->unk8);
+    func_8003E6E4(&arg1->unk10);
+    arg1->unk58 = 0;
+    temp_v0 = arg1->unk58;
+    arg1->unk5A = 0;
+    arg1->unk56 = temp_v0;
+    arg1->unk54 = temp_v0;
+}
 
 void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
     arg0->actor = arg1;

@@ -193,10 +193,15 @@ typedef struct {
     /* 0x00 */ Actor* actor;
     /* 0x04 */ void* unk_04; // Struct800417A0*
     /* 0x08 */ ActorMesh_sub8 unk8;
-    /* 0x10 */ char pad10[0x4];
+    /* 0x10 */ UNK_TYPE2 unk10;
+    /* 0x12 */ char unk12[2];
     /* 0x14 */ ActorMeshTransform transform1;
     /* 0x34 */ ActorMeshTransform transform2;
-    /* 0x54 */ char  unk_54[0x10];
+    /* 0x54 */ s16 unk54;                           /* inferred */
+    /* 0x56 */ s16 unk56;                           /* inferred */
+    /* 0x58 */ s16 unk58;                           /* inferred */
+    /* 0x5A */ s16 unk5A;                           /* inferred */
+    /* 0x5C */ char pad5C[8];
 } ActorMesh; // size = 0x64
 
 typedef struct {
