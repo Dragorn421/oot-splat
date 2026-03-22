@@ -24,9 +24,61 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038924.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800389D4.s")
+void func_800389D4(CollisionPoly* arg0, f32* arg1, f32* arg2, f32* arg3) {
+    *arg1 = (f32)arg0->norm.x * 0.00003051851f;
+    *arg2 = (f32)arg0->norm.y * 0.00003051851f;
+    *arg3 = (f32)arg0->norm.z * 0.00003051851f;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038A28.s")
+void func_800389D4(CollisionPoly* arg0, f32* arg1, f32* arg2, f32* arg3);
+void func_80038A28(CollisionPoly* poly, f32 x, f32 y, f32 z, MtxF* mtxF) {
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+    f32 temp_fv0;
+    f32 temp_fv0_2;
+    f32 var_fa0;
+    f32 var_fa1;
+    f32 var_fv1;
+    s32 pad[2];
+
+    if (poly != NULL) {
+        func_800389D4(poly, &sp3C, &sp38, &sp34);
+        var_fv1 = sqrtf(1.0f - (sp3C * sp3C));
+        if (!(fabsf(var_fv1) < 0.008f)) {
+            temp_fv0 = 1.0f / var_fv1;
+            var_fa1 = sp38 * temp_fv0;
+            var_fa0 = -(sp34 * temp_fv0);
+        } else {
+            var_fa1 = sqrtf(1.0f - (sp38 * sp38));
+            if (!(fabsf(var_fa1) < 0.008f)) {
+                temp_fv0_2 = 1.0f / var_fa1;
+                var_fa0 = sp3C * temp_fv0_2;
+                var_fv1 = -(sp34 * temp_fv0_2);
+            } else {
+                var_fa0 = 0.0f;
+                var_fv1 = 0.0f;
+            }
+        }
+        mtxF->mf[0][0] = var_fv1;
+        mtxF->mf[0][1] = -sp3C * var_fa1;
+        mtxF->mf[0][2] = sp3C * var_fa0;
+        mtxF->mf[1][0] = sp3C;
+        mtxF->mf[1][1] = sp38;
+        mtxF->mf[1][2] = sp34;
+        mtxF->mf[2][1] = var_fa0;
+        if (0) {}
+        mtxF->mf[2][2] = var_fa1;
+        mtxF->mf[0][3] = 0.0f;
+        mtxF->mf[1][3] = 0.0f;
+        mtxF->mf[2][0] = 0.0f;
+        mtxF->mf[2][3] = 0.0f;
+        mtxF->mf[3][0] = x;
+        mtxF->mf[3][1] = y;
+        mtxF->mf[3][2] = z;
+        mtxF->mf[3][3] = 1.0f;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038B7C.s")
 
