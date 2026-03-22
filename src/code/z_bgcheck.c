@@ -10,7 +10,10 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038780.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800387FC.s")
+void func_800387FC(GlobalContext* arg0, struct_800387FC* arg1) {
+    arg1->unk0 = 0;
+    arg1->unk4 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003880C.s")
 
@@ -378,18 +381,18 @@ void func_8003E398(struct_8003E398* arg0) {
     arg0->unk8 = 0;
 }
 
-void func_8003E3AC(GlobalContext *arg0, struct_8003E398 *arg1, u32 arg2, s32 arg3) {
+void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg3) {
     UNK_PTR temp_v0;
     UNK_PTR temp_v0_2;
 
-    arg1->unk0 = (s16) arg2;
+    arg1->unk0 = (s16)arg2;
     arg1->unk2 = 0;
     temp_v0 = THA_AllocEndAlign(&arg0->state.tha, arg2 * 4, -2U);
     arg1->unk4 = temp_v0;
     if (temp_v0 == 0) {
         __assert("this->short_slist_node_tbl != NULL", "../z_bgcheck.c", 0x1757);
     }
-    temp_v0_2 = GameState_Alloc(&arg0->state, (u32) arg3, "../z_bgcheck.c", 0x175B);
+    temp_v0_2 = GameState_Alloc(&arg0->state, (u32)arg3, "../z_bgcheck.c", 0x175B);
     arg1->unk8 = temp_v0_2;
     if (temp_v0_2 == 0) {
         __assert("this->polygon_check != NULL", "../z_bgcheck.c", 0x175D);
@@ -428,11 +431,15 @@ void func_8003E750(ActorMesh* arg0, Actor* arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E804.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E82C.s")
+void func_8003E82C(void* arg0) {
+    *(s32*)arg0 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E834.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E888.s")
+void func_8003E888(void* arg0) {
+    *(s32*)arg0 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E890.s")
 
@@ -447,7 +454,14 @@ s32 func_8003E934(s32 arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E954.s")
+void func_8003E82C(UNK_PTR);
+void func_8003E888(UNK_PTR);
+void func_8003E954(GlobalContext* arg0, DynaCollisionContext* arg1) {
+    arg1->unk0 = 1;
+    func_8003E82C(&arg1->unk13F0);
+    func_8003E888(&arg1->unk13F4);
+    func_800387FC(arg0, &arg1->unk13F8);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E9A0.s")
 

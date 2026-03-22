@@ -244,13 +244,21 @@ typedef struct {
     /* 0x44 */ struct_8003E398 unk44;
 } StaticCollisionContext; // size = 0x50
 
+typedef struct struct_800387FC {
+    UNK_TYPE4 unk0;
+    UNK_TYPE4 unk4;
+} struct_800387FC;
+
 typedef struct {
     /* 0x0000 */ u8 unk0;
     /* 0x0001 */ char pad1[1];
     /* 0x0002 */ s16 unk2;
     /* 0x0004 */ ActorMesh actorMeshArr[50];
     /* 0x138C */ u16    flags[50];
-    /* 0x13F0 */ char pad13F0[0x14];
+    /* 0x13F0 */ UNK_TYPE unk13F0;
+    /* 0x13F4 */ UNK_TYPE unk13F4;
+    /* 0x13F8 */ struct_800387FC unk13F8;
+    /* 0x1400 */ char pad1400[0x4];
     /* 0x1404 */ s32 unk1404;                       /* inferred */
     /* 0x1408 */ s32 unk1408;                       /* inferred */
     /* 0x140C */ s32 unk140C;                       /* inferred */
