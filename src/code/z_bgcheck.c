@@ -177,16 +177,16 @@ s32 func_8003AC54(CollisionContext* arg0, UNK_PTR arg1, PosRot* arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AD00.s")
 
-void func_8003ADC8(CollisionContext *arg0, PosRot *arg1, s32 *arg2) {
+void func_8003ADC8(CollisionContext* arg0, PosRot* arg1, s32* arg2) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v1;
     s32 temp_v1_2;
     s32 temp_v1_3;
 
-    arg2[0] = (s32) ((arg1->pos.x - arg0->stat.unk4) * arg0->stat.unk34);
-    arg2[1] = (s32) ((arg1->pos.y - arg0->stat.unk8) * arg0->stat.unk38);
-    arg2[2] = (s32) ((arg1->pos.z - arg0->stat.unkC) * arg0->stat.unk3C);
+    arg2[0] = (s32)((arg1->pos.x - arg0->stat.unk4) * arg0->stat.unk34);
+    arg2[1] = (s32)((arg1->pos.y - arg0->stat.unk8) * arg0->stat.unk38);
+    arg2[2] = (s32)((arg1->pos.z - arg0->stat.unkC) * arg0->stat.unk3C);
     if (arg2[0] < 0) {
         arg2[0] = 0;
     } else {
@@ -201,7 +201,7 @@ void func_8003ADC8(CollisionContext *arg0, PosRot *arg1, s32 *arg2) {
     } else {
         temp_v1_2 = arg0->stat.unk20;
         if (temp_v0 >= temp_v1_2) {
-            arg2[1] = (s32) (temp_v1_2 - 1);
+            arg2[1] = (s32)(temp_v1_2 - 1);
         }
     }
     temp_v0_2 = arg2[2];
@@ -211,7 +211,7 @@ void func_8003ADC8(CollisionContext *arg0, PosRot *arg1, s32 *arg2) {
     }
     temp_v1_3 = arg0->stat.unk24;
     if (temp_v0_2 >= temp_v1_3) {
-        arg2[2] = (s32) (temp_v1_3 - 1);
+        arg2[2] = (s32)(temp_v1_3 - 1);
     }
 }
 
@@ -223,7 +223,88 @@ void func_8003ADC8(CollisionContext *arg0, PosRot *arg1, s32 *arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003B3C8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003BB18.s")
+typedef struct struct_8003BB18_arg2 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+} struct_8003BB18_arg2;
+s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR /* struct_8003BB18_arg2* */ arg2) {
+    void* temp_s5_polygonArray;
+    struct_8003BB18_arg2* var_fp;
+    s32 temp_v1_nbPolygons;
+    s32 spE8_iPoly;
+    Vec3s* temp_s4_vertexArray;
+    s32 spE0_iy;
+    s32 var_a0_iz;
+    s32 spD8;
+    s32 spD4;
+    s32 spD0;
+    s32 spCC;
+    s32 spC8;
+    s32 spC4;
+    Vec3f spB8;
+    Vec3f spAC;
+    f32 temp_fs1;
+    struct_8003BB18_arg2* var_a1_2;
+    f32 temp_fs2;
+    f32 temp_fs3;
+    s32 sp98;
+    CollisionHeader* temp_a3;
+    s32 var_s1_ix;
+    struct_8003BB18_arg2* var_s0;
+
+    temp_a3 = arg0->stat.colHeader;
+    var_a1_2 = arg2;
+    while (var_a1_2 < ((arg0->stat.unk1C * arg0->stat.unk20 * arg0->stat.unk24) + (struct_8003BB18_arg2*)arg2)) {
+        var_a1_2->unk0 = 0xFFFF;
+        var_a1_2->unk2 = 0xFFFF;
+        var_a1_2->unk4 = 0xFFFF;
+        var_a1_2++;
+    }
+    temp_v1_nbPolygons = (u16)temp_a3->nbPolygons;
+    temp_s4_vertexArray = temp_a3->vertexArray;
+    temp_s5_polygonArray = temp_a3->polygonArray;
+    sp98 = arg0->stat.unk1C * arg0->stat.unk20;
+    temp_fs1 = arg0->stat.unk28 + 100.0f;
+    temp_fs2 = arg0->stat.unk2C + 100.0f;
+    temp_fs3 = arg0->stat.unk30 + 100.0f;
+    for (spE8_iPoly = 0; spE8_iPoly < temp_v1_nbPolygons; spE8_iPoly++) {
+        func_8003B218(arg0, temp_s4_vertexArray, temp_s5_polygonArray, &spD8, &spD4, &spD0, &spCC, &spC8, &spC4,
+                      (s32)(s16)spE8_iPoly);
+        //! FAKE
+        do {
+            var_a1_2 = (spD0 * sp98) + (struct_8003BB18_arg2*)arg2;
+        } while (0);
+        spB8.z = ((arg0->stat.unk30 * (f32)spD0) + arg0->stat.unkC) - 50.0f;
+        spAC.z = spB8.z + temp_fs3;
+        for (var_a0_iz = spD0; var_a0_iz < spC4 + 1; var_a0_iz++) {
+            var_fp = (arg0->stat.unk1C * spD4) + var_a1_2;
+            spB8.y = ((arg0->stat.unk2C * (f32)spD4) + arg0->stat.unk8) - 50.0f;
+            spAC.y = spB8.y + temp_fs2;
+            for (spE0_iy = spD4; spE0_iy < spC8 + 1; spE0_iy++) {
+                var_s0 = (spD8) + var_fp;
+                spB8.x = ((arg0->stat.unk28 * (f32)spD8) + arg0->stat.unk4) - 50.0f;
+                spAC.x = spB8.x + temp_fs1;
+                for (var_s1_ix = spD8; var_s1_ix < spCC + 1; var_s1_ix++) {
+                    if (func_8003B3C8(&spB8, &spAC, temp_s5_polygonArray, temp_s4_vertexArray, (s32)(s16)spE8_iPoly) !=
+                        0) {
+                        func_8003965C(var_s0, arg0, temp_s5_polygonArray, temp_s4_vertexArray, (s32)(s16)spE8_iPoly);
+                    }
+                    spB8.x += arg0->stat.unk28;
+                    spAC.x += arg0->stat.unk28;
+                    var_s0 += 1;
+                }
+                spB8.y += arg0->stat.unk2C;
+                spAC.y += arg0->stat.unk2C;
+                var_fp += arg0->stat.unk1C;
+            }
+            spB8.z += arg0->stat.unk30;
+            spAC.z += arg0->stat.unk30;
+            var_a1_2 += sp98;
+        }
+    }
+    return (u16)arg0->stat.unk44.unk2 * 4;
+}
 
 extern s16 D_80119E2C[];
 s32 func_8003BF18(GlobalContext* arg0) {
