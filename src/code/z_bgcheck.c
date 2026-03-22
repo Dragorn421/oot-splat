@@ -265,11 +265,26 @@ DynaPolyActor* DynaPolyInfo_GetActor(CollisionContext* colCtx, s32 dynaPolyId) {
     return (DynaPolyActor*)colCtx->dyna.actorMeshArr[dynaPolyId].actor;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EBF8.s")
+void func_8003EBF8(GlobalContext *globalCtx, DynaCollisionContext *dynaColCtx, s32 dynaPolyId) {
+    if (func_8003E934(dynaPolyId) != 0) {
+        dynaColCtx->flags[dynaPolyId] |= 4;
+        dynaColCtx->unk0 |= 1;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EC50.s")
+void func_8003EC50(GlobalContext *globalCtx, DynaCollisionContext *dynaColCtx, s32 dynaPolyId) {
+    if (func_8003E934(dynaPolyId) != 0) {
+        dynaColCtx->flags[dynaPolyId] &= 0xFFFB;
+        dynaColCtx->unk0 |= 1;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003ECA8.s")
+void func_8003ECA8(GlobalContext *globalCtx, DynaCollisionContext *dynaColCtx, s32 dynaPolyId) {
+    if (func_8003E934(dynaPolyId) != 0) {
+        dynaColCtx->flags[dynaPolyId] |= 8;
+        dynaColCtx->unk0 |= 1;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003ED00.s")
 
