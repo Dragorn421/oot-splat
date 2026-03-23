@@ -808,15 +808,153 @@ f32 func_8003CB30(CollisionContext* arg0, CollisionPoly* arg1, Vec3f* arg2) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CBE8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CCA4.s")
+f32 func_8003CCA4(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Vec3f* arg3) {
+    return func_8003C614(NULL, arg0, 1, arg1, arg2, arg3, NULL, 6, 1.0f);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CD08.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CD70.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CDD4.s")
+s32 func_80038600(Vec3f*, char*, s32);
+s32 func_8003D7F0(CollisionContext*, u16, UNK_PTR, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, s32*, Actor*, f32, s32);
+s32 func_80039AEC(UNK_PTR, CollisionContext*, u16, Vec3f*, f32*, UNK_PTR, f32, CollisionPoly**);
+s32 func_8003C55C(CollisionContext*, Vec3f*);
+s32 func_800409A8(CollisionContext*, u16, Vec3f*, f32*, UNK_PTR, f32, CollisionPoly**, s32*, Actor*);
+s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4, f32 arg5,
+                  CollisionPoly** arg6, s32* arg7, Actor* arg8, f32 arg9, s32 arg10);
+s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4, f32 arg5,
+                  CollisionPoly** arg6, s32* arg7, Actor* arg8, f32 arg9, s32 arg10) {
+    void* spDC;
+    s32 padD8;
+    s32 spD4;
+    CollisionPoly* spD0;
+    f32 spCC;
+    f32 spC8;
+    f32 spC4;
+    Vec3f spB8;
+    s32 spB4;
+    Vec3f spA8;
+    s32 spA4;
+    f32 temp_fv0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003D464.s")
+    spD4 = 0;
+    *arg7 = 0x32;
+    *arg6 = NULL;
+    spDC = arg0->stat.unk40;
+    *arg2 = *arg3;
+    spCC = arg3->x - arg4->x;
+    spC8 = arg3->y - arg4->y;
+    spC4 = arg3->z - arg4->z;
+    if (((func_80038600(arg3, "../z_bgcheck.c", 0x12DF) == 1) ||
+         (func_80038600(arg4, "../z_bgcheck.c", 0x12E0) == 1)) &&
+        (arg8 != NULL)) {
+        osSyncPrintf("こいつ,pself_actor->name %d\n", arg8->id);
+    }
+    if (((spCC != 0.0f) || (spC4 != 0.0f)) && !((u8)arg10 & 1)) {
+        if ((arg9 + spC8) < 5.0f) {
+            spD4 = func_8003D7F0(arg0, (u16)arg1, NULL, arg4, arg3, &spA8, &spD0, &spA4, arg8, 1.0f, 0x1B);
+            if (spD4 != 0) {
+                f32 temp_fa0_ny = (f32)spD0->norm.y * 0.00003051851f;
+
+                if (temp_fa0_ny > 0.5f) {
+                    arg2->x = spA8.x;
+                    if (arg9 > 1.0f) {
+                        arg2->y = spA8.y - 1.0f;
+                    } else {
+                        arg2->y = spA8.y - arg9;
+                    }
+                    arg2->z = spA8.z;
+                } else {
+                    f32 nx;
+                    f32 nz;
+
+                    nx = ((f32)spD0->norm.x * 0.00003051851f);
+                    nz = ((f32)spD0->norm.z * 0.00003051851f);
+                    arg2->x = (arg5 * nx) + spA8.x;
+                    arg2->y = (arg5 * temp_fa0_ny) + spA8.y;
+                    arg2->z = (arg5 * nz) + spA8.z;
+                }
+                *arg6 = spD0;
+                *arg7 = spA4;
+            }
+        } else {
+            Vec3f sp88;
+            Vec3f sp7C;
+            s32 var_v0;
+            s32 pad;
+
+            if ((arg5 * arg5) < ((spCC * spCC) + (spC4 * spC4))) {
+                var_v0 = 0x1B;
+            } else {
+                var_v0 = 0x19;
+            }
+            sp88 = *arg3;
+            sp88.y += arg9;
+            sp7C = *arg4;
+            sp7C.y = sp88.y;
+            spD4 = func_8003D7F0(arg0, (u16)arg1, NULL, &sp7C, &sp88, &spA8, &spD0, &spA4, arg8, 1.0f, var_v0);
+            if (spD4 != 0) {
+                f32 nx = (f32)spD0->norm.x * 0.00003051851f;
+                f32 nz = (f32)spD0->norm.z * 0.00003051851f;
+                f32 nxz = sqrtf((nx * nx) + (nz * nz));
+
+                if (!(fabsf(nxz) < 0.008f)) {
+                    //! FAKE
+                    temp_fv0 = (0, arg5) * (1.0f / nxz);
+                    arg2->x = (temp_fv0 * nx) + spA8.x;
+                    arg2->z = (temp_fv0 * nz) + spA8.z;
+                    *arg6 = spD0;
+                    *arg7 = spA4;
+                    spD4 = 1;
+                }
+            }
+        }
+    }
+    spB8 = *arg2;
+    spB8.y += arg9;
+    spB4 = 0;
+    if (func_800409A8(arg0, (u16)arg1, arg2, &arg2->z, &spB8, arg5, arg6, arg7, arg8) != 0) {
+        spD4 = 1;
+        spB4 = 1;
+        spB8 = *arg2;
+        spB8.y += arg9;
+    }
+    if ((func_8003C55C(arg0, arg3) == 1) && (func_80039AEC(func_8003AC54(arg0, spDC, (PosRot*)arg2), arg0, (u16)arg1,
+                                                           arg2, &arg2->z, &spB8, arg5, arg6) != 0)) {
+        *arg7 = 0x32;
+        spD4 = 1;
+    }
+    if (((spB4 == 1) || (*arg7 != 0x32))) {
+        Vec3f sp5C;
+        s32 sp58;
+
+        if ((func_8003D7F0(arg0, (u16)arg1, NULL, arg4, arg2, &sp5C, &spD0, &sp58, arg8, 1.0f, 9) != 0)) {
+            f32 nx = (f32)spD0->norm.x * 0.00003051851f;
+            f32 nz = (f32)spD0->norm.z * 0.00003051851f;
+            f32 nxz;
+
+            nxz = sqrtf((nx * nx) + (nz * nz));
+            if (!(fabsf(nxz) < 0.008f)) {
+                //! FAKE
+                temp_fv0 = (0, arg5) * (1.0f / nxz);
+                arg2->x = (temp_fv0 * nx) + sp5C.x;
+                arg2->z = (temp_fv0 * nz) + sp5C.z;
+                *arg6 = spD0;
+                *arg7 = sp58;
+                spD4 = 1;
+            }
+        }
+    }
+    return spD4;
+}
+
+s32 func_8003D464(CollisionContext* colCtx, Vec3f* posResult, Vec3f* posNext, Vec3f* posPrev, f32 arg4,
+                  CollisionPoly** outPoly, f32 checkHeight) {
+    UNK_TYPE sp3C;
+
+    return func_8003CDD4(colCtx, 2, posResult, posNext, posPrev, arg4, outPoly, &sp3C, 0, checkHeight, 0);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003D4C8.s")
 
