@@ -1218,17 +1218,35 @@ s32 func_8003DE84(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
                          func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003DF10.s")
+s32 func_8003DF10(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
+                  u32 arg6, u32 arg7, u32 arg8, u32* arg9, Actor* arg10) {
+    return func_8003D7F0(arg0, 2U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, arg10, 1.0f,
+                         func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003DFA0.s")
+s32 func_8003DFA0(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
+                  u32 arg6, u32 arg7, u32 arg8, u32* arg9, Actor* arg10, f32 arg11) {
+    return func_8003D7F0(arg0, 2U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, arg10, arg11,
+                         func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E02C.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E0B8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E0FC.s")
+s32 func_8003E0FC(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
+                  u32 arg6, u32 arg7, u32 arg8) {
+    s32 sp3C;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E188.s")
+    return func_8003D7F0(arg0, 0U, NULL, arg1, arg2, arg3, arg4, &sp3C, NULL, 1.0f,
+                         func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
+}
+
+s32 func_8003E188(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
+                  u32 arg6, u32 arg7, u32 arg8, f32* arg9) {
+    return func_8003D7F0(arg0, 0U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
+                         func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
+}
 
 s32 func_8003AB28(void*, u16, CollisionContext*, Vec3f*, f32, s32*, u16);
 s32 func_80041648(CollisionContext*, u16, s32*, s32*, Vec3f*, f32, Actor*, u16);
