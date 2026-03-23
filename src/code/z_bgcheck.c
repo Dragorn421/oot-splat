@@ -1,5 +1,17 @@
 #include "global.h"
 
+typedef struct struct_80039448_arg1 {
+    u16 unk0;
+} struct_80039448_arg1;
+
+typedef struct struct_80039448 {
+    s16 unk0;
+    u16 unk2;
+} struct_80039448;
+
+u16 func_8003E4DC(struct_8003E398*);
+void func_80038708(struct_80039448*, s16*, u16);
+
 typedef struct struct_8003BB18_arg2 {
     u16 unk0;
     u16 unk2;
@@ -8,13 +20,22 @@ typedef struct struct_8003BB18_arg2 {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038600.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038708.s")
+void func_80038708(struct_80039448* arg0, s16* arg1, u16 arg2) {
+    arg0->unk0 = *arg1;
+    arg0->unk2 = arg2;
+}
 
 void func_8003871C(u16* arg0) {
     *arg0 = 0xFFFF;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038728.s")
+void func_80038728(struct_8003E398* arg0, u16* arg1, s16* arg2) {
+    u16 sp1E;
+
+    sp1E = func_8003E4DC(arg0);
+    func_80038708((struct_80039448*)arg0->unk4 + sp1E, arg2, *arg1);
+    *arg1 = sp1E;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038780.s")
 
@@ -39,7 +60,27 @@ void func_800388A8(Vec3s* arg0, Vec3f* arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800388E8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038924.s")
+s16 func_80038924(CollisionPoly* arg0, Vec3s* arg1) {
+    s32 i;
+    s32 new_var2;
+    int new_var;
+    s16 var_a3;
+
+    if ((arg0->norm.y == 0x7FFF) || (arg0->norm.y == (-0x7FFF))) {
+        return arg1[arg0->unk2_arr[0] & 0x1FFF].y;
+    }
+    i = arg0->unk2_arr[0] & 0x1FFF;
+    new_var2 = arg0->unk2_arr[1] & 0x1FFF;
+    new_var = arg0->unk2_arr[2];
+    var_a3 = arg1[i].y;
+    if (arg1[new_var2].y < var_a3) {
+        var_a3 = arg1[new_var2].y;
+    }
+    if (var_a3 < arg1[new_var].y) {
+        return var_a3;
+    }
+    return arg1[new_var].y;
+}
 
 void func_800389D4(CollisionPoly* arg0, f32* arg1, f32* arg2, f32* arg3) {
     *arg1 = (f32)arg0->norm.x * 0.00003051851f;
@@ -150,19 +191,8 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003937C.s")
 
-typedef struct struct_80039448_arg1 {
-    u16 unk0;
-} struct_80039448_arg1;
-
-typedef struct struct_80039448 {
-    s16 unk0;
-    u16 unk2;
-} struct_80039448;
-
 void func_80038728(struct_8003E398*, u16*, s16*);
 s16 func_80038924(CollisionPoly*, Vec3s*);
-u16 func_8003E4DC(struct_8003E398*);
-void func_80038708(struct_80039448*, s16*, u16);
 void func_80039448(CollisionContext* arg0, u16* arg1, CollisionPoly* arg2, Vec3s* arg3, s16 arg4) {
     struct_80039448* var_t1;
     struct_80039448* temp_a0;
@@ -827,7 +857,16 @@ void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E458.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E4DC.s")
+u16 func_8003E4DC(struct_8003E398* arg0) {
+    u16 temp_v1;
+
+    temp_v1 = (u16)arg0->unk2;
+    arg0->unk2 = temp_v1 + 1;
+    if ((s32)temp_v1 >= (s32)(u16)arg0->unk0) {
+        __assert("new_index < this->short_slist_node_size", "../z_bgcheck.c", 0x1785);
+    }
+    return temp_v1;
+}
 
 void func_8003E530(ActorMeshTransform* arg0) {
     s16 temp_v0;
