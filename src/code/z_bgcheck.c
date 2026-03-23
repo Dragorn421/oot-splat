@@ -187,7 +187,29 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038D48.s")
+extern Vec3f D_8015BC30;
+extern Vec3f D_8015BC3C;
+extern Vec3f D_8015BC48;
+s32 func_80038D48(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4, f32 arg5) {
+    Vec3s* vtx0;
+    Vec3s* vtx1;
+    Vec3s* vtx2;
+    f32 nx;
+    f32 ny;
+    f32 nz;
+
+    vtx0 = &arg1[arg0->unk2_arr[0] & 0x1FFF];
+    Math_Vec3s_ToVec3f(&D_8015BC30, vtx0);
+    vtx1 = &arg1[arg0->unk2_arr[1] & 0x1FFF];
+    Math_Vec3s_ToVec3f(&D_8015BC3C, vtx1);
+    vtx2 = &arg1[arg0->unk2_arr[2]];
+    Math_Vec3s_ToVec3f(&D_8015BC48, vtx2);
+    nx = (f32)arg0->norm.x * 0.00003051851f;
+    ny = (f32)arg0->norm.y * 0.00003051851f;
+    nz = (f32)arg0->norm.z * 0.00003051851f;
+    return Math3D_TriChkPointParaYIntersectDist(&D_8015BC30, &D_8015BC3C, &D_8015BC48, nx, ny, nz, (f32)arg0->dist,
+                                                arg3, arg2, arg4, arg5);
+}
 
 extern Vec3f D_8015BC58;
 extern Vec3f D_8015BC64;
@@ -203,7 +225,10 @@ s32 func_80038E78(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
                                                      (f32)arg0->dist, arg3, arg2, arg4, arg5);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038F20.s")
+s32 func_80038D48(CollisionPoly*, Vec3s*, f32, f32, f32*, f32);
+s32 func_80038F20(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4) {
+    return func_80038D48(arg0, arg1, arg2, arg3, arg4, 1.0f);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038F60.s")
 
@@ -351,7 +376,59 @@ f32 func_8003992C(UNK_PTR arg0, CollisionContext* arg1, u16 arg2, CollisionPoly*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80039AEC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003A3E0.s")
+s32 func_80038F20(CollisionPoly*, Vec3s*, f32, f32, f32*);
+typedef struct struct_8003A3E0 {
+    char pad0[4];
+    u16 unk4;
+} struct_8003A3E0;
+s32 func_8003A3E0(struct_8003A3E0* arg0, u16 arg1, CollisionContext* arg2, f32* arg3, Vec3f* arg4, f32 arg5,
+                  CollisionPoly** arg6) {
+    s32 var_t0;
+    CollisionPoly* temp_s0;
+    CollisionPoly* temp_s6;
+    struct_80039448* var_s1;
+    f32 sp8C;
+    Vec3s* temp_s7;
+    f32 temp_fv0;
+    f32 new_var;
+    u16 new_var2;
+    s16 i;
+
+    var_t0 = 0;
+    if (arg0->unk4 == 0xFFFF) {
+        return 0;
+    }
+    temp_s6 = arg2->stat.colHeader->polygonArray;
+    var_s1 = &((struct_80039448*)arg2->stat.unk44.unk4)[(arg0->unk4)];
+    temp_s7 = arg2->stat.colHeader->vertexArray;
+    *arg3 = arg4->y;
+    while (true) {
+        i = var_s1->unk0;
+        temp_s0 = &temp_s6[i];
+        if ((((CollisionPoly*)arg2->stat.colHeader->polygonArray)[i]).unk2 & ((arg1 & 7) << 0xD)) {
+            if (var_s1->unk2 == 0xFFFF) {
+                break;
+            }
+            var_s1 = &((struct_80039448*)arg2->stat.unk44.unk4)[(var_s1->unk2)];
+            continue;
+        }
+        if (func_80038F20(temp_s0, temp_s7, arg4->x, arg4->z, &sp8C) != 0) {
+            temp_fv0 = sp8C - *arg3;
+            new_var = ((f32)temp_s0->norm.y * 0.00003051851f);
+            if ((temp_fv0 > 0) && (temp_fv0 < arg5) && ((temp_fv0 * new_var) <= 0.0f)) {
+                var_t0 = 1;
+                *arg3 = sp8C - arg5;
+                *arg6 = temp_s0;
+            }
+        }
+        if (var_s1->unk2 == 0xFFFF) {
+            break;
+        }
+        var_s1 = &((struct_80039448*)arg2->stat.unk44.unk4)[(var_s1->unk2)];
+        continue;
+    }
+    return var_t0;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003A5B8.s")
 
@@ -1144,7 +1221,6 @@ s32 func_8003D594(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
     return func_8003CDD4(arg0, 2U, arg1, arg2, arg3, arg4, arg5, (s32*)arg6, arg7, arg8, 1);
 }
 
-s32 func_8003A3E0(void*, u16, CollisionContext*, f32*, Vec3f*, f32, void*);
 s32 func_80040E40(CollisionContext*, u16, f32*, Vec3f*, f32, void*, u32*, Actor*);
 s32 func_8003D600(CollisionContext* arg0, u16 arg1, f32* arg2, Vec3f* arg3, f32 arg4, void* arg5, u32* arg6,
                   Actor* arg7) {
@@ -1699,11 +1775,19 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8004239C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042538.s")
+u32 func_80042538(CollisionContext* colCtx, WaterBox* waterBox) {
+    u32 v = waterBox->properties & 0xFF;
+
+    return v;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042548.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8004259C.s")
+u32 func_8004259C(CollisionContext* colCtx, WaterBox* waterBox) {
+    u32 v = (waterBox->properties >> 8) & 0x1F;
+
+    return v;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800425B0.s")
 
