@@ -1709,7 +1709,20 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042708.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800427B4.s")
+s32 func_800427B4(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
+    f32 sp54;
+    f32 sp50;
+    f32 sp4C;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    s32 pad;
+
+    func_800389D4(arg0, &sp54, &sp50, &sp4C);
+    func_800389D4(arg1, &sp48, &sp44, &sp40);
+    return Math3D_PlaneVsLineSegClosestPoint(sp54, sp50, sp4C, (f32)arg0->dist, sp48, sp44, sp40, (f32)arg1->dist, arg2,
+                                             arg3, arg4);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042868.s")
 
@@ -1719,9 +1732,28 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042CB8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042EF8.s")
+void func_80042CB8(GlobalContext*, CollisionContext*, void*, u8, u8, u8);
+void func_80042EF8(GlobalContext* arg0, CollisionContext* arg1, u16* arg2, u8 arg3, u8 arg4, u8 arg5) {
+    u16 temp_v0;
+    s16 new_var;
+    CollisionPoly* temp_s2;
+    struct_80039448* var_s0;
 
-void func_80042EF8(GlobalContext*, CollisionContext*, UNK_PTR, s32, s32, s32);
+    temp_v0 = *arg2;
+    temp_s2 = arg1->stat.colHeader->polygonArray;
+    if (temp_v0 != 0xFFFF) {
+        var_s0 = &((struct_80039448*)arg1->stat.unk44.unk4)[(temp_v0)];
+        while (true) {
+            new_var = var_s0->unk0;
+            func_80042CB8(arg0, arg1, &temp_s2[(new_var)], arg3, arg4, arg5);
+            if (var_s0->unk2 != 0xFFFF) {
+                var_s0 = &((struct_80039448*)arg1->stat.unk44.unk4)[(var_s0->unk2)];
+                continue;
+            }
+            break;
+        }
+    }
+}
 
 void func_80042FC4(GlobalContext* globalCtx, CollisionContext* colCtx) {
     Player* player = PLAYER;
