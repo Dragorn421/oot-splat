@@ -1764,9 +1764,9 @@ void func_80042FC4(GlobalContext* globalCtx, CollisionContext* colCtx) {
         func_80042EF8(globalCtx, colCtx, sp28, 0, 0, 0xFF);
     }
     if (gGameInfo->data[0x736] != 0) {
-        func_80042EF8(globalCtx, colCtx, (char*)sp28 + 2, 0, 0xFF, 0);
+        func_80042EF8(globalCtx, colCtx, (u16*)((char*)sp28 + 2), 0, 0xFF, 0);
     }
     if (gGameInfo->data[0x735] != 0) {
-        func_80042EF8(globalCtx, colCtx, (char*)sp28 + 4, 0xFF, 0, 0);
+        func_80042EF8(globalCtx, colCtx, (u16*)((char*)sp28 + 4), 0xFF, 0, 0);
     }
 }
