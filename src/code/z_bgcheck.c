@@ -278,12 +278,12 @@ void func_8003965C(struct_8003BB18_arg2* arg0, CollisionContext* arg1, Collision
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AB28.s")
 
 void func_8003ADC8(CollisionContext*, PosRot*, s32*);
-s32 func_8003AC54(CollisionContext* arg0, UNK_PTR arg1, PosRot* arg2) {
+UNK_PTR func_8003AC54(CollisionContext* arg0, UNK_PTR arg1, PosRot* arg2) {
     s32 sp1C[3];
 
     func_8003ADC8(arg0, arg2, sp1C);
-    return (s32)((char*)arg1 + (sp1C[0] * 6) + (sp1C[1] * arg0->stat.unk1C * 6) +
-                 (sp1C[2] * arg0->stat.unk1C * arg0->stat.unk20 * 6));
+    return ((char*)arg1 + (sp1C[0] * 6) + (sp1C[1] * arg0->stat.unk1C * 6) +
+            (sp1C[2] * arg0->stat.unk1C * arg0->stat.unk20 * 6));
 }
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003AD00.s")
@@ -775,6 +775,7 @@ s32 func_8003C55C(CollisionContext* arg0, Vec3f* arg1) {
     return 1;
 }
 
+s32 func_8003AD00(CollisionContext*, UNK_PTR, Vec3f*);
 f32 func_8003992C(s32, CollisionContext*, u16, CollisionPoly**, Vec3f*, s32, f32, f32);
 typedef struct struct_8003FDDC {
     /* 0x00 */ GlobalContext* unk0;
@@ -791,12 +792,7 @@ typedef struct struct_8003FDDC {
     /* 0x28 */ char pad28[0xC];      /* maybe part of unk24[4]? */
 } struct_8003FDDC;                   /* size = 0x34 ? */
 f32 func_8003FDDC(struct_8003FDDC*);
-struct _m2c_stack_func_8003C614 {
-    /* 0x00 */ char pad0[0x6C];
-    /* 0x6C */ struct_8003FDDC sp6C;
-    /* 0xA0 */ Vec3f spA0; /* inferred */
-    /* 0xAC */ char padAC[0xC];
-};
+s32 func_80041EC8(CollisionContext*, CollisionPoly*, UNK_TYPE);
 f32 func_8003C614(GlobalContext* arg0, CollisionContext* arg1, u16 arg2, CollisionPoly** arg3, UNK_TYPE* arg4,
                   Vec3f* arg5, Actor* arg6, s32 arg7, f32 arg8) {
     f32 temp_fv0_2;
@@ -804,7 +800,7 @@ f32 func_8003C614(GlobalContext* arg0, CollisionContext* arg1, u16 arg2, Collisi
     s32 temp_v0;
     Vec3f spA0;
     struct_8003FDDC sp6C;
-    void* temp_s5;
+    UNK_PTR temp_s5;
 
     *arg4 = 0x32;
     *arg3 = NULL;
@@ -1526,20 +1522,20 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042EF8.s")
 
-void func_80042EF8(GlobalContext*, CollisionContext*, s32, s32, s32, s32);
+void func_80042EF8(GlobalContext*, CollisionContext*, UNK_PTR, s32, s32, s32);
 
 void func_80042FC4(GlobalContext* globalCtx, CollisionContext* colCtx) {
     Player* player = PLAYER;
-    s32 sp28;
+    UNK_PTR sp28;
 
     sp28 = func_8003AC54(colCtx, colCtx->stat.unk40, &player->actor.posRot);
     if (gGameInfo->data[0x737] != 0) {
         func_80042EF8(globalCtx, colCtx, sp28, 0, 0, 0xFF);
     }
     if (gGameInfo->data[0x736] != 0) {
-        func_80042EF8(globalCtx, colCtx, sp28 + 2, 0, 0xFF, 0);
+        func_80042EF8(globalCtx, colCtx, (char*)sp28 + 2, 0, 0xFF, 0);
     }
     if (gGameInfo->data[0x735] != 0) {
-        func_80042EF8(globalCtx, colCtx, sp28 + 4, 0xFF, 0, 0);
+        func_80042EF8(globalCtx, colCtx, (char*)sp28 + 4, 0xFF, 0, 0);
     }
 }
