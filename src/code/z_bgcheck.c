@@ -1212,7 +1212,11 @@ s32 func_8003DD6C(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003DDF8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003DE84.s")
+s32 func_8003DE84(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
+                  u32 arg6, u32 arg7, u32 arg8, u32* arg9) {
+    return func_8003D7F0(arg0, 2U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
+                         func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003DF10.s")
 
@@ -1226,9 +1230,33 @@ s32 func_8003DD6C(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E188.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E214.s")
+s32 func_8003AB28(void*, u16, CollisionContext*, Vec3f*, f32, s32*, u16);
+s32 func_80041648(CollisionContext*, u16, s32*, s32*, Vec3f*, f32, Actor*, u16);
+s32 func_8003E214(CollisionContext* arg0, u16 arg1, s32* arg2, s32* arg3, Vec3f* arg4, f32 arg5, Actor* arg6,
+                  u16 arg7) {
+    void* temp_v0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E30C.s")
+    *arg3 = 0x32;
+    if ((func_80038600(arg4, "../z_bgcheck.c", 0x16DC) == 1) && (arg6 != 0)) {
+        osSyncPrintf("こいつ,pself_actor->name %d\n", arg6->id);
+    }
+    temp_v0 = func_8003AD00(arg0, arg0->stat.unk40, arg4);
+    if (temp_v0 == NULL) {
+        return 0;
+    }
+    if ((func_8003AB28(temp_v0, arg1, arg0, arg4, arg5, arg2, arg7) != 0) ||
+        (func_80041648(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) != 0)) {
+        return 1;
+    }
+    return 0;
+}
+
+s32 func_8003E30C(CollisionContext* colCtx, Vec3f* center, f32 radius) {
+    UNK_TYPE sp2C;
+    UNK_TYPE sp28;
+
+    return func_8003E214(colCtx, 0, &sp2C, &sp28, center, radius, 0, 0);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E350.s")
 
