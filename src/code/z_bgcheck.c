@@ -1582,7 +1582,175 @@ void DynaPolyInfo_Free(GlobalContext* globalCtx, DynaCollisionContext* dynaColCt
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EE6C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003EE80.s")
+void func_8003EE80(GlobalContext* arg0, DynaCollisionContext* arg1, s32 arg2, s32* arg3, s32* arg4) {
+    MtxF sp128;
+    s32 pad;
+    Actor* temp_v0;
+    CollisionHeader* temp_fp;
+    Vec3s* temp_s1;
+    f32 temp_fs0;
+    Vec3f sp108;
+    f32 temp_fv0;
+    f32 temp_fv0_2;
+    f32 temp_fv0_3;
+    Vec3f spF0;
+    f32 var_fv1;
+    s16* temp_s5;
+    Vec3f spDC;
+    Vec3f spD0;
+    Vec3f spC4;
+    Vec3f spB8;
+    Vec3f spAC;
+    s16 temp_v1;
+    s32 var_s0;
+    s16 padA2;
+    s16 spA0;
+    s16 sp9E;
+    s16 sp9C;
+    Vec3f sp90;
+    Vec3f sp84;
+    s32 var_s3;
+    CollisionPoly* temp_s0;
+    CollisionPoly* poly;
+    s16 sp76;
+    s16 sp74;
+    s16 sp72;
+
+    temp_s5 = &arg1->actorMeshArr[arg2].unk54;
+    temp_v0 = arg1->actorMeshArr[arg2].actor;
+    arg1->actorMeshArr[arg2].unk8.unk0 = (s16)*arg4;
+    arg1->actorMeshArr[arg2].unk10 = (s16)*arg3;
+    temp_fp = arg1->actorMeshArr[arg2].unk_04;
+    sp108 = temp_v0->posRot.pos;
+    sp108.y += temp_v0->shape.unk_08 * temp_v0->scale.y;
+    func_8003E568(&arg1->actorMeshArr[arg2].transform2, &temp_v0->scale, &temp_v0->shape, &sp108);
+    if ((arg1->flags[arg2] & 4)) {
+        return;
+    }
+    if (arg1->unk1408 < (*arg4 + (u16)temp_fp->nbPolygons)) {
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("DynaPolyInfo_expandSRT():polygon over %dが%dを越えるとダメ\n", *arg4 + (u16)temp_fp->nbPolygons,
+                     arg1->unk1408);
+    }
+    if (arg1->unk140C < (*arg3 + (u16)temp_fp->nbVertices)) {
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("DynaPolyInfo_expandSRT():vertex over %dが%dを越えるとダメ\n", *arg3 + (u16)temp_fp->nbVertices,
+                     arg1->unk140C);
+    }
+    if (arg1->unk1408 >= (*arg4 + (u16)temp_fp->nbPolygons)) {
+    } else {
+        __assert("pdyna_poly_info->poly_num >= *pstart_poly_index + pbgdata->poly_num", "../z_bgcheck.c", 0x1A1F);
+    }
+    if (arg1->unk140C < (*arg3 + (u16)temp_fp->nbVertices)) {
+        __assert("pdyna_poly_info->vert_num >= *pstart_vert_index + pbgdata->vtx_num", "../z_bgcheck.c", 0x1A20);
+    }
+    if (!(arg1->unk0 & 1) && (func_8003E804(&arg1->actorMeshArr[arg2]) == 1)) {
+
+        for (var_s0 = *arg4; var_s0 < (*arg4 + (u16)temp_fp->nbPolygons); var_s0++) {
+            poly = &((CollisionPoly*)arg1->unk13F0)[var_s0];
+            temp_v1 = ((poly))->norm.y;
+            if (temp_v1 >= 0x4000) {
+                spA0 = (s16)var_s0;
+                func_80038780(&arg1->unk13F8, &arg1->actorMeshArr[arg2].unk8.unk6, &spA0);
+            } else if (temp_v1 < -0x6665) {
+                if (!(arg1->flags[arg2] & 8)) {
+                    sp9E = (s16)var_s0;
+                    func_80038780(&arg1->unk13F8, &arg1->actorMeshArr[arg2].unk8.unk2, &sp9E);
+                }
+            } else {
+                sp9C = (s16)var_s0;
+                func_80038780(&arg1->unk13F8, &arg1->actorMeshArr[arg2].unk8.unk4, &sp9C);
+            }
+        }
+        *arg4 = *arg4 + (u16)temp_fp->nbPolygons;
+        *arg3 = (s32)(*arg3 + (u16)temp_fp->nbVertices);
+        return;
+    }
+    SkinMatrix_SetScaleRotateYRPTranslate(
+        &sp128, arg1->actorMeshArr[arg2].transform2.scale.x, arg1->actorMeshArr[arg2].transform2.scale.y,
+        arg1->actorMeshArr[arg2].transform2.scale.z, (s16)(s32)arg1->actorMeshArr[arg2].transform2.rot.x,
+        (s16)(s32)arg1->actorMeshArr[arg2].transform2.rot.y, (s16)(s32)arg1->actorMeshArr[arg2].transform2.rot.z,
+        arg1->actorMeshArr[arg2].transform2.pos.x, arg1->actorMeshArr[arg2].transform2.pos.y,
+        arg1->actorMeshArr[arg2].transform2.pos.z);
+    temp_fs0 = 1.0f / (f32)(u16)temp_fp->nbVertices;
+    spF0.x = spF0.y = spF0.z = 0.0f;
+    for (var_s3 = 0; var_s3 < (s32)(u16)temp_fp->nbVertices; var_s3++) {
+        Math_Vec3s_ToVec3f(&sp90, &temp_fp->vertexArray[var_s3]);
+        SkinMatrix_Vec3fMtxFMultXYZ(&sp128, &sp90, &sp84);
+        func_800388E8(&arg1->unk13F4[*arg3 + var_s3], &sp84);
+        if (var_s3 == 0) {
+            arg1->actorMeshArr[arg2].unk60 = sp84.y;
+            arg1->actorMeshArr[arg2].unk5C = arg1->actorMeshArr[arg2].unk60;
+        } else if (sp84.y < arg1->actorMeshArr[arg2].unk5C) {
+            arg1->actorMeshArr[arg2].unk5C = sp84.y;
+        } else if (arg1->actorMeshArr[arg2].unk60 < sp84.y) {
+            arg1->actorMeshArr[arg2].unk60 = sp84.y;
+        }
+        spF0.x += sp84.x;
+        spF0.y += sp84.y;
+        spF0.z += sp84.z;
+    }
+    var_fv1 = -100.0f;
+    spF0.x *= temp_fs0;
+    spF0.y *= temp_fs0;
+    spF0.z *= temp_fs0;
+    temp_s5[0] = (s16)(s32)spF0.x;
+    temp_s5[1] = (s16)(s32)spF0.y;
+    temp_s5[2] = (s16)(s32)spF0.z;
+    for (var_s3 = 0; var_s3 < (s32)(u16)temp_fp->nbVertices; var_s3++) {
+        spDC.x = (f32)(arg1->unk13F4[*arg3 + var_s3]).x;
+        spDC.y = (f32)(arg1->unk13F4[*arg3 + var_s3]).y;
+        spDC.z = (f32)(arg1->unk13F4[*arg3 + var_s3]).z;
+        temp_fv0 = Math3D_Vec3fDistSq((Vec3f*)&spDC, (Vec3f*)&spF0);
+        if (var_fv1 < temp_fv0) {
+            var_fv1 = temp_fv0;
+        }
+    }
+    temp_s5[3] = (s16)(s32)(sqrtf(var_fv1) * 1.1f);
+    for (var_s3 = 0; var_s3 < (s32)(u16)temp_fp->nbPolygons; var_s3++) {
+        temp_s0 = &((CollisionPoly*)arg1->unk13F0)[((*arg4 + var_s3))];
+        *temp_s0 = (((CollisionPoly*)temp_fp->polygonArray)[var_s3]);
+        (temp_s0)->unk2 = (((temp_s0)->unk2 & 0x1FFF) + *arg3) | ((*temp_s0).unk2 & 0xE000);
+        (temp_s0)->unk4 = (u16)((((temp_s0)->unk4 & 0x1FFF) + *arg3) | ((*temp_s0).unk4 & 0xE000));
+        (temp_s0)->unk6 = (u16)(*arg3 + (temp_s0)->unk6);
+        temp_s1 = arg1->unk13F4;
+        spD0.x = (f32)temp_s1[(u32)((temp_s0)->unk2 & 0x1FFF)].x;
+        spD0.y = (f32)temp_s1[(u32)((temp_s0)->unk2 & 0x1FFF)].y;
+        spD0.z = (f32)temp_s1[(u32)((temp_s0)->unk2 & 0x1FFF)].z;
+        spC4.x = (f32)temp_s1[(u32)((temp_s0)->unk4 & 0x1FFF)].x;
+        spC4.y = (f32)temp_s1[(u32)((temp_s0)->unk4 & 0x1FFF)].y;
+        spC4.z = (f32)temp_s1[(u32)((temp_s0)->unk4 & 0x1FFF)].z;
+        spB8.x = (f32)temp_s1[(temp_s0)->unk6].x;
+        spB8.y = (f32)temp_s1[(temp_s0)->unk6].y;
+        spB8.z = (f32)temp_s1[(temp_s0)->unk6].z;
+        Math3D_SurfaceNorm((Vec3f*)&spD0, (Vec3f*)&spC4, (Vec3f*)&spB8, &spAC);
+        temp_fv0_2 = Math3D_Vec3fMagnitude(&spAC);
+        if (!(fabsf(temp_fv0_2) < 0.008f)) {
+            temp_fv0_3 = 1.0f / temp_fv0_2;
+            spAC.x *= temp_fv0_3;
+            spAC.y *= temp_fv0_3;
+            spAC.z *= temp_fv0_3;
+            (temp_s0)->norm.x = (s16)(s32)(spAC.x * 32767.0f);
+            (temp_s0)->norm.y = (s16)(s32)(spAC.y * 32767.0f);
+            (temp_s0)->norm.z = (s16)(s32)(spAC.z * 32767.0f);
+        }
+        (temp_s0)->dist = -((spAC.x * (f32)(temp_s1[(u32)((temp_s0)->unk2 & 0x1FFF)]).x) +
+                            (spAC.y * (f32)(temp_s1[(u32)((temp_s0)->unk2 & 0x1FFF)]).y) +
+                            ((f32)(temp_s1[(u32)((temp_s0)->unk2 & 0x1FFF)]).z * spAC.z));
+        if (spAC.y > 0.5f) {
+            sp76 = *arg4 + var_s3;
+            func_80038780(&arg1->unk13F8, &arg1->actorMeshArr[arg2].unk8.unk6, &sp76);
+        } else if (spAC.y < -0.8f) {
+            sp74 = *arg4 + var_s3;
+            func_80038780(&arg1->unk13F8, &arg1->actorMeshArr[arg2].unk8.unk2, &sp74);
+        } else {
+            sp72 = *arg4 + var_s3;
+            func_80038780(&arg1->unk13F8, &arg1->actorMeshArr[arg2].unk8.unk4, &sp72);
+        }
+    }
+    *arg4 = (s32)(*arg4 + (u16)temp_fp->nbPolygons);
+    *arg3 = (s32)(*arg3 + (u16)temp_fp->nbVertices);
+}
 
 void func_8003F8EC(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, Actor* actor) {
     DynaPolyActor* temp_v0;
@@ -1602,7 +1770,6 @@ void func_8003F8EC(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, A
 void func_80038870(struct_800387FC*);
 void func_8003E688(ActorMesh_sub8*);
 void func_8003E6EC(GlobalContext*, ActorMesh*);
-void func_8003EE80(GlobalContext*, DynaCollisionContext*, s32, UNK_PTR, UNK_PTR);
 void func_8003F984(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
     DynaPolyActor* temp_v0_2;
     s32 sp60;

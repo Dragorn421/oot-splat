@@ -209,7 +209,8 @@ typedef struct {
     /* 0x56 */ s16 unk56;                           /* inferred */
     /* 0x58 */ s16 unk58;                           /* inferred */
     /* 0x5A */ s16 unk5A;                           /* inferred */
-    /* 0x5C */ char pad5C[8];
+    /* 0x5C */ f32 unk5C;                           /* inferred */
+    /* 0x60 */ f32 unk60;                           /* inferred */
 } ActorMesh; // size = 0x64
 
 typedef struct {
