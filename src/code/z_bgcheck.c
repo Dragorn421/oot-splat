@@ -150,8 +150,59 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003937C.s")
 
-void func_80039448(CollisionContext*, u16*, CollisionPoly*, Vec3s*, s16);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80039448.s")
+typedef struct struct_80039448_arg1 {
+    u16 unk0;
+} struct_80039448_arg1;
+
+typedef struct struct_80039448 {
+    s16 unk0;
+    u16 unk2;
+} struct_80039448;
+
+void func_80038728(struct_8003E398*, u16*, s16*);
+s16 func_80038924(CollisionPoly*, Vec3s*);
+u16 func_8003E4DC(struct_8003E398*);
+void func_80038708(struct_80039448*, s16*, u16);
+void func_80039448(CollisionContext* arg0, u16* arg1, CollisionPoly* arg2, Vec3s* arg3, s16 arg4) {
+    struct_80039448* var_t1;
+    struct_80039448* temp_a0;
+    s16 var_a2;
+    s32 temp_v0;
+    u16 temp_v0_2;
+
+    if (*arg1 == 0xFFFF) {
+        func_80038728(&arg0->stat.unk44, arg1, &arg4);
+        return;
+    }
+    temp_v0 = func_80038924(&arg2[arg4], arg3);
+    var_t1 = (struct_80039448*)arg0->stat.unk44.unk4 + ((struct_80039448_arg1*)arg1)->unk0;
+    var_a2 = var_t1->unk0;
+    if ((temp_v0 < arg3[arg2[var_a2].unk2_arr[0] & 0x1FFF].y) &&
+        (temp_v0 < arg3[arg2[var_a2].unk2_arr[1] & 0x1FFF].y)) {
+        if (temp_v0 < arg3[arg2[var_a2].unk2_arr[2]].y) {
+            func_80038728(&arg0->stat.unk44, arg1, &arg4);
+            return;
+        }
+    }
+loop_7:
+    if (var_t1->unk2 == 0xFFFF) {
+        temp_v0_2 = func_8003E4DC(&arg0->stat.unk44);
+        func_80038708((struct_80039448*)arg0->stat.unk44.unk4 + temp_v0_2, &arg4, 0xFFFFU);
+        var_t1->unk2 = temp_v0_2;
+        return;
+    }
+    temp_a0 = (struct_80039448*)arg0->stat.unk44.unk4 + var_t1->unk2;
+    var_a2 = temp_a0->unk0;
+    if ((temp_v0 < arg3[arg2[var_a2].unk2_arr[0] & 0x1FFF].y) &&
+        (temp_v0 < arg3[arg2[var_a2].unk2_arr[1] & 0x1FFF].y) && (temp_v0 < arg3[arg2[var_a2].unk2_arr[2]].y)) {
+        temp_v0_2 = func_8003E4DC(&arg0->stat.unk44);
+        func_80038708((struct_80039448*)arg0->stat.unk44.unk4 + temp_v0_2, &arg4, var_t1->unk2);
+        var_t1->unk2 = temp_v0_2;
+        return;
+    }
+    var_t1 = temp_a0;
+    goto loop_7;
+}
 
 void func_8003965C(struct_8003BB18_arg2* arg0, CollisionContext* arg1, CollisionPoly* arg2, Vec3s* arg3, s16 arg4) {
     s16 temp_v0;

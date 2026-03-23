@@ -25,7 +25,7 @@ typedef struct {
 } PosRot; // size = 0x14
 
 typedef struct {
-    /* 0x00 */ char pad0[2];
+    /* 0x00 */ s16 unk0; /* inferred */
     union {
         struct {
             /* 0x02 */ u16 unk2;                            /* inferred */
