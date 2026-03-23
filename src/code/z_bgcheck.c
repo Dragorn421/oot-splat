@@ -762,21 +762,49 @@ void func_8003C078(CollisionContext* arg0, GlobalContext* arg1, CollisionHeader*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C834.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C890.s")
+f32 func_8003C614(GlobalContext*, CollisionContext*, UNK_TYPE, CollisionPoly**, UNK_PTR, Vec3f*, Actor*, s32, f32);
+f32 func_8003C890(CollisionContext* arg0, CollisionPoly** arg1, Vec3f* arg2) {
+    UNK_TYPE sp34;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C8EC.s")
+    return func_8003C614(0, arg0, 2, arg1, &sp34, arg2, 0, 0x1C, 1.0f);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C940.s")
+f32 func_8003C8EC(GlobalContext* arg0, CollisionContext* arg1, CollisionPoly** arg2, Vec3f* arg3) {
+    UNK_TYPE sp34;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C9A4.s")
+    return func_8003C614(arg0, arg1, 2, arg2, &sp34, arg3, 0, 0x1C, 1.0f);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CA0C.s")
+f32 func_8003C940(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Vec3f* arg3) {
+    return func_8003C614(NULL, arg0, 2, arg1, arg2, arg3, 0, 0x1C, 1.0f);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CA64.s")
+f32 func_8003C9A4(CollisionContext* arg0, CollisionPoly** arg1, void* arg2, Actor* arg3, Vec3f* arg4) {
+    return func_8003C614(NULL, arg0, 2, arg1, arg2, arg4, arg3, 0x1C, 1.0f);
+}
+
+f32 func_8003CA0C(GlobalContext* globalCtx, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor,
+                  Vec3f* pos) {
+    return func_8003C614(globalCtx, colCtx, 2, outPoly, bgId, pos, actor, 0x1C, 1.0f);
+}
+
+f32 func_8003CA64(CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos, f32 chkDist) {
+    return func_8003C614(NULL, colCtx, 2, outPoly, bgId, pos, actor, 0x1C, chkDist);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CAC8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CB30.s")
+f32 func_8003CB30(CollisionContext* arg0, CollisionPoly* arg1, Vec3f* arg2) {
+    CollisionPoly* sp3C;
+    f32 temp_fv1;
+    UNK_TYPE sp34;
+
+    temp_fv1 = func_8003C614(NULL, arg0, 0, &sp3C, &sp34, arg2, NULL, 0x1C, 1.0f);
+    if (sp3C != NULL) {
+        *arg1 = *sp3C;
+    }
+    return temp_fv1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CBE8.s")
 
