@@ -18,7 +18,17 @@ typedef struct struct_8003BB18_arg2 {
     u16 unk4;
 } struct_8003BB18_arg2;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038600.s")
+s32 func_80038600(Vec3f* arg0, const char* arg1, s32 arg2) {
+    if ((arg0->x >= 32760.0f) || (arg0->x <= -32760.0f) || ((arg0->y >= 32760.0f)) || (arg0->y <= -32760.0f) ||
+        ((arg0->z >= 32760.0f)) || ((arg0->z <= -32760.0f))) {
+        osSyncPrintf("\x1b[31m");
+        osSyncPrintf("T_BGCheck_PosErrorCheck():位置が妥当ではありません。pos (%f,%f,%f) file:%s line:%d\n", arg0->x,
+                     (f64)arg0->y, (f64)arg0->z, arg1, arg2);
+        osSyncPrintf("\x1b[m");
+        return 1;
+    }
+    return 0;
+}
 
 void func_80038708(struct_80039448* arg0, s16* arg1, u16 arg2) {
     arg0->unk0 = *arg1;
@@ -756,13 +766,91 @@ void func_8003C078(CollisionContext* arg0, GlobalContext* arg1, CollisionHeader*
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/T_BGCheck_getBGDataInfo.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C55C.s")
+s32 func_8003C55C(CollisionContext* arg0, Vec3f* arg1) {
+    if ((arg1->x < (arg0->stat.unk4 - 50.0f)) || ((arg0->stat.unk10 + 50.0f) < arg1->x) ||
+        ((arg1->y < (arg0->stat.unk8 - 50.0f))) || ((arg0->stat.unk14 + 50.0f) < arg1->y) ||
+        ((arg1->z < (arg0->stat.unkC - 50.0f))) || ((arg0->stat.unk18 + 50.0f) < arg1->z)) {
+        return 0;
+    }
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C614.s")
+f32 func_8003992C(s32, CollisionContext*, u16, CollisionPoly**, Vec3f*, s32, f32, f32);
+typedef struct struct_8003FDDC {
+    /* 0x00 */ GlobalContext* unk0;
+    /* 0x04 */ CollisionContext* unk4; /* inferred */
+    /* 0x08 */ s16 unk8;               /* inferred */
+    /* 0x0A */ char padA[2];
+    /* 0x0C */ CollisionPoly** unkC; /* inferred */
+    /* 0x10 */ f32 unk10;            /* inferred */
+    /* 0x14 */ Vec3f* unk14;         /* inferred */
+    /* 0x18 */ void* unk18;          /* inferred */
+    /* 0x1C */ Actor* unk1C;         /* inferred */
+    /* 0x20 */ s32 unk20;            /* inferred */
+    /* 0x24 */ f32 unk24;            /* inferred */
+    /* 0x28 */ char pad28[0xC];      /* maybe part of unk24[4]? */
+} struct_8003FDDC;                   /* size = 0x34 ? */
+f32 func_8003FDDC(struct_8003FDDC*);
+struct _m2c_stack_func_8003C614 {
+    /* 0x00 */ char pad0[0x6C];
+    /* 0x6C */ struct_8003FDDC sp6C;
+    /* 0xA0 */ Vec3f spA0; /* inferred */
+    /* 0xAC */ char padAC[0xC];
+};
+f32 func_8003C614(GlobalContext* arg0, CollisionContext* arg1, u16 arg2, CollisionPoly** arg3, UNK_TYPE* arg4,
+                  Vec3f* arg5, Actor* arg6, s32 arg7, f32 arg8) {
+    f32 temp_fv0_2;
+    f32 var_fs1;
+    s32 temp_v0;
+    Vec3f spA0;
+    struct_8003FDDC sp6C;
+    void* temp_s5;
+
+    *arg4 = 0x32;
+    *arg3 = NULL;
+    temp_s5 = arg1->stat.unk40;
+    spA0 = *arg5;
+    var_fs1 = -32000.0f;
+    while (true) {
+        if (!(spA0.y < arg1->stat.unk8)) {
+            if ((func_80038600(&spA0, "../z_bgcheck.c", 0x113A) != 0) && (arg6 != NULL)) {
+                osSyncPrintf("こいつ,pself_actor->name %d\n", arg6->id);
+            }
+            temp_v0 = func_8003AD00(arg1, temp_s5, &spA0);
+            if (temp_v0 == 0) {
+                spA0.y -= arg1->stat.unk2C;
+                continue;
+            }
+            var_fs1 = func_8003992C(temp_v0, arg1, arg2, arg3, arg5, arg7, arg8, -32000.0f);
+            if (!(var_fs1 > -32000.0f)) {
+                spA0.y -= arg1->stat.unk2C;
+                continue;
+            }
+        }
+        break;
+    }
+    sp6C.unk4 = arg1;
+    sp6C.unk8 = arg2;
+    sp6C.unk10 = var_fs1;
+    sp6C.unk14 = arg5;
+    sp6C.unk1C = arg6;
+    sp6C.unk20 = arg7;
+    sp6C.unk24 = arg8;
+    sp6C.unk0 = arg0;
+    sp6C.unkC = arg3;
+    sp6C.unk18 = arg4;
+    temp_fv0_2 = func_8003FDDC(&sp6C);
+    if (var_fs1 < temp_fv0_2) {
+        var_fs1 = temp_fv0_2;
+    }
+    if ((var_fs1 != -32000.0f) && (func_80041EC8(arg1, *arg3, *arg4) != 0)) {
+        var_fs1 -= 1.0f;
+    }
+    return var_fs1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C834.s")
 
-f32 func_8003C614(GlobalContext*, CollisionContext*, UNK_TYPE, CollisionPoly**, UNK_PTR, Vec3f*, Actor*, s32, f32);
 f32 func_8003C890(CollisionContext* arg0, CollisionPoly** arg1, Vec3f* arg2) {
     UNK_TYPE sp34;
 
@@ -816,7 +904,6 @@ f32 func_8003CCA4(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Vec3f
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CD70.s")
 
-s32 func_80038600(Vec3f*, char*, s32);
 s32 func_8003D7F0(CollisionContext*, u16, UNK_PTR, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, s32*, Actor*, f32, s32);
 s32 func_80039AEC(UNK_PTR, CollisionContext*, u16, Vec3f*, f32*, UNK_PTR, f32, CollisionPoly**);
 s32 func_8003C55C(CollisionContext*, Vec3f*);
