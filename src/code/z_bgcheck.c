@@ -259,9 +259,40 @@ void func_8003965C(struct_8003BB18_arg2* arg0, CollisionContext* arg1, Collision
     func_80039448(arg1, &arg0->unk2, arg2, arg3, arg4);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800396F0.s")
+// f32 func_800396F0(f32, CollisionContext *, u16, s32, Vec3f *, f32, f32, s32);
+f32 func_800396F0(CollisionContext* arg0, u16 arg1, u16* arg2, CollisionPoly** arg3, Vec3f* arg4, f32 arg5, f32 arg6,
+                  s32 arg7);
+#if 0
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003992C.s")
+#else
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800396F0.s")
+#endif
+
+f32 func_8003992C(UNK_PTR arg0, CollisionContext* arg1, u16 arg2, CollisionPoly** arg3, Vec3f* arg4, s32 arg5, f32 arg6,
+                  f32 arg7) {
+    f32 var_fv1;
+    s32 var_v0;
+
+    var_fv1 = arg7;
+    if (arg5 & 4) {
+        var_fv1 = func_800396F0(arg1, arg2, (u16*)arg0, arg3, arg4, arg7, arg6, 0);
+    }
+    if ((arg5 & 2) || (arg5 & 8)) {
+        var_v0 = 0;
+        if (arg5 & 0x10) {
+            var_v0 = 1;
+        }
+        var_fv1 = func_800396F0(arg1, arg2, (u16*)((char*)arg0 + 2), arg3, arg4, var_fv1, arg6, var_v0);
+    }
+    if (arg5 & 1) {
+        var_v0 = 0;
+        if (arg5 & 0x10) {
+            var_v0 = 1;
+        }
+        var_fv1 = func_800396F0(arg1, arg2, (u16*)((char*)arg0 + 4), arg3, arg4, var_fv1, arg6, var_v0);
+    }
+    return var_fv1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80039A3C.s")
 
@@ -775,8 +806,7 @@ s32 func_8003C55C(CollisionContext* arg0, Vec3f* arg1) {
     return 1;
 }
 
-s32 func_8003AD00(CollisionContext*, UNK_PTR, Vec3f*);
-f32 func_8003992C(s32, CollisionContext*, u16, CollisionPoly**, Vec3f*, s32, f32, f32);
+UNK_PTR func_8003AD00(CollisionContext*, UNK_PTR, Vec3f*);
 typedef struct struct_8003FDDC {
     /* 0x00 */ GlobalContext* unk0;
     /* 0x04 */ CollisionContext* unk4; /* inferred */
@@ -797,7 +827,7 @@ f32 func_8003C614(GlobalContext* arg0, CollisionContext* arg1, u16 arg2, Collisi
                   Vec3f* arg5, Actor* arg6, s32 arg7, f32 arg8) {
     f32 temp_fv0_2;
     f32 var_fs1;
-    s32 temp_v0;
+    UNK_PTR temp_v0;
     Vec3f spA0;
     struct_8003FDDC sp6C;
     UNK_PTR temp_s5;
