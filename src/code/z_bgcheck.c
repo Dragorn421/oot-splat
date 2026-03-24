@@ -1687,9 +1687,20 @@ void func_8003E530(ActorMeshTransform* arg0) {
     arg0->rot.x = temp_v0;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E568.s")
+void func_8003E568(ActorMeshTransform* arg0, Vec3f* arg1, ActorShape* arg2, Vec3f* arg3) {
+    arg0->scale = *arg1;
+    arg0->rot = arg2->rot;
+    arg0->pos = *arg3;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E5B4.s")
+s32 func_8003E5B4(ActorMeshTransform* arg0, ActorMeshTransform* arg1) {
+    if ((arg0->scale.x != arg1->scale.x) || (arg0->scale.y != arg1->scale.y) || (arg0->scale.z != arg1->scale.z) ||
+        (arg0->rot.x != arg1->rot.x) || (arg0->rot.y != arg1->rot.y) || (arg0->rot.z != arg1->rot.z) ||
+        (arg0->pos.x != arg1->pos.x) || (arg0->pos.y != arg1->pos.y) || (arg0->pos.z != arg1->pos.z)) {
+        return 0;
+    }
+    return 1;
+}
 
 void func_8003E688(ActorMesh_sub8* arg0) {
     func_8003871C(&arg0->unk2);
@@ -1735,7 +1746,10 @@ void func_8003E750(ActorMesh* arg0, Actor* arg1, CollisionHeader* arg2) {
     arg0->transform2.pos = arg1->posRot.pos;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E804.s")
+s32 func_8003E5B4(ActorMeshTransform*, ActorMeshTransform*);
+s32 func_8003E804(ActorMesh* arg0) {
+    return func_8003E5B4(&arg0->transform1, &arg0->transform2);
+}
 
 void func_8003E82C(void* arg0) {
     *(s32*)arg0 = 0;
@@ -2241,9 +2255,6 @@ f32 func_8003FDDC(struct_8003FDDC* arg0) {
     }
     return var_fs0;
 }
-/*
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003FDDC.s")
-*/
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80040284.s")
 
@@ -2299,7 +2310,9 @@ u32 func_800419B0(CollisionContext* arg0, CollisionPoly* arg1, s32 arg2, s32 arg
     return temp_v1[(u16)arg1->unk0].data[arg3];
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041A28.s")
+s32 func_80041A28(CollisionContext* colCtx, CollisionPoly* arg1, u32 arg2) {
+    return func_800419B0(colCtx, arg1, (s32)arg2, 0) & 0xFF;
+}
 
 s32 func_80041A4C(CollisionContext* colCtx, s32 camDataIdx, s32 arg2) {
     CollisionHeader* temp_v0;
