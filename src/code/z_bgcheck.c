@@ -2325,9 +2325,67 @@ s32 func_800427B4(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f* 
                                              arg3, arg4);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042868.s")
+typedef struct struct_80042868 {
+    s16 unk0;
+    u16 unk2;
+} struct_80042868;
+void func_80042868(GlobalContext* arg0, CollisionContext* arg1, DynaCollisionContext* arg2, u16* arg3, u8 arg4, u8 arg5,
+                   u8 arg6) {
+    f32 temp_fa0;
+    f32 temp_fv0;
+    f32 temp_fv1;
+    Vec3f sp88;
+    Vec3f sp7C;
+    Vec3f sp70;
+    CollisionPoly* temp_s0;
+    struct_80042868* var_s2;
+    s16 v;
+    u16 new_var;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042B2C.s")
+    new_var = *arg3;
+    if (new_var == 0xFFFF) {
+        return;
+    }
+    var_s2 = &((struct_80042868*)arg2->unk13F8.unk0)[new_var];
+    while (true) {
+        v = var_s2->unk0;
+        temp_s0 = &((CollisionPoly*)arg2->unk13F0)[(v)];
+        func_800388A8(&arg2->unk13F4[(u32)(temp_s0->unk2_arr[0] & 0x1FFF)], &sp88);
+        func_800388A8(&arg2->unk13F4[(u32)(temp_s0->unk2_arr[1] & 0x1FFF)], &sp7C);
+        func_800388A8(&arg2->unk13F4[(u32)temp_s0->unk2_arr[2]], &sp70);
+        if (gGameInfo->data[0x73A] != 0) {
+            temp_fv0 = (f32)temp_s0->norm.x * 0.00003051851f;
+            temp_fv1 = (f32)temp_s0->norm.y * 0.00003051851f;
+            temp_fa0 = (f32)temp_s0->norm.z * 0.00003051851f;
+            sp88.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
+            sp88.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
+            sp88.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
+            sp7C.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
+            sp7C.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
+            sp7C.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
+            sp70.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
+            sp70.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
+            sp70.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
+        }
+        func_8005B2AC(arg0->state.gfxCtx, &sp88, &sp7C, &sp70, arg4, arg5, arg6);
+        if (var_s2->unk2 == 0xFFFF) {
+            break;
+        }
+        var_s2 = (struct_80042868*)arg2->unk13F8.unk0 + (var_s2->unk2);
+    }
+}
+
+void func_80042B2C(GlobalContext* arg0, CollisionContext* arg1, s32 arg2) {
+    if (gGameInfo->data[0x735] != 0) {
+        func_80042868(arg0, arg1, &arg1->dyna, &arg1->dyna.actorMeshArr[arg2].unk8.unk2, 0xFF, 0, 0);
+    }
+    if (gGameInfo->data[0x736] != 0) {
+        func_80042868(arg0, arg1, &arg1->dyna, &arg1->dyna.actorMeshArr[arg2].unk8.unk4, 0, 0xFF, 0);
+    }
+    if (gGameInfo->data[0x737] != 0) {
+        func_80042868(arg0, arg1, &arg1->dyna, &arg1->dyna.actorMeshArr[arg2].unk8.unk6, 0, 0, 0xFF);
+    }
+}
 
 void func_80042B2C(GlobalContext*, CollisionContext*, s32);
 void func_80042C3C(GlobalContext* arg0, CollisionContext* arg1) {
