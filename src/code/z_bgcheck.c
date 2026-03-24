@@ -2282,20 +2282,99 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041978.s")
 
-u32 func_800419B0(CollisionContext*, CollisionPoly*, s32, s32);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800419B0.s")
+u32 func_800419B0(CollisionContext* arg0, CollisionPoly* arg1, s32 arg2, s32 arg3) {
+    CollisionHeader* temp_v0;
+    struct {
+        u32 data[2];
+    }* temp_v1;
+
+    temp_v0 = T_BGCheck_getBGDataInfo(arg0, arg2);
+    if ((temp_v0 == NULL) || (arg1 == NULL)) {
+        return 0U;
+    }
+    temp_v1 = temp_v0->polygonTypes;
+    if ((temp_v1) == SEGMENTED_TO_VIRTUAL(NULL)) {
+        return 0U;
+    }
+    return temp_v1[(u16)arg1->unk0].data[arg3];
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041A28.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041A4C.s")
+s32 func_80041A4C(CollisionContext* colCtx, s32 camDataIdx, s32 arg2) {
+    CollisionHeader* temp_v0;
+    struct {
+        u16 unk0;
+        u16 unk2;
+        char pad4[4];
+    }* v;
+    u16 v2;
+
+    temp_v0 = T_BGCheck_getBGDataInfo(colCtx, arg2);
+    if (temp_v0 == NULL) {
+        return 0;
+    }
+    v = temp_v0->cameraData;
+    v2 = v[camDataIdx].unk0;
+    return v2;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041A94.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041B24.s")
+u16 func_80041B24(CollisionContext* arg0, s32 arg1, s32 arg2) {
+    CollisionHeader* temp_v0;
+    struct {
+        char pad0[2];
+        u16 unk2;
+        char pad4[4];
+    }* temp_v1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041B80.s")
+    temp_v0 = T_BGCheck_getBGDataInfo(arg0, arg2);
+    if (temp_v0 == NULL) {
+        return 0U;
+    }
+    temp_v1 = temp_v0->cameraData;
+    if ((temp_v1) == SEGMENTED_TO_VIRTUAL(NULL)) {
+        return 0U;
+    }
+    return temp_v1[arg1].unk2;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041C10.s")
+u16 func_80041B24(CollisionContext*, s32, s32);
+u16 func_80041B80(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) {
+    CollisionHeader* temp_v0;
+    void* v1;
+    void* v2;
+
+    temp_v0 = T_BGCheck_getBGDataInfo(colCtx, bgId);
+    if (temp_v0 == NULL) {
+        return 0U;
+    }
+    v1 = temp_v0->cameraData;
+    if (v1 == SEGMENTED_TO_VIRTUAL(NULL)) {
+        return 0U;
+    }
+    v2 = temp_v0->polygonTypes;
+    if (v2 == SEGMENTED_TO_VIRTUAL(NULL)) {
+        return 0U;
+    }
+    return func_80041B24(colCtx, func_80041A28(colCtx, poly, (u32)bgId), bgId);
+}
+
+Vec3s* func_80041C10(CollisionContext* colCtx, s32 arg1, s32 arg2) {
+    CollisionHeader* temp_v0;
+    void* temp_a0;
+
+    temp_v0 = T_BGCheck_getBGDataInfo(colCtx, arg2);
+    if (temp_v0 == NULL) {
+        return NULL;
+    }
+    temp_a0 = temp_v0->cameraData;
+    if (temp_a0 == SEGMENTED_TO_VIRTUAL(NULL)) {
+        return NULL;
+    }
+    return SEGMENTED_TO_VIRTUAL(((void**)((char*)temp_a0 + (arg1 * 8)))[1]);
+}
 
 Vec3s* func_80041C98(CollisionContext* colCtx, CollisionPoly* arg1, s32 arg2) {
     CollisionHeader* temp_v0;
