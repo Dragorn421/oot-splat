@@ -247,6 +247,7 @@ typedef struct {
 typedef struct struct_800387FC {
     UNK_TYPE4 unk0;
     UNK_TYPE4 unk4;
+    UNK_TYPE4 unk8;
 } struct_800387FC;
 
 typedef struct {
@@ -258,7 +259,6 @@ typedef struct {
     /* 0x13F0 */ UNK_TYPE unk13F0;
     /* 0x13F4 */ Vec3s* unk13F4;
     /* 0x13F8 */ struct_800387FC unk13F8;
-    /* 0x1400 */ char pad1400[0x4];
     /* 0x1404 */ s32 unk1404;                       /* inferred */
     /* 0x1408 */ s32 unk1408;                       /* inferred */
     /* 0x140C */ s32 unk140C;                       /* inferred */

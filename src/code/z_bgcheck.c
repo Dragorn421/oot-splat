@@ -47,7 +47,19 @@ void func_80038728(struct_8003E398* arg0, u16* arg1, s16* arg2) {
     *arg1 = sp1E;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038780.s")
+u16 func_80038878(struct_800387FC*);
+void func_80038780(struct_800387FC* arg0, u16* arg1, s16* arg2) {
+    u16 sp1E;
+    u16 temp_v0;
+
+    temp_v0 = func_80038878(arg0);
+    sp1E = temp_v0;
+    if (temp_v0 == 0xFFFF) {
+        __assert("new_node != SS_NULL", "../z_bgcheck.c", 0x6F0);
+    }
+    func_80038708((struct_80039448*)arg0->unk0 + (sp1E), arg2, *arg1);
+    *arg1 = sp1E;
+}
 
 void func_800387FC(GlobalContext* arg0, struct_800387FC* arg1) {
     arg1->unk0 = 0;
@@ -60,7 +72,16 @@ void func_80038870(struct_800387FC* arg0) {
     arg0->unk4 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80038878.s")
+u16 func_80038878(struct_800387FC* arg0) {
+    u16 temp_v1;
+
+    temp_v1 = arg0->unk4;
+    arg0->unk4 += 1;
+    if (temp_v1 >= arg0->unk8) {
+        return 0xFFFFU;
+    }
+    return (u16)temp_v1;
+}
 
 void func_800388A8(Vec3s* arg0, Vec3f* arg1) {
     arg1->x = (f32)arg0->x;
@@ -68,7 +89,11 @@ void func_800388A8(Vec3s* arg0, Vec3f* arg1) {
     arg1->z = (f32)arg0->z;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800388E8.s")
+void func_800388E8(Vec3s* arg0, Vec3f* arg1) {
+    arg0->x = (s16)(s32)arg1->x;
+    arg0->y = (s16)(s32)arg1->y;
+    arg0->z = (s16)(s32)arg1->z;
+}
 
 s16 func_80038924(CollisionPoly* arg0, Vec3s* arg1) {
     s32 i;
@@ -428,8 +453,6 @@ typedef struct struct_80039AEC {
     char pad0[2];
     u16 unk2;
 } struct_80039AEC;
-s32 func_80039AEC(struct_80039AEC* arg0, CollisionContext* arg1, u16 arg2, Vec3f* arg3, f32* arg4, Vec3f* arg5,
-                  f32 arg6, CollisionPoly** arg7);
 s32 func_80039AEC(struct_80039AEC* arg0, CollisionContext* arg1, u16 arg2, Vec3f* arg3, f32* arg4, Vec3f* arg5,
                   f32 arg6, CollisionPoly** arg7) {
     Vec3f spFC;
@@ -2180,7 +2203,22 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042108.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8004213C.s")
+extern WaterBox D_80119EAC;
+extern f32 D_80119EBC;
+extern f32 D_80119EC0;
+extern f32 D_80119EC4;
+extern f32 D_80119EC8;
+extern f32 D_80119ECC;
+extern f32 D_80119ED0;
+s32 func_8004213C(GlobalContext* arg0, CollisionContext* arg1, f32 arg2, f32 arg3, f32* arg4, WaterBox** arg5) {
+    if ((arg0->sceneNum == 0x58) && (D_80119EBC < arg2) && (arg2 < D_80119EC8) && (D_80119EC0 < *arg4) &&
+        (*arg4 < D_80119ECC) && (D_80119EC4 < arg3) && (arg3 < D_80119ED0)) {
+        *arg5 = &D_80119EAC;
+        *arg4 = (f32)D_80119EAC.ySurface;
+        return 1;
+    }
+    return func_80042244(arg0, arg1, arg2, arg3, arg4, arg5);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042244.s")
 
@@ -2192,7 +2230,19 @@ u32 func_80042538(CollisionContext* colCtx, WaterBox* waterBox) {
     return v;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042548.s")
+u16 func_80042548(CollisionContext* colCtx, WaterBox* waterBox) {
+    void* temp_a0;
+    s32 v;
+    u16 new_var;
+
+    v = func_80042538(colCtx, waterBox);
+    temp_a0 = colCtx->stat.colHeader->cameraData;
+    if ((temp_a0) == SEGMENTED_TO_VIRTUAL(NULL)) {
+        return 0U;
+    }
+    new_var = *(u16*)((char*)temp_a0 + (v * 8));
+    return new_var;
+}
 
 u32 func_8004259C(CollisionContext* colCtx, WaterBox* waterBox) {
     u32 v = (waterBox->properties >> 8) & 0x1F;
