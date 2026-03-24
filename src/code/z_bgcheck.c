@@ -66,7 +66,17 @@ void func_800387FC(GlobalContext* arg0, struct_800387FC* arg1) {
     arg1->unk4 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003880C.s")
+void func_8003880C(GlobalContext* arg0, struct_800387FC* arg1, s32 arg2) {
+    UNK_PTR temp_v0;
+
+    temp_v0 = THA_AllocEndAlign(&arg0->state.tha, arg2 * 4, -2U);
+    *(UNK_PTR*)&arg1->unk0 = temp_v0;
+    if (temp_v0 == 0) {
+        __assert("psst->tbl != NULL", "../z_bgcheck.c", 0x713);
+    }
+    arg1->unk8 = arg2;
+    arg1->unk4 = 0;
+}
 
 void func_80038870(struct_800387FC* arg0) {
     arg0->unk4 = 0;
@@ -1755,13 +1765,29 @@ void func_8003E82C(void* arg0) {
     *(s32*)arg0 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E834.s")
+void func_8003E834(GlobalContext* arg0, UNK_PTR* arg1, s32 arg2) {
+    UNK_PTR temp_v0;
+
+    temp_v0 = THA_AllocEndAlign(&arg0->state.tha, arg2 * 0x10, -2U);
+    *arg1 = temp_v0;
+    if (temp_v0 == 0) {
+        __assert("ptbl->pbuf != NULL", "../z_bgcheck.c", 0x1867);
+    }
+}
 
 void func_8003E888(void* arg0) {
     *(s32*)arg0 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E890.s")
+void func_8003E890(GlobalContext* arg0, Vec3s** arg1, s32 arg2) {
+    Vec3s* temp_v0;
+
+    temp_v0 = THA_AllocEndAlign(&arg0->state.tha, arg2 * 6, -2U);
+    *arg1 = temp_v0;
+    if (temp_v0 == NULL) {
+        __assert("ptbl->pbuf != NULL", "../z_bgcheck.c", 0x1885);
+    }
+}
 
 void func_8003E8EC(GlobalContext* arg0, ActorMesh* arg1) {
     arg1->transform1 = arg1->transform2;
@@ -1783,7 +1809,22 @@ void func_8003E954(GlobalContext* arg0, DynaCollisionContext* arg1) {
     func_800387FC(arg0, &arg1->unk13F8);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003E9A0.s")
+void func_8003880C(GlobalContext*, struct_800387FC*, s32);
+void func_8003E890(GlobalContext*, Vec3s**, s32);
+void func_8003E9A0(GlobalContext* arg0, DynaCollisionContext* arg1) {
+    s32 var_s0;
+
+    for (var_s0 = 0; var_s0 < 50; var_s0++) {
+        func_8003E6EC(arg0, &arg1->actorMeshArr[var_s0]);
+        arg1->flags[var_s0] = 0;
+    }
+    func_8003E82C(&arg1->unk13F0);
+    func_8003E834(arg0, (UNK_PTR*)&arg1->unk13F0, arg1->unk1408);
+    func_8003E888(&arg1->unk13F4);
+    func_8003E890(arg0, &arg1->unk13F4, arg1->unk140C);
+    func_800387FC(arg0, &arg1->unk13F8);
+    func_8003880C(arg0, &arg1->unk13F8, arg1->unk1404);
+}
 
 u32 DynaPolyInfo_RegisterActor(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx, Actor* actor,
                                CollisionHeader* arg3) {
