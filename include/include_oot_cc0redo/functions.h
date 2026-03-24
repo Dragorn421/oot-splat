@@ -661,7 +661,7 @@ u16 func_80041B80(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 Vec3s* func_80041C10(CollisionContext* colCtx, s32, s32);
 Vec3s* func_80041C98(CollisionContext* colCtx, CollisionPoly*, s32);
 u32 func_80041D4C(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
-s32 func_80041E4C(CollisionContext* colCtx, CollisionPoly* wallPoly, u8 source);
+s32 func_80041E4C(CollisionContext* colCtx, CollisionPoly* wallPoly, s32 source);
 s32 func_80041EA4(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source);
 // ? func_80041D94(?);
 s32 func_80041DB8(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source);
