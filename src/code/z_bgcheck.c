@@ -1361,7 +1361,7 @@ f32 func_8003CCA4(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Vec3f
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CD70.s")
 
-s32 func_8003D7F0(CollisionContext*, u16, UNK_PTR, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, s32*, Actor*, f32, s32);
+s32 func_8003D7F0(CollisionContext*, u16, u16, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, s32*, Actor*, f32, s32);
 s32 func_8003C55C(CollisionContext*, Vec3f*);
 s32 func_800409A8(CollisionContext*, u16, Vec3f*, f32*, Vec3f*, f32, CollisionPoly**, s32*, Actor*);
 s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4, f32 arg5,
@@ -1396,7 +1396,7 @@ s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Ve
     }
     if (((spCC != 0.0f) || (spC4 != 0.0f)) && !((u8)arg10 & 1)) {
         if ((arg9 + spC8) < 5.0f) {
-            spD4 = func_8003D7F0(arg0, (u16)arg1, NULL, arg4, arg3, &spA8, &spD0, &spA4, arg8, 1.0f, 0x1B);
+            spD4 = func_8003D7F0(arg0, (u16)arg1, 0, arg4, arg3, &spA8, &spD0, &spA4, arg8, 1.0f, 0x1B);
             if (spD4 != 0) {
                 f32 temp_fa0_ny = (f32)spD0->norm.y * 0.00003051851f;
 
@@ -1436,7 +1436,7 @@ s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Ve
             sp88.y += arg9;
             sp7C = *arg4;
             sp7C.y = sp88.y;
-            spD4 = func_8003D7F0(arg0, (u16)arg1, NULL, &sp7C, &sp88, &spA8, &spD0, &spA4, arg8, 1.0f, var_v0);
+            spD4 = func_8003D7F0(arg0, (u16)arg1, 0, &sp7C, &sp88, &spA8, &spD0, &spA4, arg8, 1.0f, var_v0);
             if (spD4 != 0) {
                 f32 nx = (f32)spD0->norm.x * 0.00003051851f;
                 f32 nz = (f32)spD0->norm.z * 0.00003051851f;
@@ -1444,7 +1444,7 @@ s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Ve
 
                 if (!(fabsf(nxz) < 0.008f)) {
                     //! FAKE
-                    temp_fv0 = (0, arg5) * (1.0f / nxz);
+                    temp_fv0 = ((void)0, arg5) * (1.0f / nxz);
                     arg2->x = (temp_fv0 * nx) + spA8.x;
                     arg2->z = (temp_fv0 * nz) + spA8.z;
                     *arg6 = spD0;
@@ -1472,7 +1472,7 @@ s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Ve
         Vec3f sp5C;
         s32 sp58;
 
-        if ((func_8003D7F0(arg0, (u16)arg1, NULL, arg4, arg2, &sp5C, &spD0, &sp58, arg8, 1.0f, 9) != 0)) {
+        if ((func_8003D7F0(arg0, (u16)arg1, 0, arg4, arg2, &sp5C, &spD0, &sp58, arg8, 1.0f, 9) != 0)) {
             f32 nx = (f32)spD0->norm.x * 0.00003051851f;
             f32 nz = (f32)spD0->norm.z * 0.00003051851f;
             f32 nxz;
@@ -1480,7 +1480,7 @@ s32 func_8003CDD4(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Ve
             nxz = sqrtf((nx * nx) + (nz * nz));
             if (!(fabsf(nxz) < 0.008f)) {
                 //! FAKE
-                temp_fv0 = (0, arg5) * (1.0f / nxz);
+                temp_fv0 = ((void)0, arg5) * (1.0f / nxz);
                 arg2->x = (temp_fv0 * nx) + sp5C.x;
                 arg2->z = (temp_fv0 * nz) + sp5C.z;
                 *arg6 = spD0;
@@ -1549,7 +1549,7 @@ s32 func_8003D7A0(CollisionContext* arg0, f32* arg1, Vec3f* arg2, f32 arg3, void
 s32 func_8003A7D8(void*, CollisionContext*, u16, u16, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, f32, f32*, s32);
 s32 func_80041240(CollisionContext*, u16, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, f32*, s32*, Actor*, f32, s32);
 void func_80041978(struct_8003E398*, s32);
-s32 func_8003D7F0(CollisionContext* arg0, u16 arg1, void* arg2, Vec3f* arg3, Vec3f* arg4, Vec3f* arg5,
+s32 func_8003D7F0(CollisionContext* arg0, u16 arg1, u16 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f* arg5,
                   CollisionPoly** arg6, s32* arg7, Actor* arg8, f32 arg9, s32 arg10) {
     s32 temp_lo;
     char* var_a3_spD8;
@@ -1662,7 +1662,7 @@ s32 func_8003DD28(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 
 s32 func_8003DD6C(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, s32 arg5,
                   s32 arg6, s32 arg7, s32 arg8, void* arg9) {
-    return func_8003D7F0(arg0, 1U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
+    return func_8003D7F0(arg0, 1U, 0, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
                          func_8003DD28(arg5, arg6, arg7, arg8, 1));
 }
 
@@ -1670,19 +1670,19 @@ s32 func_8003DD6C(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
 
 s32 func_8003DE84(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
                   u32 arg6, u32 arg7, u32 arg8, u32* arg9) {
-    return func_8003D7F0(arg0, 2U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
+    return func_8003D7F0(arg0, 2U, 0, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
                          func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
 }
 
 s32 func_8003DF10(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
                   u32 arg6, u32 arg7, u32 arg8, u32* arg9, Actor* arg10) {
-    return func_8003D7F0(arg0, 2U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, arg10, 1.0f,
+    return func_8003D7F0(arg0, 2U, 0, arg1, arg2, arg3, arg4, (s32*)arg9, arg10, 1.0f,
                          func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
 }
 
 s32 func_8003DFA0(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
                   u32 arg6, u32 arg7, u32 arg8, u32* arg9, Actor* arg10, f32 arg11) {
-    return func_8003D7F0(arg0, 2U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, arg10, arg11,
+    return func_8003D7F0(arg0, 2U, 0, arg1, arg2, arg3, arg4, (s32*)arg9, arg10, arg11,
                          func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
 }
 
@@ -1694,13 +1694,13 @@ s32 func_8003E0FC(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
                   u32 arg6, u32 arg7, u32 arg8) {
     s32 sp3C;
 
-    return func_8003D7F0(arg0, 0U, NULL, arg1, arg2, arg3, arg4, &sp3C, NULL, 1.0f,
+    return func_8003D7F0(arg0, 0U, 0, arg1, arg2, arg3, arg4, &sp3C, NULL, 1.0f,
                          func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
 }
 
 s32 func_8003E188(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
                   u32 arg6, u32 arg7, u32 arg8, f32* arg9) {
-    return func_8003D7F0(arg0, 0U, NULL, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
+    return func_8003D7F0(arg0, 0U, 0, arg1, arg2, arg3, arg4, (s32*)arg9, NULL, 1.0f,
                          func_8003DD28((s32)arg5, (s32)arg6, (s32)arg7, (s32)arg8, 1));
 }
 
@@ -2437,9 +2437,48 @@ s32 func_800409A8(CollisionContext* arg0, u16 arg1, Vec3f* arg2, f32* arg3, Vec3
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800413F8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041510.s")
+s32 func_800413F8(CollisionContext* arg0, s32 arg1, void** arg2, /*?*/ Vec3f* arg3, f32 arg4, u16* arg5);
+s32 func_80041510(CollisionContext* arg0, u16 arg1, s32* arg2, Vec3f* arg3, f32 arg4, s32 arg5, u16 arg6) {
+    if (!(arg6 & 1)) {
+        if (func_800413F8(arg0, (s32)arg1, (void**)arg2, arg3, arg4, &arg0->dyna.actorMeshArr[arg5].unk8.unk2) != 0) {
+            return 1;
+        }
+    }
+    if (!(arg6 & 2)) {
+        if (func_800413F8(arg0, (s32)arg1, (void**)arg2, arg3, arg4, &arg0->dyna.actorMeshArr[arg5].unk8.unk4) != 0) {
+            return 1;
+        }
+    }
+    if (!(arg6 & 4) &&
+        (func_800413F8(arg0, (s32)arg1, (void**)arg2, arg3, arg4, &arg0->dyna.actorMeshArr[arg5].unk8.unk6) != 0)) {
+        return 1;
+    }
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041648.s")
+s32 func_80041648(CollisionContext* arg0, u16 arg1, s32* arg2, s32* arg3, Vec3f* arg4, f32 arg5, Actor* arg6,
+                  u16 arg7) {
+    s32 var_s0;
+    Sphere16 sp64;
+
+    for (var_s0 = 0; var_s0 < 50; var_s0++) {
+        if (!(arg0->dyna.flags[var_s0] & 1)) {
+            continue;
+        }
+        if (arg6 == arg0->dyna.actorMeshArr[var_s0].actor) {
+            continue;
+        }
+        sp64.center.x = (s16)(s32)arg4->x;
+        sp64.center.y = (s16)(s32)arg4->y;
+        sp64.center.z = (s16)(s32)arg4->z;
+        sp64.radius = (s16)(s32)arg5;
+        if ((Math3D_SphVsSph(&sp64, (Sphere16*)&arg0->dyna.actorMeshArr[var_s0].unk54) != 0) &&
+            (func_80041510(arg0, arg1, arg2, arg4, arg5, var_s0, arg7) != 0)) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 void func_800417A0(CollisionHeader* arg0) {
     arg0->vertexArray = SEGMENTED_TO_VIRTUAL(arg0->vertexArray);
