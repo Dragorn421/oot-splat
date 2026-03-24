@@ -1199,7 +1199,22 @@ void func_8003C078(CollisionContext* arg0, GlobalContext* arg1, CollisionHeader*
     func_8003E9A0(arg1, &arg0->dyna);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/T_BGCheck_getBGDataInfo.s")
+CollisionHeader* T_BGCheck_getBGDataInfo(CollisionContext* arg0, s32 arg1) {
+    if (arg1 == 0x32) {
+        return arg0->stat.colHeader;
+    }
+    if ((arg1 < 0) || (arg1 >= 0x33)) {
+        return 0;
+    }
+    if (!(arg0->dyna.flags[arg1] & 1)) {
+        osSyncPrintf("\x1b[43;30m");
+        //! @bug arg1 not passed to printf
+        osSyncPrintf("T_BGCheck_getBGDataInfo():そのbg_actor_indexは使われておりません。index=%d\n");
+        osSyncPrintf("\x1b[m");
+        return 0;
+    }
+    return arg0->dyna.actorMeshArr[arg1].unk_04;
+}
 
 s32 func_8003C55C(CollisionContext* arg0, Vec3f* arg1) {
     if ((arg1->x < (arg0->stat.unk4 - 50.0f)) || ((arg0->stat.unk10 + 50.0f) < arg1->x) ||
@@ -2267,6 +2282,7 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041978.s")
 
+u32 func_800419B0(CollisionContext*, CollisionPoly*, s32, s32);
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800419B0.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041A28.s")
@@ -2321,13 +2337,33 @@ void DynaPolyInfo_Alloc(CollisionHeader* arg0, CollisionHeader** arg1) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8004200C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042048.s")
+s32 func_80042048(CollisionContext* arg0, CollisionPoly* arg1, s32 arg2) {
+    u32 v;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042084.s")
+    if (T_BGCheck_getBGDataInfo(arg0, arg2) == 0) {
+        return 1;
+    }
+    v = (arg1->unk2 & 0x8000);
+    return v != 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800420C0.s")
+s32 func_80042084(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source) {
+    u32 v;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800420E4.s")
+    if (T_BGCheck_getBGDataInfo(colCtx, source) == 0) {
+        return 1;
+    }
+    v = (floorPoly->unk2_arr[1] & 0x2000);
+    return v != 0;
+}
+
+s32 func_800420C0(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source) {
+    return (func_800419B0(colCtx, floorPoly, source, 1) >> 0x12) & 7;
+}
+
+s32 func_800420E4(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source) {
+    return (func_800419B0(colCtx, floorPoly, source, 1) >> 0x15) & 0x3F;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80042108.s")
 
