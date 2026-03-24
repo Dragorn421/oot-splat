@@ -424,9 +424,198 @@ s32 func_80039A3C(CollisionContext* arg0, CollisionPoly* arg1, f32* arg2, f32* a
     return 0;
 }
 
-s32 func_80039AEC(UNK_PTR arg0, CollisionContext* arg1, u16 arg2, Vec3f* arg3, f32* arg4, Vec3f* arg5, f32 arg6,
-                  CollisionPoly** arg7);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80039AEC.s")
+typedef struct struct_80039AEC {
+    char pad0[2];
+    u16 unk2;
+} struct_80039AEC;
+s32 func_80039AEC(struct_80039AEC* arg0, CollisionContext* arg1, u16 arg2, Vec3f* arg3, f32* arg4, Vec3f* arg5,
+                  f32 arg6, CollisionPoly** arg7);
+s32 func_80039AEC(struct_80039AEC* arg0, CollisionContext* arg1, u16 arg2, Vec3f* arg3, f32* arg4, Vec3f* arg5,
+                  f32 arg6, CollisionPoly** arg7) {
+    Vec3f spFC;
+    CollisionHeader* temp_v0;
+    CollisionPoly* temp_s0;
+    Vec3s* temp_s2;
+    f32 spEC;
+    s32 spE8;
+    f32 temp_fs0_nxz;
+    CollisionPoly* spE0;
+    f32 temp_fs1_nx;
+    f32 temp_fs2_nz;
+    f32 temp_fs3_ny;
+    f32 temp_fv0_2;
+    f32 temp_fv0_3;
+    f32 temp_fv0_6;
+    f32 temp_fv1;
+    f32 temp_fv1_2;
+    f32 var_fa0_max;
+    f32 spB8;
+    f32 var_fa0_2;
+    f32 var_fv1_min;
+    f32 var_fv1_2;
+    struct_80039448* var_s1;
+    s16 v;
+    f32 sp9C;
+
+    spE8 = 0;
+    if (arg0->unk2 == 0xFFFF) {
+        return 0;
+    }
+    spFC = *arg5;
+    temp_v0 = arg1->stat.colHeader;
+    spE0 = (CollisionPoly*)temp_v0->polygonArray;
+    temp_s2 = temp_v0->vertexArray;
+    var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (arg0->unk2);
+    while (true) {
+        v = var_s1->unk0;
+        temp_s0 = &spE0[v];
+        if ((arg5->y < (f32)temp_s2[temp_s0->unk2_arr[0] & 0x1FFF].y) &&
+            (arg5->y < (f32)temp_s2[temp_s0->unk2_arr[1] & 0x1FFF].y) &&
+            (arg5->y < (f32)temp_s2[temp_s0->unk2_arr[2]].y)) {
+        } else {
+            temp_fs1_nx = (f32)temp_s0->norm.x * 0.00003051851f;
+            temp_fs3_ny = (f32)temp_s0->norm.y * 0.00003051851f;
+            temp_fs2_nz = (f32)temp_s0->norm.z * 0.00003051851f;
+            temp_fs0_nxz = sqrtf((temp_fs1_nx * temp_fs1_nx) + (temp_fs2_nz * temp_fs2_nz));
+            temp_fv0_2 = Math3D_DistPlaneToPos(temp_fs1_nx, temp_fs3_ny, temp_fs2_nz, (f32)temp_s0->dist, &spFC);
+            if ((arg6 < fabsf(temp_fv0_2)) || (temp_s0->unk2_arr[0] & ((arg2 & 7) << 0xD))) {
+                if (var_s1->unk2 == 0xFFFF) {
+                } else {
+                    var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                    continue;
+                }
+            } else {
+                if (fabsf(temp_fs0_nxz) < 0.008f) {
+                    __assert("!IS_ZERO(ac_size)", "../z_bgcheck.c", 0xB26);
+                }
+                sp9C = 1.0f / temp_fs0_nxz;
+                spB8 = fabsf(temp_fs2_nz) * sp9C;
+                if (spB8 < 0.4f) {
+                    if (var_s1->unk2 == 0xFFFF) {
+                    } else {
+                        var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                        continue;
+                    }
+                } else {
+                    temp_fv0_3 = (f32)temp_s2[temp_s0->unk2_arr[0] & 0x1FFF].z;
+                    var_fa0_max = var_fv1_min = temp_fv0_3;
+                    temp_fv0_3 = (f32)temp_s2[temp_s0->unk2_arr[1] & 0x1FFF].z;
+                    if (temp_fv0_3 < var_fv1_min) {
+                        var_fv1_min = temp_fv0_3;
+                    } else if (var_fa0_max < temp_fv0_3) {
+                        var_fa0_max = temp_fv0_3;
+                    }
+                    temp_fv0_3 = (f32)temp_s2[temp_s0->unk2_arr[2]].z;
+                    if (temp_fv0_3 < var_fv1_min) {
+                        var_fv1_min = temp_fv0_3;
+                    } else if (var_fa0_max < temp_fv0_3) {
+                        var_fa0_max = temp_fv0_3;
+                    }
+                    var_fv1_min -= arg6;
+                    var_fa0_max += arg6;
+                    if ((spFC.z < (var_fv1_min)) || ((var_fa0_max) < spFC.z)) {
+                        if (var_s1->unk2 == 0xFFFF) {
+                        } else {
+                            var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                            continue;
+                        }
+                    } else {
+                        if (func_80039000(temp_s0, temp_s2, spFC.x, arg5->y, &spEC) != 0) {
+                            temp_fv1 = spEC - spFC.z;
+                            if ((fabsf(temp_fv1) <= (arg6 / spB8)) && ((temp_fv1 * temp_fs2_nz) <= 4.0f)) {
+                                func_80039A3C(arg1, temp_s0, &spFC.x, &spFC.z, temp_fs1_nx, temp_fs3_ny, temp_fs2_nz,
+                                              sp9C, temp_fv0_2, arg6, arg7);
+                                spE8 = 1;
+                            }
+                        }
+                        if (var_s1->unk2 == 0xFFFF) {
+                        } else {
+                            var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    }
+    var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (arg0->unk2);
+    while (true) {
+        v = var_s1->unk0;
+        temp_s0 = &spE0[v];
+        if (!(arg5->y < (f32)temp_s2[temp_s0->unk2_arr[0] & 0x1FFF].y) ||
+            !(arg5->y < (f32)temp_s2[temp_s0->unk2_arr[1] & 0x1FFF].y) ||
+            !(arg5->y < (f32)temp_s2[temp_s0->unk2_arr[2]].y)) {
+            temp_fs1_nx = (f32)temp_s0->norm.x * 0.00003051851f;
+            temp_fs3_ny = (f32)temp_s0->norm.y * 0.00003051851f;
+            temp_fs2_nz = (f32)temp_s0->norm.z * 0.00003051851f;
+            temp_fs0_nxz = sqrtf((temp_fs1_nx * temp_fs1_nx) + (temp_fs2_nz * temp_fs2_nz));
+            temp_fv0_2 = Math3D_DistPlaneToPos(temp_fs1_nx, temp_fs3_ny, temp_fs2_nz, (f32)temp_s0->dist, &spFC);
+            if ((arg6 < fabsf(temp_fv0_2)) || (temp_s0->unk2_arr[0] & ((arg2 & 7) << 0xD))) {
+                if (var_s1->unk2 == 0xFFFF) {
+                } else {
+                    var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                    continue;
+                }
+            } else {
+                if (fabsf(temp_fs0_nxz) < 0.008f) {
+                    __assert("!IS_ZERO(ac_size)", "../z_bgcheck.c", 0xB94);
+                }
+                sp9C = 1.0f / temp_fs0_nxz;
+                spB8 = fabsf(temp_fs1_nx) * sp9C;
+                if (spB8 < 0.4f) {
+                    if (var_s1->unk2 == 0xFFFF) {
+                    } else {
+                        var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                        continue;
+                    }
+                } else {
+                    temp_fv0_6 = (f32)temp_s2[temp_s0->unk2_arr[0] & 0x1FFF].x;
+                    var_fa0_2 = var_fv1_2 = temp_fv0_6;
+                    temp_fv0_6 = (f32)temp_s2[temp_s0->unk2_arr[1] & 0x1FFF].x;
+                    if (temp_fv0_6 < var_fv1_2) {
+                        var_fv1_2 = temp_fv0_6;
+                    } else if (var_fa0_2 < temp_fv0_6) {
+                        var_fa0_2 = temp_fv0_6;
+                    }
+                    temp_fv0_6 = (f32)temp_s2[temp_s0->unk2_arr[2]].x;
+                    if (temp_fv0_6 < var_fv1_2) {
+                        var_fv1_2 = temp_fv0_6;
+                    } else if (var_fa0_2 < temp_fv0_6) {
+                        var_fa0_2 = temp_fv0_6;
+                    }
+                    var_fv1_2 -= arg6;
+                    var_fa0_2 += arg6;
+                    if ((spFC.x < (var_fv1_2)) || ((var_fa0_2) < spFC.x)) {
+                        if (var_s1->unk2 == 0xFFFF) {
+                        } else {
+                            var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                            continue;
+                        }
+                    } else {
+                        if (func_80038F60(temp_s0, temp_s2, arg5->y, spFC.z, &spEC) != 0) {
+                            temp_fv1_2 = spEC - spFC.x;
+                            if ((fabsf(temp_fv1_2) <= (arg6 / spB8)) && ((temp_fv1_2 * temp_fs1_nx) <= 4.0f)) {
+                                func_80039A3C(arg1, temp_s0, &spFC.x, &spFC.z, temp_fs1_nx, temp_fs3_ny, temp_fs2_nz,
+                                              sp9C, temp_fv0_2, arg6, arg7);
+                                spE8 = 1;
+                            }
+                        }
+                        if (var_s1->unk2 == 0xFFFF) {
+                        } else {
+                            var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    }
+    arg3->x = spFC.x;
+    *arg4 = spFC.z;
+    return spE8;
+}
 
 s32 func_80038F20(CollisionPoly*, Vec3s*, f32, f32, f32*);
 typedef struct struct_8003A3E0 {
