@@ -798,17 +798,17 @@ s32 func_8003A7D8(struct_8003A7D8* arg0, CollisionContext* arg1, u16 arg2, u16 a
 
     var_v1 = 0;
     if ((arg10 & 2) && (arg0->unk0 != 0xFFFF)) {
-        if (func_8003A5B8(&arg0->unk0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg9, arg8, arg10) != 0) {
+        if (func_8003A5B8((UNK_PTR)&arg0->unk0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg9, arg8, arg10) != 0) {
             var_v1 = 1;
         }
     }
     if ((arg10 & 1) && (arg0->unk2 != 0xFFFF)) {
-        if (func_8003A5B8(&arg0->unk2, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg9, arg8, arg10) != 0) {
+        if (func_8003A5B8((UNK_PTR)&arg0->unk2, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg9, arg8, arg10) != 0) {
             var_v1 = 1;
         }
     }
     if ((arg10 & 4) && (arg0->unk4 != 0xFFFF)) {
-        if (func_8003A5B8(&arg0->unk4, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg9, arg8, arg10) != 0) {
+        if (func_8003A5B8((UNK_PTR)&arg0->unk4, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg9, arg8, arg10) != 0) {
             var_v1 = 1;
         }
     }
@@ -1722,7 +1722,7 @@ void func_80041978(struct_8003E398*, s32);
 s32 func_8003D7F0(CollisionContext* arg0, u16 arg1, u16 arg2, Vec3f* arg3, Vec3f* arg4, Vec3f* arg5,
                   CollisionPoly** arg6, s32* arg7, Actor* arg8, f32 arg9, s32 arg10) {
     s32 temp_lo;
-    char* var_a3_spD8;
+    struct_8003A7D8* var_a3_spD8;
     s32 spCC[3];
     s32 spC0[3];
     s32 var_t0_spBC;
@@ -1732,10 +1732,10 @@ s32 func_8003D7F0(CollisionContext* arg0, u16 arg1, u16 arg2, Vec3f* arg3, Vec3f
     Vec3f sp9C;
     Vec3f sp90;
     s32 var_s1;
-    char* temp_s1;
+    struct_8003A7D8* temp_s1;
     s32 var_a2_sp84;
-    char* var_a1_sp80;
-    char* var_s0;
+    struct_8003A7D8* var_a1_sp80;
+    struct_8003A7D8* var_s0;
 
     temp_s1 = arg0->stat.unk40;
     spA8 = *arg4;
@@ -1765,13 +1765,13 @@ s32 func_8003D7F0(CollisionContext* arg0, u16 arg1, u16 arg2, Vec3f* arg3, Vec3f
         temp_lo = arg0->stat.unk1C * arg0->stat.unk20;
         sp9C.z = ((f32)spCC[2] * arg0->stat.unk30) + arg0->stat.unkC;
         sp90.z = arg0->stat.unk30 + sp9C.z;
-        var_a3_spD8 = (spCC[2] * temp_lo * 6) + temp_s1;
+        var_a3_spD8 = (spCC[2] * temp_lo) + temp_s1;
         for (var_t0_spBC = spCC[2]; var_t0_spBC < spC0[2] + 1; var_t0_spBC++) {
-            var_a1_sp80 = (spCC[1] * arg0->stat.unk1C * 6) + var_a3_spD8;
+            var_a1_sp80 = (spCC[1] * arg0->stat.unk1C) + var_a3_spD8;
             sp9C.y = ((f32)spCC[1] * arg0->stat.unk2C) + arg0->stat.unk8;
             sp90.y = arg0->stat.unk2C + sp9C.y;
             for (var_a2_sp84 = spCC[1]; var_a2_sp84 < spC0[1] + 1; var_a2_sp84++) {
-                var_s0 = (spCC[0] * 6) + var_a1_sp80;
+                var_s0 = (spCC[0]) + var_a1_sp80;
                 sp9C.x = ((f32)spCC[0] * arg0->stat.unk28) + arg0->stat.unk4;
                 sp90.x = arg0->stat.unk28 + sp9C.x;
                 for (var_s1 = spCC[0]; var_s1 < spC0[0] + 1; var_s1++) {
@@ -1781,14 +1781,14 @@ s32 func_8003D7F0(CollisionContext* arg0, u16 arg1, u16 arg2, Vec3f* arg3, Vec3f
                         spB8 = 1;
                     }
                     sp9C.x += arg0->stat.unk28;
-                    var_s0 += 6;
+                    var_s0++;
                     sp90.x += arg0->stat.unk28;
                 }
-                var_a1_sp80 += arg0->stat.unk1C * 6;
+                var_a1_sp80 += arg0->stat.unk1C;
                 sp9C.y += arg0->stat.unk2C;
                 sp90.y += arg0->stat.unk2C;
             }
-            var_a3_spD8 += temp_lo * 6;
+            var_a3_spD8 += temp_lo;
             sp9C.z += arg0->stat.unk30;
             sp90.z += arg0->stat.unk30;
         }
@@ -2751,8 +2751,9 @@ s32 func_800409A8(CollisionContext* arg0, u16 arg1, Vec3f* arg2, f32* arg3, Vec3
                     if (1) {}
                 } else {
                     temp_s0->unk5A -= (s16)(s32)arg5;
-                    if (func_80040284(arg0, arg1, &arg0->dyna, &(arg0->dyna.actorMeshArr + var_s4)->unk8.unk4, arg2,
-                                      arg3, arg6, arg7, &sp94, arg5, var_s4) != 0) {
+                    if (func_80040284(arg0, arg1, &arg0->dyna,
+                                      (UNK_PTR) & (arg0->dyna.actorMeshArr + var_s4)->unk8.unk4, arg2, arg3, arg6, arg7,
+                                      &sp94, arg5, var_s4) != 0) {
                         sp94.x = arg2->x;
                         sp94.z = *arg3;
                         sp90 = 1;
