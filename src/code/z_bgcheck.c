@@ -8,34 +8,6 @@ s16 D_80119E2C[0x13] = {
     0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x61, 0x62, 0x63,
 };
 
-typedef struct struct_80119E54 {
-    s16 unk0;
-    s32 unk4;
-} struct_80119E54;
-struct_80119E54 D_80119E54[8] = {
-    { 0x51, 0xB798 }, { 0x1A, 0x78C8 }, { 0x4F, 0x70C8 }, { 0x17, 0xACC8 },
-    { 0x44, 0x70C8 }, { 6, 0x16CC8 },   { 4, 0x198C8 },   { 0x19, 0x84C8 },
-};
-typedef struct struct_80119E94 {
-    /* 0x0 */ s16 unk0; /* inferred */
-    /* 0x2 */ s16 unk2; /* inferred */
-    /* 0x4 */ s16 unk4; /* inferred */
-    /* 0x6 */ s16 unk6; /* inferred */
-    /* 0x8 */ s32 unk8; /* inferred */
-} struct_80119E94;      /* size = 0xC */
-struct_80119E94 D_80119E94[2] = { { 7, 0x17, 7, 0xE, -1 }, { 3, 0x26, 1, 0x26, -1 } };
-WaterBox D_80119EAC = { -0x15C, 0x36D, -0x6D2, 0x229, 0x30C, 0x2104 };
-f32 D_80119EBC = -348.0f;
-f32 D_80119EC0 = 777.0f;
-f32 D_80119EC4 = -1746.0f;
-f32 D_80119EC8 = 205.0f;
-f32 D_80119ECC = 977.0f;
-f32 D_80119ED0 = -967.0f;
-Vec3f D_8015BC30[3];
-Vec3f D_8015BC58[3];
-Vec3f D_8015BC80[3];
-Vec3f D_8015BCA8[3];
-
 typedef struct struct_80039448_arg1 {
     u16 unk0;
 } struct_80039448_arg1;
@@ -257,6 +229,7 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
     }
 }
 
+Vec3f D_8015BC30[3];
 s32 func_80038D48(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4, f32 arg5) {
     Vec3s* vtx0;
     Vec3s* vtx1;
@@ -278,6 +251,7 @@ s32 func_80038D48(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
                                                 arg3, arg2, arg4, arg5);
 }
 
+Vec3f D_8015BC58[3];
 s32 func_80038E78(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4, f32 arg5) {
     f32 sp44;
     f32 sp40;
@@ -293,6 +267,7 @@ s32 func_80038F20(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
     return func_80038D48(arg0, arg1, arg2, arg3, arg4, 1.0f);
 }
 
+Vec3f D_8015BC80[3];
 s32 func_80038F60(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4) {
     f32 sp3C;
     f32 sp38;
@@ -304,6 +279,7 @@ s32 func_80038F60(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
                                             (f32)arg0->dist, arg2, arg3, arg4);
 }
 
+Vec3f D_8015BCA8[3];
 s32 func_80039000(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4) {
     f32 sp3C;
     f32 sp38;
@@ -1271,7 +1247,15 @@ s32 func_8003BF18(GlobalContext* arg0) {
     return 0;
 }
 
-extern struct_80119E54 D_80119E54[];
+typedef struct struct_80119E54 {
+    s16 unk0;
+    s32 unk4;
+} struct_80119E54;
+struct_80119E54 D_80119E54[8] = {
+    { SCENE_SPOT00, 0xB798 },     { SCENE_GANON_FINAL, 0x78C8 }, { SCENE_GANON_DEMO, 0x70C8 },
+    { SCENE_JYASINBOSS, 0xACC8 }, { SCENE_KENJYANOMA, 0x70C8 },  { SCENE_JYASINZOU, 0x16CC8 },
+    { SCENE_HIDAN, 0x198C8 },     { SCENE_GANON_BOSS, 0x84C8 },
+};
 s32 func_8003BF5C(s32 arg0, u32* arg1) {
     s32 i;
 
@@ -1298,10 +1282,17 @@ void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4) {
     *arg2 = (*arg3 * arg1) + arg0;
 }
 
-extern struct_80119E94 D_80119E94[];
-s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR arg2);
-s32 func_8003BF18(GlobalContext* arg0);
-void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4);
+typedef struct struct_80119E94 {
+    /* 0x0 */ s16 unk0; /* inferred */
+    /* 0x2 */ s16 unk2; /* inferred */
+    /* 0x4 */ s16 unk4; /* inferred */
+    /* 0x6 */ s16 unk6; /* inferred */
+    /* 0x8 */ s32 unk8; /* inferred */
+} struct_80119E94;      /* size = 0xC */
+struct_80119E94 D_80119E94[2] = {
+    { 7, 0x17, 7, 0xE, -1 },
+    { 3, 0x26, 1, 0x26, -1 },
+};
 void func_8003E398(struct_8003E398*);
 void func_8003E3AC(GlobalContext* arg0, struct_8003E398* arg1, u32 arg2, s32 arg3);
 void func_8003E954(GlobalContext* arg0, DynaCollisionContext* arg1);
@@ -2259,7 +2250,7 @@ void func_8003EE80(GlobalContext* arg0, DynaCollisionContext* arg1, s32 arg2, s3
     f32 temp_fv0_3;
     Vec3f spF0;
     f32 var_fv1;
-    s16* temp_s5;
+    Sphere16* temp_s5;
     Vec3f spDC;
     Vec3f spD0;
     Vec3f spC4;
@@ -2358,20 +2349,20 @@ void func_8003EE80(GlobalContext* arg0, DynaCollisionContext* arg1, s32 arg2, s3
     spF0.x *= temp_fs0;
     spF0.y *= temp_fs0;
     spF0.z *= temp_fs0;
-    temp_s5[0] = (s16)(s32)spF0.x;
-    temp_s5[1] = (s16)(s32)spF0.y;
-    temp_s5[2] = (s16)(s32)spF0.z;
-    for (var_s3 = 0; var_s3 < (s32)(u16)temp_fp->nbVertices; var_s3++) {
-        spDC.x = (f32)(arg1->unk13F4[*arg3 + var_s3]).x;
-        spDC.y = (f32)(arg1->unk13F4[*arg3 + var_s3]).y;
-        spDC.z = (f32)(arg1->unk13F4[*arg3 + var_s3]).z;
-        temp_fv0 = Math3D_Vec3fDistSq((Vec3f*)&spDC, (Vec3f*)&spF0);
+    temp_s5->center.x = spF0.x;
+    temp_s5->center.y = spF0.y;
+    temp_s5->center.z = spF0.z;
+    for (var_s3 = 0; var_s3 < (u16)temp_fp->nbVertices; var_s3++) {
+        spDC.x = arg1->unk13F4[*arg3 + var_s3].x;
+        spDC.y = arg1->unk13F4[*arg3 + var_s3].y;
+        spDC.z = arg1->unk13F4[*arg3 + var_s3].z;
+        temp_fv0 = Math3D_Vec3fDistSq(&spDC, &spF0);
         if (var_fv1 < temp_fv0) {
             var_fv1 = temp_fv0;
         }
     }
-    temp_s5[3] = (s16)(s32)(sqrtf(var_fv1) * 1.1f);
-    for (var_s3 = 0; var_s3 < (s32)(u16)temp_fp->nbPolygons; var_s3++) {
+    temp_s5->radius = sqrtf(var_fv1) * 1.1f;
+    for (var_s3 = 0; var_s3 < (u16)temp_fp->nbPolygons; var_s3++) {
         temp_s0 = &((CollisionPoly*)arg1->unk13F0)[((*arg4 + var_s3))];
         *temp_s0 = (((CollisionPoly*)temp_fp->polygonArray)[var_s3]);
         (temp_s0)->unk2 = (((temp_s0)->unk2 & 0x1FFF) + *arg3) | ((*temp_s0).unk2 & 0xE000);
@@ -3487,15 +3478,15 @@ s32 func_80042108(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
     return var_v1;
 }
 
-extern WaterBox D_80119EAC;
-extern f32 D_80119EBC;
-extern f32 D_80119EC0;
-extern f32 D_80119EC4;
-extern f32 D_80119EC8;
-extern f32 D_80119ECC;
-extern f32 D_80119ED0;
+WaterBox D_80119EAC = { -348, 877, -1746, 553, 780, 0x2104 };
+f32 D_80119EBC = -348.0f;
+f32 D_80119EC0 = 777.0f;
+f32 D_80119EC4 = -1746.0f;
+f32 D_80119EC8 = 205.0f;
+f32 D_80119ECC = 977.0f;
+f32 D_80119ED0 = -967.0f;
 s32 func_8004213C(GlobalContext* arg0, CollisionContext* arg1, f32 arg2, f32 arg3, f32* arg4, WaterBox** arg5) {
-    if ((arg0->sceneNum == 0x58) && (D_80119EBC < arg2) && (arg2 < D_80119EC8) && (D_80119EC0 < *arg4) &&
+    if ((arg0->sceneNum == SCENE_SPOT07) && (D_80119EBC < arg2) && (arg2 < D_80119EC8) && (D_80119EC0 < *arg4) &&
         (*arg4 < D_80119ECC) && (D_80119EC4 < arg3) && (arg3 < D_80119ED0)) {
         *arg5 = &D_80119EAC;
         *arg4 = D_80119EAC.ySurface;
@@ -3633,8 +3624,7 @@ void func_80042708(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f*
 
     func_800389D4(arg0, &sp44, &sp40, &sp3C);
     func_800389D4(arg1, &sp38, &sp34, &sp30);
-    Math3D_PlaneVsPlaneVsLineClosestPoint(sp44, sp40, sp3C, arg0->dist, sp38, sp34, sp30, arg1->dist, arg2,
-                                          arg3);
+    Math3D_PlaneVsPlaneVsLineClosestPoint(sp44, sp40, sp3C, arg0->dist, sp38, sp34, sp30, arg1->dist, arg2, arg3);
 }
 
 s32 func_800427B4(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4) {
@@ -3648,8 +3638,8 @@ s32 func_800427B4(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f* 
 
     func_800389D4(arg0, &sp54, &sp50, &sp4C);
     func_800389D4(arg1, &sp48, &sp44, &sp40);
-    return Math3D_PlaneVsLineSegClosestPoint(sp54, sp50, sp4C, arg0->dist, sp48, sp44, sp40, arg1->dist, arg2,
-                                             arg3, arg4);
+    return Math3D_PlaneVsLineSegClosestPoint(sp54, sp50, sp4C, arg0->dist, sp48, sp44, sp40, arg1->dist, arg2, arg3,
+                                             arg4);
 }
 
 void func_80042868(GlobalContext* arg0, CollisionContext* arg1, DynaCollisionContext* arg2, u16* arg3, u8 arg4, u8 arg5,
