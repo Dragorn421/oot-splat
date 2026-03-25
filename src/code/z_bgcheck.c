@@ -3634,7 +3634,38 @@ u32 func_8004259C(CollisionContext* colCtx, WaterBox* waterBox) {
     return v;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800425B0.s")
+s32 func_800425B0(GlobalContext* arg0, CollisionContext* arg1, f32 arg2, f32 arg3, f32* arg4, WaterBox** arg5) {
+    CollisionHeader* temp_v0;
+    WaterBox* temp_v0_2;
+    WaterBox* var_a1;
+    s16 temp_v1_3;
+    s16 temp_v1_4;
+    s32 temp_v1_2;
+    u16 temp_v1;
+
+    temp_v0 = arg1->stat.colHeader;
+    temp_v1 = temp_v0->nbWaterBoxes;
+    if ((temp_v1 == 0) || (((temp_v0->waterBoxes) == SEGMENTED_TO_VIRTUAL(NULL)))) {
+        return 0;
+    }
+    var_a1 = temp_v0->waterBoxes;
+    while ((u32)var_a1 < (u32)&temp_v0->waterBoxes[temp_v1]) {
+        temp_v1_2 = (var_a1->properties >> 0xD) & 0x3F;
+        if (((temp_v1_2 == arg0->roomCtx.curRoom.num) || (temp_v1_2 == 0x3F)) && (var_a1->properties & 0x80000)) {
+            temp_v1_3 = var_a1->xMin;
+            if (((f32)temp_v1_3 < arg2) && (arg2 < (f32)(temp_v1_3 + var_a1->xLength))) {
+                temp_v1_4 = var_a1->zMin;
+                if (((f32)temp_v1_4 < arg3) && (arg3 < (f32)(temp_v1_4 + var_a1->zLength))) {
+                    *arg5 = var_a1;
+                    *arg4 = (f32)var_a1->ySurface;
+                    return 1;
+                }
+            }
+        }
+        var_a1++;
+    }
+    return 0;
+}
 
 void func_80042708(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f* arg3) {
     f32 sp44;
