@@ -205,12 +205,9 @@ typedef struct {
     /* 0x12 */ char unk12[2];
     /* 0x14 */ ActorMeshTransform transform1;
     /* 0x34 */ ActorMeshTransform transform2;
-    /* 0x54 */ s16 unk54;                           /* inferred */
-    /* 0x56 */ s16 unk56;                           /* inferred */
-    /* 0x58 */ s16 unk58;                           /* inferred */
-    /* 0x5A */ s16 unk5A;                           /* inferred */
-    /* 0x5C */ f32 unk5C;                           /* inferred */
-    /* 0x60 */ f32 unk60;                           /* inferred */
+    /* 0x54 */ Sphere16 unk54;
+    /* 0x5C */ f32 unk5C;
+    /* 0x60 */ f32 unk60;
 } ActorMesh; // size = 0x64
 
 typedef struct {

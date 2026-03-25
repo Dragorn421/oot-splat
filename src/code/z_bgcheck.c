@@ -2065,11 +2065,8 @@ void func_8003E6EC(GlobalContext* arg0, ActorMesh* arg1) {
     func_8003E530(&arg1->transform2);
     func_8003E6C4(&arg1->unk8);
     func_8003E6E4(&arg1->unk10);
-    arg1->unk58 = 0;
-    temp_v0 = arg1->unk58;
-    arg1->unk5A = 0;
-    arg1->unk56 = temp_v0;
-    arg1->unk54 = temp_v0;
+    arg1->unk54.center.x = arg1->unk54.center.y = arg1->unk54.center.z = 0;
+    arg1->unk54.radius = 0;
 }
 
 void func_8003E750(ActorMesh* arg0, Actor* arg1, CollisionHeader* arg2) {
@@ -2568,8 +2565,8 @@ f32 func_8003FDDC(struct_8003FDDC* arg0) {
     for (var_s2 = 0; var_s2 < 50; var_s2++) {
         if (((arg0->unk4->dyna.flags[var_s2]) & 1) && (arg0->unk1C != arg0->unk4->dyna.actorMeshArr[var_s2].actor)) {
             if (!(arg0->unk14->y < arg0->unk4->dyna.actorMeshArr[var_s2].unk5C)) {
-                if (Math3D_XZInSphere((Sphere16*)&arg0->unk4->dyna.actorMeshArr[var_s2].unk54, arg0->unk14->x,
-                                      arg0->unk14->z) == 0) {
+                if (Math3D_XZInSphere(&arg0->unk4->dyna.actorMeshArr[var_s2].unk54, arg0->unk14->x, arg0->unk14->z) ==
+                    0) {
                     continue;
                 } else {
                     arg0->unk28 = &arg0->unk4->dyna;
@@ -2839,14 +2836,15 @@ s32 func_800409A8(CollisionContext* arg0, u16 arg1, Vec3f* arg2, f32* arg3, Vec3
         if ((arg0->dyna.flags[var_s4] & 1) && (arg8 != (arg0->dyna.actorMeshArr + var_s4)->actor)) {
             temp_s0 = &arg0->dyna.actorMeshArr[var_s4];
             if (!(sp94.y < temp_s0->unk5C) && !(temp_s0->unk60 < sp94.y)) {
-                temp_s0->unk5A += (s16)(s32)arg5;
-                if ((SQ((f32)temp_s0->unk5A) < (SQ((f32)temp_s0->unk54 - sp94.x) + SQ((f32)temp_s0->unk58 - sp94.z))) ||
-                    ((Math3D_XYInSphere((Sphere16*)&temp_s0->unk54, sp94.x, sp94.y) == 0) &&
-                     (Math3D_YZInSphere((Sphere16*)&temp_s0->unk54, sp94.y, sp94.z) == 0))) {
-                    temp_s0->unk5A -= (s16)(s32)arg5;
+                temp_s0->unk54.radius += (s16)arg5;
+                if ((SQ((f32)temp_s0->unk54.radius) <
+                     (SQ(temp_s0->unk54.center.x - sp94.x) + SQ(temp_s0->unk54.center.z - sp94.z))) ||
+                    ((Math3D_XYInSphere(&temp_s0->unk54, sp94.x, sp94.y) == 0) &&
+                     (Math3D_YZInSphere(&temp_s0->unk54, sp94.y, sp94.z) == 0))) {
+                    temp_s0->unk54.radius -= (s16)arg5;
                     if (1) {}
                 } else {
-                    temp_s0->unk5A -= (s16)(s32)arg5;
+                    temp_s0->unk54.radius -= (s16)arg5;
                     if (func_80040284(arg0, arg1, &arg0->dyna,
                                       (UNK_PTR) & (arg0->dyna.actorMeshArr + var_s4)->unk8.unk4, arg2, arg3, arg6, arg7,
                                       &sp94, arg5, var_s4) != 0) {
@@ -2886,7 +2884,7 @@ s32 func_80040BE4(CollisionContext* arg0, u16 arg1, DynaCollisionContext* arg2, 
     sp98 = *arg5;
     while (true) {
         v = var_s1->unk0;
-        temp_s0 = (CollisionPoly*)arg2->unk13F0 + (v);
+        temp_s0 = (CollisionPoly*)arg2->unk13F0 + v;
         if (temp_s0->unk2_arr[0] & ((arg1 & 7) << 0xD)) {
             if (var_s1->unk2 == 0xFFFF) {
                 break;
@@ -2896,7 +2894,7 @@ s32 func_80040BE4(CollisionContext* arg0, u16 arg1, DynaCollisionContext* arg2, 
             }
         } else {
             func_800389D4(temp_s0, &sp8C, &sp88, &sp84);
-            if (arg6 < Math3D_UDistPlaneToPos(sp8C, sp88, sp84, (f32)temp_s0->dist, &sp98)) {
+            if (arg6 < Math3D_UDistPlaneToPos(sp8C, sp88, sp84, temp_s0->dist, &sp98)) {
                 if (var_s1->unk2 == 0xFFFF) {
                     break;
                 } else {
@@ -2946,7 +2944,7 @@ s32 func_80040E40(CollisionContext* arg0, u16 arg1, f32* arg2, Vec3f* arg3, f32 
             continue;
         }
         if ((arg7 == arg0->dyna.actorMeshArr[var_s1].actor) ||
-            !(Math3D_XZInSphere((Sphere16*)&arg0->dyna.actorMeshArr[var_s1].unk54, arg3->x, arg3->z) != 0)) {
+            !(Math3D_XZInSphere(&arg0->dyna.actorMeshArr[var_s1].unk54, arg3->x, arg3->z) != 0)) {
             continue;
         }
         if ((func_80040BE4(arg0, arg1, &arg0->dyna, &arg0->dyna.actorMeshArr[var_s1].unk8.unk2, &sp70, arg3, arg4,
@@ -3080,7 +3078,7 @@ s32 func_80041240(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Ve
                  !(temp_fa0_2 < temp_fv1))) {
                 sp74.a = *arg2;
                 sp74.b = *arg3;
-                if ((Math3D_LineVsSph((Sphere16*)&arg0->dyna.actorMeshArr[var_s0].unk54, &sp74) != 0) &&
+                if ((Math3D_LineVsSph(&arg0->dyna.actorMeshArr[var_s0].unk54, &sp74) != 0) &&
                     (func_80041128(arg0, arg1, arg2, arg3, arg4, arg5, arg6, var_s0, arg9, arg10) == 1)) {
                     *arg7 = var_s0;
                     var_s6 = 1;
@@ -3155,11 +3153,11 @@ s32 func_80041648(CollisionContext* arg0, u16 arg1, CollisionPoly** arg2, s32* a
         if (arg6 == arg0->dyna.actorMeshArr[var_s0].actor) {
             continue;
         }
-        sp64.center.x = (s16)(s32)arg4->x;
-        sp64.center.y = (s16)(s32)arg4->y;
-        sp64.center.z = (s16)(s32)arg4->z;
-        sp64.radius = (s16)(s32)arg5;
-        if ((Math3D_SphVsSph(&sp64, (Sphere16*)&arg0->dyna.actorMeshArr[var_s0].unk54) != 0) &&
+        sp64.center.x = arg4->x;
+        sp64.center.y = arg4->y;
+        sp64.center.z = arg4->z;
+        sp64.radius = arg5;
+        if ((Math3D_SphVsSph(&sp64, &arg0->dyna.actorMeshArr[var_s0].unk54) != 0) &&
             (func_80041510(arg0, arg1, arg2, arg4, arg5, var_s0, arg7) != 0)) {
             return 1;
         }
@@ -3216,14 +3214,14 @@ u32 func_800419B0(CollisionContext* arg0, CollisionPoly* arg1, s32 arg2, s32 arg
         return 0U;
     }
     temp_v1 = temp_v0->polygonTypes;
-    if ((temp_v1) == SEGMENTED_TO_VIRTUAL(NULL)) {
+    if (temp_v1 == SEGMENTED_TO_VIRTUAL(NULL)) {
         return 0U;
     }
     return temp_v1[(u16)arg1->unk0].data[arg3];
 }
 
 s32 func_80041A28(CollisionContext* colCtx, CollisionPoly* arg1, u32 arg2) {
-    return func_800419B0(colCtx, arg1, (s32)arg2, 0) & 0xFF;
+    return func_800419B0(colCtx, arg1, arg2, 0) & 0xFF;
 }
 
 s32 func_80041A4C(CollisionContext* colCtx, s32 camDataIdx, s32 arg2) {
@@ -3274,11 +3272,11 @@ u16 func_80041B24(CollisionContext* arg0, s32 arg1, s32 arg2) {
 
     temp_v0 = T_BGCheck_getBGDataInfo(arg0, arg2);
     if (temp_v0 == NULL) {
-        return 0U;
+        return 0;
     }
     temp_v1 = temp_v0->cameraData;
     if ((temp_v1) == SEGMENTED_TO_VIRTUAL(NULL)) {
-        return 0U;
+        return 0;
     }
     return temp_v1[arg1].unk2;
 }
@@ -3291,17 +3289,17 @@ u16 func_80041B80(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) {
 
     temp_v0 = T_BGCheck_getBGDataInfo(colCtx, bgId);
     if (temp_v0 == NULL) {
-        return 0U;
+        return 0;
     }
     v1 = temp_v0->cameraData;
     if (v1 == SEGMENTED_TO_VIRTUAL(NULL)) {
-        return 0U;
+        return 0;
     }
     v2 = temp_v0->polygonTypes;
     if (v2 == SEGMENTED_TO_VIRTUAL(NULL)) {
-        return 0U;
+        return 0;
     }
-    return func_80041B24(colCtx, func_80041A28(colCtx, poly, (u32)bgId), bgId);
+    return func_80041B24(colCtx, func_80041A28(colCtx, poly, bgId), bgId);
 }
 
 Vec3s* func_80041C10(CollisionContext* colCtx, s32 arg1, s32 arg2) {
@@ -3336,11 +3334,11 @@ Vec3s* func_80041C98(CollisionContext* colCtx, CollisionPoly* arg1, s32 arg2) {
     if (v2 == SEGMENTED_TO_VIRTUAL(NULL)) {
         return NULL;
     }
-    return func_80041C10(colCtx, func_80041A28(colCtx, arg1, (u32)arg2), arg2);
+    return func_80041C10(colCtx, func_80041A28(colCtx, arg1, arg2), arg2);
 }
 
 s32 func_80041D28(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
-    return (func_800419B0(arg0, arg1, (s32)arg2, 0) >> 8) & 0x1F;
+    return (func_800419B0(arg0, arg1, arg2, 0) >> 8) & 0x1F;
 }
 
 u32 func_80041D4C(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) {
@@ -3357,7 +3355,7 @@ s32 func_80041D94(CollisionContext* arg0, CollisionPoly* arg1, s32 arg2) {
 
 extern s32 D_80119D90[];
 s32 func_80041DB8(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source) {
-    return *(D_80119D90 + (func_80041D94(colCtx, floorPoly, source)));
+    return D_80119D90[func_80041D94(colCtx, floorPoly, source)];
 }
 
 s32 func_80041DE4(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source) {
@@ -3425,11 +3423,11 @@ u16 func_80041F34(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
 }
 
 s32 func_80041F7C(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
-    return (func_800419B0(arg0, arg1, (s32)arg2, 1) >> 4) & 3;
+    return (func_800419B0(arg0, arg1, arg2, 1) >> 4) & 3;
 }
 
 s32 func_80041FA0(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
-    return (func_800419B0(arg0, arg1, (s32)arg2, 1) >> 6) & 0x1F;
+    return (func_800419B0(arg0, arg1, arg2, 1) >> 6) & 0x1F;
 }
 
 s32 func_80041FC4(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source) {
@@ -3437,16 +3435,16 @@ s32 func_80041FC4(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source
 }
 
 s32 func_80041FE8(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
-    return (func_800419B0(arg0, arg1, (s32)arg2, 1) >> 0x11) & 1;
+    return (func_800419B0(arg0, arg1, arg2, 1) >> 0x11) & 1;
 }
 
 s32 func_8004200C(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
     s32 v;
 
-    if (T_BGCheck_getBGDataInfo(arg0, (s32)arg2) == NULL) {
+    if (T_BGCheck_getBGDataInfo(arg0, arg2) == NULL) {
         return 1;
     }
-    v = (arg1->unk2_arr[0] & 0x4000);
+    v = arg1->unk2_arr[0] & 0x4000;
     return v != 0;
 }
 
@@ -3456,7 +3454,7 @@ s32 func_80042048(CollisionContext* arg0, CollisionPoly* arg1, s32 arg2) {
     if (T_BGCheck_getBGDataInfo(arg0, arg2) == 0) {
         return 1;
     }
-    v = (arg1->unk2 & 0x8000);
+    v = arg1->unk2 & 0x8000;
     return v != 0;
 }
 
@@ -3466,7 +3464,7 @@ s32 func_80042084(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source
     if (T_BGCheck_getBGDataInfo(colCtx, source) == 0) {
         return 1;
     }
-    v = (floorPoly->unk2_arr[1] & 0x2000);
+    v = floorPoly->unk2_arr[1] & 0x2000;
     return v != 0;
 }
 
@@ -3481,7 +3479,7 @@ s32 func_800420E4(CollisionContext* colCtx, CollisionPoly* floorPoly, s32 source
 s32 func_80042108(CollisionContext* arg0, CollisionPoly* arg1, u32 arg2) {
     s32 var_v1;
 
-    if (func_800419B0(arg0, arg1, (s32)arg2, 1) & 0x08000000) {
+    if (func_800419B0(arg0, arg1, arg2, 1) & 0x08000000) {
         var_v1 = 1;
     } else {
         var_v1 = 0;
@@ -3500,7 +3498,7 @@ s32 func_8004213C(GlobalContext* arg0, CollisionContext* arg1, f32 arg2, f32 arg
     if ((arg0->sceneNum == 0x58) && (D_80119EBC < arg2) && (arg2 < D_80119EC8) && (D_80119EC0 < *arg4) &&
         (*arg4 < D_80119ECC) && (D_80119EC4 < arg3) && (arg3 < D_80119ED0)) {
         *arg5 = &D_80119EAC;
-        *arg4 = (f32)D_80119EAC.ySurface;
+        *arg4 = D_80119EAC.ySurface;
         return 1;
     }
     return func_80042244(arg0, arg1, arg2, arg3, arg4, arg5);
@@ -3522,10 +3520,10 @@ s32 func_80042244(GlobalContext* globalCtx, CollisionContext* colCtx, f32 x, f32
     while (var_a1 < temp_v0_2) {
         temp_v1_2 = (var_a1->properties >> 0xD) & 0x3F;
         if (((temp_v1_2 == globalCtx->roomCtx.curRoom.num) || (temp_v1_2 == 0x3F)) && !(var_a1->properties & 0x80000)) {
-            if (((f32)var_a1->xMin < x) && (x < (f32)(var_a1->xMin + var_a1->xLength))) {
-                if (((f32)var_a1->zMin < z) && (z < (f32)(var_a1->zMin + var_a1->zLength))) {
+            if ((var_a1->xMin < x) && (x < (var_a1->xMin + var_a1->xLength))) {
+                if ((var_a1->zMin < z) && (z < (var_a1->zMin + var_a1->zLength))) {
                     *outWaterBox = var_a1;
-                    *ySurface = (f32)var_a1->ySurface;
+                    *ySurface = var_a1->ySurface;
                     return 1;
                 }
             }
@@ -3548,13 +3546,13 @@ s32 func_8004239C(GlobalContext* globalCtx, CollisionContext* colCtx, Vec3f* arg
         *arg4 = NULL;
         return -1;
     }
-    for (var_a0 = 0; var_a0 < (s32)temp_v0->nbWaterBoxes; var_a0++) {
+    for (var_a0 = 0; var_a0 < temp_v0->nbWaterBoxes; var_a0++) {
         var_v0 = &temp_v0->waterBoxes[var_a0];
         temp_a1 = (var_v0->properties >> 0xD) & 0x3F;
         if (((temp_a1 == globalCtx->roomCtx.curRoom.num) || (temp_a1 == 0x3F)) && !(var_v0->properties & 0x80000)) {
-            if (((f32)var_v0->xMin < arg2->x) && (arg2->x < (f32)(var_v0->xMin + var_v0->xLength))) {
-                if (((f32)var_v0->zMin < arg2->z) && (arg2->z < (f32)(var_v0->zMin + var_v0->zLength))) {
-                    if (((arg2->y - arg3) < (f32)var_v0->ySurface) && ((f32)var_v0->ySurface < (arg2->y + arg3))) {
+            if ((var_v0->xMin < arg2->x) && (arg2->x < (var_v0->xMin + var_v0->xLength))) {
+                if ((var_v0->zMin < arg2->z) && (arg2->z < (var_v0->zMin + var_v0->zLength))) {
+                    if (((arg2->y - arg3) < var_v0->ySurface) && (var_v0->ySurface < (arg2->y + arg3))) {
                         *arg4 = var_v0;
                         return var_a0;
                     }
@@ -3603,19 +3601,19 @@ s32 func_800425B0(GlobalContext* arg0, CollisionContext* arg1, f32 arg2, f32 arg
 
     temp_v0 = arg1->stat.colHeader;
     temp_v1 = temp_v0->nbWaterBoxes;
-    if ((temp_v1 == 0) || (((temp_v0->waterBoxes) == SEGMENTED_TO_VIRTUAL(NULL)))) {
+    if ((temp_v1 == 0) || ((temp_v0->waterBoxes) == SEGMENTED_TO_VIRTUAL(NULL))) {
         return 0;
     }
     var_a1 = temp_v0->waterBoxes;
-    while ((u32)var_a1 < (u32)&temp_v0->waterBoxes[temp_v1]) {
+    while (var_a1 < &temp_v0->waterBoxes[temp_v1]) {
         temp_v1_2 = (var_a1->properties >> 0xD) & 0x3F;
         if (((temp_v1_2 == arg0->roomCtx.curRoom.num) || (temp_v1_2 == 0x3F)) && (var_a1->properties & 0x80000)) {
             temp_v1_3 = var_a1->xMin;
-            if (((f32)temp_v1_3 < arg2) && (arg2 < (f32)(temp_v1_3 + var_a1->xLength))) {
+            if ((temp_v1_3 < arg2) && (arg2 < (temp_v1_3 + var_a1->xLength))) {
                 temp_v1_4 = var_a1->zMin;
-                if (((f32)temp_v1_4 < arg3) && (arg3 < (f32)(temp_v1_4 + var_a1->zLength))) {
+                if ((temp_v1_4 < arg3) && (arg3 < (temp_v1_4 + var_a1->zLength))) {
                     *arg5 = var_a1;
-                    *arg4 = (f32)var_a1->ySurface;
+                    *arg4 = var_a1->ySurface;
                     return 1;
                 }
             }
@@ -3635,7 +3633,7 @@ void func_80042708(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f*
 
     func_800389D4(arg0, &sp44, &sp40, &sp3C);
     func_800389D4(arg1, &sp38, &sp34, &sp30);
-    Math3D_PlaneVsPlaneVsLineClosestPoint(sp44, sp40, sp3C, (f32)arg0->dist, sp38, sp34, sp30, (f32)arg1->dist, arg2,
+    Math3D_PlaneVsPlaneVsLineClosestPoint(sp44, sp40, sp3C, arg0->dist, sp38, sp34, sp30, arg1->dist, arg2,
                                           arg3);
 }
 
@@ -3650,7 +3648,7 @@ s32 func_800427B4(CollisionPoly* arg0, CollisionPoly* arg1, Vec3f* arg2, Vec3f* 
 
     func_800389D4(arg0, &sp54, &sp50, &sp4C);
     func_800389D4(arg1, &sp48, &sp44, &sp40);
-    return Math3D_PlaneVsLineSegClosestPoint(sp54, sp50, sp4C, (f32)arg0->dist, sp48, sp44, sp40, (f32)arg1->dist, arg2,
+    return Math3D_PlaneVsLineSegClosestPoint(sp54, sp50, sp4C, arg0->dist, sp48, sp44, sp40, arg1->dist, arg2,
                                              arg3, arg4);
 }
 
@@ -3679,18 +3677,18 @@ void func_80042868(GlobalContext* arg0, CollisionContext* arg1, DynaCollisionCon
         func_800388A8(&arg2->unk13F4[(u32)(temp_s0->unk2_arr[1] & 0x1FFF)], &sp7C);
         func_800388A8(&arg2->unk13F4[(u32)temp_s0->unk2_arr[2]], &sp70);
         if (gGameInfo->data[0x73A] != 0) {
-            temp_fv0 = (f32)temp_s0->norm.x * 0.00003051851f;
-            temp_fv1 = (f32)temp_s0->norm.y * 0.00003051851f;
-            temp_fa0 = (f32)temp_s0->norm.z * 0.00003051851f;
-            sp88.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
-            sp88.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
-            sp88.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
-            sp7C.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
-            sp7C.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
-            sp7C.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
-            sp70.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
-            sp70.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
-            sp70.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
+            temp_fv0 = temp_s0->norm.x * 0.00003051851f;
+            temp_fv1 = temp_s0->norm.y * 0.00003051851f;
+            temp_fa0 = temp_s0->norm.z * 0.00003051851f;
+            sp88.x += gGameInfo->data[0x73A] * temp_fv0;
+            sp88.y += gGameInfo->data[0x73A] * temp_fv1;
+            sp88.z += gGameInfo->data[0x73A] * temp_fa0;
+            sp7C.x += gGameInfo->data[0x73A] * temp_fv0;
+            sp7C.y += gGameInfo->data[0x73A] * temp_fv1;
+            sp7C.z += gGameInfo->data[0x73A] * temp_fa0;
+            sp70.x += gGameInfo->data[0x73A] * temp_fv0;
+            sp70.y += gGameInfo->data[0x73A] * temp_fv1;
+            sp70.z += gGameInfo->data[0x73A] * temp_fa0;
         }
         func_8005B2AC(arg0->state.gfxCtx, &sp88, &sp7C, &sp70, arg4, arg5, arg6);
         if (var_s2->unk2 == 0xFFFF) {
@@ -3731,30 +3729,27 @@ void func_80042CB8(GlobalContext* arg0, CollisionContext* arg1, CollisionPoly* a
     f32 temp_fa0;
     f32 temp_fv0;
     f32 temp_fv1;
-    s16 temp_v1;
 
     func_800388A8(&arg1->stat.colHeader->vertexArray[arg2->unk2_arr[0] & 0x1FFF], &sp5C);
     func_800388A8(&arg1->stat.colHeader->vertexArray[arg2->unk2_arr[1] & 0x1FFF], &sp50);
     func_800388A8(&arg1->stat.colHeader->vertexArray[arg2->unk2_arr[2]], &sp44);
-    temp_v1 = gGameInfo->data[0x73A];
-    if (temp_v1 != 0) {
-        temp_fv0 = (f32)arg2->norm.x * 0.00003051851f;
-        temp_fv1 = (f32)arg2->norm.y * 0.00003051851f;
-        temp_fa0 = (f32)arg2->norm.z * 0.00003051851f;
-        sp5C.x += ((f32)temp_v1 * temp_fv0);
-        sp5C.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
-        sp5C.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
-        sp50.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
-        sp50.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
-        sp50.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
-        sp44.x += ((f32)gGameInfo->data[0x73A] * temp_fv0);
-        sp44.y += (f32)gGameInfo->data[0x73A] * temp_fv1;
-        sp44.z += (f32)gGameInfo->data[0x73A] * temp_fa0;
+    if (gGameInfo->data[0x73A] != 0) {
+        temp_fv0 = arg2->norm.x * 0.00003051851f;
+        temp_fv1 = arg2->norm.y * 0.00003051851f;
+        temp_fa0 = arg2->norm.z * 0.00003051851f;
+        sp5C.x += gGameInfo->data[0x73A] * temp_fv0;
+        sp5C.y += gGameInfo->data[0x73A] * temp_fv1;
+        sp5C.z += gGameInfo->data[0x73A] * temp_fa0;
+        sp50.x += gGameInfo->data[0x73A] * temp_fv0;
+        sp50.y += gGameInfo->data[0x73A] * temp_fv1;
+        sp50.z += gGameInfo->data[0x73A] * temp_fa0;
+        sp44.x += gGameInfo->data[0x73A] * temp_fv0;
+        sp44.y += gGameInfo->data[0x73A] * temp_fv1;
+        sp44.z += gGameInfo->data[0x73A] * temp_fa0;
     }
     func_8005B2AC(arg0->state.gfxCtx, &sp5C, &sp50, &sp44, (u8)(s32)arg3, (u8)(s32)arg4, (u8)(s32)arg5);
 }
 
-void func_80042CB8(GlobalContext*, CollisionContext*, CollisionPoly*, u8, u8, u8);
 void func_80042EF8(GlobalContext* arg0, CollisionContext* arg1, u16* arg2, u8 arg3, u8 arg4, u8 arg5) {
     u16 temp_v0;
     s16 new_var;
