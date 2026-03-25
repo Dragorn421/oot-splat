@@ -1521,7 +1521,11 @@ f32 func_8003C614(GlobalContext* arg0, CollisionContext* arg1, u16 arg2, Collisi
     return var_fs1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003C834.s")
+void func_8003C834(CollisionContext* arg0, CollisionPoly** arg1, Vec3f* arg2) {
+    UNK_TYPE sp34;
+
+    func_8003C614(NULL, arg0, 1U, arg1, &sp34, arg2, NULL, 0x1C, 1.0f);
+}
 
 f32 func_8003C890(CollisionContext* arg0, CollisionPoly** arg1, Vec3f* arg2) {
     UNK_TYPE sp34;
@@ -1552,7 +1556,9 @@ f32 func_8003CA64(CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, 
     return func_8003C614(NULL, colCtx, 2, outPoly, bgId, pos, actor, 0x1C, chkDist);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CAC8.s")
+void func_8003CAC8(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Actor* arg3, Vec3f* arg4) {
+    func_8003C614(NULL, arg0, 2U, arg1, arg2, arg4, arg3, 6, 1.0f);
+}
 
 f32 func_8003CB30(CollisionContext* arg0, CollisionPoly* arg1, Vec3f* arg2) {
     CollisionPoly* sp3C;
@@ -1566,15 +1572,28 @@ f32 func_8003CB30(CollisionContext* arg0, CollisionPoly* arg1, Vec3f* arg2) {
     return temp_fv1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CBE8.s")
+f32 func_8003CBE8(CollisionContext* arg0, CollisionPoly* arg1, s32* arg2, Vec3f* arg3) {
+    CollisionPoly* sp34;
+    f32 temp_fv1;
+
+    temp_fv1 = func_8003C614(NULL, arg0, 0U, &sp34, arg2, arg3, NULL, 0x1C, 1.0f);
+    if (sp34 != NULL) {
+        *arg1 = *sp34;
+    }
+    return temp_fv1;
+}
 
 f32 func_8003CCA4(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Vec3f* arg3) {
     return func_8003C614(NULL, arg0, 1, arg1, arg2, arg3, NULL, 6, 1.0f);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CD08.s")
+void func_8003CD08(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Actor* arg3, Vec3f* arg4) {
+    func_8003C614(NULL, arg0, 2U, arg1, arg2, arg4, arg3, 2, 1.0f);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003CD70.s")
+void func_8003CD70(CollisionContext* arg0, CollisionPoly** arg1, s32* arg2, Vec3f* arg3) {
+    func_8003C614(NULL, arg0, 2U, arg1, arg2, arg3, NULL, 6, 1.0f);
+}
 
 s32 func_8003D7F0(CollisionContext*, u16, u16, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, s32*, Actor*, f32, s32);
 s32 func_8003C55C(CollisionContext*, Vec3f*);
@@ -1714,7 +1733,10 @@ s32 func_8003D464(CollisionContext* colCtx, Vec3f* posResult, Vec3f* posNext, Ve
     return func_8003CDD4(colCtx, 2, posResult, posNext, posPrev, arg4, outPoly, &sp3C, 0, checkHeight, 0);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003D4C8.s")
+void func_8003D4C8(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, CollisionPoly** arg5,
+                   s32* arg6, f32 arg7) {
+    func_8003CDD4(arg0, 2U, arg1, arg2, arg3, arg4, arg5, arg6, NULL, arg7, 0);
+}
 
 s32 func_8003D52C(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, f32 arg4, CollisionPoly** arg5,
                   u32* arg6, Actor* arg7, f32 arg8) {
@@ -1755,7 +1777,12 @@ s32 func_8003D600(CollisionContext* arg0, u16 arg1, f32* arg2, Vec3f* arg3, f32 
     return var_v1;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003D754.s")
+void func_8003D754(CollisionContext* arg0, f32* arg1, Vec3f* arg2, f32 arg3) {
+    UNK_TYPE sp2C;
+    u32 sp28;
+
+    func_8003D600(arg0, 0U, arg1, arg2, arg3, &sp2C, &sp28, NULL);
+}
 
 s32 func_8003D7A0(CollisionContext* arg0, f32* arg1, Vec3f* arg2, f32 arg3, void* arg4, u32* arg5, Actor* arg6) {
     return func_8003D600(arg0, 2, arg1, arg2, arg3, arg4, arg5, arg6);
@@ -1880,7 +1907,11 @@ s32 func_8003DD6C(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3,
                          func_8003DD28(arg5, arg6, arg7, arg8, 1));
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003DDF8.s")
+s32 func_8003DDF8(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, s32 arg5,
+                  s32 arg6, s32 arg7, s32 arg8, s32* arg9) {
+    return func_8003D7F0(arg0, 0U, 1U, arg1, arg2, arg3, arg4, arg9, NULL, 1.0f,
+                         func_8003DD28(arg5, arg6, arg7, arg8, 1));
+}
 
 s32 func_8003DE84(CollisionContext* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, CollisionPoly** arg4, u32 arg5,
                   u32 arg6, u32 arg7, u32 arg8, u32* arg9) {
