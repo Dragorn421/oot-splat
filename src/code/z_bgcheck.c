@@ -298,7 +298,49 @@ s32 func_80039000(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
                                             arg2, arg3, arg4);
 }
 
+// need bss import
+#if 0
+s32 func_800390A0(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4, s32 arg5, f32 arg6) {
+    static Vec3f D_8015BCD0;
+    static Vec3f D_8015BCDC;
+    static Vec3f D_8015BCE8;
+    static Plane D_8015BCF8;
+    f32 temp_ft5_sp34;
+    f32 temp_fv1_2_sp28;
+    f32 temp_ft4;
+
+    D_8015BCF8.originDist = (f32)arg0->dist;
+    temp_ft5_sp34 =
+        (((arg0->norm.x * arg2->x) + (arg0->norm.y * arg2->y) + (arg0->norm.z * arg2->z)) * 0.00003051851f) +
+        D_8015BCF8.originDist;
+    temp_ft4 = (((arg0->norm.x * arg3->x) + (arg0->norm.y * arg3->y) + (arg0->norm.z * arg3->z)) * 0.00003051851f) +
+               D_8015BCF8.originDist;
+    temp_fv1_2_sp28 = temp_ft5_sp34 - temp_ft4;
+    if (((temp_ft5_sp34 >= 0.0f) && (temp_ft4 >= 0.0f)) || ((temp_ft5_sp34 < 0.0f) && (temp_ft4 < 0.0f)) ||
+        ((arg5 != 0) && (temp_ft5_sp34 < 0.0f) && (temp_ft4 > 0.0f)) || ((fabsf(temp_fv1_2_sp28) < 0.008f))) {
+        // goto block_16;
+        return 0;
+    }
+    func_800389D4(arg0, &D_8015BCF8.normal.x, &D_8015BCF8.normal.y, &D_8015BCF8.normal.z);
+    func_80038BE0(arg0, arg1, &D_8015BCD0);
+    Math3D_LineSplitRatio(arg2, arg3, temp_ft5_sp34 / temp_fv1_2_sp28, arg4);
+    if (((fabsf(D_8015BCF8.normal.x) > 0.5f) &&
+         (Math3D_TriChkPointParaXDist(&D_8015BCD0, &D_8015BCDC, &D_8015BCE8, &D_8015BCF8, arg4->y, arg4->z, arg6) !=
+          0)) ||
+        ((fabsf(D_8015BCF8.normal.y) > 0.5f) &&
+         (Math3D_TriChkPointParaYDist(&D_8015BCD0, &D_8015BCDC, &D_8015BCE8, &D_8015BCF8, arg4->z, arg4->x, arg6) !=
+          0)) ||
+        ((fabsf(D_8015BCF8.normal.z) > 0.5f) &&
+         (Math3D_TriChkLineSegParaZDist(&D_8015BCD0, &D_8015BCDC, &D_8015BCE8, &D_8015BCF8, arg4->x, arg4->y, arg6) !=
+          0))) {
+        return 1;
+    }
+block_16:
+    return 0;
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800390A0.s")
+#endif
 
 // need bss import
 #if 0
@@ -1420,7 +1462,9 @@ typedef struct struct_8003FDDC {
     /* 0x20 */ s32 unk20;                   /* inferred */
     /* 0x24 */ f32 unk24;                   /* inferred */
     /* 0x28 */ DynaCollisionContext* unk28; /* inferred */
-    /* 0x2C */ u16* unk2C;                  /* inferred */
+    /* 0x2C */ struct {
+        u16 unk0;
+    }* unk2C; /* inferred */
     /* 0x30 */ char pad30[4];
 } struct_8003FDDC; /* size = 0x34 ? */
 f32 func_8003FDDC(struct_8003FDDC*);
@@ -2429,21 +2473,54 @@ void func_8003FB64(GlobalContext* globalCtx, DynaCollisionContext* dynaColCtx) {
     } while (var_s0 != 0x32);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003FBF4.s")
+f32 func_8003FBF4(struct_8003FDDC* arg0, s32 arg1) {
+    f32 var_fs0;
+    s32 temp_s2;
+    CollisionPoly* temp_s4;
+    f32 sp70;
+    struct_80042868* var_s0;
 
-struct _m2c_stack_func_8003FDDC {
-    /* 0x000 */ char pad0[0x70];
-    /* 0x070 */ f32 sp70;   /* inferred */
-    /* 0x074 */ Vec3f sp74; /* inferred */
-    /* 0x080 */ char pad80[4];
-    /* 0x084 */ Vec3s* sp84; /* inferred */
-    /* 0x088 */ char pad88[4];
-    /* 0x08C */ MtxF sp8C; /* inferred */
-    /* 0x0CC */ char padCC[8];
-    /* 0x0D4 */ Vec3f spD4;    /* inferred */
-    /* 0x0E0 */ Vec3f spE0[3]; /* inferred */
-    /* 0x104 */ char pad104[0x1C];
-}; /* size = 0x120 */
+    var_fs0 = arg0->unk10;
+    if (arg0->unk2C->unk0 == 0xFFFF) {
+        return var_fs0;
+    } else {
+        temp_s4 = (CollisionPoly*)arg0->unk28->unk13F0;
+        var_s0 = (struct_80042868*)arg0->unk28->unk13F8.unk0 + (arg0->unk2C->unk0);
+        while (true) {
+            temp_s2 = var_s0->unk0;
+            if ((temp_s4[temp_s2]).unk2 & (((u16)arg0->unk8 & 7) << 0xD)) {
+                if (var_s0->unk2 == 0xFFFF) {
+                    break;
+                } else {
+                    var_s0 = (struct_80042868*)arg0->unk28->unk13F8.unk0 + (var_s0->unk2);
+                    continue;
+                }
+            }
+            if ((arg1 & 6) && (arg0->unk20 & 0x10) && (((f32)(temp_s4[temp_s2]).norm.y * 0.00003051851f) < 0.0f)) {
+                if (var_s0->unk2 == 0xFFFF) {
+                    break;
+                } else {
+                    var_s0 = (struct_80042868*)arg0->unk28->unk13F8.unk0 + (var_s0->unk2);
+                    continue;
+                }
+            }
+            if ((func_80038D48(&temp_s4[temp_s2], arg0->unk28->unk13F4, arg0->unk14->x, arg0->unk14->z, &sp70,
+                               arg0->unk24) == 1) &&
+                (sp70 < arg0->unk14->y) && (var_fs0 < sp70)) {
+                var_fs0 = sp70;
+                *arg0->unkC = (CollisionPoly*)arg0->unk28->unk13F0 + temp_s2;
+            }
+            if (var_s0->unk2 == 0xFFFF) {
+                break;
+            } else {
+                var_s0 = (struct_80042868*)arg0->unk28->unk13F8.unk0 + (var_s0->unk2);
+                continue;
+            }
+        }
+    }
+    return var_fs0;
+}
+
 f32 func_8003FBF4(struct_8003FDDC*, UNK_TYPE);
 f32 func_8003FDDC(struct_8003FDDC* arg0) {
     ActorMeshTransform* temp_v0_4;
@@ -2478,7 +2555,7 @@ f32 func_8003FDDC(struct_8003FDDC* arg0) {
                 } else {
                     arg0->unk28 = &arg0->unk4->dyna;
                     if (arg0->unk20 & 4) {
-                        arg0->unk2C = &arg0->unk4->dyna.actorMeshArr[var_s2].unk8.unk6;
+                        arg0->unk2C = (UNK_PTR)&arg0->unk4->dyna.actorMeshArr[var_s2].unk8.unk6;
                         temp_fv0 = func_8003FBF4(arg0, 1);
                         if (arg0->unk10 < temp_fv0) {
                             arg0->unk10 = temp_fv0;
@@ -2487,7 +2564,7 @@ f32 func_8003FDDC(struct_8003FDDC* arg0) {
                         }
                     }
                     if ((arg0->unk20 & 2) || ((*arg0->unkC == NULL) && (arg0->unk20 & 8))) {
-                        arg0->unk2C = &arg0->unk4->dyna.actorMeshArr[var_s2].unk8.unk4;
+                        arg0->unk2C = (UNK_PTR)&arg0->unk4->dyna.actorMeshArr[var_s2].unk8.unk4;
                         temp_fv0 = func_8003FBF4(arg0, 2);
                         if (arg0->unk10 < temp_fv0) {
                             arg0->unk10 = temp_fv0;
@@ -2496,7 +2573,7 @@ f32 func_8003FDDC(struct_8003FDDC* arg0) {
                         }
                     }
                     if (arg0->unk20 & 1) {
-                        arg0->unk2C = &arg0->unk4->dyna.actorMeshArr[var_s2].unk8.unk2;
+                        arg0->unk2C = (UNK_PTR)&arg0->unk4->dyna.actorMeshArr[var_s2].unk8.unk2;
                         temp_fv0 = func_8003FBF4(arg0, 4);
                         if (arg0->unk10 < temp_fv0) {
                             arg0->unk10 = temp_fv0;
@@ -2870,7 +2947,38 @@ s32 func_80040E40(CollisionContext* arg0, u16 arg1, f32* arg2, Vec3f* arg3, f32 
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041128.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_80041240.s")
+s32 func_80041128(CollisionContext*, u16, Vec3f*, Vec3f*, Vec3f*, CollisionPoly**, f32*, s32, f32, s32);
+s32 func_80041240(CollisionContext* arg0, u16 arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4, CollisionPoly** arg5,
+                  f32* arg6, s32* arg7, Actor* arg8, f32 arg9, s32 arg10) {
+    f32 temp_fa0;
+    f32 temp_fa0_2;
+    f32 temp_fv0;
+    Linef sp74;
+    f32 temp_fv1;
+    s32 var_s0;
+    s32 var_s6;
+
+    var_s6 = 0;
+    for (var_s0 = 0; var_s0 < 50; var_s0++) {
+        if ((arg0->dyna.flags[var_s0] & 1) && (arg8 != arg0->dyna.actorMeshArr[var_s0].actor)) {
+            temp_fv0 = arg2->y;
+            temp_fv1 = arg3->y;
+            temp_fa0 = arg0->dyna.actorMeshArr[var_s0].unk5C;
+            if (((!(temp_fv0 < temp_fa0)) || !(temp_fv1 < temp_fa0)) &&
+                ((temp_fa0_2 = arg0->dyna.actorMeshArr[var_s0].unk60, !(temp_fa0_2 < temp_fv0)) ||
+                 !(temp_fa0_2 < temp_fv1))) {
+                sp74.a = *arg2;
+                sp74.b = *arg3;
+                if ((Math3D_LineVsSph((Sphere16*)&arg0->dyna.actorMeshArr[var_s0].unk54, &sp74) != 0) &&
+                    (func_80041128(arg0, arg1, arg2, arg3, arg4, arg5, arg6, var_s0, arg9, arg10) == 1)) {
+                    *arg7 = var_s0;
+                    var_s6 = 1;
+                }
+            }
+        }
+    }
+    return var_s6;
+}
 
 s32 func_800413F8(CollisionContext* arg0, u16 arg1, CollisionPoly** arg2, Vec3f* arg3, f32 arg4, u16* arg5) {
     DynaCollisionContext* temp_s2;
