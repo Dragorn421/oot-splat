@@ -728,10 +728,65 @@ s32 func_8003A3E0(struct_8003A3E0* arg0, u16 arg1, CollisionContext* arg2, f32* 
     return var_t0;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003A5B8.s")
+s32 func_800390A0(CollisionPoly*, Vec3s*, Vec3f*, Vec3f*, Vec3f*, s32, f32);
+s32 func_8003A5B8(
+    struct { u16 unk0; } * arg0, CollisionContext* arg1, u16 arg2, u16 arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6,
+    CollisionPoly** arg7, f32* arg8, f32 arg9, s32 arg10) {
+    CollisionPoly* temp_s0;
+    f32 temp_fv0;
+    Vec3f sp84;
+    f32 temp_fv0_2;
+    s16 temp_v0_2;
+    s32 sp78;
+    u8* temp_v1;
+    CollisionPoly* temp_s6;
+    struct_80039448* var_s1;
 
-s32 func_8003A5B8(UNK_PTR arg0, CollisionContext* arg1, u16 arg2, u16 arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6,
-                  CollisionPoly** arg7, f32* arg8, f32 arg9, s32 arg10);
+    sp78 = 0;
+    temp_s6 = arg1->stat.colHeader->polygonArray;
+    if (arg0->unk0 == 0xFFFF) {
+        return 0;
+    }
+    var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + arg0->unk0;
+    while (true) {
+        temp_v0_2 = var_s1->unk0;
+        temp_v1 = (u8*)arg1->stat.unk44.unk8 + temp_v0_2;
+        if ((*temp_v1 == 1) || ((((temp_s6[temp_v0_2]).unk2 & ((arg2 & 7) << 0xD)) != 0)) ||
+            ((arg3 != 0) && !((temp_s6[temp_v0_2]).unk2 & ((arg3 & 7) << 0xD)))) {
+            if (var_s1->unk2 == 0xFFFF) {
+                break;
+            } else {
+                var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + var_s1->unk2;
+                continue;
+            }
+        }
+        *temp_v1 = 1;
+        temp_s0 = &temp_s6[temp_v0_2];
+        temp_fv0 = (f32)func_80038924(temp_s0, arg1->stat.colHeader->vertexArray);
+        if (!(arg4->y < temp_fv0) || !(arg5->y < temp_fv0)) {
+            if (func_800390A0(temp_s0, arg1->stat.colHeader->vertexArray, arg4, arg5, &sp84, (arg10 & 8) != 0, arg9) !=
+                0) {
+                temp_fv0_2 = Math3D_Vec3fDistSq(arg4, &sp84);
+                if (temp_fv0_2 < *arg8) {
+                    *arg8 = temp_fv0_2;
+                    *arg6 = sp84;
+                    *arg5 = sp84;
+                    *arg7 = temp_s0;
+                    sp78 = 1;
+                }
+            }
+            if (var_s1->unk2 == 0xFFFF) {
+                break;
+            } else {
+                var_s1 = (struct_80039448*)arg1->stat.unk44.unk4 + (var_s1->unk2);
+                continue;
+            }
+        }
+        break;
+    }
+    return sp78;
+}
+
 typedef struct struct_8003A7D8 {
     u16 unk0;
     u16 unk2;
