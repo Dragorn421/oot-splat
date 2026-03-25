@@ -668,7 +668,7 @@ segments:
       - [0xB8CF60, data, code/flg_set]
       - [0xB8D120, data, code/z_actor]
       - [0xB8D440, data, code/z_actor_dlftbls]
-      - [0xB90F30, data, code/z_bgcheck]
+      - [0xB90F30, .data, code/z_bgcheck]
       - [0xB91080, data, code/z_camera]
       - [0xB94CC0, data, code/z_collision_btltbls]
       - [0xB94FA0, data, code/z_collision_check]
@@ -900,7 +900,7 @@ segments:
       - { name: flg_set_bss, type: bss, vram: 0x8015BB90 }
       - { name: z_actor_bss, type: bss, vram: 0x8015BBA0 }
       - { name: z_actor_dlftbls_bss, type: bss, vram: 0x8015BC20 }
-      - { name: code/z_bgcheck, type: bss, vram: 0x8015BC30 }
+      - { name: code/z_bgcheck, type: .bss, vram: 0x8015BC30 }
       - { name: z_camera_bss, type: bss, vram: 0x8015BD50 }
       - { name: code/z_collision_check, type: bss, vram: 0x8015CF00 }
       - { name: z_common_data_bss, type: bss, vram: 0x8015E660 }

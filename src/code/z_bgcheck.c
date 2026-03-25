@@ -1,5 +1,41 @@
 #include "global.h"
 
+s32 D_80119D90[0x20] = {
+    0, 1, 3, 5, 8, 0x10, 0x20, 0x40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+u16 D_80119E10[0xE] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 0xB, 0xA, 0, 0xF, 9 };
+s16 D_80119E2C[0x13] = {
+    0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x61, 0x62, 0x63,
+};
+
+typedef struct struct_80119E54 {
+    s16 unk0;
+    s32 unk4;
+} struct_80119E54;
+struct_80119E54 D_80119E54[8] = {
+    { 0x51, 0xB798 }, { 0x1A, 0x78C8 }, { 0x4F, 0x70C8 }, { 0x17, 0xACC8 },
+    { 0x44, 0x70C8 }, { 6, 0x16CC8 },   { 4, 0x198C8 },   { 0x19, 0x84C8 },
+};
+typedef struct struct_80119E94 {
+    /* 0x0 */ s16 unk0; /* inferred */
+    /* 0x2 */ s16 unk2; /* inferred */
+    /* 0x4 */ s16 unk4; /* inferred */
+    /* 0x6 */ s16 unk6; /* inferred */
+    /* 0x8 */ s32 unk8; /* inferred */
+} struct_80119E94;      /* size = 0xC */
+struct_80119E94 D_80119E94[2] = { { 7, 0x17, 7, 0xE, -1 }, { 3, 0x26, 1, 0x26, -1 } };
+WaterBox D_80119EAC = { -0x15C, 0x36D, -0x6D2, 0x229, 0x30C, 0x2104 };
+f32 D_80119EBC = -348.0f;
+f32 D_80119EC0 = 777.0f;
+f32 D_80119EC4 = -1746.0f;
+f32 D_80119EC8 = 205.0f;
+f32 D_80119ECC = 977.0f;
+f32 D_80119ED0 = -967.0f;
+Vec3f D_8015BC30[3];
+Vec3f D_8015BC58[3];
+Vec3f D_8015BC80[3];
+Vec3f D_8015BCA8[3];
+
 typedef struct struct_80039448_arg1 {
     u16 unk0;
 } struct_80039448_arg1;
@@ -227,9 +263,6 @@ void func_80038C78(CollisionPoly* arg0, s32 arg1, CollisionContext* arg2, Vec3f*
     }
 }
 
-extern Vec3f D_8015BC30;
-extern Vec3f D_8015BC3C;
-extern Vec3f D_8015BC48;
 s32 func_80038D48(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4, f32 arg5) {
     Vec3s* vtx0;
     Vec3s* vtx1;
@@ -239,29 +272,26 @@ s32 func_80038D48(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
     f32 nz;
 
     vtx0 = &arg1[arg0->unk2_arr[0] & 0x1FFF];
-    Math_Vec3s_ToVec3f(&D_8015BC30, vtx0);
+    Math_Vec3s_ToVec3f(&D_8015BC30[0], vtx0);
     vtx1 = &arg1[arg0->unk2_arr[1] & 0x1FFF];
-    Math_Vec3s_ToVec3f(&D_8015BC3C, vtx1);
+    Math_Vec3s_ToVec3f(&D_8015BC30[1], vtx1);
     vtx2 = &arg1[arg0->unk2_arr[2]];
-    Math_Vec3s_ToVec3f(&D_8015BC48, vtx2);
+    Math_Vec3s_ToVec3f(&D_8015BC30[2], vtx2);
     nx = (f32)arg0->norm.x * 0.00003051851f;
     ny = (f32)arg0->norm.y * 0.00003051851f;
     nz = (f32)arg0->norm.z * 0.00003051851f;
-    return Math3D_TriChkPointParaYIntersectDist(&D_8015BC30, &D_8015BC3C, &D_8015BC48, nx, ny, nz, (f32)arg0->dist,
-                                                arg3, arg2, arg4, arg5);
+    return Math3D_TriChkPointParaYIntersectDist(&D_8015BC30[0], &D_8015BC30[1], &D_8015BC30[2], nx, ny, nz,
+                                                (f32)arg0->dist, arg3, arg2, arg4, arg5);
 }
 
-extern Vec3f D_8015BC58;
-extern Vec3f D_8015BC64;
-extern Vec3f D_8015BC70;
 s32 func_80038E78(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4, f32 arg5) {
     f32 sp44;
     f32 sp40;
     f32 sp3C;
 
-    func_80038BE0((CollisionPoly*)arg0, arg1, &D_8015BC58);
+    func_80038BE0((CollisionPoly*)arg0, arg1, D_8015BC58);
     func_800389D4((CollisionPoly*)arg0, &sp44, &sp40, &sp3C);
-    return Math3D_TriChkPointParaYIntersectInsideTri(&D_8015BC58, &D_8015BC64, &D_8015BC70, sp44, sp40, sp3C,
+    return Math3D_TriChkPointParaYIntersectInsideTri(&D_8015BC58[0], &D_8015BC58[1], &D_8015BC58[2], sp44, sp40, sp3C,
                                                      (f32)arg0->dist, arg3, arg2, arg4, arg5);
 }
 
@@ -270,40 +300,30 @@ s32 func_80038F20(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg
     return func_80038D48(arg0, arg1, arg2, arg3, arg4, 1.0f);
 }
 
-extern Vec3f D_8015BC80;
-extern Vec3f D_8015BC8C;
-extern Vec3f D_8015BC98;
 s32 func_80038F60(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4) {
     f32 sp3C;
     f32 sp38;
     f32 sp34;
 
-    func_80038BE0(arg0, arg1, &D_8015BC80);
+    func_80038BE0(arg0, arg1, D_8015BC80);
     func_800389D4(arg0, &sp3C, &sp38, &sp34);
-    return Math3D_TriChkPointParaXIntersect(&D_8015BC80, &D_8015BC8C, &D_8015BC98, sp3C, sp38, sp34, (f32)arg0->dist,
-                                            arg2, arg3, arg4);
+    return Math3D_TriChkPointParaXIntersect(&D_8015BC80[0], &D_8015BC80[1], &D_8015BC80[2], sp3C, sp38, sp34,
+                                            (f32)arg0->dist, arg2, arg3, arg4);
 }
 
-extern Vec3f D_8015BCA8;
-extern Vec3f D_8015BCB4;
-extern Vec3f D_8015BCC0;
 s32 func_80039000(CollisionPoly* arg0, Vec3s* arg1, f32 arg2, f32 arg3, f32* arg4) {
     f32 sp3C;
     f32 sp38;
     f32 sp34;
 
-    func_80038BE0(arg0, arg1, &D_8015BCA8);
+    func_80038BE0(arg0, arg1, D_8015BCA8);
     func_800389D4(arg0, &sp3C, &sp38, &sp34);
-    return Math3D_TriChkPointParaZIntersect(&D_8015BCA8, &D_8015BCB4, &D_8015BCC0, sp3C, sp38, sp34, (f32)arg0->dist,
-                                            arg2, arg3, arg4);
+    return Math3D_TriChkPointParaZIntersect(&D_8015BCA8[0], &D_8015BCA8[1], &D_8015BCA8[2], sp3C, sp38, sp34,
+                                            (f32)arg0->dist, arg2, arg3, arg4);
 }
 
-// need bss import
-#if 0
 s32 func_800390A0(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2, Vec3f* arg3, Vec3f* arg4, s32 arg5, f32 arg6) {
-    static Vec3f D_8015BCD0;
-    static Vec3f D_8015BCDC;
-    static Vec3f D_8015BCE8;
+    static Vec3f D_8015BCD0[3];
     static Plane D_8015BCF8;
     f32 temp_ft5_sp34;
     f32 temp_fv1_2_sp28;
@@ -318,32 +338,25 @@ s32 func_800390A0(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2, Vec3f* arg3, Ve
     temp_fv1_2_sp28 = temp_ft5_sp34 - temp_ft4;
     if (((temp_ft5_sp34 >= 0.0f) && (temp_ft4 >= 0.0f)) || ((temp_ft5_sp34 < 0.0f) && (temp_ft4 < 0.0f)) ||
         ((arg5 != 0) && (temp_ft5_sp34 < 0.0f) && (temp_ft4 > 0.0f)) || ((fabsf(temp_fv1_2_sp28) < 0.008f))) {
-        // goto block_16;
         return 0;
     }
     func_800389D4(arg0, &D_8015BCF8.normal.x, &D_8015BCF8.normal.y, &D_8015BCF8.normal.z);
-    func_80038BE0(arg0, arg1, &D_8015BCD0);
+    func_80038BE0(arg0, arg1, D_8015BCD0);
     Math3D_LineSplitRatio(arg2, arg3, temp_ft5_sp34 / temp_fv1_2_sp28, arg4);
     if (((fabsf(D_8015BCF8.normal.x) > 0.5f) &&
-         (Math3D_TriChkPointParaXDist(&D_8015BCD0, &D_8015BCDC, &D_8015BCE8, &D_8015BCF8, arg4->y, arg4->z, arg6) !=
-          0)) ||
+         (Math3D_TriChkPointParaXDist(&D_8015BCD0[0], &D_8015BCD0[1], &D_8015BCD0[2], &D_8015BCF8, arg4->y, arg4->z,
+                                      arg6) != 0)) ||
         ((fabsf(D_8015BCF8.normal.y) > 0.5f) &&
-         (Math3D_TriChkPointParaYDist(&D_8015BCD0, &D_8015BCDC, &D_8015BCE8, &D_8015BCF8, arg4->z, arg4->x, arg6) !=
-          0)) ||
+         (Math3D_TriChkPointParaYDist(&D_8015BCD0[0], &D_8015BCD0[1], &D_8015BCD0[2], &D_8015BCF8, arg4->z, arg4->x,
+                                      arg6) != 0)) ||
         ((fabsf(D_8015BCF8.normal.z) > 0.5f) &&
-         (Math3D_TriChkLineSegParaZDist(&D_8015BCD0, &D_8015BCDC, &D_8015BCE8, &D_8015BCF8, arg4->x, arg4->y, arg6) !=
-          0))) {
+         (Math3D_TriChkLineSegParaZDist(&D_8015BCD0[0], &D_8015BCD0[1], &D_8015BCD0[2], &D_8015BCF8, arg4->x, arg4->y,
+                                        arg6) != 0))) {
         return 1;
     }
-block_16:
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_800390A0.s")
-#endif
 
-// need bss import
-#if 0
 s32 func_8003937C(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2, f32 arg3) {
     static Sphere16 D_8015BD08;
     static TriNorm D_8015BD10;
@@ -358,10 +371,6 @@ s32 func_8003937C(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2, f32 arg3) {
     D_8015BD08.radius = (s16)(s32)arg3;
     return Math3D_TriVsSphIntersect(&D_8015BD08, &D_8015BD10, &sp1C);
 }
-#else
-s32 func_8003937C(CollisionPoly* arg0, Vec3s* arg1, Vec3f* arg2, f32 arg3);
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_bgcheck/func_8003937C.s")
-#endif
 
 void func_80038728(struct_8003E398*, u16*, s16*);
 s16 func_80038924(CollisionPoly*, Vec3s*);
@@ -1277,10 +1286,6 @@ s32 func_8003BF18(GlobalContext* arg0) {
     return 0;
 }
 
-typedef struct struct_80119E54 {
-    s16 unk0;
-    s32 unk4;
-} struct_80119E54;
 extern struct_80119E54 D_80119E54[];
 s32 func_8003BF5C(s32 arg0, u32* arg1) {
     s32 i;
@@ -1308,13 +1313,6 @@ void func_8003BFF4(f32 arg0, s32 arg1, f32* arg2, f32* arg3, f32* arg4) {
     *arg2 = (*arg3 * arg1) + arg0;
 }
 
-typedef struct struct_80119E94 {
-    /* 0x0 */ s16 unk0; /* inferred */
-    /* 0x2 */ s16 unk2; /* inferred */
-    /* 0x4 */ s16 unk4; /* inferred */
-    /* 0x6 */ s16 unk6; /* inferred */
-    /* 0x8 */ s32 unk8; /* inferred */
-} struct_80119E94;      /* size = 0xC */
 extern struct_80119E94 D_80119E94[];
 s32 func_8003BB18(CollisionContext* arg0, GlobalContext* arg1, UNK_PTR arg2);
 s32 func_8003BF18(GlobalContext* arg0);
