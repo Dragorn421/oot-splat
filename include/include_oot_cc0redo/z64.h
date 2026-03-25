@@ -217,8 +217,8 @@ typedef struct CollisionHeader {
 } CollisionHeader;
 
 typedef struct struct_8003E398 {
-    /* 0x0 */ s16 unk0; // "short_slist_node_size"
-    /* 0x2 */ s16 unk2;                             /* inferred */
+    /* 0x0 */ u16 unk0; // "short_slist_node_size"
+    /* 0x2 */ u16 unk2; // "short_slist_node_last_index"
     /* 0x4 */ UNK_PTR unk4; // "short_slist_node_tbl"
     /* 0x8 */ UNK_PTR unk8; // "polygon_check"
 } struct_8003E398;                                  /* size = 0xC */
