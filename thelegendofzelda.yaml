@@ -5927,9 +5927,9 @@ segments:
     follows_vram: ovl_En_Wonder_Talk2
     bss_size: 0x10
     subsegments:
-      - [0xEF0CC0, asm, overlays/ovl_En_Wood02]
+      - [0xEF0CC0, c, overlays/ovl_En_Wood02]
       - [0xEF1C30, data, overlays/ovl_En_Wood02]
-      - [0xEF1CF0, rodata, overlays/ovl_En_Wood02]
+      - [0xEF1CF0, .rodata, overlays/ovl_En_Wood02]
       - [0xEF1DC0, rodatabin, rodatabin_80B3C070]
       - { name: overlays/ovl_En_Wood02, type: bss, vram: 0x80B3C1D0 }
 
