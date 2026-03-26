@@ -5,6 +5,7 @@
 #include "ultra64/gs2dex.h"
 #include "z64save.h"
 #include "z64light.h"
+#include "z64bgcheck.h"
 #include "z64actor.h"
 #include "z64player.h"
 #include "z64audio.h"
@@ -48,14 +49,13 @@
 
 // Game Info aka. Static Context (dbg ram start: 80210A10)
 // Data normally accessed through REG macros (see regs.h)
-typedef struct
-{
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ s32 unk4;
-    /* 0x08 */ s32 unk8;
-    /* 0x0C */ s32 unkC;
-    /* 0x10 */ s32 unk10;
-    /* 0x14 */ s16   data[0xAE0];
+typedef struct {
+    /* 0x00 */ s32  regPage;   // 1 is first page
+    /* 0x04 */ s32  regGroup;  // "register" group (R, RS, RO, RP etc.)
+    /* 0x08 */ s32  regCur;    // selected register within page
+    /* 0x0C */ s32  dpadLast;
+    /* 0x10 */ s32  repeat;
+    /* 0x14 */ s16  data[REG_GROUPS * REG_PER_GROUP]; // 0xAE0 entries
 } GameInfo; // size = 0x15D4
 
 typedef struct {
@@ -188,87 +188,6 @@ typedef struct {
     /* 0x00 */ u32 toggle;
     /* 0x04 */ s32 counter;
 } SubGlobalContext7B8; // size = 0x8
-
-typedef struct {
-    /* 0x00 */ s16 xMin;
-    /* 0x02 */ s16 ySurface;
-    /* 0x04 */ s16 zMin;
-    /* 0x06 */ s16 xLength;
-    /* 0x08 */ s16 zLength;
-    /* 0x0C */ u32 properties;
-
-    // 0x0008_0000 = ?
-    // 0x0007_E000 = Room Index, 0x3F = all rooms
-    // 0x0000_1F00 = Lighting Settings Index
-    // 0x0000_00FF = CamData index
-} WaterBox; // size = 0x10
-
-typedef struct CollisionHeader {
-    /* 0x00 */ Vec3s     colAbsMin;
-    /* 0x06 */ Vec3s     colAbsMax;
-    /* 0x0C */ s16       nbVertices;
-    /* 0x10 */ Vec3s*     vertexArray;
-    /* 0x14 */ s16       nbPolygons;
-    /* 0x18 */ void*     polygonArray;
-    /* 0x1C */ void*     polygonTypes;
-    /* 0x20 */ void*     cameraData;
-    /* 0x24 */ u16       nbWaterBoxes;
-    /* 0x28 */ WaterBox* waterBoxes;
-} CollisionHeader;
-
-typedef struct struct_8003E398 {
-    /* 0x0 */ u16 unk0; // "short_slist_node_size"
-    /* 0x2 */ u16 unk2; // "short_slist_node_last_index"
-    /* 0x4 */ UNK_PTR unk4; // "short_slist_node_tbl"
-    /* 0x8 */ UNK_PTR unk8; // "polygon_check"
-} struct_8003E398;                                  /* size = 0xC */
-
-typedef struct {
-    /* 0x00 */ CollisionHeader *colHeader;
-    /* 0x04 */ f32 unk4;                            /* inferred */
-    /* 0x08 */ f32 unk8;                            /* inferred */
-    /* 0x0C */ f32 unkC;                            /* inferred */
-    /* 0x10 */ f32 unk10;                           /* inferred */
-    /* 0x14 */ f32 unk14;                           /* inferred */
-    /* 0x18 */ f32 unk18;                           /* inferred */
-    /* 0x1C */ s32 unk1C;                           /* inferred */
-    /* 0x20 */ s32 unk20;                           /* inferred */
-    /* 0x24 */ s32 unk24;                           /* inferred */
-    /* 0x28 */ f32 unk28;                             /* inferred */
-    /* 0x2C */ f32 unk2C;                             /* inferred */
-    /* 0x30 */ f32 unk30;                             /* inferred */
-    /* 0x34 */ f32 unk34;                             /* inferred */
-    /* 0x38 */ f32 unk38;                             /* inferred */
-    /* 0x3C */ f32 unk3C;                             /* inferred */
-    /* 0x40 */ UNK_PTR unk40;
-    /* 0x44 */ struct_8003E398 unk44;
-} StaticCollisionContext; // size = 0x50
-
-typedef struct struct_800387FC {
-    UNK_TYPE4 unk0;
-    UNK_TYPE4 unk4;
-    UNK_TYPE4 unk8;
-} struct_800387FC;
-
-typedef struct {
-    /* 0x0000 */ u8 unk0;
-    /* 0x0001 */ char pad1[1];
-    /* 0x0002 */ s16 unk2;
-    /* 0x0004 */ ActorMesh actorMeshArr[50];
-    /* 0x138C */ u16    flags[50];
-    /* 0x13F0 */ UNK_TYPE unk13F0;
-    /* 0x13F4 */ Vec3s* unk13F4;
-    /* 0x13F8 */ struct_800387FC unk13F8;
-    /* 0x1404 */ s32 unk1404;                       /* inferred */
-    /* 0x1408 */ s32 unk1408;                       /* inferred */
-    /* 0x140C */ s32 unk140C;                       /* inferred */
-    /* 0x1410 */ u32 unk1410;                       /* inferred */
-} DynaCollisionContext; // size = 0x1414
-
-typedef struct {
-    /* 0x0000 */ StaticCollisionContext stat;
-    /* 0x0050 */ DynaCollisionContext   dyna;
-} CollisionContext; // size = 0x1464
 
 typedef struct {
     /* 0x00 */ Vec3f    pos;
@@ -444,10 +363,14 @@ typedef struct {
     /* 0x01FC */ s16    unk_1FC;
     /* 0x01FE */ s16    unk_1FE;
     /* 0x0200 */ s16    unk_200;
-    /* 0x0202 */ s16    unk_202[3];
-    /* 0x0208 */ s16    unk_208[3];
-    /* 0x020E */ s16    unk_20E[6];
-    /* 0x021A */ s16    unk_21A[6];
+    /* 0x0202 */ s16    beatingHeartPrim[3];
+    /* 0x0208 */ s16    beatingHeartEnv[3];
+    /* 0x020E */ s16    heartsPrimR[2];
+    /* 0x0212 */ s16    heartsPrimG[2];
+    /* 0x0216 */ s16    heartsPrimB[2];
+    /* 0x021A */ s16    heartsEnvR[2];
+    /* 0x021E */ s16    heartsEnvG[2];
+    /* 0x0222 */ s16    heartsEnvB[2];
     /* 0x0226 */ s16    unk_226;
     /* 0x0228 */ s16    unk_228;
     /* 0x022A */ s16    unk_22A;
@@ -744,16 +667,16 @@ typedef struct {
 } RoomContext; // size = 0x74
 
 typedef struct {
-    /* 0x000 */ s16 nATColliders;
-    /* 0x002 */ u16 unk2;
-    /* 0x004 */ Collider* atColliders[50];
-    /* 0x0CC */ s32 nACColliders;
-    /* 0x0D0 */ Collider* acColliders[60];
-    /* 0x1C0 */ s32 nOCColliders;
-    /* 0x1C4 */ Collider* ocColliders[50];
-    s32 unk28C;
-    struct_ColliderCtx_290* unk290[3];
-} ColliderContext; // size = 0x29C
+    /* 0x000 */ s16 colAtCount;
+    /* 0x002 */ u16 sacFlags;
+    /* 0x004 */ Collider* colAt[COLLISION_CHECK_AT_MAX];
+    /* 0x0CC */ s32 colAcCount;
+    /* 0x0D0 */ Collider* colAc[COLLISION_CHECK_AC_MAX];
+    /* 0x1C0 */ s32 colOcCount;
+    /* 0x1C4 */ Collider* colOc[COLLISION_CHECK_OC_MAX];
+    /* 0x28C */ s32 colOcLineCount;
+    /* 0x290 */ OcLine* colOcLine[COLLISION_CHECK_OC_LINE_MAX];
+} CollisionCheckContext; // size = 0x29C
 
 typedef struct ListAlloc {
     /* 0x00 */ struct ListAlloc* prev;
@@ -995,7 +918,7 @@ typedef struct GlobalContext {
     /* 0x11E5C */ s8 shootingGalleryStatus;
     /* 0x11E5D */ s8 bombchuBowlingStatus; // "bombchu_game_flag"
     /* 0x11E5E */ u8 fadeTransition;
-    /* 0x11E60 */ ColliderContext colliderCtx;
+    /* 0x11E60 */ CollisionCheckContext colChkCtx;
     /* 0x120FC */ u16 envFlags[20];
     /* 0x12124 */ PreRenderContext preRenderCtx;
     /* 0x12174 */ char unk_12174[0x53];

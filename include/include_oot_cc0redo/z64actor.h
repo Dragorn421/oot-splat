@@ -6,14 +6,12 @@
 #include "z64math.h"
 #include "z64collision_check.h"
 
-#include "z64collision_check.h"
-
 #define ACTOR_NUMBER_MAX 200
 #define INVISIBLE_ACTOR_MAX 20
 #define AM_FIELD_SIZE 0x27A0
 
-// From z64.h
 struct Actor;
+// From z64.h
 struct GlobalContext;
 
 // From z64light.h
@@ -24,19 +22,6 @@ typedef struct {
     Vec3s rot;
 } PosRot; // size = 0x14
 
-typedef struct {
-    /* 0x00 */ s16 unk0; /* inferred */
-    union {
-        struct {
-            /* 0x02 */ u16 unk2;                            /* inferred */
-            /* 0x04 */ u16 unk4;                            /* inferred */
-            /* 0x06 */ u16 unk6;                            /* inferred */
-        };
-        u16 unk2_arr[3];
-    };
-    /* 0x08 */ Vec3s  norm;  // Normal vector
-    /* 0x0E */ s16    dist;  // Plane distance from origin
-} CollisionPoly; // size = 0x10
 
 typedef void (*ActorFunc)(struct Actor*, struct GlobalContext*);
 typedef u16 (*callback1_800343CC)(struct GlobalContext*, struct Actor*);
@@ -73,31 +58,37 @@ typedef struct {
 } ActorOverlay; // size = 0x20
 
 typedef struct {
-    union {
-        u8 raw;
-        struct {
-            char damage : 4;
-            char effect : 4;
-        };
-    } attack[32];
-} ActorDamageChart;
-
-#define MASS_IMMOVABLE 0xFF // Cannot be pushed by OC colliders
-#define MASS_HEAVY 0xFE // Can only be pushed by OC colliders from actors with IMMOVABLE or HEAVY mass.
+    u8 table[32];
+} DamageTable;
 
 typedef struct {
-    /* 0x00 */ ActorDamageChart* damageChart;  // For actors which contain a damage chart (example: Stalfos)...
+    /* 0x00 */ u8 health;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ u8 mass;
+} CollisionCheckInfoInit;
+
+typedef struct {
+    /* 0x00 */ u8 health;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ u8 mass;
+} CollisionCheckInfoInit2;
+
+typedef struct {
+    /* 0x00 */ DamageTable* damageTable;  // For actors which contain one (example: Stalfos)...
     /* 0x04 */ Vec3f displacement; // Amount to correct velocity (0x5C) by when colliding into a body
     /* 0x10 */ s16   unk_10;
     /* 0x12 */ s16   unk_12;
     /* 0x14 */ u16   unk_14;
-    /* 0x16 */ u8    mass; // Used to compute displacement
+    /* 0x16 */ u8    mass; // Used to compute displacement, 50 is common value, 0xFF for infinite mass/unmoveable
     /* 0x17 */ u8    health;
     /* 0x18 */ u8    damage; // Amount to decrement health by
-    /* 0x19 */ u8    damageEffect;
-    /* 0x1A */ u8    atHitBacklash;
-    /* 0x1B */ u8    acHitSpecialEffect;
-} CollideData; // size = 0x1C
+    /* 0x19 */ u8    damageEffect; // Stores what effect should occur when hit by a weapon
+    /* 0x1A */ u8    atHitEffect; // Stores what effect should occur when AT connects with an AC
+    /* 0x1B */ u8    acHitEffect; // Stores what effect should occur when AC is touched by an AT
+} CollisionCheckInfo; // size = 0x1C
 
 typedef struct {
     /* 0x00 */ Vec3s  rot; // Current actor shape rotation
@@ -131,15 +122,15 @@ typedef struct Actor {
     /* 0x078 */ CollisionPoly* floorPoly; // Floor polygon an actor is over/touching
     /* 0x07C */ u8      wallPolySource; // Complex Poly Surface Source. 0x32 = Scene
     /* 0x07D */ u8      floorPolySource; // Complex Poly Surface Source. 0x32 = Scene. related to 0x80/88
-    /* 0x07E */ s16     wallPolyRot; // Rotation of the wall poly an actor is touching
-    /* 0x080 */ f32     groundY;
-    /* 0x084 */ f32     yDistToWater;
+    /* 0x07E */ s16     wallPolyRot; // Rotation of the wall poly
+    /* 0x080 */ f32     groundY; // Floor poly height
+    /* 0x084 */ f32     yDistToWater; // Distance from water surface 
     /* 0x088 */ u16     bgCheckFlags;
     /* 0x08A */ s16     yawTowardsLink;
     /* 0x08C */ f32     xyzDistToLinkSq;
     /* 0x090 */ f32     xzDistToLink;
     /* 0x094 */ f32     yDistToLink;
-    /* 0x098 */ CollideData collideData;
+    /* 0x098 */ CollisionCheckInfo colChkInfo;
     /* 0x0B4 */ ActorShape shape;
     /* 0x0CC */ Vec3f   unk_CC[2];
     /* 0x0E4 */ Vec3f   projectedPos; // actor position in projected space
@@ -147,7 +138,7 @@ typedef struct Actor {
     /* 0x0F4 */ f32     uncullZoneForward; // amount to increase the uncull zone forward by (in projected space)
     /* 0x0F8 */ f32     uncullZoneScale; // amount to increase the uncull zone scale by (in projected space)
     /* 0x0FC */ f32     uncullZoneDownward; // amount to increase uncull zone downward by (in projected space)
-    /* 0x100 */ Vec3f   pos4;
+    /* 0x100 */ Vec3f   pos4; // previous position
     /* 0x10C */ u8      unk_10C; // Z-Target related
     /* 0x10D */ u8      unk_10D; // Z-Target related
     /* 0x10E */ u16     textId; // Text id to pass to link/display when interacting with an actor
@@ -169,53 +160,13 @@ typedef struct Actor {
     /* 0x13C */ char    dbgPad[0x10]; // Padding that only exists in the debug rom
 } Actor; // size = 0x14C
 
-typedef struct CollideDataInit {
-    /* 0x00 */ u8 health;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ u8 mass;
-} CollideDataInit;
 
-typedef struct CollideDataInitAlt {
-    /* 0x00 */ u8 health;
-    /* 0x02 */ s16 unk_10;
-    /* 0x04 */ s16 unk_12;
-    /* 0x06 */ s16 unk_14;
-    /* 0x08 */ u8 mass;
-} CollideDataInitAlt;
-
-typedef struct ActorMeshTransform {
-    Vec3f scale;
-    Vec3s rot;
-    Vec3f pos;
-} ActorMeshTransform;
-
-typedef struct ActorMesh_sub8 {
-    UNK_TYPE2 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-} ActorMesh_sub8;
-
-typedef struct {
-    /* 0x00 */ Actor* actor;
-    /* 0x04 */ struct CollisionHeader* unk_04;
-    /* 0x08 */ ActorMesh_sub8 unk8;
-    /* 0x10 */ UNK_TYPE2 unk10;
-    /* 0x12 */ char unk12[2];
-    /* 0x14 */ ActorMeshTransform transform1;
-    /* 0x34 */ ActorMeshTransform transform2;
-    /* 0x54 */ Sphere16 unk54;
-    /* 0x5C */ f32 unk5C;
-    /* 0x60 */ f32 unk60;
-} ActorMesh; // size = 0x64
-
-typedef struct {
-    /* 0x000 */ Actor actor;
-    /* 0x14C */ u32 dynaPolyId;
+typedef struct DynaPolyActor {
+    /* 0x000 */ struct Actor actor;
+    /* 0x14C */ s32 bgId;
     /* 0x150 */ f32 unk_150;
     /* 0x154 */ f32 unk_154;
-    /* 0x158 */ s16 unk_158;
+    /* 0x158 */ s16 unk_158; // y rotation?
     /* 0x15A */ u16 unk_15A;
     /* 0x15C */ u32 unk_15C;
     /* 0x160 */ u8 unk_160;

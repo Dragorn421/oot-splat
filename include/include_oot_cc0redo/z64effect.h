@@ -22,37 +22,37 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ Vec3f velocity;
-    /* 0x0C */ Vec3f pos;
-    /* 0x18 */ Vec3s unk18;
-    /* 0x1E */ Vec3s unk1E;
+    /* 0x0C */ Vec3f position;
+    /* 0x18 */ Vec3s unkVelocity;
+    /* 0x1E */ Vec3s unkPosition;
 } EffectSparkElement; // size = 0x24
 
 typedef struct {
-    /* 0x000 */ Vec3s pos;
+    /* 0x000 */ Vec3s position;
     /* 0x008 */ s32 numElements; // "table_size"; calculated as uDiv * vDiv + 2
     /* 0x00C */ EffectSparkElement elements[32];
-    /* 0x48C */ f32 unk48C;
-    /* 0x490 */ f32 unk490;
+    /* 0x48C */ f32 speed;
+    /* 0x490 */ f32 gravity;
     /* 0x494 */ u32 uDiv; // "u_div"
     /* 0x498 */ u32 vDiv; // "v_div"
-    /* 0x49C */ Color_RGBA8 unk49C[4];
-    /* 0x4AC */ Color_RGBA8 unk4AC[4];
-    /* 0x4BC */ s32 unk4BC;
-    /* 0x4C0 */ s32 unk4C0;
+    /* 0x49C */ Color_RGBA8 colorStart[4];
+    /* 0x4AC */ Color_RGBA8 colorEnd[4];
+    /* 0x4BC */ s32 timer;
+    /* 0x4C0 */ s32 duration;
 } EffectSparkInit; // size = 0x4C4
 
 typedef struct {
-    /* 0x000 */ Vec3s pos;
+    /* 0x000 */ Vec3s position;
     /* 0x008 */ s32 numElements; // "table_size"; calculated as uDiv * vDiv + 2
     /* 0x00C */ EffectSparkElement elements[32];
-    /* 0x48C */ f32 unk48C;
-    /* 0x490 */ f32 unk490;
+    /* 0x48C */ f32 speed;
+    /* 0x490 */ f32 gravity;
     /* 0x494 */ u32 uDiv; // "u_div"
     /* 0x498 */ u32 vDiv; // "v_div"
-    /* 0x49C */ Color_RGBA8 unk49C[4];
-    /* 0x4AC */ Color_RGBA8 unk4AC[4];
+    /* 0x49C */ Color_RGBA8 colorStart[4];
+    /* 0x4AC */ Color_RGBA8 colorEnd[4];
     /* 0x4BC */ s32 timer;
-    /* 0x4C0 */ s32 unk4C0;
+    /* 0x4C0 */ s32 duration;
 } EffectSpark; // size = 0x4C4
 
 typedef struct {
@@ -110,7 +110,7 @@ typedef struct {
 } EffectBlure; // size = 0x1AC
 
 typedef struct {
-    /* 0x00 */ f32 unk00;
+    /* 0x00 */ f32 initialSpeed;
     /* 0x04 */ f32 endXChange;
     /* 0x08 */ f32 endX;
     /* 0x0C */ f32 startXChange;
@@ -121,17 +121,17 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ u8 numElements;
-    /* 0x02 */ Vec3s pos;
-    /* 0x08 */ Color_RGBA8 primColor0;
-    /* 0x0C */ Color_RGBA8 envColor0;
-    /* 0x10 */ Color_RGBA8 primColor1;
-    /* 0x14 */ Color_RGBA8 envColor1;
-    /* 0x18 */ Color_RGBA8 primColor2;
-    /* 0x1C */ Color_RGBA8 envColor2;
+    /* 0x02 */ Vec3s position;
+    /* 0x08 */ Color_RGBA8 primColorStart;
+    /* 0x0C */ Color_RGBA8 envColorStart;
+    /* 0x10 */ Color_RGBA8 primColorMid;
+    /* 0x14 */ Color_RGBA8 envColorMid;
+    /* 0x18 */ Color_RGBA8 primColorEnd;
+    /* 0x1C */ Color_RGBA8 envColorEnd;
     /* 0x20 */ f32 deceleration;
-    /* 0x24 */ f32 unk24;
-    /* 0x28 */ f32 unk28;
-    /* 0x2C */ u8 unk2C;
+    /* 0x24 */ f32 maxInitialSpeed;
+    /* 0x28 */ f32 lengthCutoff;
+    /* 0x2C */ u8 duration;
     /* 0x2E */ LightPoint lightPoint;
     /* 0x3C */ s32 lightDecay; // halves light radius every frame when set to 1
 } EffectShieldParticleInit; // size = 0x40
@@ -139,19 +139,19 @@ typedef struct {
 typedef struct {
     /* 0x000 */ EffectShieldParticleElement elements[16];
     /* 0x180 */ u8 numElements;
-    /* 0x182 */ Vec3s pos;
-    /* 0x188 */ Color_RGBA8 primColor0;
-    /* 0x18C */ Color_RGBA8 envColor0;
-    /* 0x190 */ Color_RGBA8 primColor1;
-    /* 0x194 */ Color_RGBA8 envColor1;
-    /* 0x198 */ Color_RGBA8 primColor2;
-    /* 0x19C */ Color_RGBA8 envColor2;
+    /* 0x182 */ Vec3s position;
+    /* 0x188 */ Color_RGBA8 primColorStart;
+    /* 0x18C */ Color_RGBA8 envColorStart;
+    /* 0x190 */ Color_RGBA8 primColorMid;
+    /* 0x194 */ Color_RGBA8 envColorMid;
+    /* 0x198 */ Color_RGBA8 primColorEnd;
+    /* 0x19C */ Color_RGBA8 envColorEnd;
     /* 0x1A0 */ f32 deceleration;
     /* 0x1A4 */ char unk_1A4[0x04];
-    /* 0x1A8 */ f32 unk1A8;
-    /* 0x1AC */ f32 unk1AC;
-    /* 0x1B0 */ u8 unk1B0;
-    /* 0x1B1 */ u8 unk1B1;
+    /* 0x1A8 */ f32 maxInitialSpeed;
+    /* 0x1AC */ f32 lengthCutoff;
+    /* 0x1B0 */ u8 duration;
+    /* 0x1B1 */ u8 timer;
     /* 0x1B2 */ LightInfo lightInfo;
     /* 0x1C0 */ LightNode* lightNode;
     /* 0x1C4 */ s32 lightDecay; // halves light radius every frame when set to 1
