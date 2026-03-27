@@ -16,7 +16,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnWood02_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 s32 EnWood02_IsInUncullZone(EnWood02* this, GlobalContext* globalCtx, Vec3f* arg2);
-void func_80B3B094(EnWood02* this, GlobalContext* globalCtx);
+void EnWood02_SpawnUnculledChildren(EnWood02* this, GlobalContext* globalCtx);
 
 extern Gfx D_6000090[];
 extern Gfx D_6000340[];
@@ -42,7 +42,7 @@ static ColliderCylinderInit D_80B3BF00 = {
 };
 static f32 sSpawnDistances[] = { 707.0f, 525.0f, 510.0f, 500.0f, 566.0f, 141.0f };
 static s16 sSpawnAngles[] = { 0x1FFF, 0x4C9E, 0x77F5, 0xA5C9, -0x293D, 0xA000 };
-static InitChainEntry D_80B3BF50[] = {
+static InitChainEntry sInitChain[] = {
     ICHAIN_F32(unk_4C, 5600, ICHAIN_STOP),
 };
 static Gfx* D_80B3BF54[7] = {
@@ -75,7 +75,7 @@ s32 EnWood02_IsInUncullZone(EnWood02* this, GlobalContext* globalCtx, Vec3f* pos
     return false;
 }
 
-void func_80B3B094(EnWood02* this, GlobalContext* globalCtx) {
+void EnWood02_SpawnUnculledChildren(EnWood02* this, GlobalContext* globalCtx) {
     s32 pad[2];
     Vec3f newEnWood02Pos;
     EnWood02* newEnWood02;
@@ -84,7 +84,7 @@ void func_80B3B094(EnWood02* this, GlobalContext* globalCtx) {
     s32 i;
 
     for (i = 4; i >= 0; i--) {
-        if (!(this->unk14E[i] & 0x7F)) {
+        if ((this->unk14E[i] & 0x7F) == 0) {
             spawnAngleModifier = 0;
             if (this->actor.params == EN_WOOD_02_TYPE_15) {
                 spawnAngleModifier = 0x4000;
@@ -117,15 +117,15 @@ void func_80B3B094(EnWood02* this, GlobalContext* globalCtx) {
 
 void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
     s16 var_t0_sp4E;
-    f32 sp48;
+    f32 scale;
     EnWood02* this = (EnWood02*)thisx;
     f32 floorY;
-    CollisionPoly* sp3C;
-    s32 sp38;
+    CollisionPoly* floorPoly;
+    s32 floorBgId;
     s32 pad;
     s16 spawnAngleModifier;
 
-    sp48 = 1.0f;
+    scale = 1.0f;
     var_t0_sp4E = 0;
     this->unk14C = (this->actor.params >> 8) & 0xFF;
     if (this->actor.initPosRot.rot.z != 0) {
@@ -137,7 +137,7 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->unk14C = -1;
     }
     this->actor.params = this->actor.params & 0xFF;
-    Actor_ProcessInitChain(&this->actor, D_80B3BF50);
+    Actor_ProcessInitChain(&this->actor, sInitChain);
     if (this->actor.params < EN_WOOD_02_TYPE_11) {
         Collider_InitCylinder(globalCtx, &this->unk158);
         Collider_SetCylinder(globalCtx, &this->unk158, &this->actor, &D_80B3BF00);
@@ -147,33 +147,30 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
         case EN_WOOD_02_TYPE_15:
         case EN_WOOD_02_TYPE_21:
             var_t0_sp4E = 1;
-            /* fallthrough */
         case EN_WOOD_02_TYPE_16:
         case EN_WOOD_02_TYPE_22:
             var_t0_sp4E += 1;
-            /* fallthrough */
         case EN_WOOD_02_TYPE_0:
         case EN_WOOD_02_TYPE_12:
         case EN_WOOD_02_TYPE_18:
-            sp48 = 1.5f;
+            scale = 1.5f;
             this->actor.uncullZoneForward = 4000.0f;
             this->actor.uncullZoneScale = 2000.0f;
             this->actor.uncullZoneDownward = 2400.0f;
             break;
+
         case EN_WOOD_02_TYPE_3:
         case EN_WOOD_02_TYPE_6:
         case EN_WOOD_02_TYPE_8:
         case EN_WOOD_02_TYPE_13:
         case EN_WOOD_02_TYPE_19:
             var_t0_sp4E = 1;
-            /* fallthrough */
         case EN_WOOD_02_TYPE_4:
         case EN_WOOD_02_TYPE_7:
         case EN_WOOD_02_TYPE_9:
         case EN_WOOD_02_TYPE_14:
         case EN_WOOD_02_TYPE_20:
             var_t0_sp4E += 1;
-            /* fallthrough */
         case EN_WOOD_02_TYPE_1:
         case EN_WOOD_02_TYPE_5:
         case EN_WOOD_02_TYPE_10:
@@ -183,16 +180,18 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
             this->actor.uncullZoneScale = 800.0f;
             this->actor.uncullZoneDownward = 1800.0f;
             break;
+
         case EN_WOOD_02_TYPE_2:
-            sp48 = 0.6f;
+            scale = 0.6f;
             this->actor.uncullZoneForward = 4000.0f;
             this->actor.uncullZoneScale = 400.0f;
             this->actor.uncullZoneDownward = 1000.0f;
             break;
+
         case EN_WOOD_02_TYPE_23:
         case EN_WOOD_02_TYPE_24:
             this->unk14E[0] = 0x4B;
-            sp48 = 0.02f;
+            scale = 0.02f;
             this->actor.velocity.x = Rand_CenteredFloat(6.0f);
             this->actor.velocity.z = Rand_CenteredFloat(6.0f);
             var_t0_sp4E = 0;
@@ -212,7 +211,7 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
     } else {
         this->unk154 = 5;
     }
-    Actor_SetScale(&this->actor, sp48);
+    Actor_SetScale(&this->actor, scale);
     this->unk153 = var_t0_sp4E;
     if (var_t0_sp4E != 0) {
         spawnAngleModifier = 0;
@@ -221,7 +220,7 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
         }
         if (var_t0_sp4E == 2) {
             this->unk154 |= this->unk14C * 0x10;
-            func_80B3B094(this, globalCtx);
+            EnWood02_SpawnUnculledChildren(this, globalCtx);
             sCos = Math_CosS(sSpawnAngles[5] + this->actor.posRot.rot.y + spawnAngleModifier);
             sSin = Math_SinS(sSpawnAngles[5] + this->actor.posRot.rot.y + spawnAngleModifier);
             this->actor.posRot.pos.x += sSin * sSpawnDistances[5];
@@ -230,7 +229,8 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
             this->actor.flags |= 0x10;
         }
         this->actor.posRot.pos.y += 200.0f;
-        floorY = BgCheck_EntityRaycastFloor4(&globalCtx->colCtx, &sp3C, &sp38, &this->actor, &this->actor.posRot.pos);
+        floorY = BgCheck_EntityRaycastFloor4(&globalCtx->colCtx, &floorPoly, &floorBgId, &this->actor,
+                                             &this->actor.posRot.pos);
         if (floorY > BGCHECK_Y_MIN) {
             this->actor.posRot.pos.y = floorY;
         } else {
@@ -275,7 +275,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
             return;
         }
     } else if (this->unk153 == 2) {
-        func_80B3B094(this, globalCtx);
+        EnWood02_SpawnUnculledChildren(this, globalCtx);
     }
     if (thisx->params < EN_WOOD_02_TYPE_11) {
         if (this->unk158.base.acFlags & 2) {
@@ -286,7 +286,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
             sp58 = this->actor.posRot.pos;
             sp58.y += 200.0f;
             if ((this->unk14C >= 0) && (this->unk14C < 0x64)) {
-                Item_DropCollectibleRandom(globalCtx, &this->actor, &sp58, (s16)(this->unk14C * 0x10));
+                Item_DropCollectibleRandom(globalCtx, &this->actor, &sp58, this->unk14C * 0x10);
             } else if (this->actor.initPosRot.rot.z != 0) {
                 this->actor.initPosRot.rot.z &= 0x1FFF;
                 this->actor.initPosRot.rot.z |= 0xE000;
@@ -294,10 +294,10 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
                             this->actor.posRot.rot.y, 0, this->actor.initPosRot.rot.z);
                 this->actor.initPosRot.rot.z = 0;
             }
-            var_v1_sp44_or_sp50 = 23;
+            var_v1_sp44_or_sp50 = EN_WOOD_02_TYPE_23;
             if (this->unk14C >= -1) {
                 if ((this->actor.params == EN_WOOD_02_TYPE_6) || (this->actor.params == EN_WOOD_02_TYPE_7)) {
-                    var_v1_sp44_or_sp50 = 24;
+                    var_v1_sp44_or_sp50 = EN_WOOD_02_TYPE_24;
                 }
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_TREE_SWING);
                 for (var_s0 = 3; var_s0 >= 0; var_s0--) {
@@ -314,7 +314,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
             CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->unk158.base);
         }
     } else if (this->actor.params < EN_WOOD_02_TYPE_23) {
-        player = (Player*)globalCtx->actorCtx.actorList[2].first;
+        player = PLAYER;
         if ((this->unk14C >= (-1)) && (((((player->rideActor == NULL)) && (sqrt(this->actor.xyzDistToLinkSq) < 20.0)) &&
                                         (player->linearVelocity != 0.0f)) ||
                                        (((player->rideActor != NULL) && (sqrt(this->actor.xyzDistToLinkSq) < 60.0)) &&
@@ -340,44 +340,43 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
     if (this->unk14C < -1) {
         this->unk14C += 1;
         sp6C = Math_SinS((s16)((this->unk14C ^ 0xFFFF) * 0x3332)) * 250.0f;
-        this->actor.shape.rot.x =
-            (s16)((s32)(Math_CosS((s16)(this->actor.yawTowardsLink - this->actor.shape.rot.y)) * sp6C));
-        this->actor.shape.rot.z =
-            (s16)((s32)(Math_SinS((s16)(this->actor.yawTowardsLink - this->actor.shape.rot.y)) * sp6C));
+        this->actor.shape.rot.x = Math_CosS(this->actor.yawTowardsLink - this->actor.shape.rot.y) * sp6C;
+        this->actor.shape.rot.z = Math_SinS(this->actor.yawTowardsLink - this->actor.shape.rot.y) * sp6C;
     }
 }
 
 void EnWood02_Draw(Actor* thisx, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx;
-    s16 v;
+    s16 type;
     EnWood02* this = (EnWood02*)thisx;
-    u8 sp53;
-    u8 sp52;
-    u8 sp51;
+    u8 r;
+    u8 g;
+    u8 b;
 
     gfxCtx = globalCtx->state.gfxCtx;
     OPEN_DISPS(gfxCtx, "../z_en_wood02.c", 775);
-    v = this->actor.params;
-    if ((v == EN_WOOD_02_TYPE_8) || (v == EN_WOOD_02_TYPE_9) || (v == EN_WOOD_02_TYPE_5) || (v == EN_WOOD_02_TYPE_23)) {
-        sp53 = 50;
-        sp52 = 170;
-        sp51 = 70;
-    } else if ((v == EN_WOOD_02_TYPE_6) || (v == EN_WOOD_02_TYPE_7) || ((v == EN_WOOD_02_TYPE_24))) {
-        sp53 = 180;
-        sp52 = 155;
-        sp51 = 0;
+    type = this->actor.params;
+    if ((type == EN_WOOD_02_TYPE_8) || (type == EN_WOOD_02_TYPE_9) || (type == EN_WOOD_02_TYPE_5) ||
+        (type == EN_WOOD_02_TYPE_23)) {
+        r = 50;
+        g = 170;
+        b = 70;
+    } else if ((type == EN_WOOD_02_TYPE_6) || (type == EN_WOOD_02_TYPE_7) || ((type == EN_WOOD_02_TYPE_24))) {
+        r = 180;
+        g = 155;
+        b = 0;
     } else {
-        sp53 = sp52 = sp51 = 255;
+        r = g = b = 255;
     }
     func_80093D84(gfxCtx);
     if ((this->actor.params == EN_WOOD_02_TYPE_23) || (this->actor.params == EN_WOOD_02_TYPE_24)) {
         func_80093D18(gfxCtx);
-        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, sp53, sp52, sp51, 127);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, r, g, b, 127);
         Gfx_DrawDListOpa(globalCtx, D_6000700);
     } else {
         if (D_80B3BF70[this->unk154 & 0xF] != NULL) {
             Gfx_DrawDListOpa(globalCtx, D_80B3BF54[this->unk154 & 0xF]);
-            gDPSetEnvColor(POLY_XLU_DISP++, sp53, sp52, sp51, 0);
+            gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, 0);
             gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", 808),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, D_80B3BF70[this->unk154 & 0xF]);
