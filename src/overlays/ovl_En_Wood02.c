@@ -56,23 +56,23 @@ static f32 D_80B3C1D0;
 static f32 D_80B3C1D4;
 
 s32 func_80B3AF70(EnWood02* this, GlobalContext* globalCtx, Vec3f* arg2) {
-    f32 var_fa0;
+    f32 invW;
 
     SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->mf_11D60, arg2, &this->actor.projectedPos, &this->actor.projectedW);
     if (this->actor.projectedW == 0.0f) {
-        var_fa0 = 1000.0f;
+        invW = 1000.0f;
     } else {
-        var_fa0 = fabsf(1.0f / this->actor.projectedW);
+        invW = fabsf(1.0f / this->actor.projectedW);
     }
     if ((-this->actor.uncullZoneScale < this->actor.projectedPos.z) &&
         (this->actor.projectedPos.z < (this->actor.uncullZoneForward + this->actor.uncullZoneScale)) &&
-        (((fabsf(this->actor.projectedPos.x) - this->actor.uncullZoneScale) * var_fa0) < 1.0f)) {
-        if ((((this->actor.projectedPos.y + this->actor.uncullZoneDownward) * var_fa0) > -1.0f) &&
-            (((this->actor.projectedPos.y - this->actor.uncullZoneScale) * var_fa0) < 1.0f)) {
-            return 1;
+        (((fabsf(this->actor.projectedPos.x) - this->actor.uncullZoneScale) * invW) < 1.0f)) {
+        if ((((this->actor.projectedPos.y + this->actor.uncullZoneDownward) * invW) > -1.0f) &&
+            (((this->actor.projectedPos.y - this->actor.uncullZoneScale) * invW) < 1.0f)) {
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 void func_80B3B094(EnWood02* this, GlobalContext* globalCtx) {
@@ -89,20 +89,20 @@ void func_80B3B094(EnWood02* this, GlobalContext* globalCtx) {
             if (this->actor.params == 0xF) {
                 var_s1 = 0x4000;
             }
-            D_80B3C1D0 = Math_CosS((s16)(D_80B3BF44[var_s3] + this->actor.posRot.rot.y + var_s1));
-            D_80B3C1D4 = Math_SinS((s16)(D_80B3BF44[var_s3] + this->actor.posRot.rot.y + var_s1));
+            D_80B3C1D0 = Math_CosS(D_80B3BF44[var_s3] + this->actor.posRot.rot.y + var_s1);
+            D_80B3C1D4 = Math_SinS(D_80B3BF44[var_s3] + this->actor.posRot.rot.y + var_s1);
             sp7C.x = (D_80B3BF2C[var_s3] * D_80B3C1D4) + this->actor.initPosRot.pos.x;
             sp7C.y = this->actor.initPosRot.pos.y;
             sp7C.z = (D_80B3BF2C[var_s3] * D_80B3C1D0) + this->actor.initPosRot.pos.z;
-            if (func_80B3AF70(this, globalCtx, (Vec3f*)&sp7C) != 0) {
+            if (func_80B3AF70(this, globalCtx, &sp7C)) {
                 if (this->unk14E[var_s3] & 0x80) {
                     var_v0 = ((this->actor.params + 1) | 0xFF00);
                 } else {
                     var_v0 = (((this->unk154 & 0xF0) * 0x10) | (this->actor.params + 1));
                 }
-                temp_v0 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, 0x77, sp7C.x, sp7C.y,
-                                             sp7C.z, (s16)(s32)this->actor.posRot.rot.x, (s16)(s32)D_80B3BF44[var_s3],
-                                             0, (s16)(var_v0));
+                temp_v0 =
+                    Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_WOOD02, sp7C.x, sp7C.y,
+                                       sp7C.z, this->actor.posRot.rot.x, (s16)(s32)D_80B3BF44[var_s3], 0, var_v0);
                 if (temp_v0 != NULL) {
                     ((EnWood02*)temp_v0)->unk14E[0] = var_s3;
                     this->unk14E[var_s3] |= 1;
@@ -143,7 +143,7 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
         Collider_SetCylinder(globalCtx, &this->unk158, &this->actor, &D_80B3BF00);
         var_t0_sp4E = 0;
     }
-    switch ((u32)this->actor.params) {
+    switch (this->actor.params) {
         case 15:
         case 21:
             var_t0_sp4E = 1;
@@ -246,7 +246,7 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
 void EnWood02_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     EnWood02* this = (EnWood02*)thisx;
 
-    if (this->actor.params < 0xB) {
+    if (this->actor.params < 11) {
         Collider_DestroyCylinder(globalCtx, &this->unk158);
     }
 }
@@ -277,10 +277,10 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
     } else if (this->unk153 == 2) {
         func_80B3B094(this, globalCtx);
     }
-    if (thisx->params < 0xB) {
+    if (thisx->params < 11) {
         if (this->unk158.base.acFlags & 2) {
-            this->unk158.base.acFlags &= 0xFFFD;
-            Audio_PlayActorSound2(&this->actor, 0x1837U);
+            this->unk158.base.acFlags &= ~2;
+            Audio_PlayActorSound2(&this->actor, NA_SE_IT_REFLECTION_WOOD);
         }
         if (this->actor.initPosRot.rot.y != 0) {
             sp58 = this->actor.posRot.pos;
@@ -290,24 +290,22 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
             } else if (this->actor.initPosRot.rot.z != 0) {
                 this->actor.initPosRot.rot.z &= 0x1FFF;
                 this->actor.initPosRot.rot.z |= 0xE000;
-                Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x95, sp58.x, sp58.y, sp58.z, 0,
-                            (s16)((s32)this->actor.posRot.rot.y), 0, (s16)((s32)this->actor.initPosRot.rot.z));
+                Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_SW, sp58.x, sp58.y, sp58.z, 0,
+                            this->actor.posRot.rot.y, 0, this->actor.initPosRot.rot.z);
                 this->actor.initPosRot.rot.z = 0;
             }
-            var_v1_sp44_or_sp50 = 0x17;
-            if (this->unk14C >= (-1)) {
+            var_v1_sp44_or_sp50 = 23;
+            if (this->unk14C >= -1) {
                 if ((this->actor.params == 6) || (this->actor.params == 7)) {
-                    var_v1_sp44_or_sp50 = 0x18;
+                    var_v1_sp44_or_sp50 = 24;
                 }
-                Audio_PlayActorSound2(&this->actor, 0x2877U);
-                var_s0 = 3;
-                do {
-                    Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x77, sp58.x, sp58.y, sp58.z, 0,
-                                (s16)((s32)Rand_CenteredFloat(65535.0f)), 0, (s16)var_v1_sp44_or_sp50);
-                    var_s0 -= 1;
-                } while (var_s0 >= 0);
+                Audio_PlayActorSound2(&this->actor, NA_SE_EV_TREE_SWING);
+                for (var_s0 = 3; var_s0 >= 0; var_s0--) {
+                    Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_WOOD02, sp58.x, sp58.y, sp58.z, 0,
+                                (s16)(s32)Rand_CenteredFloat(65535.0f), 0, var_v1_sp44_or_sp50);
+                }
             }
-            this->unk14C = -0x15;
+            this->unk14C = -21;
             this->actor.initPosRot.rot.y = 0;
         }
         if (this->actor.xzDistToLink < 600.0f) {
@@ -317,17 +315,16 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
         }
     } else if (this->actor.params < 0x17) {
         player = (Player*)globalCtx->actorCtx.actorList[2].first;
-        if ((this->unk14C >= (-1)) &&
-            (((((player->rideActor == NULL)) && (sqrt((f64)this->actor.xyzDistToLinkSq) < 20.0)) &&
-              (player->linearVelocity != 0.0f)) ||
-             (((player->rideActor != NULL) && (sqrt((f64)this->actor.xyzDistToLinkSq) < 60.0)) &&
-              (player->rideActor->speedXZ != 0.0f)))) {
+        if ((this->unk14C >= (-1)) && (((((player->rideActor == NULL)) && (sqrt(this->actor.xyzDistToLinkSq) < 20.0)) &&
+                                        (player->linearVelocity != 0.0f)) ||
+                                       (((player->rideActor != NULL) && (sqrt(this->actor.xyzDistToLinkSq) < 60.0)) &&
+                                        (player->rideActor->speedXZ != 0.0f)))) {
             if ((this->unk14C >= 0) && (this->unk14C < 0x64)) {
                 Item_DropCollectibleRandom(globalCtx, &this->actor, &this->actor.posRot.pos,
-                                           (s16)((this->unk14C * 0x10) | 0x8000));
+                                           (this->unk14C * 0x10) | 0x8000);
             }
-            this->unk14C = -0x15;
-            Audio_PlayActorSound2(&this->actor, 0x2877U);
+            this->unk14C = -21;
+            Audio_PlayActorSound2(&this->actor, NA_SE_EV_TREE_SWING);
         }
     } else {
         this->unk14C += 1;
@@ -340,7 +337,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
             Actor_Kill(&this->actor);
         }
     }
-    if (this->unk14C < (-1)) {
+    if (this->unk14C < -1) {
         this->unk14C += 1;
         sp6C = Math_SinS((s16)((this->unk14C ^ 0xFFFF) * 0x3332)) * 250.0f;
         this->actor.shape.rot.x =
@@ -351,45 +348,45 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnWood02_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* temp_s0;
+    GraphicsContext* gfxCtx;
     s16 v;
     EnWood02* this = (EnWood02*)thisx;
     u8 sp53;
     u8 sp52;
     u8 sp51;
 
-    temp_s0 = globalCtx->state.gfxCtx;
-    OPEN_DISPS(temp_s0, "../z_en_wood02.c", 0x307);
+    gfxCtx = globalCtx->state.gfxCtx;
+    OPEN_DISPS(gfxCtx, "../z_en_wood02.c", 775);
     v = this->actor.params;
-    if ((v == 8) || (v == 9) || (v == 5) || (v == 0x17)) {
-        sp53 = 0x32;
-        sp52 = 0xAA;
-        sp51 = 0x46;
-    } else if ((v == 6) || (v == 7) || ((v == 0x18))) {
-        sp53 = 0xB4;
-        sp52 = 0x9B;
+    if ((v == 8) || (v == 9) || (v == 5) || (v == 23)) {
+        sp53 = 50;
+        sp52 = 170;
+        sp51 = 70;
+    } else if ((v == 6) || (v == 7) || ((v == 24))) {
+        sp53 = 180;
+        sp52 = 155;
         sp51 = 0;
     } else {
-        sp53 = sp52 = sp51 = 0xFF;
+        sp53 = sp52 = sp51 = 255;
     }
-    func_80093D84(temp_s0);
-    if ((this->actor.params == 0x17) || (this->actor.params == 0x18)) {
-        func_80093D18(temp_s0);
+    func_80093D84(gfxCtx);
+    if ((this->actor.params == 23) || (this->actor.params == 24)) {
+        func_80093D18(gfxCtx);
         gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, sp53, sp52, sp51, 127);
         Gfx_DrawDListOpa(globalCtx, D_6000700);
     } else {
         if (D_80B3BF70[this->unk154 & 0xF] != NULL) {
             Gfx_DrawDListOpa(globalCtx, D_80B3BF54[this->unk154 & 0xF]);
             gDPSetEnvColor(POLY_XLU_DISP++, sp53, sp52, sp51, 0);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(temp_s0, "../z_en_wood02.c", 0x328),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", 808),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, D_80B3BF70[this->unk154 & 0xF]);
         } else {
-            func_80093D84(temp_s0);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(temp_s0, "../z_en_wood02.c", 0x32E),
+            func_80093D84(gfxCtx);
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", 814),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, D_80B3BF54[this->unk154 & 0xF]);
         }
     }
-    CLOSE_DISPS(temp_s0, "../z_en_wood02.c", 0x348);
+    CLOSE_DISPS(gfxCtx, "../z_en_wood02.c", 840);
 }
