@@ -198,15 +198,15 @@ void EnWood02_Init(Actor* thisx, GlobalContext* globalCtx) {
             this->actor.velocity.y = (Rand_ZeroOne() * 1.25f) + -3.1f;
             break;
     }
-    if (this->actor.params < EN_WOOD_02_TYPE_5) {
+    if (this->actor.params <= EN_WOOD_02_TYPE_4) {
         this->unk154 = 0;
-    } else if (this->actor.params < EN_WOOD_02_TYPE_10) {
+    } else if (this->actor.params <= EN_WOOD_02_TYPE_9) {
         this->unk154 = 1;
-    } else if (this->actor.params < EN_WOOD_02_TYPE_11) {
+    } else if (this->actor.params <= EN_WOOD_02_TYPE_10) {
         this->unk154 = 2;
-    } else if (this->actor.params < EN_WOOD_02_TYPE_17) {
+    } else if (this->actor.params <= EN_WOOD_02_TYPE_16) {
         this->unk154 = 3;
-    } else if (this->actor.params < EN_WOOD_02_TYPE_24) {
+    } else if (this->actor.params <= EN_WOOD_02_TYPE_23) {
         this->unk154 = 4;
     } else {
         this->unk154 = 5;
@@ -331,7 +331,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
         Math_ApproachF(&this->actor.velocity.x, 0.0f, 1.0f, 0.049999997f);
         Math_ApproachF(&this->actor.velocity.z, 0.0f, 1.0f, 0.049999997f);
         func_8002D7EC(&this->actor);
-        this->actor.shape.rot.z = (s16)((s32)(Math_SinS((s16)(this->unk14C * 0xBB8)) * 16384.0f));
+        this->actor.shape.rot.z = (s16)(s32)(Math_SinS((s16)(this->unk14C * 0xBB8)) * 16384.0f);
         this->unk14E[0] -= 1;
         if (this->unk14E[0] == 0) {
             Actor_Kill(&this->actor);
@@ -339,7 +339,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
     if (this->unk14C < -1) {
         this->unk14C += 1;
-        sp6C = Math_SinS((s16)((this->unk14C ^ 0xFFFF) * 0x3332)) * 250.0f;
+        sp6C = Math_SinS((this->unk14C ^ 0xFFFF) * 0x3332) * 250.0f;
         this->actor.shape.rot.x = Math_CosS(this->actor.yawTowardsLink - this->actor.shape.rot.y) * sp6C;
         this->actor.shape.rot.z = Math_SinS(this->actor.yawTowardsLink - this->actor.shape.rot.y) * sp6C;
     }
