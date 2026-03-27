@@ -11,8 +11,8 @@ typedef struct DemoExt {
     /* 0x14C */ s32 unk14C;
     /* 0x150 */ s32 unk150;
     /* 0x154 */ s32 unk154;
-    /* 0x158 */ s16 unk158[4];
-    /* 0x160 */ s16 unk160[4];
+    /* 0x158 */ s16 texScrollStep[4];
+    /* 0x160 */ s16 texScrollPos[4];
     /* 0x168 */ s16 unk168;
     /* 0x16A */ char pad16A[2];
     /* 0x16C */ f32 unk16C;

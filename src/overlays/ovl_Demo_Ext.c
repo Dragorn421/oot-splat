@@ -46,10 +46,10 @@ void DemoExt_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 void DemoExt_Init(Actor* thisx, GlobalContext* globalCtx) {
     DemoExt* this = (DemoExt*)thisx;
 
-    this->unk158[0] = 25;
-    this->unk158[1] = 40;
-    this->unk158[2] = 5;
-    this->unk158[3] = 30;
+    this->texScrollStep[0] = 25;
+    this->texScrollStep[1] = 40;
+    this->texScrollStep[2] = 5;
+    this->texScrollStep[3] = 30;
     this->unk170 = gGameInfo->data[0xA3C] + 0xFF;
     this->unk174 = gGameInfo->data[0xA40] + 0xFF;
     this->unk178.x = gGameInfo->data[0xA33] + 400.0f;
@@ -138,12 +138,12 @@ void func_80977610(DemoExt* this, GlobalContext* globalCtx) {
 }
 
 void func_809776D0(DemoExt* this) {
-    s16* p1 = this->unk160;
-    s16* p2 = this->unk158;
+    s16* texScrollPos = this->texScrollPos;
+    s16* texScrollStep = this->texScrollStep;
     s32 var_v0;
 
     for (var_v0 = 3; var_v0 != 0; var_v0--) {
-        p1[var_v0] += p2[var_v0];
+        texScrollPos[var_v0] += texScrollStep[var_v0];
     }
     this->unk168 += (s16)(gGameInfo->data[0xA42] + 0x3E8);
 }
@@ -195,36 +195,35 @@ void func_80977944(DemoExt* this, GlobalContext* globalCtx) {
 }
 
 void func_80977950(DemoExt* this, GlobalContext* globalCtx) {
-    GraphicsContext* temp_s0;
-    Mtx* sp80;
+    GraphicsContext* gfxCtx;
+    Mtx* mtx;
     Vec3f* temp_v0;
-    s16* temp_v0_2;
+    s16* texScrollPos;
     s32 pad;
 
-    temp_s0 = globalCtx->state.gfxCtx;
-    temp_v0_2 = this->unk160;
+    gfxCtx = globalCtx->state.gfxCtx;
+    texScrollPos = this->texScrollPos;
     temp_v0 = &this->unk178;
-    sp80 = Graph_Alloc(temp_s0, 0x40U);
-    OPEN_DISPS(temp_s0, "../z_demo_ext.c", 460);
+    mtx = Graph_Alloc(gfxCtx, 0x40U);
+    OPEN_DISPS(gfxCtx, "../z_demo_ext.c", 460);
     Matrix_Push();
     Matrix_Scale(temp_v0->x, temp_v0->y, temp_v0->z, MTXMODE_APPLY);
-    Matrix_RotateRPY((s16)(gGameInfo->data[0xA30] + 0x4000), this->unk168, gGameInfo->data[0xA32], MTXMODE_APPLY);
-    Matrix_Translate((f32)gGameInfo->data[0xA36], (f32)gGameInfo->data[0xA37], (f32)gGameInfo->data[0xA38],
-                     MTXMODE_APPLY);
-    Matrix_ToMtx(sp80, "../z_demo_ext.c", 476);
+    Matrix_RotateRPY(gGameInfo->data[0xA30] + 0x4000, this->unk168, gGameInfo->data[0xA32], MTXMODE_APPLY);
+    Matrix_Translate(gGameInfo->data[0xA36], gGameInfo->data[0xA37], gGameInfo->data[0xA38], MTXMODE_APPLY);
+    Matrix_ToMtx(mtx, "../z_demo_ext.c", 476);
     Matrix_Pull();
-    func_80093D84(temp_s0);
+    func_80093D84(gfxCtx);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x00, gGameInfo->data[0xA41] + 0x80, gGameInfo->data[0xA39] + 0x8C,
                     gGameInfo->data[0xA3A] + 0x50, gGameInfo->data[0xA3B] + 0x8C, this->unk170);
     gDPSetEnvColor(POLY_XLU_DISP++, gGameInfo->data[0xA3D] + 0x5A, gGameInfo->data[0xA3E] + 0x32,
                    gGameInfo->data[0xA3F] + 0x5F, this->unk174);
     gSPSegment(POLY_XLU_DISP++, 0x08,
-               Gfx_TwoTexScroll(temp_s0, 0, (u32)temp_v0_2[0], (u32)temp_v0_2[1], 64, 64, 1, (u32)temp_v0_2[2],
-                                (u32)temp_v0_2[3], 64, 64));
-    gSPMatrix(POLY_XLU_DISP++, sp80, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+               Gfx_TwoTexScroll(gfxCtx, 0, texScrollPos[0], texScrollPos[1], 64, 64, 1, texScrollPos[2],
+                                texScrollPos[3], 64, 64));
+    gSPMatrix(POLY_XLU_DISP++, mtx, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, D_600FAA0);
     gSPPopMatrix(POLY_XLU_DISP++, G_MTX_MODELVIEW);
-    CLOSE_DISPS(temp_s0, "../z_demo_ext.c", 512);
+    CLOSE_DISPS(gfxCtx, "../z_demo_ext.c", 512);
 }
 
 void DemoExt_Draw(Actor* thisx, GlobalContext* globalCtx) {
