@@ -2773,7 +2773,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xD30A20, c, overlays/ovl_Demo_Ext]
-      - [0xD31300, data, overlays/ovl_Demo_Ext]
+      - [0xD31300, .data, overlays/ovl_Demo_Ext]
       - [0xD31340, .rodata, overlays/ovl_Demo_Ext]
       - [0xD31420, rodatabin, rodatabin_80977D90]
 
