@@ -9,15 +9,6 @@ void DemoExt_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void DemoExt_Update(Actor* thisx, GlobalContext* globalCtx);
 void DemoExt_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_80977450(DemoExt* arg0);
-CsCmdActorAction* func_809774D8(GlobalContext* arg0, s32 arg1);
-void func_809774FC(DemoExt* arg0);
-void func_80977508(DemoExt* arg0, GlobalContext* arg1);
-void func_80977590(DemoExt* arg0);
-void func_809775A4(DemoExt* arg0);
-void func_80977610(DemoExt* arg0, GlobalContext* arg1);
-void func_809776D0(DemoExt* arg0);
-void func_8097771C(DemoExt* arg0);
 void func_80977854(DemoExt*, GlobalContext*);
 void func_80977874(DemoExt* arg0, GlobalContext* arg1);
 void func_809778AC(DemoExt* arg0, GlobalContext* arg1);
@@ -27,13 +18,13 @@ void func_80977950(DemoExt* arg0, GlobalContext* arg1);
 extern Gfx D_600FAA0[];
 
 typedef void (*DemoExtUpdateFunc)(DemoExt*, GlobalContext*);
-DemoExtUpdateFunc D_80977C70[] = {
+static DemoExtUpdateFunc sUpdateFuncs[] = {
     func_80977854,
     func_80977874,
     func_809778AC,
 };
 typedef void (*DemoExtDrawFunc)(DemoExt*, GlobalContext*);
-DemoExtDrawFunc D_80977C7C[] = {
+static DemoExtDrawFunc sDrawFuncs[] = {
     func_80977944,
     func_80977950,
 };
@@ -54,10 +45,11 @@ void DemoExt_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 void DemoExt_Init(Actor* thisx, GlobalContext* globalCtx) {
     DemoExt* this = (DemoExt*)thisx;
-    this->unk158[0] = 0x19;
-    this->unk158[1] = 0x28;
+
+    this->unk158[0] = 25;
+    this->unk158[1] = 40;
     this->unk158[2] = 5;
-    this->unk158[3] = 0x1E;
+    this->unk158[3] = 30;
     this->unk170 = gGameInfo->data[0xA3C] + 0xFF;
     this->unk174 = gGameInfo->data[0xA40] + 0xFF;
     this->unk178.x = gGameInfo->data[0xA33] + 400.0f;
@@ -192,11 +184,11 @@ void func_809778AC(DemoExt* this, GlobalContext* globalCtx) {
 void DemoExt_Update(Actor* thisx, GlobalContext* globalCtx) {
     DemoExt* this = (DemoExt*)thisx;
 
-    if ((this->unk14C < 0) || (this->unk14C >= ARRAY_COUNT(D_80977C70)) || (D_80977C70[this->unk14C] == NULL)) {
+    if ((this->unk14C < 0) || (this->unk14C >= ARRAY_COUNT(sUpdateFuncs)) || (sUpdateFuncs[this->unk14C] == NULL)) {
         osSyncPrintf("\x1b[31mメインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n\x1b[m");
         return;
     }
-    D_80977C70[this->unk14C](this, globalCtx);
+    sUpdateFuncs[this->unk14C](this, globalCtx);
 }
 
 void func_80977944(DemoExt* this, GlobalContext* globalCtx) {
@@ -215,9 +207,10 @@ void func_80977950(DemoExt* this, GlobalContext* globalCtx) {
     sp80 = Graph_Alloc(temp_s0, 0x40U);
     OPEN_DISPS(temp_s0, "../z_demo_ext.c", 460);
     Matrix_Push();
-    Matrix_Scale(temp_v0->x, temp_v0->y, temp_v0->z, 1U);
-    Matrix_RotateRPY((s16)(gGameInfo->data[0xA30] + 0x4000), this->unk168, gGameInfo->data[0xA32], 1U);
-    Matrix_Translate((f32)gGameInfo->data[0xA36], (f32)gGameInfo->data[0xA37], (f32)gGameInfo->data[0xA38], 1U);
+    Matrix_Scale(temp_v0->x, temp_v0->y, temp_v0->z, MTXMODE_APPLY);
+    Matrix_RotateRPY((s16)(gGameInfo->data[0xA30] + 0x4000), this->unk168, gGameInfo->data[0xA32], MTXMODE_APPLY);
+    Matrix_Translate((f32)gGameInfo->data[0xA36], (f32)gGameInfo->data[0xA37], (f32)gGameInfo->data[0xA38],
+                     MTXMODE_APPLY);
     Matrix_ToMtx(sp80, "../z_demo_ext.c", 476);
     Matrix_Pull();
     func_80093D84(temp_s0);
@@ -226,8 +219,8 @@ void func_80977950(DemoExt* this, GlobalContext* globalCtx) {
     gDPSetEnvColor(POLY_XLU_DISP++, gGameInfo->data[0xA3D] + 0x5A, gGameInfo->data[0xA3E] + 0x32,
                    gGameInfo->data[0xA3F] + 0x5F, this->unk174);
     gSPSegment(POLY_XLU_DISP++, 0x08,
-               Gfx_TwoTexScroll(temp_s0, 0, (u32)temp_v0_2[0], (u32)temp_v0_2[1], 0x40, 0x40, 1, (u32)temp_v0_2[2],
-                                (u32)temp_v0_2[3], 0x40, 0x40));
+               Gfx_TwoTexScroll(temp_s0, 0, (u32)temp_v0_2[0], (u32)temp_v0_2[1], 64, 64, 1, (u32)temp_v0_2[2],
+                                (u32)temp_v0_2[3], 64, 64));
     gSPMatrix(POLY_XLU_DISP++, sp80, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, D_600FAA0);
     gSPPopMatrix(POLY_XLU_DISP++, G_MTX_MODELVIEW);
@@ -237,9 +230,9 @@ void func_80977950(DemoExt* this, GlobalContext* globalCtx) {
 void DemoExt_Draw(Actor* thisx, GlobalContext* globalCtx) {
     DemoExt* this = (DemoExt*)thisx;
 
-    if ((this->unk150 < 0) || (this->unk150 >= ARRAY_COUNT(D_80977C7C)) || (D_80977C7C[this->unk150] == NULL)) {
+    if ((this->unk150 < 0) || (this->unk150 >= ARRAY_COUNT(sDrawFuncs)) || (sDrawFuncs[this->unk150] == NULL)) {
         osSyncPrintf("\x1b[31m描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n\x1b[m");
         return;
     }
-    D_80977C7C[this->unk150](this, globalCtx);
+    sDrawFuncs[this->unk150](this, globalCtx);
 }
