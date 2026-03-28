@@ -9,13 +9,19 @@ void EnMThunder_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnMThunder_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnMThunder_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_04012570;
-extern UNK_TYPE D_04012690;
-extern UNK_TYPE D_04012AF0;
-extern UNK_TYPE D_04012C10;
-extern UNK_TYPE D_04013610;
+void func_80A9EFE0(EnMThunder* arg0, void (*arg1)(EnMThunder*, GlobalContext*));
+void func_80A9F314(GlobalContext* arg0, f32 arg1);
+void func_80A9F350(EnMThunder* arg0, GlobalContext* arg1);
+void func_80A9F408(EnMThunder* arg0, GlobalContext* arg1);
+void func_80A9F938(EnMThunder* arg0, GlobalContext* arg1);
+void func_80A9F9B4(EnMThunder* arg0, GlobalContext* arg1);
 
-/*
+extern Gfx D_4012570[];
+extern Gfx D_4012690[];
+extern Gfx D_4012AF0[];
+extern Gfx D_4012C10[];
+extern Gfx D_4013610[];
+
 const ActorInit En_M_Thunder_InitVars = {
     ACTOR_EN_M_THUNDER,
     ACTORCAT_ITEMACTION,
@@ -47,7 +53,11 @@ static ColliderCylinderInit D_80AA0420 = {
     },
     { 200, 200, 0, { 0, 0, 0 } },
 };
-*/
+
+static u32 D_80AA044C[3] = { 0x01000000, 0x400000, 0x800000 };
+static u32 D_80AA0458[3] = { 0x08000000, 0x02000000, 0x04000000 };
+static u16 D_80AA0464[4] = { 0x182F, 0x182E, 0x182F, 0x182E };
+static f32 D_80AA046C[9] = { 0.1f, 0.15f, 0.2f, 0.25f, 0.3f, 0.25f, 0.2f, 0.15f, 0.0f };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_M_Thunder/func_80A9EFE0.s")
 
