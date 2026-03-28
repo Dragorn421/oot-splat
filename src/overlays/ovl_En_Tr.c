@@ -60,15 +60,15 @@ static s32 D_80B243D0[3] = { 0x060086D8, 0x060094D8, 0x060098D8 };
 static Vec3f D_80B243DC = { 2300.0f, 0.0f, -600.0f };
 static Vec3f D_80B243E8 = { 0.0f, 0.0f, 0.0f };
 
-void func_80B22CF0(EnTr* this, EnTrActionFunc arg1) {
-    this->unk2DC = arg1;
+void EnTr_SetupAction(EnTr* this, EnTrActionFunc actionFunc) {
+    this->actionFunc = actionFunc;
 }
 
 void EnTr_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnTr* this = (EnTr*)thisx;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
-    func_80B22CF0(this, func_80B22F1C);
+    EnTr_SetupAction(this, func_80B22F1C);
     this->unk2D4 = 0;
     this->actor.child = NULL;
     Actor_SetScale(&this->actor, 0.01f);
@@ -77,26 +77,25 @@ void EnTr_Init(Actor* thisx, GlobalContext* globalCtx) {
             SkelAnime_InitFlex(globalCtx, &this->unk14C, &D_6011688, &D_6003FC8, this->unk190, this->unk232, 27);
             Animation_PlayOnce(&this->unk14C, &D_6003FC8);
             this->unk2E4 = NULL;
-            func_80B22CF0(this, func_80B23A88);
+            EnTr_SetupAction(this, func_80B23A88);
             this->unk2D8 = 3;
-            return;
+            break;
 
         case 1:
             SkelAnime_InitFlex(globalCtx, &this->unk14C, &D_600C530, &D_6001CDC, this->unk190, this->unk232, 27);
             Animation_PlayOnce(&this->unk14C, &D_6001CDC);
             this->unk2E4 = NULL;
-            func_80B22CF0(this, func_80B23A88);
+            EnTr_SetupAction(this, func_80B23A88);
             this->unk2D8 = 2;
-            return;
+            break;
 
         default:
             __assert("0", "../z_en_tr.c", 0x115);
-            return;
+            break;
     }
 }
 
 void EnTr_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    EnTr* this = (EnTr*)thisx;
 }
 
 void func_80B22E6C(EnTr* this, GlobalContext* globalCtx) {
@@ -105,8 +104,10 @@ void func_80B22E6C(EnTr* this, GlobalContext* globalCtx) {
     }
     if (this->unk2D6 > 0) {
         this->unk2D6--;
-    } else if (this->actor.child != NULL) {
-        this->actor.child = NULL;
+    } else {
+        if (this->actor.child != NULL) {
+            this->actor.child = NULL;
+        }
     }
     func_8002F974(&this->actor, NA_SE_EN_TWINROBA_FLY_DEMO - SFX_FLAG);
 }
@@ -123,7 +124,7 @@ void func_80B22F28(EnTr* this, GlobalContext* globalCtx) {
             switch (temp_v0->action) {
                 case 4:
                     Actor_SetScale(&this->actor, 0.01f);
-                    func_80B22CF0(this, func_80B234D4);
+                    EnTr_SetupAction(this, func_80B234D4);
                     this->unk2D6 = 0x18;
                     Audio_PlayActorSound2(&this->actor, NA_SE_EN_PO_DEAD2);
                     break;
@@ -131,7 +132,7 @@ void func_80B22F28(EnTr* this, GlobalContext* globalCtx) {
                 case 6:
                     Animation_Change(&this->unk14C, D_80B24380[this->actor.params], 1.0f, 0.0f,
                                      Animation_GetLastFrame(D_80B24380[this->actor.params]), ANIMMODE_ONCE, -5.0f);
-                    func_80B22CF0(this, func_80B22E6C);
+                    EnTr_SetupAction(this, func_80B22E6C);
                     this->unk2E4 = D_80B24378[this->actor.params];
                     this->unk2D6 = 0x27;
                     Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_DEMO_6K,
@@ -155,7 +156,7 @@ void func_80B230D8(EnTr* this, GlobalContext* globalCtx) {
     CsCmdActorAction* temp_v0;
 
     sp34 = this->actor.world.pos;
-    if (globalCtx->csCtx.state != 0) {
+    if (globalCtx->csCtx.state != CS_STATE_IDLE) {
         temp_v0 = globalCtx->csCtx.npcActions[this->unk2D8];
         if (temp_v0 != NULL) {
             if (temp_v0->action == 8) {
@@ -218,20 +219,18 @@ void func_80B234D4(EnTr* this, GlobalContext* globalCtx) {
 
     if (this->unk2D6 >= 0x11) {
         this->actor.shape.rot.y = (this->actor.shape.rot.y - (this->unk2D6 * 0x28F)) + 0x3D68;
+    } else if (this->unk2D6 >= 5) {
+        Actor_SetScale(&this->actor, this->actor.scale.x * 0.9f);
+        this->actor.shape.rot.y = (this->actor.shape.rot.y - (this->unk2D6 * 0x28F)) + 0x3D68;
+    } else if (this->unk2D6 > 0) {
+        temp_hi = (this->unk2D6 * 2) % 7;
+        func_80B23254(this, globalCtx, temp_hi, 5.0f, 0.2f);
+        func_80B23254(this, globalCtx, (temp_hi + 1) % 7, 5.0f, 0.2f);
+        Actor_SetScale(&this->actor, this->actor.scale.x * 0.9f);
+        this->actor.shape.rot.y = (this->actor.shape.rot.y - (this->unk2D6 * 0x28F)) + 0x3D68;
     } else {
-        if (this->unk2D6 >= 5) {
-            Actor_SetScale(&this->actor, this->actor.scale.x * 0.9f);
-            this->actor.shape.rot.y = (this->actor.shape.rot.y - (this->unk2D6 * 0x28F)) + 0x3D68;
-        } else if (this->unk2D6 > 0) {
-            temp_hi = (this->unk2D6 * 2) % 7;
-            func_80B23254(this, globalCtx, temp_hi, 5.0f, 0.2f);
-            func_80B23254(this, globalCtx, (temp_hi + 1) % 7, 5.0f, 0.2f);
-            Actor_SetScale(&this->actor, this->actor.scale.x * 0.9f);
-            this->actor.shape.rot.y = (this->actor.shape.rot.y - (this->unk2D6 * 0x28F)) + 0x3D68;
-        } else {
-            func_80B22CF0(this, func_80B23820);
-            this->actor.draw = NULL;
-        }
+        EnTr_SetupAction(this, func_80B23820);
+        this->actor.draw = NULL;
     }
     if (this->unk2D6 == 4) {
         Audio_PlayActorSound2(&this->actor, NA_SE_EN_BUBLE_DOWN);
@@ -251,14 +250,12 @@ void func_80B23690(EnTr* this, GlobalContext* globalCtx) {
     } else if (this->unk2D6 == 0x1E) {
         this->actor.draw = EnTr_Draw;
         this->actor.shape.rot.y += this->unk2D6 * 0x1A6;
+    } else if (this->unk2D6 > 0) {
+        this->actor.shape.rot.y += this->unk2D6 * 0x1A6;
+        Actor_SetScale(&this->actor, (this->actor.scale.x * 0.8f) + 0.002f);
     } else {
-        if (this->unk2D6 > 0) {
-            this->actor.shape.rot.y += this->unk2D6 * 0x1A6;
-            Actor_SetScale(&this->actor, (this->actor.scale.x * 0.8f) + 0.002f);
-        } else {
-            func_80B22CF0(this, func_80B22F28);
-            Actor_SetScale(&this->actor, 0.01f);
-        }
+        EnTr_SetupAction(this, func_80B22F28);
+        Actor_SetScale(&this->actor, 0.01f);
     }
     if (this->unk2D6 > 0) {
         this->unk2D6--;
@@ -275,7 +272,7 @@ void func_80B23820(EnTr* this, GlobalContext* globalCtx) {
             Audio_PlayActorSound2(&this->actor, 0x390DU);
             this->unk2D6 = 0x22;
             func_80B242B4(this, globalCtx, this->unk2D8);
-            func_80B22CF0(this, func_80B23690);
+            EnTr_SetupAction(this, func_80B23690);
             Animation_PlayLoop(&this->unk14C, &D_60049C8);
             this->unk2E4 = NULL;
             Actor_SetScale(&this->actor, 0.003f);
@@ -293,7 +290,7 @@ void func_80B238E0(EnTr* this, GlobalContext* globalCtx) {
         if ((temp_v0 != NULL) && (temp_v0->action == 3)) {
             Animation_Change(&this->unk14C, D_80B24378[this->actor.params], 1.0f, 0.0f, temp_fv0, 0U, -10.0f);
             this->unk2E4 = NULL;
-            func_80B22CF0(this, func_80B22F28);
+            EnTr_SetupAction(this, func_80B22F28);
         }
     }
 }
@@ -308,7 +305,7 @@ void func_80B239A8(EnTr* this, GlobalContext* globalCtx) {
         if ((temp_v0 != NULL) && (temp_v0->action == 2)) {
             Animation_Change(&this->unk14C, D_80B24368[this->actor.params], 1.0f, 0.0f, temp_fv0, 2U, -4.0f);
             this->unk2E4 = D_80B24370[this->actor.params];
-            func_80B22CF0(this, func_80B238E0);
+            EnTr_SetupAction(this, func_80B238E0);
         }
     }
 }
@@ -318,29 +315,29 @@ void func_80B23A88(EnTr* this, GlobalContext* globalCtx) {
     CsCmdActorAction* temp_v1;
 
     temp_a3 = globalCtx->gameplayFrames;
-    if ((globalCtx->csCtx.state != 0)) {
+    if (globalCtx->csCtx.state != CS_STATE_IDLE) {
         temp_v1 = globalCtx->csCtx.npcActions[this->unk2D8];
-        if (((temp_v1 != NULL))) {
+        if (temp_v1 != NULL) {
             switch (temp_v1->action) {
                 case 1:
                     func_80B242B4(this, globalCtx, this->unk2D8);
-                    func_80B22CF0(this, func_80B239A8);
+                    EnTr_SetupAction(this, func_80B239A8);
                     break;
 
                 case 3:
                     func_80B242B4(this, globalCtx, this->unk2D8);
-                    func_80B22CF0(this, func_80B22F28);
+                    EnTr_SetupAction(this, func_80B22F28);
                     Animation_PlayLoop(&this->unk14C, &D_60049C8);
                     this->unk2E4 = NULL;
                     break;
 
                 case 4:
-                    func_80B22CF0(this, func_80B23820);
+                    EnTr_SetupAction(this, func_80B23820);
                     this->actor.draw = NULL;
                     break;
 
                 case 7:
-                    func_80B22CF0(this, func_80B230D8);
+                    EnTr_SetupAction(this, func_80B230D8);
                     Animation_PlayLoop(&this->unk14C, &D_60049C8);
                     this->unk2E4 = NULL;
                     if (this->actor.params != 0) {
@@ -359,8 +356,8 @@ void EnTr_Update(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
 
     Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 0.0f, 0.0f, 0.0f, 5);
-    this->unk2DC(this, globalCtx);
-    if (SkelAnime_Update(&this->unk14C) != 0) {
+    this->actionFunc(this, globalCtx);
+    if (SkelAnime_Update(&this->unk14C)) {
         if (this->unk2E4 != NULL) {
             if ((this->unk2E4 == &D_60035CC) || (this->unk2E4 == &D_60013CC)) {
                 if (this->actor.params != 0) {
@@ -370,8 +367,9 @@ void EnTr_Update(Actor* thisx, GlobalContext* globalCtx) {
                 }
                 Animation_PlayLoop(&this->unk14C, this->unk2E4);
             } else if (this->unk2E4 == &D_60049C8) {
-                func_80B22CF0(this, func_80B22F28);
-                Animation_Change(&this->unk14C, &D_60049C8, 1.0f, 0.0f, Animation_GetLastFrame(&D_60049C8), 0U, -5.0f);
+                EnTr_SetupAction(this, func_80B22F28);
+                Animation_Change(&this->unk14C, &D_60049C8, 1.0f, 0.0f, Animation_GetLastFrame(&D_60049C8),
+                                 ANIMMODE_LOOP, -5.0f);
             } else {
                 Animation_PlayLoop(&this->unk14C, this->unk2E4);
             }
@@ -412,7 +410,7 @@ void EnTr_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnTr* this = (EnTr*)thisx;
     s32 pad;
 
-    if ((globalCtx->csCtx.state == 0) || (globalCtx->csCtx.npcActions[this->unk2D8] == NULL)) {
+    if ((globalCtx->csCtx.state == CS_STATE_IDLE) || (globalCtx->csCtx.npcActions[this->unk2D8] == NULL)) {
         this->actor.shape.shadowDraw = NULL;
     } else {
         if (1) {}

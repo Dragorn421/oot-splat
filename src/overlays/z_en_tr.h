@@ -17,7 +17,7 @@ typedef struct EnTr {
     /* 0x2D6 */ u16 unk2D6;
     /* 0x2D8 */ s16 unk2D8;
     /* 0x2DA */ char pad2DA[2];
-    /* 0x2DC */ EnTrActionFunc unk2DC;
+    /* 0x2DC */ EnTrActionFunc actionFunc;
     /* 0x2E0 */ s16 unk2E0;
     /* 0x2E2 */ s16 unk2E2;
     /* 0x2E4 */ AnimationHeader* unk2E4;
