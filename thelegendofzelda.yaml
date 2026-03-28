@@ -5735,7 +5735,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xED8B40, c, overlays/ovl_En_Tr]
-      - [0xEDA190, data, overlays/ovl_En_Tr]
+      - [0xEDA190, .data, overlays/ovl_En_Tr]
       - [0xEDA250, .rodata, overlays/ovl_En_Tr]
       - [0xEDA2B0, rodatabin, rodatabin_80B24460]
 
