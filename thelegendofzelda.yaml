@@ -3610,7 +3610,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xD78ED0, c, overlays/ovl_En_Bili]
-      - [0xD7AC50, data, overlays/ovl_En_Bili]
+      - [0xD7AC50, .data, overlays/ovl_En_Bili]
       - [0xD7AD40, .rodata, overlays/ovl_En_Bili]
       - [0xD7AE30, rodatabin, rodatabin_809C1800]
 
