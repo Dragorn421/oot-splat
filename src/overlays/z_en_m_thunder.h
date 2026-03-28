@@ -6,6 +6,8 @@
 
 struct EnMThunder;
 
+typedef void (*EnMThunderActionFunc)(struct EnMThunder*, GlobalContext*);
+
 typedef struct EnMThunder {
     /* 0x000 */ Actor actor;
     /* 0x14C */ ColliderCylinder unk14C;
@@ -17,7 +19,7 @@ typedef struct EnMThunder {
     /* 0x1B4 */ f32 unk1B4;
     /* 0x1B8 */ f32 unk1B8;
     /* 0x1BC */ f32 unk1BC;
-    /* 0x1C0 */ void (*unk1C0)(struct EnMThunder*, GlobalContext*);
+    /* 0x1C0 */ EnMThunderActionFunc actionFunc;
     /* 0x1C4 */ u16 unk1C4;
     /* 0x1C6 */ u8 unk1C6;
     /* 0x1C7 */ u8 unk1C7;
