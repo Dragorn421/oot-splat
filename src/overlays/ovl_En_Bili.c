@@ -37,7 +37,8 @@ void func_809C0A70(EnBili* this, GlobalContext* globalCtx);
 void func_809C0E08(EnBili* this, f32 arg1, Vec3f* arg2);
 void func_809C1020(EnBili* this, f32 arg1, Vec3f* arg2);
 void func_809C1240(EnBili* this, f32 arg1, Vec3f* arg2);
-s32 func_809C13A8(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx, Gfx** gfx);
+s32 EnBili_OverrideLimbDraw(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx,
+                            Gfx** gfx);
 
 extern AnimationHeader D_6000024;
 extern AnimationHeader D_6000064;
@@ -96,17 +97,17 @@ void EnBili_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     Actor_ProcessInitChain(&this->actor, D_809C1698);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 17.0f);
-    this->actor.shape.shadowAlpha = 0x9B;
-    SkelAnime_Init(globalCtx, &this->unk14C, &D_6005848, &D_60000A4, &this->unk198, &this->unk1B6, 5);
+    this->actor.shape.shadowAlpha = 155;
+    SkelAnime_Init(globalCtx, &this->unk14C, &D_6005848, &D_60000A4, this->unk198, this->unk1B6, 5);
     Collider_InitCylinder(globalCtx, &this->unk1D4);
     Collider_SetCylinder(globalCtx, &this->unk1D4, &this->actor, &D_809C1640);
     CollisionCheck_SetInfo2(&this->actor.colChkInfo, &D_809C1678, &D_809C166C);
     this->unk195 = 0;
     if (this->actor.params == -1) {
         func_809BF9BC(this);
-        return;
+    } else {
+        func_809BFA14(this);
     }
-    func_809BFA14(this);
 }
 
 void EnBili_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -119,8 +120,8 @@ void func_809BF9BC(EnBili* this) {
     this->actor.speedXZ = 0.7f;
     this->unk1D4.info.bumper.effect = 1;
     this->unk196 = 0x20;
-    this->unk1D4.base.atFlags |= 1;
-    this->unk1D4.base.acFlags |= 1;
+    this->unk1D4.base.atFlags |= AT_ON;
+    this->unk1D4.base.acFlags |= AC_ON;
     this->unk190 = func_809C0174;
     this->actor.home.pos.y = this->actor.world.pos.y;
     this->actor.gravity = 0.0f;
@@ -133,7 +134,7 @@ void func_809BFA14(EnBili* this) {
     this->actor.velocity.y = 6.0f;
     this->actor.gravity = -0.3f;
     this->actor.speedXZ = 3.0f;
-    this->unk1D4.base.atFlags &= 0xFFFE;
+    this->unk1D4.base.atFlags &= ~AT_ON;
     this->unk190 = func_809C0260;
 }
 
@@ -147,7 +148,7 @@ void func_809BFA8C(EnBili* this) {
 
 void func_809BFAE8(EnBili* this) {
     Animation_PlayOnce(&this->unk14C, &D_6000064);
-    this->unk1D4.base.atFlags &= 0xFFFE;
+    this->unk1D4.base.atFlags &= ~AT_ON;
     this->unk190 = func_809C04B4;
     this->actor.speedXZ = 0.0f;
     this->actor.velocity.y = 0.0f;
@@ -182,8 +183,8 @@ void func_809BFC48(EnBili* this) {
         Animation_PlayLoop(&this->unk14C, &D_60000A4);
     }
     this->unk196 = 0x14;
-    this->unk1D4.base.atFlags &= 0xFFFE;
-    this->unk1D4.base.acFlags &= 0xFFFE;
+    this->unk1D4.base.atFlags &= ~AT_ON;
+    this->unk1D4.base.acFlags &= ~AC_ON;
     this->actor.flags |= 0x10;
     this->actor.speedXZ = 0.0f;
     func_8003426C(&this->actor, 0x4000, 0xC8, 0x2000, 0x14);
@@ -203,8 +204,8 @@ void func_809BFD18(EnBili* this) {
     this->actor.gravity = -1.0f;
     this->actor.speedXZ = 0.0f;
     func_8003426C(&this->actor, 0, 0x96, 0x2000, 0x50);
-    Audio_PlayActorSound2(&this->actor, 0x389EU);
-    this->unk1D4.base.atFlags &= 0xFFFE;
+    Audio_PlayActorSound2(&this->actor, NA_SE_EN_GOMA_JR_FREEZE);
+    this->unk1D4.base.atFlags &= ~AT_ON;
     this->unk190 = func_809C0980;
 }
 
@@ -217,19 +218,17 @@ void func_809BFD94(EnBili* this, GlobalContext* globalCtx) {
     }
     this->actor.velocity.y = 0.0f;
     sp80.y = this->actor.world.pos.y - 15.0f;
-    var_s0 = 0;
-    do {
+    for (var_s0 = 0; var_s0 < 8; var_s0++) {
         sp80.x = ((var_s0 & 1) ? 7.0f : -7.0f) + this->actor.world.pos.x;
         sp80.y += 2.5f;
         sp80.z = ((var_s0 & 4) ? 7.0f : -7.0f) + this->actor.world.pos.z;
-        EffectSsEnIce_SpawnFlyingVec3f(globalCtx, &this->actor, (Vec3f*)&sp80, 0x96, 0x96, 0x96, 0xFA, 0xEB, 0xF5, 0xFF,
+        EffectSsEnIce_SpawnFlyingVec3f(globalCtx, &this->actor, &sp80, 150, 150, 150, 250, 235, 245, 255,
                                        (Rand_ZeroOne() * 0.2f) + 0.7f);
-        var_s0 += 1;
-    } while (var_s0 != 8);
+    }
     this->actor.speedXZ = 0.0f;
     func_8003426C(&this->actor, 0, 0x96, 0x2000, 0xA);
-    this->unk1D4.base.atFlags &= 0xFFFE;
-    this->unk1D4.base.acFlags &= 0xFFFE;
+    this->unk1D4.base.atFlags &= ~AT_ON;
+    this->unk1D4.base.acFlags &= ~AC_ON;
     this->unk196 = 0x12C;
     this->unk190 = func_809C09E0;
 }
@@ -238,31 +237,30 @@ void func_809BFF6C(EnBili* this) {
     s16 temp_v1_2;
     s16 temp_v1_4;
     s16 temp_ft1;
-    s32 temp_v1_3;
+    s16 temp_v1_3;
 
     temp_ft1 = this->unk14C.curFrame;
     if (this->unk190 == func_809C02B8) {
-        temp_v1_2 = 3 - (s16)temp_ft1;
-        this->unk194 = (u8)((s32)(ABS(temp_v1_2) + 5) % 8);
-        return;
+        temp_v1_2 = 3 - temp_ft1;
+        this->unk194 = (ABS(temp_v1_2) + 5) % 8;
     } else if (this->unk190 == func_809C04B4) {
-        temp_v1_3 = (s16)temp_ft1 >> 1;
-        if ((s16)temp_ft1 < 0xA) {
-            if ((s16)temp_v1_3 >= 4) {
+        temp_v1_3 = temp_ft1 >> 1;
+        if (temp_ft1 < 0xA) {
+            if (temp_v1_3 >= 4) {
                 this->unk194 = 3;
-                return;
+            } else {
+                this->unk194 = temp_v1_3;
             }
-            this->unk194 = (u8)(s16)temp_v1_3;
-        } else if ((s16)temp_ft1 < 0x13) {
-            temp_v1_4 = 0x11 - (s16)temp_ft1;
-            this->unk194 = (u8)(CLAMP_MIN(temp_v1_4, 0) >> 1);
-        } else if ((s16)temp_ft1 < 0x25) {
-            this->unk194 = ((s32)(0x24 - (s16)temp_ft1) / 3) + 2;
+        } else if (temp_ft1 < 0x13) {
+            temp_v1_4 = 0x11 - temp_ft1;
+            this->unk194 = CLAMP_MIN(temp_v1_4, 0) >> 1;
+        } else if (temp_ft1 < 0x25) {
+            this->unk194 = ((0x24 - temp_ft1) / 3) + 2;
         } else {
-            this->unk194 = (u8)((s32)(0x28 - (s16)temp_ft1) >> 1);
+            this->unk194 = (0x28 - temp_ft1) >> 1;
         }
     } else {
-        this->unk194 = (u8)((s16)temp_ft1 >> 1);
+        this->unk194 = temp_ft1 >> 1;
     }
 }
 
@@ -285,7 +283,7 @@ void func_809C008C(EnBili* this) {
         var_fa0 = temp_fv1;
     }
     Math_StepToF(&this->actor.home.pos.y, var_fa0 + var_fa1, 1.0f);
-    this->actor.world.pos.y = (sinf((f32)this->unk196 * 0.19634955f) * 3.0f) + this->actor.home.pos.y;
+    this->actor.world.pos.y = (sinf(this->unk196 * 0.19634955f) * 3.0f) + this->actor.home.pos.y;
     if (this->actor.bgCheckFlags & 8) {
         this->actor.world.rot.y = this->actor.wallYaw;
     }
@@ -333,17 +331,17 @@ void func_809C02B8(EnBili* this, GlobalContext* globalCtx) {
         }
     }
     SkelAnime_Update(&this->unk14C);
-    func_8002F974(&this->actor, 0x309AU);
+    func_8002F974(&this->actor, NA_SE_EN_BIRI_SPARK - SFX_FLAG);
     if (this->unk196 != 0) {
         this->unk196--;
     }
     this->actor.velocity.y *= -1.0f;
-    if ((this->unk196 == 0) && (Animation_OnFrame(&this->unk14C, 0.0f) != 0)) {
+    if ((this->unk196 == 0) && Animation_OnFrame(&this->unk14C, 0.0f)) {
         if (this->actor.params == 1) {
             func_809BFCE8(this);
-            return;
+        } else {
+            func_809BFAE8(this);
         }
-        func_809BFAE8(this);
     }
 }
 
@@ -353,7 +351,7 @@ void func_809C04B4(EnBili* this, GlobalContext* globalCtx) {
 
     sp2C = SkelAnime_Update(&this->unk14C);
     sp28 = this->unk14C.curFrame;
-    if (Animation_OnFrame(&this->unk14C, 9.0f) != 0) {
+    if (Animation_OnFrame(&this->unk14C, 9.0f)) {
         Audio_PlayActorSound2(&this->actor, 0x3899U);
     }
     if (sp28 > 9.0f) {
@@ -366,13 +364,10 @@ void func_809C04B4(EnBili* this, GlobalContext* globalCtx) {
 }
 
 void func_809C0570(EnBili* this, GlobalContext* globalCtx) {
-    s16 temp_v0;
-
     SkelAnime_Update(&this->unk14C);
     Math_ApproachS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 2, 0x71C);
-    temp_v0 = this->unk196;
-    if (temp_v0 != 0) {
-        this->unk196 = temp_v0 - 1;
+    if (this->unk196 != 0) {
+        this->unk196--;
     }
     func_809C008C(this);
     if (this->unk196 == 0) {
@@ -384,14 +379,11 @@ void func_809C0570(EnBili* this, GlobalContext* globalCtx) {
 }
 
 void func_809C0600(EnBili* this, GlobalContext* globalCtx) {
-    s16 temp_v0;
-
     SkelAnime_Update(&this->unk14C);
-    temp_v0 = this->unk196;
-    if (temp_v0 != 0) {
-        this->unk196 = temp_v0 - 1;
+    if (this->unk196 != 0) {
+        this->unk196--;
     }
-    Math_ScaledStepToS(&this->actor.world.rot.y, (s16)(this->actor.yawTowardsPlayer + 0x8000), 0x38E);
+    Math_ScaledStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer + 0x8000, 0x38E);
     func_809C008C(this);
     if (this->unk196 == 0) {
         func_809BF9BC(this);
@@ -410,13 +402,13 @@ void func_809C06E0(EnBili* this, GlobalContext* globalCtx) {
     SkelAnime_Update(&this->unk14C);
     if (this->actor.flags & 0x8000) {
         this->actor.colorFilterTimer = 0x14;
-        return;
-    }
-    if (this->unk196 != 0) {
-        this->unk196--;
-    }
-    if (this->unk196 == 0) {
-        func_809BFCE8(this);
+    } else {
+        if (this->unk196 != 0) {
+            this->unk196--;
+        }
+        if (this->unk196 == 0) {
+            func_809BFCE8(this);
+        }
     }
 }
 
@@ -440,24 +432,24 @@ void func_809C0754(EnBili* this, GlobalContext* globalCtx) {
     }
     if (this->unk196 != 0) {
         for (var_s1 = 0; var_s1 < 2; var_s1++) {
-            sp78.x = ((Rand_ZeroOne() * 10.0f) + this->actor.world.pos.x) - 5.0f;
-            sp78.y = ((Rand_ZeroOne() * 5.0f) + this->actor.world.pos.y) - 2.5f;
-            sp78.z = ((Rand_ZeroOne() * 10.0f) + this->actor.world.pos.z) - 5.0f;
+            sp78.x = (Rand_ZeroOne() * 10.0f) + this->actor.world.pos.x - 5.0f;
+            sp78.y = (Rand_ZeroOne() * 5.0f) + this->actor.world.pos.y - 2.5f;
+            sp78.z = (Rand_ZeroOne() * 10.0f) + this->actor.world.pos.z - 5.0f;
             D_809C16A8.y = Rand_ZeroOne() + 1.0f;
             temp_s0 = Rand_S16Offset(0x28, 0x28);
             if (Rand_ZeroOne() < 0.7f) {
-                EffectSsDtBubble_SpawnColorProfile(globalCtx, (Vec3f*)&sp78, &D_809C16A8, &D_809C16B4,
-                                                   (s16)(s32)temp_s0, 0x19, 2, 1);
+                EffectSsDtBubble_SpawnColorProfile(globalCtx, (Vec3f*)&sp78, &D_809C16A8, &D_809C16B4, temp_s0, 0x19, 2,
+                                                   1);
             } else {
-                EffectSsDtBubble_SpawnColorProfile(globalCtx, (Vec3f*)&sp78, &D_809C16A8, &D_809C16B4,
-                                                   (s16)(s32)temp_s0, 0x19, 0, 1);
+                EffectSsDtBubble_SpawnColorProfile(globalCtx, (Vec3f*)&sp78, &D_809C16A8, &D_809C16B4, temp_s0, 0x19, 0,
+                                                   1);
             }
         }
     } else {
         Actor_Kill(&this->actor);
     }
     if (this->unk196 == 0xE) {
-        Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 0x28, 0x389CU);
+        Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 0x28, NA_SE_EN_BIRI_BUBLE);
     }
 }
 
@@ -477,14 +469,11 @@ static Gfx D_809C1700[] = {
 };
 
 void func_809C0980(EnBili* this, GlobalContext* globalCtx) {
-    s16 temp_v0;
-
-    temp_v0 = this->unk196;
-    if (temp_v0 != 0) {
-        this->unk196 = temp_v0 - 1;
+    if (this->unk196 != 0) {
+        this->unk196--;
     }
     if (this->actor.bgCheckFlags & 2) {
-        Audio_PlayActorSound2(&this->actor, 0x387BU);
+        Audio_PlayActorSound2(&this->actor, NA_SE_EN_DODO_M_GND);
     }
     if (this->unk196 == 0) {
         func_809BF9BC(this);
@@ -492,30 +481,27 @@ void func_809C0980(EnBili* this, GlobalContext* globalCtx) {
 }
 
 void func_809C09E0(EnBili* this, GlobalContext* globalCtx) {
-    s16 temp_v0;
-
-    temp_v0 = this->unk196;
-    if (temp_v0 != 0) {
-        this->unk196 = temp_v0 - 1;
+    if (this->unk196 != 0) {
+        this->unk196--;
     }
     if (!(this->actor.flags & 0x8000)) {
         this->actor.gravity = -1.0f;
     }
-    if ((this->actor.bgCheckFlags & 1) || (this->actor.floorHeight == -32000.0f)) {
+    if ((this->actor.bgCheckFlags & 1) || (this->actor.floorHeight == BGCHECK_Y_MIN)) {
         this->actor.colorFilterTimer = 0;
         func_809BFCE8(this);
-        return;
+    } else {
+        this->actor.colorFilterTimer = 0xA;
     }
-    this->actor.colorFilterTimer = 0xA;
 }
 
 void func_809C0A70(EnBili* this, GlobalContext* globalCtx) {
-    if ((this->actor.colChkInfo.health != 0) && (this->unk1D4.base.acFlags & 2)) {
-        this->unk1D4.base.acFlags &= 0xFFFD;
+    if ((this->actor.colChkInfo.health != 0) && (this->unk1D4.base.acFlags & AC_HIT)) {
+        this->unk1D4.base.acFlags &= ~AC_HIT;
         func_80035650(&this->actor, &this->unk1D4.info, 1);
         if ((((this->actor.colChkInfo.damageEffect != 0)) || (this->actor.colChkInfo.damage != 0))) {
             if (Actor_ApplyDamage(&this->actor) == 0) {
-                Audio_PlayActorSound2(&this->actor, 0x389BU);
+                Audio_PlayActorSound2(&this->actor, NA_SE_EN_BIRI_DEAD);
                 func_80032C7C(globalCtx, &this->actor);
                 this->actor.flags &= ~1;
             }
@@ -554,15 +540,15 @@ void EnBili_Update(Actor* thisx, GlobalContext* globalCtx2) {
     EnBili* this = (EnBili*)thisx;
     GlobalContext* globalCtx = globalCtx2;
 
-    if (this->unk1D4.base.atFlags & 2) {
-        this->unk1D4.base.atFlags &= 0xFFFD;
+    if (this->unk1D4.base.atFlags & AT_HIT) {
+        this->unk1D4.base.atFlags &= ~AT_HIT;
         func_809BFA8C(this);
     }
     func_809C0A70(this, globalCtx);
     this->unk190(this, globalCtx);
     if (this->unk190 != func_809C0754) {
         func_809BFF6C(this);
-        if ((Animation_OnFrame(&this->unk14C, 9.0f) != 0) &&
+        if (Animation_OnFrame(&this->unk14C, 9.0f) &&
             (((this->unk190 == func_809C0174)) || (this->unk190 == func_809C0600) || (this->unk190 == func_809C0570) ||
              (this->unk190 == func_809C067C))) {
             if (this->unk195 != 0) {
@@ -577,8 +563,7 @@ void EnBili_Update(Actor* thisx, GlobalContext* globalCtx2) {
         } else {
             Actor_MoveForward(&this->actor);
         }
-        Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 5.0f, (f32)this->unk1D4.dim.radius,
-                                (f32)this->unk1D4.dim.height, 7);
+        Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 5.0f, this->unk1D4.dim.radius, this->unk1D4.dim.height, 7);
         Collider_UpdateCylinder(&this->actor, &this->unk1D4);
         if (this->unk1D4.base.atFlags & 1) {
             CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->unk1D4.base);
@@ -612,7 +597,7 @@ void func_809C0E08(EnBili* this, f32 arg1, Vec3f* arg2) {
         }
         arg2->z = arg2->x;
     } else if (this->unk190 == func_809C0980) {
-        temp_fv1 = sinf((f32)this->unk196 * 0.31415927f) * 0.08f;
+        temp_fv1 = sinf(this->unk196 * 0.31415927f) * 0.08f;
         arg2->x -= temp_fv1;
         arg2->y += temp_fv1;
         arg2->z -= temp_fv1;
@@ -628,9 +613,7 @@ void func_809C1020(EnBili* this, f32 arg1, Vec3f* arg2) {
 
     if (this->unk190 == func_809C02B8) {
         arg2->y = (sinf(0.5236092f * arg1) * 0.2f) + 1.0f;
-        return;
-    }
-    if (this->unk190 == func_809C04B4) {
+    } else if (this->unk190 == func_809C04B4) {
         if (arg1 <= 8.0f) {
             arg2->x = 1.125f - (cosf(0.3926991f * arg1) * 0.125f);
         } else if (arg1 <= 18.0f) {
@@ -643,45 +626,39 @@ void func_809C1020(EnBili* this, f32 arg1, Vec3f* arg2) {
             arg2->y = (0.48f * temp_fv0_2) + 1.0f;
         }
         arg2->z = arg2->x;
-        return;
-    }
-    if (this->unk190 == func_809C0980) {
-        temp_fv1 = sinf((f32)this->unk196 * 0.31415927f) * 0.08f;
+    } else if (this->unk190 == func_809C0980) {
+        temp_fv1 = sinf(this->unk196 * 0.31415927f) * 0.08f;
         arg2->x += temp_fv1;
         arg2->y -= temp_fv1;
         arg2->z += temp_fv1;
-        return;
+    } else {
+        arg2->y = 1.1f - (cosf(0.3926991f * arg1) * 0.1f);
     }
-    arg2->y = 1.1f - (cosf(0.3926991f * arg1) * 0.1f);
 }
 
 void func_809C1240(EnBili* this, f32 arg1, Vec3f* arg2) {
     f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 var_ft1;
 
     if (this->unk190 == func_809C04B4) {
         if (arg1 <= 8.0f) {
             temp_fv0 = cosf(0.3926991f * arg1);
             arg2->x = 1.125f - (0.125f * temp_fv0);
-            var_ft1 = (0.3f * temp_fv0) + 0.7f;
-            arg2->y = var_ft1;
+            arg2->y = (0.3f * temp_fv0) + 0.7f;
         } else if (arg1 <= 18.0f) {
-            temp_fv0_2 = cosf((arg1 - 8.0f) * 0.31415927f);
-            arg2->x = (0.325f * temp_fv0_2) + 0.925f;
-            arg2->y = 0.95f - (0.55f * temp_fv0_2);
+            temp_fv0 = cosf((arg1 - 8.0f) * 0.31415927f);
+            arg2->x = (0.325f * temp_fv0) + 0.925f;
+            arg2->y = 0.95f - (0.55f * temp_fv0);
         } else {
-            temp_fv0_3 = cosf((arg1 - 18.0f) * 0.071314156f);
-            arg2->x = 1.0f - (0.4f * temp_fv0_3);
-            var_ft1 = (0.52f * temp_fv0_3) + 1.0f;
-            arg2->y = var_ft1;
+            temp_fv0 = cosf((arg1 - 18.0f) * 0.071314156f);
+            arg2->x = 1.0f - (0.4f * temp_fv0);
+            arg2->y = (0.52f * temp_fv0) + 1.0f;
         }
         arg2->z = arg2->x;
     }
 }
 
-s32 func_809C13A8(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx, Gfx** gfx) {
+s32 EnBili_OverrideLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx,
+                            Gfx** gfx) {
     EnBili* this = thisx;
     Vec3f sp20;
     f32 temp_fv0;
@@ -694,30 +671,25 @@ s32 func_809C13A8(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s*
         func_809C1020(this, temp_fv0, &sp20);
     } else if (arg1 == 4) {
         func_809C1240(this, temp_fv0, &sp20);
-        arg4->y = (Camera_GetCamDirYaw(arg0->cameraPtrs[arg0->activeCamera]) - this->actor.shape.rot.y) + 0x8000;
+        arg4->y = Camera_GetCamDirYaw(ACTIVE_CAM) - this->actor.shape.rot.y + 0x8000;
     }
-    Matrix_Scale(sp20.x, sp20.y, sp20.z, 1U);
+    Matrix_Scale(sp20.x, sp20.y, sp20.z, MTXMODE_APPLY);
     return 0;
 }
 
 void EnBili_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnBili* this = (EnBili*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bili.c", 0x5F1);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bili.c", 1521);
     func_80093D84(globalCtx->state.gfxCtx);
-    if ((s32)this->unk194 >= 8) {
-        this->unk194 = 7;
-    } else {
-        this->unk194 = this->unk194;
-    }
+    this->unk194 = CLAMP_MAX(this->unk194, 7);
     gSPSegment(POLY_XLU_DISP++, 8, SEGMENTED_TO_VIRTUAL(D_809C16CC[this->unk194]));
     if ((this->unk190 == func_809C02B8) && (this->unk196 & 1)) {
         gSPSegment(POLY_XLU_DISP++, 9, D_809C16F0);
     } else {
         gSPSegment(POLY_XLU_DISP++, 9, D_809C1700);
     }
-    POLY_XLU_DISP = SkelAnime_Draw(globalCtx, this->unk14C.skeleton, this->unk14C.jointTable,
-                                   (s32(*)(GlobalContext*, s32, Gfx**, Vec3f*, Vec3s*, void*, Gfx**))func_809C13A8,
+    POLY_XLU_DISP = SkelAnime_Draw(globalCtx, this->unk14C.skeleton, this->unk14C.jointTable, EnBili_OverrideLimbDraw,
                                    NULL, this, POLY_XLU_DISP);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bili.c", 0x610);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bili.c", 1552);
 }
