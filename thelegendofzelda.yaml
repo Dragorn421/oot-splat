@@ -4917,9 +4917,9 @@ segments:
     follows_vram: ovl_En_M_Fire1
     bss_size: 0x0
     subsegments:
-      - [0xE55050, c, overlays/ovl_En_M_Thunder]
-      - [0xE56470, .data, overlays/ovl_En_M_Thunder]
-      - [0xE56500, .rodata, overlays/ovl_En_M_Thunder]
+      - [0xE55050, asm, overlays/ovl_En_M_Thunder]
+      - [0xE56470, data, overlays/ovl_En_M_Thunder]
+      - [0xE56500, rodata, overlays/ovl_En_M_Thunder]
       - [0xE565A0, rodatabin, rodatabin_80AA0530]
 
   - name: ovl_En_Ma1
