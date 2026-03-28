@@ -4,7 +4,9 @@ This repo is used to re-decompile non-cc0 parts of the OoT decomp.
 
 oot-splat https://github.com/Dragorn421/oot-splat
 
-oot_cc0redo https://github.com/Dragorn421/oot/tree/oot_cc0redo
+oot_cc0redo_take2 https://github.com/Dragorn421/oot/tree/oot_cc0redo_take2
+
+(first oot_cc0redo branch https://github.com/Dragorn421/oot/tree/oot_cc0redo )
 
 ## Contributing
 
