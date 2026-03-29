@@ -53,3 +53,5 @@ subprocess.call(
         *sys.argv[2:],
     ]
 )
+
+print("./tools/decomp-permuter/permuter.py")
