@@ -198,28 +198,230 @@ static InitChainEntry D_80A88CE0[] = {
 static Vec3f D_80A88CF0 = { -1589.0f, 53.0f, -43.0f };
 static s32 D_80A88CFC[5] = { 0x06007698, 0x06007A98, 0x06007E98, 0, 0 };
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87800.s")
+void func_80A87800(EnJj* this, void (*arg1)(EnJj*, GlobalContext*)) {
+    this->unk2FC = arg1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/EnJj_Init.s")
+void EnJj_Init(Actor* thisx, GlobalContext* globalCtx) {
+    s32 pad;
+    EnJj* this = (EnJj*)thisx;
+    CollisionHeader* sp4C;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/EnJj_Destroy.s")
+    sp4C = NULL;
+    Actor_ProcessInitChain(&this->dyna.actor, D_80A88CE0);
+    ActorShape_Init(&this->dyna.actor.shape, 0.0f, NULL, 0.0f);
+    switch (this->dyna.actor.params) { /* irregular */
+        case -1:
+            SkelAnime_InitFlex(globalCtx, &this->unk164, &D_600B9A8, &D_6001F4C, this->unk1A8, this->unk22C, 0x16);
+            Animation_PlayLoop(&this->unk164, &D_6001F4C);
+            this->unk30A = 0;
+            this->unk30E = 0;
+            this->unk30F = 0;
+            this->unk310 = 0;
+            this->unk311 = 0;
+            if (gSaveContext.eventChkInf[3] & 0x400) {
+                func_80A87800(this, func_80A87BEC);
+            } else {
+                func_80A87800(this, func_80A87C30);
+            }
+            this->unk300 =
+                Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, 0x5A,
+                                   this->dyna.actor.world.pos.x - 10.0f, this->dyna.actor.world.pos.y,
+                                   this->dyna.actor.world.pos.z, 0, (s16)(s32)this->dyna.actor.world.rot.y, 0, 0);
+            DynaPolyActor_Init(&this->dyna, DPM_UNK);
+            CollisionHeader_GetVirtual(&D_6000A1C, &sp4C);
+            this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp4C);
+            Collider_InitCylinder(globalCtx, &this->unk2B0);
+            Collider_SetCylinder(globalCtx, &this->unk2B0, &this->dyna.actor, &D_80A88CB4);
+            this->dyna.actor.colChkInfo.mass = 0xFF;
+            return;
+        case 0:
+            DynaPolyActor_Init(&this->dyna, DPM_UNK);
+            CollisionHeader_GetVirtual(&D_6001830, &sp4C);
+            this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp4C);
+            func_8003ECA8(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
+            this->dyna.actor.update = (void (*)(Actor*, GlobalContext*))func_80A87F44;
+            this->dyna.actor.draw = NULL;
+            Actor_SetScale(&this->dyna.actor, 0.087f);
+            return;
+        case 1:
+            DynaPolyActor_Init(&this->dyna, DPM_UNK);
+            CollisionHeader_GetVirtual(&D_600BA8C, &sp4C);
+            this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp4C);
+            this->dyna.actor.update = (void (*)(Actor*, GlobalContext*))func_80A87F44;
+            this->dyna.actor.draw = NULL;
+            Actor_SetScale(&this->dyna.actor, 0.087f);
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87B1C.s")
+void EnJj_Destroy(Actor* thisx, GlobalContext* globalCtx) {
+    s16 temp_v0;
+    EnJj* this = (EnJj*)thisx;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87B9C.s")
+    temp_v0 = this->dyna.actor.params;
+    switch (temp_v0) { /* irregular */
+        case -1:
+            DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
+            Collider_DestroyCylinder(globalCtx, &this->unk2B0);
+            return;
+        case 0:
+        case 1:
+            DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
+            return;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87BEC.s")
+void func_80A87B1C(EnJj* this) {
+    if ((s32)this->unk30F > 0) {
+        this->unk30F--;
+        return;
+    }
+    this->unk30E++;
+    if (this->unk30E >= 3) {
+        this->unk30E = 0;
+        if ((s32)this->unk310 > 0) {
+            this->unk310--;
+            return;
+        }
+        this->unk30F = Rand_S16Offset(0x14, 0x14);
+        this->unk310 = this->unk311;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87C30.s")
+void func_80A87B9C(EnJj* this, GlobalContext* globalCtx) {
+    EnJj* unk300;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87CEC.s")
+    unk300 = this->unk300;
+    if (this->unk308 >= -0x1450) {
+        this->unk308 -= 0x66;
+        if (this->unk308 < -0xA28) {
+            func_8003EBF8(globalCtx, &globalCtx->colCtx.dyna, unk300->dyna.bgId /*unk14C*/);
+        }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87D94.s")
+void func_80A87BEC(EnJj* this, GlobalContext* globalCtx) {
+    if (this->dyna.actor.xzDistToPlayer < 300.0f) {
+        func_80A87800(this, func_80A87B9C);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87EF0.s")
+void func_80A87C30(EnJj* this, GlobalContext* globalCtx) {
+    Player* player = PLAYER;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87F44.s")
+    if ((Math_Vec3f_DistXZ(&D_80A88CF0, &player->actor.world.pos) < 300.0f) &&
+        (globalCtx->isPlayerDroppingFish(globalCtx) != 0)) {
+        this->unk30C = 0x64;
+        func_80A87800(this, func_80A87CEC);
+    }
+    this->unk2B0.dim.pos.x = -0x4DD;
+    this->unk2B0.dim.pos.y = 0x14;
+    this->unk2B0.dim.pos.z = -0x30;
+    CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->unk2B0.base);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/EnJj_Update.s")
+void func_80A87CEC(EnJj* this, GlobalContext* globalCtx) {
+    EnJj* temp_v1;
+    Actor* sp1C;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/EnJj_Draw.s")
+    temp_v1 = this->unk300;
+    if (this->unk30C > 0) {
+        this->unk30C--;
+        return;
+    }
+    func_80A87800(this, func_80A87EF0);
+    globalCtx->csCtx.segment = D_80A88164;
+    gSaveContext.cutsceneTrigger = 1;
+    func_8003EBF8(globalCtx, &globalCtx->colCtx.dyna, temp_v1->dyna.bgId /*unk14C*/);
+    func_8005B1A4(globalCtx->cameraPtrs[globalCtx->activeCamera]);
+    gSaveContext.eventChkInf[3] |= 0x400;
+    func_80078884(0x4802U);
+}
+
+void func_80A87D94(EnJj* this, GlobalContext* globalCtx) {
+    switch (globalCtx->csCtx.npcActions[2]->action) { /* irregular */
+        default:
+            break;
+        case 1:
+            if (this->unk30A & 2) {
+                this->unk30E = 0;
+                this->unk30F = Rand_S16Offset(0x14, 0x14);
+                this->unk310 = 0;
+                this->unk311 = 0;
+                this->unk30A ^= 2;
+            }
+            break;
+        case 2:
+            this->unk30A |= 1;
+            if (!(this->unk30A & 8)) {
+                this->unk304 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, 0x101, -1100.0f,
+                                                  105.0f, -27.0f, 0, 0, 0, 0);
+                this->unk30A |= 8;
+            }
+            break;
+        case 3:
+            if (!(this->unk30A & 2)) {
+                this->unk30E = 0;
+                this->unk30F = 0;
+                this->unk310 = 1;
+                this->unk311 = 0;
+                this->unk30A |= 2;
+            }
+            break;
+    }
+    if (this->unk30A & 1) {
+        Audio_PlayActorSound2(&this->dyna.actor, 0x206DU);
+        if (this->unk308 >= -0x1450) {
+            this->unk308 -= 0x66;
+        }
+    }
+}
+
+void func_80A87EF0(EnJj* this, GlobalContext* globalCtx) {
+    Actor* temp_a0;
+    u16 temp_v0;
+
+    temp_v0 = this->unk30A;
+    if (!(temp_v0 & 4)) {
+        this->unk30A = temp_v0 | 4;
+        temp_a0 = this->unk304;
+        if (temp_a0 != NULL) {
+            Actor_Kill(temp_a0);
+            this->dyna.actor.child = NULL;
+        }
+    }
+}
+
+void func_80A87F44(EnJj* this, GlobalContext* globalCtx) {
+}
+
+void EnJj_Update(Actor* thisx, GlobalContext* globalCtx) {
+    EnJj* this = (EnJj*)thisx;
+    if ((globalCtx->csCtx.state != 0) && (globalCtx->csCtx.npcActions[2] != NULL)) {
+        func_80A87D94(this, globalCtx);
+    } else {
+        this->unk2FC(this, globalCtx);
+        if (this->unk164.curFrame == 41.0f) {
+            Audio_PlayActorSound2(&this->dyna.actor, 0x28B6U);
+        }
+    }
+    func_80A87B1C(this);
+    SkelAnime_Update(&this->unk164);
+    Actor_SetScale(&this->dyna.actor, 0.087f);
+    this->unk164.jointTable[10].z /*unk40*/ = (s16)this->unk308;
+}
+
+void EnJj_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    s32 temp_a0;
+    EnJj* this = (EnJj*)thisx;
+
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_jj.c", 0x36F);
+    func_800943C8(globalCtx->state.gfxCtx);
+    Matrix_Translate(0.0f, (cosf(this->unk164.curFrame * 0.076624215f) * 10.0f) - 10.0f, 0.0f, 1U);
+    Matrix_Scale(10.0f, 10.0f, 10.0f, 1U);
+    gSPSegment(POLY_OPA_DISP++, 8, SEGMENTED_TO_VIRTUAL(D_80A88CFC[this->unk30E]));
+    SkelAnime_DrawFlexOpa(globalCtx, this->unk164.skeleton, this->unk164.jointTable, (s32)this->unk164.dListCount, NULL,
+                          NULL, this);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_jj.c", 0x382);
+}
