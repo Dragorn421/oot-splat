@@ -66,7 +66,7 @@ typedef struct BgDyYoseizo {
     /* 0x033A */ Vec3s unk33A;
     /* 0x0340 */ struct EnDyExtra* unk340;
     /* 0x0344 */ struct EnExItem* unk344;
-    /* 0x0348 */ char pad348[0x4C]; /* maybe part of unk344[0x14]? */
+    /* 0x0348 */ char pad348[0x4C];
     /* 0x0394 */ struct_BgDyYoseizo_394 unk394[200];
 } BgDyYoseizo; // size = 0x38B4
 
