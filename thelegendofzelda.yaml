@@ -5481,7 +5481,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xEB28C0, c, overlays/ovl_En_Skb]
-      - [0xEB3F40, data, overlays/ovl_En_Skb]
+      - [0xEB3F40, .data, overlays/ovl_En_Skb]
       - [0xEB4000, .rodata, overlays/ovl_En_Skb]
       - [0xEB4050, rodatabin, rodatabin_80AFE130]
 

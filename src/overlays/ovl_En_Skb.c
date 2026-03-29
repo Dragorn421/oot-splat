@@ -39,19 +39,6 @@ extern AnimationHeader D_6001854;
 extern SkeletonHeader D_60041F8;
 extern AnimationHeader D_60047E0;
 
-/*
-const ActorInit En_Skb_InitVars = {
-    ACTOR_EN_SKB,
-    ACTORCAT_ENEMY,
-    FLAGS,
-    OBJECT_SKB,
-    sizeof(EnSkb),
-    (ActorFunc)EnSkb_Init,
-    (ActorFunc)EnSkb_Destroy,
-    (ActorFunc)EnSkb_Update,
-    (ActorFunc)EnSkb_Draw,
-};
-
 static ColliderJntSphElementInit D_80AFE020[2] = {
     {
         {
@@ -89,10 +76,32 @@ static ColliderJntSphInit D_80AFE068 = {
     2,
     D_80AFE020,
 };
-*/
 
-extern Vec3f D_80AFE0B8;
-extern Vec3f D_80AFE0C4;
+static DamageTable D_80AFE078 = {
+    {
+        0x10, 0xF2, 0xF1, 0xF2, 0x10, 0xF2, 0xF2, 0x10, 0xE1, 0xF2, 0xF4, 0x74, 0xF2, 0xF2, 0xF2, 0,
+        0,    0x74, 0x60, 0xD3, 0,    0,    0xD1, 0xF4, 0xF2, 0xF2, 0xF8, 0xF4, 0,    0,    0xF4, 0,
+    },
+};
+
+const ActorInit En_Skb_InitVars = {
+    ACTOR_EN_SKB,
+    ACTORCAT_ENEMY,
+    FLAGS,
+    OBJECT_SKB,
+    sizeof(EnSkb),
+    (ActorFunc)EnSkb_Init,
+    (ActorFunc)EnSkb_Destroy,
+    (ActorFunc)EnSkb_Update,
+    (ActorFunc)EnSkb_Draw,
+};
+
+static Vec3f D_80AFE0B8 = { 0.0f, 8.0f, 0.0f };
+static Vec3f D_80AFE0C4 = { 0.0f, -1.5f, 0.0f };
+static InitChainEntry D_80AFE0D0[] = {
+    ICHAIN_F32(targetArrowOffset, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32_DIV1000(gravity, -2000, ICHAIN_STOP),
+};
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Skb/func_80AFC9A0.s")
 
