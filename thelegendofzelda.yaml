@@ -4750,9 +4750,9 @@ segments:
     follows_vram: ovl_En_It
     bss_size: 0x0
     subsegments:
-      - [0xE3E3D0, c, overlays/ovl_En_Jj]
-      - [0xE3ED10, .data, overlays/ovl_En_Jj]
-      - [0xE3F8E0, .rodata, overlays/ovl_En_Jj]
+      - [0xE3E3D0, asm, overlays/ovl_En_Jj]
+      - [0xE3ED10, data, overlays/ovl_En_Jj]
+      - [0xE3F8E0, rodata, overlays/ovl_En_Jj]
       - [0xE3F910, rodatabin, rodatabin_80A88D40]
 
   - name: ovl_En_Js
