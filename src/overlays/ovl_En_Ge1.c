@@ -60,7 +60,6 @@ extern Gfx D_6009690[];
 extern AnimationHeader D_600A048;
 extern AnimationHeader D_600A498;
 
-/*
 const ActorInit En_Ge1_InitVars = {
     ACTOR_EN_GE1,
     ACTORCAT_NPC,
@@ -92,7 +91,10 @@ static ColliderCylinderInit D_80A32770 = {
     },
     { 20, 40, 0, { 0, 0, 0 } },
 };
-*/
+
+static u32 D_80A3279C[3] = { (u32) D_6009198, (u32) D_6009430, (u32) D_6009690 };
+static Vec3f D_80A327A8 = { 600.0f, 700.0f, 0.0f };
+static s32 D_80A327B4[3] = { 0x06000708, 0x06000F08, 0x06001708 };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Ge1/EnGe1_Init.s")
 
