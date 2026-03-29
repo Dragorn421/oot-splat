@@ -14,6 +14,27 @@ void ObjTsubo_Init(Actor* thisx, GlobalContext* globalCtx);
 void ObjTsubo_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void ObjTsubo_Update(Actor* thisx, GlobalContext* globalCtx);
 
+void func_80BA0D60(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA0DC0(ObjTsubo* this, GlobalContext* globalCtx);
+s32 func_80BA0DF4(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA0E98(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA100C(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA1294(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA152C(ObjTsubo* this);
+void func_80BA153C(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA15AC(ObjTsubo* this);
+void func_80BA15BC(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA17C4(ObjTsubo* this);
+void func_80BA180C(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA188C(ObjTsubo* this);
+void func_80BA1958(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA1B0C(ObjTsubo* this, GlobalContext* globalCtx);
+
+extern Gfx D_5017870[];
+extern Gfx D_5017A60[];
+extern Gfx D_60017C0[];
+extern Gfx D_6001960[];
+
 /*
 const ActorInit Obj_Tsubo_InitVars = {
     ACTOR_OBJ_TSUBO,
