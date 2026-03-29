@@ -1224,9 +1224,9 @@ segments:
     follows_vram: ovl_Bg_Dodoago
     bss_size: 0x0
     subsegments:
-      - [0xC41590, c, overlays/ovl_Bg_Dy_Yoseizo]
-      - [0xC441A0, .data, overlays/ovl_Bg_Dy_Yoseizo]
-      - [0xC44240, .rodata, overlays/ovl_Bg_Dy_Yoseizo]
+      - [0xC41590, asm, overlays/ovl_Bg_Dy_Yoseizo]
+      - [0xC441A0, data, overlays/ovl_Bg_Dy_Yoseizo]
+      - [0xC44240, rodata, overlays/ovl_Bg_Dy_Yoseizo]
       - [0xC44430, rodatabin, rodatabin_808756D0]
 
   - name: ovl_Bg_Ganon_Otyuka
@@ -2278,9 +2278,9 @@ segments:
     follows_vram: ovl_Bg_Spot08_Bakudankabe
     bss_size: 0x0
     subsegments:
-      - [0xC7F660, c, overlays/ovl_Bg_Spot08_Iceblock]
-      - [0xC80390, .data, overlays/ovl_Bg_Spot08_Iceblock]
-      - [0xC80410, .rodata, overlays/ovl_Bg_Spot08_Iceblock]
+      - [0xC7F660, asm, overlays/ovl_Bg_Spot08_Iceblock]
+      - [0xC80390, data, overlays/ovl_Bg_Spot08_Iceblock]
+      - [0xC80410, rodata, overlays/ovl_Bg_Spot08_Iceblock]
       - [0xC805B0, rodatabin, rodatabin_808B18B0]
 
   - name: ovl_Bg_Spot09_Obj
@@ -3609,9 +3609,9 @@ segments:
     follows_vram: ovl_En_Bigokuta
     bss_size: 0x0
     subsegments:
-      - [0xD78ED0, c, overlays/ovl_En_Bili]
-      - [0xD7AC50, .data, overlays/ovl_En_Bili]
-      - [0xD7AD40, .rodata, overlays/ovl_En_Bili]
+      - [0xD78ED0, asm, overlays/ovl_En_Bili]
+      - [0xD7AC50, data, overlays/ovl_En_Bili]
+      - [0xD7AD40, rodata, overlays/ovl_En_Bili]
       - [0xD7AE30, rodatabin, rodatabin_809C1800]
 
   - name: ovl_En_Bird
@@ -4330,9 +4330,9 @@ segments:
     follows_vram: ovl_En_Gb
     bss_size: 0x0
     subsegments:
-      - [0xDE7550, c, overlays/ovl_En_Ge1]
-      - [0xDE9330, .data, overlays/ovl_En_Ge1]
-      - [0xDE93A0, .rodata, overlays/ovl_En_Ge1]
+      - [0xDE7550, asm, overlays/ovl_En_Ge1]
+      - [0xDE9330, data, overlays/ovl_En_Ge1]
+      - [0xDE93A0, rodata, overlays/ovl_En_Ge1]
       - [0xDE94B0, rodatabin, rodatabin_80A328D0]
 
   - name: ovl_En_Ge2
@@ -4342,9 +4342,9 @@ segments:
     follows_vram: ovl_En_Ge1
     bss_size: 0x0
     subsegments:
-      - [0xDE97B0, c, overlays/ovl_En_Ge2]
-      - [0xDEAED0, .data, overlays/ovl_En_Ge2]
-      - [0xDEAFB0, .rodata, overlays/ovl_En_Ge2]
+      - [0xDE97B0, asm, overlays/ovl_En_Ge2]
+      - [0xDEAED0, data, overlays/ovl_En_Ge2]
+      - [0xDEAFB0, rodata, overlays/ovl_En_Ge2]
       - [0xDEB020, rodatabin, rodatabin_80A34440]
 
   - name: ovl_En_Ge3
@@ -4354,9 +4354,9 @@ segments:
     follows_vram: ovl_En_Ge2
     bss_size: 0x0
     subsegments:
-      - [0xDEB200, c, overlays/ovl_En_Ge3]
-      - [0xDEBD50, .data, overlays/ovl_En_Ge3]
-      - [0xDEBDC0, .rodata, overlays/ovl_En_Ge3]
+      - [0xDEB200, asm, overlays/ovl_En_Ge3]
+      - [0xDEBD50, data, overlays/ovl_En_Ge3]
+      - [0xDEBDC0, rodata, overlays/ovl_En_Ge3]
       - [0xDEBE00, rodatabin, rodatabin_80A35220]
 
   - name: ovl_En_GeldB
