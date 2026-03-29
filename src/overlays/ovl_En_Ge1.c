@@ -9,48 +9,18 @@ void EnGe1_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnGe1_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnGe1_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-s32 func_80A30C70(EnGe1* this, GlobalContext* globalCtx, u16 arg2, f32 arg3, void (*arg4)(EnGe1*, GlobalContext*));
-void func_80A30D48(EnGe1* this);
 s32 func_80A30DCC(void);
-void func_80A30E08(EnGe1* this, GlobalContext* globalCtx);
-void func_80A30EE8(EnGe1* this, GlobalContext* globalCtx);
 void func_80A30F48(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31000(EnGe1* this, GlobalContext* globalCtx);
 void func_80A31094(EnGe1* this, GlobalContext* globalCtx);
 void func_80A310C4(EnGe1* this, GlobalContext* globalCtx);
 void func_80A3118C(EnGe1* this, GlobalContext* globalCtx);
-void func_80A311E0(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31234(EnGe1* this, GlobalContext* globalCtx);
-void func_80A312E4(EnGe1* this, GlobalContext* globalCtx);
-void func_80A313A0(EnGe1* this, GlobalContext* globalCtx);
-void func_80A313E0(EnGe1* this, GlobalContext* globalCtx);
-void func_80A314D0(EnGe1* this, GlobalContext* globalCtx);
 void func_80A31514(EnGe1* this, GlobalContext* globalCtx);
-void func_80A3157C(EnGe1* this, GlobalContext* globalCtx);
-void func_80A315F0(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31644(EnGe1* this, GlobalContext* globalCtx);
-void func_80A316F4(EnGe1* this, GlobalContext* globalCtx);
 void func_80A317C0(EnGe1* this, GlobalContext* globalCtx);
-void func_80A3183C(EnGe1* this, GlobalContext* globalCtx);
 void func_80A31880(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31934(EnGe1* this, GlobalContext* globalCtx);
-void func_80A3196C(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31A5C(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31B20(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31B7C(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31BDC(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31BE8(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31D88(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31DE4(EnGe1* this, GlobalContext* globalCtx);
 void func_80A31E2C(EnGe1* this, GlobalContext* globalCtx);
-void func_80A31F9C(EnGe1* this, GlobalContext* globalCtx);
 void func_80A31FE0(EnGe1* this, GlobalContext* globalCtx);
-void func_80A32078(EnGe1* this, GlobalContext* globalCtx);
-void func_80A32190(EnGe1* this, GlobalContext* globalCtx);
 void func_80A323B0(EnGe1* this);
 void func_80A323EC(EnGe1* this);
-s32 EnGe1_OverrideLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx);
-void EnGe1_PostLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, void* thisx);
 
 extern AnimationHeader D_6000228;
 extern FlexSkeletonHeader D_6000330;
@@ -92,7 +62,7 @@ static ColliderCylinderInit D_80A32770 = {
     { 20, 40, 0, { 0, 0, 0 } },
 };
 
-static u32 D_80A3279C[3] = { (u32)D_6009198, (u32)D_6009430, (u32)D_6009690 };
+static Gfx* D_80A3279C[3] = { D_6009198, D_6009430, D_6009690 };
 static Vec3f D_80A327A8 = { 600.0f, 700.0f, 0.0f };
 static s32 D_80A327B4[3] = { 0x06000708, 0x06000F08, 0x06001708 };
 
@@ -140,7 +110,7 @@ void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
             break;
 
         case 0x5:
-            if (gSaveContext.linkAge == 0) {
+            if (LINK_IS_ADULT) {
                 osSyncPrintf("\x1b[36m谷底 ゲルド 撤退 \n\x1b[m");
                 Actor_Kill(&this->actor);
                 return;
@@ -212,8 +182,9 @@ s32 func_80A30DCC(void) {
     if (!(gSaveContext.eventChkInf[9] & 1) || !(gSaveContext.eventChkInf[9] & 2) ||
         !(gSaveContext.eventChkInf[9] & 4) || !(gSaveContext.eventChkInf[9] & 8)) {
         return 0;
+    } else {
+        return 1;
     }
-    return 1;
 }
 
 void func_80A30E08(EnGe1* this, GlobalContext* globalCtx) {
