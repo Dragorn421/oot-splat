@@ -40,7 +40,6 @@ void func_80A341A0(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, 
 extern FlexSkeletonHeader D_6008968;
 extern AnimationHeader D_6009ED4;
 
-/*
 const ActorInit En_Ge2_InitVars = {
     ACTOR_EN_GE2,
     ACTORCAT_NPC,
@@ -72,9 +71,29 @@ static ColliderCylinderInit D_80A34310 = {
     },
     { 20, 60, 0, { 0, 0, 0 } },
 };
-*/
 
-extern u8 D_80A34384[];
+static void (*D_80A3433C[9])(EnGe2*, GlobalContext*) = {
+    func_80A33600, func_80A3354C, func_80A33444, func_80A3334C, func_80A332D4,
+    func_80A331A0, func_80A330CC, func_80A336C4, func_80A339EC,
+};
+static AnimationHeader* D_80A34360[9] = {
+    &D_6009ED4,
+    (AnimationHeader*)0x060098AC,
+    (AnimationHeader*)0x060098AC,
+    (AnimationHeader*)0x060011F4,
+    (AnimationHeader*)0x060098AC,
+    (AnimationHeader*)0x06008D60,
+    (AnimationHeader*)0x060098AC,
+    (AnimationHeader*)0x060098AC,
+    (AnimationHeader*)0x060098AC,
+};
+static u8 D_80A34384[0xC] = { 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0 };
+static Vec3f D_80A34390 = { 0.0f, -0.05f, 0.0f };
+static Vec3f D_80A3439C = { 0.0f, -0.025f, 0.0f };
+static Color_RGBA8 D_80A343A8 = { 0xFF, 0xFF, 0xFF, 0 };
+static Color_RGBA8 D_80A343AC = { 0xFF, 0x96, 0, 0 };
+static Vec3f D_80A343B0 = { 600.0f, 700.0f, 0.0f };
+static s32 D_80A343BC[5] = { 0x06004F78, 0x06005578, 0x06005BF8, 0, 0 };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Ge2/func_80A32BD0.s")
 
