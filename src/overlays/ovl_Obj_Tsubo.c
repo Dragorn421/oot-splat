@@ -15,7 +15,7 @@ void ObjTsubo_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void ObjTsubo_Update(Actor* thisx, GlobalContext* globalCtx);
 
 void func_80BA0D60(ObjTsubo* this, GlobalContext* globalCtx);
-void func_80BA0DC0(ObjTsubo* this, GlobalContext* globalCtx);
+void func_80BA0DC0(ObjTsubo* this);
 s32 func_80BA0DF4(ObjTsubo* this, GlobalContext* globalCtx);
 void func_80BA0E98(ObjTsubo* this, GlobalContext* globalCtx);
 void func_80BA100C(ObjTsubo* this, GlobalContext* globalCtx);
@@ -83,38 +83,271 @@ static InitChainEntry D_80BA1BC8[] = {
     ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneDownward, 800, ICHAIN_STOP),
 };
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA0D60.s")
+void func_80BA0D60(ObjTsubo* this, GlobalContext* globalCtx) {
+    s16 temp_v0;
+    s16 temp_v1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA0DC0.s")
+    temp_v1 = this->actor.params;
+    temp_v0 = temp_v1 & 0x1F;
+    if ((temp_v0 >= 0) && (temp_v0 < 0x1A)) {
+        Item_DropCollectible(globalCtx, &this->actor.world.pos, (s16)(temp_v0 | (((temp_v1 >> 9) & 0x3F) << 8)));
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA0DF4.s")
+void func_80BA0DC0(ObjTsubo* this) {
+    f32 temp_fv0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA0E98.s")
+    temp_fv0 = this->actor.minVelocityY;
+    this->actor.velocity.y += this->actor.gravity;
+    if (this->actor.velocity.y < temp_fv0) {
+        this->actor.velocity.y = temp_fv0;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/ObjTsubo_Init.s")
+s32 func_80BA0DF4(ObjTsubo* this, GlobalContext* globalCtx) {
+    CollisionPoly* sp34;
+    Vec3f sp28;
+    s32 sp24;
+    f32 temp_fv0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/ObjTsubo_Destroy.s")
+    sp28.x = this->actor.world.pos.x;
+    sp28.y = this->actor.world.pos.y + 20.0f;
+    sp28.z = this->actor.world.pos.z;
+    temp_fv0 = BgCheck_EntityRaycastFloor4(&globalCtx->colCtx, &sp34, &sp24, &this->actor, (Vec3f*)&sp28);
+    if (temp_fv0 > -32000.0f) {
+        this->actor.world.pos.y = temp_fv0;
+        Math_Vec3f_Copy(&this->actor.home.pos, &this->actor.world.pos);
+        return 1;
+    }
+    osSyncPrintf("地面に付着失敗\n");
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA100C.s")
+void func_80BA0E98(ObjTsubo* this2, GlobalContext* globalCtx) {
+    ObjTsubo* this = this2;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA1294.s")
+    Collider_InitCylinder(globalCtx, &this->unk150);
+    Collider_SetCylinder(globalCtx, &this->unk150, &this->actor, &D_80BA1B94);
+    Collider_UpdateCylinder(&this->actor, &this->unk150);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA152C.s")
+void ObjTsubo_Init(Actor* thisx, GlobalContext* globalCtx) {
+    ObjTsubo* this = (ObjTsubo*)thisx;
+    Actor_ProcessInitChain(&this->actor, D_80BA1BC8);
+    func_80BA0E98(this, globalCtx);
+    CollisionCheck_SetInfo(&this->actor.colChkInfo, NULL, &D_80BA1BC0);
+    if (func_80BA0DF4(this, globalCtx) == 0) {
+        Actor_Kill(&this->actor);
+        return;
+    }
+    this->unk19C = Object_GetIndex(&globalCtx->objectCtx, D_80BA1B80[((s16)this->actor.params >> 8) & 1]);
+    if (this->unk19C < 0) {
+        osSyncPrintf("Error : バンク危険！ (arg_data 0x%04x)(%s %d)\n", this->actor.params, "../z_obj_tsubo.c", 0x19A);
+        Actor_Kill(&this->actor);
+        return;
+    }
+    func_80BA152C(this);
+    osSyncPrintf("(dungeon keep 壷)(arg_data 0x%04x)\n", this->actor.params);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA153C.s")
+void ObjTsubo_Destroy(Actor* thisx, GlobalContext* globalCtx2) {
+    GlobalContext* globalCtx = globalCtx2;
+    ObjTsubo* this = (ObjTsubo*)thisx;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA15AC.s")
+    Collider_DestroyCylinder(globalCtx, &this->unk150);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA15BC.s")
+void func_80BA100C(ObjTsubo* this, GlobalContext* globalCtx) {
+    s32 pad;
+    f32 sin;
+    f32 cos;
+    Vec3f spC8;
+    Vec3f spBC;
+    f32 temp_fv0;
+    s32 var_s0;
+    s32 var_s2;
+    s16 var_s1;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA17C4.s")
+    for (var_s2 = 0, var_s1 = 0; var_s2 < 15; var_s2++, var_s1 += 0x4E20) {
+        sin = Math_SinS(var_s1);
+        cos = Math_CosS(var_s1);
+        spC8.x = sin * 8.0f;
+        spC8.y = (Rand_ZeroOne() * 5.0f) + 2.0f;
+        spC8.z = cos * 8.0f;
+        spBC.x = spC8.x * 0.23f;
+        spBC.y = (Rand_ZeroOne() * 5.0f) + 2.0f;
+        spBC.z = spC8.z * 0.23f;
+        Math_Vec3f_Sum((Vec3f*)&spC8, &this->actor.world.pos, (Vec3f*)&spC8);
+        temp_fv0 = Rand_ZeroOne();
+        if (temp_fv0 < 0.2f) {
+            var_s0 = 0x60;
+        } else if (temp_fv0 < 0.6f) {
+            var_s0 = 0x40;
+        } else {
+            var_s0 = 0x20;
+        }
+        EffectSsKakera_Spawn(globalCtx, (Vec3f*)&spC8, (Vec3f*)&spBC, &this->actor.world.pos, -0xF0, (s16)var_s0, 0xA,
+                             0xA, 0, (s16)(s32)((Rand_ZeroOne() * 95.0f) + 15.0f), 0, 0x20, 0x3C, -1,
+                             (s16)(s32)D_80BA1B80[((s16)this->actor.params >> 8) & 1],
+                             D_80BA1B8C[((s16)this->actor.params >> 8) & 1]);
+    }
+    func_80033480(globalCtx, &this->actor.world.pos, 30.0f, 4, 0x14, 0x32, 1U);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA180C.s")
+void func_80BA1294(ObjTsubo* this, GlobalContext* globalCtx) {
+    f32 temp_fs0;
+    f32 temp_fs1;
+    s16 var_s1;
+    Vec3f spC8;
+    Vec3f spBC;
+    s32 var_s0;
+    s32 var_s2;
+    s32 pad[2];
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA188C.s")
+    spC8 = this->actor.world.pos;
+    spC8.y += this->actor.yDistToWater;
+    EffectSsGSplash_Spawn(globalCtx, &spC8, NULL, NULL, 0, 0x190);
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA1958.s")
+    for (var_s2 = 0, var_s1 = 0; var_s2 < 15; var_s2++, var_s1 += 0x4E20) {
+        temp_fs0 = Math_SinS(var_s1);
+        temp_fs1 = Math_CosS(var_s1);
+        spC8.x = temp_fs0 * 8.0f;
+        spC8.y = (Rand_ZeroOne() * 5.0f) + 2.0f;
+        spC8.z = temp_fs1 * 8.0f;
+        spBC.x = spC8.x * 0.20f;
+        spBC.y = (Rand_ZeroOne() * 4.0f) + 2.0f;
+        spBC.z = spC8.z * 0.20f;
+        Math_Vec3f_Sum(&spC8, &this->actor.world.pos, &spC8);
+        if (Rand_ZeroOne() < 0.2f) {
+            var_s0 = 0x40;
+        } else {
+            var_s0 = 0x20;
+        }
+        EffectSsKakera_Spawn(globalCtx, &spC8, (Vec3f*)&spBC, &this->actor.world.pos, -0xB4, (s16)var_s0, 0x1E, 0x1E, 0,
+                             (s16)(s32)((Rand_ZeroOne() * 95.0f) + 15.0f), 0, 0x20, 0x46, -1,
+                             (s16)(s32)D_80BA1B80[((s16)this->actor.params >> 8) & 1],
+                             D_80BA1B8C[((s16)this->actor.params >> 8) & 1]);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/ObjTsubo_Update.s")
+void func_80BA152C(ObjTsubo* this) {
+    this->actionFunc = func_80BA153C;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA1B0C.s")
+void func_80BA153C(ObjTsubo* this, GlobalContext* globalCtx) {
+    if (Object_IsLoaded(&globalCtx->objectCtx, (s32)this->unk19C) != 0) {
+        this->actor.draw = (void (*)(Actor*, GlobalContext*))func_80BA1B0C;
+        this->actor.objBankIndex = this->unk19C;
+        func_80BA15AC(this);
+        this->actor.flags &= ~0x10;
+    }
+}
+
+void func_80BA15AC(ObjTsubo* this) {
+    this->actionFunc = func_80BA15BC;
+}
+
+void func_80BA15BC(ObjTsubo* this, GlobalContext* globalCtx) {
+    s16 temp_v0;
+    s16 var_v1;
+    s32 pad;
+
+    if (Actor_HasParent(&this->actor, globalCtx) != 0) {
+        func_80BA17C4(this);
+        return;
+    }
+    if ((this->actor.bgCheckFlags & 0x20) && (this->actor.yDistToWater > 15.0f)) {
+        func_80BA1294(this, globalCtx);
+        Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 0x14, 0x2887U);
+        func_80BA0D60(this, globalCtx);
+        Actor_Kill(&this->actor);
+        return;
+    }
+    if ((this->unk150.base.acFlags & 2) && (this->unk150.info.acHitInfo->toucher.dmgFlags & 0x4FC1FFFC)) {
+        func_80BA100C(this, globalCtx);
+        func_80BA0D60(this, globalCtx);
+        Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 0x14, 0x2887U);
+        Actor_Kill(&this->actor);
+        return;
+    }
+    if (this->actor.xzDistToPlayer < 600.0f) {
+        Collider_UpdateCylinder(&this->actor, &this->unk150);
+        this->unk150.base.acFlags &= 0xFFFD;
+        CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->unk150.base);
+        if (this->actor.xzDistToPlayer < 150.0f) {
+            CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->unk150.base);
+        }
+    }
+    if (this->actor.xzDistToPlayer < 100.0f) {
+        temp_v0 = this->actor.yawTowardsPlayer - globalCtx->actorCtx.actorLists[2].head->world.rot.y;
+        if (ABS(temp_v0) >= 0x5556) {
+            func_8002F434(&this->actor, globalCtx, 0, 30.0f, 30.0f);
+        }
+    }
+}
+
+void func_80BA17C4(ObjTsubo* this) {
+    this->actionFunc = func_80BA180C;
+    this->actor.room = -1;
+    func_8002F7DC(&this->actor, 0x86FU);
+    this->actor.flags |= 0x10;
+}
+
+void func_80BA180C(ObjTsubo* this, GlobalContext* globalCtx) {
+    if (Actor_HasNoParent(&this->actor, globalCtx) != 0) {
+        this->actor.room = globalCtx->roomCtx.curRoom.num;
+        func_80BA188C(this);
+        func_80BA0DC0(this);
+        func_8002D7EC(&this->actor);
+        Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 5.0f, 15.0f, 0.0f, 0x85);
+    }
+}
+
+void func_80BA188C(ObjTsubo* this) {
+    this->actor.velocity.x = Math_SinS(this->actor.world.rot.y) * this->actor.speedXZ;
+    this->actor.velocity.z = Math_CosS(this->actor.world.rot.y) * this->actor.speedXZ;
+    this->actor.colChkInfo.mass = 0xF0;
+    D_80BA1B50 = (s16)(s32)((Rand_ZeroOne() - 0.7f) * 2800.0f);
+    D_80BA1B58 = (s16)(s32)((Rand_ZeroOne() - 0.5f) * 2000.0f);
+    D_80BA1B54 = 0;
+    D_80BA1B5C = 0;
+    this->actionFunc = func_80BA1958;
+}
+
+void func_80BA1958(ObjTsubo* this, GlobalContext* globalCtx) {
+    s32 pad[2];
+
+    if ((this->actor.bgCheckFlags & 0xB) || (this->unk150.base.atFlags & 2)) {
+        func_80BA100C(this, globalCtx);
+        func_80BA0D60(this, globalCtx);
+        Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 0x14, 0x2887U);
+        Actor_Kill(&this->actor);
+        return;
+    }
+    if (this->actor.bgCheckFlags & 0x40) {
+        func_80BA1294(this, globalCtx);
+        func_80BA0D60(this, globalCtx);
+        Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 0x14, 0x2887U);
+        Actor_Kill(&this->actor);
+        return;
+    }
+    func_80BA0DC0(this);
+    func_8002D7EC(&this->actor);
+    Math_StepToS(&D_80BA1B54, D_80BA1B50, 0x64);
+    Math_StepToS(&D_80BA1B5C, D_80BA1B58, 0x64);
+    this->actor.shape.rot.x += D_80BA1B54;
+    this->actor.shape.rot.y += D_80BA1B5C;
+    Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 5.0f, 15.0f, 0.0f, 0x85);
+    Collider_UpdateCylinder(&this->actor, &this->unk150);
+    CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->unk150.base);
+    CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->unk150.base);
+}
+
+void ObjTsubo_Update(Actor* thisx, GlobalContext* globalCtx) {
+    ObjTsubo* this = (ObjTsubo*)thisx;
+    this->actionFunc(this, globalCtx);
+}
+
+void func_80BA1B0C(ObjTsubo* this, GlobalContext* globalCtx) {
+    Gfx_DrawDListOpa(globalCtx, D_80BA1B84[((s16)this->actor.params >> 8) & 1]);
+}
