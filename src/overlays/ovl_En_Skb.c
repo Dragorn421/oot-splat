@@ -9,12 +9,35 @@ void EnSkb_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnSkb_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnSkb_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06000460;
-extern UNK_TYPE D_060009DC;
-extern UNK_TYPE D_06000D98;
-extern UNK_TYPE D_06001854;
-extern UNK_TYPE D_060041F8;
-extern UNK_TYPE D_060047E0;
+void func_80AFC9A0(EnSkb* this, void (*arg1)(EnSkb*, GlobalContext*));
+void func_80AFC9A8(GlobalContext* globalCtx, EnSkb* this, Vec3f* arg2);
+void func_80AFCD60(EnSkb* this);
+void func_80AFCDF8(EnSkb* this);
+void func_80AFCE5C(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFCF48(EnSkb* this);
+void func_80AFCFF0(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD0A4(EnSkb* this);
+void func_80AFD13C(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD33C(EnSkb* this);
+void func_80AFD3D4(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD47C(EnSkb* this);
+void func_80AFD508(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD540(EnSkb* this);
+void func_80AFD59C(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD644(EnSkb* this);
+void func_80AFD6CC(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD7B4(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD880(EnSkb* this, GlobalContext* globalCtx);
+void func_80AFD968(EnSkb* this, GlobalContext* globalCtx);
+s32 func_80AFDD30(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg5, EnSkb* this);
+void func_80AFDF24(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3s* arg3, EnSkb* this);
+
+extern AnimationHeader D_6000460;
+extern AnimationHeader D_60009DC;
+extern AnimationHeader D_6000D98;
+extern AnimationHeader D_6001854;
+extern SkeletonHeader D_60041F8;
+extern AnimationHeader D_60047E0;
 
 /*
 const ActorInit En_Skb_InitVars = {
@@ -67,6 +90,9 @@ static ColliderJntSphInit D_80AFE068 = {
     D_80AFE020,
 };
 */
+
+extern Vec3f D_80AFE0B8;
+extern Vec3f D_80AFE0C4;
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Skb/func_80AFC9A0.s")
 
