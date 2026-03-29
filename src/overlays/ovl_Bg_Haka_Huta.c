@@ -47,18 +47,19 @@ void BgHakaHuta_Init(Actor* thisx, GlobalContext* globalCtx) {
     DynaPolyActor_Init(&this->dyna, DPM_PLAYER);
     CollisionHeader_GetVirtual(&D_6000870, &sp24);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp24);
-    this->unk16A = ((s16)this->dyna.actor.params >> 8) & 0xFF;
+    this->unk16A = (this->dyna.actor.params >> 8) & 0xFF;
     thisx->params &= 0xFF;
-    if (Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0) {
+    if (Flags_GetSwitch(globalCtx, this->dyna.actor.params)) {
         this->unk168 = -1;
         this->actionFunc = func_8087D720;
-        return;
+    } else {
+        this->actionFunc = func_8087D2F0;
     }
-    this->actionFunc = func_8087D2F0;
 }
 
 void BgHakaHuta_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaHuta* this = (BgHakaHuta*)thisx;
+
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
 }
 
@@ -87,8 +88,8 @@ void func_8087D0AC(BgHakaHuta* this, GlobalContext* globalCtx) {
             sp94.z += 120.0f * var_fs0;
         }
         sp94.x = this->dyna.actor.home.pos.x - (Rand_ZeroOne() * temp_fs1);
-        func_8002829C(globalCtx, (Vec3f*)&sp94, (Vec3f*)&sp88, &D_8087D944, &D_8087D950, &D_8087D954,
-                      (s16)(s32)((Rand_ZeroOne() * 10.0f) + 50.0f), 0xA);
+        func_8002829C(globalCtx, &sp94, &sp88, &D_8087D944, &D_8087D950, &D_8087D954, (Rand_ZeroOne() * 10.0f) + 50.0f,
+                      10);
     }
 }
 
@@ -102,40 +103,38 @@ void func_8087D268(BgHakaHuta* this, GlobalContext* globalCtx, u16 arg2) {
     }
     sp24.x = this->dyna.actor.world.pos.x;
     sp24.y = this->dyna.actor.world.pos.y;
-    Audio_PlaySoundAtPosition(globalCtx, (Vec3f*)&sp24, 0x1E, arg2);
+    Audio_PlaySoundAtPosition(globalCtx, &sp24, 30, arg2);
 }
 
 void func_8087D2F0(BgHakaHuta* this, GlobalContext* globalCtx) {
-    if ((Flags_GetSwitch(globalCtx, (s32)this->dyna.actor.params) != 0) && (Player_InCsMode(globalCtx) == 0)) {
+    if (Flags_GetSwitch(globalCtx, this->dyna.actor.params) && !Player_InCsMode(globalCtx)) {
         this->unk168 = 0x19;
         this->actionFunc = func_8087D5B8;
         func_800800F8(globalCtx, 0x1771, 0x3E7, &this->dyna.actor, 0);
         if (this->unk16A == 2) {
-            Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x13,
-                        (this->dyna.actor.world.pos.x + (-25.0f * Math_CosS(this->dyna.actor.shape.rot.y))) +
-                            (Math_SinS(this->dyna.actor.shape.rot.y) * 40.0f),
+            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_FIREFLY,
+                        this->dyna.actor.world.pos.x + (-25.0f * Math_CosS(this->dyna.actor.shape.rot.y)) +
+                            (40.0f * Math_SinS(this->dyna.actor.shape.rot.y)),
                         this->dyna.actor.world.pos.y - 10.0f,
 
-                        (this->dyna.actor.world.pos.z - (-25.0f * Math_SinS(this->dyna.actor.shape.rot.y))) +
-                            (Math_CosS(this->dyna.actor.shape.rot.y) * 40.0f),
-                        0, (s16)(this->dyna.actor.shape.rot.y + 0x8000), 0, 2);
-            Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x13,
-                        (this->dyna.actor.world.pos.x + (-25.0f * Math_CosS(this->dyna.actor.shape.rot.y))) +
-                            (Math_SinS(this->dyna.actor.shape.rot.y) * 80.0f),
+                        this->dyna.actor.world.pos.z - (-25.0f * Math_SinS(this->dyna.actor.shape.rot.y)) +
+                            (40.0f * Math_CosS(this->dyna.actor.shape.rot.y)),
+                        0, this->dyna.actor.shape.rot.y + 0x8000, 0, 2);
+            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_FIREFLY,
+                        this->dyna.actor.world.pos.x + (-25.0f * Math_CosS(this->dyna.actor.shape.rot.y)) +
+                            (80.0f * Math_SinS(this->dyna.actor.shape.rot.y)),
                         this->dyna.actor.world.pos.y - 10.0f,
-                        (this->dyna.actor.world.pos.z - (-25.0f * Math_SinS(this->dyna.actor.shape.rot.y))) +
-                            (Math_CosS(this->dyna.actor.shape.rot.y) * 80.0f),
-                        0, (s16)(s32)this->dyna.actor.shape.rot.y, 0, 2);
-            return;
-        }
-        if (this->unk16A == 1) {
-            Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x90,
-                        (this->dyna.actor.home.pos.x + (-25.0f * Math_CosS(this->dyna.actor.shape.rot.y))) +
-                            (Math_SinS(this->dyna.actor.shape.rot.y) * 100.0f),
+                        this->dyna.actor.world.pos.z - (-25.0f * Math_SinS(this->dyna.actor.shape.rot.y)) +
+                            (80.0f * Math_CosS(this->dyna.actor.shape.rot.y)),
+                        0, this->dyna.actor.shape.rot.y, 0, 2);
+        } else if (this->unk16A == 1) {
+            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_RD,
+                        this->dyna.actor.home.pos.x + (-25.0f * Math_CosS(this->dyna.actor.shape.rot.y)) +
+                            (100.0f * Math_SinS(this->dyna.actor.shape.rot.y)),
                         this->dyna.actor.home.pos.y - 40.0f,
-                        (this->dyna.actor.home.pos.z - (-25.0f * Math_SinS(this->dyna.actor.shape.rot.y))) +
-                            (Math_CosS(this->dyna.actor.shape.rot.y) * 100.0f),
-                        0, (s16)(s32)this->dyna.actor.shape.rot.y, 0, 0xFD);
+                        this->dyna.actor.home.pos.z - (-25.0f * Math_SinS(this->dyna.actor.shape.rot.y)) +
+                            (100.0f * Math_CosS(this->dyna.actor.shape.rot.y)),
+                        0, this->dyna.actor.shape.rot.y, 0, 0xFD);
         }
     }
 }
@@ -156,7 +155,7 @@ void func_8087D5B8(BgHakaHuta* this, GlobalContext* globalCtx) {
     Math_StepToF(&this->dyna.actor.world.pos.x, this->dyna.actor.home.pos.x + var_fv0, 2.0f);
     if (this->unk168 == 0) {
         this->unk168 = 0x25;
-        func_8087D268(this, globalCtx, 0x2855);
+        func_8087D268(this, globalCtx, NA_SE_EV_COFFIN_CAP_OPEN);
         this->actionFunc = func_8087D66C;
     }
 }
@@ -174,11 +173,11 @@ void func_8087D66C(BgHakaHuta* this, GlobalContext* globalCtx) {
     } else {
         var_fv0 = -24.0f;
     }
-    if (Math_StepToF(&this->dyna.actor.world.pos.x, this->dyna.actor.home.pos.x + var_fv0, 0.5f) == 0) {
+    if (!Math_StepToF(&this->dyna.actor.world.pos.x, this->dyna.actor.home.pos.x + var_fv0, 0.5f)) {
         func_8087D0AC(this, globalCtx);
     }
     if (this->unk168 == 0) {
-        func_8087D268(this, globalCtx, 0x2856);
+        func_8087D268(this, globalCtx, NA_SE_EV_COFFIN_CAP_BOUND);
         this->actionFunc = func_8087D720;
     }
 }
@@ -194,19 +193,19 @@ void func_8087D720(BgHakaHuta* this, GlobalContext* globalCtx) {
     if (this->unk168 == 6) {
         this->actionFunc = func_8087D8C0;
         temp_v0 = Quake_Add(globalCtx->cameraPtrs[globalCtx->activeCamera], 3U);
-        Quake_SetSpeed((s16)temp_v0, 0x7530);
-        Quake_SetQuakeValues(/*unksp32*/ temp_v0, 4, 0, 0, 0);
-        Quake_SetCountdown(/*unksp32*/ temp_v0, 2);
+        Quake_SetSpeed(temp_v0, 0x7530);
+        Quake_SetQuakeValues(temp_v0, 4, 0, 0, 0);
+        Quake_SetCountdown(temp_v0, 2);
     } else if (this->unk168 == 0) {
         this->unk168 = 6;
         this->actionFunc = func_8087D8C0;
     }
-    D_8087D958.x = (f32)this->unk168 + 24.0f;
+    D_8087D958.x = this->unk168 + 24.0f;
     if (D_8087D958.x > 30.0f) {
         D_8087D958.x = 30.0f;
     }
-    Matrix_RotateY((f32)this->dyna.actor.world.rot.y * 0.0000958738f, 0U);
-    func_800D23FC((f32)this->unk168 * 0.16001178f, &D_8087D964, 1U);
+    Matrix_RotateY(this->dyna.actor.world.rot.y * 0.0000958738f, MTXMODE_NEW);
+    func_800D23FC(this->unk168 * 0.16001178f, &D_8087D964, MTXMODE_APPLY);
     Matrix_MultVec3f(&D_8087D958, &sp34);
     this->dyna.actor.world.pos.x = this->dyna.actor.home.pos.x + sp34.x;
     this->dyna.actor.world.pos.y = this->dyna.actor.home.pos.y + sp34.y;
@@ -220,10 +219,12 @@ void func_8087D8C0(BgHakaHuta* this, GlobalContext* globalCtx) {
 
 void BgHakaHuta_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaHuta* this = (BgHakaHuta*)thisx;
+
     this->actionFunc(this, globalCtx);
 }
 
 void BgHakaHuta_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaHuta* this = (BgHakaHuta*)thisx;
+
     Gfx_DrawDListOpa(globalCtx, D_60006B0);
 }
