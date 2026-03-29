@@ -15,11 +15,21 @@ void EnJj_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnJj_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnJj_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06000A1C;
-extern UNK_TYPE D_06001830;
-extern UNK_TYPE D_06001F4C;
-extern UNK_TYPE D_0600B9A8;
-extern UNK_TYPE D_0600BA8C;
+void func_80A87800(EnJj* this, void (*arg1)(EnJj*, GlobalContext*));
+void func_80A87B1C(EnJj* this);
+void func_80A87B9C(EnJj* this, GlobalContext* globalCtx);
+void func_80A87BEC(EnJj* this, GlobalContext* globalCtx);
+void func_80A87C30(EnJj* this, GlobalContext* globalCtx);
+void func_80A87CEC(EnJj* this, GlobalContext* globalCtx);
+void func_80A87D94(EnJj* this, GlobalContext* globalCtx);
+void func_80A87EF0(EnJj* this, GlobalContext* globalCtx);
+void func_80A87F44(EnJj* this, GlobalContext* globalCtx);
+
+extern CollisionHeader D_6000A1C;
+extern CollisionHeader D_6001830;
+extern AnimationHeader D_6001F4C;
+extern FlexSkeletonHeader D_600B9A8;
+extern CollisionHeader D_600BA8C;
 
 /*
 const ActorInit En_Jj_InitVars = {
@@ -54,6 +64,8 @@ static ColliderCylinderInit D_80A88CB4 = {
     { 170, 150, 0, { 0, 0, 0 } },
 };
 */
+
+extern CutsceneData D_80A88164[];
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Jj/func_80A87800.s")
 
