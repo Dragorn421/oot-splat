@@ -1225,7 +1225,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC41590, c, overlays/ovl_Bg_Dy_Yoseizo]
-      - [0xC441A0, data, overlays/ovl_Bg_Dy_Yoseizo]
+      - [0xC441A0, .data, overlays/ovl_Bg_Dy_Yoseizo]
       - [0xC44240, .rodata, overlays/ovl_Bg_Dy_Yoseizo]
       - [0xC44430, rodatabin, rodatabin_808756D0]
 
