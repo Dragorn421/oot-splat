@@ -6,6 +6,46 @@
 
 #include "z_bg_dy_yoseizo.h"
 
+// TODO remove EnDyExtra struct and use include:
+// #include "overlays/actors/ovl_En_Dy_Extra/z_en_dy_extra.h"
+struct EnDyExtra;
+typedef void (*EnDyExtraActionFunc)(struct EnDyExtra*, GlobalContext*);
+typedef struct EnDyExtra {
+    /* 0x0000 */ Actor actor;
+    /* 0x014C */ EnDyExtraActionFunc actionFunc;
+    /* 0x0150 */ s16 type;
+    /* 0x0152 */ s16 unk_152;
+    /* 0x0154 */ s16 unk_154;
+    /* 0x0158 */ f32 unk_158;
+    /* 0x015C */ Vec3f unk_15C;
+    /* 0x0168 */ Vec3f unk_168;
+} EnDyExtra; // size = 0x0174
+
+// TODO remove EnExItem struct and use include:
+// #include "overlays/actors/ovl_En_Ex_Item/z_en_ex_item.h"
+struct EnExItem;
+typedef void (*EnExItemActionFunc)(struct EnExItem* this, GlobalContext* globalCtx);
+typedef void (*EnExItemLightFunc)(Actor*, GlobalContext*, s32);
+typedef struct EnExItem {
+    /* 0x0000 */ Actor actor;
+    /* 0x014C */ EnExItemActionFunc actionFunc;
+    /* 0x0150 */ s16 getItemObjId;
+    /* 0x0152 */ s16 type;
+    /* 0x0152 */ s16 unusedParam;
+    /* 0x0156 */ s16 drawItemId;
+    /* 0x0158 */ s16 stopRotate;
+    /* 0x015A */ s16 timer;
+    /* 0x015A */ s16 chestKillTimer;
+    /* 0x015A */ s16 prizeRotateTimer;
+    /* 0x0160 */ s16 killItem;
+    /* 0x0164 */ f32 scale;
+    /* 0x0168 */ f32 unkFloat; // set to the same value as scale, but unused
+    /* 0x016C */ s8 objectIdx;
+    /* 0x0170 */ Vec3f initPos; // unused
+    /* 0x017C */ EnExItemLightFunc unk_17C;
+    /* 0x0180 */ EnExItemLightFunc unk_180;
+} EnExItem; // size = 0x0184
+
 #define FLAGS 0x02000030
 
 #define THIS ((BgDyYoseizo*)thisx)
@@ -34,30 +74,29 @@ void func_80873FD8(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx);
 s32 func_80874B7C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, BgDyYoseizo* this);
 void func_80874BE0(BgDyYoseizo* this, GlobalContext* globalCtx);
-// func_80874D9C
+void func_80874D9C(BgDyYoseizo* this, Vec3f*, Vec3f*, Vec3f*, Color_RGB8*, Color_RGB8*, f32, s32, s32);
 void func_80874EAC(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_808751A0(BgDyYoseizo* this, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_02000130;
-extern UNK_TYPE D_02000160;
-extern UNK_TYPE D_02001020;
-extern UNK_TYPE D_020013E0;
-extern UNK_TYPE D_02001F40;
-extern UNK_TYPE D_020025D0;
-extern UNK_TYPE D_0600092C;
-extern UNK_TYPE D_06001DF0;
-extern UNK_TYPE D_060031C0;
-extern UNK_TYPE D_06004344;
-extern UNK_TYPE D_06005810;
-extern UNK_TYPE D_06005860;
-extern UNK_TYPE D_06005868;
-extern UNK_TYPE D_060058D8;
-extern UNK_TYPE D_06005E60;
-extern UNK_TYPE D_060069E8;
-extern UNK_TYPE D_06007CA8;
-extern UNK_TYPE D_06008698;
-extern UNK_TYPE D_0601C450;
-extern UNK_TYPE D_0601D514;
+extern CutsceneData D_2000130;
+extern CutsceneData D_2000160;
+extern CutsceneData D_2001020;
+extern CutsceneData D_20013E0;
+extern CutsceneData D_2001F40;
+extern CutsceneData D_20025D0;
+extern AnimationHeader D_600092C;
+extern AnimationHeader D_6001DF0;
+extern AnimationHeader D_60031C0;
+extern AnimationHeader D_6004344;
+extern AnimationHeader D_6005810;
+extern Gfx D_6005860[];
+extern Gfx D_60058D8[];
+extern AnimationHeader D_6005E60;
+extern AnimationHeader D_60069E8;
+extern AnimationHeader D_6007CA8;
+extern AnimationHeader D_6008698;
+extern FlexSkeletonHeader D_601C450;
+extern AnimationHeader D_601D514;
 
 static s32 D_80875440[3] = { 0x5D, 0x5E, 0x5C };
 const ActorInit Bg_Dy_Yoseizo_InitVars = {
