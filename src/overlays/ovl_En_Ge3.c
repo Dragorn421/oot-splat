@@ -15,8 +15,22 @@ void EnGe3_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnGe3_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnGe3_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_0600A458;
-extern UNK_TYPE D_0600B07C;
+void func_80A34620(EnGe3* this, s32 arg1);
+void func_80A347F4(EnGe3* this, GlobalContext* globalCtx);
+void func_80A3490C(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34A20(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34A80(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34AA0(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34B00(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34B90(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34C40(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34CE4(EnGe3* this, GlobalContext* globalCtx);
+void func_80A34D68(EnGe3* this, GlobalContext* globalCtx);
+s32 func_80A34E58(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, s16* arg4, EnGe3* this);
+void func_80A35004(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnGe3* this);
+
+extern FlexSkeletonHeader D_600A458;
+extern AnimationHeader D_600B07C;
 
 /*
 const ActorInit En_Ge3_InitVars = {
@@ -51,6 +65,8 @@ static ColliderCylinderInit D_80A35190 = {
     { 20, 50, 0, { 0, 0, 0 } },
 };
 */
+extern u8 D_80A351C4[];
+extern Vec3f D_80A351C8;
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Ge3/func_80A34620.s")
 
