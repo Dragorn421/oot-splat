@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 from pathlib import Path
 import sys
 
@@ -7,6 +8,13 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 import sym_info
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--diff-immediates", "-i", dest="diff_immediates", action="store_true"
+)
+args = parser.parse_args()
 
 
 baserom_p = Path("baserom.z64")
@@ -28,7 +36,7 @@ map_file.readMapFile(built_map_path)
 local_symbols = sym_info.read_local_symbols_from_mdebug(built_elf_path)
 sym_info.merge_local_symbols(map_file, local_symbols)
 
-IGN_IMMEDIATES = True
+IGN_IMMEDIATES = not args.diff_immediates
 
 for off in diffs_inds:
     if off % 4 >= 2 and IGN_IMMEDIATES:
