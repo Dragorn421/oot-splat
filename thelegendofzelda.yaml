@@ -2279,7 +2279,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC7F660, c, overlays/ovl_Bg_Spot08_Iceblock]
-      - [0xC80390, data, overlays/ovl_Bg_Spot08_Iceblock]
+      - [0xC80390, .data, overlays/ovl_Bg_Spot08_Iceblock]
       - [0xC80410, .rodata, overlays/ovl_Bg_Spot08_Iceblock]
       - [0xC805B0, rodatabin, rodatabin_808B18B0]
 

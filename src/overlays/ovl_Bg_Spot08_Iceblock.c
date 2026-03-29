@@ -33,7 +33,6 @@ extern CollisionHeader D_6001904;
 extern Gfx D_6002BD0[];
 extern CollisionHeader D_6002FD8;
 
-/*
 const ActorInit Bg_Spot08_Iceblock_InitVars = {
     ACTOR_BG_SPOT08_ICEBLOCK,
     ACTORCAT_BG,
@@ -45,12 +44,18 @@ const ActorInit Bg_Spot08_Iceblock_InitVars = {
     (ActorFunc)BgSpot08Iceblock_Update,
     (ActorFunc)BgSpot08Iceblock_Draw,
 };
-*/
 
-extern Vec3f D_808B16BC;
-extern f32 D_808B16D4[3];
-extern f32 D_808B16E0[3];
-extern f32 D_808B16EC[3];
+static Vec3f D_808B16B0 = { 0.0f, 1.0f, 0.0f };
+static Vec3f D_808B16BC = { 0.0f, 0.0f, 0.0f };
+static f32 D_808B16C8[3] = { 1.4285714e-8f, 5.714286e-9f, 1.4285715e-9f };
+static f32 D_808B16D4[3] = { 0.96f, 0.96f, 0.98f };
+static f32 D_808B16E0[3] = { 0.22495104f, 0.22495104f, 0.03489947f };
+static f32 D_808B16EC[3] = { 0.97437006f, 0.97437006f, 0.99939084f };
+static InitChainEntry D_808B16F8[] = {
+    ICHAIN_F32(uncullZoneForward, 3000, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 1000, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneDownward, 2200, ICHAIN_STOP),
+};
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Spot08_Iceblock/func_808B0960.s")
 
