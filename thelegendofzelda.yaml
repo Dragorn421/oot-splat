@@ -1359,7 +1359,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC4BD00, c, overlays/ovl_Bg_Haka_Huta]
-      - [0xC4C660, data, overlays/ovl_Bg_Haka_Huta]
+      - [0xC4C660, .data, overlays/ovl_Bg_Haka_Huta]
       - [0xC4C6B0, .rodata, overlays/ovl_Bg_Haka_Huta]
       - [0xC4C6C0, rodatabin, rodatabin_8087D980]
 
