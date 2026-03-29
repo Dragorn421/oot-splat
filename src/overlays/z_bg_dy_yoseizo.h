@@ -7,21 +7,11 @@
 typedef struct struct_BgDyYoseizo_394 {
     /* 0x00 */ u8 unk0;
     /* 0x01 */ char pad1[3]; /* maybe part of unk0[4]? */
-    /* 0x04 */ f32 unk4;
-    /* 0x08 */ f32 unk8;
-    /* 0x0C */ f32 unkC;
-    /* 0x10 */ f32 unk10;
-    /* 0x14 */ f32 unk14;
-    /* 0x18 */ f32 unk18;
-    /* 0x1C */ f32 unk1C;
-    /* 0x20 */ f32 unk20;
-    /* 0x24 */ f32 unk24;
-    /* 0x28 */ u8 unk28;
-    /* 0x29 */ u8 unk29;
-    /* 0x2A */ u8 unk2A;
-    /* 0x2B */ u8 unk2B;
-    /* 0x2C */ u8 unk2C;
-    /* 0x2D */ u8 unk2D;
+    /* 0x04 */ Vec3f unk4;
+    /* 0x10 */ Vec3f unk10;
+    /* 0x1C */ Vec3f unk1C;
+    /* 0x28 */ Color_RGB8 unk28;
+    /* 0x2B */ Color_RGB8 unk2B;
     /* 0x2E */ s16 unk2E;
     /* 0x30 */ f32 unk30;
     /* 0x34 */ s16 unk34;
@@ -68,7 +58,7 @@ typedef struct BgDyYoseizo {
     /* 0x0310 */ f32 unk310;
     /* 0x0314 */ f32 unk314;
     /* 0x0318 */ f32 unk318;
-    /* 0x031C */ char pad31C[4];
+    /* 0x031C */ f32 unk31C;
     /* 0x0320 */ f32 unk320;
     /* 0x0324 */ f32 unk324;
     /* 0x0328 */ f32 unk328;
