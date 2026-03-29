@@ -54,8 +54,6 @@ void BgDyYoseizo_Init(Actor* thisx, GlobalContext* globalCtx);
 void BgDyYoseizo_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgDyYoseizo_Update(Actor* thisx, GlobalContext* globalCtx);
 
-void func_80872960(BgDyYoseizo* this, GlobalContext* globalCtx, s16 arg2);
-void func_80872C58(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_80872D20(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_80872DE4(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_8087328C(BgDyYoseizo* this, GlobalContext* globalCtx);
@@ -72,18 +70,17 @@ void func_80873E04(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_80873EA4(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_80873FD8(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx);
-s32 func_80874B7C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, BgDyYoseizo* this);
-void func_80874BE0(BgDyYoseizo* this, GlobalContext* globalCtx);
+void func_80874BE0(Actor* thisx, GlobalContext* globalCtx);
 void func_80874D9C(BgDyYoseizo* this, Vec3f*, Vec3f*, Vec3f*, Color_RGB8*, Color_RGB8*, f32, s16, s16);
 void func_80874EAC(BgDyYoseizo* this, GlobalContext* globalCtx);
 void func_808751A0(BgDyYoseizo* this, GlobalContext* globalCtx);
 
-extern CutsceneData D_2000130;
-extern CutsceneData D_2000160;
-extern CutsceneData D_2001020;
-extern CutsceneData D_20013E0;
-extern CutsceneData D_2001F40;
-extern CutsceneData D_20025D0;
+extern CutsceneData D_2000130[];
+extern CutsceneData D_2000160[];
+extern CutsceneData D_2001020[];
+extern CutsceneData D_20013E0[];
+extern CutsceneData D_2001F40[];
+extern CutsceneData D_20025D0[];
 extern AnimationHeader D_600092C;
 extern AnimationHeader D_6001DF0;
 extern AnimationHeader D_60031C0;
@@ -137,12 +134,12 @@ void BgDyYoseizo_Init(Actor* thisx, GlobalContext* globalCtx2) {
     this->unk310 = this->actor.world.pos.y;
     this->unk30C = this->actor.world.pos.y + 40.0f;
     this->actor.focus.pos = this->actor.world.pos;
-    if (globalCtx->sceneNum == 0x3B) {
+    if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
         osSyncPrintf("\x1b[32m☆☆☆☆☆ 大妖精の泉 ☆☆☆☆☆ %d\n\x1b[m", globalCtx->curSpawn);
-        SkelAnime_InitFlex(globalCtx, &this->skelAnime, &D_601C450, &D_6008698, &this->unk194, &this->unk23C, 0x1C);
+        SkelAnime_InitFlex(globalCtx, &this->skelAnime, &D_601C450, &D_6008698, this->unk194, this->unk23C, 28);
     } else {
         osSyncPrintf("\x1b[32m☆☆☆☆☆ 石妖精の泉 ☆☆☆☆☆ %d\n\x1b[m", globalCtx->curSpawn);
-        SkelAnime_InitFlex(globalCtx, &this->skelAnime, &D_601C450, &D_60031C0, &this->unk194, &this->unk23C, 0x1C);
+        SkelAnime_InitFlex(globalCtx, &this->skelAnime, &D_601C450, &D_60031C0, this->unk194, this->unk23C, 28);
     }
     this->actionFunc = func_80872D20;
 }
@@ -174,23 +171,21 @@ void func_80872960(BgDyYoseizo* this, GlobalContext* globalCtx, s16 arg2) {
                 var_fs2 = 0.4f;
                 var_s2 = 0x5A;
                 spAC.x = this->actor.world.pos.x;
-                spAC.y = ((Rand_ZeroOne() - 0.5f) * (temp_fs0 * 0.5f)) + (this->actor.world.pos.y + temp_fs0);
+                spAC.y = this->actor.world.pos.y + temp_fs0 + (temp_fs0 * 0.5f * (Rand_ZeroOne() - 0.5f));
                 spAC.z = this->actor.world.pos.z + 30.0f;
             } else {
                 var_fs2 = 0.2f;
                 var_s2 = 0x32;
                 var_s1 = arg2;
                 spAC.x = Rand_CenteredFloat(10.0f) + this->actor.world.pos.x;
-                if (globalCtx->sceneNum == 0x3B) {
-                    spAC.y =
-                        ((Rand_ZeroOne() - 0.5f) * (temp_fs0 * 0.1f)) + (this->actor.world.pos.y + temp_fs0 + 50.0f);
+                if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+                    spAC.y = this->actor.world.pos.y + temp_fs0 + 50.0f + (temp_fs0 * 0.1f * (Rand_ZeroOne() - 0.5f));
                     spAC.z = this->actor.world.pos.z + 30.0f;
                 } else {
-                    spAC.y =
-                        ((Rand_ZeroOne() - 0.5f) * (temp_fs0 * 0.1f)) + ((this->actor.world.pos.y + temp_fs0) - 30.0f);
+                    spAC.y = this->actor.world.pos.y + temp_fs0 - 30.0f + (temp_fs0 * 0.1f * (Rand_ZeroOne() - 0.5f));
                     spAC.z = this->actor.world.pos.z + 60.0f;
                 }
-                if (gSaveContext.linkAge == 0) {
+                if (LINK_IS_ADULT) {
                     spAC.y += 20.0f;
                 }
             }
@@ -200,43 +195,36 @@ void func_80872960(BgDyYoseizo* this, GlobalContext* globalCtx, s16 arg2) {
             spA4.r = D_80875488[var_s1].r;
             spA4.g = D_80875488[var_s1].g;
             spA4.b = D_80875488[var_s1].b;
-            func_80874D9C(this, (Vec3f*)&spAC, &spC4, (Vec3f*)&spB8, (Color_RGB8*)&spA8, (Color_RGB8*)&spA4, var_fs2,
-                          var_s2, (s32)var_s1);
+            func_80874D9C(this, &spAC, &spC4, &spB8, &spA8, &spA4, var_fs2, var_s2, var_s1);
         }
     }
 }
 
 void func_80872C58(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32* temp_a0;
-    f32 temp_fv0;
-
-    temp_fv0 = this->unk30C + this->unk320;
-    temp_a0 = &this->actor.world.pos.y;
-    this->unk31C = temp_fv0; // temp_a0->unk2F4 = temp_fv0;
-    Math_ApproachF(temp_a0, temp_fv0, 0.1f, 10.0f);
+    this->unk31C = this->unk30C + this->unk320;
+    Math_ApproachF(&this->actor.world.pos.y, this->unk31C, 0.1f, 10.0f);
     Math_ApproachF(&this->unk320, 10.0f, 0.1f, 0.5f);
-    if (globalCtx->csCtx.state == 0) {
+    if (globalCtx->csCtx.state == CS_STATE_IDLE) {
         this->actor.velocity.y = Math_SinS((s16)(s32)this->unk324);
-        return;
+    } else {
+        this->actor.velocity.y = Math_SinS((s16)(s32)this->unk324) * 0.4f;
     }
-    this->actor.velocity.y = Math_SinS((s16)(s32)this->unk324) * 0.4f;
 }
 
 void func_80872D20(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    if (Flags_GetSwitch(globalCtx, 0x38) != 0) {
+    if (Flags_GetSwitch(globalCtx, 0x38)) {
         globalCtx->msgCtx.unk_E3EE = 4;
-        if (globalCtx->sceneNum == 0x3B) {
-            if ((gSaveContext.magicAcquired == 0) && (this->unk2EC != 0)) {
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+            if (!gSaveContext.magicAcquired && (this->unk2EC != 0)) {
                 Actor_Kill(&this->actor);
                 return;
             }
-            goto block_7;
+        } else {
+            if (!gSaveContext.magicAcquired) {
+                Actor_Kill(&this->actor);
+                return;
+            }
         }
-        if (gSaveContext.magicAcquired == 0) {
-            Actor_Kill(&this->actor);
-            return;
-        }
-    block_7:
         func_8002DF54(globalCtx, &this->actor, 1U);
         this->actionFunc = func_80872DE4;
     }
@@ -248,43 +236,47 @@ void func_80872DE4(BgDyYoseizo* this, GlobalContext* globalCtx) {
     func_8002DF54(globalCtx, &this->actor, 1U);
     osSyncPrintf("\x1b[33m☆☆☆☆☆ もうど ☆☆☆☆☆ %d\n\x1b[m", globalCtx->msgCtx.unk_E3EE);
     var_v1 = 0;
-    if (globalCtx->sceneNum != 0x3B) {
-        switch (this->unk2EC) { /* switch 1; irregular */
-            case 0:             /* switch 1 */
+    if (globalCtx->sceneNum != SCENE_DAIYOUSEI_IZUMI) {
+        switch (this->unk2EC) {
+            case 0:
                 if (!(gSaveContext.itemGetInf[1] & 0x100)) {
                     var_v1 = 1;
                 }
                 break;
-            case 1: /* switch 1 */
+
+            case 1:
                 if (!(gSaveContext.itemGetInf[1] & 0x200)) {
                     var_v1 = 1;
                 }
                 break;
-            case 2: /* switch 1 */
+
+            case 2:
                 if (!(gSaveContext.itemGetInf[1] & 0x400)) {
                     var_v1 = 1;
                 }
                 break;
         }
     } else {
-        switch (this->unk2EC) { /* switch 2; irregular */
-            case 0:             /* switch 2 */
-                if ((gSaveContext.magicAcquired == 0) || (gGameInfo->data[0x962] != 0)) {
-                    osSyncPrintf("\x1b[32m ☆☆☆☆☆ 回転切り速度ＵＰ ☆☆☆☆☆ \n\x1b[m", &gSaveContext);
+        switch (this->unk2EC) {
+            case 0:
+                if (!gSaveContext.magicAcquired || (gGameInfo->data[0x962] != 0)) {
+                    osSyncPrintf("\x1b[32m ☆☆☆☆☆ 回転切り速度ＵＰ ☆☆☆☆☆ \n\x1b[m");
                     var_v1 = 1;
                     this->unk2EA = 1;
                 }
                 break;
-            case 1: /* switch 2 */
-                if (gSaveContext.doubleMagic == 0) {
-                    osSyncPrintf("\x1b[33m ☆☆☆☆☆ 魔法ゲージメーター倍増 ☆☆☆☆☆ \n\x1b[m", &gSaveContext);
+
+            case 1:
+                if (!gSaveContext.doubleMagic) {
+                    osSyncPrintf("\x1b[33m ☆☆☆☆☆ 魔法ゲージメーター倍増 ☆☆☆☆☆ \n\x1b[m");
                     var_v1 = 1;
                     this->unk2EA = 1;
                 }
                 break;
-            case 2: /* switch 2 */
-                if (gSaveContext.doubleDefense == 0) {
-                    osSyncPrintf("\x1b[35m ☆☆☆☆☆ ダメージ半減 ☆☆☆☆☆ \n\x1b[m", &gSaveContext);
+
+            case 2:
+                if (!gSaveContext.doubleDefense) {
+                    osSyncPrintf("\x1b[35m ☆☆☆☆☆ ダメージ半減 ☆☆☆☆☆ \n\x1b[m");
                     var_v1 = 1;
                     this->unk2EA = 1;
                 }
@@ -293,94 +285,84 @@ void func_80872DE4(BgDyYoseizo* this, GlobalContext* globalCtx) {
     }
     if (var_v1 != 0) {
         if (gSaveContext.sceneSetupIndex < 4) {
-            if (globalCtx->sceneNum != 0x3B) {
-                switch (this->unk2EC) { /* switch 3; irregular */
-                    case 0:             /* switch 3 */
-                        globalCtx->csCtx.segment = gSegments[(u32)((s32)&D_2000160 * 0x10) >> 0x1C] +
-                                                   ((s32)&D_2000160 & 0xFFFFFF) + 0x80000000;
+            if (globalCtx->sceneNum != SCENE_DAIYOUSEI_IZUMI) {
+                switch (this->unk2EC) {
+                    case 0:
+                        globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(D_2000160);
                         gSaveContext.cutsceneTrigger = 1;
                         break;
-                    case 1: /* switch 3 */
-                        globalCtx->csCtx.segment = gSegments[(u32)((s32)&D_2001020 * 0x10) >> 0x1C] +
-                                                   ((s32)&D_2001020 & 0xFFFFFF) + 0x80000000;
+
+                    case 1:
+                        globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(D_2001020);
                         gSaveContext.cutsceneTrigger = 1;
                         break;
-                    case 2: /* switch 3 */
-                        globalCtx->csCtx.segment = gSegments[(u32)((s32)&D_2001F40 * 0x10) >> 0x1C] +
-                                                   ((s32)&D_2001F40 & 0xFFFFFF) + 0x80000000;
+
+                    case 2:
+                        globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(D_2001F40);
                         gSaveContext.cutsceneTrigger = 1;
                         break;
                 }
             } else {
-                switch (this->unk2EC) { /* switch 4; irregular */
-                    case 0:             /* switch 4 */
-                        globalCtx->csCtx.segment = gSegments[(u32)((s32)&D_2000130 * 0x10) >> 0x1C] +
-                                                   ((s32)&D_2000130 & 0xFFFFFF) + 0x80000000;
+                switch (this->unk2EC) {
+                    case 0:
+                        globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(D_2000130);
                         gSaveContext.cutsceneTrigger = 1;
                         break;
-                    case 1: /* switch 4 */
-                        globalCtx->csCtx.segment = gSegments[(u32)((s32)&D_20013E0 * 0x10) >> 0x1C] +
-                                                   ((s32)&D_20013E0 & 0xFFFFFF) + 0x80000000;
+
+                    case 1:
+                        globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(D_20013E0);
                         gSaveContext.cutsceneTrigger = 1;
                         break;
-                    case 2: /* switch 4 */
-                        globalCtx->csCtx.segment = gSegments[(u32)((s32)&D_20025D0 * 0x10) >> 0x1C] +
-                                                   ((s32)&D_20025D0 & 0xFFFFFF) + 0x80000000;
+
+                    case 2:
+                        globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(D_20025D0);
                         gSaveContext.cutsceneTrigger = 1;
                         break;
                 }
             }
         }
         this->actionFunc = func_80873EA4;
-        return;
-    }
-    globalCtx->envCtx.unk_BF = 2;
-    if (globalCtx->sceneNum == 0x3B) {
-        func_800800F8(globalCtx, 0x219B, -0x63, NULL, 0);
     } else {
-        func_800800F8(globalCtx, 0x219C, -0x63, NULL, 0);
+        globalCtx->envCtx.unk_BF = 2;
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+            func_800800F8(globalCtx, 0x219B, -0x63, NULL, 0);
+        } else {
+            func_800800F8(globalCtx, 0x219C, -0x63, NULL, 0);
+        }
+        Audio_PlayActorSound2(&this->actor, NA_SE_EV_GREAT_FAIRY_APPEAR);
+        this->actor.draw = func_80874BE0;
+        this->actionFunc = func_8087328C;
     }
-    Audio_PlayActorSound2(&this->actor, 0x287FU);
-    this->actor.draw = (void (*)(Actor*, GlobalContext*))func_80874BE0;
-    this->actionFunc = func_8087328C;
 }
 
 void func_8087328C(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-
-    if (globalCtx->sceneNum == 0x3B) {
-        temp_fv0 = (f32)Animation_GetLastFrame(&D_6008698);
-        this->unk32C = temp_fv0;
-        Animation_Change(&this->skelAnime, &D_6008698, 1.0f, 0.0f, temp_fv0, 2U, -10.0f);
+    if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+        this->unk32C = Animation_GetLastFrame(&D_6008698);
+        Animation_Change(&this->skelAnime, &D_6008698, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
     } else {
-        temp_fv0_2 = (f32)Animation_GetLastFrame(&D_60031C0);
-        this->unk32C = temp_fv0_2;
-        Animation_Change(&this->skelAnime, &D_60031C0, 1.0f, 0.0f, temp_fv0_2, 2U, -10.0f);
+        this->unk32C = Animation_GetLastFrame(&D_60031C0);
+        Animation_Change(&this->skelAnime, &D_60031C0, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
     }
-    Audio_PlayActorSound2(&this->actor, 0x6858U);
+    Audio_PlayActorSound2(&this->actor, NA_SE_VO_FR_LAUGH_0);
     func_8002DF54(globalCtx, &this->actor, 1U);
     this->actionFunc = func_80873380;
 }
 
 void func_80873380(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    s16 temp_v0;
-
     func_8002DF54(globalCtx, &this->actor, 1U);
     Math_ApproachF(&this->actor.world.pos.y, this->unk30C, this->unk314, 100.0f);
     Math_ApproachF(&this->unk308, 0.035f, this->unk318, 0.005f);
     Math_ApproachF(&this->unk314, 0.8f, 0.1f, 0.02f);
     Math_ApproachF(&this->unk318, 0.2f, 0.03f, 0.05f);
     if (this->unk308 >= 0.034f) {
-        temp_v0 = this->actor.shape.rot.y;
-        if ((temp_v0 >= -0x1F3F) && (temp_v0 < 0x3E8)) {
+        if ((this->actor.shape.rot.y >= -0x1F3F) && (this->actor.shape.rot.y < 0x3E8)) {
             SkelAnime_Update(&this->skelAnime);
             Math_SmoothStepToS(&this->actor.shape.rot.y, 0, 5, 0x3E8, 0);
-            if (fabsf((f32)this->actor.shape.rot.y) < 50.0f) {
+            if (fabsf(this->actor.shape.rot.y) < 50.0f) {
                 this->actionFunc = func_808734DC;
             }
         } else {
-            this->actor.shape.rot.y = temp_v0 + 0xBB8;
+            this->actor.shape.rot.y += 0xBB8;
         }
     } else {
         this->actor.shape.rot.y += 0xBB8;
@@ -403,18 +385,13 @@ void func_808734DC(BgDyYoseizo* this, GlobalContext* globalCtx) {
 }
 
 void func_8087358C(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-
     func_8002DF54(globalCtx, &this->actor, 1U);
-    if (globalCtx->sceneNum == 0x3B) {
-        temp_fv0 = (f32)Animation_GetLastFrame(&D_601D514);
-        this->unk32C = temp_fv0;
-        Animation_Change(&this->skelAnime, &D_601D514, 1.0f, 0.0f, temp_fv0, 0U, -10.0f);
+    if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+        this->unk32C = Animation_GetLastFrame(&D_601D514);
+        Animation_Change(&this->skelAnime, &D_601D514, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
     } else {
-        temp_fv0_2 = (f32)Animation_GetLastFrame(&D_6001DF0);
-        this->unk32C = temp_fv0_2;
-        Animation_Change(&this->skelAnime, &D_6001DF0, 1.0f, 0.0f, temp_fv0_2, 0U, -10.0f);
+        this->unk32C = Animation_GetLastFrame(&D_6001DF0);
+        Animation_Change(&this->skelAnime, &D_6001DF0, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
     }
     this->actor.textId = 0xDB;
     this->unk2EE = 5;
@@ -424,12 +401,9 @@ void func_8087358C(BgDyYoseizo* this, GlobalContext* globalCtx) {
 }
 
 void func_808736A4(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-
     func_8002DF54(globalCtx, &this->actor, 1U);
-    temp_fv0 = this->skelAnime.curFrame * 1273.0f;
-    this->unk324 = temp_fv0;
-    if ((this->unk32C * 1273.0f) <= temp_fv0) {
+    this->unk324 = this->skelAnime.curFrame * 1273.0f;
+    if (this->unk324 >= (this->unk32C * 1273.0f)) {
         this->unk324 = 0.0f;
     }
     SkelAnime_Update(&this->skelAnime);
@@ -443,17 +417,12 @@ void func_808736A4(BgDyYoseizo* this, GlobalContext* globalCtx) {
 }
 
 void func_80873780(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-
-    if (globalCtx->sceneNum == 0x3B) {
-        temp_fv0 = (f32)Animation_GetLastFrame(&D_60069E8);
-        this->unk32C = temp_fv0;
-        Animation_Change(&this->skelAnime, &D_60069E8, 1.0f, 0.0f, temp_fv0, 2U, -10.0f);
+    if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+        this->unk32C = Animation_GetLastFrame(&D_60069E8);
+        Animation_Change(&this->skelAnime, &D_60069E8, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
     } else {
-        temp_fv0_2 = (f32)Animation_GetLastFrame(&D_6005810);
-        this->unk32C = temp_fv0_2;
-        Animation_Change(&this->skelAnime, &D_6005810, 1.0f, 0.0f, temp_fv0_2, 2U, -10.0f);
+        this->unk32C = Animation_GetLastFrame(&D_6005810);
+        Animation_Change(&this->skelAnime, &D_6005810, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
     }
     Audio_PlayActorSound2(&this->actor, 0x6859U);
     this->unk2F6 = 1;
@@ -476,12 +445,12 @@ void func_80873868(BgDyYoseizo* this, GlobalContext* globalCtx) {
     }
     SkelAnime_Update(&this->skelAnime);
     if ((this->unk32C <= temp_fv1) && (this->unk2FC == 0)) {
-        if (globalCtx->sceneNum == 0x3B) {
-            this->unk32C = (f32)Animation_GetLastFrame(&D_6007CA8);
-            Animation_Change(&this->skelAnime, &D_6007CA8, 1.0f, 0.0f, this->unk32C, 0U, -10.0f);
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+            this->unk32C = Animation_GetLastFrame(&D_6007CA8);
+            Animation_Change(&this->skelAnime, &D_6007CA8, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
         } else {
-            this->unk32C = (f32)Animation_GetLastFrame(&D_6004344);
-            Animation_Change(&this->skelAnime, &D_6004344, 1.0f, 0.0f, this->unk32C, 0U, -10.0f);
+            this->unk32C = Animation_GetLastFrame(&D_6004344);
+            Animation_Change(&this->skelAnime, &D_6004344, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
         }
         this->unk302 = 0x96;
         this->unk2FC = 1;
@@ -489,13 +458,13 @@ void func_80873868(BgDyYoseizo* this, GlobalContext* globalCtx) {
             vec.x = sp5C->world.pos.x;
             vec.y = sp5C->world.pos.y + 200.0f;
             vec.z = sp5C->world.pos.z;
-            if (globalCtx->sceneNum == 0x3B) {
+            if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
                 var_v0 = 0;
             } else {
                 var_v0 = 1;
             }
-            this->unk340 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, 0x184, vec.x, vec.y, vec.z,
-                                              0, 0, 0, (s16)var_v0);
+            this->unk340 = (EnDyExtra*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx,
+                                                          ACTOR_EN_DY_EXTRA, vec.x, vec.y, vec.z, 0, 0, 0, var_v0);
         }
     }
     if (this->unk306 >= 2) {
@@ -524,17 +493,14 @@ void func_80873868(BgDyYoseizo* this, GlobalContext* globalCtx) {
         this->unk2EE = 5;
         func_8010B720(globalCtx, this->actor.textId);
         this->actionFunc = func_80873B3C;
-        return;
+    } else {
+        func_80872C58(this, globalCtx);
     }
-    func_80872C58(this, globalCtx);
 }
 
 void func_80873B3C(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-
-    temp_fv0 = this->skelAnime.curFrame * 1400.0f;
-    this->unk324 = temp_fv0;
-    if ((this->unk32C * 1400.0f) <= temp_fv0) {
+    this->unk324 = this->skelAnime.curFrame * 1400.0f;
+    if (this->unk324 >= (this->unk32C * 1400.0f)) {
         this->unk324 = 0.0f;
     }
     SkelAnime_Update(&this->skelAnime);
@@ -549,23 +515,18 @@ void func_80873B3C(BgDyYoseizo* this, GlobalContext* globalCtx) {
 }
 
 void func_80873C14(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-
-    if (globalCtx->sceneNum == 0x3B) {
-        temp_fv0 = (f32)Animation_GetLastFrame(&D_6005E60);
-        this->unk32C = temp_fv0;
-        Animation_Change(&this->skelAnime, &D_6005E60, 1.0f, 0.0f, temp_fv0, 2U, -10.0f);
+    if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+        this->unk32C = Animation_GetLastFrame(&D_6005E60);
+        Animation_Change(&this->skelAnime, &D_6005E60, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
     } else {
-        temp_fv0_2 = (f32)Animation_GetLastFrame(&D_600092C);
-        this->unk32C = temp_fv0_2;
-        Animation_Change(&this->skelAnime, &D_600092C, 1.0f, 0.0f, temp_fv0_2, 2U, -10.0f);
+        this->unk32C = Animation_GetLastFrame(&D_600092C);
+        Animation_Change(&this->skelAnime, &D_600092C, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
     }
     this->unk2E8 = 5;
     this->unk318 = 0.0f;
     this->unk314 = 0.0f;
-    Audio_PlayActorSound2(&this->actor, 0x6858U);
-    Audio_PlayActorSound2(&this->actor, 0x2880U);
+    Audio_PlayActorSound2(&this->actor, NA_SE_VO_FR_LAUGH_0);
+    Audio_PlayActorSound2(&this->actor, NA_SE_EV_GREAT_FAIRY_VANISH);
     this->actionFunc = func_80873D14;
 }
 
@@ -575,14 +536,14 @@ void func_80873D14(BgDyYoseizo* this, GlobalContext* globalCtx) {
         if (this->unk308 < 0.003f) {
             this->unk2E8 = 0x1E;
             this->actionFunc = func_80873E04;
-            return;
+        } else {
+            Math_ApproachF(&this->actor.world.pos.y, this->unk310, this->unk314, 100.0f);
+            Math_ApproachZeroF(&this->unk308, this->unk318, 0.005f);
+            Math_ApproachF(&this->unk314, 0.8f, 0.1f, 0.02f);
+            Math_ApproachF(&this->unk318, 0.2f, 0.03f, 0.05f);
+            this->actor.shape.rot.y += 0xBB8;
+            func_80872960(this, globalCtx, 0);
         }
-        Math_ApproachF(&this->actor.world.pos.y, this->unk310, this->unk314, 100.0f);
-        Math_ApproachZeroF(&this->unk308, this->unk318, 0.005f);
-        Math_ApproachF(&this->unk314, 0.8f, 0.1f, 0.02f);
-        Math_ApproachF(&this->unk318, 0.2f, 0.03f, 0.05f);
-        this->actor.shape.rot.y += 0xBB8;
-        func_80872960(this, globalCtx, 0);
     }
 }
 
@@ -592,9 +553,9 @@ void func_80873E04(BgDyYoseizo* this, GlobalContext* globalCtx) {
     if (this->unk2E8 == 0) {
         func_8002DF54(globalCtx, &this->actor, 7U);
         globalCtx->envCtx.unk_BF = 0;
-        var_a0 = globalCtx->actorCtx.actorLists[6].head;
+        var_a0 = globalCtx->actorCtx.actorLists[ACTORCAT_PROP].head;
         while (var_a0 != NULL) {
-            if (var_a0->id != 0x12E) {
+            if (var_a0->id != ACTOR_EN_OKARINA_TAG) {
                 var_a0 = var_a0->next;
             } else {
                 Actor_Kill(var_a0);
@@ -607,28 +568,20 @@ void func_80873E04(BgDyYoseizo* this, GlobalContext* globalCtx) {
 }
 
 void func_80873EA4(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    CsCmdActorAction* temp_v0;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-
-    if (globalCtx->csCtx.state != 0) {
-        temp_v0 = globalCtx->csCtx.npcActions[0];
-        if ((temp_v0 != NULL) && (temp_v0->action == 2)) {
-            this->actor.draw = (void (*)(Actor*, GlobalContext*))func_80874BE0;
-            func_8002DF54(globalCtx, &this->actor, 1U);
-            this->unk2FE = 0;
-            if (globalCtx->sceneNum == 0x3B) {
-                temp_fv0 = (f32)Animation_GetLastFrame(&D_6008698);
-                this->unk32C = temp_fv0;
-                Animation_Change(&this->skelAnime, &D_6008698, 1.0f, 0.0f, temp_fv0, 2U, -10.0f);
-            } else {
-                temp_fv0_2 = (f32)Animation_GetLastFrame(&D_60031C0);
-                this->unk32C = temp_fv0_2;
-                Animation_Change(&this->skelAnime, &D_60031C0, 1.0f, 0.0f, temp_fv0_2, 2U, -10.0f);
-            }
-            Audio_PlayActorSound2(&this->actor, 0x287FU);
-            this->actionFunc = func_80873FD8;
+    if ((globalCtx->csCtx.state != CS_STATE_IDLE) && (globalCtx->csCtx.npcActions[0] != NULL) &&
+        (globalCtx->csCtx.npcActions[0]->action == 2)) {
+        this->actor.draw = func_80874BE0;
+        func_8002DF54(globalCtx, &this->actor, 1U);
+        this->unk2FE = 0;
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+            this->unk32C = Animation_GetLastFrame(&D_6008698);
+            Animation_Change(&this->skelAnime, &D_6008698, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
+        } else {
+            this->unk32C = Animation_GetLastFrame(&D_60031C0);
+            Animation_Change(&this->skelAnime, &D_60031C0, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
         }
+        Audio_PlayActorSound2(&this->actor, NA_SE_EV_GREAT_FAIRY_APPEAR);
+        this->actionFunc = func_80873FD8;
     }
 }
 
@@ -645,7 +598,7 @@ void func_80873FD8(BgDyYoseizo* this, GlobalContext* globalCtx) {
             if ((this->actor.shape.rot.y >= -0x1F3F) && (this->actor.shape.rot.y < 0x3E8)) {
                 SkelAnime_Update(&this->skelAnime);
                 Math_ApproachS(&this->actor.shape.rot.y, 0, 5, 0x3E8);
-                if (fabsf((f32)this->actor.shape.rot.y) < 50.0f) {
+                if (fabsf(this->actor.shape.rot.y) < 50.0f) {
                     this->unk2FE = 1;
                 }
             } else {
@@ -657,29 +610,28 @@ void func_80873FD8(BgDyYoseizo* this, GlobalContext* globalCtx) {
     } else {
         SkelAnime_Update(&this->skelAnime);
         if ((this->unk32C <= temp_fv0) && (this->unk2FC == 0)) {
-            if (globalCtx->sceneNum == 0x3B) {
-                this->unk32C = (f32)Animation_GetLastFrame(&D_601D514);
-                Animation_Change(&this->skelAnime, &D_601D514, 1.0f, 0.0f, this->unk32C, 0U, -10.0f);
+            if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+                this->unk32C = Animation_GetLastFrame(&D_601D514);
+                Animation_Change(&this->skelAnime, &D_601D514, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
             } else {
-                this->unk32C = (f32)Animation_GetLastFrame(&D_6001DF0);
-                Animation_Change(&this->skelAnime, &D_6001DF0, 1.0f, 0.0f, this->unk32C, 0U, -10.0f);
+                this->unk32C = Animation_GetLastFrame(&D_6001DF0);
+                Animation_Change(&this->skelAnime, &D_6001DF0, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
             }
             this->unk2FC = 1;
         }
-        if (globalCtx->csCtx.state != 0) {
-            if ((globalCtx->csCtx.npcActions[0] != NULL) && (globalCtx->csCtx.npcActions[0]->action == 3)) {
-                this->unk2FC = 0;
-                this->unk2FE = this->unk2FC;
-                if (globalCtx->sceneNum == 0x3B) {
-                    this->unk32C = (f32)Animation_GetLastFrame(&D_60069E8);
-                    Animation_Change(&this->skelAnime, &D_60069E8, 1.0f, 0.0f, this->unk32C, 2U, -10.0f);
-                } else {
-                    this->unk32C = (f32)Animation_GetLastFrame(&D_6005810);
-                    Animation_Change(&this->skelAnime, &D_6005810, 1.0f, 0.0f, this->unk32C, 2U, -10.0f);
-                }
-                this->unk2F6 = 1;
-                this->actionFunc = func_80874304;
+        if ((globalCtx->csCtx.state != CS_STATE_IDLE) && (globalCtx->csCtx.npcActions[0] != NULL) &&
+            (globalCtx->csCtx.npcActions[0]->action == 3)) {
+            this->unk2FC = 0;
+            this->unk2FE = this->unk2FC;
+            if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+                this->unk32C = Animation_GetLastFrame(&D_60069E8);
+                Animation_Change(&this->skelAnime, &D_60069E8, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
+            } else {
+                this->unk32C = Animation_GetLastFrame(&D_6005810);
+                Animation_Change(&this->skelAnime, &D_6005810, 1.0f, 0.0f, this->unk32C, ANIMMODE_ONCE, -10.0f);
             }
+            this->unk2F6 = 1;
+            this->actionFunc = func_80874304;
         }
     }
     func_80872960(this, globalCtx, 0);
@@ -696,18 +648,18 @@ void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx) {
     sp58 = globalCtx->actorCtx.actorLists[2].head;
     if (this->unk2FC != 0) {
         this->unk324 = this->skelAnime.curFrame * 1400.0f;
-        if ((this->unk32C * 1400.0f) <= this->unk324) {
+        if (this->unk324 >= (this->unk32C * 1400.0f)) {
             this->unk324 = 0.0f;
         }
     }
     SkelAnime_Update(&this->skelAnime);
     if ((this->unk32C <= temp_fv1_sp5C) && (this->unk2FC == 0)) {
-        if (globalCtx->sceneNum == 0x3B) {
-            this->unk32C = (f32)Animation_GetLastFrame(&D_6007CA8);
-            Animation_Change(&this->skelAnime, &D_6007CA8, 1.0f, 0.0f, this->unk32C, 0U, -10.0f);
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+            this->unk32C = Animation_GetLastFrame(&D_6007CA8);
+            Animation_Change(&this->skelAnime, &D_6007CA8, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
         } else {
-            this->unk32C = (f32)Animation_GetLastFrame(&D_6004344);
-            Animation_Change(&this->skelAnime, &D_6004344, 1.0f, 0.0f, this->unk32C, 0U, -10.0f);
+            this->unk32C = Animation_GetLastFrame(&D_6004344);
+            Animation_Change(&this->skelAnime, &D_6004344, 1.0f, 0.0f, this->unk32C, ANIMMODE_LOOP, -10.0f);
         }
         this->unk2FC = 1;
     }
@@ -715,31 +667,31 @@ void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx) {
         this->actionFunc = func_80873C14;
         return;
     }
-    if (((s32)globalCtx->csCtx.npcActions[0]->action >= 4) && ((s32)globalCtx->csCtx.npcActions[0]->action < 7)) {
+    if ((globalCtx->csCtx.npcActions[0]->action >= 4) && (globalCtx->csCtx.npcActions[0]->action < 7)) {
         var_v1 = globalCtx->csCtx.npcActions[0]->action - 4;
-        if (globalCtx->sceneNum == 0x3B) {
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
             var_v1 += 1;
             func_80872960(this, globalCtx, var_v1);
         } else if (this->unk2E4 == 0) {
             sp56 = D_808754B0[var_v1] << 0xC;
             sp56 |= 0x12;
-            Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x8B, this->actor.world.pos.x, this->actor.world.pos.y,
-                        this->actor.world.pos.z, 0, 0, 0, sp56);
+            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_DEMO_EFFECT, this->actor.world.pos.x,
+                        this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, sp56);
             this->unk2E4 = 1;
         }
     } else {
         func_80872960(this, globalCtx, 0);
     }
-    if (globalCtx->sceneNum == 0x3B) {
-        if (((s32)globalCtx->csCtx.npcActions[0]->action >= 0xA) &&
-            ((s32)globalCtx->csCtx.npcActions[0]->action < 0xD)) {
+    if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
+        if ((globalCtx->csCtx.npcActions[0]->action >= 0xA) && (globalCtx->csCtx.npcActions[0]->action < 0xD)) {
             var_v1 = globalCtx->csCtx.npcActions[0]->action - 0xA;
-            switch (var_v1) { /* irregular */
+            switch (var_v1) {
                 case 0:
                     gSaveContext.magicAcquired = 1;
                     gSaveContext.unk_13F6 = 0x30;
                     Interface_ChangeAlpha(9U);
                     break;
+
                 case 1:
                     if (gSaveContext.magicAcquired == 0) {
                         gSaveContext.magicAcquired = 1;
@@ -749,6 +701,7 @@ void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx) {
                     gSaveContext.magicLevel = 0;
                     Interface_ChangeAlpha(9U);
                     break;
+
                 case 2:
                     gSaveContext.doubleDefense = 1;
                     Interface_ChangeAlpha(9U);
@@ -763,35 +716,35 @@ void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx) {
             }
         }
     }
-    if (globalCtx->sceneNum != 0x3B) {
-        if (((s32)globalCtx->csCtx.npcActions[0]->action >= 0xE) &&
-            ((s32)globalCtx->csCtx.npcActions[0]->action < 0x11)) {
+    if (globalCtx->sceneNum != SCENE_DAIYOUSEI_IZUMI) {
+        if ((globalCtx->csCtx.npcActions[0]->action >= 0xE) && (globalCtx->csCtx.npcActions[0]->action < 0x11)) {
             var_v1 = globalCtx->csCtx.npcActions[0]->action - 0xE;
             if (this->unk300 == 0) {
                 var_fv1.x = sp58->world.pos.x;
-                if (gSaveContext.linkAge == 0) {
+                if (LINK_IS_ADULT) {
                     var_fv1.y = sp58->world.pos.y + 73.0f;
                 } else {
                     var_fv1.y = sp58->world.pos.y + 53.0f;
                 }
                 var_fv1.z = sp58->world.pos.z;
-                this->unk344 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, 0x168, var_fv1.x,
-                                                  var_fv1.y, var_fv1.z, 0, 0, 0, (s16)(s32)D_808754B8[var_v1]);
+                this->unk344 =
+                    (EnExItem*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_EX_ITEM,
+                                                  var_fv1.x, var_fv1.y, var_fv1.z, 0, 0, 0, D_808754B8[var_v1]);
                 if (this->unk344 != NULL) {
-                    if (gSaveContext.magicAcquired == 0) {
-                        gSaveContext.magicAcquired = 1;
+                    if (!gSaveContext.magicAcquired) {
+                        gSaveContext.magicAcquired = true;
                     } else {
                         Magic_Fill(globalCtx);
                     }
                     this->unk300 = 1;
                     gSaveContext.healthAccumulator = 0x140;
                     Interface_ChangeAlpha(9U);
-                    gSaveContext.itemGetInf[1] |= D_808754C0[var_v1]; // = *(D_808754C0 + sp40);
+                    gSaveContext.itemGetInf[1] |= D_808754C0[var_v1];
                     Item_Give(globalCtx, D_808754C8[var_v1]);
                 }
             } else {
                 this->unk344->actor.world.pos.x = sp58->world.pos.x;
-                if (gSaveContext.linkAge == 0) {
+                if (LINK_IS_ADULT) {
                     this->unk344->actor.world.pos.y = sp58->world.pos.y + 73.0f;
                 } else {
                     this->unk344->actor.world.pos.y = sp58->world.pos.y + 53.0f;
@@ -801,13 +754,13 @@ void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx) {
             }
         }
     }
-    if ((globalCtx->sceneNum != 0x3B) && (globalCtx->csCtx.npcActions[0]->action == 0x11)) {
+    if ((globalCtx->sceneNum != SCENE_DAIYOUSEI_IZUMI) && (globalCtx->csCtx.npcActions[0]->action == 0x11)) {
         if (this->unk344 != NULL) {
             Actor_Kill(&this->unk344->actor);
             this->unk344 = NULL;
         }
     }
-    if ((globalCtx->sceneNum == 0x3B) && (globalCtx->csCtx.npcActions[0]->action == 0x12)) {
+    if ((globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) && (globalCtx->csCtx.npcActions[0]->action == 0x12)) {
         this->unk2E5 = 1;
     }
     if (this->unk2E5 != 0) {
@@ -815,11 +768,11 @@ void func_80874304(BgDyYoseizo* this, GlobalContext* globalCtx) {
             gSaveContext.inventory.defenseHearts += 1;
         }
     }
-    if (((s32)globalCtx->csCtx.npcActions[0]->action >= 0x13) && ((s32)globalCtx->csCtx.npcActions[0]->action < 0x16) &&
+    if ((globalCtx->csCtx.npcActions[0]->action >= 0x13) && (globalCtx->csCtx.npcActions[0]->action < 0x16) &&
         (this->unk304 == 0)) {
         var_v1 = globalCtx->csCtx.npcActions[0]->action - 0xB;
-        Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x5D, sp58->world.pos.x, sp58->world.pos.y, sp58->world.pos.z, 0,
-                    0, 0, var_v1);
+        Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_DOOR_WARP1, sp58->world.pos.x, sp58->world.pos.y,
+                    sp58->world.pos.z, 0, 0, 0, var_v1);
         this->unk304 = 1;
     }
     func_80872C58(this, globalCtx);
@@ -841,9 +794,9 @@ void BgDyYoseizo_Update(Actor* thisx, GlobalContext* globalCtx2) {
         this->unk2FA--;
     }
     this->actionFunc(this, globalCtx);
-    if (globalCtx->csCtx.state != 0) {
+    if (globalCtx->csCtx.state != CS_STATE_IDLE) {
         var_v1 = 0;
-        if (globalCtx->sceneNum == 0x3B) {
+        if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
             if ((globalCtx->csCtx.frames == 0x20) || (globalCtx->csCtx.frames == 0x123) ||
                 (globalCtx->csCtx.frames == 0x1AA) || (globalCtx->csCtx.frames == 0x353)) {
                 var_v1 = 1;
@@ -861,10 +814,10 @@ void BgDyYoseizo_Update(Actor* thisx, GlobalContext* globalCtx2) {
             }
         }
         if (var_v1 == 1) {
-            Audio_PlayActorSound2(&this->actor, 0x6859U);
+            Audio_PlayActorSound2(&this->actor, NA_SE_VO_FR_SMILE_0);
         }
         if (var_v1 == 2) {
-            Audio_PlayActorSound2(&this->actor, 0x6858U);
+            Audio_PlayActorSound2(&this->actor, NA_SE_VO_FR_LAUGH_0);
         }
     }
     if ((this->unk2F8 == 0) && (this->actionFunc != func_80873868)) {
@@ -885,7 +838,7 @@ void BgDyYoseizo_Update(Actor* thisx, GlobalContext* globalCtx2) {
     Actor_SetScale(&this->actor, this->unk308);
 }
 
-s32 func_80874B7C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, BgDyYoseizo* thisx) {
+s32 func_80874B7C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
     BgDyYoseizo* this = thisx;
 
     if (limbIndex == 8) {
@@ -898,20 +851,19 @@ s32 func_80874B7C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* p
     return 0;
 }
 
-void func_80874BE0(BgDyYoseizo* this, GlobalContext* globalCtx) {
-    s32 pad;
+void func_80874BE0(Actor* thisx, GlobalContext* globalCtx) {
+    BgDyYoseizo* this = (BgDyYoseizo*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_dy_yoseizo.c", 0x649);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_dy_yoseizo.c", 1609);
     if (this->actionFunc != func_80873E04) {
         func_80093D18(globalCtx->state.gfxCtx);
         gSPSegment(POLY_OPA_DISP++, 8, SEGMENTED_TO_VIRTUAL(D_808754CC[this->unk2F2]));
         gSPSegment(POLY_OPA_DISP++, 9, SEGMENTED_TO_VIRTUAL(D_808754CC[this->unk2F4]));
         gSPSegment(POLY_OPA_DISP++, 10, SEGMENTED_TO_VIRTUAL(D_808754D8[this->unk2F6]));
         SkelAnime_DrawFlexOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable,
-                              (s32)this->skelAnime.dListCount,
-                              (s32(*)(GlobalContext*, s32, Gfx**, Vec3f*, Vec3s*, void*))func_80874B7C, NULL, this);
+                              this->skelAnime.dListCount, func_80874B7C, NULL, this);
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_dy_yoseizo.c", 0x65D);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_dy_yoseizo.c", 1629);
     func_808751A0(this, globalCtx);
 }
 
@@ -921,7 +873,7 @@ void func_80874D9C(BgDyYoseizo* this, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, Col
     s16 var_v1;
 
     var_v0 = this->unk394;
-    for (var_v1 = 0; var_v1 < 200; var_v1++, var_v0++) {
+    for (var_v1 = 0; var_v1 < ARRAY_COUNT(this->unk394); var_v1++, var_v0++) {
         if (var_v0->unk0 == 0) {
             var_v0->unk0 = 1;
             var_v0->unk4 = *arg1;
@@ -931,29 +883,28 @@ void func_80874D9C(BgDyYoseizo* this, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, Col
             var_v0->unk2E = 0;
             var_v0->unk2B = *arg5;
             var_v0->unk30 = arg6;
-            var_v0->unk34 = (s16)arg7;
-            var_v0->unk36 = (s16)arg8;
+            var_v0->unk34 = arg7;
+            var_v0->unk36 = arg8;
             var_v0->unk38 = 0.0f;
             var_v0->unk3C = Rand_CenteredFloat(30000.0f);
             var_v0->unk40 = 0.0f;
-            return;
+            break;
         }
     }
 }
 
 void func_80874EAC(BgDyYoseizo* this, GlobalContext* globalCtx) {
     s16 var_s5;
-    Actor* temp_s4;
+    Player* player;
     Vec3f sp94;
     Vec3f sp88;
     struct_BgDyYoseizo_394* var_s0;
-    PosRot* temp_s2;
     f32 temp_fs0;
     f32 temp_fs1;
 
     var_s0 = this->unk394;
-    temp_s4 = globalCtx->actorCtx.actorLists[2].head;
-    for (var_s5 = 0; var_s5 < 200; var_s5++, var_s0++) {
+    player = PLAYER;
+    for (var_s5 = 0; var_s5 < ARRAY_COUNT(this->unk394); var_s5++, var_s0++) {
         if (var_s0->unk0 != 0) {
             var_s0->unk40 += 3000.0f;
             if (var_s0->unk36 == 0) {
@@ -964,18 +915,17 @@ void func_80874EAC(BgDyYoseizo* this, GlobalContext* globalCtx) {
                 var_s0->unk10.y += var_s0->unk1C.y;
                 var_s0->unk10.z += var_s0->unk1C.z;
             } else {
-                temp_s2 = &temp_s4->world;
-                Audio_PlayActorSound2(&this->actor, 0x207EU);
-                sp94 = temp_s2->pos;
-                sp94.y = temp_s4->world.pos.y - 150.0f;
-                sp94.z = temp_s4->world.pos.z - 50.0f;
-                temp_fs0 = (f32)Math_Vec3f_Pitch((Vec3f*)&var_s0->unk4, &sp94);
-                temp_fs1 = (f32)Math_Vec3f_Yaw((Vec3f*)&var_s0->unk4, &sp94);
+                Audio_PlayActorSound2(&this->actor, NA_SE_EV_HEALING - SFX_FLAG);
+                sp94 = player->actor.world.pos;
+                sp94.y = player->actor.world.pos.y - 150.0f;
+                sp94.z = player->actor.world.pos.z - 50.0f;
+                temp_fs0 = Math_Vec3f_Pitch(&var_s0->unk4, &sp94);
+                temp_fs1 = Math_Vec3f_Yaw(&var_s0->unk4, &sp94);
                 Math_ApproachF(&var_s0->unk38, temp_fs0, 0.9f, 5000.0f);
                 Math_ApproachF(&var_s0->unk3C, temp_fs1, 0.9f, 5000.0f);
                 Matrix_Push();
-                Matrix_RotateY((var_s0->unk3C / 32768.0f) * 3.1415927f, 0U);
-                Matrix_RotateX((var_s0->unk38 / 32768.0f) * 3.1415927f, 1U);
+                Matrix_RotateY((var_s0->unk3C / 32768.0f) * 3.1415927f, MTXMODE_NEW);
+                Matrix_RotateX((var_s0->unk38 / 32768.0f) * 3.1415927f, MTXMODE_APPLY);
                 sp94.z = 3.0f;
                 sp94.y = 3.0f;
                 sp94.x = 3.0f;
@@ -1011,9 +961,9 @@ void func_808751A0(BgDyYoseizo* this, GlobalContext* globalCtx) {
     temp_s1 = globalCtx->state.gfxCtx;
     var_s0 = this->unk394;
     var_s3 = 0;
-    OPEN_DISPS(temp_s1, "../z_bg_dy_yoseizo.c", 0x6E7);
+    OPEN_DISPS(temp_s1, "../z_bg_dy_yoseizo.c", 1767);
     func_80093D84(globalCtx->state.gfxCtx);
-    for (var_s4 = 0; var_s4 < 200; var_s4++, var_s0++) {
+    for (var_s4 = 0; var_s4 < ARRAY_COUNT(this->unk394); var_s4++, var_s0++) {
         if (var_s0->unk0 == 1) {
             if (var_s3 == 0) {
                 gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(D_6005860));
@@ -1023,14 +973,14 @@ void func_808751A0(BgDyYoseizo* this, GlobalContext* globalCtx) {
             gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, var_s0->unk28.r, var_s0->unk28.g, var_s0->unk28.b,
                             var_s0->unk2E);
             gDPSetEnvColor(POLY_XLU_DISP++, var_s0->unk2B.r, var_s0->unk2B.g, var_s0->unk2B.b, 0);
-            Matrix_Translate(var_s0->unk4.x, var_s0->unk4.y, var_s0->unk4.z, 0U);
+            Matrix_Translate(var_s0->unk4.x, var_s0->unk4.y, var_s0->unk4.z, MTXMODE_NEW);
             func_800D1FD4(&globalCtx->mf_11DA0);
-            Matrix_Scale(var_s0->unk30, var_s0->unk30, 1.0f, 1U);
-            Matrix_RotateZ(var_s0->unk40, 1U);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(temp_s1, "../z_bg_dy_yoseizo.c", 0x712),
+            Matrix_Scale(var_s0->unk30, var_s0->unk30, 1.0f, MTXMODE_APPLY);
+            Matrix_RotateZ(var_s0->unk40, MTXMODE_APPLY);
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(temp_s1, "../z_bg_dy_yoseizo.c", 1810),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(D_60058D8));
         }
     }
-    CLOSE_DISPS(temp_s1, "../z_bg_dy_yoseizo.c", 0x71B);
+    CLOSE_DISPS(temp_s1, "../z_bg_dy_yoseizo.c", 1819);
 }
