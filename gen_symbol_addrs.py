@@ -11,6 +11,8 @@ gen_l = list[str]()
 
 SKIP_SYMS = {"vi", "D_80157D90_", "gZBuffer", "D_8015FA9B", "D_8015FC18"}
 
+already_defined_names: set[str] = set()
+
 OPTS = {
     "D_8015FA98": {"size": "0x210"},
 }
@@ -27,6 +29,9 @@ for name, addr, size in sorted(
         or addr < 0x8000_0000
     ):
         continue
+    if name in already_defined_names:
+        continue
+    already_defined_names.add(name)
     l = f"{name} = 0x{addr:08X};"
     options = dict[str, str]()
     if size is not None:
