@@ -35,7 +35,11 @@ extern Gfx D_5017A60[];
 extern Gfx D_60017C0[];
 extern Gfx D_6001960[];
 
-/*
+static s16 D_80BA1B50 = 0;
+static s16 D_80BA1B54 = 0;
+static s16 D_80BA1B58 = 0;
+static s16 D_80BA1B5C = 0;
+
 const ActorInit Obj_Tsubo_InitVars = {
     ACTOR_OBJ_TSUBO,
     ACTORCAT_PROP,
@@ -47,6 +51,10 @@ const ActorInit Obj_Tsubo_InitVars = {
     (ActorFunc)ObjTsubo_Update,
     NULL,
 };
+
+static s16 D_80BA1B80[2] = { 3, 0x12C };
+static Gfx* D_80BA1B84[2] = { D_5017870, D_60017C0 };
+static Gfx* D_80BA1B8C[2] = { D_5017A60, D_6001960 };
 
 static ColliderCylinderInit D_80BA1B94 = {
     {
@@ -67,7 +75,13 @@ static ColliderCylinderInit D_80BA1B94 = {
     },
     { 9, 26, 0, { 0, 0, 0 } },
 };
-*/
+
+static CollisionCheckInfoInit D_80BA1BC0 = { 0, 0xC, 0x3C, 0xFF };
+static InitChainEntry D_80BA1BC8[] = {
+    ICHAIN_F32_DIV1000(gravity, -1200, ICHAIN_CONTINUE), ICHAIN_F32_DIV1000(minVelocityY, -20000, ICHAIN_CONTINUE),
+    ICHAIN_VEC3F_DIV1000(scale, 150, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneForward, 900, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneDownward, 800, ICHAIN_STOP),
+};
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Obj_Tsubo/func_80BA0D60.s")
 
