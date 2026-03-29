@@ -4355,7 +4355,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xDEB200, c, overlays/ovl_En_Ge3]
-      - [0xDEBD50, data, overlays/ovl_En_Ge3]
+      - [0xDEBD50, .data, overlays/ovl_En_Ge3]
       - [0xDEBDC0, .rodata, overlays/ovl_En_Ge3]
       - [0xDEBE00, rodatabin, rodatabin_80A35220]
 

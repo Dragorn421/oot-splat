@@ -32,7 +32,6 @@ void func_80A35004(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, 
 extern FlexSkeletonHeader D_600A458;
 extern AnimationHeader D_600B07C;
 
-/*
 const ActorInit En_Ge3_InitVars = {
     ACTOR_EN_GE3,
     ACTORCAT_NPC,
@@ -64,9 +63,12 @@ static ColliderCylinderInit D_80A35190 = {
     },
     { 20, 50, 0, { 0, 0, 0 } },
 };
-*/
-extern u8 D_80A351C4[];
-extern Vec3f D_80A351C8;
+
+static void (*D_80A351BC[1])(EnGe3*, GlobalContext*) = { func_80A34A80 };
+static AnimationHeader* D_80A351C0[1] = { &D_600B07C };
+static u8 D_80A351C4[4] = { 0, 0, 0, 0 };
+static Vec3f D_80A351C8 = { 600.0f, 700.0f, 0.0f };
+static s32 D_80A351D4[3] = { 0x06005FE8, 0x060065A8, 0x06006D28 };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Ge3/func_80A34620.s")
 
