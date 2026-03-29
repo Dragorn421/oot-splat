@@ -15,19 +15,9 @@ void EnGe3_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnGe3_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnGe3_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_80A34620(EnGe3* this, s32 arg1);
-void func_80A347F4(EnGe3* this, GlobalContext* globalCtx);
-void func_80A3490C(EnGe3* this, GlobalContext* globalCtx);
-void func_80A34A20(EnGe3* this, GlobalContext* globalCtx);
 void func_80A34A80(EnGe3* this, GlobalContext* globalCtx);
-void func_80A34AA0(EnGe3* this, GlobalContext* globalCtx);
-void func_80A34B00(EnGe3* this, GlobalContext* globalCtx);
 void func_80A34B90(EnGe3* this, GlobalContext* globalCtx);
-void func_80A34C40(EnGe3* this, GlobalContext* globalCtx);
-void func_80A34CE4(EnGe3* this, GlobalContext* globalCtx);
-void func_80A34D68(EnGe3* this, GlobalContext* globalCtx);
-s32 func_80A34E58(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, s16* arg4, EnGe3* this);
-void func_80A35004(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnGe3* this);
+void func_80A34D68(Actor* thisx, GlobalContext* globalCtx);
 
 extern FlexSkeletonHeader D_600A458;
 extern AnimationHeader D_600B07C;
@@ -66,15 +56,15 @@ static ColliderCylinderInit D_80A35190 = {
 
 static void (*D_80A351BC[1])(EnGe3*, GlobalContext*) = { func_80A34A80 };
 static AnimationHeader* D_80A351C0[1] = { &D_600B07C };
-static u8 D_80A351C4[4] = { 0, 0, 0, 0 };
+static u8 D_80A351C4[1] = { ANIMMODE_LOOP };
 static Vec3f D_80A351C8 = { 600.0f, 700.0f, 0.0f };
 static s32 D_80A351D4[3] = { 0x06005FE8, 0x060065A8, 0x06006D28 };
 
 void func_80A34620(EnGe3* this, s32 arg1) {
     this->unk310 = D_80A351BC[arg1];
-    Animation_Change(&this->unk198, D_80A351C0[arg1], 1.0f, 0.0f, (f32)Animation_GetLastFrame(D_80A351C0[arg1]),
-                     (u8)(s32)D_80A351C4[arg1], -8.0f);
-    this->unk30C &= 0xFFFD;
+    Animation_Change(&this->unk198, D_80A351C0[arg1], 1.0f, 0.0f, Animation_GetLastFrame(D_80A351C0[arg1]),
+                     D_80A351C4[arg1], -8.0f);
+    this->unk30C &= ~2;
 }
 
 void EnGe3_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -82,11 +72,11 @@ void EnGe3_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 36.0f);
-    SkelAnime_InitFlex(globalCtx, &this->unk198, &D_600A458, NULL, this->unk1DC, this->unk26C, 0x18);
+    SkelAnime_InitFlex(globalCtx, &this->unk198, &D_600A458, NULL, this->unk1DC, this->unk26C, 24);
     Animation_PlayLoop(&this->unk198, &D_600B07C);
     Collider_InitCylinder(globalCtx, &this->unk14C);
     Collider_SetCylinder(globalCtx, &this->unk14C, &this->actor, &D_80A35190);
-    this->actor.colChkInfo.mass = 0xFF;
+    this->actor.colChkInfo.mass = MASS_IMMOVABLE;
     Actor_SetScale(&this->actor, 0.01f);
     this->actor.world.rot.z = 0;
     this->actor.shape.rot.z = 0;
@@ -100,6 +90,7 @@ void EnGe3_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnGe3_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     EnGe3* this = (EnGe3*)thisx;
+
     Collider_DestroyCylinder(globalCtx, &this->unk14C);
 }
 
@@ -112,15 +103,15 @@ void func_80A347F4(EnGe3* this, GlobalContext* globalCtx) {
         Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 6, 0xFA0, 0x64);
         this->actor.world.rot.y = this->actor.shape.rot.y;
         func_80038290(globalCtx, &this->actor, &this->unk300, &this->unk306, this->actor.focus.pos);
-        return;
-    }
-    if (temp_v0 < 0) {
-        Math_SmoothStepToS(&this->unk300.y, -0x2000, 6, 0x1838, 0x100);
     } else {
-        Math_SmoothStepToS(&this->unk300.y, 0x2000, 6, 0x1838, 0x100);
+        if (temp_v0 < 0) {
+            Math_SmoothStepToS(&this->unk300.y, -0x2000, 6, 0x1838, 0x100);
+        } else {
+            Math_SmoothStepToS(&this->unk300.y, 0x2000, 6, 0x1838, 0x100);
+        }
+        Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 0xC, 0x3E8, 0x64);
+        this->actor.world.rot.y = this->actor.shape.rot.y;
     }
-    Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 0xC, 0x3E8, 0x64);
-    this->actor.world.rot.y = this->actor.shape.rot.y;
 }
 
 void func_80A3490C(EnGe3* this, GlobalContext* globalCtx) {
@@ -129,19 +120,19 @@ void func_80A3490C(EnGe3* this, GlobalContext* globalCtx) {
     temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
     if ((ABS(temp_v0) < 0x2301) && (this->actor.xzDistToPlayer < 100.0f)) {
         func_80038290(globalCtx, &this->actor, &this->unk300, &this->unk306, this->actor.focus.pos);
-        return;
+    } else {
+        Math_SmoothStepToS(&this->unk300.x, 0, 6, 0x1838, 0x64);
+        Math_SmoothStepToS(&this->unk300.y, 0, 6, 0x1838, 0x64);
+        Math_SmoothStepToS(&this->unk306.x, 0, 6, 0x1838, 0x64);
+        Math_SmoothStepToS(&this->unk306.y, 0, 6, 0x1838, 0x64);
     }
-    Math_SmoothStepToS(&this->unk300.x, 0, 6, 0x1838, 0x64);
-    Math_SmoothStepToS(&this->unk300.y, 0, 6, 0x1838, 0x64);
-    Math_SmoothStepToS(&this->unk306.x, 0, 6, 0x1838, 0x64);
-    Math_SmoothStepToS(&this->unk306.y, 0, 6, 0x1838, 0x64);
 }
 
 void func_80A34A20(EnGe3* this, GlobalContext* globalCtx) {
     if (func_8002F334(&this->actor, globalCtx) != 0) {
         this->unk310 = func_80A34A80;
-        this->actor.update = (void (*)(Actor*, GlobalContext*))func_80A34D68;
-        this->actor.flags &= 0xFFFEFFFF;
+        this->actor.update = func_80A34D68;
+        this->actor.flags &= ~0x10000;
     }
     func_80A347F4(this, globalCtx);
 }
@@ -154,17 +145,17 @@ void func_80A34AA0(EnGe3* this, GlobalContext* globalCtx) {
     if (Actor_HasParent(&this->actor, globalCtx) != 0) {
         this->actor.parent = NULL;
         this->unk310 = func_80A34A20;
-        return;
+    } else {
+        func_8002F434(&this->actor, globalCtx, GI_GERUDO_CARD, 10000.0f, 50.0f);
     }
-    func_8002F434(&this->actor, globalCtx, 0x3A, 10000.0f, 50.0f);
 }
 
 void func_80A34B00(EnGe3* this, GlobalContext* globalCtx) {
     if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
         func_80106CCC(globalCtx);
-        this->actor.flags &= 0xFFFEFFFF;
+        this->actor.flags &= ~0x10000;
         this->unk310 = func_80A34AA0;
-        func_8002F434(&this->actor, globalCtx, 0x3A, 10000.0f, 50.0f);
+        func_8002F434(&this->actor, globalCtx, GI_GERUDO_CARD, 10000.0f, 50.0f);
     }
 }
 
@@ -184,15 +175,12 @@ void func_80A34B90(EnGe3* this, GlobalContext* globalCtx) {
 }
 
 void func_80A34C40(EnGe3* this, GlobalContext* globalCtx) {
-    ColliderCylinder* sp2C;
-    ColliderCylinder* temp_a2;
+    s32 pad[2];
 
-    temp_a2 = &this->unk14C;
-    sp2C = temp_a2;
-    Collider_UpdateCylinder(&this->actor, temp_a2);
-    CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &temp_a2->base);
+    Collider_UpdateCylinder(&this->actor, &this->unk14C);
+    CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->unk14C.base);
     Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 40.0f, 25.0f, 40.0f, 5);
-    if (!(this->unk30C & 2) && (SkelAnime_Update(&this->unk198) != 0)) {
+    if (!(this->unk30C & 2) && SkelAnime_Update(&this->unk198)) {
         this->unk30C |= 2;
     }
 }
@@ -208,7 +196,9 @@ void func_80A34CE4(EnGe3* this, GlobalContext* globalCtx) {
     }
 }
 
-void func_80A34D68(EnGe3* this, GlobalContext* globalCtx) {
+void func_80A34D68(Actor* thisx, GlobalContext* globalCtx) {
+    EnGe3* this = (EnGe3*)thisx;
+
     func_80A34C40(this, globalCtx);
     this->unk310(this, globalCtx);
     if (func_8002F194(&this->actor, globalCtx) != 0) {
@@ -225,12 +215,13 @@ void func_80A34D68(EnGe3* this, GlobalContext* globalCtx) {
 
 void EnGe3_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnGe3* this = (EnGe3*)thisx;
+
     func_80A34C40(this, globalCtx);
     this->unk310(this, globalCtx);
     func_80A34CE4(this, globalCtx);
 }
 
-s32 func_80A34E58(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, s16* arg4, EnGe3* thisx) {
+s32 func_80A34E58(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx) {
     EnGe3* this = thisx;
 
     switch (arg1) {
@@ -241,34 +232,37 @@ s32 func_80A34E58(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, s
             return 0;
 
         case 6:
-            *arg4 += this->unk300.y;
+            arg4->x += this->unk300.y;
         default:
-            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 0x223);
-            switch (arg1) { /* irregular */
+            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 547);
+            switch (arg1) {
                 case 3:
                     break;
+
                 case 6:
                     gDPPipeSync(POLY_OPA_DISP++);
                     gDPSetEnvColor(POLY_OPA_DISP++, 80, 60, 10, 255);
                     break;
+
                 case 11:
                 case 16:
                     gDPPipeSync(POLY_OPA_DISP++);
                     gDPSetEnvColor(POLY_OPA_DISP++, 140, 170, 230, 255);
                     gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, 255, 255, 255, 255);
                     break;
+
                 default:
                     gDPPipeSync(POLY_OPA_DISP++);
                     gDPSetEnvColor(POLY_OPA_DISP++, 140, 0, 0, 255);
                     break;
             }
-            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 0x236);
+            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 566);
             break;
     }
     return 0;
 }
 
-void func_80A35004(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnGe3* thisx) {
+void func_80A35004(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, void* thisx) {
     EnGe3* this = thisx;
     Vec3f sp18 = D_80A351C8;
 
@@ -281,12 +275,11 @@ void EnGe3_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 temp_a0;
     EnGe3* this = (EnGe3*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 0x266);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 614);
     func_800943C8(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 8, SEGMENTED_TO_VIRTUAL(D_80A351D4[this->unk2FC]));
     func_8002EBCC(&this->actor, globalCtx, 0);
-    SkelAnime_DrawFlexOpa(globalCtx, this->unk198.skeleton, this->unk198.jointTable, (s32)this->unk198.dListCount,
-                          (s32(*)(GlobalContext*, s32, Gfx**, Vec3f*, Vec3s*, void*))func_80A34E58,
-                          (void (*)(GlobalContext*, s32, Gfx**, Vec3s*, void*))func_80A35004, this);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 0x277);
+    SkelAnime_DrawFlexOpa(globalCtx, this->unk198.skeleton, this->unk198.jointTable, this->unk198.dListCount,
+                          func_80A34E58, func_80A35004, this);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge3.c", 631);
 }
