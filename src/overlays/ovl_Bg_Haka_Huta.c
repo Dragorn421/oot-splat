@@ -10,14 +10,15 @@ void BgHakaHuta_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgHakaHuta_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 void func_8087D0AC(BgHakaHuta* this, GlobalContext* globalCtx);
-// void func_8087D268(BgHakaHuta* this, GlobalContext* globalCtx, u16 arg2); not sure about this one
-// void func_8087D5B8(BgHakaHuta* this, GlobalContext* globalCtx); not sure about this one
+void func_8087D268(BgHakaHuta* this, GlobalContext* globalCtx, s32 arg2);
+void func_8087D2F0(BgHakaHuta* this, GlobalContext* globalCtx);
+void func_8087D5B8(BgHakaHuta* this, GlobalContext* globalCtx);
 void func_8087D66C(BgHakaHuta* this, GlobalContext* globalCtx);
 void func_8087D720(BgHakaHuta* this, GlobalContext* globalCtx);
 void func_8087D8C0(BgHakaHuta* this, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_060006B0;
-extern UNK_TYPE D_06000870;
+extern Gfx D_60006B0[];
+extern CollisionHeader D_6000870;
 
 /*
 const ActorInit Bg_Haka_Huta_InitVars = {
