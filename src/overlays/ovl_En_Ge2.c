@@ -9,8 +9,36 @@ void EnGe2_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnGe2_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnGe2_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06008968;
-extern UNK_TYPE D_06009ED4;
+void func_80A32BD0(EnGe2* this, s32 arg1);
+s32 func_80A32ECC(GlobalContext* globalCtx, EnGe2* this);
+s32 func_80A32F74(GlobalContext* globalCtx, EnGe2* this, Vec3f* arg2, s16 arg3, f32 arg4);
+s32 func_80A330A0(void);
+void func_80A330CC(EnGe2* this, GlobalContext* globalCtx);
+void func_80A331A0(EnGe2* this, GlobalContext* globalCtx);
+void func_80A332D4(EnGe2* this, GlobalContext* globalCtx);
+void func_80A3334C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33444(EnGe2* this, GlobalContext* globalCtx);
+void func_80A3354C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33600(EnGe2* this, GlobalContext* globalCtx);
+void func_80A336C4(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33704(EnGe2* this, GlobalContext* globalCtx);
+void func_80A3381C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33930(EnGe2* this, GlobalContext* globalCtx);
+void func_80A339EC(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33A0C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33A6C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33AFC(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33B7C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33BE8(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33C8C(EnGe2* this, GlobalContext* globalCtx);
+void func_80A33D10(Actor* thisx, GlobalContext* globalCtx);
+void func_80A33DE0(Actor* thisx, GlobalContext* globalCtx);
+void func_80A3402C(Actor* thisx, GlobalContext* globalCtx);
+s32 func_80A3415C(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, EnGe2* this);
+void func_80A341A0(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnGe2* this);
+
+extern FlexSkeletonHeader D_6008968;
+extern AnimationHeader D_6009ED4;
 
 /*
 const ActorInit En_Ge2_InitVars = {
@@ -45,6 +73,8 @@ static ColliderCylinderInit D_80A34310 = {
     { 20, 60, 0, { 0, 0, 0 } },
 };
 */
+
+extern u8 D_80A34384[];
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Ge2/func_80A32BD0.s")
 
