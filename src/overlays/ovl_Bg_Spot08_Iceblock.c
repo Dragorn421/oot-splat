@@ -9,17 +9,6 @@ void BgSpot08Iceblock_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgSpot08Iceblock_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgSpot08Iceblock_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-void func_808B0960(BgSpot08Iceblock* this, void (*arg1)(BgSpot08Iceblock*, GlobalContext*));
-void func_808B0968(BgSpot08Iceblock* this, GlobalContext* globalCtx, CollisionHeader* arg2, s32 arg3);
-void func_808B09F0(BgSpot08Iceblock* this);
-void func_808B0A84(BgSpot08Iceblock* this);
-void func_808B0AE0(BgSpot08Iceblock* this);
-void func_808B0B8C(BgSpot08Iceblock* this);
-void func_808B0BA8(Vec3f* arg0, Vec3f* arg1, f32 arg2);
-void func_808B0BD4(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2);
-s32 func_808B0C44(Vec3f* arg0, Vec3f* arg1);
-void func_808B0CE0(BgSpot08Iceblock* this, GlobalContext* globalCtx);
-void func_808B1054(BgSpot08Iceblock* this, GlobalContext* globalCtx);
 void func_808B1388(BgSpot08Iceblock* this);
 void func_808B13AC(BgSpot08Iceblock* this, GlobalContext* globalCtx);
 void func_808B13FC(BgSpot08Iceblock* this);
@@ -70,54 +59,18 @@ void func_808B0968(BgSpot08Iceblock* this, GlobalContext* globalCtx, CollisionHe
     DynaPolyActor_Init(&this->dyna, arg3);
     CollisionHeader_GetVirtual(arg2, &sp30);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, sp30);
-    if (this->dyna.bgId == 0x32) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_spot08_iceblock.c", 0xD9,
-                     this->dyna.actor.id, (s32)this->dyna.actor.params);
+    if (this->dyna.bgId == BG_ACTOR_MAX) {
+        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_spot08_iceblock.c", 217,
+                     this->dyna.actor.id, this->dyna.actor.params);
     }
 }
 
 void func_808B09F0(BgSpot08Iceblock* this) {
-    s16 temp_a3;
-    s32 temp_v0;
-
-    temp_a3 = this->dyna.actor.params;
-    temp_v0 = temp_a3 & 0xFF;
-    switch (temp_v0) { /* irregular */
+    switch (this->dyna.actor.params & 0xFF) {
         case 0xFF:
             this->dyna.actor.params = 0x10;
-            return;
-        default:
-        case 0x2:
-        case 0x3:
-        case 0x5:
-        case 0x6:
-        case 0x7:
-        case 0x8:
-        case 0x9:
-        case 0xA:
-        case 0xB:
-        case 0xC:
-        case 0xD:
-        case 0xE:
-        case 0xF:
-        case 0x13:
-        case 0x15:
-        case 0x16:
-        case 0x17:
-        case 0x18:
-        case 0x19:
-        case 0x1A:
-        case 0x1B:
-        case 0x1C:
-        case 0x1D:
-        case 0x1E:
-        case 0x1F:
-        case 0x21:
-        case 0x22:
-            osSyncPrintf("Error : arg_data 設定ミスです。(%s %d)(arg_data 0x%04x)\n", "../z_bg_spot08_iceblock.c", 0xF6,
-                         temp_a3);
-            this->dyna.actor.params = 0x10;
-            /* fallthrough */
+            break;
+
         case 0x1:
         case 0x4:
         case 0x10:
@@ -127,31 +80,34 @@ void func_808B09F0(BgSpot08Iceblock* this) {
         case 0x20:
         case 0x23:
         case 0x24:
-            return;
+            break;
+
+        default:
+            osSyncPrintf("Error : arg_data 設定ミスです。(%s %d)(arg_data 0x%04x)\n", "../z_bg_spot08_iceblock.c", 0xF6,
+                         this->dyna.actor.params);
+            this->dyna.actor.params = 0x10;
+            break;
     }
 }
 
 void func_808B0A84(BgSpot08Iceblock* this) {
-    f32 sp1C;
-
-    sp1C = Math_SinS(this->unk18C);
-    this->unk198 = (Math_SinS(this->unk18E) * 3.0f) + (sp1C * 4.0f);
+    this->unk198 = (Math_SinS(this->unk18C) * 4.0f) + (Math_SinS(this->unk18E) * 3.0f);
 }
 
 void func_808B0AE0(BgSpot08Iceblock* this) {
     f32 var_fv0;
     f32 sp18;
-    s32 temp_v0;
 
-    temp_v0 = this->dyna.actor.params & 0xF0;
-    switch (temp_v0) { /* irregular */
+    switch (this->dyna.actor.params & 0xF0) {
         case 0:
             sp18 = 0.15f;
             break;
-        case 16:
+
+        case 0x10:
             sp18 = 0.2f;
             break;
-        case 32:
+
+        case 0x20:
             sp18 = 0.4f;
             break;
     }
@@ -188,13 +144,14 @@ s32 func_808B0C44(Vec3f* arg0, Vec3f* arg1) {
         arg0->y = 0.0f;
         arg0->x = 0.0f;
         arg0->z = 1.0f;
-        return 0;
+        return false;
+    } else {
+        temp_fv1 = 1.0f / temp_fv0;
+        arg0->x = arg1->x * temp_fv1;
+        arg0->y = arg1->y * temp_fv1;
+        arg0->z = arg1->z * temp_fv1;
+        return true;
     }
-    temp_fv1 = 1.0f / temp_fv0;
-    arg0->x = arg1->x * temp_fv1;
-    arg0->y = arg1->y * temp_fv1;
-    arg0->z = arg1->z * temp_fv1;
-    return 1;
 }
 
 void func_808B0CE0(BgSpot08Iceblock* this, GlobalContext* globalCtx) {
@@ -217,9 +174,11 @@ void func_808B0CE0(BgSpot08Iceblock* this, GlobalContext* globalCtx) {
         case 0x11:
             sp84 = 0;
             break;
+
         case 1:
             sp84 = 1;
             break;
+
         default:
             sp84 = 2;
             break;
@@ -234,20 +193,20 @@ void func_808B0CE0(BgSpot08Iceblock* this, GlobalContext* globalCtx) {
     spD4.y = 0.0f;
     spD4.z = this->unk168.z;
     if ((func_8004356C(&this->dyna) != 0) && (sp88 > 3.0f)) {
-        Math_Vec3f_Diff(&spC8, (Vec3f*)&spD4, &spBC);
+        Math_Vec3f_Diff(&spC8, &spD4, &spBC);
         func_808B0BA8(&spBC, &spBC, (D_808B16C8[sp84] * sp88) / this->dyna.actor.scale.x);
     } else {
         spBC = D_808B16BC;
     }
-    func_808B0BA8(&spB0, (Vec3f*)&spD4, -0.01f);
+    func_808B0BA8(&spB0, &spD4, -0.01f);
     Math_Vec3f_Sum(&this->unk174, &spBC, &this->unk174);
     Math_Vec3f_Sum(&this->unk174, &spB0, &this->unk174);
-    Math_Vec3f_Sum(&this->unk174, (Vec3f*)&spA4, &this->unk174);
+    Math_Vec3f_Sum(&this->unk174, &spA4, &this->unk174);
     this->unk174.y = 0.0f;
     Math_Vec3f_Sum(&this->unk168, &this->unk174, &sp98);
     sp98.x *= D_808B16D4[sp84];
     sp98.z *= D_808B16D4[sp84];
-    if (func_808B0C44(&this->unk168, &sp98) != 0) {
+    if (func_808B0C44(&this->unk168, &sp98)) {
         temp_fv0_2 = Math3D_Dist1DSq(this->unk168.z, this->unk168.x);
         if (D_808B16E0[sp84] < temp_fv0_2) {
             temp_fv1 = D_808B16E0[sp84] / temp_fv0_2;
@@ -256,14 +215,14 @@ void func_808B0CE0(BgSpot08Iceblock* this, GlobalContext* globalCtx) {
             this->unk168.z *= temp_fv1;
         }
         func_808B0BD4(&sp98, &D_808B16B0, &this->unk168);
-        if (func_808B0C44(&sp8C, &sp98) != 0) {
+        if (func_808B0C44(&sp8C, &sp98)) {
             this->unk180 = sp8C;
         }
     } else {
         this->unk168 = D_808B16B0;
     }
-    func_800D23FC(Math_FAcosF(Math3D_Cos(&D_808B16B0, &this->unk168)), (Vec3f*)&this->unk180, 0U);
-    Matrix_RotateY((f32)this->dyna.actor.shape.rot.y * 0.0000958738f, 1U);
+    func_800D23FC(Math_FAcosF(Math3D_Cos(&D_808B16B0, &this->unk168)), &this->unk180, MTXMODE_NEW);
+    Matrix_RotateY(this->dyna.actor.shape.rot.y * 0.0000958738f, MTXMODE_APPLY);
     Matrix_Get(&sp44);
     func_800D20CC(&sp44, &this->dyna.actor.shape.rot, 0);
 }
@@ -276,10 +235,10 @@ void func_808B1054(BgSpot08Iceblock* this, GlobalContext* globalCtx) {
     sp44 = Math_SinS(this->dyna.actor.home.rot.y) * 100.0f;
     temp_fv1 = Math_CosS(this->dyna.actor.home.rot.y) * 100.0f;
     if (!(this->dyna.actor.params & 0x100)) {
-        Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, 0xD1, this->dyna.actor.home.pos.x,
-                           this->dyna.actor.home.pos.y, this->dyna.actor.home.pos.z,
-                           (s16)(s32)this->dyna.actor.home.rot.x, (s16)(s32)this->dyna.actor.home.rot.y,
-                           (s16)(s32)this->dyna.actor.home.rot.z, 0x123);
+        Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_BG_SPOT08_ICEBLOCK,
+                           this->dyna.actor.home.pos.x, this->dyna.actor.home.pos.y, this->dyna.actor.home.pos.z,
+                           this->dyna.actor.home.rot.x, this->dyna.actor.home.rot.y, this->dyna.actor.home.rot.z,
+                           0x123);
         this->dyna.actor.world.pos.x += sp44;
         this->dyna.actor.world.pos.z += temp_fv1;
     } else {
@@ -290,9 +249,8 @@ void func_808B1054(BgSpot08Iceblock* this, GlobalContext* globalCtx) {
 }
 
 void BgSpot08Iceblock_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s16 temp_v1;
+    s32 pad;
     CollisionHeader* var_a2;
-    s32 temp_v0;
     s32 temp_v0_2;
     BgSpot08Iceblock* this = (BgSpot08Iceblock*)thisx;
 
@@ -322,9 +280,11 @@ void BgSpot08Iceblock_Init(Actor* thisx, GlobalContext* globalCtx) {
         case 0:
             Actor_SetScale(&this->dyna.actor, 0.2f);
             break;
+
         case 0x10:
             Actor_SetScale(&this->dyna.actor, 0.1f);
             break;
+
         case 0x20:
             Actor_SetScale(&this->dyna.actor, 0.05f);
             break;
@@ -337,23 +297,27 @@ void BgSpot08Iceblock_Init(Actor* thisx, GlobalContext* globalCtx) {
         case 0:
         case 1:
             func_808B1388(this);
-            return;
+            break;
+
         case 2:
             func_808B13FC(this);
-            return;
+            break;
+
         case 3:
             func_808B1054(this, globalCtx);
-            return;
+            break;
         case 4:
             func_808B1574(this);
-            /* fallthrough */
+            break;
+
         default:
-            return;
+            break;
     }
 }
 
 void BgSpot08Iceblock_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot08Iceblock* this = (BgSpot08Iceblock*)thisx;
+
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
 }
 
@@ -413,31 +377,28 @@ void func_808B1574(BgSpot08Iceblock* this) {
 }
 
 void BgSpot08Iceblock_Update(Actor* thisx, GlobalContext* globalCtx) {
-    void (*temp_v0)(BgSpot08Iceblock*, GlobalContext*);
     BgSpot08Iceblock* this = (BgSpot08Iceblock*)thisx;
 
     if (Rand_ZeroOne() < 0.05f) {
         this->unk190 = Rand_S16Offset(0x12C, 0x64);
         this->unk192 = Rand_S16Offset(0x320, 0x190);
     }
-    temp_v0 = this->unk164;
     this->unk18C += this->unk190;
     this->unk18E += this->unk192;
-    if (temp_v0 != NULL) {
-        temp_v0(this, globalCtx);
+    if (this->unk164 != NULL) {
+        this->unk164(this, globalCtx);
     }
 }
 
 void BgSpot08Iceblock_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Gfx* sp1C;
-    s32 temp_v0;
     BgSpot08Iceblock* this = (BgSpot08Iceblock*)thisx;
 
-    temp_v0 = this->dyna.actor.params & 0x200;
-    switch (temp_v0) { /* irregular */
+    switch (this->dyna.actor.params & 0x200) {
         case 0x0:
             sp1C = D_6002BD0;
             break;
+
         case 0x200:
             sp1C = D_6000DE0;
             break;
