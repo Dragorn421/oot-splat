@@ -6,6 +6,8 @@
 
 struct EnGe1;
 
+typedef void (*EnGe1ActionFunc)(struct EnGe1*, GlobalContext*);
+
 typedef struct EnGe1 {
     /* 0x000 */ Actor actor;
     /* 0x14C */ ColliderCylinder unk14C;
@@ -20,7 +22,7 @@ typedef struct EnGe1 {
     /* 0x2AE */ u8 unk2AE;
     /* 0x2AF */ u8 unk2AF;
     /* 0x2B0 */ AnimationHeader* unk2B0;
-    /* 0x2B4 */ void (*unk2B4)(struct EnGe1*, GlobalContext*);
+    /* 0x2B4 */ EnGe1ActionFunc unk2B4;
     /* 0x2B8 */ void (*unk2B8)(struct EnGe1*);
 } EnGe1; // size = 0x2BC
 

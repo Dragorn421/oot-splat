@@ -9,48 +9,48 @@ void EnGe1_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnGe1_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnGe1_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-s32 func_80A30C70(EnGe1* arg0, GlobalContext* arg1, u16 arg2, f32 arg3, void (*arg4)(EnGe1*, GlobalContext*));
-void func_80A30D48(EnGe1* arg0);
+s32 func_80A30C70(EnGe1* this, GlobalContext* globalCtx, u16 arg2, f32 arg3, void (*arg4)(EnGe1*, GlobalContext*));
+void func_80A30D48(EnGe1* this);
 s32 func_80A30DCC(void);
-void func_80A30E08(EnGe1* arg0, GlobalContext* arg1);
-void func_80A30EE8(EnGe1* arg0, GlobalContext* arg1);
-void func_80A30F48(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31000(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31094(EnGe1* arg0, GlobalContext* arg1);
-void func_80A310C4(EnGe1* arg0, GlobalContext* arg1);
-void func_80A3118C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A311E0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31234(EnGe1* arg0, GlobalContext* arg1);
-void func_80A312E4(EnGe1* arg0, GlobalContext* arg1);
-void func_80A313A0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A313E0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A314D0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31514(EnGe1* arg0, GlobalContext* arg1);
-void func_80A3157C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A315F0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31644(EnGe1* arg0, GlobalContext* arg1);
-void func_80A316F4(EnGe1* arg0, GlobalContext* arg1);
-void func_80A317C0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A3183C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31880(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31934(EnGe1* arg0, GlobalContext* arg1);
-void func_80A3196C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31A5C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31B20(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31B7C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31BDC(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31BE8(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31D88(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31DE4(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31E2C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31F9C(EnGe1* arg0, GlobalContext* arg1);
-void func_80A31FE0(EnGe1* arg0, GlobalContext* arg1);
-void func_80A32078(EnGe1* arg0, GlobalContext* arg1);
-void func_80A32190(EnGe1* arg0, GlobalContext* arg1);
-void func_80A323B0(EnGe1* arg0);
-void func_80A323EC(EnGe1* arg0);
-s32 func_80A32444(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, EnGe1* this);
-void func_80A32598(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3s* arg3, EnGe1* this);
+void func_80A30E08(EnGe1* this, GlobalContext* globalCtx);
+void func_80A30EE8(EnGe1* this, GlobalContext* globalCtx);
+void func_80A30F48(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31000(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31094(EnGe1* this, GlobalContext* globalCtx);
+void func_80A310C4(EnGe1* this, GlobalContext* globalCtx);
+void func_80A3118C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A311E0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31234(EnGe1* this, GlobalContext* globalCtx);
+void func_80A312E4(EnGe1* this, GlobalContext* globalCtx);
+void func_80A313A0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A313E0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A314D0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31514(EnGe1* this, GlobalContext* globalCtx);
+void func_80A3157C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A315F0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31644(EnGe1* this, GlobalContext* globalCtx);
+void func_80A316F4(EnGe1* this, GlobalContext* globalCtx);
+void func_80A317C0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A3183C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31880(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31934(EnGe1* this, GlobalContext* globalCtx);
+void func_80A3196C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31A5C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31B20(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31B7C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31BDC(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31BE8(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31D88(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31DE4(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31E2C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31F9C(EnGe1* this, GlobalContext* globalCtx);
+void func_80A31FE0(EnGe1* this, GlobalContext* globalCtx);
+void func_80A32078(EnGe1* this, GlobalContext* globalCtx);
+void func_80A32190(EnGe1* this, GlobalContext* globalCtx);
+void func_80A323B0(EnGe1* this);
+void func_80A323EC(EnGe1* this);
+s32 EnGe1_OverrideLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx);
+void EnGe1_PostLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, void* thisx);
 
 extern AnimationHeader D_6000228;
 extern FlexSkeletonHeader D_6000330;
@@ -97,30 +97,30 @@ static Vec3f D_80A327A8 = { 600.0f, 700.0f, 0.0f };
 static s32 D_80A327B4[3] = { 0x06000708, 0x06000F08, 0x06001708 };
 
 void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 temp_v0;
     EnGe1* this = (EnGe1*)thisx;
+    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
-    SkelAnime_InitFlex(globalCtx, &this->unk198, &D_6000330, &D_6000228, this->unk1DC, this->unk23C, 0x10);
+    SkelAnime_InitFlex(globalCtx, &this->unk198, &D_6000330, &D_6000228, this->unk1DC, this->unk23C, 16);
     Animation_PlayOnce(&this->unk198, &D_6000228);
     Collider_InitCylinder(globalCtx, &this->unk14C);
     Collider_SetCylinder(globalCtx, &this->unk14C, &this->actor, &D_80A32770);
-    this->actor.colChkInfo.mass = 0xFF;
+    this->actor.colChkInfo.mass = MASS_IMMOVABLE;
     this->unk2B0 = &D_6000228;
     this->unk2B8 = func_80A323B0;
     this->actor.targetMode = 6;
     Actor_SetScale(&this->actor, 0.01f);
-    if (globalCtx->sceneNum == 0x5A) {
+    if (globalCtx->sceneNum == SCENE_SPOT09) {
         this->actor.uncullZoneForward = 1000.0f;
     } else {
         this->actor.uncullZoneForward = 1200.0f;
     }
-    temp_v0 = this->actor.params & 0xFF;
-    switch (temp_v0) { /* irregular */
+    switch (this->actor.params & 0xFF) {
         case 0x0:
             this->unk2AE = 2;
             this->unk2B4 = func_80A31880;
             break;
+
         case 0x1:
             this->unk2AE = 1;
             if (func_80A30DCC() != 0) {
@@ -129,6 +129,7 @@ void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
                 this->unk2B4 = func_80A30F48;
             }
             break;
+
         case 0x4:
             this->unk2AE = 1;
             if (func_80A30DCC() != 0) {
@@ -137,6 +138,7 @@ void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
                 this->unk2B4 = func_80A310C4;
             }
             break;
+
         case 0x5:
             if (gSaveContext.linkAge == 0) {
                 osSyncPrintf("\x1b[36m谷底 ゲルド 撤退 \n\x1b[m");
@@ -146,8 +148,9 @@ void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
             this->unk2AE = 0;
             this->unk2B4 = func_80A3118C;
             break;
+
         case 0x45:
-            if (gSaveContext.inventory.items[gItemSlots[3]] == 0xFF) {
+            if (INV_CONTENT(ITEM_BOW) == ITEM_NONE) {
                 Actor_Kill(&this->actor);
                 return;
             }
@@ -162,6 +165,7 @@ void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
                 this->unk2B4 = func_80A30F48;
             }
             break;
+
         case 0x46:
             this->unk2AE = 1;
             if (func_80A30DCC() != 0) {
@@ -180,320 +184,293 @@ void EnGe1_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Collider_DestroyCylinder(globalCtx, &this->unk14C);
 }
 
-s32 func_80A30C70(EnGe1* arg0, GlobalContext* arg1, u16 arg2, f32 arg3, void (*arg4)(EnGe1*, GlobalContext*)) {
-    if (func_8002F194(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = arg4;
-        arg0->unk2B8 = func_80A323EC;
-        arg0->unk2AC &= 0xFFFB;
-        arg0->unk2B0 = &D_6000228;
-        Animation_Change(&arg0->unk198, &D_6000228, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_6000228), 2U, -8.0f);
+s32 func_80A30C70(EnGe1* this, GlobalContext* globalCtx, u16 arg2, f32 arg3, EnGe1ActionFunc arg4) {
+    if (func_8002F194(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = arg4;
+        this->unk2B8 = func_80A323EC;
+        this->unk2AC &= ~4;
+        this->unk2B0 = &D_6000228;
+        Animation_Change(&this->unk198, &D_6000228, 1.0f, 0.0f, Animation_GetLastFrame(&D_6000228), ANIMMODE_ONCE,
+                         -8.0f);
         return 1;
+    } else {
+        this->actor.textId = arg2;
+        if (this->actor.xzDistToPlayer < arg3) {
+            func_8002F2CC(&this->actor, globalCtx, arg3);
+        }
+        return 0;
     }
-    arg0->actor.textId = arg2;
-    if (arg0->actor.xzDistToPlayer < arg3) {
-        func_8002F2CC(&arg0->actor, arg1, arg3);
-    }
-    return 0;
 }
 
-void func_80A30D48(EnGe1* arg0) {
-    Animation_Change(&arg0->unk198, &D_6000228, -1.0f, (f32)Animation_GetLastFrame(&D_6000228), 0.0f, 2U, 8.0f);
-    arg0->unk2B0 = &D_6000228;
-    arg0->unk2B8 = func_80A323B0;
+void func_80A30D48(EnGe1* this) {
+    Animation_Change(&this->unk198, &D_6000228, -1.0f, Animation_GetLastFrame(&D_6000228), 0.0f, ANIMMODE_ONCE, 8.0f);
+    this->unk2B0 = &D_6000228;
+    this->unk2B8 = func_80A323B0;
 }
 
 s32 func_80A30DCC(void) {
-    u16 temp_v0;
-
-    temp_v0 = gSaveContext.eventChkInf[9];
-    if (!(temp_v0 & 1) || !(temp_v0 & 2) || !(temp_v0 & 4) || !(temp_v0 & 8)) {
+    if (!(gSaveContext.eventChkInf[9] & 1) || !(gSaveContext.eventChkInf[9] & 2) ||
+        !(gSaveContext.eventChkInf[9] & 4) || !(gSaveContext.eventChkInf[9] & 8)) {
         return 0;
     }
     return 1;
 }
 
-void func_80A30E08(EnGe1* arg0, GlobalContext* arg1) {
-    u8 temp_v0;
-
-    temp_v0 = arg0->unk2AF;
-    arg0->unk2AC |= 1;
-    if ((s32)temp_v0 > 0) {
-        arg0->unk2AF = temp_v0 - 1;
-        return;
-    }
-    func_8006D074(arg1);
-    if ((gSaveContext.inventory.items[gItemSlots[0xA]] == 0xFF) ||
-        (gSaveContext.inventory.items[gItemSlots[0xB]] == 0xFF)) {
-        arg1->nextEntranceIndex = 0x1A5;
-    } else if (gSaveContext.eventChkInf[0xC] & 0x80) {
-        arg1->nextEntranceIndex = 0x5F8;
+void func_80A30E08(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if (this->unk2AF > 0) {
+        this->unk2AF--;
     } else {
-        arg1->nextEntranceIndex = 0x3B4;
+        func_8006D074(globalCtx);
+        if ((INV_CONTENT(ITEM_HOOKSHOT) == ITEM_NONE) || (INV_CONTENT(ITEM_LONGSHOT) == ITEM_NONE)) {
+            globalCtx->nextEntranceIndex = 0x1A5;
+        } else if (gSaveContext.eventChkInf[0xC] & 0x80) {
+            globalCtx->nextEntranceIndex = 0x5F8;
+        } else {
+            globalCtx->nextEntranceIndex = 0x3B4;
+        }
+        globalCtx->fadeTransition = 0x26;
+        globalCtx->sceneLoadFlag = 0x14;
     }
-    arg1->fadeTransition = 0x26;
-    arg1->sceneLoadFlag = 0x14;
 }
 
-void func_80A30EE8(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AF = 0x1E;
-    arg0->unk2B4 = func_80A30E08;
-    func_8002DF54(arg1, &arg0->actor, 0x5FU);
-    func_80078884(0x482CU);
-    func_8010B680(arg1, 0x6000U, &arg0->actor);
+void func_80A30EE8(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AF = 0x1E;
+    this->unk2B4 = func_80A30E08;
+    func_8002DF54(globalCtx, &this->actor, 0x5FU);
+    func_80078884(NA_SE_SY_FOUND);
+    func_8010B680(globalCtx, 0x6000U, &this->actor);
 }
 
-void func_80A30F48(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A30F48(EnGe1* this, GlobalContext* globalCtx) {
     s16 temp_v0;
-    s32 var_v1;
 
-    temp_v0 = arg0->actor.yawTowardsPlayer - arg0->actor.shape.rot.y;
-    if (temp_v0 >= 0) {
-        var_v1 = temp_v0;
-    } else {
-        var_v1 = -temp_v0;
+    temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
+    if ((ABS(temp_v0) < 0x4301) && (this->actor.xzDistToPlayer < 100.0f)) {
+        func_80A30EE8(this, globalCtx);
     }
-    if ((var_v1 < 0x4301) && (arg0->actor.xzDistToPlayer < 100.0f)) {
-        func_80A30EE8(arg0, arg1);
+    if (this->unk14C.base.acFlags & 2) {
+        func_80A30EE8(this, globalCtx);
     }
-    if (arg0->unk14C.base.acFlags & 2) {
-        func_80A30EE8(arg0, arg1);
-    }
-    CollisionCheck_SetAC(arg1, &arg1->colChkCtx, &arg0->unk14C.base);
+    CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->unk14C.base);
 }
 
-void func_80A31000(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AC |= 1;
-    if (func_8002F334(&arg0->actor, arg1) != 0) {
-        switch (arg0->actor.textId) { /* irregular */
-            default:
-                arg0->unk2B4 = func_80A3118C;
-                return;
+void func_80A31000(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if (func_8002F334(&this->actor, globalCtx) != 0) {
+        switch (this->actor.textId) {
             case 0x6001:
-                arg0->unk2B4 = func_80A31094;
-                return;
+                this->unk2B4 = func_80A31094;
+                break;
+
             case 0x6019:
             case 0x601A:
-                arg0->unk2B4 = func_80A3118C;
-                return;
+                this->unk2B4 = func_80A3118C;
+                break;
+
             case 0x6018:
-                arg0->unk2B4 = func_80A317C0;
+                this->unk2B4 = func_80A317C0;
+                break;
+
+            default:
+                this->unk2B4 = func_80A3118C;
                 break;
         }
     }
 }
 
-void func_80A31094(EnGe1* arg0, GlobalContext* arg1) {
-    func_80A30C70(arg0, arg1, 0x6001U, 100.0f, func_80A31000);
+void func_80A31094(EnGe1* this, GlobalContext* globalCtx) {
+    func_80A30C70(this, globalCtx, 0x6001U, 100.0f, func_80A31000);
 }
 
-void func_80A310C4(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A310C4(EnGe1* this, GlobalContext* globalCtx) {
     s16 temp_v0;
-    s32 var_v1;
 
-    temp_v0 = arg0->actor.yawTowardsPlayer - arg0->actor.shape.rot.y;
-    if (!(arg0->actor.xzDistToPlayer < 50.0f)) {
-        if (temp_v0 >= 0) {
-            var_v1 = temp_v0;
-        } else {
-            var_v1 = -temp_v0;
-        }
-        if ((var_v1 < 0x4301) && (arg0->actor.xzDistToPlayer < 400.0f)) {
-            goto block_5;
-        }
-    } else {
-    block_5:
-        func_80A30EE8(arg0, arg1);
+    temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
+    if ((this->actor.xzDistToPlayer < 50.0f) || ((ABS(temp_v0) < 0x4301) && (this->actor.xzDistToPlayer < 400.0f))) {
+        func_80A30EE8(this, globalCtx);
     }
-    if (arg0->unk14C.base.acFlags & 2) {
-        func_80A30EE8(arg0, arg1);
+    if (this->unk14C.base.acFlags & 2) {
+        func_80A30EE8(this, globalCtx);
     }
-    CollisionCheck_SetAC(arg1, &arg1->colChkCtx, &arg0->unk14C.base);
+    CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->unk14C.base);
 }
 
-void func_80A3118C(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A3118C(EnGe1* this, GlobalContext* globalCtx) {
     u16 temp_v0;
 
-    temp_v0 = Text_GetFaceReaction(arg1, 0x22U);
+    temp_v0 = Text_GetFaceReaction(globalCtx, 0x22U);
     if (temp_v0 == 0) {
         temp_v0 = 0x6019;
     }
-    func_80A30C70(arg0, arg1, temp_v0, 100.0f, func_80A31000);
+    func_80A30C70(this, globalCtx, temp_v0, 100.0f, func_80A31000);
 }
 
-void func_80A311E0(EnGe1* arg0, GlobalContext* arg1) {
-    u8 temp_v0;
-
-    temp_v0 = arg0->unk2AF;
-    if ((s32)temp_v0 > 0) {
-        arg0->unk2AF = temp_v0 - 1;
+void func_80A311E0(EnGe1* this, GlobalContext* globalCtx) {
+    if (this->unk2AF > 0) {
+        this->unk2AF--;
     } else {
-        func_80A30D48(arg0);
-        arg0->unk2B4 = func_80A31094;
+        func_80A30D48(this);
+        this->unk2B4 = func_80A31094;
     }
-    arg0->unk2AC |= 8;
+    this->unk2AC |= 8;
 }
 
-void func_80A31234(EnGe1* arg0, GlobalContext* arg1) {
-    if (arg0->unk2AC & 4) {
-        arg0->unk2B4 = func_80A311E0;
-        Flags_SetSwitch(arg1, ((s16)arg0->actor.params >> 8) & 0x3F);
-        arg0->unk2AF = 0x32;
-        func_80106CCC(arg1);
-        return;
-    }
-    if ((arg0->unk198.curFrame == 15.0f) || (arg0->unk198.curFrame == 19.0f)) {
-        Audio_PlayActorSound2(&arg0->actor, 0x184DU);
-    }
-}
-
-void func_80A312E4(EnGe1* arg0, GlobalContext* arg1) {
-    if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
-        arg0->unk2B4 = func_80A31234;
-        Animation_Change(&arg0->unk198, &D_600A048, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_600A048), 2U, -3.0f);
-        arg0->unk2B0 = &D_600A048;
-        arg0->unk2B8 = func_80A323EC;
-        arg0->unk2AC &= 0xFFFB;
+void func_80A31234(EnGe1* this, GlobalContext* globalCtx) {
+    if (this->unk2AC & 4) {
+        this->unk2B4 = func_80A311E0;
+        Flags_SetSwitch(globalCtx, ((s16)this->actor.params >> 8) & 0x3F);
+        this->unk2AF = 0x32;
+        func_80106CCC(globalCtx);
+    } else if ((this->unk198.curFrame == 15.0f) || (this->unk198.curFrame == 19.0f)) {
+        Audio_PlayActorSound2(&this->actor, 0x184DU);
     }
 }
 
-void func_80A313A0(EnGe1* arg0, GlobalContext* arg1) {
-    if (func_8010BDBC(&arg1->msgCtx) == 2) {
-        arg0->unk2B4 = func_80A31514;
-        func_80A30D48(arg0);
+void func_80A312E4(EnGe1* this, GlobalContext* globalCtx) {
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
+        this->unk2B4 = func_80A31234;
+        Animation_Change(&this->unk198, &D_600A048, 1.0f, 0.0f, Animation_GetLastFrame(&D_600A048), ANIMMODE_ONCE,
+                         -3.0f);
+        this->unk2B0 = &D_600A048;
+        this->unk2B8 = func_80A323EC;
+        this->unk2AC &= 0xFFFB;
     }
 }
 
-void func_80A313E0(EnGe1* arg0, GlobalContext* arg1) {
-    u8 temp_v0;
+void func_80A313A0(EnGe1* this, GlobalContext* globalCtx) {
+    if (func_8010BDBC(&globalCtx->msgCtx) == 2) {
+        this->unk2B4 = func_80A31514;
+        func_80A30D48(this);
+    }
+}
 
-    arg0->unk2AC |= 1;
-    if ((func_8010BDBC(&arg1->msgCtx) == 4) && (func_80106BC8(arg1) != 0)) {
-        func_80106CCC(arg1);
-        temp_v0 = arg1->msgCtx.choiceIndex;
-        switch (temp_v0) { /* irregular */
+void func_80A313E0(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 4) && (func_80106BC8(globalCtx) != 0)) {
+        func_80106CCC(globalCtx);
+        switch (globalCtx->msgCtx.choiceIndex) {
             case 0:
-                if (gSaveContext.rupees < 0xA) {
-                    func_8010B720(arg1, 0x6016U);
-                    arg0->unk2B4 = func_80A313A0;
-                    return;
+                if (gSaveContext.rupees < 10) {
+                    func_8010B720(globalCtx, 0x6016U);
+                    this->unk2B4 = func_80A313A0;
+                } else {
+                    Rupees_ChangeBy(-10);
+                    func_8010B720(globalCtx, 0x6015U);
+                    this->unk2B4 = func_80A312E4;
                 }
-                Rupees_ChangeBy(-0xA);
-                func_8010B720(arg1, 0x6015U);
-                arg0->unk2B4 = func_80A312E4;
-                return;
+                break;
+
             case 1:
-                arg0->unk2B4 = func_80A31514;
-                func_80A30D48(arg0);
+                this->unk2B4 = func_80A31514;
+                func_80A30D48(this);
                 break;
         }
     }
 }
 
-void func_80A314D0(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AC |= 1;
-    if (func_8002F334(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31514;
-        func_80A30D48(arg0);
+void func_80A314D0(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if (func_8002F334(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31514;
+        func_80A30D48(this);
     }
 }
 
-void func_80A31514(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A31514(EnGe1* this, GlobalContext* globalCtx) {
     if (gBitFlags[0x16] & gSaveContext.inventory.questItems) {
-        func_80A30C70(arg0, arg1, 0x6014U, 100.0f, func_80A313E0);
-        return;
-    }
-    func_80A30C70(arg0, arg1, 0x6013U, 100.0f, func_80A314D0);
-}
-
-void func_80A3157C(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AC |= 1;
-    if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
-        func_80106CCC(arg1);
-        arg0->unk2B4 = func_80A317C0;
-        func_80A30D48(arg0);
-    }
-}
-
-void func_80A315F0(EnGe1* arg0, GlobalContext* arg1) {
-    u8 temp_v0;
-
-    temp_v0 = arg0->unk2AF;
-    if ((s32)temp_v0 > 0) {
-        arg0->unk2AF = temp_v0 - 1;
+        func_80A30C70(this, globalCtx, 0x6014U, 100.0f, func_80A313E0);
     } else {
-        func_80A30D48(arg0);
-        arg0->unk2B4 = func_80A317C0;
-    }
-    arg0->unk2AC |= 8;
-}
-
-void func_80A31644(EnGe1* arg0, GlobalContext* arg1) {
-    if (arg0->unk2AC & 4) {
-        arg0->unk2B4 = func_80A315F0;
-        Flags_SetSwitch(arg1, ((s16)arg0->actor.params >> 8) & 0x3F);
-        arg0->unk2AF = 0x32;
-        func_80106CCC(arg1);
-        return;
-    }
-    if ((arg0->unk198.curFrame == 15.0f) || (arg0->unk198.curFrame == 19.0f)) {
-        Audio_PlayActorSound2(&arg0->actor, 0x184DU);
+        func_80A30C70(this, globalCtx, 0x6013U, 100.0f, func_80A314D0);
     }
 }
 
-void func_80A316F4(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AC |= 1;
-    if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
-        arg0->unk2B4 = func_80A31644;
-        Animation_Change(&arg0->unk198, &D_600A048, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_600A048), 2U, -3.0f);
-        arg0->unk2B0 = &D_600A048;
-        arg0->unk2B8 = func_80A323EC;
-        arg0->unk2AC &= 0xFFFB;
+void func_80A3157C(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
+        func_80106CCC(globalCtx);
+        this->unk2B4 = func_80A317C0;
+        func_80A30D48(this);
     }
 }
 
-void func_80A317C0(EnGe1* arg0, GlobalContext* arg1) {
-    if (Flags_GetSwitch(arg1, ((s16)arg0->actor.params >> 8) & 0x3F) != 0) {
-        func_80A30C70(arg0, arg1, 0x6018U, 100.0f, func_80A3157C);
-        return;
+void func_80A315F0(EnGe1* this, GlobalContext* globalCtx) {
+    if (this->unk2AF > 0) {
+        this->unk2AF--;
+    } else {
+        func_80A30D48(this);
+        this->unk2B4 = func_80A317C0;
     }
-    func_80A30C70(arg0, arg1, 0x6017U, 100.0f, func_80A316F4);
+    this->unk2AC |= 8;
 }
 
-void func_80A3183C(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AC |= 1;
-    if (func_8002F334(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31880;
-        func_80A30D48(arg0);
+void func_80A31644(EnGe1* this, GlobalContext* globalCtx) {
+    if (this->unk2AC & 4) {
+        this->unk2B4 = func_80A315F0;
+        Flags_SetSwitch(globalCtx, (this->actor.params >> 8) & 0x3F);
+        this->unk2AF = 0x32;
+        func_80106CCC(globalCtx);
+    } else if ((this->unk198.curFrame == 15.0f) || (this->unk198.curFrame == 19.0f)) {
+        Audio_PlayActorSound2(&this->actor, NA_SE_IT_HAND_CLAP);
     }
 }
 
-void func_80A31880(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A316F4(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
+        this->unk2B4 = func_80A31644;
+        Animation_Change(&this->unk198, &D_600A048, 1.0f, 0.0f, Animation_GetLastFrame(&D_600A048), ANIMMODE_ONCE,
+                         -3.0f);
+        this->unk2B0 = &D_600A048;
+        this->unk2B8 = func_80A323EC;
+        this->unk2AC &= ~4;
+    }
+}
+
+void func_80A317C0(EnGe1* this, GlobalContext* globalCtx) {
+    if (Flags_GetSwitch(globalCtx, (this->actor.params >> 8) & 0x3F)) {
+        func_80A30C70(this, globalCtx, 0x6018U, 100.0f, func_80A3157C);
+    } else {
+        func_80A30C70(this, globalCtx, 0x6017U, 100.0f, func_80A316F4);
+    }
+}
+
+void func_80A3183C(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if (func_8002F334(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31880;
+        func_80A30D48(this);
+    }
+}
+
+void func_80A31880(EnGe1* this, GlobalContext* globalCtx) {
     u16 temp_v0;
 
-    temp_v0 = Text_GetFaceReaction(arg1, 0x22U);
+    temp_v0 = Text_GetFaceReaction(globalCtx, 0x22);
     if (temp_v0 == 0) {
         temp_v0 = 0x6069;
     }
-    if (func_80A30C70(arg0, arg1, temp_v0, 100.0f, func_80A3183C) != 0) {
-        arg0->unk2B8 = func_80A323B0;
-        arg0->unk2B0 = &D_600A498;
-        Animation_Change(&arg0->unk198, &D_600A498, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_600A498), 2U, -8.0f);
+    if (func_80A30C70(this, globalCtx, temp_v0, 100.0f, func_80A3183C) != 0) {
+        this->unk2B8 = func_80A323B0;
+        this->unk2B0 = &D_600A498;
+        Animation_Change(&this->unk198, &D_600A498, 1.0f, 0.0f, Animation_GetLastFrame(&D_600A498), ANIMMODE_ONCE,
+                         -8.0f);
     }
 }
 
-void func_80A31934(EnGe1* arg0, GlobalContext* arg1) {
-    if (func_8002F334(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31FE0;
-        func_80A30D48(arg0);
+void func_80A31934(EnGe1* this, GlobalContext* globalCtx) {
+    if (func_8002F334(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31FE0;
+        func_80A30D48(this);
     }
 }
 
-void func_80A3196C(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A3196C(EnGe1* this, GlobalContext* globalCtx) {
     s32 var_a2;
 
-    if (Actor_HasParent(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31934;
-        if (arg0->unk2AC & 2) {
+    if (Actor_HasParent(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31934;
+        if (this->unk2AC & 2) {
             gSaveContext.itemGetInf[0] |= 0x8000;
             return;
         } else {
@@ -501,8 +478,8 @@ void func_80A3196C(EnGe1* arg0, GlobalContext* arg1) {
         }
         return;
     }
-    if (arg0->unk2AC & 2) {
-        switch ((s32)(gSaveContext.inventory.upgrades & *gUpgradeMasks) >> *gUpgradeShifts) {
+    if (this->unk2AC & 2) {
+        switch (CUR_UPG_VALUE(UPG_QUIVER)) {
             case 1:
                 var_a2 = 0x30;
                 break;
@@ -513,18 +490,19 @@ void func_80A3196C(EnGe1* arg0, GlobalContext* arg1) {
     } else {
         var_a2 = 0x3E;
     }
-    func_8002F434(&arg0->actor, arg1, var_a2, 10000.0f, 50.0f);
+    //! @bug var_a2 may be used uninitialized
+    func_8002F434(&this->actor, globalCtx, var_a2, 10000.0f, 50.0f);
 }
 
-void func_80A31A5C(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A31A5C(EnGe1* this, GlobalContext* globalCtx) {
     s32 var_a2;
 
-    if (func_8002F334(&arg0->actor, arg1) != 0) {
-        arg0->actor.flags &= 0xFFFEFFFF;
-        arg0->unk2B4 = func_80A3196C;
+    if (func_8002F334(&this->actor, globalCtx) != 0) {
+        this->actor.flags &= ~0x10000;
+        this->unk2B4 = func_80A3196C;
     }
-    if (arg0->unk2AC & 2) {
-        switch ((s32)(gSaveContext.inventory.upgrades & *gUpgradeMasks) >> *gUpgradeShifts) {
+    if (this->unk2AC & 2) {
+        switch (CUR_UPG_VALUE(UPG_QUIVER)) {
             case 1:
                 var_a2 = 0x30;
                 break;
@@ -535,88 +513,88 @@ void func_80A31A5C(EnGe1* arg0, GlobalContext* arg1) {
     } else {
         var_a2 = 0x3E;
     }
-    func_8002F434(&arg0->actor, arg1, var_a2, 10000.0f, 50.0f);
+    //! @bug var_a2 may be used uninitialized
+    func_8002F434(&this->actor, globalCtx, var_a2, 10000.0f, 50.0f);
 }
 
-void func_80A31B20(EnGe1* arg0, GlobalContext* arg1) {
-    if (func_8002F194(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31A5C;
-        arg0->actor.flags &= 0xFFFEFFFF;
-        return;
-    }
-    func_8002F2CC(&arg0->actor, arg1, 200.0f);
-}
-
-void func_80A31B7C(EnGe1* arg0, GlobalContext* arg1) {
-    if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
-        func_80106CCC(arg1);
-        arg0->unk2B4 = func_80A31FE0;
-        func_80A30D48(arg0);
+void func_80A31B20(EnGe1* this, GlobalContext* globalCtx) {
+    if (func_8002F194(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31A5C;
+        this->actor.flags &= ~0x10000;
+    } else {
+        func_8002F2CC(&this->actor, globalCtx, 200.0f);
     }
 }
 
-void func_80A31BDC(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A31B7C(EnGe1* this, GlobalContext* globalCtx) {
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
+        func_80106CCC(globalCtx);
+        this->unk2B4 = func_80A31FE0;
+        func_80A30D48(this);
+    }
 }
 
-void func_80A31BE8(EnGe1* arg0, GlobalContext* arg1) {
-    Player* sp2C;
+void func_80A31BDC(EnGe1* this, GlobalContext* globalCtx) {
+}
+
+void func_80A31BE8(EnGe1* this, GlobalContext* globalCtx) {
+    Player* player;
     Actor* temp_v0_2;
-    u8 temp_v0;
 
-    sp2C = arg1->actorCtx.actorLists[2].head;
-    if ((func_8010BDBC(&arg1->msgCtx) == 4) && (func_80106BC8(arg1) != 0)) {
-        arg0->actor.flags &= 0xFFFEFFFF;
-        temp_v0 = arg1->msgCtx.choiceIndex;
-        switch (temp_v0) { /* irregular */
+    player = PLAYER;
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 4) && (func_80106BC8(globalCtx) != 0)) {
+        this->actor.flags &= ~0x10000;
+        switch (globalCtx->msgCtx.choiceIndex) {
             case 0:
-                if (gSaveContext.rupees < 0x14) {
-                    func_8010B720(arg1, 0x85U);
-                    arg0->unk2B4 = func_80A31B7C;
-                    return;
-                }
-                Rupees_ChangeBy(-0x14);
-                arg1->nextEntranceIndex = 0x129;
-                gSaveContext.nextCutsceneIndex = 0xFFF0;
-                arg1->fadeTransition = 0x26;
-                arg1->sceneLoadFlag = 0x14;
-                gSaveContext.eventInf[0] |= 0x100;
-                gSaveContext.eventChkInf[6] |= 0x100;
-                if (!(sp2C->stateFlags1 & 0x800000)) {
-                    func_8002DF54(arg1, &arg0->actor, 1U);
+                if (gSaveContext.rupees < 20) {
+                    func_8010B720(globalCtx, 0x85);
+                    this->unk2B4 = func_80A31B7C;
                 } else {
-                    temp_v0_2 = Actor_FindNearby(arg1, sp2C, 0x14, 1U, 1200.0f);
-                    sp2C->actor.freezeTimer = 0x4B0;
-                    if (temp_v0_2 != NULL) {
-                        temp_v0_2->freezeTimer = 0x4B0;
+                    Rupees_ChangeBy(-20);
+                    globalCtx->nextEntranceIndex = 0x129;
+                    gSaveContext.nextCutsceneIndex = 0xFFF0;
+                    globalCtx->fadeTransition = 0x26;
+                    globalCtx->sceneLoadFlag = 0x14;
+                    gSaveContext.eventInf[0] |= 0x100;
+                    gSaveContext.eventChkInf[6] |= 0x100;
+                    if (!(player->stateFlags1 & 0x800000)) {
+                        func_8002DF54(globalCtx, &this->actor, 1U);
+                    } else {
+                        temp_v0_2 = Actor_FindNearby(globalCtx, &player->actor, ACTOR_EN_HORSE, 1U, 1200.0f);
+                        player->actor.freezeTimer = 0x4B0;
+                        if (temp_v0_2 != NULL) {
+                            temp_v0_2->freezeTimer = 0x4B0;
+                        }
                     }
+                    this->unk2B4 = func_80A31BDC;
                 }
-                arg0->unk2B4 = func_80A31BDC;
-                return;
+                break;
+
             case 1:
-                arg0->unk2B4 = func_80A31FE0;
-                func_80106CCC(arg1);
+                this->unk2B4 = func_80A31FE0;
+                func_80106CCC(globalCtx);
                 break;
         }
     }
 }
 
-void func_80A31D88(EnGe1* arg0, GlobalContext* arg1) {
-    if ((func_8010BDBC(&arg1->msgCtx) == 5) && (func_80106BC8(arg1) != 0)) {
-        func_8010B720(arg1, 0x6041U);
-        arg0->unk2B4 = func_80A31BE8;
+void func_80A31D88(EnGe1* this, GlobalContext* globalCtx) {
+    if ((func_8010BDBC(&globalCtx->msgCtx) == 5) && (func_80106BC8(globalCtx) != 0)) {
+        func_8010B720(globalCtx, 0x6041);
+        this->unk2B4 = func_80A31BE8;
     }
 }
 
-void func_80A31DE4(EnGe1* arg0, GlobalContext* arg1) {
-    if (func_8002F194(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31D88;
+void func_80A31DE4(EnGe1* this, GlobalContext* globalCtx) {
+    if (func_8002F194(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31D88;
         return;
     }
-    func_8002F2CC(&arg0->actor, arg1, 300.0f);
+    func_8002F2CC(&this->actor, globalCtx, 300.0f);
 }
 
-void func_80A31E2C(EnGe1* arg0, GlobalContext* arg1) {
-    gSaveContext.eventInf[0] &= 0xFEFF;
+void func_80A31E2C(EnGe1* this, GlobalContext* globalCtx) {
+    gSaveContext.eventInf[0] &= ~0x100;
     LogUtils_LogThreadId("../z_en_ge1.c", 0x456);
     osSyncPrintf("z_common_data.yabusame_total = %d\n", gSaveContext.minigameScore);
     if (1) {}
@@ -624,111 +602,92 @@ void func_80A31E2C(EnGe1* arg0, GlobalContext* arg1) {
     if (1) {}
     LogUtils_LogThreadId("../z_en_ge1.c", 0x457);
     osSyncPrintf("z_common_data.memory.information.room_inf[127][ 0 ] = %d\n", gSaveContext.highScores[0]);
-    arg0->actor.flags |= 0x10000;
-    if (gSaveContext.highScores[0] < (s32)gSaveContext.minigameScore) {
-        gSaveContext.highScores[0] = (s32)gSaveContext.minigameScore;
+    this->actor.flags |= 0x10000;
+    if (gSaveContext.highScores[0] < gSaveContext.minigameScore) {
+        gSaveContext.highScores[0] = gSaveContext.minigameScore;
     }
-    if ((s32)gSaveContext.minigameScore < 0x3E8) {
-        arg0->actor.textId = 0x6045;
-        arg0->unk2B4 = func_80A31DE4;
-        return;
-    }
-    if (!(gSaveContext.infTable[0x19] & 1)) {
-        arg0->actor.textId = 0x6046;
-        arg0->unk2B4 = func_80A31B20;
-        arg0->unk2AC &= 0xFFFD;
-        return;
-    }
-    if ((s32)gSaveContext.minigameScore < 0x5DC) {
-        arg0->actor.textId = 0x6047;
-        arg0->unk2B4 = func_80A31DE4;
-        return;
-    }
-    if (gSaveContext.itemGetInf[0] & 0x8000) {
-        arg0->actor.textId = 0x6047;
-        arg0->unk2B4 = func_80A31DE4;
-        return;
-    }
-    arg0->actor.textId = 0x6044;
-    arg0->unk2B4 = func_80A31B20;
-    arg0->unk2AC |= 2;
-}
-
-void func_80A31F9C(EnGe1* arg0, GlobalContext* arg1) {
-    arg0->unk2AC |= 1;
-    if (func_8002F334(&arg0->actor, arg1) != 0) {
-        arg0->unk2B4 = func_80A31FE0;
-        func_80A30D48(arg0);
+    if (gSaveContext.minigameScore < 1000) {
+        this->actor.textId = 0x6045;
+        this->unk2B4 = func_80A31DE4;
+    } else if (!(gSaveContext.infTable[0x19] & 1)) {
+        this->actor.textId = 0x6046;
+        this->unk2B4 = func_80A31B20;
+        this->unk2AC &= ~2;
+    } else if (gSaveContext.minigameScore < 1500) {
+        this->actor.textId = 0x6047;
+        this->unk2B4 = func_80A31DE4;
+    } else if (gSaveContext.itemGetInf[0] & 0x8000) {
+        this->actor.textId = 0x6047;
+        this->unk2B4 = func_80A31DE4;
+    } else {
+        this->actor.textId = 0x6044;
+        this->unk2B4 = func_80A31B20;
+        this->unk2AC |= 2;
     }
 }
 
-void func_80A31FE0(EnGe1* arg0, GlobalContext* arg1) {
-    Player* player = arg1->actorCtx.actorLists[2].head;
+void func_80A31F9C(EnGe1* this, GlobalContext* globalCtx) {
+    this->unk2AC |= 1;
+    if (func_8002F334(&this->actor, globalCtx) != 0) {
+        this->unk2B4 = func_80A31FE0;
+        func_80A30D48(this);
+    }
+}
+
+void func_80A31FE0(EnGe1* this, GlobalContext* globalCtx) {
+    Player* player = PLAYER;
     u16 var_a2;
 
     if (!(player->stateFlags1 & 0x800000)) {
-        func_80A30C70(arg0, arg1, 0x603FU, 100.0f, func_80A31F9C);
-        return;
-    }
-    if (gSaveContext.eventChkInf[6] & 0x100) {
-        if (gSaveContext.infTable[0x19] & 1) {
-            var_a2 = 0x6042;
-        } else {
-            var_a2 = 0x6043;
-        }
+        func_80A30C70(this, globalCtx, 0x603FU, 100.0f, func_80A31F9C);
     } else {
-        var_a2 = 0x6040;
+        if (gSaveContext.eventChkInf[6] & 0x100) {
+            if (gSaveContext.infTable[0x19] & 1) {
+                var_a2 = 0x6042;
+            } else {
+                var_a2 = 0x6043;
+            }
+        } else {
+            var_a2 = 0x6040;
+        }
+        func_80A30C70(this, globalCtx, var_a2, 200.0f, func_80A31D88);
     }
-    func_80A30C70(arg0, arg1, var_a2, 200.0f, func_80A31D88);
 }
 
-void func_80A32078(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A32078(EnGe1* this, GlobalContext* globalCtx) {
     s32 pad;
     s16 temp_v0;
-    s32 var_v1;
 
-    temp_v0 = arg0->actor.yawTowardsPlayer - arg0->actor.shape.rot.y;
-    if (temp_v0 >= 0) {
-        var_v1 = temp_v0;
+    temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
+    if (ABS(temp_v0) <= 0x4000) {
+        Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 6, 0xFA0, 0x64);
+        this->actor.world.rot.y = this->actor.shape.rot.y;
+        func_80038290(globalCtx, &this->actor, &this->unk29C, &this->unk2A2, this->actor.focus.pos);
     } else {
-        var_v1 = -temp_v0;
+        if (temp_v0 < 0) {
+            Math_SmoothStepToS(&this->unk29C.y, -0x2000, 6, 0x1838, 0x100);
+        } else {
+            Math_SmoothStepToS(&this->unk29C.y, 0x2000, 6, 0x1838, 0x100);
+        }
+        Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 0xC, 0x3E8, 0x64);
+        this->actor.world.rot.y = this->actor.shape.rot.y;
     }
-    if (var_v1 < 0x4001) {
-        Math_SmoothStepToS(&arg0->actor.shape.rot.y, arg0->actor.yawTowardsPlayer, 6, 0xFA0, 0x64);
-        arg0->actor.world.rot.y = arg0->actor.shape.rot.y;
-        func_80038290(arg1, &arg0->actor, &arg0->unk29C, &arg0->unk2A2, arg0->actor.focus.pos);
-        return;
-    }
-    if (temp_v0 < 0) {
-        Math_SmoothStepToS(&arg0->unk29C.y, -0x2000, 6, 0x1838, 0x100);
-    } else {
-        Math_SmoothStepToS(&arg0->unk29C.y, 0x2000, 6, 0x1838, 0x100);
-    }
-    Math_SmoothStepToS(&arg0->actor.shape.rot.y, arg0->actor.yawTowardsPlayer, 0xC, 0x3E8, 0x64);
-    arg0->actor.world.rot.y = arg0->actor.shape.rot.y;
 }
 
-void func_80A32190(EnGe1* arg0, GlobalContext* arg1) {
+void func_80A32190(EnGe1* this, GlobalContext* globalCtx) {
     s16 temp_v0;
-    s32 var_v1;
 
-    temp_v0 = arg0->actor.yawTowardsPlayer - arg0->actor.shape.rot.y;
-    if (temp_v0 >= 0) {
-        var_v1 = temp_v0;
+    temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
+    if ((ABS(temp_v0) <= 0x4300) && (this->actor.xzDistToPlayer < 100.0f)) {
+        func_80038290(globalCtx, &this->actor, &this->unk29C, &this->unk2A2, this->actor.focus.pos);
     } else {
-        var_v1 = -temp_v0;
+        Math_SmoothStepToS(&this->unk29C.x, 0, 6, 0x1838, 0x64);
+        Math_SmoothStepToS(&this->unk29C.y, 0, 6, 0x1838, 0x64);
     }
-    if ((var_v1 < 0x4301) && (arg0->actor.xzDistToPlayer < 100.0f)) {
-        func_80038290(arg1, &arg0->actor, &arg0->unk29C, &arg0->unk2A2, arg0->actor.focus.pos);
-        return;
-    }
-    Math_SmoothStepToS(&arg0->unk29C.x, 0, 6, 0x1838, 0x64);
-    Math_SmoothStepToS(&arg0->unk29C.y, 0, 6, 0x1838, 0x64);
 }
 
 void EnGe1_Update(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
-    s16 temp_v0;
     EnGe1* this = (EnGe1*)thisx;
 
     Collider_UpdateCylinder(&this->actor, &this->unk14C);
@@ -739,14 +698,11 @@ void EnGe1_Update(Actor* thisx, GlobalContext* globalCtx) {
     this->unk2B4(this, globalCtx);
     if (this->unk2AC & 1) {
         func_80A32078(this, globalCtx);
-        this->unk2AC &= 0xFFFE;
+        this->unk2AC &= ~1;
     } else {
         func_80A32190(this, globalCtx);
     }
-    this->unk2A2.z = 0;
-    temp_v0 = this->unk2A2.z;
-    this->unk2A2.y = temp_v0;
-    this->unk2A2.x = temp_v0;
+    this->unk2A2.x = this->unk2A2.y = this->unk2A2.z = 0;
     if (DECR(this->unk2AA) == 0) {
         this->unk2AA = Rand_S16Offset(0x3C, 0x3C);
     }
@@ -756,61 +712,59 @@ void EnGe1_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-void func_80A323B0(EnGe1* arg0) {
-    if (SkelAnime_Update(&arg0->unk198) != 0) {
-        Animation_PlayOnce(&arg0->unk198, arg0->unk2B0);
+void func_80A323B0(EnGe1* this) {
+    if (SkelAnime_Update(&this->unk198) != 0) {
+        Animation_PlayOnce(&this->unk198, this->unk2B0);
     }
 }
 
-void func_80A323EC(EnGe1* arg0) {
-    if (!(arg0->unk2AC & 4)) {
-        if (SkelAnime_Update(&arg0->unk198) != 0) {
-            arg0->unk2AC |= 4;
+void func_80A323EC(EnGe1* this) {
+    if (!(this->unk2AC & 4)) {
+        if (SkelAnime_Update(&this->unk198) != 0) {
+            this->unk2AC |= 4;
         }
-        arg0->unk2AC |= 8;
+        this->unk2AC |= 8;
     }
 }
 
-s32 func_80A32444(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, EnGe1* thisx) {
+s32 EnGe1_OverrideLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, void* thisx) {
     EnGe1* this = thisx;
-    s32 temp_v1;
+    s32 pad;
 
-    if (arg1 == 0xF) {
+    if (arg1 == 15) {
         arg4->x += this->unk29C.y;
         arg4->z += this->unk29C.x;
     }
     if (this->unk2AC & 8) {
-        this->unk2AC &= 0xFFF7;
+        this->unk2AC &= ~8;
         return 0;
     }
-    if ((arg1 == 8) || (arg1 == 0xA) || (arg1 == 0xD)) {
-        temp_v1 = arg1 * 0x32;
-        arg4->y += (Math_SinS((s16)(arg0->state.frames * (temp_v1 + 0x814))) * 200.0f);
-        arg4->z += (Math_CosS((s16)(arg0->state.frames * (temp_v1 + 0x940))) * 200.0f);
+    if ((arg1 == 8) || (arg1 == 10) || (arg1 == 13)) {
+        arg4->y += (Math_SinS((s16)(globalCtx->state.frames * ((arg1 * 0x32) + 0x814))) * 200.0f);
+        arg4->z += (Math_CosS((s16)(globalCtx->state.frames * ((arg1 * 0x32) + 0x940))) * 200.0f);
     }
     return 0;
 }
 
-void func_80A32598(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3s* arg3, EnGe1* thisx) {
+void EnGe1_PostLimbDraw(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, void* thisx) {
     EnGe1* this = thisx;
 
-    OPEN_DISPS(arg0->state.gfxCtx, "../z_en_ge1.c", 0x58B);
-    if (arg1 == 0xF) {
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1419);
+    if (arg1 == 15) {
         gSPDisplayList(POLY_OPA_DISP++, D_80A3279C[this->unk2AE]);
         Matrix_MultVec3f(&D_80A327A8, &this->actor.focus.pos);
     }
-    CLOSE_DISPS(arg0->state.gfxCtx, "../z_en_ge1.c", 0x593);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1427);
 }
 
 void EnGe1_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnGe1* this = (EnGe1*)thisx;
     s32 pad;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 0x5A2);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1442);
     func_800943C8(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 8, SEGMENTED_TO_VIRTUAL(D_80A327B4[this->unk2A8]));
-    SkelAnime_DrawFlexOpa(globalCtx, this->unk198.skeleton, this->unk198.jointTable, (s32)this->unk198.dListCount,
-                          (s32(*)(GlobalContext*, s32, Gfx**, Vec3f*, Vec3s*, void*))func_80A32444,
-                          (void (*)(GlobalContext*, s32, Gfx**, Vec3s*, void*))func_80A32598, this);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 0x5B3);
+    SkelAnime_DrawFlexOpa(globalCtx, this->unk198.skeleton, this->unk198.jointTable, this->unk198.dListCount,
+                          EnGe1_OverrideLimbDraw, EnGe1_PostLimbDraw, this);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1459);
 }
