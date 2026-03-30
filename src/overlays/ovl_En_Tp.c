@@ -15,9 +15,26 @@ void EnTp_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnTp_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnTp_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06000000;
-extern UNK_TYPE D_060008D0;
-extern UNK_TYPE D_06000C68;
+void func_80B20DE0(EnTp* this, void (*arg1)(EnTp*, GlobalContext*));
+void func_80B21084(EnTp* this);
+void func_80B210B0(EnTp* this, GlobalContext* globalCtx);
+void func_80B2128C(EnTp* this);
+void func_80B212C0(EnTp* this, GlobalContext* globalCtx);
+void func_80B21454(EnTp* this);
+void func_80B214CC(EnTp* this, GlobalContext* globalCtx);
+void func_80B217FC(EnTp* this);
+void func_80B21900(EnTp* this, GlobalContext* globalCtx);
+void func_80B2194C(EnTp* this);
+void func_80B219A8(EnTp* this, GlobalContext* globalCtx);
+void func_80B21B90(EnTp* this);
+void func_80B21BDC(EnTp* this, GlobalContext* globalCtx);
+void func_80B21EE8(EnTp* this);
+void func_80B21F18(EnTp* this, GlobalContext* globalCtx);
+void func_80B221E8(EnTp* this, GlobalContext* globalCtx);
+
+extern Gfx D_6000000[];
+extern Gfx D_60008D0[];
+extern UNK_TYPE D_6000C68;
 
 /*
 const ActorInit En_Tp_InitVars = {
@@ -59,6 +76,13 @@ static ColliderJntSphInit D_80B22AB4 = {
     D_80B22A90,
 };
 */
+
+extern Vec3f D_80B22AE8;
+extern Vec3f D_80B22AF4;
+extern Vec3f D_80B22B14;
+extern Vec3f D_80B22B20;
+extern Color_RGBA8 D_80B22B2C;
+extern Color_RGBA8 D_80B22B30;
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Tp/func_80B20DE0.s")
 
