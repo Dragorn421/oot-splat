@@ -23,7 +23,6 @@ extern Gfx D_6007E20[];
 extern Gfx D_6007EE0[];
 extern Gfx D_6008190[];
 
-/*
 const ActorInit Bg_Toki_Hikari_InitVars = {
     ACTOR_BG_TOKI_HIKARI,
     ACTORCAT_BG,
@@ -35,7 +34,10 @@ const ActorInit Bg_Toki_Hikari_InitVars = {
     (ActorFunc)BgTokiHikari_Update,
     (ActorFunc)BgTokiHikari_Draw,
 };
-*/
+
+static InitChainEntry D_808BAC70[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 1000, ICHAIN_STOP),
+};
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_Bg_Toki_Hikari/BgTokiHikari_Init.s")
 

@@ -2481,7 +2481,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC88C00, c, overlays/ovl_Bg_Toki_Hikari]
-      - [0xC89950, data, overlays/ovl_Bg_Toki_Hikari]
+      - [0xC89950, .data, overlays/ovl_Bg_Toki_Hikari]
       - [0xC89980, .rodata, overlays/ovl_Bg_Toki_Hikari]
       - [0xC89A70, rodatabin, rodatabin_808BAD70]
 
