@@ -119,14 +119,14 @@ void EnTp_Init(Actor* thisx, GlobalContext* globalCtx2) {
         Actor_SetScale(&this->actor, 1.5f);
         for (var_s1 = 0; var_s1 < 7; var_s1++) {
             if (((0 * var_s1) != 0) && ((0 * var_s1) != 0)) {}
-            temp_v0_2 = Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x35, this->actor.world.pos.x,
-                                    this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0 * var_s1);
+            temp_v0_2 = (EnTp*)Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_TP, this->actor.world.pos.x,
+                                           this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0 * var_s1);
             if (temp_v0_2 != NULL) {
-                var_s5->actor.child = temp_v0_2;
+                var_s5->actor.child = &temp_v0_2->actor;
                 temp_v0_2->actor.parent = &var_s5->actor;
                 temp_v0_2->unk162 = (s16)(var_s1 + 1);
                 temp_v0_2->unk1D4 = this;
-                Actor_SetScale(temp_v0_2, 0.3f);
+                Actor_SetScale(&temp_v0_2->actor, 0.3f);
                 if (var_s1 == 2) {
                     temp_v0_2->actor.flags |= 0x15;
                     temp_v0_2->unk150 = 1;
@@ -137,17 +137,16 @@ void EnTp_Init(Actor* thisx, GlobalContext* globalCtx2) {
                 temp_v0_2->unk16C = (f32)(6.0f - ((f32)var_s1 * 0.75f));
             }
         }
-        return;
-    }
-    if (this->actor.params == 0) {
+    } else if (this->actor.params == 0) {
         func_80B21084(this);
-        return;
+    } else {
+        func_80B217FC(this);
     }
-    func_80B217FC(this);
 }
 
 void EnTp_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     EnTp* this = (EnTp*)thisx;
+
     Collider_DestroyJntSph(globalCtx, &this->unk174);
 }
 
@@ -159,8 +158,6 @@ void func_80B21084(EnTp* this) {
 void func_80B210B0(EnTp* this, GlobalContext* globalCtx) {
     s16 sp36;
     s16 temp_a0_sp34;
-    s32 pad;
-    f32 sp2C;
 
     if (this->actor.params == 0xB) {
         this->unk14C = 1;
@@ -177,15 +174,15 @@ void func_80B210B0(EnTp* this, GlobalContext* globalCtx) {
                 this->actor.flags &= ~1;
             }
             this->actor.world.pos = this->actor.parent->prevPos;
-            return;
+        } else {
+            Math_SmoothStepToF(&this->actor.world.pos.y, this->actor.parent->world.pos.y - 4.0f, 1.0f, 1.0f, 0.0f);
+            sp36 = this->unk1D4->actor.shape.rot.y + 0x4000;
+            temp_a0_sp34 = (this->unk1D4->unk15C + this->unk15A) * 0x7D0;
+            this->actor.world.pos.x =
+                (Math_SinS(temp_a0_sp34) * (Math_SinS(sp36) * this->unk16C)) + this->actor.home.pos.x;
+            this->actor.world.pos.z =
+                (Math_SinS(temp_a0_sp34) * (Math_CosS(sp36) * this->unk16C)) + this->actor.home.pos.z;
         }
-        Math_SmoothStepToF(&this->actor.world.pos.y, this->actor.parent->world.pos.y - 4.0f, 1.0f, 1.0f, 0.0f);
-        sp36 = this->unk1D4->actor.shape.rot.y + 0x4000;
-        temp_a0_sp34 = (this->unk1D4->unk15C + this->unk15A) * 0x7D0;
-        sp2C = Math_SinS(temp_a0_sp34);
-        this->actor.world.pos.x = (Math_SinS(sp36) * this->unk16C * sp2C) + this->actor.home.pos.x;
-        sp2C = Math_SinS(temp_a0_sp34);
-        this->actor.world.pos.z = (Math_CosS(sp36) * this->unk16C * sp2C) + this->actor.home.pos.z;
     }
 }
 
@@ -196,23 +193,20 @@ void func_80B2128C(EnTp* this) {
 }
 
 void func_80B212C0(EnTp* this, GlobalContext* globalCtx) {
-    Actor* temp_v0;
-    s16 temp_v0_3;
-    u8 temp_v0_2;
+    Player* player;
 
-    temp_v0 = globalCtx->actorCtx.actorLists[2].head;
-    Math_SmoothStepToF(&this->actor.world.pos.y, temp_v0->world.pos.y + 30.0f, 1.0f, 0.5f, 0.0f);
-    Audio_PlaySoundGeneral(0x3064U, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
-    temp_v0_2 = this->unk174.base.atFlags;
-    if (temp_v0_2 & 2) {
-        this->unk174.base.atFlags = temp_v0_2 & 0xFFFD;
-        if (temp_v0 == this->unk174.base.at) {
+    player = PLAYER;
+    Math_SmoothStepToF(&this->actor.world.pos.y, player->actor.world.pos.y + 30.0f, 1.0f, 0.5f, 0.0f);
+    Audio_PlaySoundGeneral(NA_SE_EN_TAIL_FLY - SFX_FLAG, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0,
+                           &D_801333E8);
+    if (this->unk174.base.atFlags & AT_HIT) {
+        this->unk174.base.atFlags &= ~AT_HIT;
+        if (&player->actor == this->unk174.base.at) {
             this->unk15A = 1;
         }
     }
-    temp_v0_3 = this->unk160;
-    if (temp_v0_3 < 0xFF) {
-        this->unk160 = temp_v0_3 + 0xF;
+    if (this->unk160 < 0xFF) {
+        this->unk160 += 0xF;
     }
     if (Math_CosF(this->unk168) == 0.0f) {
         this->unk170 = 2.0f * Rand_ZeroOne();
@@ -224,9 +218,9 @@ void func_80B212C0(EnTp* this, GlobalContext* globalCtx) {
     if (this->unk15A != 0) {
         Math_SmoothStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 1, 0x2EE, 0);
         this->actor.shape.rot.y = this->actor.world.rot.y;
-        return;
+    } else {
+        func_80B21EE8(this);
     }
-    func_80B21EE8(this);
 }
 
 void func_80B21454(EnTp* this) {
@@ -235,15 +229,13 @@ void func_80B21454(EnTp* this) {
     this->unk15A = 2;
     if (this->actor.params < 0) {
         var_v0 = this->actor.child;
-        if (var_v0 != NULL) {
-            do {
-                var_v0->params = 0xB;
-                var_v0->colChkInfo.health = 0;
-                var_v0 = var_v0->child;
-            } while (var_v0 != NULL);
+        while (var_v0 != NULL) {
+            var_v0->params = 0xB;
+            var_v0->colChkInfo.health = 0;
+            var_v0 = var_v0->child;
         }
         this->unk15A = 0xD;
-        Audio_PlayActorSound2(&this->actor, 0x3866U);
+        Audio_PlayActorSound2(&this->actor, NA_SE_EN_TAIL_DEAD);
     }
     this->unk14C = 1;
     func_80B20DE0(this, func_80B214CC);
@@ -262,20 +254,20 @@ void func_80B214CC(EnTp* this, GlobalContext* globalCtx) {
             sp6C.x = ((Rand_ZeroOne() - 0.5f) * 15.0f) + this->actor.world.pos.x;
             sp6C.z = ((Rand_ZeroOne() - 0.5f) * 15.0f) + this->actor.world.pos.z;
             sp6C.y = ((Rand_ZeroOne() - 0.5f) * 5.0f) + this->actor.world.pos.y;
-            EffectSsDeadDb_Spawn(globalCtx, (Vec3f*)&sp6C, &sp78, &sp78, 0x64, 0, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 1,
-                                 9, 1);
+            EffectSsDeadDb_Spawn(globalCtx, (Vec3f*)&sp6C, &sp78, &sp78, 100, 0, 255, 255, 255, 255, 0, 0, 255, 1, 9,
+                                 1);
             sp6C.x = ((Rand_ZeroOne() - 0.5f) * 15.0f) + this->actor.world.pos.x;
             sp6C.z = ((Rand_ZeroOne() - 0.5f) * 15.0f) + this->actor.world.pos.z;
             sp6C.y = ((Rand_ZeroOne() - 0.5f) * 5.0f) + this->actor.world.pos.y;
-            EffectSsDeadDb_Spawn(globalCtx, (Vec3f*)&sp6C, &sp78, &sp78, 0x64, 0, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 1,
-                                 9, 1);
+            EffectSsDeadDb_Spawn(globalCtx, (Vec3f*)&sp6C, &sp78, &sp78, 100, 0, 255, 255, 255, 255, 0, 0, 255, 1, 9,
+                                 1);
             Item_DropCollectibleRandom(globalCtx, &this->actor, &this->actor.world.pos, 0x50);
         } else {
             for (var_s1 = 0; var_s1 < 1; var_s1++) {
-                temp_v0 = Actor_Spawn(&globalCtx->actorCtx, globalCtx, 0x35, this->actor.world.pos.x,
-                                      this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0xA);
+                temp_v0 = (EnTp*)Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_TP, this->actor.world.pos.x,
+                                             this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0xA);
                 if (temp_v0 != NULL) {
-                    Actor_SetScale(temp_v0, this->actor.scale.z * 0.5f);
+                    Actor_SetScale(&temp_v0->actor, this->actor.scale.z * 0.5f);
                     temp_v0->unk160 = (s16)this->unk160;
                 }
             }
@@ -290,21 +282,14 @@ void func_80B214CC(EnTp* this, GlobalContext* globalCtx) {
     }
 }
 
-static Vec3f D_80B22B00 = { 0.0f, -0.5f, 0.0f };
-static Color_RGBA8 D_80B22B0C = { 0xFF, 0xFF, 0xFF, 0xFF };
-static Color_RGBA8 D_80B22B10 = { 0x96, 0x96, 0x96, 0 };
-
 void func_80B217FC(EnTp* this) {
-    f32 temp_ft5;
-
     this->unk14C = 0;
     this->actor.world.pos.x += (Rand_ZeroOne() - 0.5f) * 5.0f;
     this->actor.world.pos.y += (Rand_ZeroOne() - 0.5f) * 5.0f;
     this->actor.world.pos.z += (Rand_ZeroOne() - 0.5f) * 5.0f;
     this->actor.velocity.x = (Rand_ZeroOne() - 0.5f) * 1.5f;
     this->actor.velocity.y = (Rand_ZeroOne() - 0.5f) * 1.5f;
-    temp_ft5 = (Rand_ZeroOne() - 0.5f) * 1.5f;
-    this->actor.velocity.z = temp_ft5;
+    this->actor.velocity.z = (Rand_ZeroOne() - 0.5f) * 1.5f;
     this->actor.flags &= ~1;
     func_80B20DE0(this, func_80B21900);
 }
@@ -319,47 +304,38 @@ void func_80B21900(EnTp* this, GlobalContext* globalCtx) {
 }
 
 void func_80B2194C(EnTp* this) {
-    f32 temp_ft1;
-
-    temp_ft1 = Rand_ZeroOne() * 15.0f;
-    this->unk15A = (s16)(s32)(temp_ft1 + 40.0f);
+    this->unk15A = (Rand_ZeroOne() * 15.0f) + 40.0f;
     this->unk14C = 8;
     func_80B20DE0(this, func_80B219A8);
 }
 
 void func_80B219A8(EnTp* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-    Actor* sp28;
-    s16 temp_v0_2;
-    s16 temp_v0_3;
-    u8 temp_v0;
+    s32 pad;
+    Player* player;
 
-    sp28 = globalCtx->actorCtx.actorLists[2].head;
+    player = PLAYER;
     Math_SmoothStepToF(&this->actor.speedXZ, 2.5f, 0.1f, 0.2f, 0.0f);
-    Math_SmoothStepToF(&this->actor.world.pos.y, sp28->world.pos.y + 85.0f + this->unk16C, 1.0f,
+    Math_SmoothStepToF(&this->actor.world.pos.y, player->actor.world.pos.y + 85.0f + this->unk16C, 1.0f,
                        this->actor.speedXZ * 0.25f, 0.0f);
-    Audio_PlaySoundGeneral(0x3064U, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
-    temp_v0 = this->unk174.base.atFlags;
-    if (temp_v0 & 2) {
-        this->unk174.base.atFlags = temp_v0 & 0xFFFD;
-        if (sp28 == this->unk174.base.at) {
+    Audio_PlaySoundGeneral(NA_SE_EN_TAIL_FLY - SFX_FLAG, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0,
+                           &D_801333E8);
+    if (this->unk174.base.atFlags & AT_HIT) {
+        this->unk174.base.atFlags &= ~AT_HIT;
+        if (&player->actor == this->unk174.base.at) {
             this->unk15C = 1;
         }
     }
-    temp_v0_2 = this->unk160;
-    if (temp_v0_2 != 0) {
-        this->unk160 = temp_v0_2 - 0xF;
+    if (this->unk160 != 0) {
+        this->unk160 -= 0xF;
     }
     if (Math_CosF(this->unk168) == 0.0f) {
         this->unk170 = Rand_ZeroOne() * 4.0f;
     }
-    temp_fv0 = Math_CosF(this->unk168);
-    temp_v0_3 = this->unk15A;
+    this->actor.world.pos.y += Math_CosF(this->unk168) * ((this->actor.speedXZ * 0.25f) + this->unk170);
     this->actor.world.rot.y += this->unk164;
-    this->actor.world.pos.y += temp_fv0 * ((this->actor.speedXZ * 0.25f) + this->unk170);
     this->unk168 += 0.2f;
-    if (temp_v0_3 != 0) {
-        this->unk15A = temp_v0_3 - 1;
+    if (this->unk15A != 0) {
+        this->unk15A -= 1;
     }
     Math_SmoothStepToS(&this->actor.world.rot.y, Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos), 1,
                        0x2EE, 0);
@@ -380,15 +356,15 @@ void func_80B21B90(EnTp* this) {
 }
 
 void func_80B21BDC(EnTp* this, GlobalContext* globalCtx) {
-    Actor* sp34;
+    Player* player;
     s16 sp32;
 
-    sp34 = globalCtx->actorCtx.actorLists[2].head;
+    player = PLAYER;
     this->unk15C -= 1;
     if (this->actor.xzDistToPlayer < 200.0f) {
-        if (this->unk174.base.atFlags & 2) {
-            this->unk174.base.atFlags &= 0xFFFD;
-            if (sp34 == this->unk174.base.at) {
+        if (this->unk174.base.atFlags & AT_HIT) {
+            this->unk174.base.atFlags &= ~AT_HIT;
+            if (&player->actor == this->unk174.base.at) {
                 this->unk15A = 0;
             }
         }
@@ -396,12 +372,12 @@ void func_80B21BDC(EnTp* this, GlobalContext* globalCtx) {
             this->unk15A -= 1;
             Math_SmoothStepToS(&this->actor.shape.rot.x, 0, 1, 0x1F4, 0);
             Math_SmoothStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 1, 0x5DC, 0);
-            sp32 = Math_Vec3f_Yaw(&this->actor.home.pos, &sp34->world.pos) + 0x4000;
+            sp32 = Math_Vec3f_Yaw(&this->actor.home.pos, &player->actor.world.pos) + 0x4000;
             Math_SmoothStepToF(&this->actor.world.pos.y, this->actor.home.pos.y + 30.0f, 0.3f, 1.0f, 0.3f);
             this->actor.world.pos.x =
-                (Math_SinS((s16)(this->unk15C * 0x7D0)) * (Math_SinS(sp32) * this->unk16C)) + this->actor.home.pos.x;
+                (Math_SinS(this->unk15C * 0x7D0) * (Math_SinS(sp32) * this->unk16C)) + this->actor.home.pos.x;
             this->actor.world.pos.z =
-                (Math_SinS((s16)(this->unk15C * 0x7D0)) * (Math_CosS(sp32) * this->unk16C)) + this->actor.home.pos.z;
+                (Math_SinS(this->unk15C * 0x7D0) * (Math_CosS(sp32) * this->unk16C)) + this->actor.home.pos.z;
         } else {
             this->actor.shape.rot.x = 0;
             this->unk150 = 1;
@@ -412,16 +388,17 @@ void func_80B21BDC(EnTp* this, GlobalContext* globalCtx) {
         if (Math_SmoothStepToF(&this->actor.world.pos.y, this->actor.home.pos.y, 0.3f, 1.5f, 0.3f) == 0.0f) {
             this->unk15A = 0x3C;
         } else {
-            sp32 = Math_Vec3f_Yaw(&this->actor.home.pos, &sp34->world.pos);
+            sp32 = Math_Vec3f_Yaw(&this->actor.home.pos, &player->actor.world.pos);
             this->actor.world.pos.x =
-                (Math_SinS((s16)(this->unk15C * 0x7D0)) * (Math_SinS(sp32) * 6.0f)) + this->actor.home.pos.x;
+                (Math_SinS(this->unk15C * 0x7D0) * (Math_SinS(sp32) * 6.0f)) + this->actor.home.pos.x;
             this->actor.world.pos.z =
-                (Math_SinS((s16)(this->unk15C * 0x7D0)) * (Math_CosS(sp32) * 6.0f)) + this->actor.home.pos.z;
+                (Math_SinS(this->unk15C * 0x7D0) * (Math_CosS(sp32) * 6.0f)) + this->actor.home.pos.z;
         }
     }
     this->actor.shape.rot.y = this->actor.world.rot.y;
     if (this->actor.world.pos.y != this->actor.home.pos.y) {
-        Audio_PlaySoundGeneral(0x3064U, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+        Audio_PlaySoundGeneral(NA_SE_EN_TAIL_FLY - SFX_FLAG, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0,
+                               &D_801333E8);
     }
 }
 
@@ -432,6 +409,9 @@ void func_80B21EE8(EnTp* this) {
 }
 
 void func_80B21F18(EnTp* this, GlobalContext* globalCtx) {
+    static Vec3f D_80B22B00 = { 0.0f, -0.5f, 0.0f };
+    static Color_RGBA8 D_80B22B0C = { 0xFF, 0xFF, 0xFF, 0xFF };
+    static Color_RGBA8 D_80B22B10 = { 0x96, 0x96, 0x96, 0 };
     Vec3f sp54;
     Vec3f sp48;
     s32 sp44;
@@ -446,25 +426,25 @@ void func_80B21F18(EnTp* this, GlobalContext* globalCtx) {
         }
         if ((new_var = this->unk15A) == 0) {
             func_80B21B90(this);
-            var_v0 = this->actor.child;
+            var_v0 = (EnTp*)this->actor.child;
             while (var_v0 != NULL) {
-                var_v0->unk15C = (s16)var_v0->unk15A;
-                var_v0 = var_v0->actor.child;
+                var_v0->unk15C = var_v0->unk15A;
+                var_v0 = (EnTp*)var_v0->actor.child;
             }
         } else {
             if (this->actor.shape.rot.x != -0x4000) {
                 this->unk15A = 0x50;
                 this->actor.velocity.y = 0.0f;
                 this->actor.speedXZ = 0.0f;
-                var_v0 = this->actor.child;
                 this->actor.world.pos = this->actor.home.pos;
                 this->actor.shape.rot.x = -0x4000;
+                var_v0 = (EnTp*)this->actor.child;
                 while (var_v0 != NULL) {
                     var_v0->actor.velocity.y = 0.0f;
                     var_v0->actor.speedXZ = 0.0f;
                     var_v0->actor.world.pos = this->actor.home.pos;
                     var_v0->actor.world.pos.y = this->actor.home.pos.y - 80.0f;
-                    var_v0 = var_v0->actor.child;
+                    var_v0 = (EnTp*)var_v0->actor.child;
                 }
             }
             this->actor.world.pos.y = this->actor.home.pos.y - (f32)this->unk15A;
@@ -482,7 +462,8 @@ void func_80B21F18(EnTp* this, GlobalContext* globalCtx) {
             sp44 = 1;
         }
         if (this->actor.world.pos.y != this->actor.home.pos.y) {
-            Audio_PlaySoundGeneral(0x3064U, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            Audio_PlaySoundGeneral(NA_SE_EN_TAIL_FLY - SFX_FLAG, &this->actor.projectedPos, 4U, &D_801333E0,
+                                   &D_801333E0, &D_801333E8);
         }
         if ((sp44 != 0) && (globalCtx->gameplayFrames & 1)) {
             sp48 = this->actor.world.pos;
@@ -490,8 +471,8 @@ void func_80B21F18(EnTp* this, GlobalContext* globalCtx) {
             sp54.x = Rand_CenteredFloat(5.0f);
             sp54.y = (Rand_ZeroOne() * 3.5f) + 1.5f;
             sp54.z = Rand_CenteredFloat(5.0f);
-            EffectSsDtBubble_SpawnCustomColor(globalCtx, &sp48, (Vec3f*)&sp54, &D_80B22B00, &D_80B22B0C, &D_80B22B10,
-                                              (s16)Rand_S16Offset(0x64, 0x32), 0x14, 0);
+            EffectSsDtBubble_SpawnCustomColor(globalCtx, &sp48, &sp54, &D_80B22B00, &D_80B22B0C, &D_80B22B10,
+                                              Rand_S16Offset(100, 50), 20, 0);
         }
     }
 }
@@ -503,7 +484,7 @@ void func_80B221E8(EnTp* this, GlobalContext* globalCtx) {
     s32 var_s4;
     EnTp* new_var;
 
-    if ((this->unk174.base.acFlags & 2) && (this->unk14C >= 2)) {
+    if ((this->unk174.base.acFlags & AC_HIT) && (this->unk14C >= 2)) {
         var_s2 = 0;
         var_s4 = 0;
         if (this->actor.params < 0) {
@@ -529,44 +510,40 @@ void func_80B221E8(EnTp* this, GlobalContext* globalCtx) {
                 }
             } else {
                 if (var_s4 != 0) {
-                    this->actor.freezeTimer = 0x50;
-                    Audio_PlayActorSound2(&this->actor, 0x389EU);
+                    this->actor.freezeTimer = 80;
+                    Audio_PlayActorSound2(&this->actor, NA_SE_EN_GOMA_JR_FREEZE);
                     if (var_s2 != 0) {
-                        Actor_SetColorFilter(&this->actor, 0, 0xFF, 0, 0x50);
+                        Actor_SetColorFilter(&this->actor, 0, 0xFF, 0, 80);
                     } else {
-                        Actor_SetColorFilter(&this->actor, 0, 0xFF, 0x2000, 0x50);
+                        Actor_SetColorFilter(&this->actor, 0, 0xFF, 0x2000, 80);
                     }
                 }
-                var_s0 = this->actor.parent;
-                if (var_s0 != NULL) {
-                    do {
-                        var_s0->unk174.base.acFlags &= ~2;
-                        if (var_s4 != 0) {
-                            var_s0->actor.freezeTimer = 0x50;
-                            Audio_PlayActorSound2(&this->actor, 0x389EU);
-                            if (var_s2 != 0) {
-                                Actor_SetColorFilter(var_s0, 0, 0xFF, 0, 0x50);
-                            } else {
-                                Actor_SetColorFilter(var_s0, 0, 0xFF, 0x2000, 0x50);
-                            }
+                var_s0 = (EnTp*)this->actor.parent;
+                while (var_s0 != NULL) {
+                    var_s0->unk174.base.acFlags &= ~AC_HIT;
+                    if (var_s4 != 0) {
+                        var_s0->actor.freezeTimer = 80;
+                        Audio_PlayActorSound2(&this->actor, NA_SE_EN_GOMA_JR_FREEZE);
+                        if (var_s2 != 0) {
+                            Actor_SetColorFilter(&var_s0->actor, 0, 0xFF, 0, 80);
+                        } else {
+                            Actor_SetColorFilter(&var_s0->actor, 0, 0xFF, 0x2000, 80);
                         }
-                        var_s0 = var_s0->actor.parent;
-                    } while (var_s0 != NULL);
+                    }
+                    var_s0 = (EnTp*)var_s0->actor.parent;
                 }
-                var_s0_2 = this->actor.child;
-                if (var_s0_2 != NULL) {
-                    do {
-                        var_s0_2->unk174.base.acFlags &= ~2;
-                        if (var_s4 != 0) {
-                            var_s0_2->actor.freezeTimer = 0x50;
-                            if (var_s2 != 0) {
-                                Actor_SetColorFilter(var_s0_2, 0, 0xFF, 0, 0x50);
-                            } else {
-                                Actor_SetColorFilter(var_s0_2, 0, 0xFF, 0x2000, 0x50);
-                            }
+                var_s0_2 = (EnTp*)this->actor.child;
+                while (var_s0_2 != NULL) {
+                    var_s0_2->unk174.base.acFlags &= ~AC_HIT;
+                    if (var_s4 != 0) {
+                        var_s0_2->actor.freezeTimer = 80;
+                        if (var_s2 != 0) {
+                            Actor_SetColorFilter(&var_s0_2->actor, 0, 0xFF, 0, 80);
+                        } else {
+                            Actor_SetColorFilter(&var_s0_2->actor, 0, 0xFF, 0x2000, 80);
                         }
-                        var_s0_2 = var_s0_2->actor.child;
-                    } while (var_s0_2 != NULL);
+                    }
+                    var_s0_2 = (EnTp*)var_s0_2->actor.child;
                 }
             }
         }
@@ -600,18 +577,19 @@ void EnTp_Update(Actor* thisx, GlobalContext* globalCtx) {
         }
         if ((this->actor.speedXZ != 0.0f) && (this->actor.bgCheckFlags & 8)) {
             v = this->actor.wallYaw - this->actor.world.rot.y;
-            if (ABS(v) >= 0x4001) {
+            if (ABS(v) > 0x4000) {
                 if (v >= 0) {
-                    this->actor.world.rot.y = this->actor.world.rot.y - 0x1F4;
+                    this->actor.world.rot.y -= 0x1F4;
                 } else {
-                    this->actor.world.rot.y = this->actor.world.rot.y + 0x1F4;
+                    this->actor.world.rot.y += 0x1F4;
                 }
                 this->actor.shape.rot.y = this->actor.world.rot.y;
             }
         }
         this->actor.shape.rot.z += 0x800;
         if (this->actor.shape.rot.z == 0) {
-            Audio_PlaySoundGeneral(0x3865U, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0, &D_801333E8);
+            Audio_PlaySoundGeneral(NA_SE_EN_TAIL_CRY, &this->actor.projectedPos, 4U, &D_801333E0, &D_801333E0,
+                                   &D_801333E8);
         }
         if (this->unk14C >= 2) {
             CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->unk174.base);
@@ -625,16 +603,15 @@ void EnTp_Update(Actor* thisx, GlobalContext* globalCtx) {
     if (this->unk158 == 0xE) {
         CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->unk174.base);
     }
-    if (!(this->unk162 & 7)) {
-        sp40.r = (s8)this->unk160;
+    if ((this->unk162 & 7) == 0) {
+        sp40.r = this->unk160;
         sp50.x = -this->actor.velocity.x * 0.25f;
         sp50.y = -this->actor.velocity.y * 0.25f;
         sp50.z = -this->actor.velocity.z * 0.25f;
         sp44.x = ((Rand_ZeroOne() - 0.5f) * 25.0f) + this->actor.world.pos.x;
         sp44.y = ((Rand_ZeroOne() - 0.5f) * 20.0f) + this->actor.world.pos.y;
         sp44.z = ((Rand_ZeroOne() - 0.5f) * 25.0f) + this->actor.world.pos.z;
-        EffectSsKiraKira_SpawnSmall(globalCtx, (Vec3f*)&sp44, &sp5C, (Vec3f*)&sp50, (Color_RGBA8*)&sp40,
-                                    (Color_RGBA8*)&sp3C);
+        EffectSsKiraKira_SpawnSmall(globalCtx, &sp44, &sp5C, &sp50, &sp40, &sp3C);
     }
     if ((this->unk14C >= 2) && (this->actor.colChkInfo.health != 0)) {
         CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->unk174.base);
@@ -643,7 +620,6 @@ void EnTp_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnTp_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s16 temp_v0;
-    s16 temp_v0_12;
     EnTp* this = (EnTp*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tp.c", 0x5AB);
@@ -672,8 +648,7 @@ void EnTp_Draw(Actor* thisx, GlobalContext* globalCtx) {
         }
     }
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tp.c", 0x5D7);
-    temp_v0_12 = this->actor.params;
-    if ((temp_v0_12 <= 0) || (temp_v0_12 == 0xB)) {
+    if ((this->actor.params <= 0) || (this->actor.params == 0xB)) {
         Collider_UpdateSpheres(0, &this->unk174);
     }
 }
