@@ -1284,9 +1284,9 @@ segments:
     follows_vram: ovl_Bg_Gnd_Darkmeiro
     bss_size: 0x0
     subsegments:
-      - [0xC48220, asm, overlays/ovl_Bg_Gnd_Firemeiro]
+      - [0xC48220, c, overlays/ovl_Bg_Gnd_Firemeiro]
       - [0xC48720, data, overlays/ovl_Bg_Gnd_Firemeiro]
-      - [0xC48740, rodata, overlays/ovl_Bg_Gnd_Firemeiro]
+      - [0xC48740, .rodata, overlays/ovl_Bg_Gnd_Firemeiro]
       - [0xC48790, rodatabin, rodatabin_80879A30]
 
   - name: ovl_Bg_Gnd_Iceblock
@@ -3874,9 +3874,9 @@ segments:
     follows_vram: ovl_En_Daiku_Kakariko
     bss_size: 0x0
     subsegments:
-      - [0xD9C3C0, asm, overlays/ovl_En_Dekubaba]
+      - [0xD9C3C0, c, overlays/ovl_En_Dekubaba]
       - [0xD9FA90, data, overlays/ovl_En_Dekubaba]
-      - [0xD9FC30, rodata, overlays/ovl_En_Dekubaba]
+      - [0xD9FC30, .rodata, overlays/ovl_En_Dekubaba]
       - [0xD9FDD0, rodatabin, rodatabin_809E91E0]
 
   - name: ovl_En_Dekunuts
@@ -4209,9 +4209,9 @@ segments:
     follows_vram: ovl_En_Firefly
     bss_size: 0x0
     subsegments:
-      - [0xDCBE70, asm, overlays/ovl_En_Fish]
+      - [0xDCBE70, c, overlays/ovl_En_Fish]
       - [0xDCDC00, data, overlays/ovl_En_Fish]
-      - [0xDCDC90, rodata, overlays/ovl_En_Fish]
+      - [0xDCDC90, .rodata, overlays/ovl_En_Fish]
       - [0xDCDDF0, rodatabin, rodatabin_80A17200]
 
   - name: ovl_En_Floormas
@@ -5770,9 +5770,9 @@ segments:
     follows_vram: ovl_En_Tubo_Trap
     bss_size: 0x0
     subsegments:
-      - [0xEDC500, asm, overlays/ovl_En_Vali]
+      - [0xEDC500, c, overlays/ovl_En_Vali]
       - [0xEDE6D0, data, overlays/ovl_En_Vali]
-      - [0xEDE810, rodata, overlays/ovl_En_Vali]
+      - [0xEDE810, .rodata, overlays/ovl_En_Vali]
       - [0xEDE950, rodatabin, rodatabin_80B28B00]
 
   - name: ovl_En_Vase
@@ -5878,9 +5878,9 @@ segments:
     follows_vram: ovl_En_Weiyer
     bss_size: 0x0
     subsegments:
-      - [0xEE9AE0, asm, overlays/ovl_En_Wf]
+      - [0xEE9AE0, c, overlays/ovl_En_Wf]
       - [0xEED7C0, data, overlays/ovl_En_Wf]
-      - [0xEED950, rodata, overlays/ovl_En_Wf]
+      - [0xEED950, .rodata, overlays/ovl_En_Wf]
       - [0xEEDA90, rodatabin, rodatabin_80B37C60]
 
   - name: ovl_En_Wonder_Item
@@ -5977,9 +5977,9 @@ segments:
     follows_vram: ovl_En_Yukabyun
     bss_size: 0x10
     subsegments:
-      - [0xEF9D60, asm, overlays/ovl_En_Zf]
+      - [0xEF9D60, c, overlays/ovl_En_Zf]
       - [0xEFFDA0, data, overlays/ovl_En_Zf]
-      - [0xF00020, rodata, overlays/ovl_En_Zf]
+      - [0xF00020, .rodata, overlays/ovl_En_Zf]
       - [0xF00160, rodatabin, rodatabin_80B4A450]
       - { name: overlays/ovl_En_Zf, type: bss, vram: 0x80B4AB30 }
 
