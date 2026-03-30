@@ -9,12 +9,19 @@ void BgTokiHikari_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgTokiHikari_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgTokiHikari_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06000880;
-extern UNK_TYPE D_060009C0;
-extern UNK_TYPE D_06000A10;
-extern UNK_TYPE D_06007E20;
-extern UNK_TYPE D_06007EE0;
-extern UNK_TYPE D_06008190;
+void func_808B9F98(BgTokiHikari* this, GlobalContext* globalCtx);
+void func_808BA018(BgTokiHikari* this, GlobalContext* globalCtx);
+void func_808BA204(BgTokiHikari* this, GlobalContext* globalCtx);
+void func_808BA22C(BgTokiHikari* this, GlobalContext* globalCtx);
+void func_808BA274(BgTokiHikari* this, GlobalContext* globalCtx);
+void func_808BA2CC(BgTokiHikari* this, GlobalContext* globalCtx);
+
+extern Gfx D_6000880[];
+extern Gfx D_60009C0[];
+extern Gfx D_6000A10[];
+extern Gfx D_6007E20[];
+extern Gfx D_6007EE0[];
+extern Gfx D_6008190[];
 
 /*
 const ActorInit Bg_Toki_Hikari_InitVars = {
