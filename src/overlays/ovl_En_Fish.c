@@ -45,18 +45,9 @@ extern AnimationHeader D_40185FC;
 extern FlexSkeletonHeader D_4018FE0;
 extern AnimationHeader D_401909C;
 
-/*
-const ActorInit En_Fish_InitVars = {
-    ACTOR_EN_FISH,
-    ACTORCAT_ITEMACTION,
-    FLAGS,
-    OBJECT_GAMEPLAY_KEEP,
-    sizeof(EnFish),
-    (ActorFunc)EnFish_Init,
-    (ActorFunc)EnFish_Destroy,
-    (ActorFunc)EnFish_Update,
-    (ActorFunc)EnFish_Draw,
-};
+static EnFish* D_80A17010 = NULL;
+static f32 D_80A17014 = 0.0f;
+static f32 D_80A17018 = 0.0f;
 
 static ColliderJntSphElementInit D_80A1701C[1] = {
     {
@@ -84,15 +75,33 @@ static ColliderJntSphInit D_80A17040 = {
     1,
     D_80A1701C,
 };
-*/
+
+const ActorInit En_Fish_InitVars = {
+    ACTOR_EN_FISH,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    OBJECT_GAMEPLAY_KEEP,
+    sizeof(EnFish),
+    (ActorFunc)EnFish_Init,
+    (ActorFunc)EnFish_Destroy,
+    (ActorFunc)EnFish_Update,
+    (ActorFunc)EnFish_Draw,
+};
+
+static InitChainEntry D_80A17070[4] = {
+    ICHAIN_VEC3F_DIV1000(scale, 10, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneForward, 900, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 40, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneDownward, 700, ICHAIN_STOP),
+};
 
 typedef struct struct_80A17080 {
     /* 0x0 */ f32 unk0;
     /* 0x4 */ f32 unk4;
     /* 0x8 */ f32 unk8;
 } struct_80A17080; // size = 0xC
-extern struct_80A17080 D_80A17080;
-extern struct_80A17080 D_80A1708C;
+static struct_80A17080 D_80A17080 = { 0.0f, 0.04f, 0.09f };
+static struct_80A17080 D_80A1708C = { 0.5f, 0.1f, 0.15f };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Fish/func_80A15280.s")
 

@@ -4210,7 +4210,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xDCBE70, c, overlays/ovl_En_Fish]
-      - [0xDCDC00, data, overlays/ovl_En_Fish]
+      - [0xDCDC00, .data, overlays/ovl_En_Fish]
       - [0xDCDC90, .rodata, overlays/ovl_En_Fish]
       - [0xDCDDF0, rodatabin, rodatabin_80A17200]
 
