@@ -36,7 +36,6 @@ extern Gfx D_6000000[];
 extern Gfx D_60008D0[];
 extern UNK_TYPE D_6000C68;
 
-/*
 const ActorInit En_Tp_InitVars = {
     ACTOR_EN_TP,
     ACTORCAT_ENEMY,
@@ -75,14 +74,25 @@ static ColliderJntSphInit D_80B22AB4 = {
     1,
     D_80B22A90,
 };
-*/
 
-extern Vec3f D_80B22AE8;
-extern Vec3f D_80B22AF4;
-extern Vec3f D_80B22B14;
-extern Vec3f D_80B22B20;
-extern Color_RGBA8 D_80B22B2C;
-extern Color_RGBA8 D_80B22B30;
+static DamageTable D_80B22AC4 = {
+    {
+        0x10, 0xF2, 0, 0, 0xF1, 0, 0xE2, 0,    0xE1, 0xE2, 0xE4, 0,    0, 0, 0,    0,
+        0,    0,    0, 0, 0,    0, 0xE1, 0xE4, 0xE2, 0xE2, 0xE8, 0xE4, 0, 0, 0xE4, 0,
+    },
+};
+static InitChainEntry D_80B22AE4[] = {
+    ICHAIN_F32(targetArrowOffset, 10, ICHAIN_STOP),
+};
+static Vec3f D_80B22AE8 = { 0.0f, 0.5f, 0.0f };
+static Vec3f D_80B22AF4 = { 0.0f, 0.0f, 0.0f };
+static Vec3f D_80B22B00 = { 0.0f, -0.5f, 0.0f };
+static Color_RGBA8 D_80B22B0C = { 0xFF, 0xFF, 0xFF, 0xFF };
+static Color_RGBA8 D_80B22B10 = { 0x96, 0x96, 0x96, 0 };
+static Vec3f D_80B22B14 = { 0.0f, 0.0f, 0.0f };
+static Vec3f D_80B22B20 = { 0.0f, -0.6f, 0.0f };
+static Color_RGBA8 D_80B22B2C = { 0, 0, 255, 255 };
+static Color_RGBA8 D_80B22B30 = { 0, 0, 0, 0 };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Tp/func_80B20DE0.s")
 
