@@ -5722,9 +5722,9 @@ segments:
     follows_vram: ovl_En_Toryo
     bss_size: 0x0
     subsegments:
-      - [0xED6C30, asm, overlays/ovl_En_Tp]
+      - [0xED6C30, c, overlays/ovl_En_Tp]
       - [0xED88C0, data, overlays/ovl_En_Tp]
-      - [0xED8990, rodata, overlays/ovl_En_Tp]
+      - [0xED8990, .rodata, overlays/ovl_En_Tp]
       - [0xED89F0, rodatabin, rodatabin_80B22BA0]
 
   - name: ovl_En_Tr
