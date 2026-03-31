@@ -55,7 +55,6 @@ extern Gfx D_6002740[];
 extern Gfx D_60027D8[];
 extern SkeletonHeader D_6004848;
 
-/*
 const ActorInit En_Vali_InitVars = {
     ACTOR_EN_VALI,
     ACTORCAT_ENEMY,
@@ -107,11 +106,28 @@ static ColliderCylinderInit D_80B288F0 = {
     },
     { 17, 35, -15, { 0, 0, 0 } },
 };
-*/
 
-extern Vec3f D_80B28988;
-extern Gfx D_80B28998[];
-extern Gfx D_80B289A8[];
+static CollisionCheckInfoInit D_80B2891C = { 2, 0x12, 0x20, 0xFE };
+static DamageTable D_80B28924 = {
+    {
+        0x10, 2,    0xE0, 2, 0x10, 2, 2, 2, 0xF1, 0xF2, 0xF4, 0x24, 0x34, 2, 2, 2,
+        2,    0x24, 0x34, 0, 0,    0, 1, 4, 2,    2,    8,    4,    0,    0, 4, 0,
+    },
+};
+static InitChainEntry D_80B28944[3] = {
+    ICHAIN_S8(naviEnemyId, 24, ICHAIN_CONTINUE),
+    ICHAIN_VEC3F_DIV1000(scale, 10, ICHAIN_CONTINUE),
+    ICHAIN_F32(targetArrowOffset, 5000, ICHAIN_STOP),
+};
+static Color_RGBA8 D_80B28950 = { 0xFF, 0xFF, 0xFF, 0xFF };
+static Color_RGBA8 D_80B28954 = { 0xC8, 0xFF, 0xFF, 0xFF };
+static Vec3f D_80B28958 = { 0.0f, 0.0f, 0.0f };
+static Vec3f D_80B28964 = { 0.0f, 0.0f, 0.0f };
+static Vec3f D_80B28970 = { 3000.0f, 0.0f, 0.0f };
+static Vec3f D_80B2897C = { -1000.0f, 0.0f, 0.0f };
+static Vec3f D_80B28988 = { 1.0f, 1.0f, 1.0f };
+static Gfx D_80B28998[2] = { { { 0xFC621603, 0x1F5BFFF8 } }, { { 0xDF000000, 0 } } };
+static Gfx D_80B289A8[3] = { { { 0xFC121603, 0xFF5BFFF8 } }, { { 0xDF000000, 0 } }, { { 0, 0 } } };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Vali/EnVali_Init.s")
 
