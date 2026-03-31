@@ -17,8 +17,6 @@ void BgGndFiremeiro_Update(Actor* thisx, GlobalContext* globalCtx);
 void BgGndFiremeiro_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 void BgGndFiremeiro_RiseWaitAtTop(BgGndFiremeiro* this, GlobalContext* globalCtx);
-void func_80879668(BgGndFiremeiro* this, GlobalContext* globalCtx);
-void func_80879808(BgGndFiremeiro* this, GlobalContext* globalCtx);
 
 extern Gfx gFireTrialPlatformDL[];
 extern CollisionHeader gFireTrialPlatformCol;
