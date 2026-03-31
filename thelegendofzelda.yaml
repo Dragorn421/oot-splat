@@ -3875,7 +3875,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xD9C3C0, c, overlays/ovl_En_Dekubaba]
-      - [0xD9FA90, data, overlays/ovl_En_Dekubaba]
+      - [0xD9FA90, .data, overlays/ovl_En_Dekubaba]
       - [0xD9FC30, .rodata, overlays/ovl_En_Dekubaba]
       - [0xD9FDD0, rodatabin, rodatabin_809E91E0]
 

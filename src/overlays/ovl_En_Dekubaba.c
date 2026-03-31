@@ -56,7 +56,8 @@ extern Gfx D_6001828[];
 extern SkeletonHeader D_6002A40;
 extern Gfx D_6003070[];
 
-/*
+static Vec3f D_809E8EA0 = { 0.0f, 0.0f, 0.0f };
+
 const ActorInit En_Dekubaba_InitVars = {
     ACTOR_EN_DEKUBABA,
     ACTORCAT_ENEMY,
@@ -161,7 +162,26 @@ static ColliderJntSphInit D_809E8FC8 = {
     7,
     D_809E8ECC,
 };
-*/
+
+static CollisionCheckInfoInit D_809E8FD8 = { 2, 0x19, 0x19, 0xFF };
+static DamageTable D_809E8FE0 = {
+    {
+        0x10, 2,    1, 2, 0xE2, 2, 2,    2,    0xF1, 0xF2, 0xF4, 0x24, 2, 2, 2, 2,
+        2,    0x24, 0, 0, 0,    0, 0xF1, 0xF4, 0xF2, 0xF2, 0xF8, 0xF4, 0, 0, 4, 0,
+    },
+};
+static DamageTable D_809E9000 = {
+    {
+        0x10, 2,    1, 2, 0xE2, 2, 2,    0x10, 0xF1, 0xF2, 0xF4, 0x24, 2, 2, 2, 2,
+        2,    0x24, 0, 0, 0,    0, 0xF1, 0xF4, 0xF2, 0xF2, 0xF8, 0xF4, 0, 0, 4, 0,
+    },
+};
+static InitChainEntry D_809E9020[] = {
+    ICHAIN_F32(targetArrowOffset, 1500, ICHAIN_STOP),
+};
+static Color_RGBA8 D_809E9024 = { 0x69, 0xFF, 0x69, 0xFF };
+static Color_RGBA8 D_809E9028 = { 0x96, 0xFA, 0x96, 0 };
+static u32 D_809E902C[5] = { (u32)D_6001330, 0x06001628, (u32)D_6001828, 0, 0 };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Dekubaba/EnDekubaba_Init.s")
 
