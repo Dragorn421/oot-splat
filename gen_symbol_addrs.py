@@ -17,7 +17,7 @@ OPTS = {
     "D_8015FA98": {"size": "0x210"},
 }
 
-for name, addr, size in sorted(
+for name, addr, size_bad_do_not_use in sorted(
     pynm.nm_syms_sized(str(elf_p)),
     key=lambda it: it[1],
 ):
@@ -34,8 +34,7 @@ for name, addr, size in sorted(
     already_defined_names.add(name)
     l = f"{name} = 0x{addr:08X};"
     options = dict[str, str]()
-    if size is not None:
-        options["size"] = f"0x{size:X}"
+    # used to set size using size_bad_do_not_use but actually IDO messes up symbol sizes
     options.update(OPTS.get(name, {}))
     if options:
         l += " // " + " ".join(f"{k}:{v}" for k, v in options.items())
