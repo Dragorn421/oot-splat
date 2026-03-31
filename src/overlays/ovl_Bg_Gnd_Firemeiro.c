@@ -5,7 +5,7 @@
  */
 
 #include "z_bg_gnd_firemeiro.h"
-//#include "objects/object_demo_kekkai/object_demo_kekkai.h"
+// #include "objects/object_demo_kekkai/object_demo_kekkai.h"
 
 #define FLAGS 0x00000030
 
@@ -33,11 +33,10 @@ const ActorInit Bg_Gnd_Firemeiro_InitVars = {
     (ActorFunc)BgGndFiremeiro_Draw,
 };
 
-
-void BgGndFiremeiro_Init(Actor *thisx, GlobalContext *globalCtx2) {
+void BgGndFiremeiro_Init(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
-    BgGndFiremeiro *this = (BgGndFiremeiro *) thisx;
-    CollisionHeader *colHeader = NULL;
+    BgGndFiremeiro* this = (BgGndFiremeiro*)thisx;
+    CollisionHeader* colHeader = NULL;
 
     ActorShape_Init(&this->dyna.actor.shape, 0.0f, NULL, 0.0f);
     Actor_SetScale(&this->dyna.actor, 0.1f);
@@ -50,7 +49,6 @@ void BgGndFiremeiro_Init(Actor *thisx, GlobalContext *globalCtx2) {
     }
 }
 
-
 void BgGndFiremeiro_Destroy(Actor* thisx, GlobalContext* play2) {
     GlobalContext* play = play2;
     BgGndFiremeiro* this = (BgGndFiremeiro*)thisx;
@@ -61,7 +59,7 @@ void BgGndFiremeiro_Destroy(Actor* thisx, GlobalContext* play2) {
     DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
 }
 
-void BgGndFIremeiro_Sink(BgGndFiremeiro *this, GlobalContext *globalCtx) {
+void BgGndFIremeiro_Sink(BgGndFiremeiro* this, GlobalContext* globalCtx) {
     f32 sinkTarget = this->homePos.y - 150.0f;
 
     if (func_8004356C(&this->dyna) != 0) {
@@ -82,7 +80,7 @@ void BgGndFIremeiro_Sink(BgGndFiremeiro *this, GlobalContext *globalCtx) {
     }
 }
 
-void BgGndFiremeiro_Shake(BgGndFiremeiro *this, GlobalContext *globalCtx) {
+void BgGndFiremeiro_Shake(BgGndFiremeiro* this, GlobalContext* globalCtx) {
     s32 pad;
     f32 shakeOffset;
 
@@ -97,7 +95,7 @@ void BgGndFiremeiro_Shake(BgGndFiremeiro *this, GlobalContext *globalCtx) {
             this->dyna.actor.world.pos = this->homePos;
             this->dyna.actor.world.pos.x += shakeOffset * Math_SinS(this->timer * 0x2FFF);
             this->dyna.actor.world.pos.z += shakeOffset * Math_CosS(this->timer * 0x2FFF);
-            this->dyna.actor.world.pos.y += Math_CosS(this->timer* 0x7FFF);
+            this->dyna.actor.world.pos.y += Math_CosS(this->timer * 0x7FFF);
             if (!(this->timer % 4)) {
                 Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_BLOCK_SHAKE);
             }
@@ -112,8 +110,7 @@ void BgGndFiremeiro_Shake(BgGndFiremeiro *this, GlobalContext *globalCtx) {
     }
 }
 
-
-void BgGndFiremeiro_RiseWaitAtTop(BgGndFiremeiro *this, GlobalContext *globalCtx) {
+void BgGndFiremeiro_RiseWaitAtTop(BgGndFiremeiro* this, GlobalContext* globalCtx) {
     Player* player = PLAYER;
     Actor* thisx = &this->dyna.actor;
 
@@ -141,11 +138,12 @@ void BgGndFiremeiro_Update(Actor* thisx, GlobalContext* globalCtx) {
     this->actionFunc(this, globalCtx);
 }
 
-void BgGndFiremeiro_Draw(Actor *thisx, GlobalContext *globalCtx) {
+void BgGndFiremeiro_Draw(Actor* thisx, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_gnd_firemeiro.c", 280);
 
     func_800943C8(globalCtx->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_gnd_firemeiro.c", 282), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_gnd_firemeiro.c", 282),
+              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, gFireTrialPlatformDL);
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_gnd_firemeiro.c", 285);
