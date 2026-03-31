@@ -15,14 +15,45 @@ void EnVali_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnVali_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnVali_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06000710;
-extern UNK_TYPE D_06000854;
-extern UNK_TYPE D_06000B34;
-extern UNK_TYPE D_060014AC;
-extern UNK_TYPE D_06002610;
-extern UNK_TYPE D_06002740;
-extern UNK_TYPE D_060027D8;
-extern UNK_TYPE D_06004848;
+void func_80B26878(EnVali* this);
+void func_80B268C8(EnVali* this);
+void func_80B268FC(EnVali* this);
+void func_80B26B18(EnVali* this);
+void func_80B26B4C(EnVali* this);
+void func_80B26BBC(EnVali* this);
+void func_80B26BF8(EnVali* this);
+void func_80B26C50(EnVali* this, GlobalContext* globalCtx);
+void func_80B26D54(EnVali* this);
+void func_80B26DE0(EnVali* this);
+void func_80B26E40(EnVali* this);
+void func_80B26E9C(EnVali* this, GlobalContext* globalCtx);
+void func_80B27098(EnVali* this, GlobalContext* globalCtx);
+void func_80B270D8(EnVali* this, GlobalContext* globalCtx);
+void func_80B2716C(EnVali* this, GlobalContext* globalCtx);
+void func_80B27318(EnVali* this, GlobalContext* globalCtx);
+void func_80B273D0(EnVali* this, GlobalContext* globalCtx);
+void func_80B2742C(EnVali* this, GlobalContext* globalCtx);
+void func_80B27464(EnVali* this, GlobalContext* globalCtx);
+void func_80B274A0(EnVali* this, GlobalContext* globalCtx);
+void func_80B27654(EnVali* this, GlobalContext* globalCtx);
+void func_80B27710(EnVali* this, GlobalContext* globalCtx);
+void func_80B278A0(EnVali* this, GlobalContext* globalCtx);
+void func_80B2790C(EnVali* this, GlobalContext* globalCtx);
+void func_80B27C1C(EnVali* this, f32 arg1, Vec3f* arg2);
+void func_80B27E38(EnVali* this, f32 arg1, Vec3f* arg2);
+s32 func_80B28054(EnVali* this, f32 arg1);
+s32 func_80B281F0(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, EnVali* this, Gfx** gfx);
+void func_80B28280(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnVali* this, Gfx** gfx);
+void func_80B28344(EnVali* this, GlobalContext* globalCtx);
+
+extern AnimationHeader D_6000710;
+extern AnimationHeader D_6000854;
+extern AnimationHeader D_6000B34;
+extern AnimationHeader D_60014AC;
+extern Gfx D_6002610[];
+extern Gfx D_6002740[];
+extern Gfx D_60027D8[];
+extern SkeletonHeader D_6004848;
 
 /*
 const ActorInit En_Vali_InitVars = {
@@ -77,6 +108,10 @@ static ColliderCylinderInit D_80B288F0 = {
     { 17, 35, -15, { 0, 0, 0 } },
 };
 */
+
+extern Vec3f D_80B28988;
+extern Gfx D_80B28998[];
+extern Gfx D_80B289A8[];
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Vali/EnVali_Init.s")
 
