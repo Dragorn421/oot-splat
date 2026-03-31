@@ -21,7 +21,6 @@ void BgGndFiremeiro_RiseWaitAtTop(BgGndFiremeiro* this, GlobalContext* globalCtx
 extern Gfx gFireTrialPlatformDL[];
 extern CollisionHeader gFireTrialPlatformCol;
 
-/*
 const ActorInit Bg_Gnd_Firemeiro_InitVars = {
     ACTOR_BG_GND_FIREMEIRO,
     ACTORCAT_PROP,
@@ -33,7 +32,6 @@ const ActorInit Bg_Gnd_Firemeiro_InitVars = {
     (ActorFunc)BgGndFiremeiro_Update,
     (ActorFunc)BgGndFiremeiro_Draw,
 };
-*/
 
 
 void BgGndFiremeiro_Init(Actor *thisx, GlobalContext *globalCtx2) {
