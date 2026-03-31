@@ -1285,7 +1285,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xC48220, c, overlays/ovl_Bg_Gnd_Firemeiro]
-      - [0xC48720, data, overlays/ovl_Bg_Gnd_Firemeiro]
+      - [0xC48720, .data, overlays/ovl_Bg_Gnd_Firemeiro]
       - [0xC48740, .rodata, overlays/ovl_Bg_Gnd_Firemeiro]
       - [0xC48790, rodatabin, rodatabin_80879A30]
 
