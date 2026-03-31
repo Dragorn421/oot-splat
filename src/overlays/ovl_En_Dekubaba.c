@@ -1,5 +1,5 @@
 #include "z_en_dekubaba.h"
-//#include "objects/gameplay_keep/gameplay_keep.h"
+// #include "objects/gameplay_keep/gameplay_keep.h"
 
 #define FLAGS 0x00000005
 
@@ -10,13 +10,51 @@ void EnDekubaba_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnDekubaba_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnDekubaba_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06000208;
-extern UNK_TYPE D_060002B8;
-extern UNK_TYPE D_060010F0;
-extern UNK_TYPE D_06001330;
-extern UNK_TYPE D_06001828;
-extern UNK_TYPE D_06002A40;
-extern UNK_TYPE D_06003070;
+void func_809E5A38(EnDekubaba* arg0);
+void func_809E5ABC(EnDekubaba* arg0);
+void func_809E5D28(EnDekubaba* arg0);
+void func_809E5E58(EnDekubaba* arg0);
+void func_809E5F44(EnDekubaba* arg0);
+void func_809E5F9C(EnDekubaba* arg0);
+void func_809E5FBC(EnDekubaba* arg0);
+void func_809E6000(EnDekubaba* arg0);
+void func_809E6078(EnDekubaba* arg0);
+void func_809E60A8(EnDekubaba* arg0, s32 arg1);
+void func_809E6170(EnDekubaba* arg0);
+void func_809E61E0(EnDekubaba* arg0);
+void func_809E6264(EnDekubaba* arg0);
+void func_809E63EC(EnDekubaba* arg0);
+void func_809E645C(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E64F4(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E65A0(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E6A04(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E6DCC(EnDekubaba* arg0);
+void func_809E6ED4(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E7104(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E738C(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E7458(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E77E4(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E78DC(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E79EC(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E7A88(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E7BB0(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E7F14(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E80D8(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E8140(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E858C(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E86B8(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E89E4(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E8AD8(EnDekubaba* arg0, GlobalContext* arg1);
+void func_809E8C0C(GlobalContext* arg0, s32 arg1, Gfx** arg2, Vec3s* arg3, EnDekubaba* this);
+
+extern Gfx D_4049210[];
+extern AnimationHeader D_6000208;
+extern AnimationHeader D_60002B8;
+extern Gfx D_60010F0[];
+extern Gfx D_6001330[];
+extern Gfx D_6001828[];
+extern SkeletonHeader D_6002A40;
+extern Gfx D_6003070[];
 
 /*
 const ActorInit En_Dekubaba_InitVars = {
