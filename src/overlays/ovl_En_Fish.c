@@ -109,15 +109,17 @@ f32 func_80A15280(Vec3f* arg0, Vec3f* arg1) {
 
     temp_fv1 = arg0->x - arg1->x;
     temp_fa0 = arg0->z - arg1->z;
-    return (temp_fv1 * temp_fv1) + (temp_fa0 * temp_fa0);
+    return SQ(temp_fv1) + SQ(temp_fa0);
 }
 
 void func_80A152AC(EnFish* this) {
-    Animation_Change(&this->unk1AC, &D_401909C, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_401909C), 1U, 2.0f);
+    Animation_Change(&this->unk1AC, &D_401909C, 1.0f, 0.0f, Animation_GetLastFrame(&D_401909C), ANIMMODE_LOOP_INTERP,
+                     2.0f);
 }
 
 void func_80A15310(EnFish* this) {
-    Animation_Change(&this->unk1AC, &D_40185FC, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_40185FC), 1U, 2.0f);
+    Animation_Change(&this->unk1AC, &D_40185FC, 1.0f, 0.0f, Animation_GetLastFrame(&D_40185FC), ANIMMODE_LOOP_INTERP,
+                     2.0f);
 }
 
 void func_80A15374(EnFish* this) {
@@ -166,13 +168,11 @@ void EnFish_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->actor.flags |= 0x10;
         ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 8.0f);
         func_80A15F24(this);
-        return;
-    }
-    if (sp3A == 1) {
+    } else if (sp3A == 1) {
         func_80A16618(this);
-        return;
+    } else {
+        func_80A157A4(this);
     }
-    func_80A157A4(this);
 }
 
 void EnFish_Destroy(Actor* thisx, GlobalContext* globalCtx2) {
@@ -194,10 +194,10 @@ s32 func_80A15688(EnFish* this, GlobalContext* globalCtx) {
 
     temp_v0 = globalCtx->actorCtx.actorLists[2].head;
     if (this->actor.xzDistToPlayer < 32.0f) {
-        sp1C.x = (Math_SinS((s16)(this->actor.yawTowardsPlayer + 0x8000)) * 16.0f) + temp_v0->world.pos.x;
+        sp1C.x = (Math_SinS(this->actor.yawTowardsPlayer + 0x8000) * 16.0f) + temp_v0->world.pos.x;
         sp1C.y = temp_v0->world.pos.y;
-        sp1C.z = (Math_CosS((s16)(this->actor.yawTowardsPlayer + 0x8000)) * 16.0f) + temp_v0->world.pos.z;
-        if (func_80A15280((Vec3f*)&sp1C, &this->actor.world.pos) <= 400.0f) {
+        sp1C.z = (Math_CosS(this->actor.yawTowardsPlayer + 0x8000) * 16.0f) + temp_v0->world.pos.z;
+        if (func_80A15280(&sp1C, &this->actor.world.pos) <= SQ(20.0f)) {
             return 1;
         }
     }
@@ -218,27 +218,16 @@ void func_80A157A4(EnFish* this) {
 }
 
 void func_80A157FC(EnFish* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
-
     func_80A155D0(this);
     Math_SmoothStepToF(&this->actor.speedXZ, 0.0f, 0.05f, 0.3f, 0.0f);
-    temp_fv0 = (this->actor.speedXZ * 1.4f) + 0.8f;
-    if (temp_fv0 > 2.0f) {
-        this->unk1AC.playSpeed = 2.0f;
-    } else {
-        this->unk1AC.playSpeed = temp_fv0;
-    }
+    this->unk1AC.playSpeed = CLAMP_MAX((this->actor.speedXZ * 1.4f) + 0.8f, 2.0f);
     SkelAnime_Update(&this->unk1AC);
     this->actor.shape.rot.y = this->actor.world.rot.y;
     if (this->unk248 <= 0) {
         func_80A158EC(this);
-        return;
-    }
-    if (&this->actor == this->actor.child) {
+    } else if (this->actor.child == &this->actor) {
         func_80A15D18(this);
-        return;
-    }
-    if (func_80A15774(this, globalCtx) != 0) {
+    } else if (func_80A15774(this, globalCtx)) {
         func_80A15AD4(this);
     }
 }
@@ -253,36 +242,27 @@ void func_80A158EC(EnFish* this) {
 }
 
 void func_80A15944(EnFish* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
+    s32 pad;
 
     func_80A155D0(this);
     Math_SmoothStepToF(&this->actor.speedXZ, 1.8f, 0.08f, 0.4f, 0.0f);
-    if ((func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > 6400.0f) || (this->unk248 < 4)) {
+    if ((func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > SQ(80.0f)) || (this->unk248 < 4)) {
         Math_StepToAngleS(&this->actor.world.rot.y, Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos),
                           0xBB8);
     } else {
-        if ((this->actor.child != NULL) && (&this->actor != this->actor.child)) {
+        if ((this->actor.child != NULL) && (this->actor.child != &this->actor)) {
             Math_StepToAngleS(&this->actor.world.rot.y,
                               Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.child->world.pos), 0xBB8);
         }
     }
     this->actor.shape.rot.y = this->actor.world.rot.y;
-    temp_fv0 = (this->actor.speedXZ * 1.5f) + 0.8f;
-    if (temp_fv0 > 4.0f) {
-        this->unk1AC.playSpeed = 4.0f;
-    } else {
-        this->unk1AC.playSpeed = temp_fv0;
-    }
+    this->unk1AC.playSpeed = CLAMP_MAX((this->actor.speedXZ * 1.5f) + 0.8f, 4.0f);
     SkelAnime_Update(&this->unk1AC);
     if (this->unk248 <= 0) {
         func_80A157A4(this);
-        return;
-    }
-    if (&this->actor == this->actor.child) {
+    } else if (this->actor.child == &this->actor) {
         func_80A15D18(this);
-        return;
-    }
-    if (func_80A15774(this, globalCtx) != 0) {
+    } else if (func_80A15774(this, globalCtx)) {
         func_80A15AD4(this);
     }
 }
@@ -306,23 +286,25 @@ void func_80A15B2C(EnFish* this, GlobalContext* globalCtx) {
     func_80A155D0(this);
     sp34 = func_80A15774(this, globalCtx);
     Math_SmoothStepToF(&this->actor.speedXZ, 4.2f, 0.08f, 1.4f, 0.0f);
-    if (func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > 25600.0f) {
+    if (func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > SQ(160.0f)) {
         var_a1 = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos);
         Math_StepToAngleS(&this->actor.world.rot.y, var_a1, 0xBB8);
     } else {
-        if ((this->actor.child != NULL) && (&this->actor != this->actor.child)) {
+        if ((this->actor.child != NULL) && (this->actor.child != &this->actor)) {
             var_a1 = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.child->world.pos);
             Math_StepToAngleS(&this->actor.world.rot.y, var_a1, 0x7D0);
-        } else if (sp34 != 0) {
-            temp_v0_2 = globalCtx->state.frames; // unk9E;
+        } else if (sp34) {
+            temp_v0_2 = globalCtx->state.frames;
             if (globalCtx) {}
             var_a1 = this->actor.yawTowardsPlayer + 0x8000;
             if (temp_v0_2 & 0x10) {
                 if (temp_v0_2 & 0x20) {
-                    var_a1 = (var_a1 + 0x2000);
+                    var_a1 += 0x2000;
                 }
-            } else if (temp_v0_2 & 0x20) {
-                var_a1 = (var_a1 - 0x2000);
+            } else {
+                if (temp_v0_2 & 0x20) {
+                    var_a1 -= 0x2000;
+                }
             }
             Math_StepToAngleS(&this->actor.world.rot.y, var_a1, 0x7D0);
         }
@@ -330,11 +312,9 @@ void func_80A15B2C(EnFish* this, GlobalContext* globalCtx) {
     this->actor.shape.rot.y = this->actor.world.rot.y;
     this->unk1AC.playSpeed = CLAMP_MAX((this->actor.speedXZ * 1.5f) + 0.8f, 4.0f);
     SkelAnime_Update(&this->unk1AC);
-    if ((this->unk248 <= 0) || (sp34 == 0)) {
+    if ((this->unk248 <= 0) || !sp34) {
         func_80A157A4(this);
-        return;
-    }
-    if (&this->actor == this->actor.child) {
+    } else if (this->actor.child == &this->actor) {
         func_80A15D18(this);
     }
 }
@@ -350,28 +330,28 @@ void func_80A15D18(EnFish* this) {
 
 void func_80A15D68(EnFish* this, GlobalContext* globalCtx) {
     s32 pad;
-    Actor* sp48;
+    Player* sp48;
     s32 pad2;
     Vec3f sp38;
     s16 v;
     s16 temp_a0_2;
 
-    sp48 = globalCtx->actorCtx.actorLists[2].head;
+    sp48 = PLAYER;
     func_80A155D0(this);
     Math_SmoothStepToF(&this->actor.speedXZ, 1.8f, 0.1f, 0.5f, 0.0f);
-    if (func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > 6400.0f) {
+    if (func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > SQ(80.0f)) {
         v = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos);
         Math_StepToAngleS(&this->actor.world.rot.y, v, 0xBB8);
     } else {
-        if ((s16)globalCtx->state.frames /*unk9E*/ & 0x40) {
+        if ((s16)globalCtx->state.frames & 0x40) {
             temp_a0_2 = (this->actor.yawTowardsPlayer + 0x9000);
         } else {
             temp_a0_2 = (this->actor.yawTowardsPlayer + 0x7000);
         }
-        sp38.x = (Math_SinS((s16)temp_a0_2) * 20.0f) + sp48->world.pos.x;
-        sp38.y = sp48->world.pos.y;
-        sp38.z = (Math_CosS((s16)temp_a0_2) * 20.0f) + sp48->world.pos.z;
-        v = Math_Vec3f_Yaw(&this->actor.world.pos, (Vec3f*)&sp38);
+        sp38.x = (Math_SinS(temp_a0_2) * 20.0f) + sp48->actor.world.pos.x;
+        sp38.y = sp48->actor.world.pos.y;
+        sp38.z = (Math_CosS(temp_a0_2) * 20.0f) + sp48->actor.world.pos.z;
+        v = Math_Vec3f_Yaw(&this->actor.world.pos, &sp38);
         Math_StepToAngleS(&this->actor.world.rot.y, v, 0xBB8);
     }
     this->actor.shape.rot.y = this->actor.world.rot.y;
@@ -403,15 +383,12 @@ void func_80A15F84(EnFish* this, GlobalContext* globalCtx) {
     if (this->actor.bgCheckFlags & 1) {
         this->unk248 = 0x190;
         func_80A160BC(this);
-        return;
-    }
-    if (this->actor.bgCheckFlags & 0x20) {
+    } else if (this->actor.bgCheckFlags & 0x20) {
         func_80A163DC(this);
-        return;
-    }
-    if ((this->unk248 <= 0) && (this->actor.params == 0) && (this->actor.floorHeight < -31990.0f)) {
+    } else if ((this->unk248 <= 0) && (this->actor.params == 0) &&
+               (this->actor.floorHeight < (BGCHECK_Y_MIN + 10.0f))) {
         osSyncPrintf("\x1b[43;30m");
-        osSyncPrintf("BG 抜け？ Actor_delete します(%s %d)\n", "../z_en_sakana.c", 0x336);
+        osSyncPrintf("BG 抜け？ Actor_delete します(%s %d)\n", "../z_en_sakana.c", 822);
         osSyncPrintf("\x1b[m");
         Actor_Kill(&this->actor);
     }
@@ -444,7 +421,7 @@ void func_80A160BC(EnFish* this) {
     this->unk244 = func_80A16200;
     this->unk250 = 5;
     if ((var_v0 != 0) && (this->actor.draw != NULL)) {
-        Audio_PlayActorSound2(&this->actor, 0x2869U);
+        Audio_PlayActorSound2(&this->actor, NA_SE_EV_FISH_LEAP);
     }
 }
 
@@ -455,14 +432,14 @@ void func_80A16200(EnFish* this, GlobalContext* globalCtx) {
 
     temp_v0_sp42 = globalCtx->state.frames; // unk9E;
     Math_SmoothStepToF(&this->actor.speedXZ, Rand_ZeroOne() * 0.2f, 0.1f, 0.1f, 0.0f);
-    temp_ft1 = (s32)((f32)(s16)((((temp_v0_sp42 >> 5) & 2) | ((temp_v0_sp42 >> 2) & 1)) << 0xB) * 0.3f);
+    temp_ft1 = (s16)(s32)((s16)((((temp_v0_sp42 >> 5) & 2) | ((temp_v0_sp42 >> 2) & 1)) * 0x800) * 0.3f);
     if (temp_v0_sp42 & 4) {
         temp_ft1 = temp_ft1 * -1;
     }
     Math_StepToAngleS(&this->actor.world.rot.x, temp_ft1, 0xFA0);
     Math_StepToAngleS(&this->actor.world.rot.z, 0x4000, 0x3E8);
     this->actor.world.rot.y +=
-        (s32)((s16)(s32)(((Math_SinS(this->unk24C) * 2000.0f) + (Math_SinS(this->unk24E) * 1000.0f)) * Rand_ZeroOne()));
+        (s16)(s32)(((Math_SinS(this->unk24C) * 2000.0f) + (Math_SinS(this->unk24E) * 1000.0f)) * Rand_ZeroOne());
     this->actor.shape.rot = this->actor.world.rot;
     SkelAnime_Update(&this->unk1AC);
     if (this->unk248 <= 0) {
@@ -472,16 +449,12 @@ void func_80A16200(EnFish* this, GlobalContext* globalCtx) {
     if (this->unk248 < 0x3D) {
         if (temp_v0_sp42 & 4) {
             this->actor.draw = EnFish_Draw;
-            return;
+        } else {
+            this->actor.draw = NULL;
         }
-        this->actor.draw = NULL;
-        return;
-    }
-    if (this->actor.bgCheckFlags & 0x20) {
+    } else if (this->actor.bgCheckFlags & 0x20) {
         func_80A163DC(this);
-        return;
-    }
-    if (this->actor.bgCheckFlags & 1) {
+    } else if (this->actor.bgCheckFlags & 1) {
         func_80A160BC(this);
     }
 }
@@ -559,15 +532,16 @@ void func_80A16670(EnFish* this, GlobalContext* globalCtx) {
     func_80A155D0(this);
     Math_SmoothStepToF(&this->actor.speedXZ, var_v0_sp4C->unk0, var_v0_sp4C->unk4, var_v0_sp4C->unk8, 0.0f);
     sp44 = 0.0f;
-    if (func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > 225.0f) {
-        if (Math_ScaledStepToS(&this->actor.world.rot.y, Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos),
-                               0xC8) == 0) {
+    if (func_80A15280(&this->actor.world.pos, &this->actor.home.pos) > SQ(15.0f)) {
+        if (!Math_ScaledStepToS(&this->actor.world.rot.y, Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos),
+                                0xC8)) {
             sp44 = 0.5f;
         }
-    } else if ((this->unk248 < 4) && (Math_ScaledStepToS(&this->actor.world.rot.y, (s16)(sp50 << 7), 0x64) == 0)) {
+    } else if ((this->unk248 < 4) && !Math_ScaledStepToS(&this->actor.world.rot.y, sp50 * 0x80, 0x64)) {
         sp44 = 0.5f;
     }
     this->actor.shape.rot.y = this->actor.world.rot.y;
+    //! @bug swapped min and max clamp bounds
     this->unk1AC.playSpeed = CLAMP((this->actor.speedXZ * 1.2f) + 0.2f + sp44, 1.5f, 0.5);
     SkelAnime_Update(&this->unk1AC);
     if (this->unk248 <= 0) {
@@ -586,7 +560,7 @@ void func_80A16898(EnFish* this, GlobalContext* globalCtx) {
         D_80A17014 = 1.0f;
         if (Rand_ZeroOne() < 0.1f) {
             D_80A17018 = (Rand_ZeroOne() * 3.0f) + 2.0f;
-            Audio_PlayActorSound2(&this->actor, 0x2869U);
+            Audio_PlayActorSound2(&this->actor, NA_SE_EV_FISH_LEAP);
         } else {
             D_80A17018 = 0.0f;
         }
@@ -624,35 +598,38 @@ void func_80A16A64(EnFish* this, GlobalContext* globalCtx) {
     if (sp4C == NULL) {
         if (1) {}
         osSyncPrintf("Warning : dousa 3 消滅 が呼ばれずにデモが終了した(%s %d)(arg_data 0x%04x)\n", "../z_en_sakana.c",
-                     0x491, this->actor.params);
+                     1169, this->actor.params);
         func_80A15444(this);
         Actor_Kill(&this->actor);
         return;
     }
     this->unk24C += 0x111;
     this->unk24E += 0x500;
-    switch (sp4C->action) { /* irregular */
+    switch (sp4C->action) {
         case 1:
             func_80A16898(this, globalCtx);
             break;
+
         case 2:
             func_80A169C8(this, globalCtx);
             break;
+
         case 3:
             osSyncPrintf("デモ魚消滅\n");
             func_80A15444(this);
             Actor_Kill(&this->actor);
             return;
+
         default:
-            osSyncPrintf("不正なデモ動作(%s %d)(arg_data 0x%04x)\n", "../z_en_sakana.c", 0x4B0, this->actor.params);
+            osSyncPrintf("不正なデモ動作(%s %d)(arg_data 0x%04x)\n", "../z_en_sakana.c", 1200, this->actor.params);
             break;
     }
-    sp40.x = (f32)sp4C->startPos.x;
-    sp40.y = (f32)sp4C->startPos.y;
-    sp40.z = (f32)sp4C->startPos.z;
-    sp34.x = (f32)sp4C->endPos.x;
-    sp34.y = (f32)sp4C->endPos.y;
-    sp34.z = (f32)sp4C->endPos.z;
+    sp40.x = sp4C->startPos.x;
+    sp40.y = sp4C->startPos.y;
+    sp40.z = sp4C->startPos.z;
+    sp34.x = sp4C->endPos.x;
+    sp34.y = sp4C->endPos.y;
+    sp34.z = sp4C->endPos.z;
     temp_fv0 = func_8006F93C(sp4C->endFrame, sp4C->startFrame, globalCtx->csCtx.frames);
     this->actor.world.pos.x = ((sp34.x - sp40.x) * temp_fv0) + sp40.x;
     this->actor.world.pos.y = ((sp34.y - sp40.y) * temp_fv0) + sp40.y + D_80A17014;
@@ -662,111 +639,81 @@ void func_80A16A64(EnFish* this, GlobalContext* globalCtx) {
 }
 
 void func_80A16C68(EnFish* this, GlobalContext* globalCtx) {
-    Actor* temp_v0_2;
-    s16 temp_v0;
-    s32 temp_v0_4;
-    void (*temp_v0_3)(EnFish*, GlobalContext*);
-
-    temp_v0 = this->unk248;
-    if (temp_v0 > 0) {
-        this->unk248 = temp_v0 - 1;
+    if (this->unk248 > 0) {
+        this->unk248--;
     }
-    temp_v0_2 = this->actor.child;
     this->unk24C += 0x111;
     this->unk24E += 0x500;
-    if ((temp_v0_2 != NULL) && (temp_v0_2->update == NULL) && (&this->actor != temp_v0_2)) {
+    if ((this->actor.child != NULL) && (this->actor.child->update == NULL) && (this->actor.child != &this->actor)) {
         this->actor.child = NULL;
     }
-    temp_v0_3 = this->unk244;
-    if ((temp_v0_3 == NULL) || (temp_v0_3(this, globalCtx), (this->actor.update != NULL))) {
+    if ((this->unk244 == NULL) || (this->unk244(this, globalCtx), (this->actor.update != NULL))) {
         Actor_MoveForward(&this->actor);
-        temp_v0_4 = this->unk250;
-        if (temp_v0_4 != 0) {
-            Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 17.5f, 4.0f, 0.0f, temp_v0_4);
+        if (this->unk250 != 0) {
+            Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 17.5f, 4.0f, 0.0f, this->unk250);
         }
         if (this->actor.xzDistToPlayer < 70.0f) {
             CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->unk14C.base);
         }
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * 0.01f);
-        if (Actor_HasParent(&this->actor, globalCtx) != 0) {
+        if (Actor_HasParent(&this->actor, globalCtx)) {
             this->actor.parent = NULL;
             if (this->actor.params == 0) {
                 Actor_Kill(&this->actor);
-                return;
+            } else {
+                func_80A15374(this);
             }
-            func_80A15374(this);
-            return;
-        }
-        if (func_80A15688(this, globalCtx) != 0) {
+        } else if (func_80A15688(this, globalCtx) != 0) {
             func_8002F434(&this->actor, globalCtx, 0x7E, 80.0f, 20.0f);
         }
     }
 }
 
 void func_80A16DEC(EnFish* this, GlobalContext* globalCtx) {
-    Actor* temp_v0;
-    f32 temp_fv0;
     f32 var_fv1;
-    s16 temp_v0_3;
-    void (*temp_v0_2)(EnFish*, GlobalContext*);
 
     if (this->actor.params == 1) {
         Actor_Kill(&this->actor);
         return;
     }
-    temp_v0 = this->actor.child;
-    if ((temp_v0 != NULL) && (temp_v0->update == NULL) && (&this->actor != temp_v0)) {
+    if ((this->actor.child != NULL) && (this->actor.child->update == NULL) && (this->actor.child != &this->actor)) {
         this->actor.child = NULL;
     }
-    temp_v0_2 = this->unk244;
-    if ((temp_v0_2 == NULL) || (temp_v0_2(this, globalCtx), (this->actor.update != NULL))) {
+    if ((this->unk244 == NULL) || (this->unk244(this, globalCtx), (this->actor.update != NULL))) {
         Actor_MoveForward(&this->actor);
-        temp_v0_3 = this->unk24A;
-        if (temp_v0_3 == 0x14) {
+        if (this->unk24A == 0x14) {
             this->actor.draw = EnFish_Draw;
-            return;
-        }
-        if (temp_v0_3 == 0) {
+        } else if (this->unk24A == 0) {
             Actor_SetScale(&this->actor, 0.01f);
-            return;
-        }
-        if (temp_v0_3 < 0x14) {
-            temp_fv0 = this->actor.scale.x + 0.001f;
-            if (temp_fv0 > 0.01f) {
-                var_fv1 = 0.01f;
-            } else {
-                var_fv1 = temp_fv0;
-            }
+        } else if (this->unk24A < 0x14) {
+            var_fv1 = CLAMP_MAX(this->actor.scale.x + 0.001f, 0.01f);
             Actor_SetScale(&this->actor, var_fv1);
         }
     }
 }
 
 void EnFish_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s16 temp_v0_2;
     EnFish* this = (EnFish*)thisx;
 
-    if ((D_80A17010 == NULL) && (this->actor.params == 0) && (globalCtx->csCtx.state != 0) &&
+    if ((D_80A17010 == NULL) && (this->actor.params == 0) && (globalCtx->csCtx.state != CS_STATE_IDLE) &&
         (globalCtx->csCtx.npcActions[1] != NULL)) {
         func_80A153AC(this);
     }
-    if ((D_80A17010 != NULL) && (this == D_80A17010)) {
+    if ((D_80A17010 != NULL) && (D_80A17010 == this)) {
         func_80A16A64(this, globalCtx);
-        return;
-    }
-    temp_v0_2 = this->unk24A;
-    if (temp_v0_2 > 0) {
-        this->unk24A = temp_v0_2 - 1;
+    } else if (this->unk24A > 0) {
+        this->unk24A--;
         func_80A16DEC(this, globalCtx);
-        return;
+    } else {
+        func_80A16C68(this, globalCtx);
     }
-    func_80A16C68(this, globalCtx);
 }
 
 void EnFish_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnFish* this = (EnFish*)thisx;
+
     func_80093D18(globalCtx->state.gfxCtx);
-    SkelAnime_DrawFlexOpa(globalCtx, this->unk1AC.skeleton, this->unk1AC.jointTable, (s32)this->unk1AC.dListCount, NULL,
+    SkelAnime_DrawFlexOpa(globalCtx, this->unk1AC.skeleton, this->unk1AC.jointTable, this->unk1AC.dListCount, NULL,
                           NULL, NULL);
     Collider_UpdateSpheres(0, &this->unk14C);
 }
