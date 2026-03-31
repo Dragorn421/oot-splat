@@ -49,14 +49,14 @@ void BgGndFiremeiro_Init(Actor* thisx, GlobalContext* globalCtx2) {
     }
 }
 
-void BgGndFiremeiro_Destroy(Actor* thisx, GlobalContext* play2) {
-    GlobalContext* play = play2;
+void BgGndFiremeiro_Destroy(Actor* thisx, GlobalContext* globalCtx2) {
+    GlobalContext* globalCtx = globalCtx2;
     BgGndFiremeiro* this = (BgGndFiremeiro*)thisx;
 
     if (this->dyna.actor.params != 0) {
         return;
     }
-    DynaPoly_DeleteBgActor(play, &play->colCtx.dyna, this->dyna.bgId);
+    DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
 }
 
 void BgGndFIremeiro_Sink(BgGndFiremeiro* this, GlobalContext* globalCtx) {
@@ -66,7 +66,7 @@ void BgGndFIremeiro_Sink(BgGndFiremeiro* this, GlobalContext* globalCtx) {
         this->timer = 10;
     }
     if (sinkTarget < this->dyna.actor.world.pos.y) {
-        this->dyna.actor.world.pos.y = this->dyna.actor.world.pos.y - 0.5f;
+        this->dyna.actor.world.pos.y -= 0.5f;
         // I was not able to get this to be true in fire trial.
         if (this->dyna.actor.world.pos.y < sinkTarget) {
             this->dyna.actor.world.pos.y = sinkTarget;
