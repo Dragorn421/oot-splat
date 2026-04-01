@@ -16,14 +16,7 @@ typedef struct EnDekubaba {
     /* 0x1C4 */ char pad1C4[2];
     /* 0x1C6 */ s16 unk1C6;
     /* 0x1C8 */ s16 unk1C8;
-    union {
-        struct {
-            /* 0x1CA */ s16 unk1CA;
-            /* 0x1CC */ s16 unk1CC;
-            /* 0x1CE */ s16 unk1CE;
-        };
-        /* 0x1CA */ s16 unk1CA_arr[3];
-    };
+    /* 0x1CA */ s16 unk1CA_arr[3];
     /* 0x1D0 */ Vec3s unk1D0[8];
     /* 0x200 */ Vec3s unk200[8];
     /* 0x230 */ f32 unk230;
