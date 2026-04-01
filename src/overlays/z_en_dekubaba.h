@@ -8,7 +8,7 @@ struct EnDekubaba;
 
 typedef struct EnDekubaba {
     /* 0x000 */ Actor actor;
-    /* 0x14C */ char pad14C[0x18];
+    /* 0x14C */ Vec3f unk14C[2];
     /* 0x164 */ Vec3f unk164;
     /* 0x170 */ Vec3f unk170;
     /* 0x17C */ SkelAnime unk17C;
@@ -16,9 +16,14 @@ typedef struct EnDekubaba {
     /* 0x1C4 */ char pad1C4[2];
     /* 0x1C6 */ s16 unk1C6;
     /* 0x1C8 */ s16 unk1C8;
-    /* 0x1CA */ s16 unk1CA;
-    /* 0x1CC */ s16 unk1CC;
-    /* 0x1CE */ s16 unk1CE;
+    union {
+        struct {
+            /* 0x1CA */ s16 unk1CA;
+            /* 0x1CC */ s16 unk1CC;
+            /* 0x1CE */ s16 unk1CE;
+        };
+        /* 0x1CA */ s16 unk1CA_arr[3];
+    };
     /* 0x1D0 */ Vec3s unk1D0[8];
     /* 0x200 */ Vec3s unk200[8];
     /* 0x230 */ f32 unk230;

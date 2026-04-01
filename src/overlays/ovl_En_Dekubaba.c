@@ -1019,82 +1019,61 @@ void func_809E858C(EnDekubaba* this, GlobalContext* globalCtx) {
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", 0x9A4);
 }
 
-#if 0
 void func_809E86B8(EnDekubaba* this, GlobalContext* globalCtx) {
-    MtxF spB0_real;
-    f32 spA4_real;
-    s32 sp9C_real;
-    f32 temp_fs0_real;
-    f32 temp_fs0_2_real;
-    s32 var_s2_real;
-    s32 var_s6;
-    s32 var_s7;
-    u32* var_s5;
-    void* temp_v0_3;
+    MtxF spB0;
+    f32 temp_fs0;
+    f32 temp_fs0_2;
+    f32 spA4;
+    s32 i__var_s2;
+    s32 sp9C;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", 0x9B7);
-    if (func_809E7BB0 == this->unk1C0) {
-        sp9C_real = 2;
+    if (this->unk1C0 == func_809E7BB0) {
+        sp9C = 2;
     } else {
-        sp9C_real = 3;
+        sp9C = 3;
     }
-    temp_fs0_real = this->unk230 * 0.01f;
+    temp_fs0 = this->unk230 * 0.01f;
     Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0U);
-    Matrix_Scale(temp_fs0_real, temp_fs0_real, temp_fs0_real, 1U);
-    Matrix_Get(&spB0_real);
-    var_s2_real = 0;
-    this = this;
+    Matrix_Scale(temp_fs0, temp_fs0, temp_fs0, 1U);
+    Matrix_Get(&spB0);
     if (this->actor.colorFilterTimer != 0) {
-        spA4_real = this->unk230 * 20.0f;
+        spA4 = this->unk230 * 20.0f;
         this->unk164.x = this->actor.world.pos.x;
+        this->unk164.y = this->actor.world.pos.y - spA4;
         this->unk164.z = this->actor.world.pos.z;
-        this->unk164.y = this->actor.world.pos.y - spA4_real;
     }
-    if (sp9C_real > 0) {
-        var_s5 = D_809E902C;
-        var_s6 = 0x33;
-        var_s7 = 0x34;
-        do {
-            spB0_real.mf[3][1] += 20.0f * Math_SinS(this->unk1CA) * this->unk230;
-            temp_fs0_2_real = Math_CosS(this->unk1CA) * 20.0f * this->unk230;
-            spB0_real.mf[3][0] -= temp_fs0_2_real * Math_SinS(this->actor.shape.rot.y);
-            spB0_real.mf[3][2] -= temp_fs0_2_real * Math_CosS(this->actor.shape.rot.y);
-            Matrix_Put(&spB0_real);
-            Matrix_RotateRPY(this->unk1CA, this->actor.shape.rot.y, 0, 1U);
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", 0x9E5),
-                      G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_OPA_DISP++, *var_s5);
-            Collider_UpdateSpheres(var_s6, &this->unk238);
-            Collider_UpdateSpheres(var_s7, &this->unk238);
-            if (var_s2_real == 0) {
-                if (func_809E7A88 != this->unk1C0) {
-                    this->actor.focus.pos.x = spB0_real.mf[3][0];
-                    this->actor.focus.pos.y = spB0_real.mf[3][1];
-                    this->actor.focus.pos.z = spB0_real.mf[3][2];
-                } else {
-                    this->actor.focus.pos.x = this->actor.home.pos.x;
-                    this->actor.focus.pos.z = this->actor.home.pos.z;
-                    this->actor.focus.pos.y = this->actor.home.pos.y + (40.0f * this->unk230);
-                }
+    for (i__var_s2 = 0; i__var_s2 < sp9C; i__var_s2++) {
+        spB0.mf[3][1] += 20.0f * Math_SinS(this->unk1CA_arr[i__var_s2]) * this->unk230;
+        temp_fs0_2 = Math_CosS(this->unk1CA_arr[i__var_s2]) * 20.0f * this->unk230;
+        spB0.mf[3][0] -= temp_fs0_2 * Math_SinS(this->actor.shape.rot.y);
+        spB0.mf[3][2] -= temp_fs0_2 * Math_CosS(this->actor.shape.rot.y);
+        Matrix_Put(&spB0);
+        Matrix_RotateRPY(this->unk1CA_arr[i__var_s2], this->actor.shape.rot.y, 0, 1U);
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", 0x9E5),
+                  G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(POLY_OPA_DISP++, D_809E902C[i__var_s2]);
+        Collider_UpdateSpheres(0x33 + (i__var_s2 * 2), &this->unk238);
+        Collider_UpdateSpheres(0x34 + (i__var_s2 * 2), &this->unk238);
+        if (i__var_s2 == 0) {
+            if (this->unk1C0 != func_809E7A88) {
+                this->actor.focus.pos.x = spB0.mf[3][0];
+                this->actor.focus.pos.y = spB0.mf[3][1];
+                this->actor.focus.pos.z = spB0.mf[3][2];
+            } else {
+                this->actor.focus.pos.x = this->actor.home.pos.x;
+                this->actor.focus.pos.y = this->actor.home.pos.y + (40.0f * this->unk230);
+                this->actor.focus.pos.z = this->actor.home.pos.z;
             }
-            this += 2;
-            if ((var_s2_real < 2) && (this->actor.colorFilterTimer != 0)) {
-                temp_v0_3 = this + (var_s2_real * 0xC);
-                *(f32*)((char*)temp_v0_3 + 0x14C) /*temp_v0_3->unk14C*/ = spB0_real.mf[3][0];
-                *(f32*)((char*)temp_v0_3 + 0x150) /*temp_v0_3->unk150*/ = (f32)(spB0_real.mf[3][1] - spA4_real);
-                *(f32*)((char*)temp_v0_3 + 0x154) /*temp_v0_3->unk154*/ = spB0_real.mf[3][2];
-            }
-            var_s2_real += 1;
-            var_s5 += 4;
-            var_s6 += 2;
-            var_s7 += 2;
-        } while (var_s2_real != sp9C_real);
+        }
+        if ((i__var_s2 < 2) && (this->actor.colorFilterTimer != 0)) {
+            this->unk14C[i__var_s2].x = spB0.mf[3][0];
+            this->unk14C[i__var_s2].y = (f32)(spB0.mf[3][1] - spA4);
+            this->unk14C[i__var_s2].z = spB0.mf[3][2];
+        }
     }
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", 0xA09);
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Dekubaba/func_809E86B8.s")
-#endif
 
 void func_809E89E4(EnDekubaba* this, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", 0xA13);
