@@ -5879,7 +5879,7 @@ segments:
     bss_size: 0x0
     subsegments:
       - [0xEE9AE0, c, overlays/ovl_En_Wf]
-      - [0xEED7C0, data, overlays/ovl_En_Wf]
+      - [0xEED7C0, .data, overlays/ovl_En_Wf]
       - [0xEED950, .rodata, overlays/ovl_En_Wf]
       - [0xEEDA90, rodatabin, rodatabin_80B37C60]
 

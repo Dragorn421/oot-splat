@@ -62,19 +62,6 @@ extern AnimationHeader D_60098C8;
 extern AnimationHeader D_6009B20;
 extern AnimationHeader D_600A4AC;
 
-/*
-const ActorInit En_Wf_InitVars = {
-    ACTOR_EN_WF,
-    ACTORCAT_ENEMY,
-    FLAGS,
-    OBJECT_WF,
-    sizeof(EnWf),
-    (ActorFunc)EnWf_Init,
-    (ActorFunc)EnWf_Destroy,
-    (ActorFunc)EnWf_Update,
-    (ActorFunc)EnWf_Draw,
-};
-
 static ColliderJntSphElementInit D_80B37990[4] = {
     {
         {
@@ -174,9 +161,35 @@ static ColliderCylinderInit D_80B37A5C = {
     },
     { 15, 20, -15, { 0, 0, 0 } },
 };
-*/
 
-extern Vec3f D_80B37AD0;
+static DamageTable D_80B37A88 = {
+    {
+        0x10, 2,    1,    2,    0x10, 2, 2, 0x10, 1, 2, 4, 0xE4, 2, 2, 2, 2,
+        2,    0xE4, 0x60, 0xD3, 0,    0, 1, 4,    2, 2, 8, 4,    0, 0, 4, 0,
+    },
+};
+
+const ActorInit En_Wf_InitVars = {
+    ACTOR_EN_WF,
+    ACTORCAT_ENEMY,
+    FLAGS,
+    OBJECT_WF,
+    sizeof(EnWf),
+    (ActorFunc)EnWf_Init,
+    (ActorFunc)EnWf_Destroy,
+    (ActorFunc)EnWf_Update,
+    (ActorFunc)EnWf_Draw,
+};
+
+static InitChainEntry D_80B37AC8[2] = {
+    ICHAIN_F32(targetArrowOffset, 2000, ICHAIN_CONTINUE),
+    ICHAIN_F32_DIV1000(gravity, -3000, ICHAIN_STOP),
+};
+static Vec3f D_80B37AD0 = { 0.0f, 0.5f, 0.0f };
+static Vec3f D_80B37ADC = { 1200.0f, 0.0f, 0.0f };
+static Vec3f D_80B37AE8 = { 0.0f, 0.0f, 0.0f };
+static s32 D_80B37AF4[4] = { 0x06007B68, 0x06008368, 0x06008568, 0x06008368 };
+static s32 D_80B37B04[7] = { 0x06000300, 0x060027D8, 0x060029D8, 0x060027D8, 0, 0, 0 };
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wf/func_80B33CB0.s")
 
