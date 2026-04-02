@@ -8,7 +8,7 @@ struct EnWf;
 
 typedef struct EnWf {
     /* 0x000 */ Actor actor;
-    /* 0x14C */ char pad14C[0x3C];
+    /* 0x14C */ Vec3s unk14C[10];
     /* 0x188 */ SkelAnime unk188;
     /* 0x1CC */ Vec3s unk1CC[22];
     /* 0x250 */ Vec3s unk250[22];
