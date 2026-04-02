@@ -15,15 +15,52 @@ void EnWf_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnWf_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnWf_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06004638;
-extern UNK_TYPE D_06004AD0;
-extern UNK_TYPE D_06004CA4;
-extern UNK_TYPE D_06005430;
-extern UNK_TYPE D_060057A0;
-extern UNK_TYPE D_06009690;
-extern UNK_TYPE D_060098C8;
-extern UNK_TYPE D_06009B20;
-extern UNK_TYPE D_0600A4AC;
+void func_80B33CB0(EnWf* this, void (*arg1)(EnWf*, GlobalContext*));
+s32 func_80B33FB0(GlobalContext* arg0, EnWf* this, s16 arg2);
+void func_80B34380(EnWf* this);
+void func_80B34428(EnWf* this, GlobalContext* globalCtx);
+void func_80B3455C(EnWf* this);
+void func_80B345E4(EnWf* this, GlobalContext* globalCtx);
+void func_80B347FC(EnWf* this, GlobalContext* globalCtx);
+void func_80B3487C(EnWf* this, GlobalContext* globalCtx);
+void func_80B34CFC(EnWf* this);
+void func_80B34D48(EnWf* this, GlobalContext* globalCtx);
+void func_80B34F28(EnWf* this);
+void func_80B35024(EnWf* this, GlobalContext* globalCtx);
+void func_80B35540(EnWf* this);
+void func_80B355BC(EnWf* this, GlobalContext* globalCtx);
+void func_80B3590C(EnWf* this);
+void func_80B359A8(EnWf* this, GlobalContext* globalCtx);
+void func_80B35B94(EnWf* this);
+void func_80B35C10(EnWf* this, GlobalContext* globalCtx);
+void func_80B35D18(EnWf* this);
+void func_80B35D90(EnWf* this, GlobalContext* globalCtx);
+void func_80B35E4C(EnWf* this);
+void func_80B35EE4(EnWf* this, GlobalContext* globalCtx);
+void func_80B360E8(EnWf* this);
+void func_80B361A0(EnWf* this, GlobalContext* globalCtx);
+void func_80B36288(EnWf* this);
+void func_80B36328(EnWf* this, GlobalContext* globalCtx);
+void func_80B365A8(EnWf* this, GlobalContext* globalCtx);
+void func_80B36740(EnWf* this, GlobalContext* globalCtx);
+void func_80B36C8C(EnWf* this);
+void func_80B36D3C(EnWf* this, GlobalContext* globalCtx);
+void func_80B36F40(EnWf* this, GlobalContext* globalCtx);
+void func_80B37038(EnWf* this, GlobalContext* globalCtx);
+s32 func_80B37454(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, EnWf* this);
+void func_80B37494(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnWf* this);
+s32 func_80B37830(GlobalContext* globalCtx, EnWf* this);
+
+extern FlexSkeletonHeader D_6003BC0;
+extern AnimationHeader D_6004638;
+extern AnimationHeader D_6004AD0;
+extern AnimationHeader D_6004CA4;
+extern AnimationHeader D_6005430;
+extern AnimationHeader D_60057A0;
+extern FlexSkeletonHeader D_6009690;
+extern AnimationHeader D_60098C8;
+extern AnimationHeader D_6009B20;
+extern AnimationHeader D_600A4AC;
 
 /*
 const ActorInit En_Wf_InitVars = {
@@ -138,6 +175,8 @@ static ColliderCylinderInit D_80B37A5C = {
     { 15, 20, -15, { 0, 0, 0 } },
 };
 */
+
+extern Vec3f D_80B37AD0;
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wf/func_80B33CB0.s")
 
