@@ -265,39 +265,26 @@ void EnWf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-#ifdef NON_MATCHING
 s32 func_80B33FB0(GlobalContext* arg0, EnWf* this, s16 arg2) {
-    Player* sp3C;
-    s16 sp36;
-    s16 sp34;
-    Actor* sp30;
-    s16 sp2E;
     Player* temp_t1;
-    Actor* temp_v0_2;
-    s16 temp_v0;
-    s16 temp_v1;
-    s16 temp_v1_2;
-    s16 temp_v1_3;
+    s32 temo;
     s16 var_t0;
-    s16 var_v0_2_RM;
-    s16 var_v0_3_RM;
     s16 var_v1;
-    s32 var_v0;
+    Actor* temp_v0_2;
+    s16 temp_v1_3;
 
-    temp_v0 = this->actor.shape.rot.y;
     temp_t1 = arg0->actorCtx.actorLists[2].head;
-    var_t0 = this->actor.wallYaw - temp_v0;
+
+    var_t0 = this->actor.wallYaw - this->actor.shape.rot.y;
     if (var_t0 < 0) {
         var_t0 *= -1;
     }
-    var_v1 = this->actor.yawTowardsPlayer - temp_v0;
+    var_v1 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
     if (var_v1 < 0) {
         var_v1 *= -1;
     }
-    sp34 = var_v1;
-    sp36 = var_t0;
-    sp3C = temp_t1;
-    if (func_800354B4(arg0, &this->actor, 100.0f, 0x2710, 0x2EE0, (s16)(s32)temp_v0) != 0) {
+
+    if (func_800354B4(arg0, &this->actor, 100.0f, 0x2710, 0x2EE0, this->actor.shape.rot.y) != 0) {
         if (temp_t1->swordAnimation == 0x11) {
             func_80B36288(this);
             return 1;
@@ -307,13 +294,9 @@ s32 func_80B33FB0(GlobalContext* arg0, EnWf* this, s16 arg2) {
             return 1;
         }
     }
-    sp3C = temp_t1;
-    sp36 = var_t0;
-    sp34 = var_v1;
-    if (func_800354B4(arg0, &this->actor, 100.0f, 0x5DC0, 0x2AA8, (s16)(s32)this->actor.shape.rot.y) != 0) {
-        temp_v1 = this->actor.yawTowardsPlayer;
-        this->actor.world.rot.y = temp_v1;
-        this->actor.shape.rot.y = temp_v1;
+
+    if (func_800354B4(arg0, &this->actor, 100.0f, 0x5DC0, 0x2AA8, (s16)((s32)this->actor.shape.rot.y)) != 0) {
+        this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
         if (this->actor.bgCheckFlags & 8) {
             if ((ABS(var_t0) < 0x2EE0) && (this->actor.xzDistToPlayer < 120.0f)) {
                 func_80B360E8(this);
@@ -331,19 +314,14 @@ s32 func_80B33FB0(GlobalContext* arg0, EnWf* this, s16 arg2) {
         func_80B35B94(this);
         return 1;
     }
-    sp34 = var_v1;
-    sp36 = var_t0;
-    sp3C = temp_t1;
+
     temp_v0_2 = Actor_FindNearby(arg0, &this->actor, -1, 3U, 80.0f);
     if (temp_v0_2 != NULL) {
-        temp_v1_2 = this->actor.yawTowardsPlayer;
-        this->actor.world.rot.y = temp_v1_2;
-        this->actor.shape.rot.y = temp_v1_2;
+        this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
         if (((this->actor.bgCheckFlags & 8) && (var_t0 < 0x2EE0)) || (temp_v0_2->id == 0xDA)) {
             if (temp_v0_2->id == 0xDA) {
-                sp30 = temp_v0_2;
                 if ((Actor_WorldDistXYZToActor(&this->actor, temp_v0_2) < 80.0f) &&
-                    ((s16)((this->actor.shape.rot.y - temp_v0_2->world.rot.y) + 0x8000) < 0x3E80)) {
+                    (((s16)((this->actor.shape.rot.y - temp_v0_2->world.rot.y) + 0x8000)) < 0x3E80)) {
                     func_80B360E8(this);
                     return 1;
                 }
@@ -354,7 +332,7 @@ s32 func_80B33FB0(GlobalContext* arg0, EnWf* this, s16 arg2) {
         func_80B35B94(this);
         return 1;
     }
-    var_v0 = 0;
+
     if (arg2 != 0) {
         if (var_v1 >= 0x1B58) {
             func_80B365A8(this, arg0);
@@ -362,30 +340,20 @@ s32 func_80B33FB0(GlobalContext* arg0, EnWf* this, s16 arg2) {
         }
         temp_v1_3 = temp_t1->actor.shape.rot.y - this->actor.shape.rot.y;
         if (this->actor.xzDistToPlayer <= 80.0f) {
-            sp2E = temp_v1_3;
             if (Actor_OtherIsTargeted(arg0, &this->actor) == 0) {
-                if (!(arg0->gameplayFrames & 7)) {
-                    if (ABS(temp_v1_3) < 0x38E0) {
-                        goto block_41;
-                    }
-                    goto block_42;
+
+                if ((arg0->gameplayFrames & 7) || (ABS(temp_v1_3) < 0x38E0)) {
+                    func_80B35540(this);
+                    return 1;
                 }
-            block_41:
-                func_80B35540(this);
-                return 1;
             }
         }
-    block_42:
         func_80B34F28(this);
-        var_v0 = 1;
-        /* Duplicate return node #43. Try simplifying control flow for better match */
-        return var_v0;
+
+        return 1;
     }
-    return var_v0;
+    return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wf/func_80B33FB0.s")
-#endif
 
 void func_80B34380(EnWf* this) {
     Animation_Change(&this->unk188, &D_6005430, 0.5f, 0.0f, 7.0f, 3U, 0.0f);
