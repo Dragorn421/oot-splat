@@ -1426,7 +1426,6 @@ void EnWf_Draw(Actor* thisx, GlobalContext* globalCtx) {
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_wf.c", 0x88E);
 }
 
-#ifdef NON_MATCHING
 s32 func_80B37830(GlobalContext* globalCtx, EnWf* this) {
     Actor* temp_v0_sp24_real;
     s16 temp_a2_sp22;
@@ -1435,8 +1434,7 @@ s32 func_80B37830(GlobalContext* globalCtx, EnWf* this) {
     temp_v0_sp24_real = Actor_GetProjectileActor(globalCtx, &this->actor, 600.0f);
     if (temp_v0_sp24_real != NULL) {
         temp_a2_sp22 = Actor_WorldYawTowardActor(&this->actor, temp_v0_sp24_real) - this->actor.shape.rot.y;
-        this->actor.world.rot.y = this->actor.shape.rot.y & 0xFFFFu & 0xFFFFu & 0xFFFFu & 0xFFFFu & 0xFFFFu & 0xFFFFu &
-                                  0xFFFFu & 0xFFFFu & 0xFFFFu & 0xFFFFu & 0xFFFFu & 0xFFFFu;
+        this->actor.world.rot.y = (u16)(s16)(this->actor.shape.rot.y + 0);
         temp_fv1 = Actor_WorldDistXYZToPoint(&this->actor, &temp_v0_sp24_real->world.pos);
         if ((ABS(temp_a2_sp22) < 0x2EE0) && (sqrt((f64)temp_fv1) < 400.0)) {
             func_80B36288(this);
@@ -1455,6 +1453,3 @@ s32 func_80B37830(GlobalContext* globalCtx, EnWf* this) {
     }
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Wf/func_80B37830.s")
-#endif
