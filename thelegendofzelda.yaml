@@ -5978,10 +5978,10 @@ segments:
     bss_size: 0x10
     subsegments:
       - [0xEF9D60, c, overlays/ovl_En_Zf]
-      - [0xEFFDA0, data, overlays/ovl_En_Zf]
+      - [0xEFFDA0, .data, overlays/ovl_En_Zf]
       - [0xF00020, .rodata, overlays/ovl_En_Zf]
       - [0xF00160, rodatabin, rodatabin_80B4A450]
-      - { name: overlays/ovl_En_Zf, type: bss, vram: 0x80B4AB30 }
+      - { name: overlays/ovl_En_Zf, type: .bss, vram: 0x80B4AB30 }
 
   - name: ovl_En_Zl1
     type: code

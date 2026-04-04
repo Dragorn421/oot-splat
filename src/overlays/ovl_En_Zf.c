@@ -84,7 +84,19 @@ extern AnimationHeader D_6014E60;
 extern AnimationHeader D_60157F8;
 extern AnimationHeader D_6016388;
 
-/*
+static Vec3f D_80B4A090[0x18] = {
+    { 3560.0f, 100.0f, -1517.0f }, { 3170.0f, 100.0f, -1767.0f }, { 3165.0f, 100.0f, -2217.0f },
+    { 3563.0f, 100.0f, -2437.0f }, { 3946.0f, 100.0f, -2217.0f }, { 3942.0f, 100.0f, -1765.0f },
+    { 2861.0f, 100.0f, -2394.0f }, { 2776.0f, 100.0f, -1987.0f }, { 4527.0f, 531.0f, -1146.0f },
+    { 4442.0f, 531.0f, -1405.0f }, { 4170.0f, 531.0f, -1395.0f }, { 4030.0f, 531.0f, -1162.0f },
+    { 4010.0f, 531.0f, -883.0f },  { 4270.0f, 531.0f, -810.0f },  { 4520.0f, 531.0f, -880.0f },
+    { 4260.0f, 531.0f, -1035.0f }, { 4757.0f, 531.0f, -1146.0f }, { 3850.0f, 531.0f, -883.0f },
+    { 4380.0f, 531.0f, -690.0f },  { 4197.0f, 531.0f, -646.0f },  { 4070.0f, 531.0f, -1575.0f },
+    { 3930.0f, 531.0f, -1705.0f }, { 3780.0f, 531.0f, -1835.0f }, { 3560.0f, 531.0f, -1985.0f },
+};
+static s16 D_80B4A1B0 = 0;
+static s16 D_80B4A1B4 = 1;
+
 const ActorInit En_Zf_InitVars = {
     ACTOR_EN_ZF,
     ACTORCAT_ENEMY,
@@ -136,10 +148,32 @@ static ColliderQuadInit D_80B4A204 = {
     },
     { { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } } },
 };
-*/
 
-extern Vec3f D_80B4A090[];
-extern Gfx D_80B4A2F8[];
+static DamageTable D_80B4A254 = {
+    {
+        0x10, 2,    0xD1, 2,    0x10, 2, 2, 0x10, 1, 2, 4, 0xD2, 0xF4, 0xD2, 0xD2, 0xD2,
+        0xD2, 0x60, 0xF3, 0x60, 0,    0, 1, 4,    2, 2, 8, 4,    0,    0,    4,    0,
+    },
+};
+static InitChainEntry D_80B4A274[3] = {
+    ICHAIN_F32(targetArrowOffset, 2000, ICHAIN_CONTINUE),
+    ICHAIN_VEC3F_DIV1000(scale, 15, ICHAIN_CONTINUE),
+    ICHAIN_F32_DIV1000(gravity, -3500, ICHAIN_STOP),
+};
+static AnimationHeader* D_80B4A280[6] = {
+    (AnimationHeader*)0x0601081C, (AnimationHeader*)0x06010CAC, &D_6011070,
+    (AnimationHeader*)0x44898000, (AnimationHeader*)0xC42F0000, NULL,
+};
+static Vec3f D_80B4A298 = { 300.0f, 0.0f, 0.0f };
+static Vec3f D_80B4A2A4 = { 300.0f, -1700.0f, 0.0f };
+static Vec3f D_80B4A2B0 = { -600.0f, 300.0f, 0.0f };
+static Vec3f D_80B4A2BC = { 0.0f, 1500.0f, 0.0f };
+static Vec3f D_80B4A2C8 = { -600.0f, -3000.0f, 1000.0f };
+static Vec3f D_80B4A2D4 = { -600.0f, -3000.0f, -1000.0f };
+static Vec3f D_80B4A2E0 = { 1500.0f, -3000.0f, 0.0f };
+static Vec3f D_80B4A2EC = { 0.0f, 0.0f, 0.0f };
+static Gfx D_80B4A2F8[3] = { { { 0xD7000002, 0x0A000A00 } }, { { 0xDF000000, 0 } }, { { 0, 0 } } };
+static s32 D_80B4AB30;
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44050.s")
 
