@@ -15,20 +15,74 @@ void EnZf_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnZf_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnZf_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06006690;
-extern UNK_TYPE D_06008138;
-extern UNK_TYPE D_06008C6C;
-extern UNK_TYPE D_06009530;
-extern UNK_TYPE D_0600A3D4;
-extern UNK_TYPE D_0600B10C;
-extern UNK_TYPE D_0600E198;
-extern UNK_TYPE D_06010060;
-extern UNK_TYPE D_060104B8;
-extern UNK_TYPE D_060119F4;
-extern UNK_TYPE D_0601366C;
-extern UNK_TYPE D_06014E60;
-extern UNK_TYPE D_060157F8;
-extern UNK_TYPE D_06016388;
+void func_80B44050(EnZf* this, void (*arg1)(EnZf*, GlobalContext*));
+s16 func_80B44058(EnZf* this, GlobalContext* globalCtx, f32 arg2);
+s16 func_80B441C4(EnZf* this, GlobalContext* globalCtx, f32 arg2);
+s16 func_80B446A8(Vec3f* arg0, s16 arg1);
+s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx);
+s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx);
+s32 func_80B44CF0(GlobalContext* globalCtx, EnZf* this);
+void func_80B44DC4(EnZf* this, GlobalContext* globalCtx);
+s32 func_80B44E8C(GlobalContext* globalCtx, EnZf* this);
+void func_80B450AC(EnZf* this);
+void func_80B45174(EnZf* this, GlobalContext* globalCtx);
+void func_80B45384(EnZf* this);
+void func_80B4543C(EnZf* this, GlobalContext* globalCtx);
+void func_80B456B4(EnZf* this, GlobalContext* globalCtx);
+void func_80B45748(EnZf* this, GlobalContext* globalCtx);
+void func_80B45E30(EnZf* this);
+void func_80B45EF0(EnZf* this, GlobalContext* globalCtx);
+void func_80B4604C(EnZf* this);
+void func_80B46098(EnZf* this, GlobalContext* globalCtx);
+void func_80B462E4(EnZf* this, GlobalContext* globalCtx);
+void func_80B463E4(EnZf* this, GlobalContext* globalCtx);
+void func_80B46A24(EnZf* this);
+void func_80B46AE0(EnZf* this, GlobalContext* globalCtx);
+void func_80B46D64(EnZf* this);
+void func_80B46DD4(EnZf* this, GlobalContext* globalCtx);
+void func_80B46E8C(EnZf* this);
+void func_80B46F2C(EnZf* this, GlobalContext* globalCtx);
+void func_80B47050(EnZf* this);
+void func_80B47120(EnZf* this, GlobalContext* globalCtx);
+void func_80B47360(EnZf* this, GlobalContext* globalCtx);
+void func_80B4743C(EnZf* this, GlobalContext* globalCtx);
+void func_80B474E4(EnZf* this);
+void func_80B47544(EnZf* this, GlobalContext* globalCtx);
+void func_80B4779C(EnZf* this, GlobalContext* globalCtx);
+void func_80B4781C(EnZf* this, GlobalContext* globalCtx);
+void func_80B47C64(EnZf* this, GlobalContext* globalCtx);
+void func_80B47CF8(EnZf* this, GlobalContext* globalCtx);
+void func_80B47DA8(EnZf* this);
+void func_80B47EB4(EnZf* this, GlobalContext* globalCtx);
+void func_80B48210(EnZf* this);
+void func_80B482B8(EnZf* this, GlobalContext* globalCtx);
+void func_80B483E4(EnZf* this, GlobalContext* globalCtx);
+void func_80B48578(EnZf* this, GlobalContext* globalCtx);
+void func_80B48CEC(EnZf* this);
+void func_80B48E50(EnZf* this, GlobalContext* globalCtx);
+void func_80B48F90(EnZf* this, GlobalContext* globalCtx);
+void func_80B490B4(EnZf* this, GlobalContext* globalCtx);
+s32 func_80B495FC(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3f* arg3, Vec3s* arg4, EnZf* this, Gfx** gfx);
+void func_80B49688(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, EnZf* this);
+void func_80B49B60(EnZf* this, f32 arg1);
+s32 func_80B49C2C(GlobalContext* globalCtx, EnZf* this);
+s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this);
+
+extern SkeletonHeader D_6006690;
+extern AnimationHeader D_6008138;
+extern AnimationHeader D_6008C6C;
+extern AnimationHeader D_6009530;
+extern AnimationHeader D_600A3D4;
+extern AnimationHeader D_600B10C;
+extern Gfx D_600E198[];
+extern Gfx D_6010060[];
+extern SkeletonHeader D_60104B8;
+extern AnimationHeader D_6011070;
+extern AnimationHeader D_60119F4;
+extern AnimationHeader D_601366C;
+extern AnimationHeader D_6014E60;
+extern AnimationHeader D_60157F8;
+extern AnimationHeader D_6016388;
 
 /*
 const ActorInit En_Zf_InitVars = {
@@ -83,6 +137,9 @@ static ColliderQuadInit D_80B4A204 = {
     { { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } } },
 };
 */
+
+extern Vec3f D_80B4A090[];
+extern Gfx D_80B4A2F8[];
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44050.s")
 
