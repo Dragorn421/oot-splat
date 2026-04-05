@@ -1,0 +1,11 @@
+.venv
+*.z64
+__pycache__
+asm
+assets
+thelegendofzelda.d
+thelegendofzelda.ld
+undefined_funcs_auto.txt
+undefined_syms_auto.txt
+.splat
+build
