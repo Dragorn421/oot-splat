@@ -60,6 +60,7 @@ section_by_subsegment_type = {
     "hasm": "text",
     "data": "data",
     "rodata": "rodata",
+    ".rodata": "rodata",
     "bss": "bss",
 }
 
@@ -74,9 +75,8 @@ for sym in syms:
 text_subsegments = sorted({_sym.subsegment for _sym in syms_by_section["text"]})
 color_by_subsegment: dict[str, str] = {}
 for subsegment in text_subsegments:
-    color_by_subsegment[subsegment] = (
-        f"{len(color_by_subsegment)/len(text_subsegments)} 1 1"
-    )
+    h = (len(color_by_subsegment) * 0.7) % 1
+    color_by_subsegment[subsegment] = f"{h} 1 1"
 
 if args.section:
     for section in list(syms_by_section.keys()):
@@ -129,15 +129,17 @@ for section, section_syms in syms_by_section.items():
             cur_subsegment = sym.subsegment
             gprint(f"subgraph cluster_{cur_subsegment}_{section} " "{")
         assert cur_subsegment is not None
+        color = None
+        if section == "text":
+            color = color_by_subsegment[cur_subsegment]
+        elif section == "rodata":
+            if sym.type == "jtbl":
+                color = "magenta"
         gprint(
             f'"{sym.name}"'
             " ["
             f' pos = "{x},{y}!"'
-            + (
-                f' color="{color_by_subsegment[cur_subsegment]}"'
-                if section == "text"
-                else ""
-            )
+            + (f' color="{color}"' if color is not None else "")
             + " ]"
         )
     if cur_subsegment is not None:
