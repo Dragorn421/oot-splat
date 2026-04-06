@@ -306,24 +306,24 @@ segments:
     vram: 0x801C6E80
     bss_size: 0xDC80
     subsegments:
-      - [0xB8AD30, asm, n64dd_B8AD30]
-      - [0xB8D2F0, asm, n64dd_B8D2F0]
-      - [0xB8E5F0, asm, n64dd_B8E5F0]  # libleo start
+      - [0xB8AD30, c, n64dd_B8AD30]
+      - [0xB8D2F0, c, n64dd_B8D2F0]
+      - [0xB8E5F0, c, n64dd_B8E5F0]  # libleo start
       - [0xB8FB80, hasm]  # LeoGetAAdr2
-      - [0xB8FBE0, asm, n64dd_B8FBE0]
-      - [0xB90A70, asm, n64dd_B90A70]
-      - [0xB91D30, asm, n64dd_B91D30]
+      - [0xB8FBE0, c, n64dd_B8FBE0]
+      - [0xB90A70, c, n64dd_B90A70]
+      - [0xB91D30, c, n64dd_B91D30]
       - [0xB92F60, hasm]  # LeoGetKAdr
       - [0xB93A60, hasm]  # LeoGetAAdr
       - [0xB93AD0, textbin]
-      - [0xB95EF0, asm, n64dd_B95EF0]
+      - [0xB95EF0, c, n64dd_B95EF0]
       - [0xB96D00, data, n64dd]
-      - [0xB9CCB0, rodata, n64dd_B8AD30]
-      - [0xB9CDF0, rodata, n64dd_B8D2F0]
-      - [0xB9D260, rodata, n64dd_B8E5F0]
-      - [0xB9D320, rodata, n64dd_B8FBE0]
-      - [0xB9D3A0, rodata, n64dd_B90A70]
-      - [0xB9D9A0, rodata, n64dd_B91D30]
+      - [0xB9CCB0, .rodata, n64dd_B8AD30]
+      - [0xB9CDF0, .rodata, n64dd_B8D2F0]
+      - [0xB9D260, .rodata, n64dd_B8E5F0]
+      - [0xB9D320, .rodata, n64dd_B8FBE0]
+      - [0xB9D3A0, .rodata, n64dd_B90A70]
+      - [0xB9D9A0, .rodata, n64dd_B91D30]
       - { name: n64dd, type: bss, vram: 0x801D9B90 }
 
   - name: ovl_title
