@@ -306,10 +306,16 @@ segments:
     vram: 0x801C6E80
     bss_size: 0xDC80
     subsegments:
-      - [0xB8AD30, asm, asm_801C6E80]
-      - [0xB96D00, data, data_801D2E50]
-      - [0xB9CCB0, rodata, rodata_801D8E00]
-      - { name: bss_801D9B90, type: bss, vram: 0x801D9B90 }
+      - [0xB8AD30, asm, n64dd_B8AD30]
+      - [0xB8E5F0, asm, n64dd_B8E5F0]  # libleo start
+      - [0xB92F60, hasm]  # LeoGetKAdr
+      - [0xB93A60, asm, n64dd_B93A60]
+      - [0xB93AD0, textbin]
+      - [0xB95EF0, asm, n64dd_B95EF0]
+      - [0xB96D00, data, n64dd]
+      - [0xB9CCB0, rodata, n64dd_B8AD30]
+      - [0xB9D260, rodata, n64dd_B8E5F0]
+      - { name: n64dd, type: bss, vram: 0x801D9B90 }
 
   - name: ovl_title
     type: bin
