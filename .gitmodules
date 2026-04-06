@@ -1,0 +1,3 @@
+[submodule "asm-processor"]
+	path = asm-processor
+	url = git@github.com:simonlindholm/asm-processor.git
