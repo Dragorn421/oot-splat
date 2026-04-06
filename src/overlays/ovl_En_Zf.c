@@ -175,106 +175,70 @@ static Vec3f D_80B4A2EC = { 0.0f, 0.0f, 0.0f };
 static Gfx D_80B4A2F8[3] = { { { 0xD7000002, 0x0A000A00 } }, { { 0xDF000000, 0 } }, { { 0, 0 } } };
 static s32 D_80B4AB30;
 
-// non-equivalent, even
-#ifdef NON_MATCHING
-
 void func_80B44050(EnZf* this, void (*arg1)(EnZf*, GlobalContext*)) {
     this->unk3E8 = arg1;
 }
 
 s16 func_80B44058(EnZf* this, GlobalContext* globalCtx, f32 arg2) {
-    u16 sp44;
-    f32 sp40;
-    Vec3f sp30;
-    PosRot* sp28;
-    PosRot* temp_v0;
-    f32 temp_ft2;
-    f32 var_fa0;
-    f32 var_fa0_2;
     u16 temp_v1;
+    s16 sp44;
+    f32 sp40;
+    f32 temp_ft2;
+    Vec3f sp30;
 
-    var_fa0 = arg2;
-    temp_v0 = &this->actor.world;
-    if (var_fa0 == 0.0f) {
+    if (arg2 == 0.0f) {
         if (this->actor.speedXZ >= 0.0f) {
-            var_fa0_2 = 1.0f;
+            arg2 = 1.0f;
         } else {
-            var_fa0_2 = -1.0f;
+            arg2 = -1.0f;
         }
         if (this->actor.params >= 0) {
-            var_fa0 = var_fa0_2 * 45.0f;
+            arg2 = arg2 * 45.0f;
         } else {
-            var_fa0 = var_fa0_2 * 30.0f;
+            arg2 = arg2 * 30.0f;
         }
     }
-    sp30.x = (f32)temp_v0->pos.x;
-    sp30.y = (f32)temp_v0->pos.y;
-    sp30.z = (f32)temp_v0->pos.z;
+    sp30 = this->actor.world.pos;
     sp44 = this->actor.bgCheckFlags;
-    arg2 = var_fa0;
-    sp28 = temp_v0;
     sp40 = Math_SinS(this->actor.world.rot.y) * arg2;
     temp_ft2 = Math_CosS(this->actor.world.rot.y) * arg2;
     this->actor.world.pos.x += sp40;
     this->actor.world.pos.z += temp_ft2;
     Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 0.0f, 0.0f, 0.0f, 0x1C);
-    sp28->pos.x = sp30.x;
-    sp28->pos.y = sp30.y;
-    sp28->pos.z = sp30.z;
-    temp_v1 = this->actor.bgCheckFlags;
+    this->actor.world.pos = sp30;
+    temp_v1 = !(this->actor.bgCheckFlags & 1);
     this->actor.bgCheckFlags = (u16)(s16)sp44;
-    return (s16)((temp_v1 & 1) == 0);
+    return temp_v1;
 }
 
 s16 func_80B441C4(EnZf* this, GlobalContext* globalCtx, f32 arg2) {
-    u16 sp44;
-    f32 sp40;
-    Vec3f sp30;
-    PosRot* sp28;
-    PosRot* temp_v0_2;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
     s16 temp_v0;
+    s16 sp44;
+    f32 sp40;
+    f32 temp_fv0_2;
+    Vec3f sp30;
 
-    temp_fv0 = this->actor.speedXZ;
-    if ((temp_fv0 != 0.0f) && (func_80B44058(this, globalCtx, temp_fv0) != 0)) {
+    if ((this->actor.speedXZ != 0.0f) && (func_80B44058(this, globalCtx, this->actor.speedXZ) != 0)) {
         return 1;
     }
-    temp_v0_2 = &this->actor.world;
-    sp30.x = (f32)temp_v0_2->pos.x;
-    sp30.y = (f32)temp_v0_2->pos.y;
-    sp30.z = (f32)temp_v0_2->pos.z;
+    sp30 = this->actor.world.pos;
     sp44 = this->actor.bgCheckFlags;
-    sp28 = temp_v0_2;
     sp40 = Math_SinS(this->actor.shape.rot.y) * arg2;
-    temp_fv0_2 = Math_CosS(this->actor.shape.rot.y);
+    temp_fv0_2 = Math_CosS(this->actor.shape.rot.y) * arg2;
     this->actor.world.pos.x += sp40;
-    this->actor.world.pos.z += temp_fv0_2 * arg2;
+    this->actor.world.pos.z += temp_fv0_2;
     Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 0.0f, 0.0f, 0.0f, 0x1C);
-    sp28->pos.x = sp30.x;
-    sp28->pos.y = sp30.y;
-    sp28->pos.z = sp30.z;
-    temp_v0 = (this->actor.bgCheckFlags & 1) == 0;
+    this->actor.world.pos = sp30;
+    temp_v0 = !(this->actor.bgCheckFlags & 1);
     this->actor.bgCheckFlags = (u16)(s16)sp44;
     return temp_v0;
 }
 
-struct _m2c_stack_EnZf_Init {
-    /* 0x000 */ char pad0[0x30];
-    /* 0x030 */ ColliderCylinder* sp30; /* inferred */
-    /* 0x034 */ char pad34[0x18];       /* maybe part of sp30[7]? */
-    /* 0x04C */ EffectBlureInit1 sp4C;
-    /* 0x1EC */ Actor* sp1EC; /* inferred */
-    /* 0x1F0 */ char pad1F0[8];
-};
+#ifdef NON_MATCHING
 void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
     Actor* sp1EC;
     EffectBlureInit1 sp4C;
-    ColliderCylinder* sp30; /* compiler-managed */
-    ColliderCylinder* temp_a1;
-    ColliderQuad* temp_a1_2;
     f32 temp_fv0;
-    f32 var_fv1;
     s16 temp_t8;
     s16 temp_v0;
     s16 temp_v0_2;
@@ -294,19 +258,9 @@ void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->unk3E0 = 0;
     this->actor.colChkInfo.mass = 0xFE;
     this->actor.colChkInfo.damageTable = &D_80B4A254;
-    sp4C.p2EndColor[2] = 0xFF;
-    sp4C.p2EndColor[1] = 0xFF;
-    sp4C.p2EndColor[0] = 0xFF;
-    sp4C.p1EndColor[2] = 0xFF;
-    sp4C.p1EndColor[1] = 0xFF;
-    sp4C.p1EndColor[0] = 0xFF;
-    sp4C.p2StartColor[2] = 0xFF;
-    sp4C.p2StartColor[1] = 0xFF;
-    sp4C.p2StartColor[0] = 0xFF;
-    sp4C.p1StartColor[3] = 0xFF;
-    sp4C.p1StartColor[2] = 0xFF;
-    sp4C.p1StartColor[1] = 0xFF;
-    sp4C.p1StartColor[0] = 0xFF;
+    sp4C.p1StartColor[0] = sp4C.p1StartColor[1] = sp4C.p1StartColor[2] = sp4C.p1StartColor[3] = sp4C.p2StartColor[0] =
+        sp4C.p2StartColor[1] = sp4C.p2StartColor[2] = sp4C.p1EndColor[0] = sp4C.p1EndColor[1] = sp4C.p1EndColor[2] =
+            sp4C.p2EndColor[0] = sp4C.p2EndColor[1] = sp4C.p2EndColor[2] = 0xFF;
     sp4C.p2StartColor[3] = 0x40;
     sp4C.p1EndColor[3] = 0;
     sp4C.p2EndColor[3] = 0;
@@ -318,14 +272,10 @@ void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->unk404 = 0xFF;
     this->actor.colChkInfo.cylRadius = 0x28;
     this->actor.colChkInfo.cylHeight = 0x64;
-    temp_a1 = &this->unk418;
-    sp30 = temp_a1;
-    Collider_InitCylinder(globalCtx, temp_a1);
-    Collider_SetCylinder(globalCtx, temp_a1, &this->actor, &D_80B4A1D8);
-    temp_a1_2 = &this->unk464;
-    sp30 = temp_a1_2;
-    Collider_InitQuad(globalCtx, temp_a1_2);
-    Collider_SetQuad(globalCtx, temp_a1_2, &this->actor, &D_80B4A204);
+    Collider_InitCylinder(globalCtx, &this->unk418);
+    Collider_SetCylinder(globalCtx, &this->unk418, &this->actor, &D_80B4A1D8);
+    Collider_InitQuad(globalCtx, &this->unk464);
+    Collider_SetQuad(globalCtx, &this->unk464, &this->actor, &D_80B4A204);
     if (this->actor.params == -2) {
         this->actor.colChkInfo.health = 0xC;
         this->actor.naviEnemyId = 0x10;
@@ -348,12 +298,7 @@ void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
         return;
     }
     temp_fv0 = sp1EC->world.pos.y - this->actor.world.pos.y;
-    if (temp_fv0 >= 0.0f) {
-        var_fv1 = temp_fv0;
-    } else {
-        var_fv1 = -temp_fv0;
-    }
-    if ((var_fv1 <= 100.0f) && (Flags_GetSwitch(globalCtx, (s32)this->unk3FC) == 0)) {
+    if ((ABS(temp_fv0) <= 100.0f) && (Flags_GetSwitch(globalCtx, (s32)this->unk3FC) == 0)) {
         temp_v0_2 = func_80B446A8(&this->actor.world.pos, 0);
         this->unk3FE = temp_v0_2;
         this->unk400 = temp_v0_2;
@@ -363,6 +308,9 @@ void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
     Actor_Kill(&this->actor);
 }
+#else
+#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/EnZf_Init.s")
+#endif
 
 void EnZf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     EnZf* this = (EnZf*)thisx;
@@ -373,6 +321,8 @@ void EnZf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Collider_DestroyCylinder(globalCtx, &this->unk418);
     Collider_DestroyQuad(globalCtx, &this->unk464);
 }
+
+#ifdef NON_MATCHING
 
 s16 func_80B446A8(Vec3f* arg0, s16 arg1) {
     Vec3f* temp_v0;
@@ -2852,16 +2802,6 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 #else
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44050.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44058.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B441C4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/EnZf_Init.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/EnZf_Destroy.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B446A8.s")
 
