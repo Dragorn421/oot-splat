@@ -322,54 +322,32 @@ void EnZf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Collider_DestroyQuad(globalCtx, &this->unk464);
 }
 
-#ifdef NON_MATCHING
-
 s16 func_80B446A8(Vec3f* arg0, s16 arg1) {
     Vec3f* temp_v0;
     Vec3f* temp_v0_2;
-    f32 temp_fa0;
-    f32 temp_fa0_2;
-    f32 temp_fa0_3;
-    f32 temp_fa0_4;
-    f32 temp_fa0_5;
-    f32 temp_fa0_6;
-    f32 temp_fa1;
-    f32 temp_fa1_2;
-    f32 temp_fa1_3;
-    f32 temp_fa1_4;
-    f32 temp_fv1;
-    f32 var_fv0;
+    f32 var_fv0_real;
     s16 var_v1;
 
-    var_fv0 = 210.0f;
-    temp_fv1 = arg0->y;
-    var_v1 = 0x17;
-    if (temp_fv1 >= 420.0f) {
-        var_fv0 = 110.0f;
+    var_fv0_real = 210.0f;
+    if (arg0->y >= 420.0f) {
+        var_fv0_real = 110.0f;
     }
     if (arg1 != -1) {
         temp_v0 = &D_80B4A090[arg1];
-        temp_fa0 = temp_v0->y;
-        if (((temp_fa0 - 150.0f) <= temp_fv1) && (temp_fv1 <= (temp_fa0 + 150.0f))) {
-            temp_fa1 = temp_v0->x;
-            temp_fa0_2 = arg0->x;
-            if (((temp_fa1 - var_fv0) <= temp_fa0_2) && (temp_fa0_2 <= (temp_fa1 + var_fv0))) {
-                temp_fa1_2 = temp_v0->z;
-                temp_fa0_3 = arg0->z;
-                if (((temp_fa1_2 - var_fv0) <= temp_fa0_3) && (temp_fa0_3 <= (temp_fa1_2 + var_fv0))) {
+        if (((temp_v0->y - 150.0f) <= arg0->y) && (arg0->y <= (temp_v0->y + 150.0f))) {
+            if (((temp_v0->x - var_fv0_real) <= arg0->x) && (arg0->x <= (temp_v0->x + var_fv0_real))) {
+                if (((temp_v0->z - var_fv0_real) <= arg0->z) && (arg0->z <= (temp_v0->z + var_fv0_real))) {
                     return arg1;
                 }
             }
         }
     }
+    var_v1 = 0x17;
 loop_11:
     temp_v0_2 = &D_80B4A090[var_v1];
-    temp_fa0_4 = temp_v0_2->y;
-    if (!((temp_fa0_4 - 150.0f) <= temp_fv1) || !(temp_fv1 <= (temp_fa0_4 + 150.0f)) ||
-        (temp_fa1_3 = temp_v0_2->x, temp_fa0_5 = arg0->x, !((temp_fa1_3 - var_fv0) <= temp_fa0_5)) ||
-        !(temp_fa0_5 <= (temp_fa1_3 + var_fv0)) ||
-        (temp_fa1_4 = temp_v0_2->z, temp_fa0_6 = arg0->z, !((temp_fa1_4 - var_fv0) <= temp_fa0_6)) ||
-        !(temp_fa0_6 <= (temp_fa1_4 + var_fv0))) {
+    if (!((temp_v0_2->y - 150.0f) <= arg0->y) || !(arg0->y <= (temp_v0_2->y + 150.0f)) ||
+        (!((temp_v0_2->x - var_fv0_real) <= arg0->x)) || !(arg0->x <= (temp_v0_2->x + var_fv0_real)) ||
+        (!((temp_v0_2->z - var_fv0_real) <= arg0->z)) || !(arg0->z <= (temp_v0_2->z + var_fv0_real))) {
         var_v1 -= 1;
         if (var_v1 >= 0) {
             goto loop_11;
@@ -379,8 +357,6 @@ loop_11:
 }
 
 s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
-    PosRot* sp64;
-    PosRot* temp_a0;
     Vec3f* temp_s0;
     f32 temp_fv0;
     f32 var_fs0;
@@ -393,20 +369,18 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
     s16 var_s0;
     s16 var_s4;
     s16 var_s5;
-    s16 var_v0;
     s32 var_s7;
+    Player* player = GET_PLAYER(globalCtx);
 
     var_fs2 = 585.0f;
     var_fs3 = 400.0f;
     var_fs0 = 99998.0f;
-    temp_a0 = &globalCtx->actorCtx.actorLists[2].head->world;
     var_s0 = 5;
     var_s7 = 0;
     var_fs1 = 99999.0f;
     var_s4 = -1;
     var_s5 = -1;
-    sp64 = temp_a0;
-    temp_s3 = func_80B446A8(&temp_a0->pos, arg1);
+    temp_s3 = func_80B446A8(&player->actor.world.pos, arg1);
     if (arg0->y > 420.0f) {
         var_fs3 = 50.0f;
         var_s7 = 8;
@@ -421,7 +395,7 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
     if (var_s0 >= var_s7) {
         do {
             if ((var_s0 != arg1) && (var_s0 != temp_s3) &&
-                ((temp_s3 != -1) || !(Math_Vec3f_DistXYZ(&sp64->pos, &D_80B4A090[var_s0]) < var_fs3))) {
+                ((temp_s3 != -1) || !(Math_Vec3f_DistXYZ(&player->actor.world.pos, &D_80B4A090[var_s0]) < var_fs3))) {
                 temp_fv0 = Math_Vec3f_DistXYZ(arg0, &D_80B4A090[var_s0]);
                 if (!(var_fs2 < temp_fv0)) {
                     if (temp_fv0 < var_fs0) {
@@ -439,16 +413,12 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
         } while (var_s0 >= var_s7);
     }
     temp_s0 = &D_80B4A090[var_s5];
-    Math_Vec3f_DistXYZ(&sp64->pos, temp_s0);
-    Math_Vec3f_DistXYZ(&sp64->pos, &D_80B4A090[var_s4]);
+    Math_Vec3f_DistXYZ(&player->actor.world.pos, temp_s0);
+    Math_Vec3f_DistXYZ(&player->actor.world.pos, &D_80B4A090[var_s4]);
     if (var_s4 > 0) {
         temp_s0_2 = Math_Vec3f_Yaw(arg0, temp_s0);
-        temp_v1 = temp_s0_2 - Math_Vec3f_Yaw(arg0, &sp64->pos);
-        var_v0 = -temp_v1;
-        if (temp_v1 >= 0) {
-            var_v0 = temp_v1;
-        }
-        if (var_v0 < 0x36B0) {
+        temp_v1 = temp_s0_2 - Math_Vec3f_Yaw(arg0, &player->actor.world.pos);
+        if (ABS(temp_v1) < 0x36B0) {
             var_s5 = var_s4;
         }
     }
@@ -458,8 +428,10 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
     return var_s5;
 }
 
+#ifdef NON_MATCHING
+
 s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
-    PosRot* temp_s7;
+    PosRot* temp_s7_RM;
     Vec3f* temp_s0;
     f32 temp_fv0;
     f32 var_fs0;
@@ -469,16 +441,16 @@ s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
     s16 var_s1;
     s16 var_s2;
     s16 var_s3;
-    s32 var_fp;
+    s16 var_fp;
     s32 var_s4;
+    Player* player = GET_PLAYER(globalCtx);
 
-    temp_s7 = &globalCtx->actorCtx.actorLists[2].head->world;
     var_s1 = 7;
     var_s4 = 0;
     var_fs2 = 500.0f;
     var_fs0 = 99998.0f;
     var_fs1 = 99999.0f;
-    temp_fp = func_80B446A8(&temp_s7->pos, -1);
+    temp_fp = func_80B446A8(&player->actor.world.pos, -1);
     var_s2 = arg1;
     var_s3 = arg2;
     if (arg0->y > 200.0f) {
@@ -491,7 +463,7 @@ s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
         temp_s0 = &D_80B4A090[var_s1];
         if (!(var_fs2 < Math_Vec3f_DistXYZ(arg0, temp_s0))) {
             if (var_s1 != temp_fp) {
-                temp_fv0 = Math_Vec3f_DistXYZ(&temp_s7->pos, temp_s0);
+                temp_fv0 = Math_Vec3f_DistXYZ(&player->actor.world.pos, temp_s0);
                 if (temp_fv0 < var_fs0) {
                     var_fs1 = var_fs0;
                     var_s3 = var_s2;
@@ -513,11 +485,11 @@ s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
         }
     }
     if (var_s3 != temp_fp) {
-        var_fp = var_s2 << 0x10;
+        var_fp = var_s2;
     } else {
-        var_fp = var_s3 << 0x10;
+        var_fp = var_s3;
     }
-    return var_fp >> 0x10;
+    return var_fp;
 }
 
 s32 func_80B44CF0(GlobalContext* globalCtx, EnZf* this) {
@@ -2802,10 +2774,6 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 #else
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B446A8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44870.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44B14.s")
 
