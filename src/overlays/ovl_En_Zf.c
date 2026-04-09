@@ -429,7 +429,6 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
 }
 
 #ifdef NON_MATCHING
-
 s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
     PosRot* temp_s7_RM;
     Vec3f* temp_s0;
@@ -491,6 +490,9 @@ s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
     }
     return var_fp;
 }
+#else
+#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44B14.s")
+#endif
 
 s32 func_80B44CF0(GlobalContext* globalCtx, EnZf* this) {
     Player* sp18;
@@ -500,9 +502,10 @@ s32 func_80B44CF0(GlobalContext* globalCtx, EnZf* this) {
     temp_v1 = globalCtx->actorCtx.actorLists[2].head;
     if (this->actor.params >= 0) {
         if (temp_v1->stateFlags1 & 0x6000) {
-            goto block_15;
+            return 0;
+        } else {
+            return 1;
         }
-        return 1;
     }
     sp18 = temp_v1;
     if (Actor_OtherIsTargeted(globalCtx, &this->actor) == 0) {
@@ -511,20 +514,18 @@ s32 func_80B44CF0(GlobalContext* globalCtx, EnZf* this) {
     if (this->actor.params == -2) {
         temp_v0 = temp_v1->unk_664;
         if (temp_v0 == NULL) {
-            goto block_15;
+            return 0;
         }
         if (temp_v0->category != 5) {
             return 1;
         }
         if (temp_v0->id != 0x25) {
-            goto block_15;
+            return 0;
         }
         if (temp_v0->colorFilterTimer != 0) {
             return 1;
         }
-        goto block_15;
     }
-block_15:
     return 0;
 }
 
@@ -548,37 +549,21 @@ void func_80B44DC4(EnZf* this, GlobalContext* globalCtx) {
 }
 
 s32 func_80B44E8C(GlobalContext* globalCtx, EnZf* this) {
-    s16 sp2E;
-    Actor* sp28;
-    Actor* temp_v0_2;
-    s16 temp_v0;
-    s16 temp_v1;
-    s16 temp_v1_2;
-    s16 var_t0;
-    s16 var_v0;
+    s16 var_t0_sp2E;
+    Actor* temp_v0_2_sp28;
 
-    temp_v0 = this->actor.shape.rot.y;
-    var_t0 = this->actor.wallYaw - temp_v0;
-    if (var_t0 < 0) {
-        var_t0 *= -1;
+    var_t0_sp2E = this->actor.wallYaw - this->actor.shape.rot.y;
+    if (var_t0_sp2E < 0) {
+        var_t0_sp2E *= -1;
     }
-    sp2E = var_t0;
-    if (func_800354B4(globalCtx, &this->actor, 100.0f, 0x5DC0, 0x2AA8, (s16)(s32)temp_v0) != 0) {
-        temp_v1 = this->actor.yawTowardsPlayer;
-        this->actor.world.rot.y = temp_v1;
-        this->actor.shape.rot.y = temp_v1;
+    if (func_800354B4(globalCtx, &this->actor, 100.0f, 0x5DC0, 0x2AA8, (s16)(s32)this->actor.shape.rot.y) != 0) {
+        this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
         if (this->actor.bgCheckFlags & 8) {
-            var_v0 = -var_t0;
-            if (var_t0 >= 0) {
-                var_v0 = var_t0;
-            }
-            if ((var_v0 < 0x2EE0) && (this->actor.xzDistToPlayer < 80.0f)) {
+            if ((ABS(var_t0_sp2E) < 0x2EE0) && (this->actor.xzDistToPlayer < 80.0f)) {
                 func_80B48210(this);
                 return 1;
             }
-            goto block_9;
         }
-    block_9:
         if ((this->actor.xzDistToPlayer < 90.0f) && (globalCtx->gameplayFrames & 1)) {
             func_80B48210(this);
             return 1;
@@ -586,17 +571,13 @@ s32 func_80B44E8C(GlobalContext* globalCtx, EnZf* this) {
         func_80B46E8C(this);
         return 1;
     }
-    sp2E = var_t0;
-    temp_v0_2 = Actor_FindNearby(globalCtx, &this->actor, -1, 3U, 80.0f);
-    if (temp_v0_2 != NULL) {
-        temp_v1_2 = this->actor.yawTowardsPlayer;
-        this->actor.world.rot.y = temp_v1_2;
-        this->actor.shape.rot.y = temp_v1_2;
-        if (((this->actor.bgCheckFlags & 8) && (var_t0 < 0x2EE0)) || (temp_v0_2->id == 0xDA)) {
-            if (temp_v0_2->id == 0xDA) {
-                sp28 = temp_v0_2;
-                if ((Actor_WorldDistXYZToActor(&this->actor, temp_v0_2) < 80.0f) &&
-                    ((s16)((this->actor.shape.rot.y - temp_v0_2->world.rot.y) + 0x8000) < 0x3E80)) {
+    temp_v0_2_sp28 = Actor_FindNearby(globalCtx, &this->actor, -1, 3U, 80.0f);
+    if (temp_v0_2_sp28 != NULL) {
+        this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
+        if (((this->actor.bgCheckFlags & 8) && (var_t0_sp2E < 0x2EE0)) || (temp_v0_2_sp28->id == 0xDA)) {
+            if (temp_v0_2_sp28->id == 0xDA) {
+                if ((Actor_WorldDistXYZToActor(&this->actor, temp_v0_2_sp28) < 80.0f) &&
+                    ((s16)((this->actor.shape.rot.y - temp_v0_2_sp28->world.rot.y) + 0x8000) < 0x3E80)) {
                     func_80B48210(this);
                     return 1;
                 }
@@ -611,20 +592,15 @@ s32 func_80B44E8C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 void func_80B450AC(EnZf* this) {
-    s16 temp_v0;
-
     Animation_Change(&this->unk14C, &D_6009530, 0.0f, 9.0f, (f32)Animation_GetLastFrame(&D_6009530), 0U, 0.0f);
-    temp_v0 = this->actor.yawTowardsPlayer;
     this->actor.world.pos.y = this->actor.floorHeight + 300.0f;
-    this->actor.shape.shadowAlpha = 0;
-    this->unk404 = 0;
+    this->unk404 = this->actor.shape.shadowAlpha = 0;
     this->unk3F0 = 0xA;
     this->unk3E4 = 1;
     this->unk3DC = 0;
     this->actor.bgCheckFlags &= 0xFFFD;
     this->actor.flags &= ~1;
-    this->actor.world.rot.y = temp_v0;
-    this->actor.shape.rot.y = temp_v0;
+    this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
     func_80B44050(this, func_80B45174);
 }
 
@@ -682,36 +658,29 @@ void func_80B45384(EnZf* this) {
     Animation_Change(&this->unk14C, &D_600B10C, 1.0f, 0.0f, (f32)Animation_GetLastFrame(&D_600B10C), 1U, -4.0f);
     this->unk3DC = 3;
     temp_ft4 = Rand_ZeroOne() * 10.0f;
+    this->unk3F0 = (s32)(temp_ft4 + 5.0f);
     this->actor.speedXZ = 0.0f;
     this->actor.world.rot.y = this->actor.shape.rot.y;
-    this->unk3F0 = (s32)(temp_ft4 + 5.0f);
     func_80B44050(this, func_80B4543C);
 }
 
+#ifdef NON_MATCHING
 void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
     Player* sp2C;
-    s16 sp26;
-    f32 temp_fv0;
-    s16 temp_v0;
-    s16 temp_v0_2;
-    s16 temp_v0_4;
-    s16 var_v1;
+    s16 var_v1_sp26;
     s16 var_v1_2;
-    s32 temp_v0_3;
 
     sp2C = globalCtx->actorCtx.actorLists[2].head;
-    var_v1 = (this->actor.yawTowardsPlayer - this->unk3EC) - this->actor.shape.rot.y;
-    if (var_v1 < 0) {
-        var_v1 *= -1;
+    var_v1_sp26 = (this->actor.yawTowardsPlayer - this->unk3EC) - this->actor.shape.rot.y;
+    if (var_v1_sp26 < 0) {
+        var_v1_sp26 *= -1;
     }
-    sp26 = var_v1;
     SkelAnime_Update(&this->unk14C);
     if (func_80B49C2C(globalCtx, this) == 0) {
         if (this->actor.params == -2) {
-            temp_v0 = this->unk3F4;
-            if (temp_v0 != 0) {
-                this->unk3F4 = temp_v0 - 1;
-                if (var_v1 < 0x1FFE) {
+            if (this->unk3F4 != 0) {
+                this->unk3F4 -= 1;
+                if (var_v1_sp26 < 0x1FFE) {
                     this->unk3F4 = 0;
                     goto block_8;
                 }
@@ -725,24 +694,19 @@ void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
                 var_v1_2 *= -1;
             }
             if ((this->actor.xzDistToPlayer < 100.0f) && (sp2C->swordState != 0) && (var_v1_2 >= 0x1F40)) {
-                temp_v0_2 = this->actor.yawTowardsPlayer;
-                this->actor.world.rot.y = temp_v0_2;
-                this->actor.shape.rot.y = temp_v0_2;
+                this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
                 func_80B483E4(this, globalCtx);
                 return;
             }
-            temp_v0_3 = this->unk3F0;
-            if (temp_v0_3 != 0) {
-                this->unk3F0 = temp_v0_3 - 1;
+            if (this->unk3F0 != 0) {
+                this->unk3F0 -= 1;
                 return;
             }
             if (Actor_IsFacingPlayer(&this->actor, 0x1555) != 0) {
-                temp_fv0 = this->actor.xzDistToPlayer;
-                if ((temp_fv0 < 200.0f) && (temp_fv0 > 100.0f) && (Rand_ZeroOne() < 0.3f)) {
+                if ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.xzDistToPlayer > 100.0f) &&
+                    (Rand_ZeroOne() < 0.3f)) {
                     if (this->actor.params == -2) {
-                        temp_v0_4 = this->actor.yawTowardsPlayer;
-                        this->actor.shape.rot.y = temp_v0_4;
-                        this->actor.world.rot.y = temp_v0_4;
+                        this->actor.world.rot.y = this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
                         func_80B45E30(this);
                     } else {
                         func_80B483E4(this, globalCtx);
@@ -761,23 +725,23 @@ void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
         }
     }
 }
+#else
+#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B4543C.s")
+#endif
 
 void func_80B456B4(EnZf* this, GlobalContext* globalCtx) {
-    PosRot* sp24;
-    PosRot* temp_a0;
-
     Animation_MorphToLoop(&this->unk14C, &D_6008138, -4.0f);
     this->unk3DC = 5;
-    temp_a0 = &this->actor.world;
     if (this->actor.params >= 0) {
-        sp24 = temp_a0;
-        this->unk3FE = func_80B446A8(&temp_a0->pos, this->unk3FE);
-        this->unk402 = func_80B44B14(&temp_a0->pos, this->unk3FE, this->unk400, globalCtx);
+        this->unk3FE = func_80B446A8(&this->actor.world.pos, this->unk3FE);
+        this->unk402 = func_80B44B14(&this->actor.world.pos, this->unk3FE, this->unk400, globalCtx);
         this->unk3E4 = 0;
     }
     this->actor.speedXZ = 0.0f;
     func_80B44050(this, func_80B45748);
 }
+
+#ifdef NON_MATCHING
 
 void func_80B45748(EnZf* this, GlobalContext* globalCtx) {
     s32 sp54;
@@ -2774,24 +2738,6 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 #else
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44B14.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44CF0.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44DC4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B44E8C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B450AC.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45174.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45384.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B4543C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B456B4.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45748.s")
 
