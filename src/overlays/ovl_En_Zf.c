@@ -419,8 +419,8 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
 }
 
 #ifdef NON_MATCHING
+// https://decomp.me/scratch/r2djk
 s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
-    PosRot* temp_s7_RM;
     Vec3f* temp_s0;
     f32 temp_fv0;
     f32 var_fs0;
@@ -447,8 +447,7 @@ s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
         var_s1 = 0x17;
         var_s4 = 8;
     }
-    if (var_s1 >= var_s4) {
-    loop_4:
+    for (; var_s1 >= var_s4; var_s1--) {
         temp_s0 = &D_80B4A090[var_s1];
         if (!(var_fs2 < Math_Vec3f_DistXYZ(arg0, temp_s0))) {
             if (var_s1 != temp_fp) {
@@ -462,15 +461,10 @@ s32 func_80B44B14(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
                     var_fs1 = temp_fv0;
                     var_s3 = var_s1;
                 }
-                goto block_11;
+            } else {
+                break;
             }
             var_s2 = temp_fp;
-        } else {
-        block_11:
-            var_s1 -= 1;
-            if (var_s1 >= var_s4) {
-                goto loop_4;
-            }
         }
     }
     if (var_s3 != temp_fp) {
@@ -654,9 +648,9 @@ void func_80B45384(EnZf* this) {
     func_80B44050(this, func_80B4543C);
 }
 
-#ifdef NON_MATCHING
 void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
     Player* sp2C;
+    s32 pad;
     s16 var_v1_sp26;
     s16 var_v1_2;
 
@@ -672,52 +666,49 @@ void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
                 this->unk3F4 -= 1;
                 if (var_v1_sp26 < 0x1FFE) {
                     this->unk3F4 = 0;
-                    goto block_8;
+                } else {
+                    return;
                 }
-            } else if (func_80B44E8C(globalCtx, this) == 0) {
-                goto block_8;
-            }
-        } else {
-        block_8:
-            var_v1_2 = sp2C->actor.shape.rot.y - this->actor.shape.rot.y;
-            if (var_v1_2 < 0) {
-                var_v1_2 *= -1;
-            }
-            if ((this->actor.xzDistToPlayer < 100.0f) && (sp2C->swordState != 0) && (var_v1_2 >= 0x1F40)) {
-                this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
-                func_80B483E4(this, globalCtx);
+            } else if (func_80B44E8C(globalCtx, this) != 0) {
                 return;
             }
-            if (this->unk3F0 != 0) {
-                this->unk3F0 -= 1;
-                return;
-            }
-            if (Actor_IsFacingPlayer(&this->actor, 0x1555) != 0) {
-                if ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.xzDistToPlayer > 100.0f) &&
-                    (Rand_ZeroOne() < 0.3f)) {
-                    if (this->actor.params == -2) {
-                        this->actor.world.rot.y = this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
-                        func_80B45E30(this);
-                    } else {
-                        func_80B483E4(this, globalCtx);
-                    }
-                } else if (Rand_ZeroOne() > 0.3f) {
-                    func_80B456B4(this, globalCtx);
+        }
+        var_v1_2 = sp2C->actor.shape.rot.y - this->actor.shape.rot.y;
+        if (var_v1_2 < 0) {
+            var_v1_2 *= -1;
+        }
+        if ((this->actor.xzDistToPlayer < 100.0f) && (sp2C->swordState != 0) && (var_v1_2 >= 0x1F40)) {
+            this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
+            if (var_v1_2) {}
+            func_80B483E4(this, globalCtx);
+            return;
+        }
+        if (this->unk3F0 != 0) {
+            this->unk3F0 -= 1;
+            return;
+        }
+        if (Actor_IsFacingPlayer(&this->actor, 0x1555) != 0) {
+            if ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.xzDistToPlayer > 100.0f) &&
+                (Rand_ZeroOne() < 0.3f)) {
+                if (this->actor.params == -2) {
+                    this->actor.world.rot.y = this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
+                    func_80B45E30(this);
                 } else {
                     func_80B483E4(this, globalCtx);
                 }
+            } else if (Rand_ZeroOne() > 0.3f) {
+                func_80B456B4(this, globalCtx);
             } else {
-                func_80B4604C(this);
+                func_80B483E4(this, globalCtx);
             }
-            if (!(globalCtx->gameplayFrames & 0x5F)) {
-                Audio_PlayActorSound2(&this->actor, 0x3829U);
-            }
+        } else {
+            func_80B4604C(this);
+        }
+        if (!(globalCtx->gameplayFrames & 0x5F)) {
+            Audio_PlayActorSound2(&this->actor, 0x3829U);
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B4543C.s")
-#endif
 
 void func_80B456B4(EnZf* this, GlobalContext* globalCtx) {
     Animation_MorphToLoop(&this->unk14C, &D_6008138, -4.0f);
@@ -1396,6 +1387,7 @@ void func_80B4779C(EnZf* this, GlobalContext* globalCtx) {
 }
 
 #ifdef NON_MATCHING
+// https://decomp.me/scratch/0a7cK
 void func_80B4781C(EnZf* this, GlobalContext* globalCtx) {
     f32 sp74;
     f32 sp70;
@@ -2193,6 +2185,7 @@ void func_80B49688(GlobalContext* globalCtx, s32 arg1, Gfx** arg2, Vec3s* arg3, 
 }
 
 #ifdef NON_MATCHING
+// https://decomp.me/scratch/z4lkx
 void EnZf_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnZf* this = (EnZf*)thisx;
     s32 pad;
@@ -2301,6 +2294,7 @@ s32 func_80B49C2C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 #ifdef NON_MATCHING
+// https://decomp.me/scratch/6BXmM
 s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
     s16 sp22;
     s16 sp20;
