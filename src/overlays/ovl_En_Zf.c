@@ -234,25 +234,20 @@ s16 func_80B441C4(EnZf* this, GlobalContext* globalCtx, f32 arg2) {
     return temp_v0;
 }
 
-#ifdef NON_MATCHING
 void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
+    f32 temp_fv0;
+    s32 pad;
     Actor* sp1EC;
     EffectBlureInit1 sp4C;
-    f32 temp_fv0;
-    s16 temp_t8;
-    s16 temp_v0;
-    s16 temp_v0_2;
     EnZf* this = (EnZf*)thisx;
 
     sp1EC = globalCtx->actorCtx.actorLists[2].head;
     Actor_ProcessInitChain(&this->actor, D_80B4A274);
-    temp_t8 = this->actor.params;
-    this->actor.params &= 0xFF;
-    temp_v0 = this->actor.params;
     this->actor.targetMode = 3;
-    this->unk3FC = (s16)((s32)(temp_t8 & 0xFF00) >> 8);
-    if (temp_v0 & 0x80) {
-        this->actor.params = temp_v0 | 0xFF00;
+    this->unk3FC = ((((thisx->params) & 0xFF00)) >> 8);
+    this->actor.params &= 0xFF;
+    if (this->actor.params & 0x80) {
+        this->actor.params |= 0xFF00;
     }
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFeet, 90.0f);
     this->unk3E0 = 0;
@@ -290,27 +285,22 @@ void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->unk400 = this->unk3FE;
         D_80B4A1B4 = -1;
         this->unk3E4 = 1;
-        if (this->actor.params == -1) {
+        if (this->actor.params == (-1)) {
             func_80B450AC(this);
-            return;
+        } else {
+            func_80B45384(this);
         }
-        func_80B45384(this);
-        return;
+    } else {
+        temp_fv0 = sp1EC->world.pos.y - this->actor.world.pos.y;
+        if ((ABS(temp_fv0) <= 100.0f) && (Flags_GetSwitch(globalCtx, (s32)this->unk3FC) == 0)) {
+            this->unk400 = this->unk3FE = func_80B446A8(&this->actor.world.pos, 0);
+            func_80B450AC(this);
+            D_80B4A1B4 = 1;
+        } else {
+            Actor_Kill(&this->actor);
+        }
     }
-    temp_fv0 = sp1EC->world.pos.y - this->actor.world.pos.y;
-    if ((ABS(temp_fv0) <= 100.0f) && (Flags_GetSwitch(globalCtx, (s32)this->unk3FC) == 0)) {
-        temp_v0_2 = func_80B446A8(&this->actor.world.pos, 0);
-        this->unk3FE = temp_v0_2;
-        this->unk400 = temp_v0_2;
-        func_80B450AC(this);
-        D_80B4A1B4 = 1;
-        return;
-    }
-    Actor_Kill(&this->actor);
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/EnZf_Init.s")
-#endif
 
 void EnZf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     EnZf* this = (EnZf*)thisx;
