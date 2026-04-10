@@ -37,7 +37,7 @@ typedef struct EnZf {
     /* 0x464 */ ColliderQuad unk464;
     /* 0x4E4 */ Vec3f unk4E4;
     /* 0x4F0 */ Vec3f unk4F0;
-    /* 0x4FC */ char pad4FC[0x6C];
+    /* 0x4FC */ Vec3f unk4FC[9];
 } EnZf; // size = 0x568
 
 #endif
