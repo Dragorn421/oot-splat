@@ -16,7 +16,6 @@ void EnZf_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnZf_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 void func_80B44050(EnZf* this, void (*arg1)(EnZf*, GlobalContext*));
-s16 func_80B44058(EnZf* this, GlobalContext* globalCtx, f32 arg2);
 s16 func_80B441C4(EnZf* this, GlobalContext* globalCtx, f32 arg2);
 s16 func_80B446A8(Vec3f* arg0, s16 arg1);
 s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx);
@@ -179,8 +178,8 @@ void func_80B44050(EnZf* this, void (*arg1)(EnZf*, GlobalContext*)) {
     this->unk3E8 = arg1;
 }
 
-s16 func_80B44058(EnZf* this, GlobalContext* globalCtx, f32 arg2) {
-    u16 temp_v1;
+s32 func_80B44058(EnZf* this, GlobalContext* globalCtx, f32 arg2) {
+    s16 temp_v1;
     s16 sp44;
     f32 sp40;
     f32 temp_ft2;
@@ -1374,8 +1373,6 @@ void func_80B4779C(EnZf* this, GlobalContext* globalCtx) {
     func_80B44050(this, func_80B4781C);
 }
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/0a7cK
 void func_80B4781C(EnZf* this, GlobalContext* globalCtx) {
     f32 sp74;
     f32 sp70;
@@ -1481,9 +1478,6 @@ void func_80B4781C(EnZf* this, GlobalContext* globalCtx) {
     }
     SkelAnime_Update(&this->unk14C);
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B4781C.s")
-#endif
 
 void func_80B47C64(EnZf* this, GlobalContext* globalCtx) {
     Animation_PlayOnce(&this->unk14C, &D_601366C);
