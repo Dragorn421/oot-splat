@@ -1505,20 +1505,13 @@ void func_80B4781C(EnZf* this, GlobalContext* globalCtx) {
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B4781C.s")
 #endif
 
-#ifdef NON_MATCHING
-
 void func_80B47C64(EnZf* this, GlobalContext* globalCtx) {
-    PosRot* sp24;
-    PosRot* temp_a0;
-
     Animation_PlayOnce(&this->unk14C, &D_601366C);
     this->actor.world.rot.y += 0x8000;
     this->unk3DC = 0x15;
-    temp_a0 = &this->actor.world;
     this->actor.speedXZ = 0.0f;
-    sp24 = temp_a0;
-    this->unk3FE = func_80B446A8(&temp_a0->pos, this->unk3FE);
-    this->unk402 = func_80B44870(&temp_a0->pos, this->unk3FE, this->unk400, globalCtx);
+    this->unk3FE = func_80B446A8(&this->actor.world.pos, this->unk3FE);
+    this->unk402 = func_80B44870(&this->actor.world.pos, this->unk3FE, this->unk400, globalCtx);
     func_80B44050(this, func_80B47CF8);
 }
 
@@ -1531,8 +1524,8 @@ void func_80B47CF8(EnZf* this, GlobalContext* globalCtx) {
     }
     if (SkelAnime_Update(&this->unk14C) != 0) {
         Audio_PlayActorSound2(&this->actor, 0x3829U);
-        this->unk3E4 = -1;
         this->actor.world.rot.y = sp2E;
+        this->unk3E4 = -1;
         func_80B45384(this);
     }
     if (this->unk14C.curFrame == 22.0f) {
@@ -1541,11 +1534,8 @@ void func_80B47CF8(EnZf* this, GlobalContext* globalCtx) {
 }
 
 void func_80B47DA8(EnZf* this) {
-    f32 temp_fv0;
-
     Animation_Change(&this->unk14C, &D_60157F8, 1.5f, 0.0f, (f32)Animation_GetLastFrame(&D_60157F8), 2U, -4.0f);
-    if ((this->actor.bgCheckFlags & 1) &&
-        ((temp_fv0 = this->actor.velocity.y, (temp_fv0 == 0.0f)) || (temp_fv0 == -4.0f))) {
+    if ((this->actor.bgCheckFlags & 1) && (((this->actor.velocity.y == 0.0f)) || (this->actor.velocity.y == -4.0f))) {
         this->actor.speedXZ = -4.0f;
         this->unk3E4 = 0;
     } else {
@@ -1563,24 +1553,20 @@ void func_80B47DA8(EnZf* this) {
 }
 
 void func_80B47EB4(EnZf* this, GlobalContext* globalCtx) {
-    f32 temp_fv0;
     s16 var_v0;
-    s16 var_v1;
-    u16 temp_v1;
 
     if (this->actor.bgCheckFlags & 2) {
         this->actor.speedXZ = 0.0f;
     }
     if (this->actor.bgCheckFlags & 1) {
-        temp_fv0 = this->actor.speedXZ;
-        if (temp_fv0 < 0.0f) {
-            this->actor.speedXZ = temp_fv0 + 0.05f;
+        if (this->actor.speedXZ < 0.0f) {
+            this->actor.speedXZ += 0.05f;
         }
         this->unk3E4 = 0;
     }
     Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0x1194, 0);
     if (((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0)) &&
-        (SkelAnime_Update(&this->unk14C) != 0) && (temp_v1 = this->actor.bgCheckFlags, ((temp_v1 & 1) != 0))) {
+        (SkelAnime_Update(&this->unk14C) != 0) && (((this->actor.bgCheckFlags & 1) != 0))) {
         if (D_80B4A1B4 != -1) {
             if (this->unk410 == 0xD) {
                 D_80B4A1B0 += 1;
@@ -1599,15 +1585,9 @@ void func_80B47EB4(EnZf* this, GlobalContext* globalCtx) {
             return;
         }
         var_v0 = this->actor.wallYaw - this->actor.shape.rot.y;
-        if (var_v0 < 0) {
-            var_v0 *= -1;
-        }
-        if ((this->actor.params == -2) && (temp_v1 & 8)) {
-            var_v1 = -var_v0;
-            if (var_v0 >= 0) {
-                var_v1 = var_v0;
-            }
-            if ((var_v1 < 0x2EE0) && (this->actor.xzDistToPlayer < 90.0f)) {
+        var_v0 = ABS(var_v0);
+        if ((this->actor.params == -2) && (this->actor.bgCheckFlags & 8)) {
+            if ((ABS(var_v0) < 0x2EE0) && (this->actor.xzDistToPlayer < 90.0f)) {
                 func_80B48210(this);
                 return;
             }
@@ -1651,8 +1631,6 @@ void func_80B48210(EnZf* this) {
 }
 
 void func_80B482B8(EnZf* this, GlobalContext* globalCtx) {
-    SkelAnime* sp30;
-    SkelAnime* temp_a0;
     s16 temp_v0;
 
     Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0xFA0, 1);
@@ -1660,11 +1638,9 @@ void func_80B482B8(EnZf* this, GlobalContext* globalCtx) {
         func_800355B8(globalCtx, &this->unk4F0);
         func_800355B8(globalCtx, &this->unk4E4);
     }
-    temp_a0 = &this->unk14C;
-    sp30 = temp_a0;
-    if (SkelAnime_Update(temp_a0) != 0) {
+    if (SkelAnime_Update(&this->unk14C) != 0) {
         if (this->unk3F0 == 0) {
-            Animation_Change(temp_a0, &D_600A3D4, 3.0f, 0.0f, 13.0f, 2U, -4.0f);
+            Animation_Change(&this->unk14C, &D_600A3D4, 3.0f, 0.0f, 13.0f, 2U, -4.0f);
             this->unk3F0 = 0xA;
             return;
         }
@@ -1683,10 +1659,9 @@ void func_80B482B8(EnZf* this, GlobalContext* globalCtx) {
 }
 
 void func_80B483E4(EnZf* this, GlobalContext* globalCtx) {
-    s16 sp2E;
+    s16 temp_v1_sp2E;
     Actor* sp28;
     f32 temp_ft3;
-    s16 temp_v1;
 
     if ((this->actor.params < 0) ||
         (Actor_TestFloorInDirection(&this->actor, globalCtx, 40.0f, (s16)(this->actor.shape.rot.y + 0x3FFF)) != 0) ||
@@ -1694,24 +1669,25 @@ void func_80B483E4(EnZf* this, GlobalContext* globalCtx) {
         Animation_PlayLoop(&this->unk14C, &D_6016388);
         sp28 = globalCtx->actorCtx.actorLists[2].head;
         Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0xFA0, 1);
-        temp_v1 = sp28->shape.rot.y;
-        sp2E = temp_v1;
-        if (Math_SinS((s16)(temp_v1 - this->actor.shape.rot.y)) >= 0.0f) {
+        temp_v1_sp2E = sp28->shape.rot.y;
+        if (Math_SinS((s16)(temp_v1_sp2E - this->actor.shape.rot.y)) >= 0.0f) {
             this->actor.speedXZ = -6.0f;
-        } else if (Math_SinS((s16)(temp_v1 - this->actor.shape.rot.y)) < 0.0f) {
+        } else if (Math_SinS((s16)(temp_v1_sp2E - this->actor.shape.rot.y)) < 0.0f) {
             this->actor.speedXZ = 6.0f;
         }
         this->unk408 = 0.0f;
         this->unk3E4 = 0;
         this->actor.world.rot.y = this->actor.shape.rot.y + 0x3FFF;
         temp_ft3 = Rand_ZeroOne() * 10.0f;
-        this->unk3DC = 0xC;
         this->unk3F0 = (s32)(temp_ft3 + 5.0f);
+        this->unk3DC = 0xC;
         func_80B44050(this, func_80B48578);
         return;
     }
     func_80B456B4(this, globalCtx);
 }
+
+#ifdef NON_MATCHING
 
 void func_80B48578(EnZf* this, GlobalContext* globalCtx) {
     s16 sp56;
@@ -2560,20 +2536,6 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 #else
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B47C64.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B47CF8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B47DA8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B47EB4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B48210.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B482B8.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B483E4.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B48578.s")
 
