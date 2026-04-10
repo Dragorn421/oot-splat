@@ -732,178 +732,141 @@ void func_80B456B4(EnZf* this, GlobalContext* globalCtx) {
 }
 
 #ifdef NON_MATCHING
-
+// https://decomp.me/scratch/sfJE2
 void func_80B45748(EnZf* this, GlobalContext* globalCtx) {
     s32 sp54;
     s32 sp50;
+    s32 pad1;
+    s16 var_v1;
     s16 sp48;
     f32 sp44;
     f32 sp40;
-    Player* sp3C;
+    Player* temp_t8_sp3C;
+    s32 pad2;
+    s32 pad3;
     f32 sp30;
-    f32* sp2C;
-    Player* temp_t8;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    s16 temp_a1;
-    s16 temp_a1_2;
-    s16 temp_v0;
-    s16 temp_v0_2;
-    s16 temp_v0_3;
-    s16 temp_v0_4;
-    s16 temp_v0_5;
-    s16 temp_v0_6;
-    s16 var_v1;
-    s16 var_v1_2;
 
     sp48 = -1;
     sp44 = 350.0f;
     sp40 = 0.0f;
-    temp_t8 = globalCtx->actorCtx.actorLists[2].head;
-    sp3C = temp_t8;
+    temp_t8_sp3C = globalCtx->actorCtx.actorLists[2].head;
     if (this->actor.params >= 0) {
-        temp_v0 = func_80B446A8(&temp_t8->actor.world.pos, -1);
-        sp48 = temp_v0;
-        this->unk3FE = func_80B446A8(&this->actor.world.pos, temp_v0);
+        sp48 = func_80B446A8(&temp_t8_sp3C->actor.world.pos, -1);
+        this->unk3FE = func_80B446A8(&this->actor.world.pos, sp48);
         if (this->actor.world.pos.y >= 420.0f) {
             sp44 = 270.0f;
         }
     }
     if (func_80B49C2C(globalCtx, this) == 0) {
-        temp_a1 = this->unk3FE;
-        if (sp48 != temp_a1) {
-            this->unk402 = func_80B44B14(&this->actor.world.pos, temp_a1, this->unk400, globalCtx);
-            if (sp48 < 0) {
-                temp_a1_2 = this->unk3FE;
-                if (temp_a1_2 == this->unk402) {
-                    sp48 = temp_a1_2;
-                    temp_v0_2 = this->actor.yawTowardsPlayer;
-                    this->actor.world.rot.y = temp_v0_2;
-                    this->actor.shape.rot.y = temp_v0_2;
-                    goto block_20;
+        if (sp48 != this->unk3FE) {
+            this->unk402 = func_80B44B14(&this->actor.world.pos, this->unk3FE, this->unk400, globalCtx);
+            if ((sp48 < 0) && (this->unk402 == this->unk3FE)) {
+                sp48 = this->unk3FE;
+                this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
+            } else {
+                this->actor.world.rot.y = this->actor.yawTowardsPlayer = this->actor.shape.rot.y =
+                    Actor_WorldYawTowardPoint(&this->actor, &D_80B4A090[this->unk402]);
+                var_v1 = this->actor.wallYaw - this->actor.shape.rot.y;
+                if (var_v1 < 0) {
+                    var_v1 *= -1;
                 }
-            }
-            temp_v0_3 = Actor_WorldYawTowardPoint(&this->actor, &D_80B4A090[this->unk402]);
-            this->actor.shape.rot.y = temp_v0_3;
-            this->actor.yawTowardsPlayer = temp_v0_3;
-            this->actor.world.rot.y = temp_v0_3;
-            var_v1 = this->actor.wallYaw - this->actor.shape.rot.y;
-            if (var_v1 < 0) {
-                var_v1 *= -1;
-            }
-            if (((this->unk3F8 != 0) && (this->actor.speedXZ > 0.0f)) ||
-                ((this->actor.bgCheckFlags & 8) && (var_v1 >= 0x5C19))) {
-                if ((Actor_WorldDistXZToPoint(&this->actor, &D_80B4A090[this->unk402]) < sp44) &&
-                    (func_80B44058(this, globalCtx, 191.9956f) == 0)) {
-                    func_80B45E30(this);
-                    if (this->actor.bgCheckFlags & 8) {
-                        this->actor.velocity.y = 20.0f;
+                if (((this->unk3F8 != 0) && (this->actor.speedXZ > 0.0f)) ||
+                    ((this->actor.bgCheckFlags & 8) && (var_v1 >= 0x5C19))) {
+                    if ((Actor_WorldDistXZToPoint(&this->actor, &D_80B4A090[this->unk402]) < sp44) &&
+                        (func_80B44058(this, globalCtx, 191.9956f) == 0)) {
+                        func_80B45E30(this);
+                        if (this->actor.bgCheckFlags & 8) {
+                            this->actor.velocity.y = 20.0f;
+                        }
+                        return;
+                    } else {
+                        this->actor.world.rot.y = Actor_WorldYawTowardPoint(&this->actor, &D_80B4A090[this->unk3FE]);
                     }
                 } else {
-                    this->actor.world.rot.y = Actor_WorldYawTowardPoint(&this->actor, &D_80B4A090[this->unk3FE]);
-                    goto block_20;
+                    this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
+                    Math_SmoothStepToF(&this->actor.speedXZ, 8.0f, 1.0f, 1.5f, 0.0f);
                 }
-            } else {
-                temp_v0_4 = this->actor.yawTowardsPlayer;
-                this->actor.world.rot.y = temp_v0_4;
-                this->actor.shape.rot.y = temp_v0_4;
-                Math_SmoothStepToF(&this->actor.speedXZ, 8.0f, 1.0f, 1.5f, 0.0f);
-                goto block_20;
             }
+        }
+        if (Actor_OtherIsTargeted(globalCtx, &this->actor) != 0) {
+            sp40 = 100.0f;
+        }
+        if (this->actor.xzDistToPlayer <= (70.0f + sp40)) {
+            Math_SmoothStepToF(&this->actor.speedXZ, -8.0f, 1.0f, 0.5f, 0.0f);
         } else {
-        block_20:
-            sp2C = &this->actor.speedXZ;
-            if (Actor_OtherIsTargeted(globalCtx, &this->actor) != 0) {
-                sp40 = 100.0f;
+            Math_SmoothStepToF(&this->actor.speedXZ, 8.0f, 1.0f, 0.5f, 0.0f);
+        }
+        this->unk14C.playSpeed = this->actor.speedXZ * 1.2f;
+        var_v1 = temp_t8_sp3C->actor.shape.rot.y - this->actor.shape.rot.y;
+        if (var_v1 < 0) {
+            var_v1 *= -1;
+        }
+        if ((sp48 == this->unk3FE) && (this->actor.xzDistToPlayer < 150.0f) && (temp_t8_sp3C->swordState != 0) &&
+            (var_v1 >= 0x1F40)) {
+            this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
+            if (Rand_ZeroOne() > 0.7f) {
+                func_80B483E4(this, globalCtx);
+                return;
             }
-            if (this->actor.xzDistToPlayer <= (70.0f + sp40)) {
-                Math_SmoothStepToF(sp2C, -8.0f, 1.0f, 0.5f, 0.0f);
-            } else {
-                Math_SmoothStepToF(sp2C, 8.0f, 1.0f, 0.5f, 0.0f);
+        }
+        sp54 = (s32)this->unk14C.curFrame;
+        SkelAnime_Update(&this->unk14C);
+        sp30 = ABS(this->unk14C.playSpeed);
+        sp50 = (s32)(this->unk14C.curFrame - sp30);
+        sp30 = ABS(this->unk14C.playSpeed);
+        if (sp48 == this->unk3FE) {
+            if (Actor_IsFacingPlayer(&this->actor, 0x11C7) == 0) {
+                if (Rand_ZeroOne() > 0.5f) {
+                    func_80B462E4(this, globalCtx);
+                } else {
+                    func_80B45384(this);
+                }
+            } else if (this->actor.xzDistToPlayer < 100.0f) {
+                if ((Rand_ZeroOne() > 0.05f) && (func_80B44CF0(globalCtx, this) != 0)) {
+                    func_80B46A24(this);
+                } else if (Rand_ZeroOne() > 0.5f) {
+                    func_80B483E4(this, globalCtx);
+                } else {
+                    func_80B45384(this);
+                }
+            } else if (this->unk3F8 != 0) {
+                func_80B462E4(this, globalCtx);
+            } else if (Rand_ZeroOne() < 0.1f) {
+                func_80B45384(this);
             }
-            this->unk14C.playSpeed = this->actor.speedXZ * 1.2f;
-            var_v1_2 = sp3C->actor.shape.rot.y - this->actor.shape.rot.y;
-            if (var_v1_2 < 0) {
-                var_v1_2 *= -1;
-            }
-            if ((sp48 == this->unk3FE) && (this->actor.xzDistToPlayer < 150.0f) && (sp3C->swordState != 0) &&
-                (var_v1_2 >= 0x1F40)) {
-                temp_v0_5 = this->actor.yawTowardsPlayer;
-                this->actor.world.rot.y = temp_v0_5;
-                this->actor.shape.rot.y = temp_v0_5;
-                if (Rand_ZeroOne() > 0.7f) {
+        }
+        if (this->actor.params == -2) {
+            if (func_80B44E8C(globalCtx, this) == 0) {
+                if ((this->actor.xzDistToPlayer < 180.0f) && (this->actor.xzDistToPlayer > 160.0f) &&
+                    (Actor_IsFacingPlayer(&this->actor, 0x71C) != 0)) {
+                    if (Actor_IsTargeted(globalCtx, &this->actor) != 0) {
+                        if (Rand_ZeroOne() < 0.1f) {
+                            this->actor.world.rot.y = this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
+                            func_80B45E30(this);
+                            return;
+                        }
+                        goto block_64;
+                    }
                     func_80B483E4(this, globalCtx);
                     return;
                 }
+                goto block_64;
             }
-            sp54 = (s32)this->unk14C.curFrame;
-            SkelAnime_Update(&this->unk14C);
-            temp_fv0 = this->unk14C.playSpeed;
-            if (temp_fv0 >= 0.0f) {
-                sp30 = temp_fv0;
-            } else {
-                sp30 = -temp_fv0;
+        } else {
+        block_64:
+            if (!(globalCtx->gameplayFrames & 0x5F)) {
+                Audio_PlayActorSound2(&this->actor, 0x3829U);
             }
-            sp50 = (s32)(this->unk14C.curFrame - sp30);
-            if (temp_fv0 >= 0.0f) {
-                sp30 = temp_fv0;
-            } else {
-                sp30 = -temp_fv0;
-            }
-            if (sp48 == this->unk3FE) {
-                if (Actor_IsFacingPlayer(&this->actor, 0x11C7) == 0) {
-                    if (Rand_ZeroOne() > 0.5f) {
-                        func_80B462E4(this, globalCtx);
-                    } else {
-                        func_80B45384(this);
-                    }
-                } else if (this->actor.xzDistToPlayer < 100.0f) {
-                    if ((Rand_ZeroOne() > 0.05f) && (func_80B44CF0(globalCtx, this) != 0)) {
-                        func_80B46A24(this);
-                    } else if (Rand_ZeroOne() > 0.5f) {
-                        func_80B483E4(this, globalCtx);
-                    } else {
-                        func_80B45384(this);
-                    }
-                } else if (this->unk3F8 != 0) {
-                    func_80B462E4(this, globalCtx);
-                } else if (Rand_ZeroOne() < 0.1f) {
-                    func_80B45384(this);
-                }
-            }
-            if (this->actor.params == -2) {
-                if (func_80B44E8C(globalCtx, this) == 0) {
-                    temp_fv0_2 = this->actor.xzDistToPlayer;
-                    if ((temp_fv0_2 < 180.0f) && (temp_fv0_2 > 160.0f) &&
-                        (Actor_IsFacingPlayer(&this->actor, 0x71C) != 0)) {
-                        if (Actor_IsTargeted(globalCtx, &this->actor) != 0) {
-                            if (Rand_ZeroOne() < 0.1f) {
-                                temp_v0_6 = this->actor.yawTowardsPlayer;
-                                this->actor.shape.rot.y = temp_v0_6;
-                                this->actor.world.rot.y = temp_v0_6;
-                                func_80B45E30(this);
-                                return;
-                            }
-                            goto block_64;
-                        }
-                        func_80B483E4(this, globalCtx);
-                        return;
-                    }
-                    goto block_64;
-                }
-            } else {
-            block_64:
-                if (!(globalCtx->gameplayFrames & 0x5F)) {
-                    Audio_PlayActorSound2(&this->actor, 0x3829U);
-                }
-                if ((sp54 != (s32)this->unk14C.curFrame) &&
-                    (((sp50 < 2) && (((s32)sp30 + sp54) >= 4)) || ((sp50 < 0x20) && (((s32)sp30 + sp54) >= 0x22)))) {
-                    Audio_PlayActorSound2(&this->actor, 0x382EU);
-                }
+            if ((sp54 != (s32)this->unk14C.curFrame) &&
+                (((sp50 < 2) && (((s32)sp30 + sp54) >= 4)) || ((sp50 < 0x20) && (((s32)sp30 + sp54) >= 0x22)))) {
+                Audio_PlayActorSound2(&this->actor, 0x382EU);
             }
         }
     }
 }
+#else
+#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45748.s")
+#endif
 
 void func_80B45E30(EnZf* this) {
     Animation_Change(&this->unk14C, &D_6009530, 1.0f, 0.0f, 3.0f, 2U, -3.0f);
@@ -921,24 +884,17 @@ void func_80B45E30(EnZf* this) {
 }
 
 void func_80B45EF0(EnZf* this, GlobalContext* globalCtx) {
-    SkelAnime* sp34;
-    SkelAnime* temp_a0;
-    f32 temp_fv0;
-
     if (this->unk3F0 != 0) {
-        temp_fv0 = this->actor.floorHeight;
-        if (this->actor.world.pos.y <= temp_fv0) {
-            this->actor.world.pos.y = temp_fv0;
+        if (this->actor.world.pos.y <= this->actor.floorHeight) {
+            this->actor.world.pos.y = this->actor.floorHeight;
             this->unk3E4 = 0;
             this->actor.velocity.y = 0.0f;
             this->actor.speedXZ = 0.0f;
         }
     }
-    temp_a0 = &this->unk14C;
-    sp34 = temp_a0;
-    if (SkelAnime_Update(temp_a0) != 0) {
+    if (SkelAnime_Update(&this->unk14C) != 0) {
         if (this->unk3F0 == 0) {
-            Animation_Change(temp_a0, &D_6008C6C, 3.0f, 0.0f, 17.0f, 2U, -3.0f);
+            Animation_Change(&this->unk14C, &D_6008C6C, 3.0f, 0.0f, 17.0f, 2U, -3.0f);
             this->unk3F0 = 0xA;
             Audio_PlayActorSound2(&this->actor, 0x382FU);
         } else {
@@ -966,39 +922,32 @@ void func_80B4604C(EnZf* this) {
 }
 
 void func_80B46098(EnZf* this, GlobalContext* globalCtx) {
-    Actor* sp24;
-    f32 var_fa0;
-    f32 var_fv1;
-    s16 temp_a0;
+    s32 pad;
     s16 temp_v0;
-    s32 temp_v1;
-    s32 var_v1;
+    s16 var_v1;
+    Actor* sp24;
+    f32 var_fv1;
 
     sp24 = globalCtx->actorCtx.actorLists[2].head;
     if ((func_80B49C2C(globalCtx, this) == 0) &&
         ((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0))) {
-        temp_a0 = this->actor.shape.rot.y;
-        temp_v0 = this->actor.yawTowardsPlayer - temp_a0;
+        temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
         if (temp_v0 > 0) {
-            var_v1 = (s32)(((f32)temp_v0 * 0.25f) + 2000.0f) << 0x10;
+            var_v1 = (s32)(((f32)temp_v0 * 0.25f) + 2000.0f);
         } else {
-            var_v1 = (s32)(((f32)temp_v0 * 0.25f) - 2000.0f) << 0x10;
+            var_v1 = (s32)(((f32)temp_v0 * 0.25f) - 2000.0f);
         }
-        temp_v1 = var_v1 >> 0x10;
-        this->actor.shape.rot.y = temp_a0 + temp_v1;
+        this->actor.shape.rot.y += var_v1;
         this->actor.world.rot.y = this->actor.shape.rot.y;
         if (temp_v0 > 0) {
-            var_fa0 = 2.0f;
-            var_fv1 = (f32)temp_v1 * 1.5f;
+            var_fv1 = (f32)var_v1 * 1.5f;
             if (var_fv1 > 2.0f) {
-                goto block_10;
+                var_fv1 = 2.0f;
             }
         } else {
-            var_fa0 = -2.0f;
-            var_fv1 = (f32)temp_v1 * 1.5f;
+            var_fv1 = (f32)var_v1 * 1.5f;
             if (var_fv1 < -2.0f) {
-            block_10:
-                var_fv1 = var_fa0;
+                var_fv1 = -2.0f;
             }
         }
         this->unk14C.playSpeed = -var_fv1;
@@ -1033,10 +982,10 @@ void func_80B462E4(EnZf* this, GlobalContext* globalCtx) {
         this->actor.speedXZ = Rand_CenteredFloat(12.0f);
         this->actor.world.rot.y = this->actor.shape.rot.y;
         temp_ft1 = Rand_ZeroOne() * 10.0f;
+        this->unk3F0 = (s32)(temp_ft1 + 20.0f);
         this->unk3E4 = 0;
         this->unk3DC = 7;
         this->unk408 = 0.0f;
-        this->unk3F0 = (s32)(temp_ft1 + 20.0f);
         func_80B44050(this, func_80B463E4);
         return;
     }
@@ -1045,54 +994,30 @@ void func_80B462E4(EnZf* this, GlobalContext* globalCtx) {
 
 void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
     s16 sp56;
-    s32 sp4C;
+    s32 temp_ft3;
+    s32 temp_ft5_sp4C;
+    s32 pad;
+    f32 var_fa0_3_probreal;
     Actor* sp40;
     f32 sp3C;
-    void* sp28;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 temp_fv0_4;
-    f32 temp_fv1;
-    f32 temp_fv1_2;
-    f32 temp_fv1_3;
-    f32 var_fa0;
-    f32 var_fa0_2;
-    f32 var_fa0_3;
-    f32 var_fa1;
-    f32 var_fv0;
-    s16 temp_v0;
-    s16 temp_v1;
-    s16 var_v0_3;
-    s16 var_v1;
-    s32 temp_ft3;
-    s32 temp_ft5;
-    s32 temp_v0_2;
-    s32 var_v0;
-    s32 var_v0_2;
-    void* temp_v1_2;
+    s16 var_v0_3_real;
 
     sp40 = globalCtx->actorCtx.actorLists[2].head;
     sp3C = 0.0f;
     Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0xFA0, 1);
     if ((func_80B49C2C(globalCtx, this) == 0) &&
         ((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0))) {
-        temp_v0 = this->actor.shape.rot.y;
-        this->actor.world.rot.y = temp_v0 + 0x3A98;
-        temp_v1 = sp40->shape.rot.y + 0x8000;
-        sp56 = temp_v1;
-        if (Math_SinS((s16)(temp_v1 - temp_v0)) >= 0.0f) {
-            var_fv0 = -8.0f;
+        this->actor.world.rot.y = this->actor.shape.rot.y + 0x3A98;
+        sp56 = sp40->shape.rot.y + 0x8000;
+        if (Math_SinS((s16)(sp56 - this->actor.shape.rot.y)) >= 0.0f) {
             this->actor.speedXZ -= 0.25f;
             if (this->actor.speedXZ < -8.0f) {
-                goto block_8;
+                this->actor.speedXZ = -8.0f;
             }
         } else if (Math_SinS((s16)(sp56 - this->actor.shape.rot.y)) < 0.0f) {
-            var_fv0 = 8.0f;
             this->actor.speedXZ += 0.25f;
             if (this->actor.speedXZ > 8.0f) {
-            block_8:
-                this->actor.speedXZ = var_fv0;
+                this->actor.speedXZ = 8.0f;
             }
         }
         if (this->actor.params >= 0) {
@@ -1100,37 +1025,30 @@ void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
                 this->actor.speedXZ = -this->actor.speedXZ;
             }
         } else {
-            var_v0 = this->actor.bgCheckFlags & 8;
-            if (var_v0 == 0) {
+            if (!(this->actor.bgCheckFlags & 8)) {
                 if (Actor_TestFloorInDirection(&this->actor, globalCtx, this->actor.speedXZ,
                                                (s16)(this->actor.shape.rot.y + 0x3FFF)) == 0) {
-                    var_v0 = this->actor.bgCheckFlags & 8;
                     goto block_15;
                 }
             } else {
             block_15:
-                if (var_v0 != 0) {
+                if (this->actor.bgCheckFlags & 8) {
                     if (this->actor.speedXZ >= 0.0f) {
-                        var_v0_2 = (this->actor.shape.rot.y + 0x3FFF) << 0x10;
+                        var_v0_3_real = (this->actor.shape.rot.y + 0x3FFF);
                     } else {
-                        var_v0_2 = (this->actor.shape.rot.y - 0x3FFF) << 0x10;
+                        var_v0_3_real = (this->actor.shape.rot.y - 0x3FFF);
                     }
-                    var_v0_3 = this->actor.wallYaw - (var_v0_2 >> 0x10);
+                    var_v0_3_real = this->actor.wallYaw - var_v0_3_real;
                 } else {
-                    var_v0_3 = 0;
+                    var_v0_3_real = 0;
                     this->actor.speedXZ *= -0.8f;
                 }
-                var_v1 = -var_v0_3;
-                if (var_v0_3 >= 0) {
-                    var_v1 = var_v0_3;
-                }
-                if (var_v1 >= 0x4001) {
+                if (ABS(var_v0_3_real) >= 0x4001) {
                     this->actor.speedXZ *= -0.8f;
-                    temp_fv0 = this->actor.speedXZ;
-                    if (temp_fv0 < 0.0f) {
-                        this->actor.speedXZ = temp_fv0 - 0.5f;
+                    if (this->actor.speedXZ < 0.0f) {
+                        this->actor.speedXZ = this->actor.speedXZ - 0.5f;
                     } else {
-                        this->actor.speedXZ = temp_fv0 + 0.5f;
+                        this->actor.speedXZ = this->actor.speedXZ + 0.5f;
                     }
                 }
             }
@@ -1138,66 +1056,37 @@ void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
         if (Actor_OtherIsTargeted(globalCtx, &this->actor) != 0) {
             sp3C = 100.0f;
         }
-        temp_fv0_2 = this->actor.xzDistToPlayer;
-        if (temp_fv0_2 <= (70.0f + sp3C)) {
+        if (this->actor.xzDistToPlayer <= (70.0f + sp3C)) {
             Math_SmoothStepToF(&this->unk408, -4.0f, 1.0f, 1.5f, 0.0f);
-        } else if ((90.0f + sp3C) < temp_fv0_2) {
+        } else if ((90.0f + sp3C) < this->actor.xzDistToPlayer) {
             Math_SmoothStepToF(&this->unk408, 4.0f, 1.0f, 1.5f, 0.0f);
         } else {
             Math_SmoothStepToF(&this->unk408, 0.0f, 1.0f, 5.65f, 0.0f);
         }
-        temp_fv1 = this->unk408;
-        if ((temp_fv1 != 0.0f) && (func_80B441C4(this, globalCtx, temp_fv1) == 0)) {
+        if ((this->unk408 != 0.0f) && (func_80B441C4(this, globalCtx, this->unk408) == 0)) {
             this->actor.world.pos.x += Math_SinS(this->actor.shape.rot.y) * this->unk408;
             this->actor.world.pos.z += Math_CosS(this->actor.shape.rot.y) * this->unk408;
         }
-        temp_fv0_3 = this->actor.speedXZ;
-        temp_fv1_2 = this->unk408;
-        if (temp_fv0_3 >= 0.0f) {
-            var_fa1 = temp_fv0_3;
-        } else {
-            var_fa1 = -temp_fv0_3;
-        }
-        if (temp_fv1_2 >= 0.0f) {
-            var_fa0 = temp_fv1_2;
-        } else {
-            var_fa0 = -temp_fv1_2;
-        }
-        if (var_fa0 <= var_fa1) {
-            this->unk14C.playSpeed = temp_fv0_3 * 0.75f;
+        if (ABS(this->actor.speedXZ) >= ABS(this->unk408)) {
+            this->unk14C.playSpeed = this->actor.speedXZ * 0.75f;
         } else if (this->unk14C.playSpeed < 0.0f) {
-            this->unk14C.playSpeed = temp_fv1_2 * -0.75f;
+            this->unk14C.playSpeed = this->unk408 * -0.75f;
         } else {
-            this->unk14C.playSpeed = temp_fv1_2 * 0.75f;
+            this->unk14C.playSpeed = this->unk408 * 0.75f;
         }
-        temp_ft5 = (s32)this->unk14C.curFrame;
-        sp4C = temp_ft5;
+        temp_ft5_sp4C = (s32)this->unk14C.curFrame;
         SkelAnime_Update(&this->unk14C);
-        temp_fv0_4 = this->unk14C.playSpeed;
-        if (temp_fv0_4 >= 0.0f) {
-            var_fa0_2 = temp_fv0_4;
-        } else {
-            var_fa0_2 = -temp_fv0_4;
-        }
-        temp_fv1_3 = this->unk14C.curFrame;
-        temp_ft3 = (s32)(temp_fv1_3 - var_fa0_2);
-        if (temp_fv0_4 >= 0.0f) {
-            var_fa0_3 = temp_fv0_4;
-        } else {
-            var_fa0_3 = -temp_fv0_4;
-        }
-        if ((temp_ft5 != (s32)temp_fv1_3) && (((temp_ft3 < 0xE) && (((s32)var_fa0_3 + temp_ft5) >= 0x10)) ||
-                                              ((temp_ft3 < 0x1B) && (((s32)var_fa0_3 + temp_ft5) >= 0x1D)))) {
+        temp_ft3 = (s32)(this->unk14C.curFrame - ABS(this->unk14C.playSpeed));
+        var_fa0_3_probreal = ABS(this->unk14C.playSpeed);
+        if ((temp_ft5_sp4C != (s32)this->unk14C.curFrame) &&
+            (((temp_ft3 < 0xE) && (((s32)var_fa0_3_probreal + temp_ft5_sp4C) >= 0x10)) ||
+             ((temp_ft3 < 0x1B) && (((s32)var_fa0_3_probreal + temp_ft5_sp4C) >= 0x1D)))) {
             Audio_PlayActorSound2(&this->actor, 0x382EU);
         }
-        temp_v1_2 = globalCtx + 0x10000;
         if (!(globalCtx->gameplayFrames & 0x5F)) {
-            sp28 = temp_v1_2;
             Audio_PlayActorSound2(&this->actor, 0x3829U);
         }
-        sp28 = temp_v1_2;
-        if ((Math_CosS((s16)(sp56 - this->actor.shape.rot.y)) < -0.85f) ||
-            (temp_v0_2 = this->unk3F0, (temp_v0_2 == 0))) {
+        if ((Math_CosS((s16)(sp56 - this->actor.shape.rot.y)) < -0.85f) || ((this->unk3F0 == 0))) {
             this->actor.world.rot.y = this->actor.shape.rot.y;
             if ((this->actor.xzDistToPlayer <= 100.0f) && !(globalCtx->gameplayFrames & 3) &&
                 (func_80B44CF0(globalCtx, this) != 0)) {
@@ -1207,8 +1096,8 @@ void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
             func_80B45384(this);
             return;
         }
-        if (temp_v0_2 != 0) {
-            this->unk3F0 = temp_v0_2 - 1;
+        if (this->unk3F0 != 0) {
+            this->unk3F0 -= 1;
         }
     }
 }
@@ -1218,8 +1107,8 @@ void func_80B46A24(EnZf* this) {
     if (this->actor.params == -2) {
         this->unk14C.playSpeed = 1.75f;
     }
+    this->unk464.base.atFlags &= ~4;
     this->unk3DC = 9;
-    this->unk464.base.atFlags &= 0xFFFB;
     Audio_PlayActorSound2(&this->actor, 0x3829U);
     this->actor.speedXZ = 0.0f;
     func_80B44050(this, func_80B46AE0);
@@ -1227,8 +1116,6 @@ void func_80B46A24(EnZf* this) {
 
 void func_80B46AE0(EnZf* this, GlobalContext* globalCtx) {
     Player* sp24;
-    s16 temp_a0;
-    s16 temp_v1;
     s16 var_v0;
     s16 var_v0_2;
 
@@ -1255,19 +1142,17 @@ void func_80B46AE0(EnZf* this, GlobalContext* globalCtx) {
             func_80B483E4(this, globalCtx);
             return;
         }
-        temp_a0 = this->actor.shape.rot.y;
-        var_v0 = sp24->actor.shape.rot.y - temp_a0;
+        var_v0 = sp24->actor.shape.rot.y - this->actor.shape.rot.y;
         if (var_v0 < 0) {
             var_v0 *= -1;
         }
         if (var_v0 < 0x2711) {
-            temp_v1 = this->actor.yawTowardsPlayer;
-            var_v0_2 = temp_v1 - temp_a0;
+            var_v0_2 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
             if (var_v0_2 < 0) {
                 var_v0_2 *= -1;
             }
             if (var_v0_2 >= 0x3E81) {
-                this->actor.world.rot.y = temp_v1;
+                this->actor.world.rot.y = this->actor.yawTowardsPlayer;
                 func_80B483E4(this, globalCtx);
                 return;
             }
@@ -1287,7 +1172,9 @@ void func_80B46AE0(EnZf* this, GlobalContext* globalCtx) {
 }
 
 void func_80B46D64(EnZf* this) {
-    Animation_Change(&this->unk14C, &D_600A3D4, -1.0f, this->unk14C.curFrame - 3.0f, 0.0f, 2U, 0.0f);
+    f32 f = this->unk14C.curFrame - 3.0f;
+
+    Animation_Change(&this->unk14C, &D_600A3D4, -1.0f, f, 0.0f, 2U, 0.0f);
     this->unk3DC = 8;
     func_80B44050(this, func_80B46DD4);
 }
@@ -1316,6 +1203,8 @@ void func_80B46E8C(EnZf* this) {
     Audio_PlayActorSound2(&this->actor, 0x382FU);
     func_80B44050(this, func_80B46F2C);
 }
+
+#ifdef NON_MATCHING
 
 void func_80B46F2C(EnZf* this, GlobalContext* globalCtx) {
     SkelAnime* sp34;
@@ -2728,30 +2617,6 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
 }
 
 #else
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45748.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45E30.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B45EF0.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B4604C.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46098.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B462E4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B463E4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46A24.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46AE0.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46D64.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46DD4.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46E8C.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B46F2C.s")
 
