@@ -2250,92 +2250,57 @@ void func_80B49B60(EnZf* this, f32 arg1) {
     func_80B44050(this, func_80B48578);
 }
 
-#ifdef NON_MATCHING
-
 s32 func_80B49C2C(GlobalContext* globalCtx, EnZf* this) {
-    Actor* sp1C;
+    Actor* temp_v0_sp1C;
     s16 sp1A;
-    s16 sp18;
-    Actor* temp_v0;
-    s16 temp_t7;
-    s16 var_t0;
-    s16 var_t0_2;
+    s16 var_t0_sp18;
     s16 var_v1;
-    s32 temp_t1;
-    s32 temp_t1_2;
-    s32 var_v0;
-    s32 var_v0_2;
-    s32 var_v0_3;
 
-    temp_v0 = Actor_GetProjectileActor(globalCtx, &this->actor, 600.0f);
-    if (temp_v0 != NULL) {
-        sp1C = temp_v0;
-        temp_t7 = this->actor.shape.rot.y;
-        temp_t1 = (Actor_WorldYawTowardActor(&this->actor, temp_v0) - temp_t7) << 0x10;
-        this->actor.world.rot.y = temp_t7 + 0x3FFF;
-        temp_t1_2 = temp_t1 >> 0x10;
-        sp1A = (s16)temp_t1_2;
-        sp18 = 0;
-        var_t0 = sp18;
+    temp_v0_sp1C = Actor_GetProjectileActor(globalCtx, &this->actor, 600.0f);
+    if (temp_v0_sp1C != NULL) {
+        sp1A = (Actor_WorldYawTowardActor(&this->actor, temp_v0_sp1C) - (s16)(this->actor.shape.rot.y + 0));
+        this->actor.world.rot.y = this->actor.shape.rot.y + 0x3FFF;
+        var_t0_sp18 = 0;
         if (func_80B44058(this, globalCtx, -8.0f) != 0) {
-            var_t0 = 1;
+            var_t0_sp18 = 1;
         }
-        sp18 = var_t0;
-        sp1A = (s16)temp_t1_2;
-        var_t0_2 = var_t0;
         if (func_80B44058(this, globalCtx, 8.0f) != 0) {
-            var_t0_2 |= 2;
+            var_t0_sp18 |= 2;
         }
         this->actor.world.rot.y = this->actor.shape.rot.y;
-        if ((((this->actor.xzDistToPlayer < 90.0f) || (var_t0_2 == 3)) &&
-             (sp18 = var_t0_2, sp1A = (s16)temp_t1_2, (func_80B44058(this, globalCtx, 135.0f) == 0))) ||
-            (sp1C->id == 0x66)) {
+        if ((((this->actor.xzDistToPlayer < 90.0f) || (var_t0_sp18 == 3)) &&
+             ((func_80B44058(this, globalCtx, 135.0f) == 0))) ||
+            (temp_v0_sp1C->id == 0x66)) {
             func_80B48210(this);
             return 1;
         }
-        var_v1 = var_t0_2;
         this->actor.world.rot.y = this->actor.shape.rot.y + 0x3FFF;
-        if (var_t0_2 == 0) {
+        if (var_t0_sp18 == 0) {
             var_v1 = globalCtx->gameplayFrames & 1;
+        } else {
+            var_v1 = var_t0_sp18;
         }
-        var_v0 = -temp_t1_2;
-        if (temp_t1_2 >= 0) {
-            var_v0 = temp_t1_2;
-        }
-        if (var_v0 >= 0x2000) {
-            var_v0_2 = -temp_t1_2;
-            if (temp_t1_2 >= 0) {
-                var_v0_2 = temp_t1_2;
+        if ((ABS(sp1A) < 0x2000) || (ABS(sp1A) >= 0x6000)) {
+            if (var_v1 & 1) {
+                func_80B49B60(this, 8.0f);
+                return 1;
             }
-            if (var_v0_2 >= 0x6000) {
-                goto block_18;
-            }
-            var_v0_3 = -temp_t1_2;
-            if (temp_t1_2 >= 0) {
-                var_v0_3 = temp_t1_2;
-            }
-            if (var_v0_3 < 0x5FFF) {
-                if (var_v1 & 1) {
-                    func_80B49B60(this, 4.0f);
-                    return 1;
-                }
-                func_80B49B60(this, -4.0f);
-                goto block_27;
-            }
-        block_27:
+            func_80B49B60(this, -8.0f);
             return 1;
         }
-    block_18:
-        if (var_v1 & 1) {
-            func_80B49B60(this, 8.0f);
-            return 1;
+        if (ABS(sp1A) < 0x5FFF) {
+            if (var_v1 & 1) {
+                func_80B49B60(this, 4.0f);
+                return 1;
+            }
+            func_80B49B60(this, -4.0f);
         }
-        func_80B49B60(this, -8.0f);
         return 1;
     }
     return 0;
 }
 
+#ifdef NON_MATCHING
 s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
     s16 sp22;
     s16 sp20;
@@ -2440,11 +2405,6 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
     }
     return 0;
 }
-
 #else
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B49C2C.s")
-
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Zf/func_80B49E4C.s")
-
 #endif
