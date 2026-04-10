@@ -312,12 +312,10 @@ s16 func_80B446A8(Vec3f* arg0, s16 arg1) {
     }
     if (arg1 != -1) {
         temp_v0 = &D_80B4A090[arg1];
-        if (((temp_v0->y - 150.0f) <= arg0->y) && (arg0->y <= (temp_v0->y + 150.0f))) {
-            if (((temp_v0->x - var_fv0_real) <= arg0->x) && (arg0->x <= (temp_v0->x + var_fv0_real))) {
-                if (((temp_v0->z - var_fv0_real) <= arg0->z) && (arg0->z <= (temp_v0->z + var_fv0_real))) {
-                    return arg1;
-                }
-            }
+        if (((temp_v0->y - 150.0f) <= arg0->y) && (arg0->y <= (temp_v0->y + 150.0f)) &&
+            ((temp_v0->x - var_fv0_real) <= arg0->x) && (arg0->x <= (temp_v0->x + var_fv0_real)) &&
+            ((temp_v0->z - var_fv0_real) <= arg0->z) && (arg0->z <= (temp_v0->z + var_fv0_real))) {
+            return arg1;
         }
     }
     for (var_v1 = 0x17; var_v1 >= 0; var_v1--) {
@@ -367,25 +365,23 @@ s16 func_80B44870(Vec3f* arg0, s16 arg1, s16 arg2, GlobalContext* globalCtx) {
             var_s0 = 0xE;
         }
     }
-    if (var_s0 >= var_s7) {
-        do {
-            if ((var_s0 != arg1) && (var_s0 != temp_s3) &&
-                ((temp_s3 != -1) || !(Math_Vec3f_DistXYZ(&player->actor.world.pos, &D_80B4A090[var_s0]) < var_fs3))) {
-                temp_fv0 = Math_Vec3f_DistXYZ(arg0, &D_80B4A090[var_s0]);
-                if (!(var_fs2 < temp_fv0)) {
-                    if (temp_fv0 < var_fs0) {
-                        var_fs1 = var_fs0;
-                        var_s4 = var_s5;
-                        var_fs0 = temp_fv0;
-                        var_s5 = var_s0;
-                    } else if (temp_fv0 < var_fs1) {
-                        var_fs1 = temp_fv0;
-                        var_s4 = var_s0;
-                    }
+    while (var_s0 >= var_s7) {
+        if ((var_s0 != arg1) && (var_s0 != temp_s3) &&
+            ((temp_s3 != -1) || !(Math_Vec3f_DistXYZ(&player->actor.world.pos, &D_80B4A090[var_s0]) < var_fs3))) {
+            temp_fv0 = Math_Vec3f_DistXYZ(arg0, &D_80B4A090[var_s0]);
+            if (!(var_fs2 < temp_fv0)) {
+                if (temp_fv0 < var_fs0) {
+                    var_fs1 = var_fs0;
+                    var_s4 = var_s5;
+                    var_fs0 = temp_fv0;
+                    var_s5 = var_s0;
+                } else if (temp_fv0 < var_fs1) {
+                    var_fs1 = temp_fv0;
+                    var_s4 = var_s0;
                 }
             }
-            var_s0 -= 1;
-        } while (var_s0 >= var_s7);
+        }
+        var_s0 -= 1;
     }
     temp_s0 = &D_80B4A090[var_s5];
     Math_Vec3f_DistXYZ(&player->actor.world.pos, temp_s0);
@@ -518,7 +514,7 @@ s32 func_80B44E8C(GlobalContext* globalCtx, EnZf* this) {
         this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
         if ((this->actor.bgCheckFlags & 8) && (ABS(var_t0_sp2E) < 0x2EE0) && (this->actor.xzDistToPlayer < 80.0f)) {
             func_80B48210(this);
-        } else if ((this->actor.xzDistToPlayer < 90.0f) && (globalCtx->gameplayFrames & 1)) {
+        } else if ((this->actor.xzDistToPlayer < 90.0f) && ((globalCtx->gameplayFrames % 2) != 0)) {
             func_80B48210(this);
         } else {
             func_80B46E8C(this);
@@ -558,9 +554,6 @@ void func_80B450AC(EnZf* this) {
 }
 
 void func_80B45174(EnZf* this, GlobalContext* globalCtx) {
-    s32 temp_v0;
-    u8 temp_v0_2;
-
     if (this->unk3F0 == 1) {
         Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
         this->actor.flags |= 1;
@@ -568,10 +561,9 @@ void func_80B45174(EnZf* this, GlobalContext* globalCtx) {
             func_800F5ACC(0x38U);
         }
     }
-    temp_v0 = this->unk3F0;
-    if (temp_v0 != 0) {
+    if (this->unk3F0 != 0) {
         if (this->actor.params != -1) {
-            this->unk3F0 = temp_v0 - 1;
+            this->unk3F0 -= 1;
         } else if (this->actor.xzDistToPlayer <= 160.0f) {
             this->unk3F0 = 0;
             this->actor.flags |= 1;
@@ -579,9 +571,8 @@ void func_80B45174(EnZf* this, GlobalContext* globalCtx) {
         }
         this->actor.world.pos.y = this->actor.floorHeight + 300.0f;
     } else {
-        temp_v0_2 = this->unk404;
-        if ((s32)temp_v0_2 < 0xFF) {
-            this->unk404 = temp_v0_2 + 0x33;
+        if (this->unk404 < 0xFF) {
+            this->unk404 += 0x33;
         }
     }
     if ((this->actor.bgCheckFlags & 3) && (this->unk3E4 != 0)) {
@@ -606,13 +597,10 @@ void func_80B45174(EnZf* this, GlobalContext* globalCtx) {
 }
 
 void func_80B45384(EnZf* this) {
-    f32 temp_ft4;
-
     Animation_Change(&this->unk14C, &D_600B10C, 1.0f, 0.0f, Animation_GetLastFrame(&D_600B10C), ANIMMODE_LOOP_INTERP,
                      -4.0f);
     this->unk3DC = 3;
-    temp_ft4 = Rand_ZeroOne() * 10.0f;
-    this->unk3F0 = (s32)(temp_ft4 + 5.0f);
+    this->unk3F0 = (Rand_ZeroOne() * 10.0f) + 5.0f;
     this->actor.speedXZ = 0.0f;
     this->actor.world.rot.y = this->actor.shape.rot.y;
     func_80B44050(this, func_80B4543C);
@@ -626,9 +614,7 @@ void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
 
     player = GET_PLAYER(globalCtx);
     var_v1_sp26 = (this->actor.yawTowardsPlayer - this->unk3EC) - this->actor.shape.rot.y;
-    if (var_v1_sp26 < 0) {
-        var_v1_sp26 *= -1;
-    }
+    var_v1_sp26 = ABS(var_v1_sp26);
     SkelAnime_Update(&this->unk14C);
     if (!func_80B49C2C(globalCtx, this)) {
         if (this->actor.params == -2) {
@@ -639,43 +625,39 @@ void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
                 } else {
                     return;
                 }
-            } else if (func_80B44E8C(globalCtx, this) != 0) {
+            } else if (func_80B44E8C(globalCtx, this)) {
                 return;
             }
         }
         var_v1_2 = player->actor.shape.rot.y - this->actor.shape.rot.y;
-        if (var_v1_2 < 0) {
-            var_v1_2 *= -1;
-        }
+        var_v1_2 = ABS(var_v1_2);
         if ((this->actor.xzDistToPlayer < 100.0f) && (player->swordState != 0) && (var_v1_2 >= 0x1F40)) {
             this->actor.shape.rot.y = this->actor.world.rot.y = this->actor.yawTowardsPlayer;
             if (var_v1_2) {}
             func_80B483E4(this, globalCtx);
-            return;
-        }
-        if (this->unk3F0 != 0) {
+        } else if (this->unk3F0 != 0) {
             this->unk3F0 -= 1;
-            return;
-        }
-        if (Actor_IsFacingPlayer(&this->actor, 0x1555) != 0) {
-            if ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.xzDistToPlayer > 100.0f) &&
-                (Rand_ZeroOne() < 0.3f)) {
-                if (this->actor.params == -2) {
-                    this->actor.world.rot.y = this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
-                    func_80B45E30(this);
+        } else {
+            if (Actor_IsFacingPlayer(&this->actor, 0x1555)) {
+                if ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.xzDistToPlayer > 100.0f) &&
+                    (Rand_ZeroOne() < 0.3f)) {
+                    if (this->actor.params == -2) {
+                        this->actor.world.rot.y = this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
+                        func_80B45E30(this);
+                    } else {
+                        func_80B483E4(this, globalCtx);
+                    }
+                } else if (Rand_ZeroOne() > 0.3f) {
+                    func_80B456B4(this, globalCtx);
                 } else {
                     func_80B483E4(this, globalCtx);
                 }
-            } else if (Rand_ZeroOne() > 0.3f) {
-                func_80B456B4(this, globalCtx);
             } else {
-                func_80B483E4(this, globalCtx);
+                func_80B4604C(this);
             }
-        } else {
-            func_80B4604C(this);
-        }
-        if (!(globalCtx->gameplayFrames & 0x5F)) {
-            Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
+            if ((globalCtx->gameplayFrames & 0x5F) == 0) {
+                Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
+            }
         }
     }
 }
@@ -792,7 +774,7 @@ void func_80B45748(EnZf* this, GlobalContext* globalCtx) {
             }
         }
         if (this->actor.params == -2) {
-            if (func_80B44E8C(globalCtx, this) == 0) {
+            if (!func_80B44E8C(globalCtx, this)) {
                 if ((this->actor.xzDistToPlayer < 180.0f) && (this->actor.xzDistToPlayer > 160.0f) &&
                     Actor_IsFacingPlayer(&this->actor, 0x71C)) {
                     if (Actor_IsTargeted(globalCtx, &this->actor)) {
@@ -810,7 +792,7 @@ void func_80B45748(EnZf* this, GlobalContext* globalCtx) {
             }
         } else {
         block_64:
-            if (!(globalCtx->gameplayFrames & 0x5F)) {
+            if ((globalCtx->gameplayFrames & 0x5F) == 0) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
             }
             if ((sp54 != (s32)this->unk14C.curFrame) &&
@@ -856,7 +838,7 @@ void func_80B45EF0(EnZf* this, GlobalContext* globalCtx) {
             func_80B456B4(this, globalCtx);
         }
     }
-    if (!(globalCtx->gameplayFrames & 0x5F)) {
+    if ((globalCtx->gameplayFrames & 0x5F) == 0) {
         Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
     }
     if ((this->actor.params == -2) && (this->actor.bgCheckFlags & 3)) {
@@ -882,22 +864,22 @@ void func_80B46098(EnZf* this, GlobalContext* globalCtx) {
     f32 var_fv1;
 
     player = GET_PLAYER(globalCtx);
-    if (!func_80B49C2C(globalCtx, this) && ((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0))) {
+    if (!func_80B49C2C(globalCtx, this) && ((this->actor.params != -2) || !func_80B44E8C(globalCtx, this))) {
         temp_v0 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
         if (temp_v0 > 0) {
-            var_v1 = (s32)(((f32)temp_v0 * 0.25f) + 2000.0f);
+            var_v1 = (temp_v0 * 0.25f) + 2000.0f;
         } else {
-            var_v1 = (s32)(((f32)temp_v0 * 0.25f) - 2000.0f);
+            var_v1 = (temp_v0 * 0.25f) - 2000.0f;
         }
         this->actor.shape.rot.y += var_v1;
         this->actor.world.rot.y = this->actor.shape.rot.y;
         if (temp_v0 > 0) {
-            var_fv1 = (f32)var_v1 * 1.5f;
+            var_fv1 = var_v1 * 1.5f;
             if (var_fv1 > 2.0f) {
                 var_fv1 = 2.0f;
             }
         } else {
-            var_fv1 = (f32)var_v1 * 1.5f;
+            var_fv1 = var_v1 * 1.5f;
             if (var_fv1 < -2.0f) {
                 var_fv1 = -2.0f;
             }
@@ -918,7 +900,7 @@ void func_80B46098(EnZf* this, GlobalContext* globalCtx) {
                 func_80B456B4(this, globalCtx);
             }
         }
-        if (!(globalCtx->gameplayFrames & 0x5F)) {
+        if ((globalCtx->gameplayFrames & 0x5F) == 0) {
             Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
         }
     }
@@ -936,9 +918,9 @@ void func_80B462E4(EnZf* this, GlobalContext* globalCtx) {
         this->unk3DC = 7;
         this->unk408 = 0.0f;
         func_80B44050(this, func_80B463E4);
-        return;
+    } else {
+        func_80B456B4(this, globalCtx);
     }
-    func_80B456B4(this, globalCtx);
 }
 
 void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
@@ -954,15 +936,15 @@ void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
     player = GET_PLAYER(globalCtx);
     sp3C = 0.0f;
     Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0xFA0, 1);
-    if (!func_80B49C2C(globalCtx, this) && ((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0))) {
+    if (!func_80B49C2C(globalCtx, this) && ((this->actor.params != -2) || !func_80B44E8C(globalCtx, this))) {
         this->actor.world.rot.y = this->actor.shape.rot.y + 0x3A98;
         sp56 = player->actor.shape.rot.y + 0x8000;
-        if (Math_SinS((s16)(sp56 - this->actor.shape.rot.y)) >= 0.0f) {
+        if (Math_SinS(sp56 - this->actor.shape.rot.y) >= 0.0f) {
             this->actor.speedXZ -= 0.25f;
             if (this->actor.speedXZ < -8.0f) {
                 this->actor.speedXZ = -8.0f;
             }
-        } else if (Math_SinS((s16)(sp56 - this->actor.shape.rot.y)) < 0.0f) {
+        } else if (Math_SinS(sp56 - this->actor.shape.rot.y) < 0.0f) {
             this->actor.speedXZ += 0.25f;
             if (this->actor.speedXZ > 8.0f) {
                 this->actor.speedXZ = 8.0f;
@@ -1030,7 +1012,7 @@ void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
         if ((globalCtx->gameplayFrames & 0x5F) == 0) {
             Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
         }
-        if ((Math_CosS((s16)(sp56 - this->actor.shape.rot.y)) < -0.85f) || ((this->unk3F0 == 0))) {
+        if ((Math_CosS(sp56 - this->actor.shape.rot.y) < -0.85f) || (this->unk3F0 == 0)) {
             this->actor.world.rot.y = this->actor.shape.rot.y;
             if ((this->actor.xzDistToPlayer <= 100.0f) && ((globalCtx->gameplayFrames % 4) == 0) &&
                 func_80B44CF0(globalCtx, this)) {
@@ -1173,7 +1155,7 @@ void func_80B47050(EnZf* this) {
     } else {
         Animation_PlayOnceSetSpeed(&this->unk14C, &D_60157F8, 0.0f);
     }
-    Audio_PlayActorSound2(&this->actor, 0x389EU);
+    Audio_PlayActorSound2(&this->actor, NA_SE_EN_GOMA_JR_FREEZE);
     this->unk3DC = 0xE;
     func_80B44050(this, func_80B47120);
 }
@@ -1193,7 +1175,7 @@ void func_80B47120(EnZf* this, GlobalContext* globalCtx) {
     if ((this->actor.colorFilterTimer == 0) && (this->actor.bgCheckFlags & 1)) {
         if (this->actor.colChkInfo.health == 0) {
             func_80B48CEC(this);
-        } else if ((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0)) {
+        } else if ((this->actor.params != -2) || !func_80B44E8C(globalCtx, this)) {
             if (D_80B4A1B4 != -1) {
                 func_80B44DC4(this, globalCtx);
             } else {
@@ -1206,7 +1188,7 @@ void func_80B47120(EnZf* this, GlobalContext* globalCtx) {
                 } else if (!func_80B49C2C(globalCtx, this)) {
                     if (this->actor.params != -2) {
                         func_80B44DC4(this, globalCtx);
-                    } else if ((this->actor.xzDistToPlayer <= 100.0f) && (globalCtx->gameplayFrames & 3) &&
+                    } else if ((this->actor.xzDistToPlayer <= 100.0f) && ((globalCtx->gameplayFrames % 4) != 0) &&
                                func_80B44CF0(globalCtx, this)) {
                         func_80B46A24(this);
                     } else {
@@ -1487,7 +1469,7 @@ void func_80B47EB4(EnZf* this, GlobalContext* globalCtx) {
         this->unk3E4 = 0;
     }
     Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0x1194, 0);
-    if (((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0)) && SkelAnime_Update(&this->unk14C) &&
+    if (((this->actor.params != -2) || !func_80B44E8C(globalCtx, this)) && SkelAnime_Update(&this->unk14C) &&
         (this->actor.bgCheckFlags & 1)) {
         if (D_80B4A1B4 != -1) {
             if (this->unk410 == 0xD) {
@@ -1575,9 +1557,9 @@ void func_80B483E4(EnZf* this, GlobalContext* globalCtx) {
         player = GET_PLAYER(globalCtx);
         Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer, 1, 0xFA0, 1);
         temp_v1_sp2E = player->actor.shape.rot.y;
-        if (Math_SinS((s16)(temp_v1_sp2E - this->actor.shape.rot.y)) >= 0.0f) {
+        if (Math_SinS(temp_v1_sp2E - this->actor.shape.rot.y) >= 0.0f) {
             this->actor.speedXZ = -6.0f;
-        } else if (Math_SinS((s16)(temp_v1_sp2E - this->actor.shape.rot.y)) < 0.0f) {
+        } else if (Math_SinS(temp_v1_sp2E - this->actor.shape.rot.y) < 0.0f) {
             this->actor.speedXZ = 6.0f;
         }
         this->unk408 = 0.0f;
@@ -1633,7 +1615,7 @@ void func_80B48578(EnZf* this, GlobalContext* globalCtx) {
             }
         }
     }
-    if (Math_SinS((s16)(temp_t0_sp56 - this->actor.shape.rot.y)) >= 0.0f) {
+    if (Math_SinS(temp_t0_sp56 - this->actor.shape.rot.y) >= 0.0f) {
         this->actor.speedXZ += 0.125f;
     } else {
         this->actor.speedXZ -= 0.125f;
@@ -1674,7 +1656,7 @@ void func_80B48578(EnZf* this, GlobalContext* globalCtx) {
         } else {
             func_80B456B4(this, globalCtx);
         }
-    } else if ((this->actor.params != -2) || (func_80B44E8C(globalCtx, this) == 0)) {
+    } else if ((this->actor.params != -2) || !func_80B44E8C(globalCtx, this)) {
         if (this->unk3F0 == 0) {
             var_v0 = player->actor.shape.rot.y - this->actor.shape.rot.y;
             if (var_v0 < 0) {
@@ -1710,7 +1692,7 @@ void func_80B48578(EnZf* this, GlobalContext* globalCtx) {
             (((sp48 < 0xE) && (((s32)sp34 + sp4C) >= 0x10)) || ((sp48 < 0x1B) && (((s32)sp34 + sp4C) >= 0x1D)))) {
             Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_WALK);
         }
-        if (!(globalCtx->gameplayFrames & 0x5F)) {
+        if ((globalCtx->gameplayFrames & 0x5F) == 0) {
             Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
         }
     }
@@ -1794,7 +1776,7 @@ void func_80B48F90(EnZf* this, GlobalContext* globalCtx) {
     s16 temp_v0_2;
 
     if ((this->actor.params == -2) && (this->unk3DC == 3) && (this->unk3F4 != 0)) {
-        this->unk3EC = (s16)(s32)(Math_SinS(this->unk3F4 * 0x578) * 10920.0f);
+        this->unk3EC = Math_SinS(this->unk3F4 * 0x578) * 10920.0f;
     } else {
         temp_v0_2 = this->actor.yawTowardsPlayer;
         temp_v0_2 -= (s16)(this->unk3EC + this->actor.shape.rot.y);
@@ -2134,7 +2116,7 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
         this->actor.speedXZ = 0.0f;
         if ((ABS(sp22) < 0x2000 || ABS(sp22) > 0x5FFF)) {
             if (sp20 == 0) {
-                if (globalCtx->gameplayFrames & 1) {
+                if ((globalCtx->gameplayFrames % 2) != 0) {
                     sp1E = 6;
                 } else {
                     sp1E = -6;
@@ -2157,7 +2139,7 @@ s32 func_80B49E4C(GlobalContext* globalCtx, EnZf* this) {
             }
         } else if (ABS(sp22) < 0x5FFF) {
             if (sp20 == 0) {
-                if (globalCtx->gameplayFrames & 1) {
+                if ((globalCtx->gameplayFrames % 2) != 0) {
                     sp1E = 6;
                 } else {
                     sp1E = -6;
