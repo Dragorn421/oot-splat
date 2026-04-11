@@ -783,22 +783,21 @@ void func_80B45748(EnZf* this, GlobalContext* globalCtx) {
                             func_80B45E30(this);
                             return;
                         }
-                        goto block_64;
+                    } else {
+                        func_80B483E4(this, globalCtx);
+                        return;
                     }
-                    func_80B483E4(this, globalCtx);
-                    return;
                 }
-                goto block_64;
+            } else {
+                return;
             }
-        } else {
-        block_64:
-            if ((globalCtx->gameplayFrames & 0x5F) == 0) {
-                Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
-            }
-            if ((sp54 != (s32)this->unk14C.curFrame) &&
-                (((sp50 < 2) && (((s32)sp30 + sp54) >= 4)) || ((sp50 < 0x20) && (((s32)sp30 + sp54) >= 0x22)))) {
-                Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_WALK);
-            }
+        }
+        if ((globalCtx->gameplayFrames & 0x5F) == 0) {
+            Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_CRY);
+        }
+        if ((sp54 != (s32)this->unk14C.curFrame) &&
+            (((sp50 < 2) && (((s32)sp30 + sp54) >= 4)) || ((sp50 < 0x20) && (((s32)sp30 + sp54) >= 0x22)))) {
+            Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIZA_WALK);
         }
     }
 }
