@@ -4,6 +4,7 @@ __pycache__
 build
 asm
 assets
+.splat
 thelegendofzelda.d
 thelegendofzelda.ld
 undefined_funcs_auto.txt
