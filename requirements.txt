@@ -1,1 +1,2 @@
 splat64[mips] @ git+https://github.com/Dragorn421/splat.git@add_dump_symbols_options_w_rework_bss_size
+mapfile-parser>=2.12.1,<3.0.0
