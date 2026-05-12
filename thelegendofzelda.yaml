@@ -286,7 +286,7 @@ segments:
       - [0xB8E6A0, asm]
       - [0xB8EB20, asm]
       - [0xB8F520, asm]
-      - [0xB8FBB0, asm]
+      - [0xB8FBB0, hasm]
       - [0xB8FC10, asm]
       - [0xB8FDD0, asm]
       - [0xB8FF20, asm]
