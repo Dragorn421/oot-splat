@@ -1,0 +1,14 @@
+build_system = "make"
+compiler_type = "ido"
+
+[preserve_macros]
+"NULL" = "void*"
+"ABS" = "int"
+"MIN" = "int"
+"MAX" = "int"
+"CLAMP_MIN" = "int"
+"CLAMP_MAX" = "int"
+"CLAMP" = "int"
+
+[decompme.compilers]
+"*/tools/ido_recomp/linux/7.1/cc" = "ido7.1"

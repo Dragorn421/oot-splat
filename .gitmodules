@@ -4,3 +4,9 @@
 [submodule "m2c"]
 	path = m2c
 	url = git@github.com:matt-kempster/m2c.git
+[submodule "asm-differ"]
+	path = asm-differ
+	url = git@github.com:simonlindholm/asm-differ.git
+[submodule "decomp-permuter"]
+	path = decomp-permuter
+	url = git@github.com:simonlindholm/decomp-permuter.git
