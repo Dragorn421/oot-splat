@@ -403,7 +403,9 @@ typedef enum PlayerAnimGroup {
 } PlayerAnimGroup;
 
 #define LIMB_BUF_COUNT(limbCount) ((ALIGN16((limbCount) * sizeof(Vec3s)) + sizeof(Vec3s) - 1) / sizeof(Vec3s))
-#define PLAYER_LIMB_BUF_COUNT LIMB_BUF_COUNT(PLAYER_LIMB_MAX)
+//m2c chokes on this:
+//#define PLAYER_LIMB_BUF_COUNT LIMB_BUF_COUNT(PLAYER_LIMB_MAX)
+#define PLAYER_LIMB_BUF_COUNT 24
 
 typedef enum PlayerCsAction {
     /* 0x00 */ PLAYER_CSACTION_NONE,

@@ -1,3 +1,6 @@
 [submodule "asm-processor"]
 	path = asm-processor
 	url = git@github.com:simonlindholm/asm-processor.git
+[submodule "m2c"]
+	path = m2c
+	url = git@github.com:matt-kempster/m2c.git

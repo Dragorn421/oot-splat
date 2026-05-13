@@ -1,8 +1,11 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C6E80.s")
+u32 func_801C6E80(void) {
+    return LeoDriveExist();
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C6EA0.s")
+void func_801C6EA0(Gfx** gfxP) {
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C776C.s")
 
