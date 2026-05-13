@@ -13,11 +13,7 @@ void func_801C843C(s32, s32*, s32*);
 s32 func_801C84E0(s32);
 
 extern void *D_801D36D0;
-extern s8 D_801DA638;
-typedef struct struct_801DA640 {
-    s32 unk0;
-    s32 unk4;
-} struct_801DA640; // size >= 8
-extern struct_801DA640 D_801DA640;
+extern volatile s8 D_801DA638;
+extern volatile s64 D_801DA640;
 
 #endif
