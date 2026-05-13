@@ -117,18 +117,22 @@ for section, section_syms in syms_by_section.items():
         filtered_syms.append(sym)
     cur_subsegment = None
     i = 0
+    dy = 0
     for sym in filtered_syms:
-        if 0:
-            # y = vram position
-            y = -(sym.vram_start - section_vram_start) / 500
-        y = -i / len(filtered_syms) * 100
-        i += 1
         if cur_subsegment != sym.subsegment:
             if cur_subsegment is not None:
                 gprint("}")
             cur_subsegment = sym.subsegment
             gprint(f"subgraph cluster_{cur_subsegment}_{section} " "{")
+            y = -i / len(filtered_syms) * 100 + dy - 0.2
+            gprint(f'"{cur_subsegment} {section}"' " [" f' pos = "{x},{y}!"' f' color="none"' " ]")
+            dy -= 0.8
         assert cur_subsegment is not None
+        if 0:
+            # y = vram position
+            y = -(sym.vram_start - section_vram_start) / 500
+        y = -i / len(filtered_syms) * 100 + dy
+        i += 1
         color = None
         if section == "text":
             color = color_by_subsegment[cur_subsegment]
