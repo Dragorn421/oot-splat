@@ -153,12 +153,21 @@ for section, section_syms in syms_by_section.items():
                 sym_ref_by in section_by_sym_name
                 # ignore same-section references
                 and section_by_sym_name[sym_ref_by] != section
-                # only show references from text
-                and section_by_sym_name[sym_ref_by] == "text"
-            ):
-                gprint(
-                    f'"{sym_ref_by}" -> "{sym.name}"'
-                    f' [ color = "{color_by_subsegment[sym_by_name[sym_ref_by].subsegment]}" ]'
+                # only show
+                and (
+                    # references from text
+                    section_by_sym_name[sym_ref_by] == "text"
+                    # or references from data to rodata
+                    or (
+                        section_by_sym_name[sym_ref_by] == "data"
+                        and section_by_subsegment_type[sym.subsegment_type] == "rodata"
+                    )
                 )
+            ):
+                try:
+                    color = color_by_subsegment[sym_by_name[sym_ref_by].subsegment]
+                except KeyError:
+                    color = "black"
+                gprint(f'"{sym_ref_by}" -> "{sym.name}"' f' [ color = "{color}" ]')
 
 gprint("}")
