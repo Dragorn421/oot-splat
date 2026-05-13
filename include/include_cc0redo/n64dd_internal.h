@@ -12,6 +12,8 @@ void func_801C7B28(void);
 void func_801C8214(s32, void*, s32);
 void func_801C843C(s32, s32*, s32*);
 s32 func_801C84E0(s32);
+void func_800F6BDC(void);
+void func_800F6B3C(void);
 
 extern void* D_801D36D0;
 extern volatile s8 D_801DA638;

@@ -7,15 +7,37 @@ u32 func_801C6E80(void) {
 void func_801C6EA0(Gfx** gfxP) {
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C776C.s")
+void func_801C776C(void) {
+    if (D_80121214 == 0) {
+        func_800F6BDC();
+        D_80121214 = 1;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C77B0.s")
+s32 func_801C77B0(void) {
+    return D_80121214 != 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C77C8.s")
+s32 func_801C77C8(void) {
+    if (D_80121214 != 0) {
+        return 1;
+    }
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C77F0.s")
+void func_801C77F0(void) {
+    func_801C776C();
+    while (func_801C77C8() == 0) {
+        Sleep_Usec(1000000 / 60);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7838.s")
+void func_801C7838(void) {
+    if (D_80121214 != 0) {
+        D_80121214 = 0;
+        func_800F6B3C();
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C786C.s")
 
