@@ -5,3 +5,8 @@ pip install -r requirements.txt
 ln -s .../oot/baseroms/ntsc-1.2/baserom-decompressed.z64 ./oot-ntsc-1.2-decompressed.z64
 cargo build --release --manifest-path asm-processor/rust/Cargo.toml
 ```
+
+```
+mkctx src/B8ADA0.c
+find src -name '*.c' -exec ./find_funcs_with_known_proto.py {} \;
+```
