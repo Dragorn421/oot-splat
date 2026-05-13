@@ -281,7 +281,7 @@ segments:
     vram: 0x801C7740
     bss_size: 0xDC80
     subsegments:
-      - [0xB8ADA0, asm, asm_801C7740]
+      - [0xB8ADA0, asm]
       - [0xB8BEC0, asm]
       - [0xB8C810, asm]
       - [0xB8D310, asm]
@@ -309,14 +309,14 @@ segments:
       - [0xB926C0, asm]
       - [0xB927E0, asm]
       - [0xB92A80, asm]
-      - [0xB92F90, hasm, asm_801CF930]
-      - [0xB93A90, hasm, asm_801D0430]
-      - [0xB96050, asm, asm_801D29F0]
+      - [0xB92F90, hasm]
+      - [0xB93A90, hasm]
+      - [0xB96050, asm]
       - [0xB96290, asm]
       - [0xB96B90, asm]
       - [0xB96C30, asm]
-      - [0xB96D30, data, data_801D36D0]
-      - [0xB9CCE0, rodata, rodata_801D9680]
+      - [0xB96D30, data]
+      - [0xB9CCE0, rodata]
       - [0xB9CD10, rodata]
       - [0xB9CD50, rodata]
       - [0xB9CE20, rodata]
