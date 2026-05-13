@@ -63,9 +63,16 @@ void func_801C6EA0(Gfx** gfxP) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C843C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C84E0.s")
+s32 func_801C84E0(s32 arg0) {
+    s32 sp1C;
 
-void func_801C7C1C(void* dest, s32 offset, s32 size) {
+    if (LeoLBAToByte(arg0, 1U, &sp1C) == 0) {
+        return sp1C;
+    }
+    return 0;
+}
+
+void func_801C7C1C(void* arg0, s32 arg1, s32 arg2) {
     s32 sp44;
     s32 sp40;
     s32 sp3C;
@@ -79,16 +86,16 @@ void func_801C7C1C(void* dest, s32 offset, s32 size) {
     func_801C77F0();
     D_801DA638 = 1;
     D_801DA640 = 0;
-    func_801C843C(offset, &sp44, &sp3C);
-    func_801C843C(offset + size, &sp40, &sp38);
+    func_801C843C(arg1, &sp44, &sp3C);
+    func_801C843C(arg1 + arg2, &sp40, &sp38);
     sp34 = D_801D36D0;
     if (sp44 == sp40) {
         func_801C8214(sp44, sp34, func_801C84E0(sp44));
-        bcopy((char*)sp34 + sp3C, dest, size);
+        bcopy((char*)sp34 + sp3C, arg0, arg2);
     } else {
         var_s1 = 0;
         func_801C8214(sp44, sp34, func_801C84E0(sp44));
-        bcopy((char*)sp34 + sp3C, dest, func_801C84E0(sp44) - sp3C);
+        bcopy((char*)sp34 + sp3C, arg0, func_801C84E0(sp44) - sp3C);
         temp_v0 = sp44 + 1;
         if (temp_v0 < sp40) {
             var_s0 = temp_v0;
@@ -98,11 +105,11 @@ void func_801C7C1C(void* dest, s32 offset, s32 size) {
                     var_s0 += 1;
                 } while (var_s0 < sp40);
             }
-            func_801C8214(sp44 + 1, (void*)((func_801C84E0(sp44) + (s32)dest) - sp3C), var_s1);
+            func_801C8214(sp44 + 1, (void*)((func_801C84E0(sp44) + (s32)arg0) - sp3C), var_s1);
         }
         if (sp38 > 0) {
             func_801C8214(sp40, sp34, func_801C84E0(sp40));
-            bcopy(sp34, (void*)(((func_801C84E0(sp44) + (s32)dest) - sp3C) + var_s1), sp38);
+            bcopy(sp34, (void*)(((func_801C84E0(sp44) + (s32)arg0) - sp3C) + var_s1), sp38);
         }
     }
     func_801C7B28();
@@ -113,8 +120,43 @@ void func_801C7C1C(void* dest, s32 offset, s32 size) {
 void func_801C7E78(void) {
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C86F8.s")
+s32 func_801C86F8(void) {
+    s32 sp24;
+    s32 sp20;
+    s32 pad;
+    void* sp18;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C879C.s")
+    if (D_801DA5C8 != NULL) {
+        return -1;
+    }
+    D_801DA5C8 = &D_801DA4B0;
+    func_801C7C1C(D_801DA5C8, 0x1060, sizeof(*D_801DA5C8));
+    sp24 = D_801DA5C8->unk4 - D_801DA5C8->unk0;
+    sp20 = (char*)D_801DA5C8->unkC - (char*)D_801DA5C8->unk8;
+    sp18 = (char*)D_801DA5C8->unk8 + sp24;
+    func_801C7C1C(D_801DA5C8->unk8, D_801DA5C8->unk0, sp24);
+    bzero(sp18, sp20 - sp24);
+    func_800AD4C0(D_801DA5C8->unk10);
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/n64dd_SetDiskVersion.s")
+s32 func_801C879C(void) {
+    if (D_801DA5C8 == NULL) {
+        return -1;
+    }
+    func_800AD51C();
+    bzero(D_801DA5C8->unk8, (char*)D_801DA5C8->unkC - (char*)D_801DA5C8->unk8);
+    bzero(D_801DA5C8, sizeof(*D_801DA5C8));
+    D_801DA5C8 = NULL;
+    return 0;
+}
+
+void n64dd_SetDiskVersion(s32 arg0) {
+    if (arg0 != 0) {
+        if (D_801DA5C8 == 0) {
+            func_801C86F8();
+        }
+    } else if (D_801DA5C8 != 0) {
+        func_801C879C();
+    }
+}

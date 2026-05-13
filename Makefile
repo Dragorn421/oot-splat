@@ -40,7 +40,7 @@ $(BUILD_DIR)/%.o: %.bin
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	asm-processor/rust/target/release/asm-processor --input-enc UTF-8 --output-enc EUC-JP $(CC) -- $(AS) $(ASFLAGS) -- -I include -I include/include_cc0redo -I include/include_cc0redo/libc -c -G 0 -non_shared -fullwarn -verbose -Xcpluscomm -Wab,-r4300_mul -mips2 $(OPTFLAGS) -woff 649,838,807 -o $@ $<
+	python3 asm-processor/build.py --input-enc UTF-8 --output-enc EUC-JP $(CC) -- $(AS) $(ASFLAGS) -- -DOOT_VERSION=NTSC_1_2 -I include -I include/include_cc0redo -I include/include_cc0redo/libc -c -G 0 -non_shared -fullwarn -verbose -Xcpluscomm -Wab,-r4300_mul -mips2 $(OPTFLAGS) -woff 649,838,807 -o $@ $<
 
 include thelegendofzelda.d
 
