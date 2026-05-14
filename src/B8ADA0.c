@@ -76,7 +76,29 @@ s32 func_801C70FC(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7B28.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7268.s")
+void func_801C7268(void) {
+    s32 pad;
+    s32 sp18;
+
+    sp18 = func_801C77B0();
+    if (sp18 == 0) {
+        func_801C77F0();
+    }
+    D_801DA638 = 1;
+    D_801DA640 = 0;
+    if (func_801C7924() == 1) {
+        func_801C7958();
+    } else if (D_801DA648 != 0) {
+        D_801DA648 = 0;
+    }
+    if ((D_801D3728 == 1) || (D_801E17E0 == 1) || (D_801E17E4 == 1)) {
+        D_801DA640 = osGetTime();
+    }
+    func_801C7B28();
+    if (sp18 == 0) {
+        func_801C7838();
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7CB8.s")
 
