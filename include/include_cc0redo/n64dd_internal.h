@@ -28,5 +28,6 @@ typedef struct struct_801DA5C8 {
 } struct_801DA5C8; // size = 0x118
 extern struct_801DA5C8* D_801DA5C8;
 extern struct_801DA5C8 D_801DA4B0;
+extern s32 D_801DA648;
 
 #endif
