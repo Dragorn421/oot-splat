@@ -25,8 +25,8 @@ void func_800F6B3C(void);
 s32 func_801C7924(void);
 s32 func_801C7958(void);
 s32 func_801C8860(struct_801DA5D0*);
-UNK_RET func_801C7E94();
-s32 func_801C8A24();
+void func_801C7E94(void);
+s32 func_801C8A24(void);
 
 extern void* D_801D36D0;
 extern volatile u8 D_801DA638;
@@ -46,5 +46,8 @@ extern s32 D_801D3728;
 extern s32 D_801E17E0;
 extern s32 D_801E17E4;
 extern struct_801DA5D0 D_801DA5D0;
+extern s32 D_801DA64C;
+extern s32 D_801DA650;
+extern s32 D_801DA654;
 
 #endif

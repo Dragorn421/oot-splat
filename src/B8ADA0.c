@@ -128,11 +128,15 @@ void func_801C7268(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7CB8.s")
 
+UNK_RET func_801C7CEC(s32, s32, s32);
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7CEC.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7E34.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7E94.s")
+void func_801C7E94(void) {
+    Sleep_Msec(100);
+    func_801C7CEC(D_801DA64C, D_801DA650, D_801DA654);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7658.s")
 
