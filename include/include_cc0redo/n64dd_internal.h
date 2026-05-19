@@ -15,7 +15,8 @@ s32 func_801C84E0(s32);
 void func_800F6BDC(void);
 void func_800F6B3C(void);
 s32 func_801C7924(void);
-void func_801C7958(void);
+s32 func_801C7958(void);
+s32 func_801C8860(s8*);
 
 extern void* D_801D36D0;
 extern volatile u8 D_801DA638;
@@ -34,5 +35,6 @@ extern s32 D_801DA648;
 extern s32 D_801D3728;
 extern s32 D_801E17E0;
 extern s32 D_801E17E4;
+extern s8 D_801DA5D0;
 
 #endif

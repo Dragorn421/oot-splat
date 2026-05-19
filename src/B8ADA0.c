@@ -60,9 +60,26 @@ void func_801C78D8(void) {
     D_80121213 = 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7924.s")
+s32 func_801C7924(void) {
+    s32 (*p)(s8*);
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7958.s")
+    D_801DA5D0 = 5;
+    p = func_801C8860;
+    return p(&D_801DA5D0);
+}
+
+s32 func_801C7958(void) {
+    s32 sp1C;
+    s32 (*p)(s8*);
+
+    D_801DA5D0 = 0xA;
+    p = func_801C8860;
+    sp1C = p(&D_801DA5D0);
+    if (sp1C < 0) {
+        func_800D31A0();
+    }
+    return sp1C;
+}
 
 s32 func_801C79A4(void) {
     return D_801DA648 == 1;
