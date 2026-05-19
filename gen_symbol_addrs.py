@@ -36,7 +36,10 @@ for name, addr, size_bad_do_not_use in sorted(
     key=lambda it: it[1],
 ):
     if (
-        name.startswith("_")
+        (
+            name.startswith("_")
+            and not (name.startswith("__ull") or name.startswith("__ll"))
+        )
         or name.startswith("jtbl_")
         or name.startswith("L8")
         or name in SKIP_SYMS
