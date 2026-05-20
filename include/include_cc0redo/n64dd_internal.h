@@ -4,11 +4,14 @@
 #include "ultra64.h"
 #include "n64dd.h"
 #include "stack.h"
+#include "irqmgr.h"
+
+extern IrqMgr gIrqMgr; // from main.c
 
 typedef struct struct_801DA5D0 {
     /* 0x00 */ s8 unk0;
     /* 0x01 */ char pad1[0xB];
-    /* 0x0C */ UNK_RET (*unkC)(UNK_ARGS);
+    /* 0x0C */ void (*unkC)(s32, s32, s32);
     /* 0x10 */ s32 unk10;
     /* 0x14 */ void (*unk14)(void*, uintptr_t, size_t);
     /* 0x18 */ void* unk18;
@@ -34,8 +37,8 @@ s32 func_801C7958(void);
 s32 func_801C8860(struct_801DA5D0*);
 void func_801C7E94(void);
 s32 func_801C8A24(void);
-void func_801C79DC(void*);
-UNK_RET func_801C7E34(UNK_ARGS);
+UNK_RET func_801CAA60(s32, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s32, s32);
+UNK_RET func_801C9318(void);
 
 extern void* D_801D36D0;
 extern volatile u8 D_801DA638;
@@ -58,7 +61,13 @@ extern struct_801DA5D0 D_801DA5D0;
 extern s32 D_801DA64C;
 extern s32 D_801DA650;
 extern s32 D_801DA654;
-extern UNK_TYPE D_801DA410;
+typedef struct struct_801C79DC {
+    /* 0x00 */ OSMesg unk0[30];
+    /* 0x78 */ OSMesgQueue unk78;
+    /* 0x90 */ IrqMgrClient unk90;
+    /* 0x98 */ IrqMgr* unk98;
+} struct_801C79DC; // size >= 0x9C
+extern struct_801C79DC D_801DA410;
 extern OSMesgQueue D_801DA600;
 extern OSMesgQueue D_801DA618;
 extern OSMesg D_801DA630;
@@ -68,5 +77,6 @@ extern STACK(D_801DA808, 0x1000);
 extern StackEntry D_801DB808;
 extern STACK(D_801DB828, 0x1000);
 extern StackEntry D_801DC828;
+extern void* D_801DC848;
 
 #endif

@@ -89,7 +89,44 @@ s32 func_801C70FC(void) {
     return func_801C79A4();
 }
 
+#ifdef NON_MATCHING
+void func_801C79DC(void* arg) {
+    // static void* D_801DC848; // must be in-function bss to match
+    struct_801C79DC* arg0 = arg;
+    OSMesg sp58;
+    s32 var_s0;
+    void* temp_v0;
+
+    sp58 = NULL;
+    arg0->unk98 = &gIrqMgr;
+    osCreateMesgQueue(&arg0->unk78, arg0->unk0, ARRAY_COUNT(arg0->unk0));
+    IrqMgr_AddClient(arg0->unk98, &arg0->unk90, &arg0->unk78);
+    var_s0 = 0;
+    while (var_s0 == 0) {
+        osRecvMesg(&arg0->unk78, &sp58, OS_MESG_BLOCK);
+        switch (*(s16*)sp58) {
+            case 1:
+                temp_v0 = osViGetNextFramebuffer();
+                if (D_801DC848 != temp_v0) {
+                    D_801DC848 = temp_v0;
+                    D_801DA638 = 1;
+                }
+                func_801C9318();
+                break;
+            case 4:
+                LeoReset();
+                break;
+            case 3:
+                var_s0 = 1;
+                break;
+        }
+    }
+    IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
+}
+#else
+void func_801C79DC(void* arg);
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C79DC.s")
+#endif
 
 void func_801C7B28(void) {
     s32 temp_v1_2;
@@ -126,12 +163,56 @@ void func_801C7268(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7CB8.s")
+void func_801C7CB8(u16* arg0) {
+    u16* var_v0;
 
-UNK_RET func_801C7CEC(s32, s32, s32);
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7CEC.s")
+    var_v0 = arg0;
+    while (var_v0 < (arg0 + (SCREEN_WIDTH * SCREEN_HEIGHT))) {
+        *var_v0 = 1;
+        var_v0++;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7E34.s")
+void func_801C7CEC(s32 arg0, s32 arg1, s32 arg2) {
+    s32 sp2C;
+
+    if ((arg0 != 0) || (arg1 != 0) || (arg2 != 0)) {
+        sp2C = (intptr_t)osViGetNextFramebuffer() + 0x20000000;
+        if ((sp2C & 0xFFFFFF) != 0) {
+            if (D_801DA638 != 0) {
+                D_801DA638 = 0;
+                func_801C7CB8((u16*)sp2C);
+                D_801DA640 = osGetTime();
+            }
+            if (arg0 != 0) {
+                func_801CAA60(arg0, 0x60, 0x20, 0xC0, 0x10, 0xB, sp2C, 0x140);
+            }
+            if (arg1 != 0) {
+                func_801CAA60(arg1, 0, 0x50, 0x140, 0x40, 0xB, sp2C, 0x140);
+            }
+            if (arg2 != 0) {
+                func_801CAA60(arg2, 0, 0xB0, 0x140, 0x20, 0xB, sp2C, 0x140);
+            }
+        }
+    }
+}
+
+void func_801C7E34(s32 arg0, s32 arg1, s32 arg2) {
+    if ((arg0 == 0) && (arg1 == 0) && (arg2 == 0)) {
+        return;
+    }
+    if (D_801DA638) {}
+    if (arg0 != 0) {
+        D_801DA64C = arg0;
+    }
+    if (arg1 != 0) {
+        D_801DA650 = arg1;
+    }
+    if (arg2 != 0) {
+        D_801DA654 = arg2;
+    }
+    func_801C7CEC(arg0, arg1, arg2);
+}
 
 void func_801C7E94(void) {
     Sleep_Msec(100);
