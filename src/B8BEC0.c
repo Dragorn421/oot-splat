@@ -102,7 +102,13 @@ void func_801C8DD8(OSMesgQueue* arg0, OSMesgQueue* arg1, s32 arg2, void* arg3, s
     osStartThread(&D_801E1630);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E50.s")
+void func_801C8E50(void* arg0, s32 arg1) {
+    if (arg1 == 1) {
+        func_801C8C84(arg0);
+        return;
+    }
+    osSendMesg(D_801E1590.unk0, arg0, 1);
+}
 
 #ifdef NON_MATCHING
 void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
@@ -118,20 +124,78 @@ void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, ui
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E98.s")
 #endif
 
+// https://decomp.me/scratch/WYcFi
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8EEC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8F9C.s")
+s32 func_801C8F9C(struct_801E1598* arg0) {
+    u8 sp1F;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8FD0.s")
+    arg0->unk68 = LeoTestUnitReady(&sp1F);
+    return (sp1F & 1) == 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C9020.s")
+s8 func_801C8FD0(void) {
+    s32 temp_v0;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C905C.s")
+    temp_v0 = func_801C8F9C(&D_801E1598);
+    if (D_801E1598.unk68 == 8) {
+        return 0;
+    }
+    if (temp_v0 == 0) {
+        return 2;
+    }
+    return 1;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C90A4.s")
+s32 func_801C9020(void) {
+    if ((func_801C90A4() == 0) && (D_801E1598.unk68 != 0)) {
+        return D_801E1598.unk68;
+    }
+    return -1;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C90BC.s")
+s32 func_801C905C(void) {
+    if ((func_801C90A4() == 0) && ((D_801E1604 == 3) || (D_801E1604 == 4))) {
+        return D_801E1598.unk68;
+    }
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C9114.s")
+s32 func_801C90A4(void) {
+    return D_801E1598.unk66 == 1;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C916C.s")
+s32 func_801C90BC(void) {
+    D_801E1598.unk64 = 3;
+    func_801C8E50(&D_801E1598, 1);
+    D_801D3710 = 0;
+    if ((D_801E1604 == 3) || (D_801E1604 == 4)) {
+        return -1;
+    } else {
+        return D_801E1604 == 0;
+    }
+}
+
+s32 func_801C9114(void) {
+    D_801E1598.unk64 = 4;
+    func_801C8E50(&D_801E1598, 1);
+    D_801D3710 = 0;
+    if ((D_801E1604 == 3) || (D_801E1604 == 4)) {
+        return -1;
+    } else {
+        return D_801E1604 == 0;
+    }
+}
+
+s32 func_801C916C(void) {
+    s32 var_v1;
+
+    if (LeoDriveExist() != 0) {
+        var_v1 = 8;
+    } else {
+        var_v1 = 0;
+    }
+    if (var_v1 == 0) {}
+    D_801E1598.unk68 = var_v1;
+    return var_v1 == 0;
+}

@@ -1,6 +1,8 @@
 // Visit https://github.com/ethteck/splat/wiki/Adding-Symbols for documentation about this file
 entrypoint = 0x80000400; // type:func
 
+D_801E1598 = 0x801E1598; // size:0x6C
+
 // leoInitUnit_atten = 0x801C8A04;
 LeoReadWrite = 0x801CAFB0;
 leoInitialize = 0x801CB040;
