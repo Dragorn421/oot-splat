@@ -272,9 +272,20 @@ s32 func_801C7818(void) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C81AC.s")
+s32 func_801C81AC(void) {
+    s32 var_v1;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C81E4.s")
+    var_v1 = func_801C7658();
+    if (var_v1 == 0) {
+        var_v1 = func_801C7818();
+    }
+    return var_v1;
+}
+
+void func_801C81E4(void) {
+    D_801DA5D0.unk0 = 0;
+    (&func_801C8860)(&D_801DA5D0);
+}
 
 void func_801C8214(s32 arg0, void* arg1, s32 arg2) {
     s32 (*p)(struct_801DA5D0*) = func_801C8860;
@@ -295,7 +306,13 @@ void func_801C8214(s32 arg0, void* arg1, s32 arg2) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C82C0.s")
+void func_801C82C0(void* arg0, s32 arg1, s32 arg2) {
+    D_801DA5D0.unk18 = arg0;
+    D_801DA5D0.unk1C = arg1;
+    D_801DA5D0.unk20 = arg2;
+    D_801DA5D0.unk0 = 4;
+    (&func_801C8860)(&D_801DA5D0);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C8304.s")
 
