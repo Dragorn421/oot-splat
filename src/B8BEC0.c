@@ -104,7 +104,19 @@ void func_801C8DD8(OSMesgQueue* arg0, OSMesgQueue* arg1, s32 arg2, void* arg3, s
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E50.s")
 
+#ifdef NON_MATCHING
+void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
+    // static struct_801E15FC D_801E15FC; // must be in-function bss to match
+
+    func_801CA3C0(arg1, arg2);
+    D_801D3734 = arg0;
+    D_801E15FC.unk0 = 0;
+    D_801E15FC.unk1 = 0;
+    func_801C8E50(&D_801E1598, 0);
+}
+#else
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E98.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8EEC.s")
 

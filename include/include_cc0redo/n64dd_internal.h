@@ -61,6 +61,8 @@ s32 func_801C90BC(void);
 s32 func_801C9114(void);
 s32 func_801C916C(void);
 void func_801C8D34(void*);
+UNK_RET func_801C8E50(UNK_PTR, UNK_TYPE);
+UNK_RET func_801CA3C0(s32, void (*)(void*, uintptr_t, size_t));
 
 extern void* D_801D36D0;
 extern volatile u8 D_801DA638;
@@ -108,5 +110,11 @@ typedef struct struct_801E1590 {
     /* 0x4 */ OSMesgQueue* unk4;
 } struct_801E1590; // size >= 8
 extern struct_801E1590 D_801E1590;
+extern void (*D_801D3734)(s32, s32, s32);
+extern UNK_TYPE D_801E1598;
+typedef struct struct_801E15FC {
+    s8 unk0;
+    s8 unk1;
+} struct_801E15FC;
 
 #endif
