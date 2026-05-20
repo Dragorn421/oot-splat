@@ -138,7 +138,34 @@ void func_801C7E94(void) {
     func_801C7CEC(D_801DA64C, D_801DA650, D_801DA654);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C7658.s")
+s32 func_801C7658(void) {
+    if (D_80121212 != 0) {
+        return 0;
+    }
+    osCreateMesgQueue(&D_801DA600, &D_801DA630, 1);
+    osCreateMesgQueue(&D_801DA618, &D_801DA634, 1);
+    StackCheck_Init(&D_801DC828, D_801DB828, STACK_TOP(D_801DB828), 0, 0x100, "n64dd");
+    D_801DA5D0.unk1C = (s32)&D_801DA600;
+    D_801DA5D0.unk20 = (s32)&D_801DA618;
+    D_801DA5D0.unk24 = 8;
+    D_801DA5D0.unk28 = &D_801DC828;
+    D_801DA5D0.unk2C = 0xD;
+    D_801DA5D0.unk0 = 1;
+    (&func_801C8860)(&D_801DA5D0);
+    D_80121213 = 1;
+    func_801C7898();
+    D_801DA5D0.unk0 = 2;
+    D_801DA5D0.unk10 = 6;
+    D_801DA5D0.unk14 = DmaMgr_DmaFromDriveRom;
+    D_801DA5D0.unkC = &func_801C7E34;
+    (&func_801C8860)(&D_801DA5D0);
+    D_801DA5D0.unk0 = 0xD;
+    (&func_801C8860)(&D_801DA5D0);
+    StackCheck_Init(&D_801DB808, D_801DA808, STACK_TOP(D_801DA808), 0, 0x100, "ddmsg");
+    osCreateThread(&D_801DA658, 9, func_801C79DC, &D_801DA410, STACK_TOP(D_801DA808), 0xD);
+    osStartThread(&D_801DA658);
+    return 0;
+}
 
 s32 func_801C7818(void) {
     s32 (*p)(struct_801DA5D0*) = func_801C8860;
