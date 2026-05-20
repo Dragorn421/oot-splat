@@ -131,5 +131,6 @@ typedef struct struct_801E15FC {
 } struct_801E15FC;
 extern s32 D_801D3710;
 extern s32 D_801E1604;
+extern s32 D_801D36E4;
 
 #endif

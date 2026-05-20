@@ -58,19 +58,46 @@ s32 func_801C8860(struct_801DA5D0* arg0) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C89FC.s")
+void func_801C89FC(s32 arg0) {
+    if (arg0 != 0) {
+        D_801D36E0 = 1;
+        return;
+    }
+    D_801D36E0 = 2;
+}
 
 s32 func_801C8A24(void) {
     return D_801D36E0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8A34.s")
+s32 func_801C8A34(void) {
+    return D_801D36E4 == 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8A4C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8AF8.s")
+typedef struct struct_801C8AF8 {
+    /* 0x00 */ char pad0[0x1C];
+    /* 0x1C */ OSMesgQueue unk1C;
+    /* 0x34 */ char pad34[4];
+    /* 0x38 */ LEODiskID unk38;
+    /* 0x58 */ char pad58[0x10];
+    /* 0x68 */ OSMesg unk68;
+} struct_801C8AF8; // size >= 0x6C
+void func_801C8AF8(struct_801C8AF8* arg0) {
+    LEOCmd sp1C;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8B40.s")
+    LeoReadDiskID(&sp1C, &arg0->unk38, &arg0->unk1C);
+    osRecvMesg(&arg0->unk1C, &arg0->unk68, OS_MESG_BLOCK);
+}
+
+// arg0 being struct_801C8AF8* is just a guess
+void func_801C8B40(struct_801C8AF8* arg0) {
+    LEOCmd sp1C;
+
+    LeoSpdlMotor(&sp1C, 4U, &arg0->unk1C);
+    osRecvMesg(&arg0->unk1C, &arg0->unk68, 1);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8B8C.s")
 
