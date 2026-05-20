@@ -18,11 +18,19 @@ typedef struct struct_801DA5D0 {
     /* 0x10 */ s32 unk10;
     /* 0x14 */ void (*unk14)(void*, uintptr_t, size_t);
     /* 0x18 */ void* unk18;
-    /* 0x1C */ s32 unk1C;
-    /* 0x20 */ s32 unk20;
-    /* 0x24 */ s32 unk24;
-    /* 0x28 */ StackEntry* unk28;
-    /* 0x2C */ s32 unk2C;
+    union { // different substruct based on struct_801DA5D0.unk0 ? see func_801C8860
+        struct {
+            /* 0x1C */ OSMesgQueue* unk1C;
+            /* 0x20 */ OSMesgQueue* unk20;
+            /* 0x24 */ s32 unk24;
+            /* 0x28 */ void* unk28;
+            /* 0x2C */ s32 unk2C;
+        } unk1C_1;
+        struct {
+            /* 0x1C */ s32 unk1C;
+            /* 0x20 */ s32 unk20;
+        } unk1C_3_4;
+    };
 } struct_801DA5D0; // size >= 0x30
 
 void func_801C77F0(void);
@@ -30,7 +38,6 @@ void func_801C7838(void);
 void func_801C7898(void);
 void func_801C78D8(void);
 void func_801C7B28(void);
-void func_801C8214(s32, void*, s32);
 s32 func_801C843C(s32, s32*, s32*);
 s32 func_801C84E0(s32);
 void func_800F6BDC(void);
@@ -43,7 +50,7 @@ s32 func_801C8A24(void);
 UNK_RET func_801CAA60(s32, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s32, s32);
 UNK_RET func_801C9318(void);
 UNK_RET func_801C8DB4(void);
-UNK_RET func_801C8DD8(s32, s32, s32, StackEntry*, s32);
+void func_801C8DD8(OSMesgQueue*, OSMesgQueue*, s32, void*, s32);
 UNK_RET func_801C8E98(void (*)(s32, s32, s32), s32, void (*)(void*, uintptr_t, size_t));
 UNK_RET func_801C8EEC(void*, s32, s32, UNK_TYPE);
 s8 func_801C8FD0(void);
@@ -53,6 +60,7 @@ s32 func_801C90A4(void);
 s32 func_801C90BC(void);
 s32 func_801C9114(void);
 s32 func_801C916C(void);
+void func_801C8D34(void*);
 
 extern void* D_801D36D0;
 extern volatile u8 D_801DA638;
@@ -95,5 +103,10 @@ extern void* D_801DC848;
 extern s32 D_801D3720;
 extern s32 D_801D36E0;
 extern OSThread D_801E1630;
+typedef struct struct_801E1590 {
+    /* 0x0 */ OSMesgQueue* unk0;
+    /* 0x4 */ OSMesgQueue* unk4;
+} struct_801E1590; // size >= 8
+extern struct_801E1590 D_801E1590;
 
 #endif

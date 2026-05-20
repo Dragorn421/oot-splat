@@ -4,7 +4,7 @@ s32 func_801C8860(struct_801DA5D0* arg0) {
     s32 temp_v0_2;
     s8 temp_v0;
 
-    switch ((u8)arg0->unk0) {
+    switch (arg0->unk0) {
         case 0:
             if (func_801C90A4() != 0) {
                 return 1;
@@ -12,7 +12,8 @@ s32 func_801C8860(struct_801DA5D0* arg0) {
             func_801C8DB4();
             return 0;
         case 1:
-            func_801C8DD8(arg0->unk1C, arg0->unk20, arg0->unk24, arg0->unk28, arg0->unk2C);
+            func_801C8DD8(arg0->unk1C_1.unk1C, arg0->unk1C_1.unk20, arg0->unk1C_1.unk24, arg0->unk1C_1.unk28,
+                          arg0->unk1C_1.unk2C);
             return 0;
         case 2:
             func_801C8E98(arg0->unkC, arg0->unk10, arg0->unk14);
@@ -21,13 +22,13 @@ s32 func_801C8860(struct_801DA5D0* arg0) {
             if (func_801C90A4() != 0) {
                 return 1;
             }
-            func_801C8EEC(arg0->unk18, arg0->unk1C, arg0->unk20, 1);
+            func_801C8EEC(arg0->unk18, arg0->unk1C_3_4.unk1C, arg0->unk1C_3_4.unk20, 1);
             return 0;
         case 4:
             if (func_801C90A4() != 0) {
                 return 1;
             }
-            func_801C8EEC(arg0->unk18, arg0->unk1C, arg0->unk20, 2);
+            func_801C8EEC(arg0->unk18, arg0->unk1C_3_4.unk1C, arg0->unk1C_3_4.unk20, 2);
             return 0;
         case 5:
             temp_v0 = func_801C8FD0();
@@ -77,15 +78,29 @@ s32 func_801C8A24(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8C74.s")
 
+void func_801C8C84(void*);
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8C84.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8D34.s")
+void func_801C8D34(void* arg0) {
+    void* sp24;
+
+    while (true) {
+        osRecvMesg(D_801E1590.unk0, &sp24, OS_MESG_BLOCK);
+        func_801C8C84(sp24);
+        osSendMesg(D_801E1590.unk4, NULL, OS_MESG_BLOCK);
+    }
+}
 
 void func_801C8DB4(void) {
     osDestroyThread(&D_801E1630);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8DD8.s")
+void func_801C8DD8(OSMesgQueue* arg0, OSMesgQueue* arg1, s32 arg2, void* arg3, s32 arg4) {
+    D_801E1590.unk0 = arg0;
+    D_801E1590.unk4 = arg1;
+    osCreateThread(&D_801E1630, arg2, func_801C8D34, NULL, arg3, arg4);
+    osStartThread(&D_801E1630);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E50.s")
 

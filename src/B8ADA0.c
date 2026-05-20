@@ -226,11 +226,11 @@ s32 func_801C7658(void) {
     osCreateMesgQueue(&D_801DA600, &D_801DA630, 1);
     osCreateMesgQueue(&D_801DA618, &D_801DA634, 1);
     StackCheck_Init(&D_801DC828, D_801DB828, STACK_TOP(D_801DB828), 0, 0x100, "n64dd");
-    D_801DA5D0.unk1C = (s32)&D_801DA600;
-    D_801DA5D0.unk20 = (s32)&D_801DA618;
-    D_801DA5D0.unk24 = 8;
-    D_801DA5D0.unk28 = &D_801DC828;
-    D_801DA5D0.unk2C = 0xD;
+    D_801DA5D0.unk1C_1.unk1C = &D_801DA600;
+    D_801DA5D0.unk1C_1.unk20 = &D_801DA618;
+    D_801DA5D0.unk1C_1.unk24 = 8;
+    D_801DA5D0.unk1C_1.unk28 = STACK_TOP(D_801DB828);
+    D_801DA5D0.unk1C_1.unk2C = 0xD;
     D_801DA5D0.unk0 = 1;
     (&func_801C8860)(&D_801DA5D0);
     D_80121213 = 1;
@@ -291,8 +291,8 @@ void func_801C8214(s32 arg0, void* arg1, s32 arg2) {
     s32 (*p)(struct_801DA5D0*) = func_801C8860;
 
     D_801DA5D0.unk18 = arg1;
-    D_801DA5D0.unk1C = arg0;
-    D_801DA5D0.unk20 = arg2;
+    D_801DA5D0.unk1C_3_4.unk1C = arg0;
+    D_801DA5D0.unk1C_3_4.unk20 = arg2;
     D_801DA5D0.unk0 = 3;
     p(&D_801DA5D0);
     osGetTime();
@@ -308,8 +308,8 @@ void func_801C8214(s32 arg0, void* arg1, s32 arg2) {
 
 void func_801C82C0(void* arg0, s32 arg1, s32 arg2) {
     D_801DA5D0.unk18 = arg0;
-    D_801DA5D0.unk1C = arg1;
-    D_801DA5D0.unk20 = arg2;
+    D_801DA5D0.unk1C_3_4.unk1C = arg1;
+    D_801DA5D0.unk1C_3_4.unk20 = arg2;
     D_801DA5D0.unk0 = 4;
     (&func_801C8860)(&D_801DA5D0);
 }
