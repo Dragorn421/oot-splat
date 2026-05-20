@@ -59,7 +59,9 @@ s32 func_801C8860(struct_801DA5D0* arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C89FC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8A24.s")
+s32 func_801C8A24(void) {
+    return D_801D36E0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8A34.s")
 
@@ -79,7 +81,9 @@ s32 func_801C8860(struct_801DA5D0* arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8D34.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8DB4.s")
+void func_801C8DB4(void) {
+    osDestroyThread(&D_801E1630);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8DD8.s")
 

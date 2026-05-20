@@ -93,5 +93,7 @@ extern STACK(D_801DB828, 0x1000);
 extern StackEntry D_801DC828;
 extern void* D_801DC848;
 extern s32 D_801D3720;
+extern s32 D_801D36E0;
+extern OSThread D_801E1630;
 
 #endif
