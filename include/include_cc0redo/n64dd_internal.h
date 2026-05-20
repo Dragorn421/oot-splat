@@ -9,8 +9,11 @@
 extern IrqMgr gIrqMgr; // from main.c
 
 typedef struct struct_801DA5D0 {
-    /* 0x00 */ s8 unk0;
-    /* 0x01 */ char pad1[0xB];
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ char pad1[3];
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s8 unk8;
+    /* 0x09 */ char pad9[3];
     /* 0x0C */ void (*unkC)(s32, s32, s32);
     /* 0x10 */ s32 unk10;
     /* 0x14 */ void (*unk14)(void*, uintptr_t, size_t);
@@ -39,6 +42,17 @@ void func_801C7E94(void);
 s32 func_801C8A24(void);
 UNK_RET func_801CAA60(s32, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s32, s32);
 UNK_RET func_801C9318(void);
+UNK_RET func_801C8DB4(void);
+UNK_RET func_801C8DD8(s32, s32, s32, StackEntry*, s32);
+UNK_RET func_801C8E98(void (*)(s32, s32, s32), s32, void (*)(void*, uintptr_t, size_t));
+UNK_RET func_801C8EEC(void*, s32, s32, UNK_TYPE);
+s8 func_801C8FD0(void);
+s32 func_801C9020(void);
+s32 func_801C905C(void);
+s32 func_801C90A4(void);
+s32 func_801C90BC(void);
+s32 func_801C9114(void);
+s32 func_801C916C(void);
 
 extern void* D_801D36D0;
 extern volatile u8 D_801DA638;
@@ -78,5 +92,6 @@ extern StackEntry D_801DB808;
 extern STACK(D_801DB828, 0x1000);
 extern StackEntry D_801DC828;
 extern void* D_801DC848;
+extern s32 D_801D3720;
 
 #endif
