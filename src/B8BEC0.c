@@ -151,8 +151,28 @@ void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, ui
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E98.s")
 #endif
 
-// https://decomp.me/scratch/WYcFi
+#ifdef NON_MATCHING
+// struct_801E1598 D_801E1598; // must be migrated (to this file)
+void func_801C8EEC(void* arg0, s32 arg1, s32 arg2, u8 arg3) {
+    struct_801E1598* var = &D_801E1598;
+
+    if (D_801D3710 == 1) {
+        D_801D3710 = 0;
+        var->unk64 = 4;
+        func_801C8E50(var, 1);
+        if ((D_801E1604 == 3) || (D_801E1604 == 4)) {
+            return;
+        }
+    }
+    var->unk58 = arg0;
+    var->unk5C = (void*)arg1;
+    var->unk60 = arg2;
+    var->unk64 = (u8)arg3;
+    func_801C8E50(var, 0);
+}
+#else
 #pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8EEC.s")
+#endif
 
 s32 func_801C8F9C(struct_801E1598* arg0) {
     u8 sp1F;
