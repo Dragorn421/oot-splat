@@ -38,7 +38,11 @@ for name, addr, size_bad_do_not_use in sorted(
     if (
         (
             name.startswith("_")
-            and not (name.startswith("__ull") or name.startswith("__ll"))
+            and not (
+                name.startswith("__ull")
+                or name.startswith("__ll")
+                or name.startswith("__os")
+            )
         )
         or name.startswith("jtbl_")
         or name.startswith("L8")
