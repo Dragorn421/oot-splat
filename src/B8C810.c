@@ -38,8 +38,8 @@ void func_801C92D4(void) {
 
 void func_801C9318(void) {
     u32 temp_v0;
-    s32 sp20;
-    s32 sp1C;
+    UNK_PTR sp20;
+    UNK_PTR sp1C;
     s32 sp18;
 
     osRecvMesg(D_801E1594, NULL, 0);
@@ -48,8 +48,8 @@ void func_801C9318(void) {
         sp20 = D_801D3724;
         sp1C = D_801D372C;
         sp18 = D_801D3730;
-        D_801D3724 = 0;
-        D_801D372C = 0;
+        D_801D3724 = NULL;
+        D_801D372C = NULL;
         D_801D3730 = 0;
         osSetIntMask(temp_v0);
         D_801D3734(sp20, sp1C, sp18);
@@ -140,9 +140,6 @@ s32 func_801C955C(struct_801E1598* arg0) {
     }
 }
 
-/*
-#pragma GLOBAL_ASM("asm/nonmatchings/B8C810/func_801C9630.s")
-*/
 s32 func_801C9630(struct_801E1598* arg0) {
     s32 temp_v0;
 

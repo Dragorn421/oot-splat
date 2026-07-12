@@ -34,7 +34,10 @@ typedef struct struct_801DA5D0 {
 } struct_801DA5D0; // size >= 0x30
 
 typedef struct struct_801E1598 {
-    /* 0x00 */ char pad0[0x58];
+    /* 0x00 */ char pad0[0x1C];
+    /* 0x1C */ OSMesgQueue unk1C;
+    /* 0x34 */ char pad34[4];
+    /* 0x38 */ LEODiskID unk38;
     /* 0x58 */ void* unk58;
     /* 0x5C */ s32 unk5C;
     /* 0x60 */ s32 unk60;
@@ -42,7 +45,7 @@ typedef struct struct_801E1598 {
     /* 0x65 */ s8 unk65;
     /* 0x66 */ u8 unk66;
     /* 0x67 */ char pad67[1];
-    /* 0x68 */ s32 unk68;
+    /* 0x68 */ s32 unk68; // OSMesg
 } struct_801E1598; // size >= 0x6C
 
 void func_801C77F0(void);
@@ -123,7 +126,7 @@ typedef struct struct_801E1590 {
     /* 0x4 */ OSMesgQueue* unk4;
 } struct_801E1590; // size >= 8
 extern struct_801E1590 D_801E1590;
-extern void (*D_801D3734)(s32, s32, s32);
+extern void (*D_801D3734)(UNK_PTR, UNK_PTR, s32);
 extern struct_801E1598 D_801E1598;
 typedef struct struct_801E15FC {
     s8 unk0;
@@ -139,8 +142,8 @@ s32 func_801C97C8(struct_801E1598*);
 s32 func_801C9870(struct_801E1598*);
 s32 func_801C9934(struct_801E1598*);
 s32 func_801C996C(struct_801E1598*);
-extern s32 D_801D3724;
-extern s32 D_801D372C;
+extern UNK_PTR D_801D3724;
+extern UNK_PTR D_801D372C;
 extern s32 D_801D3730;
 extern OSMesgQueue* D_801E1594;
 UNK_RET func_801C8B40(struct_801E1598*);
@@ -153,17 +156,26 @@ s32 func_801C978C(struct_801E1598*);
 UNK_RET func_801C8AF8(struct_801E1598*);
 UNK_RET func_801C91B0(s32);
 s32 func_801C955C(struct_801E1598*);
-s32 func_801CA800(s32);
-s32 func_801CA698(s32);
-s32 func_801CA86C(void);
+UNK_PTR func_801CA800(s32);
+UNK_PTR func_801CA698(s32);
+UNK_PTR func_801CA86C(void);
 s32 func_801CA8A0(s32);
 s32 func_801CA8E0(void);
 UNK_RET func_801C91E4(void);
-s32 func_801CA730(void);
+UNK_PTR func_801CA730(void);
 extern s32 (*D_801D36D4)(struct_801E1598*);
 s32 func_801C9BA4(struct_801E1598*);
 s32 func_801C9630(struct_801E1598*);
 UNK_RET func_801C93C8(UNK_TYPE, UNK_TYPE, UNK_TYPE);
 s32 func_801C999C(struct_801E1598*);
+s32 func_801CA4B8(void);
+UNK_RET func_801CA764(UNK_PTR, s32, UNK_TYPE);
+extern UNK_TYPE D_801D4460;
+extern UNK_TYPE D_801E1E00;
+UNK_RET func_801CA628(UNK_PTR, s32);
+extern UNK_TYPE D_801D3860;
+extern UNK_TYPE D_801E1800;
+UNK_RET func_801CA280(UNK_PTR, UNK_TYPE, const char*);
+extern const char* D_801D3760[2][8][4];
 
 #endif
