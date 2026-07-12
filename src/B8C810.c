@@ -40,7 +40,7 @@ void func_801C9318(void) {
     u32 temp_v0;
     UNK_PTR sp20;
     UNK_PTR sp1C;
-    s32 sp18;
+    UNK_PTR sp18;
 
     osRecvMesg(D_801E1594, NULL, 0);
     if ((D_801D3734 != NULL) && (D_801D3720 == 0)) {
@@ -50,7 +50,7 @@ void func_801C9318(void) {
         sp18 = D_801D3730;
         D_801D3724 = NULL;
         D_801D372C = NULL;
-        D_801D3730 = 0;
+        D_801D3730 = NULL;
         osSetIntMask(temp_v0);
         D_801D3734(sp20, sp1C, sp18);
     }
