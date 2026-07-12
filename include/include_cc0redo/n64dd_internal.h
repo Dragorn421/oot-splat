@@ -132,5 +132,38 @@ typedef struct struct_801E15FC {
 extern s32 D_801D3710;
 extern s32 D_801E1604;
 extern s32 D_801D36E4;
+UNK_RET func_801C9400(void);
+s32 func_801C9430(struct_801E1598*);
+s32 func_801C948C(struct_801E1598*);
+s32 func_801C97C8(struct_801E1598*);
+s32 func_801C9870(struct_801E1598*);
+s32 func_801C9934(struct_801E1598*);
+s32 func_801C996C(struct_801E1598*);
+extern s32 D_801D3724;
+extern s32 D_801D372C;
+extern s32 D_801D3730;
+extern OSMesgQueue* D_801E1594;
+UNK_RET func_801C8B40(struct_801E1598*);
+UNK_RET func_801C92A0(UNK_TYPE);
+UNK_RET func_801C92D4(void);
+UNK_RET func_801C9228(UNK_TYPE);
+UNK_RET func_801C925C(void);
+s32 func_801C96E0(struct_801E1598*);
+s32 func_801C978C(struct_801E1598*);
+UNK_RET func_801C8AF8(struct_801E1598*);
+UNK_RET func_801C91B0(s32);
+s32 func_801C955C(struct_801E1598*);
+s32 func_801CA800(s32);
+s32 func_801CA698(s32);
+s32 func_801CA86C(void);
+s32 func_801CA8A0(s32);
+s32 func_801CA8E0(void);
+UNK_RET func_801C91E4(void);
+s32 func_801CA730(void);
+extern s32 (*D_801D36D4)(struct_801E1598*);
+s32 func_801C9BA4(struct_801E1598*);
+s32 func_801C9630(struct_801E1598*);
+UNK_RET func_801C93C8(UNK_TYPE, UNK_TYPE, UNK_TYPE);
+s32 func_801C999C(struct_801E1598*);
 
 #endif
