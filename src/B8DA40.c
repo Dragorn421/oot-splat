@@ -1,6 +1,36 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DA40/func_801CA3E0.s")
+s32 func_801CA3E0(s32 arg0) {
+    s32 temp_t6;
+    s32 var_a1;
+    s32 var_a2;
+    s32 var_a2_2;
+    s32 var_v0;
+    s32 var_v1;
+
+    var_v0 = 0;
+    var_v1 = 0;
+    if (arg0 < 0xA) {
+        return arg0;
+    }
+    var_a1 = 1;
+    if (arg0 >= 0xA) {
+        var_a2_2 = 0xA;
+        do {
+            var_a1 = var_a2_2;
+            var_v0 += 1;
+            var_a2_2 *= 0xA;
+        } while (arg0 >= var_a2_2);
+    }
+    var_a2 = arg0;
+    while (var_v0--) {
+        temp_t6 = var_a2 / var_a1;
+        var_v1 = (var_v1 | temp_t6) * 0x10;
+        var_a2 = var_a2 % var_a1;
+        var_a1 = var_a1 / 10;
+    }
+    return var_v1 + var_a2;
+}
 
 s32 func_801CA4B8(void) {
     return gCurrentRegion == 1 ? 0 : 1;
