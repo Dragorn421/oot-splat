@@ -15,9 +15,30 @@ void func_801C9D68(char* arg0, u16 arg1) {
     arg0[1] = arg1 & 0xFF;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9D84.s")
+u16 func_801C9D84(u16 arg0) {
+    return arg0 - 0x8080;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9DA4.s")
+u16 func_801C9DA4(u16 arg0) {
+    u8 temp_a2;
+    u8 temp_v0;
+
+    temp_v0 = (arg0 >> 8) & 0xFF;
+    temp_a2 = arg0 & 0xFF;
+    if (temp_v0 & 1) {
+        temp_a2 += 0x1F;
+        if (temp_a2 >= 0x7F) {
+            temp_a2 += 1;
+        }
+    } else {
+        temp_a2 += 0x7E;
+    }
+    temp_v0 = ((temp_v0 - 0x21) / 2) + 0x81;
+    if (temp_v0 >= 0xA0) {
+        temp_v0 += 0x40;
+    }
+    return (temp_v0 << 8) + temp_a2;
+}
 
 void func_801C9E30(void* arg0, uintptr_t arg1, size_t arg2) {
     if (D_801D3740 != NULL) {
@@ -25,11 +46,22 @@ void func_801C9E30(void* arg0, uintptr_t arg1, size_t arg2) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9E60.s")
+s32 func_801C9E60(char* arg0) {
+    return LeoGetKAdr(func_801C9DA4(func_801C9D84(((arg0[0] << 8) | arg0[1])))) + 0xA0000;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9EAC.s")
+s32 func_801C9EAC(s32* arg0, int* arg1, int* arg2, int* arg3, char arg4) {
+    u16 v;
+    s32 temp_v0;
 
-s32 func_801C9F0C(void* arg0, s32* arg1, s32* arg2, s32* arg3, char* arg4) {
+    v = arg4 - 0x20;
+    v += D_801E17F0 * 0xC0;
+    temp_v0 = LeoGetAAdr(v, arg1, arg2, arg3);
+    *arg0 = (temp_v0 - (temp_v0 & 0xF)) + 0xA0000;
+    return temp_v0 & 0xF;
+}
+
+s32 func_801C9F0C(void* arg0, int* arg1, int* arg2, int* arg3, char* arg4) {
     s32 sp24;
     s32 var_v1;
 
