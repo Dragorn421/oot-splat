@@ -183,13 +183,16 @@ const char* func_801CA514(void);
 UNK_RET func_801CA544(const char*, s32);
 UNK_RET func_801CA5C4(char*, s32);
 extern const char* D_801D3750[];
-UNK_RET func_801C9D68(const char*, s32);
+UNK_RET func_801C9D68(char*, u16);
 s32 func_801CA3E0(s32);
-s32 func_801C9CB0(char*);
-s32 func_801C9F0C(s32, s32*, s32*, s32*, s8*);
+int func_801C9CB0(char*);
+s32 func_801C9F0C(void*, s32*, s32*, s32*, char*);
 s32 func_801CA034(void**, s32, s32, s32, s32, s32, s32, s32, s32);
 void func_801CA1C4(char*, s32*, s32*);
 extern void (*D_801D3740)(void*, uintptr_t, size_t);
 extern s32 D_801E17F0;
+void func_801C9E30(void*, uintptr_t, size_t);
+s32 func_801C9E60(char*);
+s32 func_801C9EAC(s32*, s32*, s32*, s32*, s32);
 
 #endif

@@ -48,17 +48,17 @@ const char* func_801CA514(void) {
 
 void func_801CA544(const char* arg0, s32 arg1) {
     s32 temp_v0;
-    s32 var_a1;
+    u16 var_a1;
 
     temp_v0 = func_801CA3E0(arg1);
     if (arg1 >= 0xA) {
-        var_a1 = ((temp_v0 >> 4) + 0xA3B0) & 0xFFFF;
+        var_a1 = ((temp_v0 >> 4) + 0xA3B0);
     } else {
         var_a1 = 0xA1A1;
     }
-    func_801C9D68(arg0, var_a1);
+    func_801C9D68((char*)arg0, var_a1);
     arg0 += 2;
-    func_801C9D68(arg0, ((temp_v0 & 0xF) + 0xA3B0) & 0xFFFF);
+    func_801C9D68((char*)arg0, ((temp_v0 & 0xF) + 0xA3B0));
 }
 
 void func_801CA5C4(char* arg0, s32 arg1) {
