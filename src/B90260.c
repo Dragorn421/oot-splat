@@ -18,7 +18,7 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/func_801CD1EC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/func_801CD214.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoRecal_w.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSeek_i.s")
 
@@ -42,6 +42,6 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSetUA_MEDIUM_CHANGED.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/func_801CD540.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoInitUnit_atten.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/LeoSpdlMotor.s")
