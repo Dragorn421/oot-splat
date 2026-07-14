@@ -1,6 +1,6 @@
 #include "common.h"
 
-int func_801C9CB0(char* arg0) {
+int func_801C9CB0(const char* arg0) {
     if (((*arg0 >= 0x8E) && (*arg0 < 0xFF)) || ((*arg0 != 0x8F) && (*arg0 != 0xA0))) {
         arg0++;
         return (*arg0 >= 0xA0) && (*arg0 < 0xFF);
@@ -46,7 +46,7 @@ void func_801C9E30(void* arg0, uintptr_t arg1, size_t arg2) {
     }
 }
 
-s32 func_801C9E60(char* arg0) {
+s32 func_801C9E60(const char* arg0) {
     return LeoGetKAdr(func_801C9DA4(func_801C9D84(((arg0[0] << 8) | arg0[1])))) + 0xA0000;
 }
 
@@ -61,7 +61,7 @@ s32 func_801C9EAC(s32* arg0, int* arg1, int* arg2, int* arg3, char arg4) {
     return temp_v0 & 0xF;
 }
 
-s32 func_801C9F0C(void* arg0, int* arg1, int* arg2, int* arg3, char* arg4) {
+s32 func_801C9F0C(void* arg0, int* arg1, int* arg2, int* arg3, const char* arg4) {
     s32 sp24;
     s32 var_v1;
 
@@ -84,7 +84,7 @@ s32 func_801C9F0C(void* arg0, int* arg1, int* arg2, int* arg3, char* arg4) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801CA034.s")
 
-void func_801CA1C4(char* arg0, s32* arg1, s32* arg2) {
+void func_801CA1C4(const char* arg0, s32* arg1, s32* arg2) {
     char v1, v2;
 
     if (func_801C9CB0(arg0) != 0) {
@@ -123,8 +123,35 @@ void func_801CA1C4(char* arg0, s32* arg1, s32* arg2) {
     }
 }
 
-// unknown sp construct
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801CA280.s")
+void func_801CA280(void* arg0, s32 arg1, const char* arg2) {
+    u8 megatemp[0xA0];
+    u8* temp_s1 = (u8*)(((((u32)megatemp + 0xF)) >> 4) << 4); // align to 0x10 on the stack
+    int sp78;
+    int sp74;
+    int sp70;
+    u8* var_s0;
+    s32 sp68;
+    s32 sp64;
+    s32 temp_v1;
+    s32 var_s2 = 1;
+
+    if (arg2 == NULL) {
+        return;
+    }
+
+    while (*arg2 != 0) {
+        func_801CA1C4(arg2, &sp68, &sp64);
+        temp_v1 = func_801C9F0C(temp_s1, &sp78, &sp74, &sp70, arg2);
+        if (sp78 & 1) {
+            sp78++;
+        }
+        var_s2 = func_801CA034(&arg0, arg1, var_s2, sp68, sp64, &temp_s1[temp_v1], sp78, sp74, sp70);
+        if (func_801C9CB0(arg2) != 0) {
+            arg2++;
+        }
+        arg2++;
+    }
+}
 
 void func_801CA3C0(s32 arg0, void (*arg1)(void*, uintptr_t, size_t)) {
     D_801E17F0 = arg0;
