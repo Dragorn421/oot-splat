@@ -217,7 +217,6 @@ s32 func_801C97C8(struct_801E1598* arg0) {
     }
 }
 
-#ifdef NON_MATCHING
 s32 func_801C9870(struct_801E1598* arg0) {
     s32 temp_v0_3;
     s32 var_s0;
@@ -226,13 +225,21 @@ s32 func_801C9870(struct_801E1598* arg0) {
         var_s0 = func_801C96E0(arg0);
         if ((var_s0 == 3) || (var_s0 == 4)) {
             return var_s0;
-        } else if (var_s0 == 0) {
+        }
+
+        if ((var_s0 & 0xFFFFFFFF) == 0) {
             func_801C9400();
             temp_v0_3 = func_801C978C(arg0);
             if (temp_v0_3 != 0) {
                 return 2;
             }
+
+            if (var_s0 == 3) {}
+            if (var_s0 == 4) {}
+            if (var_s0 == 3) {}
+            if (var_s0 == 4) {}
             func_801C9228(1);
+
             var_s0 = func_801C948C(arg0);
             if (var_s0 != 0) {
                 return var_s0;
@@ -244,9 +251,6 @@ s32 func_801C9870(struct_801E1598* arg0) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/B8C810/func_801C9870.s")
-#endif
 
 s32 func_801C9934(struct_801E1598* arg0) {
     func_801C91B0(arg0->unk68);
