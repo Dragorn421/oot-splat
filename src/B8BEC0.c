@@ -74,7 +74,23 @@ s32 func_801C8A34(void) {
     return D_801D36E4 == 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8A4C.s")
+extern OSMesg D_801E1608;
+extern OSMesg D_801E1610[8];
+
+void func_801C8A4C(struct_801E1598* arg0) {
+    s32 temp_v0;
+
+    osCreateMesgQueue(&arg0->unk1C, &D_801E1608, 1);
+    if (gCurrentRegion == 1) {
+        arg0->unk68 = LeoCJCreateLeoManager(0x95, 0x96, D_801E1610, 8);
+    } else {
+        arg0->unk68 = LeoCACreateLeoManager(0x95, 0x96, D_801E1610, 8);
+    }
+    temp_v0 = arg0->unk68;
+    if ((temp_v0 == 0x29) || (temp_v0 == 0)) {
+        D_801D36E4 = 1;
+    }
+}
 
 void func_801C8AF8(struct_801E1598* arg0) {
     LEOCmd sp1C;
