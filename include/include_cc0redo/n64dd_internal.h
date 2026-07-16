@@ -213,6 +213,7 @@ typedef struct struct_801CAF10 {
     /* 0x1D */ char pad1D[3];
     /* 0x20 */ s16* unk20;
     /* 0x24 */ u16 unk24;
+    /* 0x26 */ u16 unk26;
 } struct_801CAF10; /* size >= 0x28 */
 extern u32 D_801D93E0[];
 

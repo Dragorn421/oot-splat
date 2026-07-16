@@ -62,9 +62,19 @@ void func_801CAA60(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAB84.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CABA4.s")
+void func_801CABA4(struct_801CAF10* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    arg0->unk14 = (u16)arg1;
+    arg0->unk16 = (u16)arg2;
+    arg0->unk18 = (u16)arg3;
+    arg0->unk1A = (u16)arg4;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CABC0.s")
+void func_801CABC0(struct_801CAF10* arg0, s16* arg1, s32 arg2, s32 arg3) {
+    arg0->unk20 = (s16*)((uintptr_t)arg1 + 0x20000000);
+    arg0->unk24 = (u16)arg2;
+    arg0->unk26 = (u16)arg3;
+    func_801CABA4(arg0, 0, 0, arg2 - 1, arg3 - 1);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAC24.s")
 
