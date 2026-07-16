@@ -200,11 +200,19 @@ u16 func_801C9DA4(u16);
 typedef struct struct_801CAF10 {
     /* 0x00 */ struct struct_801CAF10* (*unk0)(struct struct_801CAF10*, u8*, s32);
     /* 0x04 */ u8* unk4;
-    /* 0x08 */ char pad8[2];
+    /* 0x08 */ u16 unk8;
     /* 0x0A */ u16 unkA;
     /* 0x0C */ u16 unkC;
     /* 0x0E */ char padE[2];
-    /* 0x10 */ s32 unk10;
+    /* 0x10 */ union {
+        s32 unk10w;
+        struct {
+            s8 unk10;
+            s8 unk11;
+            s8 unk12;
+            s8 unk13;
+        };
+    };
     /* 0x14 */ u16 unk14;
     /* 0x16 */ u16 unk16;
     /* 0x18 */ u16 unk18;

@@ -58,9 +58,17 @@ void func_801CAA60(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAB68.s")
+void func_801CAB68(struct_801CAF10* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    arg0->unk10 = arg1;
+    arg0->unk11 = arg2;
+    arg0->unk12 = arg3;
+    arg0->unk13 = arg4;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAB84.s")
+void func_801CAB84(struct_801CAF10* arg0, s32 arg1, s32 arg2) {
+    arg0->unkA = (s16)(arg0->unk14 + arg1);
+    arg0->unkC = (s16)(arg0->unk16 + arg2);
+}
 
 void func_801CABA4(struct_801CAF10* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     arg0->unk14 = (u16)arg1;
@@ -76,7 +84,10 @@ void func_801CABC0(struct_801CAF10* arg0, s16* arg1, s32 arg2, s32 arg3) {
     func_801CABA4(arg0, 0, 0, arg2 - 1, arg3 - 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAC24.s")
+void func_801CAC24(struct_801CAF10* arg0, u8* arg1, s32 arg2) {
+    arg0->unk4 = (u8*)((uintptr_t)arg1 + 0x20000000);
+    arg0->unk8 = arg2;
+}
 
 void func_801CAC3C(struct_801CAF10* arg0, u8 arg1) {
     s32 var_a0;
@@ -146,7 +157,11 @@ void func_801CAE2C(struct_801CAF10* arg0, u8* arg1, s32 arg2, s32 arg3) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAE88.s")
+void func_801CAE88(struct_801CAF10* arg0, u8* arg1) {
+    while (*arg1 != 0) {
+        func_801CAD64(arg0, *arg1++);
+    }
+}
 
 struct_801CAF10* func_801CAEE0(struct_801CAF10* arg0, u8* arg1, s32 arg2) {
     func_801CAE2C(arg0, arg1, 1, arg2);
@@ -161,15 +176,24 @@ void func_801CAF10(struct_801CAF10* arg0) {
     arg0->unk16 = 0;
     arg0->unk18 = 0;
     arg0->unk1A = 0;
-    arg0->unk10 = 0;
+    arg0->unk10w = 0;
     arg0->unk1C = 0;
     arg0->unk4 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAF48.s")
+void func_801CAF48(struct_801CAF10* arg0) {
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAF54.s")
+void func_801CAF54(PrintCallback* arg0, const char* arg1, va_list arg2) {
+    PrintUtils_VPrintf(arg0, arg1, arg2);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAF74.s")
+void func_801CAF74(PrintCallback* arg0, const char* arg1, ...) {
+    va_list varargs;
+
+    va_start(varargs, arg1);
+    func_801CAF54(arg0, arg1, varargs);
+    va_end(varargs);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/D_801D9C10.s")
