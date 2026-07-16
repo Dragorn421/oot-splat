@@ -1,6 +1,6 @@
 #include "common.h"
 
-s32 func_801CA920(s32 arg0, s32 arg1, int* arg2, int* arg3, int* arg4) {
+s32 func_801CA920(s32 arg0, u8* arg1, int* arg2, int* arg3, int* arg4) {
     s32 var_s0;
     OSPiHandle* sp58;
     OSMesgQueue sp40;
@@ -28,9 +28,35 @@ s32 func_801CA920(s32 arg0, s32 arg1, int* arg2, int* arg3, int* arg4) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAA44.s")
+extern u16 D_801D9C10[];
+u16 func_801CAA44(s32 arg0) {
+    return D_801D9C10[arg0 & 0xF];
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAA60.s")
+void func_801CAA60(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s16* arg6, s32 arg7) {
+    s32 var_a0;
+    s32 var_s0;
+    u8* var_s1;
+    s32 var_s5;
+    s16* var_s2;
+
+    var_s1 = arg0;
+    var_s2 = arg6;
+    for (var_s5 = 0; var_s5 < arg4; var_s5++) {
+        for (var_s0 = 0; var_s0 < arg3; var_s0++) {
+            if (!(var_s0 & 1)) {
+                var_a0 = (s32)*var_s1 >> 4;
+            } else {
+                var_a0 = *var_s1 & 0xF;
+                var_s1 += 1;
+            }
+            var_s2[arg1 + (((arg2 - arg5) + var_s5 + 0xB) * arg7) + var_s0] = func_801CAA44(var_a0);
+        }
+        if (arg3 & 1) {
+            var_s1 += 1;
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/func_801CAB68.s")
 

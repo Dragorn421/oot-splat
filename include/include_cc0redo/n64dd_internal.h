@@ -62,7 +62,7 @@ s32 func_801C7958(void);
 s32 func_801C8860(struct_801DA5D0*);
 void func_801C7E94(void);
 s32 func_801C8A24(void);
-UNK_RET func_801CAA60(s32, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s32, s32);
+UNK_RET func_801CAA60(u8*, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s16*, s32);
 UNK_RET func_801C9318(void);
 UNK_RET func_801C8DB4(void);
 void func_801C8DD8(OSMesgQueue*, OSMesgQueue*, s32, void*, s32);
@@ -199,7 +199,7 @@ u16 func_801C9DA4(u16);
 
 typedef struct struct_801CAF10 {
     /* 0x00 */ struct struct_801CAF10* (*unk0)(struct struct_801CAF10*, u8*, s32);
-    /* 0x04 */ s32 unk4;
+    /* 0x04 */ u8* unk4;
     /* 0x08 */ char pad8[2];
     /* 0x0A */ u16 unkA;
     /* 0x0C */ u16 unkC;
@@ -211,7 +211,7 @@ typedef struct struct_801CAF10 {
     /* 0x1A */ u16 unk1A;
     /* 0x1C */ u8 unk1C;
     /* 0x1D */ char pad1D[3];
-    /* 0x20 */ s32 unk20;
+    /* 0x20 */ s16* unk20;
     /* 0x24 */ u16 unk24;
 } struct_801CAF10; /* size >= 0x28 */
 extern u32 D_801D93E0[];
