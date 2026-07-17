@@ -314,9 +314,31 @@ void func_801C82C0(void* arg0, s32 arg1, s32 arg2) {
     (&func_801C8860)(&D_801DA5D0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C8304.s")
+void func_801C8304(LEODiskID* arg0) {
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C8310.s")
+extern LEODiskID D_801DC850;
+extern s32 D_801DC870;
+s32 func_801C8310(struct_801E1598* arg0) {
+    LEODiskID* temp_s0;
+
+    temp_s0 = &arg0->unk38;
+    func_801C8304(temp_s0);
+    if (D_801DC870 == 0) {
+        if ((bcmp(temp_s0, "EZLJ", 4) == 0) || (bcmp(temp_s0, "EZLE", 4) == 0)) {
+            D_801DC850 = *temp_s0;
+            D_801DC870 = 1;
+            D_801DA648 = 1;
+        } else {
+            D_801DA648 = 2;
+        }
+    } else if (bcmp(&D_801DC850, temp_s0, 0x20) == 0) {
+        D_801DA648 = 1;
+    } else {
+        D_801DA648 = 2;
+    }
+    return D_801DA648 == 1;
+}
 
 s32 func_801C843C(s32 arg0, s32* arg1, s32* arg2) {
     s32 sp2C;
