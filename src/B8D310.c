@@ -8,7 +8,13 @@ int func_801C9CB0(const char* arg0) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9D04.s")
+int func_801C9D04(u8* arg0) {
+    if (((*arg0 >= 0x81) && (*arg0 < 0xA0)) || ((*arg0 >= 0xE0) && (*arg0 < 0xFD))) {
+        arg0++;
+        return (*arg0 >= 0x40) && (*arg0 < 0xFD) && (*arg0 != 0x7F);
+    }
+    return 0;
+}
 
 void func_801C9D68(char* arg0, u16 arg1) {
     arg0[0] = arg1 >> 8;
