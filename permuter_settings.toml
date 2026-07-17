@@ -9,6 +9,8 @@ compiler_type = "ido"
 "CLAMP_MIN" = "int"
 "CLAMP_MAX" = "int"
 "CLAMP" = "int"
+"IO_READ" = "unsigned long"
+"IO_WRITE" = "void"
 
 [decompme.compilers]
 "*/tools/ido_recomp/linux/7.1/cc" = "ido7.1"
