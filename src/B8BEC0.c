@@ -106,14 +106,61 @@ void func_801C8B40(struct_801E1598* arg0) {
     osRecvMesg(&arg0->unk1C, (OSMesg*)&arg0->unk68, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8B8C.s")
+void func_801C8B8C(struct_801E1598* arg0) {
+    s32 sp34;
+    s32 sp30;
+    OSMesgQueue* sp28;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8C00.s")
+    sp30 = arg0->unk5C;
+    if (LeoByteToLBA(sp30, (u32)arg0->unk60, &sp34) == 0) {
+        sp28 = &arg0->unk1C;
+        LeoReadWrite(&arg0->unk0, 0, (u32)sp30, arg0->unk58, (u32)sp34, sp28);
+        osRecvMesg(sp28, (void**)&arg0->unk68, 1);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8C74.s")
+void func_801C8C00(struct_801E1598* arg0) {
+    s32 sp34;
+    void* sp30;
+    OSMesgQueue* sp28;
 
-void func_801C8C84(void*);
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8C84.s")
+    sp30 = arg0->unk58;
+    if (LeoByteToLBA((s32)sp30, (u32)arg0->unk60, &sp34) == 0) {
+        sp28 = &arg0->unk1C;
+        LeoReadWrite(&arg0->unk0, 1, (u32)sp30, (void*)arg0->unk5C, (u32)sp34, sp28);
+        osRecvMesg(sp28, (void**)&arg0->unk68, 1);
+    }
+}
+
+void func_801C8C74(struct_801E1598* arg0) {
+    arg0->unk68 = 9;
+}
+
+extern struct {
+    UNK_RET (*unk0)(struct_801E1598*);
+    s32 (*unk4)(struct_801E1598*);
+} D_801D36E8[];
+void func_801C8C84(struct_801E1598* arg0) {
+    s32 (*temp_s2)(struct_801E1598*);
+    s32 temp_v0_2;
+    void (*temp_s1)(struct_801E1598*);
+
+    arg0->unk68 = -1;
+    if ((func_801C8A34() != 0) || ((u8)arg0->unk64 == 0)) {
+        arg0->unk66 = 1;
+        temp_s1 = D_801D36E8[(u8)arg0->unk64].unk0;
+        temp_s2 = D_801D36E8[(u8)arg0->unk64].unk4;
+        do {
+            temp_s1(arg0);
+            temp_v0_2 = temp_s2(arg0);
+        } while (temp_v0_2 == 2);
+        arg0->unk6C = temp_v0_2;
+        if ((u8)arg0->unk64 == 0) {
+            func_801C89FC(temp_v0_2);
+        }
+        arg0->unk66 = 0;
+    }
+}
 
 void func_801C8D34(void* arg0) {
     void* sp24;
@@ -136,7 +183,7 @@ void func_801C8DD8(OSMesgQueue* arg0, OSMesgQueue* arg1, s32 arg2, void* arg3, s
     osStartThread(&D_801E1630);
 }
 
-void func_801C8E50(void* arg0, s32 arg1) {
+void func_801C8E50(struct_801E1598* arg0, s32 arg1) {
     if (arg1 == 1) {
         func_801C8C84(arg0);
         return;

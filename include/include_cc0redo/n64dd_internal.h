@@ -34,7 +34,7 @@ typedef struct struct_801DA5D0 {
 } struct_801DA5D0; // size >= 0x30
 
 typedef struct struct_801E1598 {
-    /* 0x00 */ char pad0[0x1C];
+    /* 0x00 */ LEOCmd unk0;
     /* 0x1C */ OSMesgQueue unk1C;
     /* 0x34 */ char pad34[4];
     /* 0x38 */ LEODiskID unk38;
@@ -46,7 +46,8 @@ typedef struct struct_801E1598 {
     /* 0x66 */ u8 unk66;
     /* 0x67 */ char pad67[1];
     /* 0x68 */ s32 unk68; // OSMesg
-} struct_801E1598;        // size >= 0x6C
+    /* 0x6C */ s32 unk6C;
+} struct_801E1598; // size >= 0x70
 
 void func_801C77F0(void);
 void func_801C7838(void);
@@ -76,7 +77,7 @@ s32 func_801C90BC(void);
 s32 func_801C9114(void);
 s32 func_801C916C(void);
 void func_801C8D34(void*);
-UNK_RET func_801C8E50(UNK_PTR, UNK_TYPE);
+UNK_RET func_801C8E50(struct_801E1598*, UNK_TYPE);
 UNK_RET func_801CA3C0(s32, void (*)(void*, uintptr_t, size_t));
 s32 func_801C8F9C(struct_801E1598*);
 
