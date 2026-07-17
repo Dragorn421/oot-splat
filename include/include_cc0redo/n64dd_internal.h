@@ -188,7 +188,7 @@ UNK_RET func_801C9D68(char*, u16);
 s32 func_801CA3E0(s32);
 int func_801C9CB0(const char*);
 s32 func_801C9F0C(void*, int*, int*, int*, const char*);
-s32 func_801CA034(void**, s32, s32, s32, s32, UNK_PTR, s32, s32, s32);
+s32 func_801CA034(void**, s32, s32, s32, s32, u8*, s32, s32, s32);
 void func_801CA1C4(const char*, s32*, s32*);
 extern void (*D_801D3740)(void*, uintptr_t, size_t);
 extern s32 D_801E17F0;

@@ -84,11 +84,53 @@ s32 func_801C9F0C(void* arg0, int* arg1, int* arg2, int* arg3, const char* arg4)
     return var_v1;
 }
 
+s32 func_801C9FB0(void*, s32, u8);
 #pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9FB0.s")
 
+void* func_801C9FE8(void*, s32*, s32);
 #pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801C9FE8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8D310/func_801CA034.s")
+s32 func_801CA034(void** arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5, s32 arg6, s32 arg7, s32 arg8) {
+    s32 var_s0;
+    s32 var_s1;
+    s32 var_s3;
+    void* var_fp;
+    s32 sp4C;
+    s32 var_s4;
+    s32 sp44;
+
+    sp4C = arg2;
+    var_s4 = 1;
+    sp44 = arg6 + arg3 + arg4;
+    var_fp = func_801C9FE8(*arg0, &sp4C, arg3);
+    arg1 >>= 1;
+    var_fp = (s32)var_fp + ((0xB - arg8) * arg1);
+    if (arg6 & 1) {
+        arg6 += 1;
+    }
+
+    while (arg7--) {
+        var_s0 = var_fp;
+        var_s1 = sp4C;
+
+        for (var_s3 = 0; var_s3 < arg6; var_s3++, var_s4 ^= 1, var_s1 ^= 1) {
+            if (var_s4 == 1) {
+                if (func_801C9FB0(var_s0, var_s1, (*arg5) >> 4) != 0) {
+                    var_s0++;
+                }
+            } else {
+                if (func_801C9FB0(var_s0, var_s1, (*arg5) & 0xF) != 0) {
+                    var_s0++;
+                }
+                arg5++;
+            }
+        }
+        var_fp = (s32)var_fp + arg1;
+    }
+
+    *arg0 = func_801C9FE8(*arg0, &arg2, sp44);
+    return arg2;
+}
 
 void func_801CA1C4(const char* arg0, s32* arg1, s32* arg2) {
     char v1, v2;
