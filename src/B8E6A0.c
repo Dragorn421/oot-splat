@@ -81,10 +81,45 @@ void leoCommand(void* CDB) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/LeoReset.s")
+extern LEOCmdHeader D_801D9C30;
+void LeoReset(void) {
+    __leoResetCalled = 1;
+    if (__leoQueuesCreated != 0) {
+        LEOclr_que_flag = 0xFF;
+        leoClr_queue();
+        LEOclr_que_flag = 0;
+        osRecvMesg(&LEOevent_que, NULL, 0);
+        osSendMesg(&LEOevent_que, (void*)0xA0000, 1);
+        osSendMesg(&LEOcommand_que, &D_801D9C30, 1);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/__leoSetReset.s")
+s32 __leoSetReset(void) {
+    leoDrive_reset();
+    return 0;
+}
 
+#ifdef NON_MATCHING
+s32 LeoResetClear(void) {
+    LEOCmdHeader cmd;
+
+    cmd.command = 0xF;
+    cmd.control = 0x80;
+    cmd.status = 0;
+    cmd.post = &D_801E5A00;
+    if (osSendMesg(&LEOcommand_que, &cmd, 0) != 0) {
+        return 0x23;
+    }
+    osRecvMesg(&D_801E5A00, NULL, 1);
+    if (cmd.status == 0) {
+        return 0;
+    } else {
+        return cmd.sense;
+    }
+}
+#else
+// includes 16 bytes of zero padding due to B8EB20's alignment
 #pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/LeoResetClear.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/D_801D9C30.s")
