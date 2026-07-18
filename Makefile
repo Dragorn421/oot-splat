@@ -42,6 +42,15 @@ $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	asm-processor/rust/target/release/asm-processor --input-enc UTF-8 --output-enc EUC-JP $(CC) -- $(AS) $(ASFLAGS) -- -DOOT_VERSION=NTSC_1_2 -I include -I include/include_cc0redo -I include/include_cc0redo/libc -c -G 0 -non_shared -fullwarn -verbose -Xcpluscomm -Wab,-r4300_mul -mips2 $(OPTFLAGS) -woff 649,838,807 -o $@ $<
 
+$(BUILD_DIR)/src/B8E6A0.o: CC := $(IDO5)
+$(BUILD_DIR)/src/B8E6A0.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/B90070.o: CC := $(IDO5)
+$(BUILD_DIR)/src/B90070.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/B90260.o: CC := $(IDO5)
+$(BUILD_DIR)/src/B90260.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/B92510.o: CC := $(IDO5)
+$(BUILD_DIR)/src/B92510.o: OPTFLAGS := -O2
+
 include thelegendofzelda.d
 
 $(BUILD_DIR)/thelegendofzelda.elf: $(LDSCRIPT) undefined_funcs_auto.txt undefined_syms_auto.txt
