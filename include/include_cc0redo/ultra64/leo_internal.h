@@ -25,8 +25,8 @@ extern OSThread LEOinterruptThread;
 extern STACK(LEOcommandThreadStack, 0x400);
 extern STACK(LEOinterruptThreadStack, 0x400);
 extern s32 __leoQueuesCreated;
-UNK_RET leoClr_queue(u8);
-extern s8 LEOclr_que_flag;
+UNK_RET leoClr_queue(void);
+extern vu8 LEOclr_que_flag;
 extern s32 __leoResetCalled;
 
 #endif

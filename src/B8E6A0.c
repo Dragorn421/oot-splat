@@ -37,7 +37,49 @@ void leoInitialize(s32 PRI_WRK, s32 PRI_INT, void** command_que_buf, u32 cmd_buf
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/leoCommand.s")
+void leoCommand(void* CDB) {
+    LEOCmdHeader* header = CDB;
+
+    if (__leoResetCalled != 0) {
+        header->status = 2;
+        header->sense = 0x25;
+        if (header->control & 0x80) {
+            osSendMesg(header->post, (void*)0x25, 1);
+        }
+    } else {
+        osRecvMesg(&LEOblock_que, NULL, 1);
+        header->status = 8;
+        header->sense = 0;
+        switch (header->command) {
+            case 1:
+                LEOclr_que_flag = 0xFF;
+                leoClr_queue();
+                LEOclr_que_flag = 0;
+                header->status = 0;
+                if (header->control & 0x80) {
+                    osSendMesg(header->post, NULL, 1);
+                }
+                break;
+            case 5:
+            case 6:
+                ((LEOCmdRead*)CDB)->rw_bytes = 0;
+                goto label;
+            default:
+                if ((u32)(header->command - 1) >= 0xEU) {
+                    header->sense = 0x1F;
+                    header->status = 2;
+                } else {
+                label:
+                    if (osSendMesg(&LEOcommand_que, CDB, 0) != 0) {
+                        header->sense = 0x23;
+                        header->status = 2;
+                    }
+                }
+                break;
+        }
+        osSendMesg(&LEOblock_que, NULL, 1);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/LeoReset.s")
 
