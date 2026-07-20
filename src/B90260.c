@@ -37,7 +37,22 @@ s32 leoAnalize_asic_status(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoChk_done_status.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSend_asic_cmd_i.s")
+void* leoSend_asic_cmd_i(u32 arg0, s32 arg1) {
+    u8 temp_v0;
+
+    temp_v0 = leoChk_asic_ready(arg0);
+    if (temp_v0 != 0) {
+        LEOcur_command->header.sense = temp_v0;
+        return (void*)LEOcur_command->header.sense;
+    }
+    osEPiWriteIo(LEOPiInfo, 0x05000500U, (u32)arg1);
+    if (leoRecv_event_mesg(0) != 0) {
+        LEOcur_command->header.sense = 0x25;
+        return (void*)LEOcur_command->header.sense;
+    }
+    osEPiWriteIo(LEOPiInfo, 0x05000508U, arg0);
+    return NULL;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoWait_mecha_cmd_done.s")
 
@@ -51,7 +66,15 @@ s32 leoAnalize_asic_status(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoRecal_w.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSeek_i.s")
+void* leoSeek_i(u16 arg0) {
+    s32 temp_t0;
+
+    temp_t0 = ((LEOtgt_param.head << 0xC) + LEOtgt_param.cylinder) << 0x10;
+    if (!arg0) {
+        return leoSend_asic_cmd_i(0x10001, temp_t0);
+    }
+    return leoSend_asic_cmd_i(0x20001, temp_t0);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSeek_w.s")
 

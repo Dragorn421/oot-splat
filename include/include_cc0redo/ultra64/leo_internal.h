@@ -28,5 +28,8 @@ extern s32 __leoQueuesCreated;
 UNK_RET leoClr_queue(void);
 extern vu8 LEOclr_que_flag;
 extern s32 __leoResetCalled;
+void* leoSend_asic_cmd_i(u32, s32);
+u8 leoChk_asic_ready(u32);
+s32 leoRecv_event_mesg(s32);
 
 #endif
