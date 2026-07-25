@@ -94,5 +94,9 @@ typedef union leo_sys_form {
     /* 0x0 */ u64 u64_data[29];
 } leo_sys_form;
 extern leo_sys_form LEO_sys_data;
+extern LEOCmdRead D_801D9630; // "system_read_cmd"
+extern u8 D_801D9C40[]; // "system_lba"
+void leoRead_common(unsigned int offset);
+u32 leoChk_err_retry(u32 sense);
 
 #endif

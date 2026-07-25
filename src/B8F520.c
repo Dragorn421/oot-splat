@@ -168,6 +168,80 @@ void leomain(void* arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8F520/leoRead_system_area.s")
+u8 leoRead_system_area(void) {
+    LEOCmdRead dummy_cmd;
+    void* backup_pointer;
+    u32 retry_cntr;
+    s32 read_mode;
+
+    backup_pointer = LEOcur_command;
+    LEOcur_command = (LEOCmd*)&dummy_cmd;
+    read_mode = 0;
+    retry_cntr = 0;
+
+    while (true) {
+        LEOdisk_type = 0;
+        // For lba_to_phys to avoid dealing with alternative tracks on the disk
+        LEO_sys_data.param.defect_num[0] = 0;
+        LEOrw_flags = 0x3000;
+        dummy_cmd = D_801D9630;
+        dummy_cmd.buff_ptr = &LEO_sys_data;
+
+        if (read_mode == 0) {
+            // read System LBA 12 (+0, this is an offset value for leoRead_common)
+            // see system_read_cmd premade struct
+            leoRead_common(0);
+            switch (dummy_cmd.header.sense) {
+                case LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION:
+                    do {
+                        // if expecting a retail disk, LBA 12 is expected to do a read error, if not then freeze
+                    } while (LEO_country_code != 0);
+                    retry_cntr = 0;
+                    read_mode--;
+                    continue;
+                case LEO_SENSE_UNRECOVERED_READ_ERROR:
+                    do {
+                        // if expecting a development disk, LBA 12 is expected to read correctly, if not then freeze
+                    } while (LEO_country_code == 0);
+                    retry_cntr = 0;
+                    read_mode--;
+                    continue;
+            }
+        } else {
+            // read System LBA 0,1,8,9 (or 2,3,10,11 for dev)
+            dummy_cmd.lba = D_801D9C40[retry_cntr & 3];
+            if (LEO_country_code == 0) {
+                dummy_cmd.lba += 2;
+            }
+            leoRead_common(0);
+            if (dummy_cmd.header.status == LEO_STATUS_GOOD) {
+                do {
+                    // if disk country and set country code in libleo mismatch, then freeze
+                } while (LEO_sys_data.param.country != LEO_country_code);
+                goto sys_read_end;
+            }
+        }
+
+    system_retry:
+        if (leoChk_err_retry(dummy_cmd.header.sense) != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
+            break;
+        }
+        if (retry_cntr++ >= 0x40U) {
+            break;
+        }
+        if ((retry_cntr & 7) == 0) {
+            // Recalibrate drive every 8th tries
+            if ((dummy_cmd.header.sense = leoSend_asic_cmd_w(0x30001, 0)) == LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
+                continue;
+            }
+            goto system_retry;
+        }
+    }
+
+sys_read_end:
+    LEOcur_command = backup_pointer;
+    LEOcur_command->header.sense = dummy_cmd.header.sense;
+    return LEOcur_command->header.sense;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8F520/D_801D9C40.s")
