@@ -54,5 +54,10 @@ extern STACK(leoDiskStack, 0xFF0);
 void func_801D3190(void);
 void func_801D3244(void);
 extern s32 D_800068E0;
+extern u8 LEOdisk_type;
+extern const u16 LEOBYTE_TBL2[];
+extern const u16 LEOVZONE_TBL[][0x10];
+extern const u8 LEOVZONE_PZONEHD_TBL[][0x10];
+u16 leoLba_to_vzone(u32 lba);
 
 #endif
