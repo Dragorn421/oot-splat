@@ -59,5 +59,12 @@ extern const u16 LEOBYTE_TBL2[];
 extern const u16 LEOVZONE_TBL[][0x10];
 extern const u8 LEOVZONE_PZONEHD_TBL[][0x10];
 u16 leoLba_to_vzone(u32 lba);
+u32 func_801CB650(void); // "read_write_track"
+u16 leoLba_to_phys(u32 lba);
+u8 leoSeek_i(u16 rwmode);
+extern OSMesgQueue LEOc2ctrl_que;
+extern void* LEOc2ctrl_que_buf;
+extern u16 LEOrw_flags;
+extern void* LEOwrite_pointer;
 
 #endif

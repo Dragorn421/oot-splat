@@ -1,5 +1,6 @@
 #include "common.h"
 
+// https://decomp.me/scratch/n5d7V
 #pragma GLOBAL_ASM("asm/nonmatchings/B8EB20/leointerrupt.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8EB20/func_801CB650.s")
