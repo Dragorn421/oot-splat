@@ -112,5 +112,8 @@ u32 func_801CBD9C(void);  // "leochk_err_reg"
 u32 func_801CBC4C(void);  // "leoChk_mecha_int"
 void leoSet_mseq(u16 rwmode);
 u8 leoDetect_index_w(void);
+extern const u16 LEOZONE_SCYL_TBL[];
+extern const u16 LEOZONE_OUTERCYL_TBL[];
+extern const u8 LEOBYTE_TBL1[];
 
 #endif
