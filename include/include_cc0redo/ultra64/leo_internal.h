@@ -31,5 +31,18 @@ extern s32 __leoResetCalled;
 void* leoSend_asic_cmd_i(u32, s32);
 u8 leoChk_asic_ready(u32);
 s32 leoRecv_event_mesg(s32);
+void leoDrive_reset(void);
+extern s32 __leoActive;
+extern LEOCmd* LEOcur_command;
+extern struct tgt_param_form {
+    /* 0x0 */ u16 lba;
+    /* 0x2 */ u16 cylinder;
+    /* 0x4 */ u16 blk_bytes;
+    /* 0x6 */ u8 sec_bytes;
+    /* 0x7 */ u8 head;
+    /* 0x8 */ u8 zone;
+    /* 0x9 */ u8 rdwr_blocks;
+    /* 0xA */ u8 start_block;
+} LEOtgt_param;
 
 #endif
