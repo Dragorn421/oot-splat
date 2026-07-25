@@ -1,8 +1,6 @@
 #include "common.h"
 
-/*
-#pragma GLOBAL_ASM("asm/nonmatchings/B8F520/leomain.s")
-*/
+extern u16 LEOrw_flags;
 
 void leomain(void* arg0) {
     u32 cur_status;

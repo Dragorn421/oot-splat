@@ -64,8 +64,7 @@ u16 leoLba_to_phys(u32 lba);
 u8 leoSeek_i(u16 rwmode);
 extern OSMesgQueue LEOc2ctrl_que;
 extern void* LEOc2ctrl_que_buf;
-extern u16 LEOrw_flags;
-extern void* LEOwrite_pointer;
+extern u8* LEOwrite_pointer;
 u32 leoChkUnit_atten(void);
 u8 leoChk_cur_drvmode(void);
 void leoClrUA_RESET(void);
@@ -95,8 +94,23 @@ typedef union leo_sys_form {
 } leo_sys_form;
 extern leo_sys_form LEO_sys_data;
 extern LEOCmdRead D_801D9630; // "system_read_cmd"
-extern u8 D_801D9C40[]; // "system_lba"
+extern u8 D_801D9C40[];       // "system_lba"
 void leoRead_common(unsigned int offset);
 u32 leoChk_err_retry(u32 sense);
+typedef struct block_param_form {
+    /* 0x0 */ u8* pntr;
+    /* 0x4 */ u8* c2buff_e;
+    /* 0x8 */ u8 err_pos[4];
+    /* 0xC */ u8 err_num;
+    /* 0xD */ u8 bytes;
+    /* 0xE */ u16 blkbytes;
+} block_param_form;
+extern u8 D_801E68F0[2][0xE8 * 4]; // "LEOC2_Syndrome"
+extern block_param_form LEOc2_param;
+void func_801CBCB4(void); // "leosetup_BM"
+u32 func_801CBD9C(void);  // "leochk_err_reg"
+u32 func_801CBC4C(void);  // "leoChk_mecha_int"
+void leoSet_mseq(u16 rwmode);
+u8 leoDetect_index_w(void);
 
 #endif
