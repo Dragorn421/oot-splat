@@ -115,5 +115,6 @@ u8 leoDetect_index_w(void);
 extern const u16 LEOZONE_SCYL_TBL[];
 extern const u16 LEOZONE_OUTERCYL_TBL[];
 extern const u8 LEOBYTE_TBL1[];
+int leoC2_Correction(void);
 
 #endif
