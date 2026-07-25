@@ -26,7 +26,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
     osLeoDiskInit();
     sp84 = osDriveRomInit();
     __leoActive = 1;
-    __osSetHWIntrRoutine(1U, __osLeoInterrupt, &D_801E8080);
+    __osSetHWIntrRoutine(1U, __osLeoInterrupt, STACK_TOP(leoDiskStack));
     leoInitialize(comPri, intPri, cmdBuf, (u32)cmdMsgCnt);
     if (osResetType == 1) {
         __leoSetReset();
