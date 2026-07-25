@@ -6,7 +6,7 @@
 extern OSPiHandle* LEOPiInfo;
 extern u32 D_801E67F0;
 extern s32 D_801E67F4;
-extern s8 LEOdrive_flag;
+extern u8 LEOdrive_flag;
 void leointerrupt(void*);
 void leomain(void*);
 extern OSMesgQueue D_801E5A00;
@@ -28,7 +28,7 @@ extern s32 __leoQueuesCreated;
 UNK_RET leoClr_queue(void);
 extern vu8 LEOclr_que_flag;
 extern s32 __leoResetCalled;
-void* leoSend_asic_cmd_i(u32, s32);
+u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data);
 u8 leoChk_asic_ready(u32);
 s32 leoRecv_event_mesg(s32);
 void leoDrive_reset(void);
@@ -46,9 +46,9 @@ extern struct tgt_param_form {
 } LEOtgt_param;
 s32 __leoSetReset(void);
 s32 __osLeoInterrupt(void);
-UNK_RET osLeoDiskInit(void);
+OSPiHandle* osLeoDiskInit(void);
 extern UNK_TYPE D_801E8080;
-extern s32 LEO_country_code;
+extern u32 LEO_country_code;
 extern LEOVersion __leoVersion;
 extern STACK(leoDiskStack, 0xFF0);
 void func_801D3190(void);
@@ -66,5 +66,33 @@ extern OSMesgQueue LEOc2ctrl_que;
 extern void* LEOc2ctrl_que_buf;
 extern u16 LEOrw_flags;
 extern void* LEOwrite_pointer;
+u32 leoChkUnit_atten(void);
+u8 leoChk_cur_drvmode(void);
+void leoClrUA_RESET(void);
+void leoInitUnit_atten(void);
+u8 leoRead_system_area(void);
+u32 leoRetUnit_atten(void);
+u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
+extern UNK_FUN_PTR(D_801D95F0[]);
+extern OSIoMesg LEOPiDmaParam;
+extern s32 LEOasic_bm_ctl_shadow;
+extern s32 LEOasic_seq_ctl_shadow;
+extern s32 currentCommand;
+typedef union leo_sys_form {
+    /* 0x0 */ struct {
+        /* 0x0 */ u32 country;
+        /* 0x4 */ u8 fmt_type;
+        /* 0x5 */ u8 disk_type;
+        /* 0x6 */ u16 ipl_load_len;
+        /* 0x8 */ u8 defect_num[20];
+        /* 0x1C */ void* loadptr;
+        /* 0x20 */ u8 defect_data[192];
+        /* 0xE0 */ u16 rom_end_lba;
+        /* 0xE2 */ u16 ram_start_lba;
+        /* 0xE4 */ u16 ram_end_lba;
+    } param;
+    /* 0x0 */ u64 u64_data[29];
+} leo_sys_form;
+extern leo_sys_form LEO_sys_data;
 
 #endif

@@ -1,6 +1,172 @@
 #include "common.h"
 
+/*
 #pragma GLOBAL_ASM("asm/nonmatchings/B8F520/leomain.s")
+*/
+
+void leomain(void* arg0) {
+    u32 cur_status;
+    u32 sense_code;
+    u8 disktype_bak;
+
+    ((u8*)&LEO_country_code)[0] = *(vu8*)OS_PHYSICAL_TO_K1(0x10);
+    ((u8*)&LEO_country_code)[1] = *(vu8*)OS_PHYSICAL_TO_K1(0x90);
+    ((u8*)&LEO_country_code)[2] = *(vu8*)OS_PHYSICAL_TO_K1(0x110);
+    ((u8*)&LEO_country_code)[3] = *(vu8*)OS_PHYSICAL_TO_K1(0x190);
+
+    LEOasic_seq_ctl_shadow = 0;
+    LEOasic_bm_ctl_shadow = 0;
+    LEOdrive_flag = 0;
+    LEOclr_que_flag = 0;
+    leoInitUnit_atten();
+    LEOPiInfo = osLeoDiskInit();
+    LEOPiDmaParam.hdr.pri = 1;
+    LEOPiDmaParam.hdr.retQueue = &LEOdma_que;
+    osEPiReadIo(LEOPiInfo, 0x05000508, &cur_status);
+    if (!(cur_status & 0x400000)) {
+        if ((cur_status & 0x06800000)) {
+            leoDrive_reset();
+        }
+    }
+
+    while (true) {
+        osRecvMesg(&LEOcommand_que, (OSMesg*)&LEOcur_command, OS_MESG_BLOCK);
+        currentCommand = LEOcur_command->header.command;
+        if (LEOcur_command->header.command == 0) {
+            leoDrive_reset();
+            osRecvMesg(&LEOevent_que, NULL, OS_MESG_NOBLOCK);
+            continue;
+        }
+
+        sense_code = leoChk_asic_ready(0x10001);
+        cur_status = leoChkUnit_atten();
+
+        do {
+            if (cur_status == 0) {
+                if (sense_code == 0) {
+                    continue;
+                }
+            } else {
+                switch (sense_code) {
+                    case 3:
+                    case 37:
+                    case 41:
+                    case 43:
+                        break;
+                    case 49:
+                        if (leoRetUnit_atten() == 43) {
+                            sense_code = 43;
+                        }
+                        break;
+                    default:
+                        sense_code = leoRetUnit_atten();
+                }
+            }
+
+            switch (sense_code) {
+                case 47:
+                    switch (LEOcur_command->header.command) {
+                        case 2:
+                        case 8:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                            continue;
+                    }
+                    break;
+                case 49:
+                    switch (LEOcur_command->header.command) {
+                        case 2:
+                        case 11:
+                        case 13:
+                        case 14:
+                        case 15:
+                            continue;
+                        default:
+                            sense_code = 42;
+                    }
+                    break;
+                case 43:
+                    switch (LEOcur_command->header.command) {
+                        case 15:
+                            leoClrUA_RESET();
+                            FALLTHROUGH;
+                        case 2:
+                        case 13:
+                        case 14:
+                            continue;
+                    }
+                    break;
+                default:
+                    /* empty */;
+            }
+
+            if (LEOcur_command->header.command == 3) {
+                LEOcur_command->data.modeselect.reserve1 = leoChk_cur_drvmode();
+            }
+            LEOcur_command->header.sense = sense_code;
+            LEOcur_command->header.status = 2;
+            goto post_exe;
+        } while (0);
+
+        if (LEOdrive_flag == 0) {
+            switch (LEOcur_command->header.command) {
+                case 2:
+                case 3:
+                case 8:
+                case 11:
+                case 13:
+                case 14:
+                case 15:
+                    break;
+                default:
+                    if (LEO_country_code == 0) {
+                        osEPiReadIo(LEOPiInfo, 0x05000540, &cur_status);
+                        if ((cur_status & 0x70000) != 0x40000) {
+                            while (true) {}
+                        }
+                    }
+
+                    if (leoRead_system_area() != 0) {
+                        LEOcur_command->header.status = 2;
+                        goto post_exe;
+                    }
+
+                    if ((LEOcur_command->header.sense =
+                             leoSend_asic_cmd_w(0xB0001, LEO_sys_data.param.disk_type << 16)) != 0) {
+                        LEOcur_command->header.status = 2;
+                        goto post_exe;
+                    }
+
+                    if ((LEO_sys_data.param.disk_type & 0xF0) != 0x10) {
+                        goto invalid_disktype;
+                    }
+
+                    LEOdisk_type = (LEO_sys_data.param.disk_type & 0xF);
+                    if (LEOdisk_type >= 7) {
+                    invalid_disktype:
+                        LEOcur_command->header.sense = 0xBU;
+                        LEOcur_command->header.status = 2;
+                        goto post_exe;
+                    }
+
+                    LEOdrive_flag = -1;
+            }
+        }
+
+        D_801D95F0[LEOcur_command->header.command]();
+
+    post_exe:
+        if (LEOcur_command->header.control & 0x80) {
+            osSendMesg(LEOcur_command->header.post, (void*)(s32)LEOcur_command->header.sense, OS_MESG_BLOCK);
+        }
+        if (LEOclr_que_flag != 0) {
+            leoClr_queue();
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8F520/leoRead_system_area.s")
 
