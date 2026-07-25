@@ -44,5 +44,12 @@ extern struct tgt_param_form {
     /* 0x9 */ u8 rdwr_blocks;
     /* 0xA */ u8 start_block;
 } LEOtgt_param;
+s32 __leoSetReset(void);
+s32 __osLeoInterrupt(void);
+UNK_RET osLeoDiskInit(void);
+extern UNK_TYPE D_801E8080;
+extern s32 LEO_country_code;
+extern LEOVersion __leoVersion;
+extern STACK(leoDiskStack, 0xFF0);
 
 #endif
