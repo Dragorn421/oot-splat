@@ -51,5 +51,8 @@ extern UNK_TYPE D_801E8080;
 extern s32 LEO_country_code;
 extern LEOVersion __leoVersion;
 extern STACK(leoDiskStack, 0xFF0);
+void func_801D3190(void);
+void func_801D3244(void);
+extern s32 D_800068E0;
 
 #endif
