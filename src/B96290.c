@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ultra64/internal.h"
 
 s32 __osLeoInterrupt(void) {
     u32 temp_a1;
@@ -150,9 +151,38 @@ s32 __osLeoInterrupt(void) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B96290/func_801D3190.s")
+void func_801D3190(void) {
+    __OSTranxInfo* temp_a0;
+    u32 pi_stat;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B96290/func_801D3244.s")
+    temp_a0 = &__osDiskHandle->transferInfo;
+    while ((pi_stat = IO_READ(0xA4600010)) & 3) {}
+    IO_WRITE(0xA5000510, temp_a0->bmCtlShadow | 0x10000000);
+    while ((pi_stat = IO_READ(0xA4600010)) & 3) {}
+    IO_WRITE(0xA5000510, temp_a0->bmCtlShadow);
+    func_801D3244();
+    IO_WRITE(0xA4600010, 2);
+    D_800068E0 |= 0x100401;
+}
+
+void func_801D3244(void) {
+    __OSEventState* es;
+    OSMesgQueue* mq;
+    s32 last;
+
+    es = &__osEventStateTab[OS_EVENT_PI];
+    mq = es->queue;
+    if (mq != NULL) {
+        if (mq->validCount < mq->msgCount) {
+            last = (mq->first + mq->validCount) % mq->msgCount;
+            mq->msg[last] = es->msg;
+            mq->validCount++;
+            if (mq->mtqueue->next != NULL) {
+                __osEnqueueThread(&__osRunQueue, __osPopThread(&mq->mtqueue));
+            }
+        }
+    }
+}
 
 s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) {
     OSPiHandle* sp84;
