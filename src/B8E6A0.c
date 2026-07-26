@@ -99,7 +99,6 @@ s32 __leoSetReset(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
 s32 LeoResetClear(void) {
     LEOCmdHeader cmd;
 
@@ -117,9 +116,5 @@ s32 LeoResetClear(void) {
         return cmd.sense;
     }
 }
-#else
-// includes 16 bytes of zero padding due to B8EB20's alignment
-#pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/LeoResetClear.s")
-#endif
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/D_801D9C30.s")

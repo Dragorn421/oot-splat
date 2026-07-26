@@ -44,6 +44,8 @@ options:
   # hardware_regs: True
   # gfx_ucode: # one of [f3d, f3db, f3dex, f3dexb, f3dex2]
 
+  subalign: null
+
   dump_symbols: true
   dump_symbols_references: true
 

@@ -238,7 +238,6 @@ void func_801CBCB4(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
 }
 
-#ifdef NON_MATCHING
 u32 func_801CBD9C(void) {
     u32 sp1C;
     u32 sp18;
@@ -267,7 +266,3 @@ u32 func_801CBD9C(void) {
     }
     return 0x18U;
 }
-#else
-// zero padding
-#pragma GLOBAL_ASM("asm/nonmatchings/B8EB20/func_801CBD9C.s")
-#endif
