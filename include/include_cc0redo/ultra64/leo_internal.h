@@ -132,5 +132,6 @@ extern u8 D_801E6716;
 extern s32 D_801E7040[];
 extern u8 D_801E6784[0x60];
 extern OSPiHandle __LeoDiskHandle;
+u8 leoAnalize_asic_status(void);
 
 #endif

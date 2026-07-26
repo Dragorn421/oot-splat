@@ -12,4 +12,15 @@ void leoClr_queue(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B926C0/leoClr_reset.s")
+void leoClr_reset(void) {
+    u32 temp_v0;
+
+    temp_v0 = leoAnalize_asic_status();
+    if (temp_v0 == 3 || temp_v0 == 0x29 || temp_v0 == 0x2B) {
+        LEOcur_command->header.sense = temp_v0;
+        LEOcur_command->header.status = 2;
+    } else {
+        LEOcur_command->header.sense = 0;
+        LEOcur_command->header.status = 0;
+    }
+}
