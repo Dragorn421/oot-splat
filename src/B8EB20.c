@@ -168,8 +168,67 @@ u32 func_801CB650(void) {
     return message;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8EB20/func_801CBC4C.s")
+u32 func_801CBC4C(void) {
+    u32 var_v1;
+    u32 sp18;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8EB20/func_801CBCB4.s")
+    var_v1 = leoWait_mecha_cmd_done(0x10001U);
+    if (var_v1 == 0) {
+        osEPiReadIo(LEOPiInfo, 0x0500050CU, &sp18);
+        if ((sp18 & 0x60000000) != 0x60000000) {
+            var_v1 = 0x18;
+        }
+    }
+    return var_v1;
+}
 
+void func_801CBCB4(void) {
+    osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
+    if (LEOtgt_param.start_block != 0) {
+        LEOasic_bm_ctl_shadow = 0x5A0000;
+    } else {
+        LEOasic_bm_ctl_shadow = 0;
+    }
+    if (!(LEOrw_flags & 0x8000)) {
+        LEOasic_bm_ctl_shadow |= 0x40000000;
+    }
+    if (LEOtgt_param.rdwr_blocks == 2) {
+        LEOasic_bm_ctl_shadow |= 0x02000000;
+    }
+    osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
+}
+
+#ifdef NON_MATCHING
+u32 func_801CBD9C(void) {
+    u32 sp1C;
+    u32 sp18;
+
+    osEPiReadIo(LEOPiInfo, 0x05000514U, &sp1C);
+    osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
+    if (sp1C & 0x04000000) {
+        return 0x31U;
+    }
+    if (sp1C & 0x10000000) {
+        return 4U;
+    }
+    if (sp1C & 0x42000000) {
+        if (LEOrw_flags & 0x8000) {
+            return 0x16U;
+        }
+        return 0x17U;
+    }
+    if (sp1C & 0x80000000) {
+        return 0x18U;
+    }
+    osEPiReadIo(LEOPiInfo, 0x0500050CU, &sp18);
+    if ((sp18 & 0x60000000) == 0x60000000) {
+        return 0x19U;
+    }
+    return 0x18U;
+}
+#else
+// zero padding
 #pragma GLOBAL_ASM("asm/nonmatchings/B8EB20/func_801CBD9C.s")
+#endif
