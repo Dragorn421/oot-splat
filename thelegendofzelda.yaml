@@ -341,7 +341,7 @@ segments:
       - { name: B8ADA0, type: .bss, vram: 0x801DA410 }
       - { name: B8ADA0_post, type: .bss, vram: 0x801DC880 }
       - { name: B8BEC0, type: .bss, vram: 0x801E1590 }
-      - { name: bss_801E17E0, type: bss, vram: 0x801E17E0 }
+      - { name: B8C810, type: .bss, vram: 0x801E17E0 }
       - { name: bss_801E17F0, type: bss, vram: 0x801E17F0 }
       - { name: bss_801E1800, type: bss, vram: 0x801E1800 }
       - { name: bss_801E5A00, type: bss, vram: 0x801E5A00 }
