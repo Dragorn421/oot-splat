@@ -105,13 +105,9 @@ UNK_PTR func_801CA8E0(void);
 UNK_PTR func_801CA730(void);
 extern s32 (*D_801D36D4)(struct_801E1598*);
 s32 func_801C9BA4(struct_801E1598*);
-extern UNK_TYPE D_801E1E00;
-extern UNK_TYPE D_801E1800;
 UNK_RET func_801CA280(UNK_PTR, UNK_TYPE, const char*);
-extern UNK_TYPE D_801E4600;
 extern const char* D_801D3750[2];
 UNK_RET func_801C9D68(char*, u16);
-extern s32 D_801E17F0;
 
 typedef struct struct_801CAF10 {
     /* 0x00 */ struct struct_801CAF10* (*unk0)(struct struct_801CAF10*, u8*, s32);
