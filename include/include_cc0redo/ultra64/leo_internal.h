@@ -117,5 +117,7 @@ extern const u16 LEOZONE_OUTERCYL_TBL[];
 extern const u8 LEOBYTE_TBL1[];
 int leoC2_Correction(void);
 u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
+u8 leoChk_done_status(u32 asic_cmd);
+u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 
 #endif

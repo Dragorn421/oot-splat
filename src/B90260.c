@@ -33,9 +33,101 @@ s32 leoAnalize_asic_status(void) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoChk_asic_ready.s")
+u8 leoChk_asic_ready(u32 arg0) {
+    s32 sp1C;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoChk_done_status.s")
+    sp1C = leoAnalize_asic_status();
+    switch (sp1C) {
+        case 47:
+            if (arg0 == 0x80000) {
+                return 0U;
+            }
+            FALLTHROUGH;
+        case 43:
+            if (!(D_801E67F0 & 0x800000)) {
+                if (arg0 == 0x90000) {
+                    return 0U;
+                }
+                if (leoRecv_event_mesg(0) != 0) {
+                    return 0x25U;
+                }
+                osEPiWriteIo(LEOPiInfo, 0x05000508U, 0x90000U);
+                if (leoRecv_event_mesg(1) != 0) {
+                    return 0x25U;
+                }
+            }
+            break;
+        case 49:
+            if (arg0 & 1) {
+                break;
+            }
+            FALLTHROUGH;
+        case 21:
+            return 0U;
+        default:
+            break;
+    }
+    return sp1C;
+}
+
+u8 leoChk_done_status(u32 asic_cmd) {
+    u32 sp24;
+    u32 sp20;
+
+    sp20 = leoAnalize_asic_status();
+    switch (sp20) {
+        case 43:
+        case 47:
+            if (!(D_801E67F0 & 0x800000)) {
+                if (leoRecv_event_mesg(0) != 0) {
+                    return 0x25U;
+                }
+                osEPiWriteIo(LEOPiInfo, 0x05000508U, 0x90000U);
+                if (leoRecv_event_mesg(1) != 0) {
+                    return 0x25U;
+                }
+            }
+            break;
+        default:
+            break;
+        case 49:
+            if (!(asic_cmd & 1)) {
+                return 0U;
+            }
+            break;
+        case 21:
+            osEPiWriteIo(LEOPiInfo, 0x05000500U, 0U);
+            if (leoRecv_event_mesg(0) != 0) {
+                return 0x25U;
+            }
+            osEPiWriteIo(LEOPiInfo, 0x05000508U, 0xC0000U);
+            if (leoRecv_event_mesg(1) != 0) {
+                return 0x25U;
+            }
+            osEPiReadIo(LEOPiInfo, 0x05000500U, &sp24);
+            sp20 = leoChk_asic_ready(0xC0000U);
+            if (sp20 != 0) {
+                return sp20;
+            }
+            if (sp24 & 0x10000) {
+                return 2U;
+            }
+            if (sp24 & 0x20000) {
+                return 0x18U;
+            }
+            if (sp24 & 0x40000) {
+                return 1U;
+            }
+            if (sp24 & 0x80000) {
+                return 0x15U;
+            }
+            if (sp24 & 0x200000) {
+                return 0xBU;
+            }
+            return 0x29U;
+    }
+    return sp20;
+}
 
 u8 leoSend_asic_cmd_i(u32 arg0, u32 arg1) {
     u8 temp_v0;
@@ -54,11 +146,53 @@ u8 leoSend_asic_cmd_i(u32 arg0, u32 arg1) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoWait_mecha_cmd_done.s")
+u8 leoWait_mecha_cmd_done(u32 asic_cmd) {
+    u32 temp_v0;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSend_asic_cmd_w.s")
+    if (leoRecv_event_mesg(1) != 0) {
+        return 0x25U;
+    }
+    temp_v0 = leoChk_done_status(asic_cmd);
+    if (temp_v0 != 0) {
+        return temp_v0;
+    }
+    return 0U;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSend_asic_cmd_w_nochkDiskChange.s")
+u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data) {
+    u32 temp_v0;
+
+    temp_v0 = leoSend_asic_cmd_i(asic_cmd, asic_data);
+    if (temp_v0 != 0) {
+        return temp_v0;
+    }
+    return leoWait_mecha_cmd_done(asic_cmd);
+}
+
+u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
+    u8 temp_v0_2;
+    u32 temp_v0;
+
+    temp_v0_2 = leoChk_asic_ready(asic_cmd);
+    if ((temp_v0_2 != 0x2F) && (temp_v0_2 != 0)) {
+        LEOcur_command->header.sense = temp_v0_2;
+        return LEOcur_command->header.sense;
+    }
+    osEPiWriteIo(LEOPiInfo, 0x05000500U, asic_data);
+    if (leoRecv_event_mesg(0) != 0) {
+        LEOcur_command->header.sense = 0x25;
+        return LEOcur_command->header.sense;
+    }
+    osEPiWriteIo(LEOPiInfo, 0x05000508U, asic_cmd);
+    if (leoRecv_event_mesg(1) != 0) {
+        return 0x25U;
+    }
+    temp_v0 = leoChk_done_status(asic_cmd);
+    if ((temp_v0 != 0x2F) && (temp_v0 != 0)) {
+        return temp_v0;
+    }
+    return 0U;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoDetect_index_w.s")
 
