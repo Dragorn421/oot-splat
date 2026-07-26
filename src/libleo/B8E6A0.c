@@ -117,4 +117,4 @@ s32 LeoResetClear(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8E6A0/D_801D9C30.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B8E6A0/D_801D9C30.s")

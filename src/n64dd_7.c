@@ -210,4 +210,4 @@ void func_801CAF74(PrintCallback* arg0, const char* arg1, ...) {
     va_end(varargs);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B8DF80/D_801D9C10.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/n64dd_7/D_801D9C10.s")

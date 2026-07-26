@@ -60,4 +60,4 @@ void leoReadDiskId(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90070/D_801D9CF0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B90070/D_801D9CF0.s")

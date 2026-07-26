@@ -186,7 +186,7 @@ u8 __locSetTimer(__LOCTime* time) {
 }
 
 // "ymdupper"
-#pragma GLOBAL_ASM("asm/nonmatchings/B92A80/D_801DA3F0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B92A80/D_801DA3F0.s")
 
 // "dayupper"
-#pragma GLOBAL_ASM("asm/nonmatchings/B92A80/D_801DA3F8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B92A80/D_801DA3F8.s")

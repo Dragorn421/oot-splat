@@ -71,6 +71,6 @@ void leoStart_stop(void) {
     LEOcur_command->header.status = 2;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B91D60/D_801DA370.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B91D60/D_801DA370.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B91D60/D_801DA3B0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B91D60/D_801DA3B0.s")
