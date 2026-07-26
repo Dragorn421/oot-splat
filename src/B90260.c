@@ -1,6 +1,6 @@
 #include "common.h"
 
-s32 leoAnalize_asic_status(void) {
+u8 leoAnalize_asic_status(void) {
     u32 temp_v0;
 
     osEPiReadIo(LEOPiInfo, 0x05000508U, &D_801E67F0);

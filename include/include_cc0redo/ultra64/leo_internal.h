@@ -120,12 +120,12 @@ u8 leoChk_done_status(u32 asic_cmd);
 u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 u8 func_801CD1EC(void);
 u8 leoRecal_w(void);
-u8 leoSeek_w();
+u8 leoSeek_w(void);
 u8 leoRecv_event_mesg(s32 control);
 u32 leoChk_err_retry(u32 sense);
-u8 leoChk_cur_drvmode();
-void leoClrUA_MEDIUM_CHANGED();
-void leoSetUA_MEDIUM_CHANGED();
+u8 leoChk_cur_drvmode(void);
+void leoClrUA_MEDIUM_CHANGED(void);
+void leoSetUA_MEDIUM_CHANGED(void);
 extern s32 D_801DA370;
 extern s32 D_801DA3B0;
 extern u8 D_801E6716;
@@ -134,5 +134,8 @@ extern u8 D_801E6784[0x60];
 extern OSPiHandle __LeoDiskHandle;
 u8 leoAnalize_asic_status(void);
 void leoMode_sel(void);
+extern LEOCmdRead D_801D9650; // "read_id_cmd"
+extern u8 D_801D9CF0[2]; // "leo_disk_id_lba"
+extern u8 LEO_TempBuffer[0xE8];
 
 #endif
