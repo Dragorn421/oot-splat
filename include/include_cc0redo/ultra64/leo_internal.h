@@ -126,5 +126,9 @@ u32 leoChk_err_retry(u32 sense);
 u8 leoChk_cur_drvmode();
 void leoClrUA_MEDIUM_CHANGED();
 void leoSetUA_MEDIUM_CHANGED();
+extern s32 D_801DA370;
+extern s32 D_801DA3B0;
+extern u8 D_801E6716;
+extern s32 D_801E7040[];
 
 #endif
