@@ -30,7 +30,6 @@ extern vu8 LEOclr_que_flag;
 extern s32 __leoResetCalled;
 u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data);
 u8 leoChk_asic_ready(u32);
-s32 leoRecv_event_mesg(s32);
 void leoDrive_reset(void);
 extern s32 __leoActive;
 extern LEOCmd* LEOcur_command;
@@ -119,5 +118,13 @@ int leoC2_Correction(void);
 u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
 u8 leoChk_done_status(u32 asic_cmd);
 u8 leoWait_mecha_cmd_done(u32 asic_cmd);
+u8 func_801CD1EC(void);
+u8 leoRecal_w(void);
+u8 leoSeek_w();
+u8 leoRecv_event_mesg(s32 control);
+u32 leoChk_err_retry(u32 sense);
+u8 leoChk_cur_drvmode();
+void leoClrUA_MEDIUM_CHANGED();
+void leoSetUA_MEDIUM_CHANGED();
 
 #endif

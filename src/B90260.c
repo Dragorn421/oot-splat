@@ -194,11 +194,18 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
     return 0U;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoDetect_index_w.s")
+u8 leoDetect_index_w(void) {
+    return leoSend_asic_cmd_w(0xE0001U, 0U);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/func_801CD1EC.s")
+// "leoRecal_i"
+u8 func_801CD1EC(void) {
+    return leoSend_asic_cmd_i(0x30001U, 0U);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoRecal_w.s")
+u8 leoRecal_w(void) {
+    return leoSend_asic_cmd_w(0x30001U, 0U);
+}
 
 u8 leoSeek_i(u16 arg0) {
     s32 temp_t0;
@@ -210,13 +217,81 @@ u8 leoSeek_i(u16 arg0) {
     return leoSend_asic_cmd_i(0x20001, temp_t0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSeek_w.s")
+u8 leoSeek_w(void) {
+    u8 temp_v0;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoRecv_event_mesg.s")
+    temp_v0 = leoSeek_i(0U);
+    if (temp_v0 != 0) {
+        return temp_v0;
+    }
+    return leoWait_mecha_cmd_done(0x10001U);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoChk_err_retry.s")
+u8 leoRecv_event_mesg(s32 control) {
+    OSMesg sp1C;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoChk_cur_drvmode.s")
+    if ((osRecvMesg(&LEOevent_que, &sp1C, control) == 0) && (sp1C == (OSMesg)0xA0000)) {
+        leoDrive_reset();
+        return 0xFFU;
+    }
+    return 0U;
+}
+
+u32 leoChk_err_retry(u32 sense) {
+    if ((currentCommand == 0xC) || (currentCommand == 8)) {
+        switch (sense) {
+            case 43:
+                D_801E67F4 |= 2;
+                FALLTHROUGH;
+            case 2:
+            case 3:
+            case 37:
+            case 41:
+            case 42:
+            case 49:
+                LEOdrive_flag = 0;
+                return -1U;
+            default:
+                break;
+        }
+    } else {
+        switch (sense) {
+            case 43:
+                D_801E67F4 |= 2;
+                FALLTHROUGH;
+            case 47:
+                D_801E67F4 |= 1;
+                FALLTHROUGH;
+            case 2:
+            case 3:
+            case 37:
+            case 41:
+            case 42:
+            case 49:
+                LEOdrive_flag = 0;
+                return -1U;
+            default:
+                break;
+        }
+    }
+    return 0U;
+}
+
+u8 leoChk_cur_drvmode(void) {
+    u8 var_v1;
+
+    var_v1 = 0;
+    if (!(D_801E67F0 & 0x01000000)) {
+        var_v1 |= 1;
+    }
+    if (D_801E67F0 & 0x80000) {
+        var_v1 |= 2;
+    }
+    if (D_801E67F0 & 0x100000) {
+        var_v1 |= 4;
+    }
+    return var_v1;
+}
 
 void leoDrive_reset(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000520U, 0xAAAA0000U);
