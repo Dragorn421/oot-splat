@@ -140,7 +140,7 @@ extern u8 LEO_TempBuffer[0xE8];
 void leoTest_unit_rdy(void);
 void leoSeek(void);
 void leoRd_capacity(void);
-extern u16 LEORAM_START_LBA[];
-extern u32 LEORAM_BYTE[];
+extern const u16 LEORAM_START_LBA[];
+extern const u32 LEORAM_BYTE[];
 
 #endif

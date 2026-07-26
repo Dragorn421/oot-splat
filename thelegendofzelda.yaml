@@ -332,7 +332,7 @@ segments:
       - [0xB9D2A0, .rodata, B8F520]
       - [0xB9D350, .rodata, B90070]
       - [0xB9D360, .rodata, B90260]
-      - [0xB9D3D0, rodata]
+      - [0xB9D3D0, .rodata]
       - [0xB9D5B0, .rodata, B90C70]
       - [0xB9D9D0, .rodata, B91D60]
       - [0xB9DA50, .rodata, B92A80]
