@@ -139,5 +139,8 @@ extern u8 D_801D9CF0[2]; // "leo_disk_id_lba"
 extern u8 LEO_TempBuffer[0xE8];
 void leoTest_unit_rdy(void);
 void leoSeek(void);
+void leoRd_capacity(void);
+extern u16 LEORAM_START_LBA[];
+extern u32 LEORAM_BYTE[];
 
 #endif
