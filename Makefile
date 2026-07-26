@@ -82,6 +82,8 @@ $(BUILD_DIR)/src/B96290.o: CC := $(IDO5)
 $(BUILD_DIR)/src/B96290.o: OPTFLAGS := -O2
 $(BUILD_DIR)/src/B96B90.o: CC := $(IDO5)
 $(BUILD_DIR)/src/B96B90.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/B96C30.o: CC := $(IDO5)
+$(BUILD_DIR)/src/B96C30.o: OPTFLAGS := -O2
 
 include thelegendofzelda.d
 

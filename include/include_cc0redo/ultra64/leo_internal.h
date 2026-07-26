@@ -137,5 +137,7 @@ void leoMode_sel(void);
 extern LEOCmdRead D_801D9650; // "read_id_cmd"
 extern u8 D_801D9CF0[2]; // "leo_disk_id_lba"
 extern u8 LEO_TempBuffer[0xE8];
+void leoTest_unit_rdy(void);
+void leoSeek(void);
 
 #endif
