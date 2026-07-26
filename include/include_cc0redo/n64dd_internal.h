@@ -171,10 +171,10 @@ UNK_RET func_801C93C8(UNK_TYPE, UNK_TYPE, UNK_TYPE);
 s32 func_801C999C(struct_801E1598*);
 s32 func_801CA4B8(void);
 UNK_RET func_801CA764(UNK_PTR, s32, UNK_TYPE);
-extern UNK_TYPE D_801D4460;
+extern UNK_TYPE1 D_801D4460[2][0x2800];
 extern UNK_TYPE D_801E1E00;
 UNK_RET func_801CA628(UNK_PTR, s32);
-extern UNK_TYPE D_801D3860;
+extern UNK_TYPE1 D_801D3860[2][0x600];
 extern UNK_TYPE D_801E1800;
 UNK_RET func_801CA280(UNK_PTR, UNK_TYPE, const char*);
 extern const char* D_801D3760[2][8][4];
@@ -183,14 +183,13 @@ void func_801CA4E4(u8*, u8, s32);
 const char* func_801CA514(void);
 UNK_RET func_801CA544(const char*, s32);
 UNK_RET func_801CA5C4(char*, s32);
-extern const char* D_801D3750[];
+extern const char* D_801D3750[2];
 UNK_RET func_801C9D68(char*, u16);
 s32 func_801CA3E0(s32);
 int func_801C9CB0(const char*);
 s32 func_801C9F0C(void*, int*, int*, int*, const char*);
 s32 func_801CA034(void**, s32, s32, s32, s32, u8*, s32, s32, s32);
 void func_801CA1C4(const char*, s32*, s32*);
-extern void (*D_801D3740)(void*, uintptr_t, size_t);
 extern s32 D_801E17F0;
 void func_801C9E30(void*, uintptr_t, size_t);
 s32 func_801C9E60(const char*);
@@ -224,6 +223,7 @@ typedef struct struct_801CAF10 {
     /* 0x24 */ u16 unk24;
     /* 0x26 */ u16 unk26;
 } struct_801CAF10; /* size >= 0x28 */
-extern u32 D_801D93E0[];
+
+extern UNK_TYPE D_801DC880;
 
 #endif

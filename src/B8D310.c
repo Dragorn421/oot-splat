@@ -1,5 +1,7 @@
 #include "common.h"
 
+void (*D_801D3740)(void*, uintptr_t, size_t) = NULL;
+
 int func_801C9CB0(const char* arg0) {
     if (((*arg0 >= 0x8E) && (*arg0 < 0xFF)) || ((*arg0 != 0x8F) && (*arg0 != 0xA0))) {
         arg0++;

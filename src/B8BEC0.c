@@ -1,5 +1,24 @@
 #include "common.h"
 
+void func_801C8A4C(struct_801E1598*);
+void func_801C8B8C(struct_801E1598*);
+void func_801C8C00(struct_801E1598*);
+void func_801C8C74(struct_801E1598*);
+s32 func_801C9A50(struct_801E1598*);
+s32 func_801C9AD0(struct_801E1598*);
+s32 func_801C9C34(struct_801E1598*);
+
+s32 D_801D36E0 = 0;
+s32 D_801D36E4 = 0;
+struct {
+    UNK_RET (*unk0)(struct_801E1598*);
+    s32 (*unk4)(struct_801E1598*);
+} D_801D36E8[5] = {
+    { func_801C8A4C, func_801C9A50 }, { func_801C8B8C, func_801C9AD0 }, { func_801C8C00, func_801C9AD0 },
+    { func_801C8C74, func_801C9BA4 }, { func_801C8C74, func_801C9C34 },
+};
+s32 D_801D3710 = 0;
+
 s32 func_801C8860(struct_801DA5D0* arg0) {
     s32 temp_v0_2;
     s8 temp_v0;
@@ -136,10 +155,6 @@ void func_801C8C74(struct_801E1598* arg0) {
     arg0->unk68 = 9;
 }
 
-extern struct {
-    UNK_RET (*unk0)(struct_801E1598*);
-    s32 (*unk4)(struct_801E1598*);
-} D_801D36E8[];
 void func_801C8C84(struct_801E1598* arg0) {
     s32 (*temp_s2)(struct_801E1598*);
     s32 temp_v0_2;

@@ -1,5 +1,12 @@
 #include "common.h"
 
+s32 D_801D3720 = 0;
+void* D_801D3724 = NULL;
+s32 D_801D3728 = 0;
+void* D_801D372C = NULL;
+void* D_801D3730 = NULL;
+void (*D_801D3734)(void*, void*, void*) = NULL;
+
 void func_801C91B0(s32 arg0) {
     D_801D3724 = func_801CA698(arg0);
     D_801D3728 = 1;
