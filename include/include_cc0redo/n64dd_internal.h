@@ -101,20 +101,12 @@ typedef struct struct_801C79DC {
 } struct_801C79DC; // size >= 0x9C
 extern s32 D_801D3720;
 extern s32 D_801D36E0;
-extern OSThread D_801E1630;
 typedef struct struct_801E1590 {
     /* 0x0 */ OSMesgQueue* unk0;
     /* 0x4 */ OSMesgQueue* unk4;
 } struct_801E1590; // size >= 8
-extern struct_801E1590 D_801E1590;
 extern void (*D_801D3734)(UNK_PTR, UNK_PTR, UNK_PTR);
-extern struct_801E1598 D_801E1598;
-typedef struct struct_801E15FC {
-    s8 unk0;
-    s8 unk1;
-} struct_801E15FC;
 extern s32 D_801D3710;
-extern s32 D_801E1604;
 extern s32 D_801D36E4;
 UNK_RET func_801C9400(void);
 s32 func_801C9430(struct_801E1598*);
@@ -126,7 +118,6 @@ s32 func_801C996C(struct_801E1598*);
 extern UNK_PTR D_801D3724;
 extern UNK_PTR D_801D372C;
 extern UNK_PTR D_801D3730;
-extern OSMesgQueue* D_801E1594;
 UNK_RET func_801C8B40(struct_801E1598*);
 UNK_RET func_801C92A0(UNK_TYPE);
 UNK_RET func_801C92D4(void);

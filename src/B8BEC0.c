@@ -1,5 +1,11 @@
 #include "common.h"
 
+DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
+
 void func_801C8A4C(struct_801E1598*);
 void func_801C8B8C(struct_801E1598*);
 void func_801C8C00(struct_801E1598*);
@@ -18,6 +24,12 @@ struct {
     { func_801C8C74, func_801C9BA4 }, { func_801C8C74, func_801C9C34 },
 };
 s32 D_801D3710 = 0;
+
+struct_801E1590 D_801E1590;
+struct_801E1598 D_801E1598;
+OSMesg D_801E1608;
+OSMesg D_801E1610[8];
+OSThread D_801E1630;
 
 s32 func_801C8860(struct_801DA5D0* arg0) {
     s32 temp_v0_2;
@@ -92,9 +104,6 @@ s32 func_801C8A24(void) {
 s32 func_801C8A34(void) {
     return D_801D36E4 == 1;
 }
-
-extern OSMesg D_801E1608;
-extern OSMesg D_801E1610[8];
 
 void func_801C8A4C(struct_801E1598* arg0) {
     s32 temp_v0;
@@ -206,22 +215,16 @@ void func_801C8E50(struct_801E1598* arg0, s32 arg1) {
     osSendMesg(D_801E1590.unk0, arg0, 1);
 }
 
-#ifdef NON_MATCHING
 void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
-    // static struct_801E15FC D_801E15FC; // must be in-function bss to match
+    struct_801E1598 *ptr = &D_801E1598;
 
     func_801CA3C0(arg1, arg2);
     D_801D3734 = arg0;
-    D_801E15FC.unk0 = 0;
-    D_801E15FC.unk1 = 0;
-    func_801C8E50(&D_801E1598, 0);
+    ptr->unk64 = 0;
+    ptr->unk65 = 0;
+    func_801C8E50(ptr, 0);
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8E98.s")
-#endif
 
-#ifdef NON_MATCHING
-// struct_801E1598 D_801E1598; // must be migrated (to this file)
 void func_801C8EEC(void* arg0, s32 arg1, s32 arg2, u8 arg3) {
     struct_801E1598* var = &D_801E1598;
 
@@ -229,19 +232,16 @@ void func_801C8EEC(void* arg0, s32 arg1, s32 arg2, u8 arg3) {
         D_801D3710 = 0;
         var->unk64 = 4;
         func_801C8E50(var, 1);
-        if ((D_801E1604 == 3) || (D_801E1604 == 4)) {
+        if ((D_801E1598.unk6C == 3) || (D_801E1598.unk6C == 4)) {
             return;
         }
     }
     var->unk58 = arg0;
-    var->unk5C = (void*)arg1;
+    var->unk5C = arg1;
     var->unk60 = arg2;
-    var->unk64 = (u8)arg3;
+    var->unk64 = arg3;
     func_801C8E50(var, 0);
 }
-#else
-#pragma GLOBAL_ASM("asm/nonmatchings/B8BEC0/func_801C8EEC.s")
-#endif
 
 s32 func_801C8F9C(struct_801E1598* arg0) {
     u8 sp1F;
@@ -271,7 +271,10 @@ s32 func_801C9020(void) {
 }
 
 s32 func_801C905C(void) {
-    if ((func_801C90A4() == 0) && ((D_801E1604 == 3) || (D_801E1604 == 4))) {
+    s32* new_var;
+
+    new_var = &D_801E1598.unk6C;
+    if ((func_801C90A4() == 0) && ((*new_var == 3) || (*new_var == 4))) {
         return D_801E1598.unk68;
     }
     return 0;
@@ -285,10 +288,10 @@ s32 func_801C90BC(void) {
     D_801E1598.unk64 = 3;
     func_801C8E50(&D_801E1598, 1);
     D_801D3710 = 0;
-    if ((D_801E1604 == 3) || (D_801E1604 == 4)) {
+    if ((D_801E1598.unk6C == 3) || (D_801E1598.unk6C == 4)) {
         return -1;
     } else {
-        return D_801E1604 == 0;
+        return D_801E1598.unk6C == 0;
     }
 }
 
@@ -296,10 +299,10 @@ s32 func_801C9114(void) {
     D_801E1598.unk64 = 4;
     func_801C8E50(&D_801E1598, 1);
     D_801D3710 = 0;
-    if ((D_801E1604 == 3) || (D_801E1604 == 4)) {
+    if ((D_801E1598.unk6C == 3) || (D_801E1598.unk6C == 4)) {
         return -1;
     } else {
-        return D_801E1604 == 0;
+        return D_801E1598.unk6C == 0;
     }
 }
 

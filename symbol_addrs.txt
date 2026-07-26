@@ -1,7 +1,7 @@
 // Visit https://github.com/ethteck/splat/wiki/Adding-Symbols for documentation about this file
 entrypoint = 0x80000400; // type:func
 
-D_801E1598 = 0x801E1598; // size:0x6C
+D_801E1598 = 0x801E1598; // size:0x70
 D_801D9460 = 0x801D9460;
 D_801D4460 = 0x801D4460; // size:0x5000
 

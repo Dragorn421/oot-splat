@@ -63,6 +63,7 @@ section_by_subsegment_type = {
     "rodata": "rodata",
     ".rodata": "rodata",
     "bss": "bss",
+    ".bss": "bss",
 }
 
 syms_by_section: dict[str, list[Sym]] = {}

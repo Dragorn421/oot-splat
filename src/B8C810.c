@@ -1,5 +1,8 @@
 #include "common.h"
 
+// TODO move to a header once we can easily fix bss orderings
+extern struct_801E1590 D_801E1590;
+
 s32 D_801D3720 = 0;
 void* D_801D3724 = NULL;
 s32 D_801D3728 = 0;
@@ -49,7 +52,7 @@ void func_801C9318(void) {
     UNK_PTR sp1C;
     UNK_PTR sp18;
 
-    osRecvMesg(D_801E1594, NULL, 0);
+    osRecvMesg(D_801E1590.unk4, NULL, 0);
     if ((D_801D3734 != NULL) && (D_801D3720 == 0)) {
         temp_v0 = osSetIntMask(1U);
         sp20 = D_801D3724;
