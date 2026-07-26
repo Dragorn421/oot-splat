@@ -59,6 +59,7 @@ section_by_subsegment_type = {
     "textbin": "text",
     "hasm": "text",
     "data": "data",
+    ".data": "data",
     "rodata": "rodata",
     ".rodata": "rodata",
     "bss": "bss",

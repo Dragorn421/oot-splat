@@ -1,57 +1,105 @@
 #include "common.h"
 
-extern s8 D_801D97C0;
-extern s8 D_801D97D4;
-extern s8 D_801D97F0;
-extern s8 D_801D9818;
-extern s8 D_801D9840;
-extern s8 D_801D9868;
-extern s8 D_801D9890;
-extern s8 D_801D98B8;
-extern s8 D_801D98E0;
-extern s8 D_801D9908;
-extern s8 D_801D9930;
-extern s8 D_801D9958;
-extern s8 D_801D9980;
-extern s8 D_801D99A8;
-extern s8 D_801D99D0;
-extern s8 D_801D99F8;
-extern s8 D_801D9A1C;
-extern s8 D_801D9A44;
-extern s8 D_801D9A68;
-extern s8 D_801D9A84;
-extern s8 D_801D9AAC;
-extern s8 D_801D9AC4;
-extern s8 D_801D9AE8;
-extern s8 D_801D9B10;
-extern s8 D_801D9B38;
-extern s8 D_801D9B54;
-extern s8 D_801D9B7C;
-extern s8 D_801D9B98;
-extern s8 D_801D9BBC;
-extern s8 D_801D9BE4;
-const char* D_801D3750[2] = { &D_801D97C0, &D_801D97D4 };
-static s32 sPad_801D3758[2] = { 0 };
 const char* D_801D3760[2][8][4] = {
     {
-        { &D_801D97F0, &D_801D9818, NULL, NULL },
-        { &D_801D9840, &D_801D9868, &D_801D9890, NULL },
-        { &D_801D98B8, &D_801D98E0, &D_801D9908, NULL },
-        { &D_801D9930, &D_801D9958, NULL, NULL },
-        { &D_801D9980, NULL, NULL, NULL },
-        { &D_801D99A8, NULL, NULL, NULL },
-        { &D_801D99D0, NULL, NULL, NULL },
-        { NULL, NULL, NULL, NULL },
+        {
+            "　　メモリー拡張パックが正しく差し込",
+            "　　んでありますか？　　　　　　　　",
+            NULL,
+            NULL,
+        },
+        {
+            "　　間違ったディスクが差し込まれてい",
+            "　　る可能性があります。正しいディス",
+            "　　クに交換してください。　　　　　",
+            NULL,
+        },
+        {
+            "　　注意：アクセスランプ点滅中にディ",
+            "　　スクを抜かないでください。詳しく",
+            "　　は、取扱説明書をお読みください。",
+            NULL,
+        },
+        {
+            "　　詳しくは、取扱説明書をお読みくだ",
+            "　　さい。　　　　　　　　　　　　　",
+            NULL,
+            NULL,
+        },
+        {
+            "　　　ディスクを差し込んでください。",
+            NULL,
+            NULL,
+            NULL,
+        },
+        {
+            "　　ディスクを差し込み直してください。",
+            NULL,
+            NULL,
+            NULL,
+        },
+        {
+            "　　　ディスクを取り出してください。",
+            NULL,
+            NULL,
+            NULL,
+        },
+        {
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+        },
     },
     {
-        { &D_801D99F8, &D_801D9A1C, NULL, NULL },
-        { &D_801D9A44, &D_801D9A68, &D_801D9A84, &D_801D9AAC },
-        { &D_801D9AC4, &D_801D9AE8, &D_801D9B10, &D_801D9B38 },
-        { &D_801D9B54, &D_801D9B7C, NULL, NULL },
-        { &D_801D9B98, NULL, NULL, NULL },
-        { &D_801D9BBC, NULL, NULL, NULL },
-        { &D_801D9BE4, NULL, NULL, NULL },
-        { NULL, NULL, NULL, NULL },
+        {
+            "      Are you sure  the Expansion",
+            "      Pak  is   inserted  correctly?",
+            NULL,
+            NULL,
+        },
+        {
+            "       Check to see  if  the proper",
+            "       disk  is  inserted.",
+            "       Please  insert  the disk  the",
+            "       correct  disk.",
+        },
+        {
+            "      Do not remove the disk when",
+            "      the  access light  is  flashing.",
+            "      Please  read  the  instruction",
+            "      manual  for  details.",
+        },
+        {
+            "      Please  read  the  instruction",
+            "      manual  for  details.",
+            NULL,
+            NULL,
+        },
+        {
+            "         Please  insert  a  disk.",
+            NULL,
+            NULL,
+            NULL,
+        },
+        {
+            "        Please insert the disk again.",
+            NULL,
+            NULL,
+            NULL,
+        },
+        {
+            "        Please  remove  the  disk.",
+            NULL,
+            NULL,
+            NULL,
+        },
+        {
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+        },
     },
 };
 UNK_TYPE1 D_801D3860[2][0x600] = {
