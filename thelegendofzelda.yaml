@@ -336,7 +336,13 @@ segments:
       - [0xB9D5B0, .rodata, B90C70]
       - [0xB9D9D0, .rodata, B91D60]
       - [0xB9DA50, .rodata, B92A80]
-      - { name: bss_801DA410, type: bss, vram: 0x801DA410 }
+      - { name: B8ADA0, type: .bss, vram: 0x801DA410 }
+      - { name: B8ADA0_post, type: .bss, vram: 0x801DC880 }
+      - { name: bss_801E1590, type: bss, vram: 0x801E1590 }
+      - { name: bss_801E17E0, type: bss, vram: 0x801E17E0 }
+      - { name: bss_801E17F0, type: bss, vram: 0x801E17F0 }
+      - { name: bss_801E1800, type: bss, vram: 0x801E1800 }
+      - { name: bss_801E5A00, type: bss, vram: 0x801E5A00 }
 
   - name: ovl_title
     type: bin
