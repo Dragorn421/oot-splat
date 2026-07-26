@@ -297,17 +297,35 @@ void leoDrive_reset(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000520U, 0xAAAA0000U);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoChkUnit_atten.s")
+u32 leoChkUnit_atten(void) {
+    return (u32)D_801E67F4;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoRetUnit_atten.s")
+u32 leoRetUnit_atten(void) {
+    if (D_801E67F4 & 2) {
+        return 0x2BU;
+    }
+    if (D_801E67F4 & 1) {
+        return 0x2FU;
+    }
+    return 0U;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoClrUA_RESET.s")
+void leoClrUA_RESET(void) {
+    D_801E67F4 &= ~2;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoClrUA_MEDIUM_CHANGED.s")
+void leoClrUA_MEDIUM_CHANGED(void) {
+    D_801E67F4 &= ~1;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoSetUA_MEDIUM_CHANGED.s")
+void leoSetUA_MEDIUM_CHANGED(void) {
+    D_801E67F4 |= 1;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/B90260/leoInitUnit_atten.s")
+void leoInitUnit_atten(void) {
+    D_801E67F4 = 1;
+}
 
 s32 LeoSpdlMotor(LEOCmd* cmdBlock, u8 mode, OSMesgQueue* mq) {
     if (__leoActive == 0) {
