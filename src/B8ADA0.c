@@ -14,6 +14,11 @@ DUMMY_STRUCT
 DUMMY_STRUCT
 DUMMY_STRUCT
 DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
+DUMMY_STRUCT
 
 s32 func_801C8310(struct_801E1598* arg0);
 
@@ -40,9 +45,6 @@ StackEntry D_801DB808;
 STACK(D_801DB828, 0x1000);
 StackEntry D_801DC828;
 s32 D_801DC844;
-void* D_801DC848;
-LEODiskID D_801DC850;
-s32 D_801DC870;
 
 u32 func_801C6E80(void) {
     return LeoDriveExist();
@@ -133,9 +135,9 @@ s32 func_801C70FC(void) {
     return func_801C79A4();
 }
 
-#ifdef NON_MATCHING
 void func_801C79DC(void* arg) {
-    // static void* D_801DC848; // must be in-function bss to match
+    static void* D_801DC848;
+
     struct_801C79DC* arg0 = arg;
     OSMesg sp58;
     s32 var_s0;
@@ -167,10 +169,9 @@ void func_801C79DC(void* arg) {
     }
     IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
 }
-#else
-void func_801C79DC(void* arg);
-#pragma GLOBAL_ASM("asm/nonmatchings/B8ADA0/func_801C79DC.s")
-#endif
+
+LEODiskID D_801DC850;
+s32 D_801DC870;
 
 void func_801C7B28(void) {
     s32 temp_v1_2;
@@ -361,8 +362,6 @@ void func_801C82C0(void* arg0, s32 arg1, s32 arg2) {
 void func_801C8304(LEODiskID* arg0) {
 }
 
-extern LEODiskID D_801DC850;
-extern s32 D_801DC870;
 s32 func_801C8310(struct_801E1598* arg0) {
     LEODiskID* temp_s0;
 
