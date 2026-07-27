@@ -5,7 +5,7 @@ void leoSeek(void) {
     u8 sense_code;
     u8 retry_cntr = 20;
 
-    if (LEOcur_command->data.readwrite.lba >= 0x10C4U) {
+    if (LEOcur_command->data.readwrite.lba >= 0x10C4) {
         LEOcur_command->header.sense = 0x20;
         LEOcur_command->header.status = 2;
         return;

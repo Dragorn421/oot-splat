@@ -34,7 +34,7 @@ void leoReadTimer(void) {
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
-    if ((u8)LEOcur_command->data.time.yearlo >= 0x96U) {
+    if (LEOcur_command->data.time.yearlo >= 0x96U) {
         LEOcur_command->data.time.yearhi = 0x19;
     } else {
         LEOcur_command->data.time.yearhi = 0x20;
@@ -136,30 +136,30 @@ STATIC u8 __locReadTimer(__LOCTime* time) {
     u32 data;
     u8 sense_code;
 
-    sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x140000, 0U);
+    sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x140000, 0);
     if (sense_code != 0) {
         return sense_code;
     }
     osEPiReadIo(LEOPiInfo, 0x05000500, &data);
-    time->minute = (u8)((u32)(data & 0xFF000000) >> 0x18);
-    time->second = (s8)((u32)(data & 0xFF0000) >> 0x10);
-    sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x130000, 0U);
+    time->minute = (u8)((u32)(data & 0xFF000000) >> 24);
+    time->second = (s8)((u32)(data & 0xFF0000) >> 16);
+    sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x130000, 0);
     if (sense_code != 0) {
         time->minute = (u8)(time->minute & 0xFF7F);
         return sense_code;
     }
     osEPiReadIo(LEOPiInfo, 0x05000500, &data);
-    time->day = (s8)((u32)(data & 0xFF000000) >> 0x18);
-    time->hour = (s8)((u32)(data & 0xFF0000) >> 0x10);
-    sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x120000, 0U);
+    time->day = (s8)((u32)(data & 0xFF000000) >> 24);
+    time->hour = (s8)((u32)(data & 0xFF0000) >> 16);
+    sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x120000, 0);
     if (sense_code != 0) {
         time->minute = (u8)(time->minute & 0xFF7F);
         return sense_code;
     }
     osEPiReadIo(LEOPiInfo, 0x05000500, &data);
     sense_code = time->minute;
-    time->year = (s8)((u32)(data & 0xFF000000) >> 0x18);
-    time->month = (s8)((u32)(data & 0xFF0000) >> 0x10);
+    time->year = (s8)((u32)(data & 0xFF000000) >> 24);
+    time->month = (s8)((u32)(data & 0xFF0000) >> 16);
     if (sense_code & 0x80) {
         time->minute = (u8)(sense_code & 0xFF7F);
         return 5;
@@ -173,9 +173,9 @@ STATIC u8 __locSetTimer(__LOCTime* time) {
     u32 MinuteSecondX10000h;
     u8 result;
 
-    YearMonthX10000h = (time->year << 0x18) + (time->month << 0x10);
-    DayHourX10000h = (time->day << 0x18) + (time->hour << 0x10);
-    MinuteSecondX10000h = (time->minute << 0x18) + (time->second << 0x10);
+    YearMonthX10000h = (time->year << 24) + (time->month << 16);
+    DayHourX10000h = (time->day << 24) + (time->hour << 16);
+    MinuteSecondX10000h = (time->minute << 24) + (time->second << 16);
     if ((result = leoSend_asic_cmd_w_nochkDiskChange(0xF0000, YearMonthX10000h)) != 0 ||
         (result = leoSend_asic_cmd_w_nochkDiskChange(0x100000, DayHourX10000h)) != 0 ||
         (result = leoSend_asic_cmd_w_nochkDiskChange(0x110000, MinuteSecondX10000h)) != 0) {

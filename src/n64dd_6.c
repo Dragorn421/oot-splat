@@ -1716,7 +1716,7 @@ void* func_801CA698(s32 arg0) {
 }
 
 void* func_801CA730(void) {
-    func_801CA4E4(D_801E1800, 0U, 0x600);
+    func_801CA4E4(D_801E1800, 0, sizeof(D_801E1800));
     return D_801E1800;
 }
 
@@ -1740,7 +1740,7 @@ void* func_801CA800(s32 arg0) {
 }
 
 void* func_801CA86C(void) {
-    func_801CA4E4(D_801E1E00, 0U, 0x2800);
+    func_801CA4E4(D_801E1E00, 0, sizeof(D_801E1E00));
     return D_801E1E00;
 }
 
@@ -1751,6 +1751,6 @@ UNK_PTR func_801CA8A0(s32 arg0) {
 }
 
 void* func_801CA8E0(void) {
-    func_801CA4E4(D_801E4600, 0, 0x1400);
+    func_801CA4E4(D_801E4600, 0, sizeof(D_801E4600));
     return D_801E4600;
 }

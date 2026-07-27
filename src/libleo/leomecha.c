@@ -8,7 +8,7 @@ u32 unit_atten;
 u8 leoAnalize_asic_status(void) {
     u32 curr_stat;
 
-    osEPiReadIo(LEOPiInfo, 0x05000508U, &asic_cur_status);
+    osEPiReadIo(LEOPiInfo, 0x05000508, &asic_cur_status);
     curr_stat = asic_cur_status ^ 0x01000000;
     if (curr_stat & 0x01C3FFFF) {
         if (curr_stat & 0x01C1FFFF) {
@@ -51,14 +51,14 @@ u8 leoChk_asic_ready(u32 asic_cmd) {
         case 43:
             if (!(asic_cur_status & 0x800000)) {
                 if (asic_cmd == 0x90000) {
-                    return 0U;
+                    return 0;
                 }
                 if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-                    return 0x25U;
+                    return 0x25;
                 }
-                osEPiWriteIo(LEOPiInfo, 0x05000508U, 0x90000U);
+                osEPiWriteIo(LEOPiInfo, 0x05000508, 0x90000);
                 if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-                    return 0x25U;
+                    return 0x25;
                 }
             }
             break;
@@ -68,7 +68,7 @@ u8 leoChk_asic_ready(u32 asic_cmd) {
             }
             FALLTHROUGH;
         case 21:
-            return 0U;
+            return 0;
         default:
             break;
     }
@@ -85,11 +85,11 @@ u8 leoChk_done_status(u32 asic_cmd) {
         case 47:
             if (!(asic_cur_status & 0x800000)) {
                 if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-                    return 0x25U;
+                    return 0x25;
                 }
-                osEPiWriteIo(LEOPiInfo, 0x05000508U, 0x90000U);
+                osEPiWriteIo(LEOPiInfo, 0x05000508, 0x90000);
                 if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-                    return 0x25U;
+                    return 0x25;
                 }
             }
             break;
@@ -97,39 +97,39 @@ u8 leoChk_done_status(u32 asic_cmd) {
             break;
         case 49:
             if (!(asic_cmd & 1)) {
-                return 0U;
+                return 0;
             }
             break;
         case 21:
-            osEPiWriteIo(LEOPiInfo, 0x05000500U, 0U);
+            osEPiWriteIo(LEOPiInfo, 0x05000500, 0);
             if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-                return 0x25U;
+                return 0x25;
             }
-            osEPiWriteIo(LEOPiInfo, 0x05000508U, 0xC0000U);
+            osEPiWriteIo(LEOPiInfo, 0x05000508, 0xC0000);
             if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-                return 0x25U;
+                return 0x25;
             }
-            osEPiReadIo(LEOPiInfo, 0x05000500U, &asic_data);
-            code = leoChk_asic_ready(0xC0000U);
+            osEPiReadIo(LEOPiInfo, 0x05000500, &asic_data);
+            code = leoChk_asic_ready(0xC0000);
             if (code != 0) {
                 return code;
             }
             if (asic_data & 0x10000) {
-                return 2U;
+                return 2;
             }
             if (asic_data & 0x20000) {
-                return 0x18U;
+                return 0x18;
             }
             if (asic_data & 0x40000) {
-                return 1U;
+                return 1;
             }
             if (asic_data & 0x80000) {
-                return 0x15U;
+                return 0x15;
             }
             if (asic_data & 0x200000) {
-                return 0xBU;
+                return 0xB;
             }
-            return 0x29U;
+            return 0x29;
     }
     return code;
 }
@@ -142,12 +142,12 @@ u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data) {
         LEOcur_command->header.sense = status;
         return LEOcur_command->header.sense;
     }
-    osEPiWriteIo(LEOPiInfo, 0x05000500U, asic_data);
+    osEPiWriteIo(LEOPiInfo, 0x05000500, asic_data);
     if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
         LEOcur_command->header.sense = 0x25;
         return LEOcur_command->header.sense;
     }
-    osEPiWriteIo(LEOPiInfo, 0x05000508U, asic_cmd);
+    osEPiWriteIo(LEOPiInfo, 0x05000508, asic_cmd);
     return 0;
 }
 
@@ -183,12 +183,12 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
         LEOcur_command->header.sense = status;
         return LEOcur_command->header.sense;
     }
-    osEPiWriteIo(LEOPiInfo, 0x05000500U, asic_data);
+    osEPiWriteIo(LEOPiInfo, 0x05000500, asic_data);
     if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
         LEOcur_command->header.sense = 0x25;
         return LEOcur_command->header.sense;
     }
-    osEPiWriteIo(LEOPiInfo, 0x05000508U, asic_cmd);
+    osEPiWriteIo(LEOPiInfo, 0x05000508, asic_cmd);
     if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
         return 0x25U;
     }
@@ -200,21 +200,21 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
 }
 
 u8 leoDetect_index_w(void) {
-    return leoSend_asic_cmd_w(0xE0001U, 0U);
+    return leoSend_asic_cmd_w(0xE0001, 0);
 }
 
 u8 leoRecal_i(void) {
-    return leoSend_asic_cmd_i(0x30001U, 0U);
+    return leoSend_asic_cmd_i(0x30001, 0);
 }
 
 u8 leoRecal_w(void) {
-    return leoSend_asic_cmd_w(0x30001U, 0U);
+    return leoSend_asic_cmd_w(0x30001, 0);
 }
 
 u8 leoSeek_i(u16 rwmode) {
     s32 tgt_tk;
 
-    tgt_tk = ((LEOtgt_param.head << 0xC) + LEOtgt_param.cylinder) << 0x10;
+    tgt_tk = ((LEOtgt_param.head << 12) + LEOtgt_param.cylinder) << 16;
     if (!rwmode) {
         return leoSend_asic_cmd_i(0x10001, tgt_tk);
     }
@@ -224,11 +224,11 @@ u8 leoSeek_i(u16 rwmode) {
 u8 leoSeek_w(void) {
     u8 sksense;
 
-    sksense = leoSeek_i(0U);
+    sksense = leoSeek_i(0);
     if (sksense != 0) {
         return sksense;
     }
-    return leoWait_mecha_cmd_done(0x10001U);
+    return leoWait_mecha_cmd_done(0x10001);
 }
 
 u8 leoRecv_event_mesg(s32 control) {
@@ -298,7 +298,7 @@ u8 leoChk_cur_drvmode(void) {
 }
 
 void leoDrive_reset(void) {
-    osEPiWriteIo(LEOPiInfo, 0x05000520U, 0xAAAA0000U);
+    osEPiWriteIo(LEOPiInfo, 0x05000520, 0xAAAA0000);
 }
 
 u32 leoChkUnit_atten(void) {

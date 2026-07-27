@@ -439,7 +439,7 @@ s32 func_801C843C(s32 arg0, s32* arg1, s32* arg2) {
 s32 func_801C84E0(s32 arg0) {
     s32 sp1C;
 
-    if (LeoLBAToByte(arg0, 1U, &sp1C) == 0) {
+    if (LeoLBAToByte(arg0, 1, &sp1C) == 0) {
         return sp1C;
     }
     return 0;

@@ -20,7 +20,7 @@ void leoSet_mseq(u16 rwmode) {
     u8 i;
 
     LEOasic_seq_ctl_shadow &= 0xBFFFFFFF;
-    osEPiWriteIo(LEOPiInfo, 0x05000518U, LEOasic_seq_ctl_shadow);
+    osEPiWriteIo(LEOPiInfo, 0x05000518, LEOasic_seq_ctl_shadow);
     if (rwmode == 1) {
         tbl = wt_mseq_code;
     } else {
@@ -40,11 +40,11 @@ void leoSet_mseq(u16 rwmode) {
     LEOPiInfo->transferInfo.cmdType = 2;
     osEPiStartDma(LEOPiInfo, &LEOPiDmaParam, 1);
     osRecvMesg(&LEOdma_que, NULL, OS_MESG_BLOCK);
-    osEPiWriteIo(LEOPiInfo, 0x05000530U, (sct_byte_u | 0x5900) << 16);
+    osEPiWriteIo(LEOPiInfo, 0x05000530, (sct_byte_u | 0x5900) << 16);
     if (LEOrw_flags & 0x800) {
         sct_byte_x += 0x100;
     }
-    osEPiWriteIo(LEOPiInfo, 0x05000528U, sct_byte_x << 8);
+    osEPiWriteIo(LEOPiInfo, 0x05000528, sct_byte_x << 8);
     LEOasic_seq_ctl_shadow |= 0x40000000;
-    osEPiWriteIo(LEOPiInfo, 0x05000518U, LEOasic_seq_ctl_shadow);
+    osEPiWriteIo(LEOPiInfo, 0x05000518, LEOasic_seq_ctl_shadow);
 }

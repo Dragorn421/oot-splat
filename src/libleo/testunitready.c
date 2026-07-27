@@ -6,7 +6,7 @@ s32 LeoTestUnitReady(LEOStatus* status) {
     if (__leoActive == 0) {
         return -1;
     }
-    if (IO_READ(0xA4600010) & 1) {
+    if (IO_READ(PI_STATUS_REG) & 1) {
         return 8;
     }
     cmdBlock.header.command = 3;

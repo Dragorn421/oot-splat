@@ -219,9 +219,9 @@ u32 leoChk_mecha_int(void) {
     u32 stat;
     u32 index_stat;
 
-    stat = leoWait_mecha_cmd_done(0x10001U);
+    stat = leoWait_mecha_cmd_done(0x10001);
     if (stat == 0) {
-        osEPiReadIo(LEOPiInfo, 0x0500050CU, &index_stat);
+        osEPiReadIo(LEOPiInfo, 0x0500050C, &index_stat);
         if ((index_stat & 0x60000000) != 0x60000000) {
             stat = 0x18;
         }
@@ -230,8 +230,8 @@ u32 leoChk_mecha_int(void) {
 }
 
 void leosetup_BM(void) {
-    osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow | 0x10000000);
-    osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, (u32)LEOasic_bm_ctl_shadow);
     if (LEOtgt_param.start_block != 0) {
         LEOasic_bm_ctl_shadow = 0x5A0000;
     } else {
@@ -243,34 +243,34 @@ void leosetup_BM(void) {
     if (LEOtgt_param.rdwr_blocks == 2) {
         LEOasic_bm_ctl_shadow |= 0x02000000;
     }
-    osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, (u32)LEOasic_bm_ctl_shadow);
 }
 
 u32 leochk_err_reg(void) {
     u32 sense;
     u32 index_status;
 
-    osEPiReadIo(LEOPiInfo, 0x05000514U, &sense);
-    osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow | 0x10000000);
-    osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
+    osEPiReadIo(LEOPiInfo, 0x05000514, &sense);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, (u32)LEOasic_bm_ctl_shadow);
     if (sense & 0x04000000) {
-        return 0x31U;
+        return 0x31;
     }
     if (sense & 0x10000000) {
-        return 4U;
+        return 4;
     }
     if (sense & 0x42000000) {
         if (LEOrw_flags & 0x8000) {
-            return 0x16U;
+            return 0x16;
         }
-        return 0x17U;
+        return 0x17;
     }
     if (sense & 0x80000000) {
-        return 0x18U;
+        return 0x18;
     }
-    osEPiReadIo(LEOPiInfo, 0x0500050CU, &index_status);
+    osEPiReadIo(LEOPiInfo, 0x0500050C, &index_status);
     if ((index_status & 0x60000000) == 0x60000000) {
-        return 0x19U;
+        return 0x19;
     }
-    return 0x18U;
+    return 0x18;
 }

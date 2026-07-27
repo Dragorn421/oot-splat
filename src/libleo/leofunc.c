@@ -35,7 +35,7 @@ void leoInitialize(OSPri compri, OSPri intpri, void** command_que_buf, u32 cmd_b
     osStartThread(&LEOcommandThread);
     osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL, STACK_TOP(LEOinterruptThreadStack), intpri);
     osStartThread(&LEOinterruptThread);
-    osSetEventMesg(2U, &LEOevent_que, (void*)0x30000);
+    osSetEventMesg(2, &LEOevent_que, (void*)0x30000);
     osSendMesg(&LEOblock_que, NULL, OS_MESG_NOBLOCK);
     __osRestoreInt(savedMask);
     if (oldPri != -1) {

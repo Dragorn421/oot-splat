@@ -15,22 +15,22 @@ s32 __osLeoInterrupt(void) {
 
     info = &__osDiskHandle->transferInfo;
     blockInfo = &info->block[info->blockNum];
-    pi_stat = IO_READ(0xA4600010);
+    pi_stat = IO_READ(PI_STATUS_REG);
     if (pi_stat & 1) {
         __OSGlobalIntMask &= ~0x800;
         blockInfo->errStatus = 0x1D;
         __osLeoResume();
         return 1;
     }
-    pi_stat = IO_READ(0xA4600010);
+    pi_stat = IO_READ(PI_STATUS_REG);
     while (pi_stat & 3) {
-        pi_stat = IO_READ(0xA4600010);
+        pi_stat = IO_READ(PI_STATUS_REG);
     }
     stat = IO_READ(0xA5000508);
     if (stat & 0x02000000) {
-        pi_stat = IO_READ(0xA4600010);
+        pi_stat = IO_READ(PI_STATUS_REG);
         while (pi_stat & 3) {
-            pi_stat = IO_READ(0xA4600010);
+            pi_stat = IO_READ(PI_STATUS_REG);
         }
         IO_WRITE(0xA5000510, info->bmCtlShadow | 0x01000000);
         blockInfo->errStatus = 0;
@@ -40,14 +40,14 @@ s32 __osLeoInterrupt(void) {
         return 1;
     }
     if (stat & 0x08000000) {
-        pi_stat = IO_READ(0xA4600010);
+        pi_stat = IO_READ(PI_STATUS_REG);
         while (pi_stat & 3) {
-            pi_stat = IO_READ(0xA4600010);
+            pi_stat = IO_READ(PI_STATUS_REG);
         }
         IO_READ(0xA5000508);
         blockInfo->errStatus = 0x16;
         __osLeoResume();
-        IO_WRITE(0xA4600010, 2);
+        IO_WRITE(PI_STATUS_REG, 2);
         __OSGlobalIntMask |= 0x100401;
         return 1;
     }
@@ -57,7 +57,7 @@ s32 __osLeoInterrupt(void) {
                 blockInfo->errStatus = 0x18;
                 __osLeoAbnormalResume();
             } else {
-                IO_WRITE(0xA4600010, 2);
+                IO_WRITE(PI_STATUS_REG, 2);
                 __OSGlobalIntMask |= 0x100401;
                 blockInfo->errStatus = 0;
                 __osLeoResume();
@@ -65,7 +65,7 @@ s32 __osLeoInterrupt(void) {
         } else {
             blockInfo->dramAddr = (u32)blockInfo->dramAddr + blockInfo->sectorSize;
             info->sectorNum += 1;
-            __osEPiRawStartDma(__osDiskHandle, 1, 0x05000400U, blockInfo->dramAddr, blockInfo->sectorSize);
+            __osEPiRawStartDma(__osDiskHandle, 1, 0x05000400, blockInfo->dramAddr, blockInfo->sectorSize);
         }
         return 1;
     }
@@ -86,7 +86,7 @@ s32 __osLeoInterrupt(void) {
         }
         bm_stat = IO_READ(0xA5000510);
         if (((bm_stat & 0x200000) && (bm_stat & 0x400000)) || (bm_stat & 0x02000000)) {
-            if (blockInfo->C1ErrNum >= 4U) {
+            if (blockInfo->C1ErrNum >= 4) {
                 if ((info->transferMode != 3) || (info->sectorNum >= 0x53)) {
                     blockInfo->errStatus = 0x17;
                     __osLeoAbnormalResume();
@@ -111,12 +111,12 @@ s32 __osLeoInterrupt(void) {
                     info->block[1].dramAddr = (u32)info->block[1].dramAddr - info->block[1].sectorSize;
                     blockInfo->errStatus = 0x16;
                 } else {
-                    IO_WRITE(0xA4600010, 2);
+                    IO_WRITE(PI_STATUS_REG, 2);
                     __OSGlobalIntMask |= 0x100401;
                     info->cmdType = 2;
                     blockInfo->errStatus = 0;
                 }
-                __osEPiRawStartDma(__osDiskHandle, 0, 0x05000000U, blockInfo->C2Addr, blockInfo->sectorSize * 4);
+                __osEPiRawStartDma(__osDiskHandle, 0, 0x05000000, blockInfo->C2Addr, blockInfo->sectorSize * 4);
             }
             return 1;
         }
@@ -141,7 +141,7 @@ s32 __osLeoInterrupt(void) {
                 __osLeoAbnormalResume();
                 return 1;
             }
-            __osEPiRawStartDma(__osDiskHandle, 0, 0x05000400U, blockInfo->dramAddr, blockInfo->sectorSize);
+            __osEPiRawStartDma(__osDiskHandle, 0, 0x05000400, blockInfo->dramAddr, blockInfo->sectorSize);
             blockInfo->errStatus = 0;
             return 1;
         }
@@ -162,12 +162,12 @@ void __osLeoAbnormalResume(void) {
     u32 pi_stat;
 
     info = &__osDiskHandle->transferInfo;
-    while ((pi_stat = IO_READ(0xA4600010)) & 3) {}
+    while ((pi_stat = IO_READ(PI_STATUS_REG)) & 3) {}
     IO_WRITE(0xA5000510, info->bmCtlShadow | 0x10000000);
-    while ((pi_stat = IO_READ(0xA4600010)) & 3) {}
+    while ((pi_stat = IO_READ(PI_STATUS_REG)) & 3) {}
     IO_WRITE(0xA5000510, info->bmCtlShadow);
     __osLeoResume();
-    IO_WRITE(0xA4600010, 2);
+    IO_WRITE(PI_STATUS_REG, 2);
     __OSGlobalIntMask |= 0x100401;
 }
 

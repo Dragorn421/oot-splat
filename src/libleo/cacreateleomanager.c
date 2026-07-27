@@ -18,7 +18,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
     osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
     __leoActive = 1;
-    __osSetHWIntrRoutine(1U, __osLeoInterrupt, STACK_TOP(leoDiskStack));
+    __osSetHWIntrRoutine(1, __osLeoInterrupt, STACK_TOP(leoDiskStack));
     leoInitialize(comPri, intPri, cmdBuf, (u32)cmdMsgCnt);
     if (osResetType == 1) {
         __leoSetReset();
@@ -32,7 +32,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
         vs32 dummy = (u32)__osSetHWIntrRoutine & 0xA48D3C;
 
         while (dummy < 0xE00000) {
-            dummy += (((s32)leoCommand & 0xFF) | 0x8A) << 0x10;
+            dummy += (((s32)leoCommand & 0xFF) | 0x8A) << 16;
         }
     }
     while (cmdBlockInq.header.status == 8) {}
@@ -48,7 +48,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
     } else if (((__leoVersion.drive & 0xF) == 3) || ((__leoVersion.drive & 0xF) == 1)) {
         vu32 dummy;
 
-        osEPiReadIo(driveRomHandle, 0x9FF00U, &data);
+        osEPiReadIo(driveRomHandle, 0x9FF00, &data);
         data = ((data & 0xFF000000) >> 24);
         if (data != 4) {
             while (true) {}

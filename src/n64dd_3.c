@@ -57,7 +57,7 @@ void func_801C9318(void) {
 
     osRecvMesg(D_801E1590.unk4, NULL, OS_MESG_NOBLOCK);
     if ((D_801D3734 != NULL) && (D_801D3720 == 0)) {
-        temp_v0 = osSetIntMask(1U);
+        temp_v0 = osSetIntMask(OS_IM_NONE);
         sp20 = D_801D3724;
         sp1C = D_801D372C;
         sp18 = D_801D3730;
@@ -98,7 +98,7 @@ s32 func_801C948C(struct_801E1598* arg0) {
 
     while (true) {
         var_s0 = 0;
-        Sleep_Msec(0x3CU);
+        Sleep_Msec(60);
         func_801C8B40(arg0);
         switch (arg0->unk68) {
             case 0x2A:
@@ -171,7 +171,7 @@ s32 func_801C9630(struct_801E1598* arg0) {
                 if (temp_v0 != 9) {
                     return temp_v0;
                 }
-                Sleep_Msec(0x3CU);
+                Sleep_Msec(60);
                 break;
         }
     }
@@ -181,7 +181,7 @@ s32 func_801C96E0(struct_801E1598* arg0) {
     s32 temp_v0;
 
     while (true) {
-        Sleep_Msec(0x3CU);
+        Sleep_Msec(60);
         func_801C8AF8(arg0);
         switch (arg0->unk68) {
             case 0x23:
@@ -293,7 +293,7 @@ s32 func_801C999C(struct_801E1598* arg0) {
             return temp_v0;
         }
         if (1) {}
-        Sleep_Msec(0xFAU);
+        Sleep_Msec(250);
         if (var_s0++ < 0x1E) {
         } else {
             return func_801C9430(arg0);
@@ -305,7 +305,7 @@ s32 func_801C9A50(struct_801E1598* arg0) {
     if (arg0->unk68 == 0x29) {
         return func_801C9430(arg0);
     }
-    if ((u32)osMemSize < 0x800000U) {
+    if (osMemSize < 0x800000) {
         func_801C93C8(0x2C, 0, 3);
         return 4;
     }

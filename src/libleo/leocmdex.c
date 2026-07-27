@@ -237,7 +237,7 @@ u8 leoRead_system_area(void) {
         if (leoChk_err_retry(dummy_cmd.header.sense) != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             break;
         }
-        if (retry_cntr++ >= 0x40U) {
+        if (retry_cntr++ >= 64) {
             break;
         }
         if ((retry_cntr & 7) == 0) {

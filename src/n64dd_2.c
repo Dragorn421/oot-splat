@@ -171,7 +171,7 @@ void func_801C8AF8(struct_801E1598* arg0) {
 void func_801C8B40(struct_801E1598* arg0) {
     LEOCmd sp1C;
 
-    LeoSpdlMotor(&sp1C, 4U, &arg0->unk1C);
+    LeoSpdlMotor(&sp1C, 4, &arg0->unk1C);
     osRecvMesg(&arg0->unk1C, (OSMesg*)&arg0->unk68, OS_MESG_BLOCK);
 }
 
