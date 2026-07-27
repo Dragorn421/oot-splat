@@ -6,10 +6,7 @@
 extern OSPiHandle* LEOPiInfo;
 void leointerrupt(void*);
 void leomain(void*);
-extern s32 __leoQueuesCreated;
-UNK_RET leoClr_queue(void);
-extern s32 __leoResetCalled;
-u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data);
+void leoClr_queue(void);
 u8 leoChk_asic_ready(u32);
 void leoDrive_reset(void);
 extern s32 __leoActive;
@@ -26,7 +23,6 @@ typedef struct tgt_param_form {
 s32 __leoSetReset(void);
 s32 __osLeoInterrupt(void);
 OSPiHandle* osLeoDiskInit(void);
-extern UNK_TYPE D_801E8080;
 extern LEOVersion __leoVersion;
 extern STACK(leoDiskStack, 0xFF0);
 extern const u16 LEOBYTE_TBL2[];
@@ -46,20 +42,20 @@ u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
 extern OSIoMesg LEOPiDmaParam;
 extern s32 currentCommand;
 typedef union leo_sys_form {
-    /* 0x0 */ struct {
-        /* 0x0 */ u32 country;
-        /* 0x4 */ u8 fmt_type;
-        /* 0x5 */ u8 disk_type;
-        /* 0x6 */ u16 ipl_load_len;
-        /* 0x8 */ u8 defect_num[20];
+    /* 0x00 */ struct {
+        /* 0x00 */ u32 country;
+        /* 0x04 */ u8 fmt_type;
+        /* 0x05 */ u8 disk_type;
+        /* 0x06 */ u16 ipl_load_len;
+        /* 0x08 */ u8 defect_num[20];
         /* 0x1C */ void* loadptr;
         /* 0x20 */ u8 defect_data[192];
         /* 0xE0 */ u16 rom_end_lba;
         /* 0xE2 */ u16 ram_start_lba;
         /* 0xE4 */ u16 ram_end_lba;
     } param;
-    /* 0x0 */ u64 u64_data[29];
-} leo_sys_form;
+    /* 0x00 */ u64 u64_data[29];
+} leo_sys_form; // size = 0xE8
 void leoRead_common(unsigned int offset);
 u32 leoChk_err_retry(u32 sense);
 typedef struct block_param_form {
@@ -69,7 +65,7 @@ typedef struct block_param_form {
     /* 0xC */ u8 err_num;
     /* 0xD */ u8 bytes;
     /* 0xE */ u16 blkbytes;
-} block_param_form;
+} block_param_form; // size = 0x10
 extern u8 LEOC2_Syndrome[2][0xE8 * 4];
 extern block_param_form LEOc2_param;
 void leoSet_mseq(u16 rwmode);
@@ -81,13 +77,10 @@ int leoC2_Correction(void);
 u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
 u8 leoChk_done_status(u32 asic_cmd);
 u8 leoWait_mecha_cmd_done(u32 asic_cmd);
-u8 leoRecal_i(void);
 u8 leoRecal_w(void);
 u8 leoSeek_w(void);
-u8 leoChk_cur_drvmode(void);
 void leoClrUA_MEDIUM_CHANGED(void);
 void leoSetUA_MEDIUM_CHANGED(void);
-extern OSPiHandle __LeoDiskHandle;
 u8 leoAnalize_asic_status(void);
 void leoMode_sel(void);
 extern u8 LEO_TempBuffer[0xE8];
