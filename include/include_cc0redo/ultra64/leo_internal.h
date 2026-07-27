@@ -81,7 +81,7 @@ int leoC2_Correction(void);
 u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
 u8 leoChk_done_status(u32 asic_cmd);
 u8 leoWait_mecha_cmd_done(u32 asic_cmd);
-u8 func_801CD1EC(void);
+u8 leoRecal_i(void);
 u8 leoRecal_w(void);
 u8 leoSeek_w(void);
 u32 leoChk_err_retry(u32 sense);

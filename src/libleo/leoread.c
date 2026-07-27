@@ -4,7 +4,7 @@ extern vu16 LEOrw_flags;
 
 void leoRead(void) {
     LEOrw_flags = 0;
-    leoRead_common(0x18U);
+    leoRead_common(0x18);
 }
 
 void leoRead_common(unsigned int offset) {

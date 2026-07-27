@@ -2,11 +2,9 @@
 
 extern vu16 LEOrw_flags;
 
-// "read_id_cmd"
-const LEOCmdRead D_801D9650 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xE, 1, LEO_TempBuffer, 0 };
+STATIC const LEOCmdRead read_id_cmd = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xE, 1, LEO_TempBuffer, 0 };
 
-// "leo_disk_id_lba"
-const u8 D_801D9CF0[2] = { 0xE, 0xF };
+STATIC const u8 leo_disk_id_lba[2] = { 0xE, 0xF };
 
 void leoReadDiskId(void) {
     LEOCmdRead dummy_cmd;
@@ -20,8 +18,8 @@ void leoReadDiskId(void) {
     LEOcur_command = (LEOCmd*)&dummy_cmd;
     for (cntr = 0; cntr < 2; cntr++) {
         LEOrw_flags = 0x2000;
-        dummy_cmd = D_801D9650;
-        dummy_cmd.lba = D_801D9CF0[cntr];
+        dummy_cmd = read_id_cmd;
+        dummy_cmd.lba = leo_disk_id_lba[cntr];
         leoRead_common(0);
         if (dummy_cmd.header.sense != LEO_SENSE_UNRECOVERED_READ_ERROR) {
             break;

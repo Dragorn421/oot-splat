@@ -1,18 +1,18 @@
 #include "common.h"
 
 void leoMode_sel(void) {
-    u8 var_v0;
+    u8 sense;
 
-    var_v0 = leoSend_asic_cmd_w_nochkDiskChange(0x60000U, LEOcur_command->data.time.yearlo << 0x10);
-    if ((var_v0 != 0) ||
-        (var_v0 = leoSend_asic_cmd_w_nochkDiskChange(0x70000U, LEOcur_command->data.time.month << 0x10),
-         (var_v0 != 0)) ||
-        (var_v0 = leoSend_asic_cmd_w_nochkDiskChange(0x150000U, LEOcur_command->data.readwrite.xfer_blks),
-         (var_v0 != 0))) {
-        LEOcur_command->header.sense = var_v0;
+    sense = leoSend_asic_cmd_w_nochkDiskChange(0x60000U, LEOcur_command->data.time.yearlo << 16);
+    if ((sense != 0) ||
+        (sense = leoSend_asic_cmd_w_nochkDiskChange(0x70000U, LEOcur_command->data.time.month << 16),
+         (sense != 0)) ||
+        (sense = leoSend_asic_cmd_w_nochkDiskChange(0x150000U, LEOcur_command->data.readwrite.xfer_blks),
+         (sense != 0))) {
+        LEOcur_command->header.sense = sense;
         LEOcur_command->header.status = 2;
         return;
     }
-    LEOcur_command->header.sense = var_v0;
+    LEOcur_command->header.sense = sense;
     LEOcur_command->header.status = 0;
 }

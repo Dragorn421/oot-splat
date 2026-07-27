@@ -1,10 +1,10 @@
 #include "common.h"
 
 void leoSeek(void) {
-    u8 var_s0;
-    u8 temp_s1;
+    u32 tgt_tk;
+    u8 sense_code;
+    u8 retry_cntr = 20;
 
-    var_s0 = 0x14;
     if (LEOcur_command->data.readwrite.lba >= 0x10C4U) {
         LEOcur_command->header.sense = 0x20;
         LEOcur_command->header.status = 2;
@@ -12,15 +12,15 @@ void leoSeek(void) {
     }
     leoLba_to_phys(LEOcur_command->data.readwrite.lba + 0x18);
     do {
-        temp_s1 = leoSeek_w();
-        if (temp_s1 == 0) {
+        sense_code = leoSeek_w();
+        if (sense_code == 0) {
             LEOcur_command->header.status = 0;
             return;
         }
-        if (leoChk_err_retry(temp_s1) != 0) {
+        if (leoChk_err_retry(sense_code) != 0) {
             break;
         }
-    } while (var_s0--);
-    LEOcur_command->header.sense = temp_s1;
+    } while (retry_cntr--);
+    LEOcur_command->header.sense = sense_code;
     LEOcur_command->header.status = 2;
 }

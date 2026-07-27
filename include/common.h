@@ -8,3 +8,5 @@
 #define EXPAND2(a, b) a##b
 #define EXPAND(a, b) EXPAND2(a, b)
 #define DUMMY_STRUCT struct EXPAND(dummy, __LINE__);
+
+#define STATIC
