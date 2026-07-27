@@ -11,6 +11,9 @@ void (*D_801D95F0[])() = {
 // "system_read_cmd"
 const LEOCmdRead D_801D9630 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
 
+// "system_lba"
+const u8 D_801D9C40[] = { 0, 1, 8, 9, 0, 0, 0, 0 };
+
 OSPiHandle* LEOPiInfo;
 OSIoMesg LEOPiDmaParam;
 s32 currentCommand;
@@ -254,5 +257,3 @@ sys_read_end:
     LEOcur_command->header.sense = dummy_cmd.header.sense;
     return LEOcur_command->header.sense;
 }
-
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leocmdex/D_801D9C40.s")

@@ -87,7 +87,9 @@ void leoCommand(void* CDB) {
     }
 }
 
-extern LEOCmdHeader D_801D9C30;
+// "zero"
+const u8 D_801D9C30[] = { 0 };
+
 void LeoReset(void) {
     __leoResetCalled = 1;
     if (__leoQueuesCreated != 0) {
@@ -95,8 +97,8 @@ void LeoReset(void) {
         leoClr_queue();
         LEOclr_que_flag = 0;
         osRecvMesg(&LEOevent_que, NULL, 0);
-        osSendMesg(&LEOevent_que, (void*)0xA0000, 1);
-        osSendMesg(&LEOcommand_que, &D_801D9C30, 1);
+        osSendMesg(&LEOevent_que, (OSMesg)0xA0000, 1);
+        osSendMesg(&LEOcommand_que, D_801D9C30, 1);
     }
 }
 
@@ -122,5 +124,3 @@ s32 LeoResetClear(void) {
         return cmd.sense;
     }
 }
-
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leofunc/D_801D9C30.s")

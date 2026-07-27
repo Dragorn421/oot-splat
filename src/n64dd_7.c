@@ -42,7 +42,7 @@ s32 func_801CA920(s32 arg0, u8* arg1, int* arg2, int* arg3, int* arg4) {
     return 0;
 }
 
-extern u16 D_801D9C10[];
+extern const u16 D_801D9C10[];
 u16 func_801CAA44(s32 arg0) {
     return D_801D9C10[arg0 & 0xF];
 }
@@ -210,4 +210,7 @@ void func_801CAF74(PrintCallback* arg0, const char* arg1, ...) {
     va_end(varargs);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/n64dd_7/D_801D9C10.s")
+const u16 D_801D9C10[0x10] = {
+    1,      0x1085, 0x2109, 0x318D, 0x4211, 0x5295, 0x6319, 0x739D,
+    0x8C63, 0x9CE7, 0xAD6B, 0xBDEF, 0xCE73, 0xDEF7, 0xEF7B, 0xFFFF,
+};
