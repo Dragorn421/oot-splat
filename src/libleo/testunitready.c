@@ -6,7 +6,7 @@ s32 LeoTestUnitReady(LEOStatus* status) {
     if (__leoActive == 0) {
         return -1;
     }
-    if (IO_READ(PI_STATUS_REG) & 1) {
+    if (IO_READ(PI_STATUS_REG) & PI_STATUS_DMA_BUSY) {
         return 8;
     }
     cmdBlock.header.command = LEO_COMMAND_TEST_UNIT_READY;

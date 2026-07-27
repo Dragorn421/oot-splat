@@ -10,7 +10,7 @@ u32 LeoDriveExist(void) {
     u32 relDuration;
 
     __osPiGetAccess();
-    while ((stat = IO_READ(PI_STATUS_REG)) & 3) {}
+    while (((stat = IO_READ(PI_STATUS_REG)) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) != 0) {}
     latency = IO_READ(PI_BSD_DOM1_LAT_REG);
     pageSize = IO_READ(PI_BSD_DOM1_PGS_REG);
     relDuration = IO_READ(PI_BSD_DOM1_RLS_REG);

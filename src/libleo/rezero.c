@@ -6,7 +6,7 @@ void leoRezero(void) {
 
     do {
         sense_code = leoRecal_w();
-        if (sense_code == 0) {
+        if (sense_code == LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             LEOtgt_param.cylinder = 0;
             LEOtgt_param.head = 0;
             LEOtgt_param.zone = 0;

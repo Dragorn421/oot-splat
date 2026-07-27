@@ -3,9 +3,9 @@
 extern vu16 LEOrw_flags;
 
 u32 read_write_track(void);
-u32 leoChk_mecha_int(void);  
-void leosetup_BM(void);      
-u32 leochk_err_reg(void);    
+u32 leoChk_mecha_int(void);
+void leosetup_BM(void);
+u32 leochk_err_reg(void);
 
 OSMesg LEOc2ctrl_que_buf;
 OSMesgQueue LEOc2ctrl_que;
@@ -143,7 +143,7 @@ u32 read_write_track(void) {
                             if (LEOtgt_param.rdwr_blocks == 1) {
                                 osEPiReadIo(LEOPiInfo, 0x05000514, &message);
                                 if (message & 0x10000000) {
-                                    message = 4;
+                                    message = LEO_SENSE_DATA_PHASE_ERROR;
                                     goto track_end;
                                 }
                             }
@@ -164,13 +164,13 @@ u32 read_write_track(void) {
                             osRecvMesg(&LEOc2ctrl_que, NULL, OS_MESG_BLOCK);
                             LEOrw_flags |= 0x4000;
                             LEOc2_param = block_param;
-                            osSendMesg(&LEOcontrol_que, (void*)0x80000, OS_MESG_BLOCK);
+                            osSendMesg(&LEOcontrol_que, (OSMesg)0x80000, OS_MESG_BLOCK);
                         }
                     } else {
                         if (LEOtgt_param.rdwr_blocks == 1) {
                             if ((*(u32*)&LEOC2_Syndrome[block][0x00] | *(u32*)&LEOC2_Syndrome[block][0x04] |
                                  *(u32*)&LEOC2_Syndrome[block][0x08] | *(u32*)&LEOC2_Syndrome[block][0x0C]) != 0) {
-                                message = 0x17;
+                                message = LEO_SENSE_UNRECOVERED_READ_ERROR;
                                 goto track_end;
                             }
                         }
@@ -184,11 +184,11 @@ u32 read_write_track(void) {
             return 0;
         }
     track_end:
-        if (message == 0x16) {
+        if (message == LEO_SENSE_WRITE_FAULT) {
             message = leochk_err_reg();
         }
     do_retry:
-        if (leoChk_err_retry(message) || (LEOrw_flags & 0x1000) || retry_cntr++ == 0x40) {
+        if ((leoChk_err_retry(message) != 0) || (LEOrw_flags & 0x1000) || (retry_cntr++ == 64)) {
             break;
         }
         if ((retry_cntr & 7) == 0) {
@@ -197,7 +197,8 @@ u32 read_write_track(void) {
                 goto do_retry;
             }
         }
-        if (message == 0x18 || (message == 0x17 && retry_cntr == 0x20)) {
+        if ((message == LEO_SENSE_NO_REFERENCE_POSITION_FOUND) ||
+            ((message == LEO_SENSE_UNRECOVERED_READ_ERROR) && (retry_cntr == 32))) {
             message = leoDetect_index_w();
             if (message != 0) {
                 goto do_retry;
@@ -223,7 +224,7 @@ u32 leoChk_mecha_int(void) {
     if (stat == 0) {
         osEPiReadIo(LEOPiInfo, 0x0500050C, &index_stat);
         if ((index_stat & 0x60000000) != 0x60000000) {
-            stat = 0x18;
+            stat = LEO_SENSE_NO_REFERENCE_POSITION_FOUND;
         }
     }
     return stat;
@@ -254,23 +255,23 @@ u32 leochk_err_reg(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow | 0x10000000);
     osEPiWriteIo(LEOPiInfo, 0x05000510, (u32)LEOasic_bm_ctl_shadow);
     if (sense & 0x04000000) {
-        return 0x31;
+        return LEO_SENSE_EJECTED_ILLEGALLY_RESUME;
     }
     if (sense & 0x10000000) {
-        return 4;
+        return LEO_SENSE_DATA_PHASE_ERROR;
     }
     if (sense & 0x42000000) {
         if (LEOrw_flags & 0x8000) {
-            return 0x16;
+            return LEO_SENSE_WRITE_FAULT;
         }
-        return 0x17;
+        return LEO_SENSE_UNRECOVERED_READ_ERROR;
     }
     if (sense & 0x80000000) {
-        return 0x18;
+        return LEO_SENSE_NO_REFERENCE_POSITION_FOUND;
     }
     osEPiReadIo(LEOPiInfo, 0x0500050C, &index_status);
     if ((index_status & 0x60000000) == 0x60000000) {
-        return 0x19;
+        return LEO_SENSE_TRACK_FOLLOWING_ERROR;
     }
-    return 0x18;
+    return LEO_SENSE_NO_REFERENCE_POSITION_FOUND;
 }

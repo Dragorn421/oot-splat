@@ -15,27 +15,27 @@ u8 leoAnalize_asic_status(void) {
             LEOdrive_flag = 0;
         }
         if (curr_stat & 0xFFFF) {
-            return 0x29;
+            return LEO_SENSE_DEVICE_COMMUNICATION_FAILURE;
         }
         if ((curr_stat & 0xC00000) == 0x800000) {
-            return 3;
+            return LEO_SENSE_COMMAND_PHASE_ERROR;
         }
         if (curr_stat & 0x400000) {
             unit_atten |= 2;
-            return 0x2B;
+            return LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED;
         }
         if (curr_stat & 0x01000000) {
-            return 0x31;
+            return LEO_SENSE_EJECTED_ILLEGALLY_RESUME;
         }
         if (curr_stat & 0x10000) {
             unit_atten |= 1;
-            return 0x2F;
+            return LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED;
         }
         if (curr_stat & 0x20000) {
-            return 0x15;
+            return LEO_SENSE_NO_SEEK_COMPLETE;
         }
     }
-    return 0;
+    return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
 }
 
 u8 leoChk_asic_ready(u32 asic_cmd) {
@@ -43,31 +43,31 @@ u8 leoChk_asic_ready(u32 asic_cmd) {
 
     sense_code = leoAnalize_asic_status();
     switch (sense_code) {
-        case 47:
+        case LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED:
             if (asic_cmd == 0x80000) {
-                return 0;
+                return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
             }
             FALLTHROUGH;
-        case 43:
+        case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
             if (!(asic_cur_status & 0x800000)) {
                 if (asic_cmd == 0x90000) {
-                    return 0;
+                    return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
                 }
                 if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-                    return 0x25;
+                    return LEO_SENSE_WAITING_NMI;
                 }
                 osEPiWriteIo(LEOPiInfo, 0x05000508, 0x90000);
                 if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-                    return 0x25;
+                    return LEO_SENSE_WAITING_NMI;
                 }
             }
             break;
-        case 49:
+        case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
             if (asic_cmd & 1) {
                 break;
             }
             FALLTHROUGH;
-        case 21:
+        case LEO_SENSE_NO_SEEK_COMPLETE:
             return 0;
         default:
             break;
@@ -85,11 +85,11 @@ u8 leoChk_done_status(u32 asic_cmd) {
         case 47:
             if (!(asic_cur_status & 0x800000)) {
                 if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-                    return 0x25;
+                    return LEO_SENSE_WAITING_NMI;
                 }
                 osEPiWriteIo(LEOPiInfo, 0x05000508, 0x90000);
                 if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-                    return 0x25;
+                    return LEO_SENSE_WAITING_NMI;
                 }
             }
             break;
@@ -97,17 +97,17 @@ u8 leoChk_done_status(u32 asic_cmd) {
             break;
         case 49:
             if (!(asic_cmd & 1)) {
-                return 0;
+                return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
             }
             break;
         case 21:
             osEPiWriteIo(LEOPiInfo, 0x05000500, 0);
             if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-                return 0x25;
+                return LEO_SENSE_WAITING_NMI;
             }
             osEPiWriteIo(LEOPiInfo, 0x05000508, 0xC0000);
             if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-                return 0x25;
+                return LEO_SENSE_WAITING_NMI;
             }
             osEPiReadIo(LEOPiInfo, 0x05000500, &asic_data);
             code = leoChk_asic_ready(0xC0000);
@@ -115,21 +115,21 @@ u8 leoChk_done_status(u32 asic_cmd) {
                 return code;
             }
             if (asic_data & 0x10000) {
-                return 2;
+                return LEO_SENSE_DIAGNOSTIC_FAILURE;
             }
             if (asic_data & 0x20000) {
-                return 0x18;
+                return LEO_SENSE_NO_REFERENCE_POSITION_FOUND;
             }
             if (asic_data & 0x40000) {
-                return 1;
+                return LEO_SENSE_DRIVE_NOT_READY;
             }
             if (asic_data & 0x80000) {
-                return 0x15;
+                return LEO_SENSE_NO_SEEK_COMPLETE;
             }
             if (asic_data & 0x200000) {
-                return 0xB;
+                return 11;
             }
-            return 0x29;
+            return LEO_SENSE_DEVICE_COMMUNICATION_FAILURE;
     }
     return code;
 }
@@ -144,7 +144,7 @@ u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data) {
     }
     osEPiWriteIo(LEOPiInfo, 0x05000500, asic_data);
     if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-        LEOcur_command->header.sense = 0x25;
+        LEOcur_command->header.sense = LEO_SENSE_WAITING_NMI;
         return LEOcur_command->header.sense;
     }
     osEPiWriteIo(LEOPiInfo, 0x05000508, asic_cmd);
@@ -155,7 +155,7 @@ u8 leoWait_mecha_cmd_done(u32 asic_cmd) {
     u32 done_stat;
 
     if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-        return 0x25;
+        return LEO_SENSE_WAITING_NMI;
     }
     done_stat = leoChk_done_status(asic_cmd);
     if (done_stat != 0) {
@@ -185,18 +185,18 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
     }
     osEPiWriteIo(LEOPiInfo, 0x05000500, asic_data);
     if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
-        LEOcur_command->header.sense = 0x25;
+        LEOcur_command->header.sense = LEO_SENSE_WAITING_NMI;
         return LEOcur_command->header.sense;
     }
     osEPiWriteIo(LEOPiInfo, 0x05000508, asic_cmd);
     if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-        return 0x25;
+        return LEO_SENSE_WAITING_NMI;
     }
     done_stat = leoChk_done_status(asic_cmd);
-    if ((done_stat != 0x2F) && (done_stat != 0)) {
+    if ((done_stat != LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED) && (done_stat != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION)) {
         return done_stat;
     }
-    return 0;
+    return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
 }
 
 u8 leoDetect_index_w(void) {
@@ -242,17 +242,17 @@ u8 leoRecv_event_mesg(s32 control) {
 }
 
 u32 leoChk_err_retry(u32 sense) {
-    if ((currentCommand == 0xC) || (currentCommand == 8)) {
+    if ((currentCommand == LEO_COMMAND_READ_DISK_ID) || (currentCommand == LEO_COMMAND_START_STOP)) {
         switch (sense) {
-            case 43:
+            case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
                 unit_atten |= 2;
                 FALLTHROUGH;
-            case 2:
-            case 3:
-            case 37:
-            case 41:
-            case 42:
-            case 49:
+            case LEO_SENSE_DIAGNOSTIC_FAILURE:
+            case LEO_SENSE_COMMAND_PHASE_ERROR:
+            case LEO_SENSE_WAITING_NMI:
+            case LEO_SENSE_DEVICE_COMMUNICATION_FAILURE:
+            case LEO_SENSE_MEDIUM_NOT_PRESENT:
+            case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
                 LEOdrive_flag = 0;
                 return -1U;
             default:
@@ -260,18 +260,18 @@ u32 leoChk_err_retry(u32 sense) {
         }
     } else {
         switch (sense) {
-            case 43:
+            case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
                 unit_atten |= 2;
                 FALLTHROUGH;
-            case 47:
+            case LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED:
                 unit_atten |= 1;
                 FALLTHROUGH;
-            case 2:
-            case 3:
-            case 37:
-            case 41:
-            case 42:
-            case 49:
+            case LEO_SENSE_DIAGNOSTIC_FAILURE:
+            case LEO_SENSE_COMMAND_PHASE_ERROR:
+            case LEO_SENSE_WAITING_NMI:
+            case LEO_SENSE_DEVICE_COMMUNICATION_FAILURE:
+            case LEO_SENSE_MEDIUM_NOT_PRESENT:
+            case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
                 LEOdrive_flag = 0;
                 return -1U;
             default:
@@ -307,12 +307,12 @@ u32 leoChkUnit_atten(void) {
 
 u32 leoRetUnit_atten(void) {
     if (unit_atten & 2) {
-        return 0x2B;
+        return LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED;
     }
     if (unit_atten & 1) {
-        return 0x2F;
+        return LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED;
     }
-    return 0;
+    return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
 }
 
 void leoClrUA_RESET(void) {

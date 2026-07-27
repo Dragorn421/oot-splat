@@ -16,20 +16,20 @@ s32 __osLeoInterrupt(void) {
     info = &__osDiskHandle->transferInfo;
     blockInfo = &info->block[info->blockNum];
     pi_stat = IO_READ(PI_STATUS_REG);
-    if (pi_stat & 1) {
+    if (pi_stat & PI_STATUS_DMA_BUSY) {
         __OSGlobalIntMask &= ~0x800;
         blockInfo->errStatus = 0x1D;
         __osLeoResume();
         return 1;
     }
     pi_stat = IO_READ(PI_STATUS_REG);
-    while (pi_stat & 3) {
+    while ((pi_stat & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) != 0) {
         pi_stat = IO_READ(PI_STATUS_REG);
     }
     stat = IO_READ(0xA5000508);
     if (stat & 0x02000000) {
         pi_stat = IO_READ(PI_STATUS_REG);
-        while (pi_stat & 3) {
+        while ((pi_stat & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) != 0) {
             pi_stat = IO_READ(PI_STATUS_REG);
         }
         IO_WRITE(0xA5000510, info->bmCtlShadow | 0x01000000);
@@ -41,14 +41,14 @@ s32 __osLeoInterrupt(void) {
     }
     if (stat & 0x08000000) {
         pi_stat = IO_READ(PI_STATUS_REG);
-        while (pi_stat & 3) {
+        while ((pi_stat & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) != 0) {
             pi_stat = IO_READ(PI_STATUS_REG);
         }
         IO_READ(0xA5000508);
         blockInfo->errStatus = 0x16;
         __osLeoResume();
-        IO_WRITE(PI_STATUS_REG, 2);
-        __OSGlobalIntMask |= 0x100401;
+        IO_WRITE(PI_STATUS_REG, PI_STATUS_CLR_INTR);
+        __OSGlobalIntMask |= OS_IM_PI;
         return 1;
     }
     if (info->cmdType == 1) {
@@ -57,8 +57,8 @@ s32 __osLeoInterrupt(void) {
                 blockInfo->errStatus = 0x18;
                 __osLeoAbnormalResume();
             } else {
-                IO_WRITE(PI_STATUS_REG, 2);
-                __OSGlobalIntMask |= 0x100401;
+                IO_WRITE(PI_STATUS_REG, PI_STATUS_CLR_INTR);
+                __OSGlobalIntMask |= OS_IM_PI;
                 blockInfo->errStatus = 0;
                 __osLeoResume();
             }
@@ -111,8 +111,8 @@ s32 __osLeoInterrupt(void) {
                     info->block[1].dramAddr = (u32)info->block[1].dramAddr - info->block[1].sectorSize;
                     blockInfo->errStatus = 0x16;
                 } else {
-                    IO_WRITE(PI_STATUS_REG, 2);
-                    __OSGlobalIntMask |= 0x100401;
+                    IO_WRITE(PI_STATUS_REG, PI_STATUS_CLR_INTR);
+                    __OSGlobalIntMask |= OS_IM_PI;
                     info->cmdType = 2;
                     blockInfo->errStatus = 0;
                 }
@@ -162,13 +162,13 @@ void __osLeoAbnormalResume(void) {
     u32 pi_stat;
 
     info = &__osDiskHandle->transferInfo;
-    while ((pi_stat = IO_READ(PI_STATUS_REG)) & 3) {}
+    while (((pi_stat = IO_READ(PI_STATUS_REG)) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) != 0) {}
     IO_WRITE(0xA5000510, info->bmCtlShadow | 0x10000000);
-    while ((pi_stat = IO_READ(PI_STATUS_REG)) & 3) {}
+    while (((pi_stat = IO_READ(PI_STATUS_REG)) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) != 0) {}
     IO_WRITE(0xA5000510, info->bmCtlShadow);
     __osLeoResume();
-    IO_WRITE(PI_STATUS_REG, 2);
-    __OSGlobalIntMask |= 0x100401;
+    IO_WRITE(PI_STATUS_REG, PI_STATUS_CLR_INTR);
+    __OSGlobalIntMask |= OS_IM_PI;
 }
 
 void __osLeoResume(void) {

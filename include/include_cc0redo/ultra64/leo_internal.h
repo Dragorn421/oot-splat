@@ -84,7 +84,6 @@ u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 u8 leoRecal_i(void);
 u8 leoRecal_w(void);
 u8 leoSeek_w(void);
-u32 leoChk_err_retry(u32 sense);
 u8 leoChk_cur_drvmode(void);
 void leoClrUA_MEDIUM_CHANGED(void);
 void leoSetUA_MEDIUM_CHANGED(void);
