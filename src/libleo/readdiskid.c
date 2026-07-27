@@ -10,7 +10,7 @@ s32 LeoReadDiskID(LEOCmd* cmdBlock, LEODiskID* vaddr, OSMesgQueue* mq) {
     cmdBlock->header.reserve3 = 0;
     cmdBlock->data.readwrite.lba = (u32)vaddr;
     if (mq != NULL) {
-        cmdBlock->header.control |= 0x80;
+        cmdBlock->header.control |= LEO_CONTROL_POST;
         cmdBlock->header.post = mq;
     }
     leoCommand(cmdBlock);

@@ -81,8 +81,8 @@ u8 leoChk_done_status(u32 asic_cmd) {
 
     code = leoAnalize_asic_status();
     switch (code) {
-        case 43:
-        case 47:
+        case LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED:
+        case LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED:
             if (!(asic_cur_status & 0x800000)) {
                 if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
                     return LEO_SENSE_WAITING_NMI;
@@ -95,12 +95,12 @@ u8 leoChk_done_status(u32 asic_cmd) {
             break;
         default:
             break;
-        case 49:
+        case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
             if (!(asic_cmd & 1)) {
                 return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
             }
             break;
-        case 21:
+        case LEO_SENSE_NO_SEEK_COMPLETE:
             osEPiWriteIo(LEOPiInfo, 0x05000500, 0);
             if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
                 return LEO_SENSE_WAITING_NMI;

@@ -16,7 +16,8 @@ void leoClr_reset(void) {
     u32 code;
 
     code = leoAnalize_asic_status();
-    if (code == 3 || code == 0x29 || code == 0x2B) {
+    if (code == LEO_SENSE_COMMAND_PHASE_ERROR || code == LEO_SENSE_DEVICE_COMMUNICATION_FAILURE ||
+        code == LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED) {
         LEOcur_command->header.sense = code;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
     } else {

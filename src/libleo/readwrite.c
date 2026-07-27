@@ -11,7 +11,7 @@ s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBA
     }
     cmdBlock->header.reserve1 = 0;
     if (mq != NULL) {
-        cmdBlock->header.control = 0x80;
+        cmdBlock->header.control = LEO_CONTROL_POST;
     } else {
         cmdBlock->header.control = 0;
     }

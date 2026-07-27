@@ -11,19 +11,19 @@ s32 LeoSpdlMotor(LEOCmd* cmdBlock, u8 mode, OSMesgQueue* mq) {
             cmdBlock->header.control = 1;
             break;
         case 1:
-            cmdBlock->header.control = 2;
+            cmdBlock->header.control = LEO_CONTROL_STBY;
             break;
         case 2:
             cmdBlock->header.control = 0;
             break;
         case 4:
-            cmdBlock->header.control = 4;
+            cmdBlock->header.control = LEO_CONTROL_BRAKE;
             break;
     }
     cmdBlock->header.reserve3 = 0;
     if (mq != NULL) {
         cmdBlock->header.post = mq;
-        cmdBlock->header.control |= 0x80;
+        cmdBlock->header.control |= LEO_CONTROL_POST;
     }
     leoCommand(cmdBlock);
     return 0;
