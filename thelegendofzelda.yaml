@@ -316,6 +316,7 @@ segments:
       - [0xB92A80, c, libleo/leotimer]
       - [0xB92F90, hasm, libleo/getkadr]
       - [0xB93A90, hasm, libleo/getaadr]
+      - [0xB95F20, c, libleo/leowrite]
       - [0xB96050, c, libleo/cjcreateleomanager]
       - [0xB96290, c, libleo/leointerrupt]
       - [0xB96960, c, libleo/cacreateleomanager]
