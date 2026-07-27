@@ -356,8 +356,8 @@ segments:
       - { name: libleo/leofunc, type: .bss, vram: 0x801E5A00 }
       - { name: libleo/leoram, type: .bss, vram: 0x801E5A20 }
       - { name: libleo/leoint, type: .bss, vram: 0x801E6720 }
-      - { name: libleo/bss_801E6740, type: bss, vram: 0x801E6740 }
-      - { name: libleo/bss_801E6770, type: bss, vram: 0x801E6770 }
+      - { name: libleo/leocmdex, type: .bss, vram: 0x801E6740 }
+      - { name: libleo/leodiskinit, type: .bss, vram: 0x801E6770 }
       - { name: libleo/bss_801E67F0, type: bss, vram: 0x801E67F0 }
       - { name: libleo/bss_801E6800, type: bss, vram: 0x801E6800 }
       - { name: libleo/bss_801E7080, type: bss, vram: 0x801E7080 }

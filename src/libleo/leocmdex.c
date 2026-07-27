@@ -11,6 +11,10 @@ void (*D_801D95F0[])() = {
 // "system_read_cmd"
 const LEOCmdRead D_801D9630 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
 
+OSPiHandle* LEOPiInfo;
+OSIoMesg LEOPiDmaParam;
+s32 currentCommand;
+
 void leomain(void* arg0) {
     u32 cur_status;
     u32 sense_code;
