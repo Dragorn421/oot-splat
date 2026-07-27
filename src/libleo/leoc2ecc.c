@@ -91,8 +91,7 @@ int leoC2_Correction(void) {
     return 0;
 }
 
-// static
-void leoC2_single_ecc(void) {
+STATIC void leoC2_single_ecc(void) {
     u8* pointer;
     unsigned int byte;
     u8* p_s;
@@ -108,8 +107,7 @@ void leoC2_single_ecc(void) {
     }
 }
 
-// static
-void leoC2_double_ecc(void) {
+STATIC void leoC2_double_ecc(void) {
     unsigned int s0;
     unsigned int error_k;
     u8* pointer1;
@@ -161,8 +159,7 @@ c2_2_1:
     } while (--byte != 0);
 }
 
-// static
-void leoC2_3_ecc(void) {
+STATIC void leoC2_3_ecc(void) {
     unsigned int s0;
     unsigned int error_i;
     unsigned int error_j;
@@ -277,8 +274,7 @@ c2_3_1:
     } while (--byte != 0);
 }
 
-// static
-void leoC2_4_ecc(void) {
+STATIC void leoC2_4_ecc(void) {
     unsigned int s0;
     unsigned int R0;
     unsigned int R1;
@@ -471,16 +467,14 @@ c2_4_1:
     } while (--byte != 0);
 }
 
-// static
-int leoAlpha_mult(int i, int k) {
+STATIC int leoAlpha_mult(int i, int k) {
     if (i == 0 || k == 0) {
         return 0;
     }
     return ganlog[glog[i] + glog[k]];
 }
 
-// static
-int leoAlpha_div(int i, int k) {
+STATIC int leoAlpha_div(int i, int k) {
     if (i == 0 || k == 0) {
         return 0;
     }

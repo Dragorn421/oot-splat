@@ -7,16 +7,14 @@ typedef struct {
     /* 0x3 */ u8 hour;
     /* 0x4 */ u8 minute;
     /* 0x5 */ u8 second;
-} __LOCTime;
+} __LOCTime; // size = 0x6
 
 u8 __locReadTimer(__LOCTime* time);
 u8 __locSetTimer(__LOCTime* time);
 
-// "ymdupper"
-const u8 D_801DA3F0[] = { 0x63, 0xC, 0x1F, 0x17, 0x3B, 0x3B };
+STATIC const u8 ymdupper[] = { 99, 12, 31, 23, 59, 59 };
 
-// "dayupper"
-const u8 D_801DA3F8[] = { 0, 0x1F, 0x1C, 0x1F, 0x1E, 0x1F, 0x1E, 0x1F, 0x1F, 0x1E, 0x1F, 0x1E, 0x1F };
+STATIC const u8 dayupper[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 void leoReadTimer(void) {
     u8* rdparam;
@@ -73,7 +71,7 @@ void leoSetTimer(void) {
         switch (ymd) {
             case 2:
                 // Day value check
-                if (D_801DA3F8[month] < temp && (temp != 0x1D || (year & 3))) {
+                if (dayupper[month] < temp && (temp != 0x1D || (year & 3))) {
                     LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
                     LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                     return;
@@ -87,7 +85,7 @@ void leoSetTimer(void) {
                 }
             default:
                 // Verify max value of each time info
-                if (D_801DA3F0[ymd] < temp) {
+                if (ymdupper[ymd] < temp) {
                     LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
                     LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                     return;
@@ -134,8 +132,7 @@ void leoSetTimer(void) {
     LEOcur_command->header.status = LEO_STATUS_GOOD;
 }
 
-// static
-u8 __locReadTimer(__LOCTime* time) {
+STATIC u8 __locReadTimer(__LOCTime* time) {
     u32 data;
     u8 sense_code;
 
@@ -170,8 +167,7 @@ u8 __locReadTimer(__LOCTime* time) {
     return 0;
 }
 
-// static
-u8 __locSetTimer(__LOCTime* time) {
+STATIC u8 __locSetTimer(__LOCTime* time) {
     u32 YearMonthX10000h;
     u32 DayHourX10000h;
     u32 MinuteSecondX10000h;

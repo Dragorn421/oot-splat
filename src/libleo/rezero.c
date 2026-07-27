@@ -1,23 +1,22 @@
 #include "common.h"
 
 void leoRezero(void) {
-    u8 var_s0;
-    u8 temp_v0;
+    u8 sense_code;
+    u8 retry_cntr = 8;
 
-    var_s0 = 8;
     do {
-        temp_v0 = leoRecal_w();
-        if (temp_v0 == 0) {
+        sense_code = leoRecal_w();
+        if (sense_code == 0) {
             LEOtgt_param.cylinder = 0;
             LEOtgt_param.head = 0;
             LEOtgt_param.zone = 0;
             LEOcur_command->header.status = 0;
             return;
         }
-        if (leoChk_err_retry(temp_v0) != 0) {
+        if (leoChk_err_retry(sense_code) != 0) {
             break;
         }
-    } while (var_s0--);
-    LEOcur_command->header.sense = temp_v0;
+    } while (retry_cntr--);
+    LEOcur_command->header.sense = sense_code;
     LEOcur_command->header.status = 2;
 }
