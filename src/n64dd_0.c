@@ -151,7 +151,7 @@ void func_801C7898(void) {
 
 void func_801C78D8(void) {
     if (D_80121213 != 0) {
-        Fault_AddHungupAndCrash("../z_n64dd.c", 0x23D);
+        Fault_AddHungupAndCrash("../z_n64dd.c", 573);
     }
     D_80121213 = 1;
 }
