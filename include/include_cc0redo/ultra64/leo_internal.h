@@ -42,7 +42,6 @@ u32 func_801CB650(void); // "read_write_track"
 u16 leoLba_to_phys(u32 lba);
 u8 leoSeek_i(u16 rwmode);
 extern OSMesgQueue LEOc2ctrl_que;
-extern void* LEOc2ctrl_que_buf;
 u32 leoChkUnit_atten(void);
 u8 leoChk_cur_drvmode(void);
 void leoClrUA_RESET(void);

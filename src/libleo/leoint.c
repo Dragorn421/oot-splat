@@ -2,6 +2,9 @@
 
 extern vu16 LEOrw_flags;
 
+OSMesg LEOc2ctrl_que_buf;
+OSMesgQueue LEOc2ctrl_que;
+
 void leointerrupt(void* arg) {
     u32 result;
     u32 tg_blocks;
