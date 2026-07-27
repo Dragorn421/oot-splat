@@ -1,8 +1,6 @@
 #ifndef LEO_INTERNAL_H
 #define LEO_INTERNAL_H
 
-#include "unk.h"
-
 extern OSPiHandle* LEOPiInfo;
 void leointerrupt(void*);
 void leomain(void*);

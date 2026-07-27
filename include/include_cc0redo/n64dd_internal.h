@@ -49,24 +49,11 @@ typedef struct struct_801E1598 {
     /* 0x6C */ s32 unk6C;
 } struct_801E1598; // size >= 0x70
 
-void func_800F6BDC(void);
-void func_800F6B3C(void);
 s32 func_801C8860(struct_801DA5D0*);
 s32 func_801C8A24(void);
-UNK_RET func_801CAA60(u8*, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s16*, s32);
-UNK_RET func_801C9318(void);
-UNK_RET func_801C8DB4(void);
-void func_801C8DD8(OSMesgQueue*, OSMesgQueue*, s32, void*, s32);
-UNK_RET func_801C8E98(void (*)(s32, s32, s32), s32, void (*)(void*, uintptr_t, size_t));
-UNK_RET func_801C8EEC(void*, s32, s32, u8);
-s8 func_801C8FD0(void);
-s32 func_801C9020(void);
-s32 func_801C905C(void);
-s32 func_801C90A4(void);
-s32 func_801C90BC(void);
-s32 func_801C9114(void);
-s32 func_801C916C(void);
-UNK_RET func_801CA3C0(s32, void (*)(void*, uintptr_t, size_t));
+void func_801CAA60(u8*, UNK_TYPE, UNK_TYPE, UNK_TYPE, s32, s32, s16*, s32);
+void func_801C9318(void);
+void func_801CA3C0(s32, void (*)(void*, uintptr_t, size_t));
 s32 func_801C8F9C(struct_801E1598*);
 
 typedef struct struct_801DA5C8 {
@@ -87,16 +74,14 @@ typedef struct struct_801C79DC {
     /* 0x98 */ IrqMgr* unk98;
 } struct_801C79DC; // size >= 0x9C
 extern s32 D_801D3720;
-extern s32 D_801D36E0;
 typedef struct struct_801E1590 {
     /* 0x0 */ OSMesgQueue* unk0;
     /* 0x4 */ OSMesgQueue* unk4;
 } struct_801E1590; // size >= 8
 extern void (*D_801D3734)(UNK_PTR, UNK_PTR, UNK_PTR);
 extern s32 D_801D3710;
-UNK_RET func_801C9400(void);
-UNK_RET func_801C8B40(struct_801E1598*);
-UNK_RET func_801C8AF8(struct_801E1598*);
+void func_801C8B40(struct_801E1598*);
+void func_801C8AF8(struct_801E1598*);
 UNK_PTR func_801CA800(s32);
 UNK_PTR func_801CA698(s32);
 UNK_PTR func_801CA86C(void);
@@ -105,36 +90,9 @@ UNK_PTR func_801CA8E0(void);
 UNK_PTR func_801CA730(void);
 extern s32 (*D_801D36D4)(struct_801E1598*);
 s32 func_801C9BA4(struct_801E1598*);
-UNK_RET func_801CA280(UNK_PTR, UNK_TYPE, const char*);
+void func_801CA280(UNK_PTR, UNK_TYPE, const char*);
 extern const char* D_801D3750[2];
-UNK_RET func_801C9D68(char*, u16);
-
-typedef struct struct_801CAF10 {
-    /* 0x00 */ struct struct_801CAF10* (*unk0)(struct struct_801CAF10*, u8*, s32);
-    /* 0x04 */ u8* unk4;
-    /* 0x08 */ u16 unk8;
-    /* 0x0A */ u16 unkA;
-    /* 0x0C */ u16 unkC;
-    /* 0x0E */ char padE[2];
-    /* 0x10 */ union {
-        s32 unk10w;
-        struct {
-            s8 unk10;
-            s8 unk11;
-            s8 unk12;
-            s8 unk13;
-        };
-    };
-    /* 0x14 */ u16 unk14;
-    /* 0x16 */ u16 unk16;
-    /* 0x18 */ u16 unk18;
-    /* 0x1A */ u16 unk1A;
-    /* 0x1C */ u8 unk1C;
-    /* 0x1D */ char pad1D[3];
-    /* 0x20 */ s16* unk20;
-    /* 0x24 */ u16 unk24;
-    /* 0x26 */ u16 unk26;
-} struct_801CAF10; /* size >= 0x28 */
+void func_801C9D68(char*, u16);
 
 extern u8 D_801DC880[];
 

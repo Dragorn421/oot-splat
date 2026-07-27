@@ -54,11 +54,22 @@ void func_801C8C74(struct_801E1598*);
 s32 func_801C9A50(struct_801E1598*);
 s32 func_801C9AD0(struct_801E1598*);
 s32 func_801C9C34(struct_801E1598*);
+void func_801C8DB4(void);
+void func_801C8DD8(OSMesgQueue*, OSMesgQueue*, s32, void*, s32);
+void func_801C8E98(void (*)(s32, s32, s32), s32, void (*)(void*, uintptr_t, size_t));
+void func_801C8EEC(void*, s32, s32, u8);
+s8 func_801C8FD0(void);
+s32 func_801C9020(void);
+s32 func_801C905C(void);
+s32 func_801C90A4(void);
+s32 func_801C90BC(void);
+s32 func_801C9114(void);
+s32 func_801C916C(void);
 
 s32 D_801D36E0 = 0;
 s32 D_801D36E4 = 0;
 struct {
-    UNK_RET (*unk0)(struct_801E1598*);
+    void (*unk0)(struct_801E1598*);
     s32 (*unk4)(struct_801E1598*);
 } D_801D36E8[5] = {
     { func_801C8A4C, func_801C9A50 }, { func_801C8B8C, func_801C9AD0 }, { func_801C8C00, func_801C9AD0 },
@@ -257,7 +268,7 @@ void func_801C8E50(struct_801E1598* arg0, s32 arg1) {
 }
 
 void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
-    struct_801E1598 *ptr = &D_801E1598;
+    struct_801E1598* ptr = &D_801E1598;
 
     func_801CA3C0(arg1, arg2);
     D_801D3734 = arg0;

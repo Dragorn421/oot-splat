@@ -1,5 +1,32 @@
 #include "common.h"
 
+typedef struct struct_801CAF10 {
+    /* 0x00 */ struct struct_801CAF10* (*unk0)(struct struct_801CAF10*, u8*, s32);
+    /* 0x04 */ u8* unk4;
+    /* 0x08 */ u16 unk8;
+    /* 0x0A */ u16 unkA;
+    /* 0x0C */ u16 unkC;
+    /* 0x0E */ char padE[2];
+    /* 0x10 */ union {
+        s32 unk10w;
+        struct {
+            s8 unk10;
+            s8 unk11;
+            s8 unk12;
+            s8 unk13;
+        };
+    };
+    /* 0x14 */ u16 unk14;
+    /* 0x16 */ u16 unk16;
+    /* 0x18 */ u16 unk18;
+    /* 0x1A */ u16 unk1A;
+    /* 0x1C */ u8 unk1C;
+    /* 0x1D */ char pad1D[3];
+    /* 0x20 */ s16* unk20;
+    /* 0x24 */ u16 unk24;
+    /* 0x26 */ u16 unk26;
+} struct_801CAF10; /* size >= 0x28 */
+
 u32 D_801D9460[0x5F] = {
     0x9D14,     0x232A14,   0x296314,   0x2F8A14,   0x457E18,   0x63CA14,   0x84AA14,   0xA03314,   0xA45E14,
     0xBB4E14,   0xCA6514,   0xD3770E,   0xE33302,   0xE78108,   0xEB2102,   0xEC6C14,   0x01008A14, 0x01163A14,
