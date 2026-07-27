@@ -19,7 +19,7 @@ void leoSet_mseq(u16 rwmode) {
     for (var_v0 = 0; var_v0 < 0x10; var_v0++, var_v1++) {
         D_801E7040[var_v0] = *var_v1;
     }
-    temp_t2 = sp2C = D_801E6716 - 1;
+    temp_t2 = sp2C = LEOtgt_param.sec_bytes - 1;
     sp2C += 7;
     temp_t2 <<= 8;
     D_801E7040[4] |= temp_t2;

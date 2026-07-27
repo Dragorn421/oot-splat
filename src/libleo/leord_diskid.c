@@ -2,6 +2,9 @@
 
 extern vu16 LEOrw_flags;
 
+// "read_id_cmd"
+const LEOCmdRead D_801D9650 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xE, 1, LEO_TempBuffer, 0 };
+
 void leoReadDiskId(void) {
     LEOCmdRead dummy_cmd;
     u8* temp_pointer;

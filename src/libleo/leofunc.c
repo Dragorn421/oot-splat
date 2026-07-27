@@ -25,7 +25,7 @@ void leoInitialize(s32 PRI_WRK, s32 PRI_INT, void** command_que_buf, u32 cmd_buf
     osCreateMesgQueue(&LEOcommand_que, command_que_buf, (s32)cmd_buff_size);
     osCreateMesgQueue(&LEOcontrol_que, &LEOcontrol_que_buf, 1);
     osCreateMesgQueue(&LEOevent_que, &LEOevent_que_buf, 1);
-    osCreateMesgQueue(&LEOdma_que, &LEOdma_que_buf, 2);
+    osCreateMesgQueue(&LEOdma_que, LEOdma_que_buf, ARRAY_COUNT(LEOdma_que_buf));
     osCreateMesgQueue(&LEOblock_que, &LEOblock_que_buf, 1);
     osCreateMesgQueue(&D_801E5A00, &D_801E5A18, 1);
     osCreateThread(&LEOcommandThread, 1, leomain, NULL, STACK_TOP(LEOcommandThreadStack), PRI_WRK);

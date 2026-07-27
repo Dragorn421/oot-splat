@@ -331,7 +331,7 @@ segments:
       - [0xB9CAC0, .data, n64dd_7]
       - [0xB9CC40, .data, libleo/leofunc]
       - [0xB9CC50, .data, libleo/leocmdex]
-      - [0xB9CCB0, data, libleo/data_B9CCB0]
+      - [0xB9CCB0, .data, libleo/leord_diskid]
       - [0xB9CCD0, .data, libleo/leoglobals]
       - [0xB9CCE0, .rodata, n64dd_0]
       - [0xB9CD10, .rodata, n64dd_2]
@@ -354,6 +354,14 @@ segments:
       - { name: n64dd_4, type: .bss, vram: 0x801E17F0 }
       - { name: n64dd_6, type: .bss, vram: 0x801E1800 }
       - { name: libleo/bss_801E5A00, type: bss, vram: 0x801E5A00 }
+      - { name: libleo/leoram, type: .bss, vram: 0x801E5A20 }
+      - { name: libleo/bss_801E6720, type: bss, vram: 0x801E6720 }
+      - { name: libleo/bss_801E6740, type: bss, vram: 0x801E6740 }
+      - { name: libleo/bss_801E6770, type: bss, vram: 0x801E6770 }
+      - { name: libleo/bss_801E67F0, type: bss, vram: 0x801E67F0 }
+      - { name: libleo/bss_801E6800, type: bss, vram: 0x801E6800 }
+      - { name: libleo/bss_801E7080, type: bss, vram: 0x801E7080 }
+      - { name: libleo/bss_801E7090, type: bss, vram: 0x801E7090 }
 
   - name: ovl_title
     type: bin
