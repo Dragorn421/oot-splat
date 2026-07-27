@@ -1,5 +1,8 @@
 #include "common.h"
 
+u32 D_801E67F0;
+s32 D_801E67F4;
+
 u8 leoAnalize_asic_status(void) {
     u32 temp_v0;
 
