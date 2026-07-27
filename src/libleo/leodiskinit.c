@@ -4,7 +4,7 @@ OSPiHandle __LeoDiskHandle;
 OSPiHandle* __osDiskHandle;
 
 OSPiHandle* osLeoDiskInit(void) {
-    u32 temp_v0;
+    u32 saveMask;
 
     __LeoDiskHandle.type = 2;
     __LeoDiskHandle.baseAddress = 0xA5000000;
@@ -15,10 +15,10 @@ OSPiHandle* osLeoDiskInit(void) {
     __LeoDiskHandle.domain = 1;
     __LeoDiskHandle.speed = 0;
     bzero(&__LeoDiskHandle.transferInfo, sizeof(__LeoDiskHandle.transferInfo));
-    temp_v0 = __osDisableInt();
+    saveMask = __osDisableInt();
     __LeoDiskHandle.next = __osPiTable;
     __osPiTable = &__LeoDiskHandle;
     __osDiskHandle = &__LeoDiskHandle;
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(saveMask);
     return &__LeoDiskHandle;
 }

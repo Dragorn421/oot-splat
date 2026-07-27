@@ -172,7 +172,7 @@ void func_801C8B40(struct_801E1598* arg0) {
     LEOCmd sp1C;
 
     LeoSpdlMotor(&sp1C, 4U, &arg0->unk1C);
-    osRecvMesg(&arg0->unk1C, (OSMesg*)&arg0->unk68, 1);
+    osRecvMesg(&arg0->unk1C, (OSMesg*)&arg0->unk68, OS_MESG_BLOCK);
 }
 
 void func_801C8B8C(struct_801E1598* arg0) {
@@ -184,7 +184,7 @@ void func_801C8B8C(struct_801E1598* arg0) {
     if (LeoByteToLBA(sp30, (u32)arg0->unk60, &sp34) == 0) {
         sp28 = &arg0->unk1C;
         LeoReadWrite(&arg0->unk0, 0, (u32)sp30, arg0->unk58, (u32)sp34, sp28);
-        osRecvMesg(sp28, (void**)&arg0->unk68, 1);
+        osRecvMesg(sp28, &arg0->unk68, OS_MESG_BLOCK);
     }
 }
 
@@ -197,7 +197,7 @@ void func_801C8C00(struct_801E1598* arg0) {
     if (LeoByteToLBA((s32)sp30, (u32)arg0->unk60, &sp34) == 0) {
         sp28 = &arg0->unk1C;
         LeoReadWrite(&arg0->unk0, 1, (u32)sp30, (void*)arg0->unk5C, (u32)sp34, sp28);
-        osRecvMesg(sp28, (void**)&arg0->unk68, 1);
+        osRecvMesg(sp28, (void**)&arg0->unk68, OS_MESG_BLOCK);
     }
 }
 
@@ -253,7 +253,7 @@ void func_801C8E50(struct_801E1598* arg0, s32 arg1) {
         func_801C8C84(arg0);
         return;
     }
-    osSendMesg(D_801E1590.unk0, arg0, 1);
+    osSendMesg(D_801E1590.unk0, arg0, OS_MESG_BLOCK);
 }
 
 void func_801C8E98(void (*arg0)(s32, s32, s32), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {

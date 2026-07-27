@@ -38,7 +38,7 @@ s32 func_801CA920(s32 arg0, u8* arg1, int* arg2, int* arg3, int* arg4) {
     // clang-format on
     sp58->transferInfo.cmdType = 2;
     osEPiStartDma(sp58, &sp24, 0);
-    osRecvMesg(&sp40, NULL, 1);
+    osRecvMesg(&sp40, NULL, OS_MESG_BLOCK);
     return 0;
 }
 

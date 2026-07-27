@@ -35,11 +35,11 @@ void leoRead_common(unsigned int offset) {
     }
     LEOtgt_param.lba = tg_lba;
     LEOrw_flags &= ~0xC000;
-    osSendMesg(&LEOc2ctrl_que, NULL, 0);
+    osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);
     osStartThread(&LEOinterruptThread);
 
     while (1) {
-        osRecvMesg(&LEOcontrol_que, &message, 1);
+        osRecvMesg(&LEOcontrol_que, &message, OS_MESG_BLOCK);
         switch (message) {
             case 0x90000:
                 goto read_complete;
@@ -47,7 +47,7 @@ void leoRead_common(unsigned int offset) {
                 leoC2_Correction();
                 LEOrw_flags &= ~0x4000;
                 if (LEOcur_command) {}
-                osSendMesg(&LEOc2ctrl_que, NULL, 0);
+                osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);
                 break;
             default:
                 LEOcur_command->header.sense = (u8)message;

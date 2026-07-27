@@ -2,17 +2,14 @@
 
 extern u16 LEOrw_flags;
 
-// "cmd_tbl"
-void (*D_801D95F0[])() = {
+void (*cmd_tbl[])() = {
     NULL,          leoClr_queue, leoInquiry,    leoTest_unit_rdy, leoRezero,    leoRead,
     leoWrite,      leoSeek,      leoStart_stop, leoRd_capacity,   leoTranslate, leoMode_sel,
     leoReadDiskId, leoReadTimer, leoSetTimer,   leoClr_reset,
 };
-// "system_read_cmd"
-const LEOCmdRead D_801D9630 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
+const LEOCmdRead system_read_cmd = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
 
-// "system_lba"
-const u8 D_801D9C40[] = { 0, 1, 8, 9, 0, 0, 0, 0 };
+const u8 system_lba[] = { 0, 1, 8, 9, 0, 0, 0, 0 };
 
 OSPiHandle* LEOPiInfo;
 OSIoMesg LEOPiDmaParam;
@@ -170,7 +167,7 @@ void leomain(void* arg0) {
             }
         }
 
-        D_801D95F0[LEOcur_command->header.command]();
+        cmd_tbl[LEOcur_command->header.command]();
 
     post_exe:
         if (LEOcur_command->header.control & 0x80) {
@@ -198,7 +195,7 @@ u8 leoRead_system_area(void) {
         // For lba_to_phys to avoid dealing with alternative tracks on the disk
         LEO_sys_data.param.defect_num[0] = 0;
         LEOrw_flags = 0x3000;
-        dummy_cmd = D_801D9630;
+        dummy_cmd = system_read_cmd;
         dummy_cmd.buff_ptr = &LEO_sys_data;
 
         if (read_mode == 0) {
@@ -223,7 +220,7 @@ u8 leoRead_system_area(void) {
             }
         } else {
             // read System LBA 0,1,8,9 (or 2,3,10,11 for dev)
-            dummy_cmd.lba = D_801D9C40[retry_cntr & 3];
+            dummy_cmd.lba = system_lba[retry_cntr & 3];
             if (LEO_country_code == 0) {
                 dummy_cmd.lba += 2;
             }

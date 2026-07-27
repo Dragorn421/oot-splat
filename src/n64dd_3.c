@@ -55,7 +55,7 @@ void func_801C9318(void) {
     UNK_PTR sp1C;
     UNK_PTR sp18;
 
-    osRecvMesg(D_801E1590.unk4, NULL, 0);
+    osRecvMesg(D_801E1590.unk4, NULL, OS_MESG_NOBLOCK);
     if ((D_801D3734 != NULL) && (D_801D3720 == 0)) {
         temp_v0 = osSetIntMask(1U);
         sp20 = D_801D3724;

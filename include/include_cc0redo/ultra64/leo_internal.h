@@ -29,14 +29,10 @@ OSPiHandle* osLeoDiskInit(void);
 extern UNK_TYPE D_801E8080;
 extern LEOVersion __leoVersion;
 extern STACK(leoDiskStack, 0xFF0);
-void func_801D3190(void);
-void func_801D3244(void);
-extern s32 D_800068E0;
 extern const u16 LEOBYTE_TBL2[];
 extern const u16 LEOVZONE_TBL[][0x10];
 extern const u8 LEOVZONE_PZONEHD_TBL[][0x10];
 u16 leoLba_to_vzone(u32 lba);
-u32 func_801CB650(void); // "read_write_track"
 u16 leoLba_to_phys(u32 lba);
 u8 leoSeek_i(u16 rwmode);
 extern OSMesgQueue LEOc2ctrl_que;
@@ -74,11 +70,8 @@ typedef struct block_param_form {
     /* 0xD */ u8 bytes;
     /* 0xE */ u16 blkbytes;
 } block_param_form;
-extern u8 D_801E68F0[2][0xE8 * 4]; // "LEOC2_Syndrome"
+extern u8 LEOC2_Syndrome[2][0xE8 * 4];
 extern block_param_form LEOc2_param;
-void func_801CBCB4(void); // "leosetup_BM"
-u32 func_801CBD9C(void);  // "leochk_err_reg"
-u32 func_801CBC4C(void);  // "leoChk_mecha_int"
 void leoSet_mseq(u16 rwmode);
 u8 leoDetect_index_w(void);
 extern const u16 LEOZONE_SCYL_TBL[];
@@ -91,7 +84,6 @@ u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 u8 func_801CD1EC(void);
 u8 leoRecal_w(void);
 u8 leoSeek_w(void);
-u8 leoRecv_event_mesg(s32 control);
 u32 leoChk_err_retry(u32 sense);
 u8 leoChk_cur_drvmode(void);
 void leoClrUA_MEDIUM_CHANGED(void);

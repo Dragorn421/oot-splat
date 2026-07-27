@@ -2,6 +2,11 @@
 
 extern vu16 LEOrw_flags;
 
+u32 read_write_track(void);
+u32 leoChk_mecha_int(void);  
+void leosetup_BM(void);      
+u32 leochk_err_reg(void);    
+
 OSMesg LEOc2ctrl_que_buf;
 OSMesgQueue LEOc2ctrl_que;
 
@@ -33,7 +38,7 @@ void leointerrupt(void* arg) {
             }
             LEOtgt_param.lba += LEOtgt_param.rdwr_blocks;
             tg_blocks -= LEOtgt_param.rdwr_blocks;
-            result = func_801CB650();
+            result = read_write_track();
             if (result != 0) {
                 goto complete;
             }
@@ -43,11 +48,11 @@ void leointerrupt(void* arg) {
         result = 0x90000;
 
     complete:
-        osSendMesg(&LEOcontrol_que, result, 1);
+        osSendMesg(&LEOcontrol_que, (OSMesg)result, OS_MESG_BLOCK);
     }
 }
 
-u32 func_801CB650(void) {
+u32 read_write_track(void) {
     u32 message;
     u32 block;
     u32 retry_cntr;
@@ -71,7 +76,7 @@ u32 func_801CB650(void) {
         LEOPiInfo->transferInfo.block[0].C1ErrNum = 0;
         LEOPiInfo->transferInfo.block[0].sectorSize = block_param.bytes;
         LEOPiInfo->transferInfo.block[0].dramAddr = block_param.pntr;
-        LEOPiInfo->transferInfo.block[0].C2Addr = &D_801E68F0[0];
+        LEOPiInfo->transferInfo.block[0].C2Addr = &LEOC2_Syndrome[0];
         if (LEOrw_flags & 0x2000) {
             // Sector Mode
             LEOtgt_param.rdwr_blocks = 1;
@@ -79,11 +84,11 @@ u32 func_801CB650(void) {
         } else if (LEOtgt_param.rdwr_blocks == 2) {
             LEOPiInfo->transferInfo.transferMode = 2;
             LEOPiInfo->transferInfo.block[1] = LEOPiInfo->transferInfo.block[0];
-            LEOPiInfo->transferInfo.block[1].C2Addr = &D_801E68F0[1];
+            LEOPiInfo->transferInfo.block[1].C2Addr = &LEOC2_Syndrome[1];
             LEOPiInfo->transferInfo.block[1].dramAddr =
                 ((u8*)LEOPiInfo->transferInfo.block[1].dramAddr + block_param.blkbytes);
         }
-        message = func_801CBC4C();
+        message = leoChk_mecha_int();
         if (message == 0) {
             if (LEOrw_flags & 0x8000) {
                 // Write Mode
@@ -92,7 +97,7 @@ u32 func_801CB650(void) {
                 // Read Mode
                 leoSet_mseq(0);
             }
-            func_801CBCB4();
+            leosetup_BM();
             LEOPiInfo->transferInfo.bmCtlShadow = LEOasic_bm_ctl_shadow;
             LEOPiInfo->transferInfo.seqCtlShadow = LEOasic_seq_ctl_shadow;
             if (LEOrw_flags & 0x8000) {
@@ -144,9 +149,9 @@ u32 func_801CB650(void) {
                             }
 
                             if (block == 0) {
-                                temp = D_801E68F0[0];
+                                temp = LEOC2_Syndrome[0];
                             } else {
-                                temp = D_801E68F0[1];
+                                temp = LEOC2_Syndrome[1];
                             }
                             c2datasize = block_param.bytes * 4;
                             block_param.c2buff_e = temp + c2datasize;
@@ -163,8 +168,8 @@ u32 func_801CB650(void) {
                         }
                     } else {
                         if (LEOtgt_param.rdwr_blocks == 1) {
-                            if ((*(u32*)&D_801E68F0[block][0x00] | *(u32*)&D_801E68F0[block][0x04] |
-                                 *(u32*)&D_801E68F0[block][0x08] | *(u32*)&D_801E68F0[block][0x0C]) != 0) {
+                            if ((*(u32*)&LEOC2_Syndrome[block][0x00] | *(u32*)&LEOC2_Syndrome[block][0x04] |
+                                 *(u32*)&LEOC2_Syndrome[block][0x08] | *(u32*)&LEOC2_Syndrome[block][0x0C]) != 0) {
                                 message = 0x17;
                                 goto track_end;
                             }
@@ -180,7 +185,7 @@ u32 func_801CB650(void) {
         }
     track_end:
         if (message == 0x16) {
-            message = func_801CBD9C();
+            message = leochk_err_reg();
         }
     do_retry:
         if (leoChk_err_retry(message) || (LEOrw_flags & 0x1000) || retry_cntr++ == 0x40) {
@@ -210,21 +215,21 @@ u32 func_801CB650(void) {
     return message;
 }
 
-u32 func_801CBC4C(void) {
-    u32 var_v1;
-    u32 sp18;
+u32 leoChk_mecha_int(void) {
+    u32 stat;
+    u32 index_stat;
 
-    var_v1 = leoWait_mecha_cmd_done(0x10001U);
-    if (var_v1 == 0) {
-        osEPiReadIo(LEOPiInfo, 0x0500050CU, &sp18);
-        if ((sp18 & 0x60000000) != 0x60000000) {
-            var_v1 = 0x18;
+    stat = leoWait_mecha_cmd_done(0x10001U);
+    if (stat == 0) {
+        osEPiReadIo(LEOPiInfo, 0x0500050CU, &index_stat);
+        if ((index_stat & 0x60000000) != 0x60000000) {
+            stat = 0x18;
         }
     }
-    return var_v1;
+    return stat;
 }
 
-void func_801CBCB4(void) {
+void leosetup_BM(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow | 0x10000000);
     osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
     if (LEOtgt_param.start_block != 0) {
@@ -241,30 +246,30 @@ void func_801CBCB4(void) {
     osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
 }
 
-u32 func_801CBD9C(void) {
-    u32 sp1C;
-    u32 sp18;
+u32 leochk_err_reg(void) {
+    u32 sense;
+    u32 index_status;
 
-    osEPiReadIo(LEOPiInfo, 0x05000514U, &sp1C);
+    osEPiReadIo(LEOPiInfo, 0x05000514U, &sense);
     osEPiWriteIo(LEOPiInfo, 0x05000510U, LEOasic_bm_ctl_shadow | 0x10000000);
     osEPiWriteIo(LEOPiInfo, 0x05000510U, (u32)LEOasic_bm_ctl_shadow);
-    if (sp1C & 0x04000000) {
+    if (sense & 0x04000000) {
         return 0x31U;
     }
-    if (sp1C & 0x10000000) {
+    if (sense & 0x10000000) {
         return 4U;
     }
-    if (sp1C & 0x42000000) {
+    if (sense & 0x42000000) {
         if (LEOrw_flags & 0x8000) {
             return 0x16U;
         }
         return 0x17U;
     }
-    if (sp1C & 0x80000000) {
+    if (sense & 0x80000000) {
         return 0x18U;
     }
-    osEPiReadIo(LEOPiInfo, 0x0500050CU, &sp18);
-    if ((sp18 & 0x60000000) == 0x60000000) {
+    osEPiReadIo(LEOPiInfo, 0x0500050CU, &index_status);
+    if ((index_status & 0x60000000) == 0x60000000) {
         return 0x19U;
     }
     return 0x18U;

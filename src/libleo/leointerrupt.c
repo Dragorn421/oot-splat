@@ -1,173 +1,177 @@
 #include "common.h"
 #include "ultra64/internal.h"
 
+void __osLeoAbnormalResume(void);
+void __osLeoResume(void);
+
 STACK(leoDiskStack, 0xFF0);
 
 s32 __osLeoInterrupt(void) {
-    u32 temp_a1;
-    volatile u32 sp30;
-    u32 v;
-    __OSTranxInfo* temp_t0;
-    __OSBlockInfo* temp_t1;
-    int errNum;
-    __OSBlockInfo* temp_v1;
+    u32 stat;
+    volatile u32 pi_stat;
+    u32 bm_stat;
+    __OSTranxInfo* info;
+    __OSBlockInfo* blockInfo;
 
-    temp_t0 = &__osDiskHandle->transferInfo;
-    temp_t1 = &temp_t0->block[temp_t0->blockNum];
-    sp30 = IO_READ(0xA4600010);
-    if (sp30 & 1) {
-        D_800068E0 &= ~0x800;
-        temp_t1->errStatus = 0x1D;
-        func_801D3244();
+    info = &__osDiskHandle->transferInfo;
+    blockInfo = &info->block[info->blockNum];
+    pi_stat = IO_READ(0xA4600010);
+    if (pi_stat & 1) {
+        __OSGlobalIntMask &= ~0x800;
+        blockInfo->errStatus = 0x1D;
+        __osLeoResume();
         return 1;
     }
-    sp30 = IO_READ(0xA4600010);
-    while (sp30 & 3) {
-        sp30 = IO_READ(0xA4600010);
+    pi_stat = IO_READ(0xA4600010);
+    while (pi_stat & 3) {
+        pi_stat = IO_READ(0xA4600010);
     }
-    temp_a1 = IO_READ(0xA5000508);
-    if (temp_a1 & 0x02000000) {
-        sp30 = IO_READ(0xA4600010);
-        while (sp30 & 3) {
-            sp30 = IO_READ(0xA4600010);
+    stat = IO_READ(0xA5000508);
+    if (stat & 0x02000000) {
+        pi_stat = IO_READ(0xA4600010);
+        while (pi_stat & 3) {
+            pi_stat = IO_READ(0xA4600010);
         }
-        IO_WRITE(0xA5000510, temp_t0->bmCtlShadow | 0x01000000);
-        temp_t1->errStatus = 0;
+        IO_WRITE(0xA5000510, info->bmCtlShadow | 0x01000000);
+        blockInfo->errStatus = 0;
         return 0;
     }
-    if (temp_t0->cmdType == 2) {
+    if (info->cmdType == 2) {
         return 1;
     }
-    if (temp_a1 & 0x08000000) {
-        sp30 = IO_READ(0xA4600010);
-        while (sp30 & 3) {
-            sp30 = IO_READ(0xA4600010);
+    if (stat & 0x08000000) {
+        pi_stat = IO_READ(0xA4600010);
+        while (pi_stat & 3) {
+            pi_stat = IO_READ(0xA4600010);
         }
         IO_READ(0xA5000508);
-        temp_t1->errStatus = 0x16;
-        func_801D3244();
+        blockInfo->errStatus = 0x16;
+        __osLeoResume();
         IO_WRITE(0xA4600010, 2);
-        D_800068E0 |= 0x100401;
+        __OSGlobalIntMask |= 0x100401;
         return 1;
     }
-    if (temp_t0->cmdType == 1) {
-        if (!(temp_a1 & 0x40000000)) {
-            if ((temp_t0->sectorNum + 1) != (temp_t0->transferMode * 0x55)) {
-                temp_t1->errStatus = 0x18;
-                func_801D3190();
+    if (info->cmdType == 1) {
+        if (!(stat & 0x40000000)) {
+            if ((info->sectorNum + 1) != (info->transferMode * 0x55)) {
+                blockInfo->errStatus = 0x18;
+                __osLeoAbnormalResume();
             } else {
                 IO_WRITE(0xA4600010, 2);
-                D_800068E0 |= 0x100401;
-                temp_t1->errStatus = 0;
-                func_801D3244();
+                __OSGlobalIntMask |= 0x100401;
+                blockInfo->errStatus = 0;
+                __osLeoResume();
             }
         } else {
-            temp_t1->dramAddr = (u32)temp_t1->dramAddr + temp_t1->sectorSize;
-            temp_t0->sectorNum += 1;
-            __osEPiRawStartDma(__osDiskHandle, 1, 0x05000400U, temp_t1->dramAddr, temp_t1->sectorSize);
+            blockInfo->dramAddr = (u32)blockInfo->dramAddr + blockInfo->sectorSize;
+            info->sectorNum += 1;
+            __osEPiRawStartDma(__osDiskHandle, 1, 0x05000400U, blockInfo->dramAddr, blockInfo->sectorSize);
         }
         return 1;
     }
-    if (temp_t0->cmdType == 0) {
-        if (temp_t0->transferMode == 3) {
-            if ((s32)(temp_t1->C1ErrNum + 0x11) < temp_t0->sectorNum) {
-                temp_t1->errStatus = 0;
-                func_801D3190();
+    if (info->cmdType == 0) {
+        if (info->transferMode == 3) {
+            if ((s32)(blockInfo->C1ErrNum + 0x11) < info->sectorNum) {
+                blockInfo->errStatus = 0;
+                __osLeoAbnormalResume();
                 return 1;
             }
-            if (!(temp_a1 & 0x40000000)) {
-                temp_t1->errStatus = 0x17;
-                func_801D3190();
+            if (!(stat & 0x40000000)) {
+                blockInfo->errStatus = 0x17;
+                __osLeoAbnormalResume();
                 return 1;
             }
         } else {
-            temp_t1->dramAddr = (u32)temp_t1->dramAddr + temp_t1->sectorSize;
+            blockInfo->dramAddr = (u32)blockInfo->dramAddr + blockInfo->sectorSize;
         }
-        v = IO_READ(0xA5000510);
-        if (((v & 0x200000) && (v & 0x400000)) || (v & 0x02000000)) {
-            if (temp_t1->C1ErrNum >= 4U) {
-                if ((temp_t0->transferMode != 3) || (temp_t0->sectorNum >= 0x53)) {
-                    temp_t1->errStatus = 0x17;
-                    func_801D3190();
+        bm_stat = IO_READ(0xA5000510);
+        if (((bm_stat & 0x200000) && (bm_stat & 0x400000)) || (bm_stat & 0x02000000)) {
+            if (blockInfo->C1ErrNum >= 4U) {
+                if ((info->transferMode != 3) || (info->sectorNum >= 0x53)) {
+                    blockInfo->errStatus = 0x17;
+                    __osLeoAbnormalResume();
                     return 1;
                 }
             } else {
-                errNum = temp_t1->C1ErrNum;
-                temp_t1->C1ErrSector[errNum] = temp_t0->sectorNum + 1;
+                int errNum;
+
+                errNum = blockInfo->C1ErrNum;
+                blockInfo->C1ErrSector[errNum] = info->sectorNum + 1;
             }
-            temp_t1->C1ErrNum += 1;
+            blockInfo->C1ErrNum += 1;
         }
-        if (temp_a1 & 0x10000000) {
-            if (temp_t0->sectorNum != 0x57) {
-                temp_t1->errStatus = 0x18;
-                func_801D3190();
+        if (stat & 0x10000000) {
+            if (info->sectorNum != 0x57) {
+                blockInfo->errStatus = 0x18;
+                __osLeoAbnormalResume();
             } else {
-                if ((temp_t0->transferMode == 2) && (temp_t0->blockNum == 0)) {
-                    temp_t0->blockNum = 1;
-                    temp_t0->sectorNum = -1;
-                    temp_t0->block[1].dramAddr = (u32)temp_t0->block[1].dramAddr - temp_t0->block[1].sectorSize;
-                    temp_t1->errStatus = 0x16;
+                if ((info->transferMode == 2) && (info->blockNum == 0)) {
+                    info->blockNum = 1;
+                    info->sectorNum = -1;
+                    info->block[1].dramAddr = (u32)info->block[1].dramAddr - info->block[1].sectorSize;
+                    blockInfo->errStatus = 0x16;
                 } else {
                     IO_WRITE(0xA4600010, 2);
-                    D_800068E0 |= 0x100401;
-                    temp_t0->cmdType = 2;
-                    temp_t1->errStatus = 0;
+                    __OSGlobalIntMask |= 0x100401;
+                    info->cmdType = 2;
+                    blockInfo->errStatus = 0;
                 }
-                __osEPiRawStartDma(__osDiskHandle, 0, 0x05000000U, temp_t1->C2Addr, temp_t1->sectorSize * 4);
+                __osEPiRawStartDma(__osDiskHandle, 0, 0x05000000U, blockInfo->C2Addr, blockInfo->sectorSize * 4);
             }
             return 1;
         }
-        if ((temp_t0->sectorNum == -1) && (temp_t0->transferMode == 2) && (temp_t0->blockNum == 1)) {
-            temp_v1 = temp_t0->block;
-            if (temp_t0->block[0].C1ErrNum == 0) {
-                if ((((u32*)temp_v1->C2Addr)[0] | ((u32*)temp_v1->C2Addr)[1] | ((u32*)temp_v1->C2Addr)[2] |
-                     ((u32*)temp_v1->C2Addr)[3]) != 0) {
-                    temp_v1->errStatus = 0x17;
-                    func_801D3190();
+        if ((info->sectorNum == -1) && (info->transferMode == 2) && (info->blockNum == 1)) {
+            __OSBlockInfo* bptr = info->block;
+
+            if (info->block[0].C1ErrNum == 0) {
+                if ((((u32*)bptr->C2Addr)[0] | ((u32*)bptr->C2Addr)[1] | ((u32*)bptr->C2Addr)[2] |
+                     ((u32*)bptr->C2Addr)[3]) != 0) {
+                    bptr->errStatus = 0x17;
+                    __osLeoAbnormalResume();
                     return 1;
                 }
             }
-            temp_t0->block[0].errStatus = 0;
-            func_801D3244();
+            info->block[0].errStatus = 0;
+            __osLeoResume();
         }
-        temp_t0->sectorNum += 1;
-        if (temp_a1 & 0x40000000) {
-            if (temp_t0->sectorNum >= 0x55) {
-                temp_t1->errStatus = 0x18;
-                func_801D3190();
+        info->sectorNum += 1;
+        if (stat & 0x40000000) {
+            if (info->sectorNum >= 0x55) {
+                blockInfo->errStatus = 0x18;
+                __osLeoAbnormalResume();
                 return 1;
             }
-            __osEPiRawStartDma(__osDiskHandle, 0, 0x05000400U, temp_t1->dramAddr, temp_t1->sectorSize);
-            temp_t1->errStatus = 0;
+            __osEPiRawStartDma(__osDiskHandle, 0, 0x05000400U, blockInfo->dramAddr, blockInfo->sectorSize);
+            blockInfo->errStatus = 0;
             return 1;
         }
-        if (temp_t0->sectorNum < 0x55) {
-            temp_t1->errStatus = 0x18;
-            func_801D3190();
+        if (info->sectorNum < 0x55) {
+            blockInfo->errStatus = 0x18;
+            __osLeoAbnormalResume();
             return 1;
         }
         return 1;
     }
-    temp_t1->errStatus = 4;
-    func_801D3190();
+    blockInfo->errStatus = 4;
+    __osLeoAbnormalResume();
     return 1;
 }
 
-void func_801D3190(void) {
-    __OSTranxInfo* temp_a0;
+void __osLeoAbnormalResume(void) {
+    __OSTranxInfo* info;
     u32 pi_stat;
 
-    temp_a0 = &__osDiskHandle->transferInfo;
+    info = &__osDiskHandle->transferInfo;
     while ((pi_stat = IO_READ(0xA4600010)) & 3) {}
-    IO_WRITE(0xA5000510, temp_a0->bmCtlShadow | 0x10000000);
+    IO_WRITE(0xA5000510, info->bmCtlShadow | 0x10000000);
     while ((pi_stat = IO_READ(0xA4600010)) & 3) {}
-    IO_WRITE(0xA5000510, temp_a0->bmCtlShadow);
-    func_801D3244();
+    IO_WRITE(0xA5000510, info->bmCtlShadow);
+    __osLeoResume();
     IO_WRITE(0xA4600010, 2);
-    D_800068E0 |= 0x100401;
+    __OSGlobalIntMask |= 0x100401;
 }
 
-void func_801D3244(void) {
+void __osLeoResume(void) {
     __OSEventState* es;
     OSMesgQueue* mq;
     s32 last;
