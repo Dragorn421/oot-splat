@@ -12,8 +12,11 @@ typedef struct {
 u8 __locReadTimer(__LOCTime* time);
 u8 __locSetTimer(__LOCTime* time);
 
-extern const u8 D_801DA3F0[];
-extern const u8 D_801DA3F8[];
+// "ymdupper"
+const u8 D_801DA3F0[] = { 0x63, 0xC, 0x1F, 0x17, 0x3B, 0x3B };
+
+// "dayupper"
+const u8 D_801DA3F8[] = { 0, 0x1F, 0x1C, 0x1F, 0x1E, 0x1F, 0x1E, 0x1F, 0x1F, 0x1E, 0x1F, 0x1E, 0x1F };
 
 void leoReadTimer(void) {
     u8* rdparam;
@@ -184,9 +187,3 @@ u8 __locSetTimer(__LOCTime* time) {
     }
     return 0;
 }
-
-// "ymdupper"
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leotimer/D_801DA3F0.s")
-
-// "dayupper"
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leotimer/D_801DA3F8.s")

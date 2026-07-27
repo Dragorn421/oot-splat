@@ -5,6 +5,9 @@ extern vu16 LEOrw_flags;
 // "read_id_cmd"
 const LEOCmdRead D_801D9650 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xE, 1, LEO_TempBuffer, 0 };
 
+// "leo_disk_id_lba"
+const u8 D_801D9CF0[2] = { 0xE, 0xF };
+
 void leoReadDiskId(void) {
     LEOCmdRead dummy_cmd;
     u8* temp_pointer;
@@ -45,5 +48,3 @@ void leoReadDiskId(void) {
         leoSetUA_MEDIUM_CHANGED();
     }
 }
-
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leord_diskid/D_801D9CF0.s")

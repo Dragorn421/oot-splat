@@ -96,12 +96,9 @@ u32 leoChk_err_retry(u32 sense);
 u8 leoChk_cur_drvmode(void);
 void leoClrUA_MEDIUM_CHANGED(void);
 void leoSetUA_MEDIUM_CHANGED(void);
-extern s32 D_801DA370;
-extern s32 D_801DA3B0;
 extern OSPiHandle __LeoDiskHandle;
 u8 leoAnalize_asic_status(void);
 void leoMode_sel(void);
-extern u8 D_801D9CF0[2]; // "leo_disk_id_lba"
 extern u8 LEO_TempBuffer[0xE8];
 void leoTest_unit_rdy(void);
 void leoSeek(void);

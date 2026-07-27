@@ -4,6 +4,15 @@ extern vu16 LEOrw_flags;
 
 s32 D_801E7040[0x10];
 
+const u32 D_801DA370[0x10] = {
+    0x10000, 0x20200, 0x80030100, 0x82040000, 0xA8050000, 0xA0060600, 0x31760000, 0x20300,
+    0,       0,       0,          0,          0,          0,          0,          0x04060000,
+};
+const u32 D_801DA3B0[0x10] = {
+    0x40020000, 0x20000, 0x40130B00, 0x42140100, 0x68050000, 0x50060600, 0x401702FF, 0x01870000,
+    0x40020000, 0,       0,          0,          0,          0,          0,          0x040F0000,
+};
+
 void leoSet_mseq(u16 rwmode) {
     s32 pad[2];
     u32 sp2C;
@@ -14,9 +23,9 @@ void leoSet_mseq(u16 rwmode) {
     LEOasic_seq_ctl_shadow &= 0xBFFFFFFF;
     osEPiWriteIo(LEOPiInfo, 0x05000518U, LEOasic_seq_ctl_shadow);
     if (rwmode == 1) {
-        var_v1 = &D_801DA3B0;
+        var_v1 = D_801DA3B0;
     } else {
-        var_v1 = &D_801DA370;
+        var_v1 = D_801DA370;
     }
     for (var_v0 = 0; var_v0 < 0x10; var_v0++, var_v1++) {
         D_801E7040[var_v0] = *var_v1;
@@ -40,7 +49,3 @@ void leoSet_mseq(u16 rwmode) {
     LEOasic_seq_ctl_shadow |= 0x40000000;
     osEPiWriteIo(LEOPiInfo, 0x05000518U, LEOasic_seq_ctl_shadow);
 }
-
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomseq_tbl/D_801DA370.s")
-
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leomseq_tbl/D_801DA3B0.s")
