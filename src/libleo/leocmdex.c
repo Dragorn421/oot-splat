@@ -242,4 +242,4 @@ sys_read_end:
     return LEOcur_command->header.sense;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libleo/B8F520/D_801D9C40.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libleo/leocmdex/D_801D9C40.s")
