@@ -2,6 +2,8 @@
 
 extern vu16 LEOrw_flags;
 
+s32 D_801E7040[0x10];
+
 void leoSet_mseq(u16 rwmode) {
     s32 pad[2];
     u32 sp2C;

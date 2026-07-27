@@ -1,6 +1,8 @@
 #include "common.h"
 #include "ultra64/internal.h"
 
+STACK(leoDiskStack, 0xFF0);
+
 s32 __osLeoInterrupt(void) {
     u32 temp_a1;
     volatile u32 sp30;

@@ -99,7 +99,6 @@ void leoClrUA_MEDIUM_CHANGED(void);
 void leoSetUA_MEDIUM_CHANGED(void);
 extern s32 D_801DA370;
 extern s32 D_801DA3B0;
-extern s32 D_801E7040[];
 extern OSPiHandle __LeoDiskHandle;
 u8 leoAnalize_asic_status(void);
 void leoMode_sel(void);
