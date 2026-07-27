@@ -2,6 +2,15 @@
 
 extern u16 LEOrw_flags;
 
+// "cmd_tbl"
+void (*D_801D95F0[])() = {
+    NULL,          leoClr_queue, leoInquiry,    leoTest_unit_rdy, leoRezero,    leoRead,
+    leoWrite,      leoSeek,      leoStart_stop, leoRd_capacity,   leoTranslate, leoMode_sel,
+    leoReadDiskId, leoReadTimer, leoSetTimer,   leoClr_reset,
+};
+// "system_read_cmd"
+const LEOCmdRead D_801D9630 = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
+
 void leomain(void* arg0) {
     u32 cur_status;
     u32 sense_code;

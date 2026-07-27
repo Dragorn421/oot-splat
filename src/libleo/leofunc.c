@@ -1,5 +1,8 @@
 #include "common.h"
 
+s32 __leoResetCalled = 0;
+s32 __leoQueuesCreated = 0;
+
 void leoInitialize(s32 PRI_WRK, s32 PRI_INT, void** command_que_buf, u32 cmd_buff_size) {
     s32 sp2C;
     s32 sp28;

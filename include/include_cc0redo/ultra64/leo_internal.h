@@ -71,7 +71,6 @@ void leoInitUnit_atten(void);
 u8 leoRead_system_area(void);
 u32 leoRetUnit_atten(void);
 u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
-extern UNK_FUN_PTR(D_801D95F0[]);
 extern OSIoMesg LEOPiDmaParam;
 extern s32 LEOasic_bm_ctl_shadow;
 extern s32 LEOasic_seq_ctl_shadow;
@@ -92,7 +91,6 @@ typedef union leo_sys_form {
     /* 0x0 */ u64 u64_data[29];
 } leo_sys_form;
 extern leo_sys_form LEO_sys_data;
-extern LEOCmdRead D_801D9630; // "system_read_cmd"
 extern u8 D_801D9C40[];       // "system_lba"
 void leoRead_common(unsigned int offset);
 u32 leoChk_err_retry(u32 sense);
@@ -135,12 +133,23 @@ extern OSPiHandle __LeoDiskHandle;
 u8 leoAnalize_asic_status(void);
 void leoMode_sel(void);
 extern LEOCmdRead D_801D9650; // "read_id_cmd"
-extern u8 D_801D9CF0[2]; // "leo_disk_id_lba"
+extern u8 D_801D9CF0[2];      // "leo_disk_id_lba"
 extern u8 LEO_TempBuffer[0xE8];
 void leoTest_unit_rdy(void);
 void leoSeek(void);
 void leoRd_capacity(void);
 extern const u16 LEORAM_START_LBA[];
 extern const u32 LEORAM_BYTE[];
+
+void leoClr_reset(void);
+void leoInquiry(void);
+void leoRead(void);
+void leoReadDiskId(void);
+void leoReadTimer(void);
+void leoRezero(void);
+void leoSetTimer(void);
+void leoStart_stop(void);
+void leoTranslate(void);
+void leoWrite(void);
 
 #endif
