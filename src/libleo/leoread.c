@@ -22,7 +22,7 @@ void leoRead_common(unsigned int offset) {
     if ((tg_lba + tg_blocks) >= 0x10DD) {
     invalid_lba:
         LEOcur_command->header.sense = 0x20;
-        LEOcur_command->header.status = 2;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
     if (tg_blocks == 0) {
@@ -30,7 +30,7 @@ void leoRead_common(unsigned int offset) {
             goto invalid_lba;
         }
         LEOcur_command->header.sense = 0;
-        LEOcur_command->header.status = 0;
+        LEOcur_command->header.status = LEO_STATUS_GOOD;
         return;
     }
     LEOtgt_param.lba = tg_lba;
@@ -51,11 +51,11 @@ void leoRead_common(unsigned int offset) {
                 break;
             default:
                 LEOcur_command->header.sense = (u8)message;
-                LEOcur_command->header.status = 2;
+                LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
         }
     }
 read_complete:
     LEOcur_command->header.sense = 0;
-    LEOcur_command->header.status = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }

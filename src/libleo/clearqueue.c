@@ -6,7 +6,7 @@ s32 LeoClearQueue(void) {
     if (__leoActive == 0) {
         return -1;
     }
-    cmdBlock.header.command = 1;
+    cmdBlock.header.command = LEO_COMMAND_CLEAR_QUE;
     cmdBlock.header.reserve1 = 0;
     cmdBlock.header.control = 0;
     cmdBlock.header.reserve3 = 0;

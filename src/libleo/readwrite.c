@@ -5,9 +5,9 @@ s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBA
         return -1;
     }
     if (direction == 0) {
-        cmdBlock->header.command = 5;
+        cmdBlock->header.command = LEO_COMMAND_READ;
     } else {
-        cmdBlock->header.command = 6;
+        cmdBlock->header.command = LEO_COMMAND_WRITE;
     }
     cmdBlock->header.reserve1 = 0;
     if (mq != NULL) {

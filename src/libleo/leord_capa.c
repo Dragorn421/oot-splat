@@ -10,5 +10,5 @@ void leoRd_capacity(void) {
         LEOcur_command->data.readwrite.xfer_blks = 0x10C3;
         LEOcur_command->data.readwrite.buff_ptr = (void*)0x03D78F40;
     }
-    LEOcur_command->header.status = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }

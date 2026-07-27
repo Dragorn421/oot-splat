@@ -18,12 +18,12 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
     osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
     __leoActive = 1;
-    __osSetHWIntrRoutine(1, __osLeoInterrupt, STACK_TOP(leoDiskStack));
+    __osSetHWIntrRoutine(OS_INTR_CART, __osLeoInterrupt, STACK_TOP(leoDiskStack));
     leoInitialize(comPri, intPri, cmdBuf, (u32)cmdMsgCnt);
     if (osResetType == 1) {
         __leoSetReset();
     }
-    cmdBlockInq.header.command = 2;
+    cmdBlockInq.header.command = LEO_COMMAND_INQUIRY;
     cmdBlockInq.header.reserve1 = 0;
     cmdBlockInq.header.control = 0;
     cmdBlockInq.header.reserve3 = 0;
@@ -35,7 +35,7 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
             dummy -= ((s32)__leoSetReset & 0xFFFFFF) | 0x403DF4;
         }
     }
-    while (cmdBlockInq.header.status == 8) {}
+    while (cmdBlockInq.header.status == LEO_STATUS_BUSY) {}
     if (cmdBlockInq.header.status != 0) {
         return (s32)cmdBlockInq.header.sense;
     }

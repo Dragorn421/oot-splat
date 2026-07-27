@@ -4,9 +4,9 @@ void leoClr_queue(void) {
     OSMesg clr_cmd;
 
     while (osRecvMesg(&LEOcommand_que, &clr_cmd, OS_MESG_NOBLOCK) == 0) {
-        ((LEOCmdHeader*)clr_cmd)->sense = 0x22;
-        ((LEOCmdHeader*)clr_cmd)->status = 2;
-        if (((LEOCmdHeader*)clr_cmd)->control & 0x80) {
+        ((LEOCmdHeader*)clr_cmd)->sense = LEO_SENSE_COMMAND_TERMINATED;
+        ((LEOCmdHeader*)clr_cmd)->status = LEO_STATUS_CHECK_CONDITION;
+        if (((LEOCmdHeader*)clr_cmd)->control & LEO_CONTROL_POST) {
             osSendMesg(((LEOCmdHeader*)clr_cmd)->post, (OSMesg)0x22, OS_MESG_BLOCK);
         }
     }
@@ -18,9 +18,9 @@ void leoClr_reset(void) {
     code = leoAnalize_asic_status();
     if (code == 3 || code == 0x29 || code == 0x2B) {
         LEOcur_command->header.sense = code;
-        LEOcur_command->header.status = 2;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
     } else {
         LEOcur_command->header.sense = 0;
-        LEOcur_command->header.status = 0;
+        LEOcur_command->header.status = LEO_STATUS_GOOD;
     }
 }

@@ -15,5 +15,5 @@ void leoInquiry(void) {
     LEOcur_command->data.time.yearhi = (u8)(asic_id >> 16);
     LEOcur_command->data.time.yearlo = 1;
     LEOcur_command->data.time.month = 0;
-    LEOcur_command->header.status = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }

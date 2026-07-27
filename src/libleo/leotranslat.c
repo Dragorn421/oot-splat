@@ -11,7 +11,7 @@ void leoTranslate(void) {
 
     if (LEOcur_command->data.readwrite.lba >= 0x10C4) {
         LEOcur_command->header.sense = 0x20;
-        LEOcur_command->header.status = 2;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
     lba = LEOcur_command->data.readwrite.lba + 0x18;
@@ -38,7 +38,7 @@ void leoTranslate(void) {
             lba++;
             if ((calc_bytes != 0) && (lba >= 0x10DC)) {
                 LEOcur_command->header.sense = 0x20;
-                LEOcur_command->header.status = 2;
+                LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
             }
             flag = 0;
@@ -60,12 +60,12 @@ void leoTranslate(void) {
             lba++;
             if ((calc_blks != 0) && (lba >= 0x10DC)) {
                 LEOcur_command->header.sense = 0x20;
-                LEOcur_command->header.status = 2;
+                LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
             }
             flag = 0;
         }
         LEOcur_command->data.readwrite.buff_ptr = calc_bytes;
     }
-    LEOcur_command->header.status = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }

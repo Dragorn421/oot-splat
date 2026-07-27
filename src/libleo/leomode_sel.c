@@ -9,9 +9,9 @@ void leoMode_sel(void) {
         (sense = leoSend_asic_cmd_w_nochkDiskChange(0x150000, LEOcur_command->data.readwrite.xfer_blks),
          (sense != 0))) {
         LEOcur_command->header.sense = sense;
-        LEOcur_command->header.status = 2;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
     LEOcur_command->header.sense = sense;
-    LEOcur_command->header.status = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }

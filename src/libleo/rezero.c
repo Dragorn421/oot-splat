@@ -10,7 +10,7 @@ void leoRezero(void) {
             LEOtgt_param.cylinder = 0;
             LEOtgt_param.head = 0;
             LEOtgt_param.zone = 0;
-            LEOcur_command->header.status = 0;
+            LEOcur_command->header.status = LEO_STATUS_GOOD;
             return;
         }
         if (leoChk_err_retry(sense_code) != 0) {
@@ -18,5 +18,5 @@ void leoRezero(void) {
         }
     } while (retry_cntr--);
     LEOcur_command->header.sense = sense_code;
-    LEOcur_command->header.status = 2;
+    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
 }

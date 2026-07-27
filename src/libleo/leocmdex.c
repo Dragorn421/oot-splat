@@ -7,7 +7,7 @@ void (*cmd_tbl[])() = {
     leoWrite,      leoSeek,      leoStart_stop, leoRd_capacity,   leoTranslate, leoMode_sel,
     leoReadDiskId, leoReadTimer, leoSetTimer,   leoClr_reset,
 };
-const LEOCmdRead system_read_cmd = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
+const LEOCmdRead system_read_cmd = { { LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xC, 1, NULL, 0 };
 
 const u8 system_lba[] = { 0, 1, 8, 9, 0, 0, 0, 0 };
 
@@ -114,11 +114,11 @@ void leomain(void* arg0) {
                     /* empty */;
             }
 
-            if (LEOcur_command->header.command == 3) {
+            if (LEOcur_command->header.command == LEO_COMMAND_TEST_UNIT_READY) {
                 LEOcur_command->data.modeselect.reserve1 = leoChk_cur_drvmode();
             }
             LEOcur_command->header.sense = sense_code;
-            LEOcur_command->header.status = 2;
+            LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
             goto post_exe;
         } while (0);
 
@@ -141,13 +141,13 @@ void leomain(void* arg0) {
                     }
 
                     if (leoRead_system_area() != 0) {
-                        LEOcur_command->header.status = 2;
+                        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                         goto post_exe;
                     }
 
                     if ((LEOcur_command->header.sense =
                              leoSend_asic_cmd_w(0xB0001, LEO_sys_data.param.disk_type << 16)) != 0) {
-                        LEOcur_command->header.status = 2;
+                        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                         goto post_exe;
                     }
 
@@ -159,7 +159,7 @@ void leomain(void* arg0) {
                     if (LEOdisk_type >= 7) {
                     invalid_disktype:
                         LEOcur_command->header.sense = 0xBU;
-                        LEOcur_command->header.status = 2;
+                        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                         goto post_exe;
                     }
 
@@ -170,7 +170,7 @@ void leomain(void* arg0) {
         cmd_tbl[LEOcur_command->header.command]();
 
     post_exe:
-        if (LEOcur_command->header.control & 0x80) {
+        if (LEOcur_command->header.control & LEO_CONTROL_POST) {
             osSendMesg(LEOcur_command->header.post, (void*)(s32)LEOcur_command->header.sense, OS_MESG_BLOCK);
         }
         if (LEOclr_que_flag != 0) {

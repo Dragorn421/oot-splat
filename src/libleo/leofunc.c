@@ -47,38 +47,38 @@ void leoCommand(void* cmd_blk_addr) {
     LEOCmdHeader* header = cmd_blk_addr;
 
     if (__leoResetCalled != 0) {
-        header->status = 2;
-        header->sense = 0x25;
-        if (header->control & 0x80) {
+        header->status = LEO_STATUS_CHECK_CONDITION;
+        header->sense = LEO_SENSE_WAITING_NMI;
+        if (header->control & LEO_CONTROL_POST) {
             osSendMesg(header->post, (OSMesg)0x25, OS_MESG_BLOCK);
         }
     } else {
         osRecvMesg(&LEOblock_que, NULL, OS_MESG_BLOCK);
-        header->status = 8;
-        header->sense = 0;
+        header->status = LEO_STATUS_BUSY;
+        header->sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
         switch (header->command) {
-            case 1:
+            case LEO_COMMAND_CLEAR_QUE:
                 LEOclr_que_flag = 0xFF;
                 leoClr_queue();
                 LEOclr_que_flag = 0;
-                header->status = 0;
-                if (header->control & 0x80) {
+                header->status = LEO_STATUS_GOOD;
+                if (header->control & LEO_CONTROL_POST) {
                     osSendMesg(header->post, NULL, OS_MESG_BLOCK);
                 }
                 break;
-            case 5:
-            case 6:
+            case LEO_COMMAND_READ:
+            case LEO_COMMAND_WRITE:
                 ((LEOCmdRead*)cmd_blk_addr)->rw_bytes = 0;
                 goto cmd_queing;
             default:
                 if ((u32)(header->command - 1) >= 0xE) {
-                    header->sense = 0x1F;
-                    header->status = 2;
+                    header->sense = LEO_SENSE_INVALID_COMMAND_OPERATION_CODE;
+                    header->status = LEO_STATUS_CHECK_CONDITION;
                 } else {
                 cmd_queing:
                     if (osSendMesg(&LEOcommand_que, cmd_blk_addr, OS_MESG_NOBLOCK) != 0) {
-                        header->sense = 0x23;
-                        header->status = 2;
+                        header->sense = LEO_SENSE_QUEUE_FULL;
+                        header->status = LEO_STATUS_CHECK_CONDITION;
                     }
                 }
                 break;
@@ -110,14 +110,14 @@ s32 LeoResetClear(void) {
     LEOCmdHeader resetclear;
 
     resetclear.command = 0xF;
-    resetclear.control = 0x80;
-    resetclear.status = 0;
+    resetclear.control = LEO_CONTROL_POST;
+    resetclear.status = LEO_STATUS_GOOD;
     resetclear.post = &LEOpost_que;
     if (osSendMesg(&LEOcommand_que, &resetclear, OS_MESG_NOBLOCK) != 0) {
-        return 0x23;
+        return LEO_SENSE_QUEUE_FULL;
     }
     osRecvMesg(&LEOpost_que, NULL, OS_MESG_BLOCK);
-    if (resetclear.status == 0) {
+    if (resetclear.status == LEO_STATUS_GOOD) {
         return 0;
     } else {
         return resetclear.sense;

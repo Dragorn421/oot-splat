@@ -2,7 +2,7 @@
 
 extern vu16 LEOrw_flags;
 
-STATIC const LEOCmdRead read_id_cmd = { { 5, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xE, 1, LEO_TempBuffer, 0 };
+STATIC const LEOCmdRead read_id_cmd = { { LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, NULL }, 0xE, 1, LEO_TempBuffer, 0 };
 
 STATIC const u8 leo_disk_id_lba[2] = { 0xE, 0xF };
 

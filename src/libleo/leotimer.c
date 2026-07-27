@@ -39,7 +39,7 @@ void leoReadTimer(void) {
     } else {
         LEOcur_command->data.time.yearhi = 0x20;
     }
-    LEOcur_command->header.status = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }
 
 void leoSetTimer(void) {

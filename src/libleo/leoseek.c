@@ -7,14 +7,14 @@ void leoSeek(void) {
 
     if (LEOcur_command->data.readwrite.lba >= 0x10C4) {
         LEOcur_command->header.sense = 0x20;
-        LEOcur_command->header.status = 2;
+        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
     leoLba_to_phys(LEOcur_command->data.readwrite.lba + 0x18);
     do {
         sense_code = leoSeek_w();
         if (sense_code == 0) {
-            LEOcur_command->header.status = 0;
+            LEOcur_command->header.status = LEO_STATUS_GOOD;
             return;
         }
         if (leoChk_err_retry(sense_code) != 0) {
@@ -22,5 +22,5 @@ void leoSeek(void) {
         }
     } while (retry_cntr--);
     LEOcur_command->header.sense = sense_code;
-    LEOcur_command->header.status = 2;
+    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
 }

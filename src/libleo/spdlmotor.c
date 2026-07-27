@@ -4,7 +4,7 @@ s32 LeoSpdlMotor(LEOCmd* cmdBlock, u8 mode, OSMesgQueue* mq) {
     if (__leoActive == 0) {
         return -1;
     }
-    cmdBlock->header.command = 8;
+    cmdBlock->header.command = LEO_COMMAND_START_STOP;
     cmdBlock->header.reserve1 = 0;
     switch (mode) {
         case 0:
