@@ -26,7 +26,7 @@ u32 LeoDriveExist(void) {
     IO_WRITE(PI_BSD_DOM1_PWD_REG, pulse);
     __osPiRelAccess();
     if (data == 0x2129FFF8) {
-        return 1U;
+        return 1;
     }
-    return 0U;
+    return 0;
 }

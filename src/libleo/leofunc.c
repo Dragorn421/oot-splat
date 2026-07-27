@@ -97,7 +97,7 @@ void LeoReset(void) {
         LEOclr_que_flag = 0;
         osRecvMesg(&LEOevent_que, NULL, OS_MESG_NOBLOCK);
         osSendMesg(&LEOevent_que, (OSMesg)0xA0000, OS_MESG_BLOCK);
-        osSendMesg(&LEOcommand_que, zero, OS_MESG_BLOCK);
+        osSendMesg(&LEOcommand_que, (OSMesg)zero, OS_MESG_BLOCK);
     }
 }
 

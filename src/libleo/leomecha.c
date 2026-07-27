@@ -45,7 +45,7 @@ u8 leoChk_asic_ready(u32 asic_cmd) {
     switch (sense_code) {
         case 47:
             if (asic_cmd == 0x80000) {
-                return 0U;
+                return 0;
             }
             FALLTHROUGH;
         case 43:
@@ -155,13 +155,13 @@ u8 leoWait_mecha_cmd_done(u32 asic_cmd) {
     u32 done_stat;
 
     if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-        return 0x25U;
+        return 0x25;
     }
     done_stat = leoChk_done_status(asic_cmd);
     if (done_stat != 0) {
         return done_stat;
     }
-    return 0U;
+    return 0;
 }
 
 u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data) {
@@ -190,13 +190,13 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
     }
     osEPiWriteIo(LEOPiInfo, 0x05000508, asic_cmd);
     if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
-        return 0x25U;
+        return 0x25;
     }
     done_stat = leoChk_done_status(asic_cmd);
     if ((done_stat != 0x2F) && (done_stat != 0)) {
         return done_stat;
     }
-    return 0U;
+    return 0;
 }
 
 u8 leoDetect_index_w(void) {
@@ -278,7 +278,7 @@ u32 leoChk_err_retry(u32 sense) {
                 break;
         }
     }
-    return 0U;
+    return 0;
 }
 
 u8 leoChk_cur_drvmode(void) {
@@ -307,12 +307,12 @@ u32 leoChkUnit_atten(void) {
 
 u32 leoRetUnit_atten(void) {
     if (unit_atten & 2) {
-        return 0x2BU;
+        return 0x2B;
     }
     if (unit_atten & 1) {
-        return 0x2FU;
+        return 0x2F;
     }
-    return 0U;
+    return 0;
 }
 
 void leoClrUA_RESET(void) {
