@@ -8,8 +8,6 @@ extern u32 D_801E67F0;
 extern s32 D_801E67F4;
 void leointerrupt(void*);
 void leomain(void*);
-extern OSMesgQueue D_801E5A00;
-extern void* D_801E5A18;
 extern s32 __leoQueuesCreated;
 UNK_RET leoClr_queue(void);
 extern s32 __leoResetCalled;

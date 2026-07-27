@@ -353,7 +353,7 @@ segments:
       - { name: n64dd_3, type: .bss, vram: 0x801E17E0 }
       - { name: n64dd_4, type: .bss, vram: 0x801E17F0 }
       - { name: n64dd_6, type: .bss, vram: 0x801E1800 }
-      - { name: libleo/bss_801E5A00, type: bss, vram: 0x801E5A00 }
+      - { name: libleo/leofunc, type: .bss, vram: 0x801E5A00 }
       - { name: libleo/leoram, type: .bss, vram: 0x801E5A20 }
       - { name: libleo/bss_801E6720, type: bss, vram: 0x801E6720 }
       - { name: libleo/bss_801E6740, type: bss, vram: 0x801E6740 }
