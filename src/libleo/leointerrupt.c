@@ -17,7 +17,7 @@ s32 __osLeoInterrupt(void) {
     blockInfo = &info->block[info->blockNum];
     pi_stat = IO_READ(PI_STATUS_REG);
     if (pi_stat & PI_STATUS_DMA_BUSY) {
-        __OSGlobalIntMask &= ~0x800;
+        __OSGlobalIntMask &= ~(OS_IM_CART & ~OS_IM_RCP);
         blockInfo->errStatus = 0x1D;
         __osLeoResume();
         return 1;
