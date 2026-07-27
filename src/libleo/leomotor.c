@@ -20,7 +20,7 @@ void leoStart_stop(void) {
             send_cmd = 0x40000;
         }
         sense_code = leoSend_asic_cmd_w_nochkDiskChange(send_cmd, send_data);
-        if (sense_code == 0) {
+        if (sense_code == LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             LEOcur_command->header.status = LEO_STATUS_GOOD;
             return;
         }

@@ -158,10 +158,10 @@ u8 leoWait_mecha_cmd_done(u32 asic_cmd) {
         return LEO_SENSE_WAITING_NMI;
     }
     done_stat = leoChk_done_status(asic_cmd);
-    if (done_stat != 0) {
+    if (done_stat != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
         return done_stat;
     }
-    return 0;
+    return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
 }
 
 u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data) {
@@ -179,7 +179,7 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
     u32 done_stat;
 
     status = leoChk_asic_ready(asic_cmd);
-    if ((status != 0x2F) && (status != 0)) {
+    if ((status != LEO_SENSE_MEDIUM_MAY_HAVE_CHANGED) && (status != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION)) {
         LEOcur_command->header.sense = status;
         return LEOcur_command->header.sense;
     }

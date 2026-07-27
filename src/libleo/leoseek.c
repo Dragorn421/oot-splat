@@ -6,14 +6,14 @@ void leoSeek(void) {
     u8 retry_cntr = 20;
 
     if (LEOcur_command->data.readwrite.lba >= 0x10C4) {
-        LEOcur_command->header.sense = 0x20;
+        LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
     leoLba_to_phys(LEOcur_command->data.readwrite.lba + 0x18);
     do {
         sense_code = leoSeek_w();
-        if (sense_code == 0) {
+        if (sense_code == LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             LEOcur_command->header.status = LEO_STATUS_GOOD;
             return;
         }

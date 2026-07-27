@@ -20,7 +20,7 @@ void leoClr_reset(void) {
         LEOcur_command->header.sense = code;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
     } else {
-        LEOcur_command->header.sense = 0;
+        LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
         LEOcur_command->header.status = LEO_STATUS_GOOD;
     }
 }

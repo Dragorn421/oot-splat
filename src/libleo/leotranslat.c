@@ -10,7 +10,7 @@ void leoTranslate(void) {
     u8 flag;
 
     if (LEOcur_command->data.readwrite.lba >= 0x10C4) {
-        LEOcur_command->header.sense = 0x20;
+        LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
@@ -37,7 +37,7 @@ void leoTranslate(void) {
             calc_blks++;
             lba++;
             if ((calc_bytes != 0) && (lba >= 0x10DC)) {
-                LEOcur_command->header.sense = 0x20;
+                LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
             }
@@ -59,7 +59,7 @@ void leoTranslate(void) {
             calc_blks--;
             lba++;
             if ((calc_blks != 0) && (lba >= 0x10DC)) {
-                LEOcur_command->header.sense = 0x20;
+                LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
             }

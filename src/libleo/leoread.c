@@ -15,13 +15,13 @@ void leoRead_common(unsigned int offset) {
 
     tg_lba = LEOcur_command->data.readwrite.lba;
     tg_blocks = LEOcur_command->data.readwrite.xfer_blks;
-    if ((tg_lba | tg_blocks) & 0xFFFF0000) {
+    if (((tg_lba | tg_blocks) & 0xFFFF0000) != 0) {
         goto invalid_lba;
     }
     tg_lba += offset;
     if ((tg_lba + tg_blocks) >= 0x10DD) {
     invalid_lba:
-        LEOcur_command->header.sense = 0x20;
+        LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
@@ -29,7 +29,7 @@ void leoRead_common(unsigned int offset) {
         if (tg_lba >= 0x10DC) {
             goto invalid_lba;
         }
-        LEOcur_command->header.sense = 0;
+        LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
         LEOcur_command->header.status = LEO_STATUS_GOOD;
         return;
     }
@@ -39,7 +39,7 @@ void leoRead_common(unsigned int offset) {
     osStartThread(&LEOinterruptThread);
 
     while (1) {
-        osRecvMesg(&LEOcontrol_que, &message, OS_MESG_BLOCK);
+        osRecvMesg(&LEOcontrol_que, (OSMesg*)&message, OS_MESG_BLOCK);
         switch (message) {
             case 0x90000:
                 goto read_complete;
@@ -56,6 +56,6 @@ void leoRead_common(unsigned int offset) {
         }
     }
 read_complete:
-    LEOcur_command->header.sense = 0;
+    LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
     LEOcur_command->header.status = LEO_STATUS_GOOD;
 }
